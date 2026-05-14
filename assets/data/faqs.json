@@ -1,0 +1,42 @@
+{
+  "trucker-authority": [
+    {"q": "What is an MC Number?", "a": "Official FMCSA permission to transport regulated interstate freight."},
+    {"q": "The Protest Period", "a": "A mandatory 10-day window for public feedback before authority is fully granted."},
+    {"q": "BOC-3 Filing Requirement", "a": "Assigns structural legal process agents across all 50 US states natively."},
+    {"q": "What is UCR?", "a": "Unified Carrier Registration fee required annually for interstate commerce."},
+    {"q": "Insurance Deadline", "a": "Carriers must submit active public liability proof within 20 days post-filing."},
+    {"q": "New Entrant Audit", "a": "A safety performance audit triggered within your initial 12 operational months."},
+    {"q": "Filing Processing Time", "a": "FMCSA processing typically takes 21-28 business days to issue active authority."},
+    {"q": "Can I edit my file?", "a": "Corrections to names or cargo types require an explicit amendment filing request."}
+  ],
+  "llc-formation": [
+    {"q": "Why form an LLC?", "a": "Insulates your personal assets and vehicles from business liabilities and operational risks."},
+    {"q": "What is a Registered Agent?", "a": "A state-mandated physical address to receive official legal notices and tax documents."},
+    {"q": "What is an Operating Agreement?", "a": "An internal document outlining company ownership, management, and voting parameters."},
+    {"q": "Delaware vs Wyoming", "a": "DE offers advanced corporate legal shielding; WY provides lower annual fee tracking."},
+    {"q": "How long does formation take?", "a": "Standard state approval takes 3-7 days. Tiers include expedited options."},
+    {"q": "Do I need a local office?", "a": "No. Our filings4u Corporate Agent network provides the necessary statutory address."},
+    {"q": "Annual Report Mandates", "a": "States require annual filings to preserve your business entity's active standing status."},
+    {"q": "Can an LLC have 1 owner?", "a": "Yes. This creates a Single-Member LLC structure maximizing personal insulation."}
+  ],
+  "heavy-use-tax": [
+    {"q": "What is Form 2290?", "a": "The IRS Heavy Highway Vehicle Use Tax (HVUT) annual return declaration layout."},
+    {"q": "Who must file Form 2290?", "a": "Any carrier operating vehicles with a taxable gross weight of 55,000 lbs or more."},
+    {"q": "What is a Schedule 1?", "a": "Your official, watermarked proof of payment required to secure state license plates."},
+    {"q": "Taxable Period Cycle", "a": "The tax year runs from July 1 through June 30. Filings are due by August 31 annually."},
+    {"q": "What is an EIN?", "a": "Employer ID Number. The IRS strictly rejects SSNs for Form 2290 data matching."},
+    {"q": "Logging Vehicle Discounts", "a": "Exclusive reduced IRS statutory tax assessment rates apply to timber logistics fleets."},
+    {"q": "What if I buy mid-year?", "a": "You must file a partial-year return by the end of the month following first highway use."},
+    {"q": "The 5,000-Mile Exemption", "a": "Vehicles driven under 5,000 miles file a suspended return to completely skip tax liability."}
+  ],
+  "broker-insurance": [
+    {"q": "What is a BMC-84 Bond?", "a": "A $75,000 surety bond requiring an annual premium based on credit evaluation metrics."},
+    {"q": "What is a BMC-85 Trust?", "a": "A financial security setup requiring $75,000 cash locked inside an escrow account."},
+    {"q": "Why does FMCSA require it?", "a": "To protect shippers and trucking companies against non-payment risks by brokers."},
+    {"q": "How long is a bond valid?", "a": "Coverage tracks run for 12 months and require annual renewal compliance."},
+    {"q": "Can I switch types?", "a": "Yes, you can transition a BMC-85 Trust to a BMC-84 Bond to free up business capital."},
+    {"q": "What affects premium rates?", "a": "Personal credit history, corporate longevity, and asset history details."},
+    {"q": "Filing Verification Speed", "a": "Once underwritten, the bond is processed electronically into the FMCSA pool instantly."},
+    {"q": "Bond Claim Consequences", "a": "Valid unresolved claims lead to structural suspension of your broker license authority."}
+  ]
+}
