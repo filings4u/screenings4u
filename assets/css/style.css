@@ -1,0 +1,98 @@
+/* Custom Variable Configuration */
+:root {
+  --brand-blue: #1e40af;
+  --brand-orange: #ea580c;
+  --transition-smooth: all 0.2s ease-in-out;
+}
+
+/* Custom Base Layout Refinements */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure clean font processing */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Desktop Dropdown Interactivity Engine */
+@media (min-width: 1024px) {
+  .nav-dropdown {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: var(--transition-smooth);
+  }
+
+  /* Triggers the dropdown visibility smoothly on hover */
+  .nav-group:hover .nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+/* Form Element Focus Enhancements */
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--brand-blue) !important;
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.15);
+}
+
+/* High-Conversion CTA Hover States */
+.btn-primary {
+  background-color: var(--brand-orange);
+  transition: var(--transition-smooth);
+}
+
+.btn-primary:hover {
+  background-color: #c2410c; /* Darker orange */
+  transform: translateY(-1px);
+}
+
+/* Tell Tailwind to process custom utility rules safely */
+@layer utilities {
+  .brand-blue-bg { background-color: #1e40af; }
+  .brand-orange-bg { background-color: #ea580c; }
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth !important;
+}
+
+/* Desktop Hover Menu Rules */
+@media (min-width: 1024px) {
+  /* Targets the relative menu wrapper */
+  .relative.group:hover .absolute {
+    opacity: 1 !important;
+    vertical-align: middle;
+    visibility: visible !important;
+    transform: translateY(0px) !important;
+  }
+  
+  /* Initial hidden state of dropdowns */
+  .relative.group .absolute {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+/* Custom Interactive Input Ring Engine */
+input:focus, select:focus {
+  outline: none !important;
+  border-color: #1e40af !important;
+  box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.2) !important;
+}
+
+/* Button Animations */
+.btn-animate {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-animate:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+}
