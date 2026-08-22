@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screenings4U Enterprise | Workforce Testing & Compliance Infrastructure</title>
+    <link rel="icon" type="image/png" href="images/fav.png">
+    <!-- Inter Font Family for High-Utility UI Cleanliness -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+
+    
+<style>
+    /* CSS variables establishing the exact corporate dark-slate, deep orange, and technical ocean blue palette */
+    :root {
+        --brand-primary: #0f172a;    /* Deep slate blue for primary text and dominance */
+        --brand-accent: #325aa3;     /* Tech-focused blue for platform highlights, navigation, and badges */
+        --brand-accent-rgb: 50, 90, 163; /* Corrected RGB translation of #325aa3 for clean shadows */
+        --purple-primary: #ff6b00;   /* Polished high-visibility orange accent for major corporate branding elements */
+        --text-main: #334155;        /* Neutral dark slate for standard reading copy */
+        --text-muted: #64748b;       /* Muted gray for captions and metadata */
+        --bg-light: #f8fafc;         /* Crisp canvas background color */
+        --border-subtle: #e2e8f0;    /* Micro-borders for data containment grids */
+        --success-color: #10b981;   /* Strict operational emerald for 'On Track' elements */
+        --danger-color: #ef4444;    /* Operational crimson for metrics requiring review */
+        --warning-color: #f59e0b;   /* Warning amber for expiring criteria metrics */
+    }
+
+    /* Core Canvas Resets */
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: var(--bg-light);
+        color: var(--text-main);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Utility Layout Elements */
+    .container {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    /* High-Visibility Security & Update Banner */
+    .announcement-bar {
+        background-color: var(--brand-primary);
+        color: #ffffff;
+        font-size: 0.85rem;
+        font-weight: 500;
+        padding: 10px 0;
+        text-align: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .announcement-bar a {
+        color: #ffffff;
+        text-decoration: underline;
+        margin-left: 8px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        transition: opacity 0.2s ease;
+    }
+
+    .announcement-bar a:hover {
+        opacity: 0.85;
+    }
+
+    /* Enterprise Technical Navigation Bar */
+    .main-header {
+        background-color: #ffffff;
+        border-bottom: 1px solid var(--border-subtle);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
+    }
+
+    .header-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 72px;
+    }
+
+    .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--brand-primary);
+    }
+
+    .brand-logo img {
+        height: 32px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    .brand-logo span {
+        font-size: 1.25rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        text-transform: uppercase;
+    }
+
+    .brand-logo span span {
+        color: var(--purple-primary); /* Uses your primary high-visibility branding orange */
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        list-style: none;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--text-main);
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover {
+        color: var(--brand-accent);
+    }
+
+    /* Context-Driven Corporate Actions */
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        cursor: pointer;
+    }
+
+    .btn-link {
+        color: var(--text-main);
+        background: transparent;
+        border: none;
+    }
+
+    .btn-link:hover {
+        color: var(--brand-accent);
+    }
+
+    .btn-outline {
+        border: 1px solid var(--border-subtle);
+        background-color: #ffffff;
+        color: var(--brand-primary);
+    }
+
+    .btn-outline:hover {
+        background-color: var(--bg-light);
+        border-color: var(--text-muted);
+    }
+
+    .btn-primary {
+        background-color: var(--brand-accent); /* Clean technical deep blue */
+        color: #ffffff;
+        border: 1px solid transparent;
+        box-shadow: 0 2px 4px rgba(var(--brand-accent-rgb), 0.15);
+    }
+
+    .btn-primary:hover {
+        background-color: #25447a; /* Professional dark variant of accent blue for dynamic interaction hover states */
+        box-shadow: 0 4px 8px rgba(var(--brand-accent-rgb), 0.25);
+    }
+
+    /* Generic Section Parameters for Enterprise Scannability */
+    .section-padding {
+        padding: 100px 0;
+    }
+
+    .section-header {
+        text-align: center;
+        max-width: 760px;
+        margin: 0 auto 60px auto;
+    }
+
+    .section-tag {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--brand-accent);
+        background-color: rgba(var(--brand-accent-rgb), 0.06);
+        padding: 4px 12px;
+        border-radius: 20px;
+        display: inline-block;
+        margin-bottom: 16px;
+        border: 1px solid rgba(var(--brand-accent-rgb), 0.15);
+    }
+
+    .section-title {
+        font-size: 2.25rem;
+        font-weight: 800;
+        color: var(--brand-primary);
+        letter-spacing: -0.03em;
+        margin-bottom: 16px;
+        line-height: 1.2;
+    }
+
+    .section-desc {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    /* Mobile Responsive Header Actions Trigger Overlay */
+    .mobile-menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--brand-primary);
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    @media (max-width: 1024px) {
+        .nav-links, .header-actions .btn-link {
+            display: none;
+        }
+        .mobile-menu-toggle {
+            display: block;
+        }
+    }
+</style>
+
+</head>
+<body>
+
+    <!-- HIGH-VISIBILITY ENTERPRISE RECRUITMENT AND STATUS BANNER -->
+    <div class="announcement-bar">
+        Enterprise Workforce Testing, Rebuilt. Centralize drug & alcohol testing across your entire organization.
+        <a href="#demo" onclick="document.getElementById('demo-modal').style.display='flex'">Request an Enterprise Demo &rarr;</a>
+    </div>
+
+    <!-- MAIN STRATEGIC ARCHITECTURE HEAD NAVIGATION HUB -->
+    <header class="main-header">
+        <div class="container header-wrap">
+            <a href="/" class="brand-logo">
+                <!-- Using local corporate brand layout architecture config -->
+                <img src="images/logo.png" alt="Screenings4U Enterprise Logo" onerror="this.style.display='none';">
+            </a>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="platform.html">Platform Engine</a></li>
+                    <li><a href="random.html">Random Autopilot</a></li>
+                    <li><a href="compliance.html">DOT Compliance</a></li>
+                    <li><a href="workflows.html">Workflows</a></li>
+                    <li><a href="security.html">Security Core</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="btn btn-link" onclick="togglePortalState()">Client Secure Gateway</button>
+                <button class="btn btn-primary" onclick="document.getElementById('demo-modal').style.display='flex'">Request Demo</button>
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation parameters">☰</button>
+            </div>
+        </div>
+    </header>
+    <!-- MAIN ENTERPRISE PLATFORM VIEW HERO -->
+    <main style="background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%); position: relative; overflow: hidden;">
+        <!-- Subtle compliance micro-grid background pattern to emphasize infrastructure precision -->
+        <div style="position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(99,102,241,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(99,102,241,0.03) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none;"></div>
+        
+        <div class="container section-padding" style="position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+            
+            <!-- Direct Value Proposition Frame -->
+            <div style="max-width: 620px;">
+                <span class="section-tag">Enterprise Control Infrastructure</span>
+                <h1 style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800; color: var(--brand-primary); letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 24px;">
+                    Drug & Alcohol Testing Built for Enterprise Scale.
+                </h1>
+                <p style="font-size: 1.15rem; color: var(--text-main); line-height: 1.6; margin-bottom: 32px; font-weight: 400;">
+                    Manage workforce testing across employees, locations, business units, and regulatory programs from one centralized platform. Screenings4U connects testing workflows, collection coordination, results, compliance tracking, and administrative controls into a single enterprise experience.
+                </p>
+                
+                <!-- Explicit Enterprise Call to Actions -->
+                <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 40px;">
+                    <a href="#demo" class="btn btn-primary" style="padding: 14px 28px; font-size: 1rem;" onclick="document.getElementById('demo-modal').style.display='flex'">Request an Enterprise Demo</a>
+                    <a href="#platform" class="btn btn-outline" style="padding: 14px 28px; font-size: 1rem;">Explore the Platform</a>
+                </div>
+
+                <!-- Structured Subtext Capabilities Layout -->
+                <div style="display: flex; flex-wrap: wrap; gap: 24px; border-top: 1px solid var(--border-subtle); padding-top: 24px;">
+                    <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--brand-accent);">•</span> DOT + Non-DOT Workflows
+                    </div>
+                    <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--brand-accent);">•</span> Multi-Location Governance
+                    </div>
+                    <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--brand-accent);">•</span> Enterprise Workflows
+                    </div>
+                    <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--brand-accent);">•</span> Nationwide Site Network
+                    </div>
+                </div>
+            </div>
+
+            <!-- Highly Functional SaaS Mockup Dashboard (No stock image cliches) -->
+            <div style="background: #0f172a; border-radius: 12px; border: 1px solid #1e293b; padding: 24px; box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25); color: #f8fafc;">
+                <!-- Simulated Window Chrome Chrome Top Control Panel Bar -->
+                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1e293b; padding-bottom: 16px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <div style="display: flex; gap: 6px;">
+                            <span style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444; display: inline-block;"></span>
+                            <span style="width: 10px; height: 10px; border-radius: 50%; background: #f59e0b; display: inline-block;"></span>
+                            <span style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+                        </div>
+                        <span style="font-size: 0.8rem; font-family: monospace; color: #94a3b8; background: #1e293b; padding: 2px 10px; border-radius: 4px;">console.screenings4u.enterprise</span>
+                    </div>
+                    <span style="font-size: 0.75rem; background: rgba(99, 102, 241, 0.2); color: #818cf8; padding: 2px 8px; border-radius: 4px; font-weight: 600; border: 1px solid rgba(99,102,241,0.3);">Environment: Live Production</span>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <span style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px;">Global Infrastructure Monitoring Overview</span>
+                    <h2 style="font-size: 1.5rem; font-weight: 700; color: #ffffff; margin-top: 4px; letter-spacing: -0.5px;">Enterprise Testing Overview</h2>
+                </div>
+
+                <!-- High-Density Analytical Metric Matrix Row Grid -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+                    <div style="background: #1e293b; padding: 16px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                        <div style="color: #94a3b8; font-size: 0.8rem; font-weight: 500;">Active Monitored Workforce</div>
+                        <div style="font-size: 1.75rem; font-weight: 700; margin-top: 4px; color: #ffffff;">12,482 <span style="font-size: 0.85rem; color: #64748b; font-weight: 400;">Employees</span></div>
+                    </div>
+                    <div style="background: #1e293b; padding: 16px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                        <div style="color: #94a3b8; font-size: 0.8rem; font-weight: 500;">Configured Terminal Terminals</div>
+                        <div style="font-size: 1.75rem; font-weight: 700; margin-top: 4px; color: #ffffff;">96 <span style="font-size: 0.85rem; color: #64748b; font-weight: 400;">Locations</span></div>
+                    </div>
+                    <div style="background: #1e293b; padding: 16px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                        <div style="color: #94a3b8; font-size: 0.8rem; font-weight: 500;">Active Appended Orders (MTD)</div>
+                        <div style="font-size: 1.75rem; font-weight: 700; margin-top: 4px; color: #ffffff;">1,184 <span style="font-size: 0.85rem; color: #64748b; font-weight: 400;">Tests Running</span></div>
+                    </div>
+                    <div style="background: #1e293b; padding: 16px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                        <div style="color: #94a3b8; font-size: 0.8rem; font-weight: 500;">Overall Verification Completion Rate</div>
+                        <div style="font-size: 1.75rem; font-weight: 700; margin-top: 4px; color: var(--success-color);">98.7% <span style="font-size: 0.85rem; color: #64748b; font-weight: 400;">Passing</span></div>
+                    </div>
+                </div>
+
+                <!-- Exception Driven System Flags Indicators List Container -->
+                <div style="border-top: 1px solid #1e293b; padding-top: 16px;">
+                    <div style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: #94a3b8; margin-bottom: 12px; letter-spacing: 0.5px;">Real-Time Operational Exceptions Queue</div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.15); padding: 10px 14px; border-radius: 6px;">
+                            <span style="font-size: 0.85rem; color: #fbae17; font-weight: 500;">⏳ Pending Donor Collections Timeline</span>
+                            <span style="font-family: monospace; background: #2c2514; color: #f59e0b; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">42 Records</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15); padding: 10px 14px; border-radius: 6px;">
+                            <span style="font-size: 0.85rem; color: #f87171; font-weight: 500;">⚠️ Results Awaiting Direct MRO Review</span>
+                            <span style="font-family: monospace; background: #31181b; color: #ef4444; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">8 Flagged</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.15); padding: 10px 14px; border-radius: 6px;">
+                            <span style="font-size: 0.85rem; color: #818cf8; font-weight: 500;">🔄 Active Random Group Rotation Pool</span>
+                            <span style="font-family: monospace; background: #1a1b35; color: #6366f1; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">ON TRACK</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- TRUST STRIP FOR MISSION CRITICAL ENVIRONMENTS -->
+    <section style="background-color: #ffffff; border-bottom: 1px solid var(--border-subtle); padding: 40px 0;">
+        <div class="container">
+            <p style="text-align: center; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1.5px; margin-bottom: 24px;">
+                Built for organizations where infrastructure screening and regulatory compliance are mission-critical
+            </p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: center; opacity: 0.75;">
+                <span style="font-weight: 700; font-size: 1.1rem; color: var(--brand-primary); letter-spacing: -0.2px;">📈 Logistics Fleet Units</span>
+                <span style="font-weight: 700; font-size: 1.1rem; color: var(--brand-primary); letter-spacing: -0.2px;">🏗️ Heavy Manufacturing</span>
+                <span style="font-weight: 700; font-size: 1.1rem; color: var(--brand-primary); letter-spacing: -0.2px;">🏥 Clinical Systems</span>
+                <span style="font-weight: 700; font-size: 1.1rem; color: var(--brand-primary); letter-spacing: -0.2px;">🦺 High-Volume Staffing</span>
+                <span style="font-weight: 700; font-size: 1.1rem; color: var(--brand-primary); letter-spacing: -0.2px;">⚖️ Federal Agency Sites</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECURE INTERACTIVE GATEWAY GATE CONSOLE MODAL LAYOUT -->
+    <div id="portal-modal" style="display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); backdrop-filter: blur(4px); z-index: 2000; align-items: center; justify-content: center; padding: 20px;">
+        <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 8px; width: 100%; max-width: 420px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); padding: 32px; position: relative;">
+            <button style="position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text-muted);" onclick="togglePortalState()">&times;</button>
+            
+            <div style="text-align: center; margin-bottom: 24px;">
+                <div style="display: inline-block; margin-bottom: 12px;">
+                    
+                    <img src="images/logo.png" alt="screenings4u Logo" style="max-width: 140px; height: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div style="display: none; width: 48px; height: 48px; background: rgba(99,102,241,0.08); color: var(--brand-accent); border-radius: 8px; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto;">🔐</div>
+                </div>
+                <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--brand-primary); margin-bottom: 4px;">Staff Console Sign-In</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Authorized organization screening gateway node</p>
+            </div>
+
+            <form id="clinicLoginForm" onsubmit="handlePortalSandboxAuth(event)">
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-main); margin-bottom: 6px; letter-spacing: 0.5px;">Clinic Access Token Email</label>
+                    <input type="email" id="loginEmail" required style="width: 100%; padding: 10px 14px; border: 1px solid var(--border-subtle); border-radius: 6px; font-size: 0.95rem;" placeholder="compliance@organization.com">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-main); margin-bottom: 6px; letter-spacing: 0.5px;">Account Password</label>
+                    <input type="password" id="loginPassword" required style="width: 100%; padding: 10px 14px; border: 1px solid var(--border-subtle); border-radius: 6px; font-size: 0.95rem;" placeholder="••••••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 0.95rem; border-radius: 6px;">Sign In to Registry Dashboard</button>
+                <p id="loginErrorMsg" style="color: var(--danger-color); font-size: 0.8rem; font-weight: 600; text-align: center; margin-top: 12px; display: none;"></p>
+            </form>
+        </div>
+    </div>
+    <!-- PROBLEM VS RESOLUTION COMPARISON ENGINE -->
+    <section class="section-padding" style="background-color: #ffffff; border-bottom: 1px solid var(--border-subtle);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Workflow Evolution</span>
+                <h2 class="section-title">Your Testing Program Shouldn't Live in Spreadsheets.</h2>
+                <p class="section-desc">Enterprise testing fragments rapidly when workforce files, testing data, collection site vouchers, and medical reviews live in isolated channels. Screenings4U centralizes the complete record lifecycle.</p>
+            </div>
+
+            <!-- Side-by-Side Architectural Transformation Grid -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+                <!-- Manual Fragmentation State (Before) -->
+                <div style="background-color: #fafafa; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 32px;">
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--brand-primary); margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--danger-color);">✕</span> Legacy Fragmented Operations
+                    </h3>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 14px; font-size: 0.95rem; color: var(--text-main);">
+                        <li style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--danger-color); font-weight: bold;">•</span> Untracked internal manual spreadsheets</li>
+                        <li style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--danger-color); font-weight: bold;">•</span> Vulnerable, unsecured email-based tracking</li>
+                        <li style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--danger-color); font-weight: bold;">•</span> Decentralized regional medical vendors</li>
+                        <li style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--danger-color); font-weight: bold;">•</span> Blind spots when evaluating site wait-times</li>
+                        <li style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--danger-color); font-weight: bold;">•</span> Missing or distributed physical certificates</li>
+                        <li style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--danger-color); font-weight: bold;">•</span> Manual phone calls to track donor check-ins</li>
+                    </ul>
+                </div>
+
+                <!-- Modern Automated Platform State (With Screenings4U) -->
+                <div style="background-color: #f8fafc; border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 8px; padding: 32px; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.02);">
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--brand-primary); margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--success-color);">✓</span> Screenings4U Enterprise Core
+                    </h3>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 14px; font-size: 0.95rem; color: var(--text-main);">
+                        <li style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--success-color); font-weight: bold;">•</span> Monitored global employee data records</li>
+                        <li style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--success-color); font-weight: bold;">•</span> Configurable regulatory notification groups</li>
+                        <li style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--success-color); font-weight: bold;">•</span> Nationwide collection center coordinates</li>
+                        <li style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--success-color); font-weight: bold;">•</span> Centralized real-time results dashboards</li>
+                        <li style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--success-color); font-weight: bold;">•</span> Immutable cryptographic activity audit trails</li>
+                        <li style="display: flex; gap: 10px; align-items: flex-start;"><span style="color: var(--success-color); font-weight: bold;">•</span> Seamless programmatic API external pipelines</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLAGSHIP EXCEPTION-DRIVEN COMPLIANCE COMMAND CENTER -->
+    <section id="platform" class="section-padding" style="background-color: #f8fafc; border-bottom: 1px solid var(--border-subtle);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Flagship Command Control</span>
+                <h2 class="section-title">One Platform for the Entire Testing Lifecycle</h2>
+                <p class="section-desc">Engineered specifically to isolate operational compliance risks. Instead of forcing administrators to search through thousands of clean files, Screenings4U surfaces action-required data anomalies immediately.</p>
+            </div>
+
+            <!-- Command Center Component Grid -->
+            <div style="background-color: #ffffff; border: 1px solid var(--border-subtle); border-radius: 12px; box-shadow: 0 4px 24px rgba(15, 23, 42, 0.04); overflow: hidden; margin-bottom: 48px;">
+                
+                <!-- Component Header -->
+                <div style="background-color: var(--brand-primary); color: #ffffff; padding: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                    <div>
+                        <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: #94a3b8; letter-spacing: 1px;">Active Control Monitoring Interface</div>
+                        <h3 style="font-size: 1.35rem; font-weight: 700; margin-top: 2px;">Compliance Command Center</h3>
+                    </div>
+                    <div style="display: flex; gap: 12px;">
+                        <button class="btn btn-outline" style="font-size: 0.8rem; padding: 8px 14px; background: rgba(255,255,255,0.05); color: #fff; border-color: rgba(255,255,255,0.15);" onclick="alert('Compiling secure historical compliance ledger metrics...')">Run Compliance Report</button>
+                        <button class="btn btn-primary" style="font-size: 0.8rem; padding: 8px 14px;" onclick="alert('Packaging encrypted cryptographic audit package bundle (ZIP/CSV)...')">Export Audit Package</button>
+                    </div>
+                </div>
+
+                <!-- High-Utility Summary Data Sub-Row Grid -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); border-bottom: 1px solid var(--border-subtle); background: #fafafa;">
+                    <div style="padding: 20px; border-right: 1px solid var(--border-subtle); text-align: center;">
+                        <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Workforce Compliance</div>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--success-color); margin-top: 4px;">98.7%</div>
+                    </div>
+                    <div style="padding: 20px; border-right: 1px solid var(--border-subtle); text-align: center;">
+                        <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Testing Due Queue</div>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--brand-primary); margin-top: 4px;">42 <span style="font-size: 0.85rem; font-weight: 400; color: var(--text-muted);">Open</span></div>
+                    </div>
+                    <div style="padding: 20px; border-right: 1px solid var(--border-subtle); text-align: center;">
+                        <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Overdue Testing Failures</div>
+                        <div style="font-size: 1.8rem; height: 36px; font-weight: 800; color: var(--danger-color); margin-top: 4px;">7 <span style="font-size: 0.85rem; font-weight: 400; color: var(--text-muted);">Breached</span></div>
+                    </div>
+                    <div style="padding: 20px; border-right: 1px solid var(--border-subtle); text-align: center;">
+                        <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Expiring Base Documents</div>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--warning-color); margin-top: 4px;">17 <span style="font-size: 0.85rem; font-weight: 400; color: var(--text-muted);">Files</span></div>
+                    </div>
+                    <div style="padding: 20px; text-align: center;">
+                        <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Unresolved Exceptions</div>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--danger-color); margin-top: 4px;">12 <span style="font-size: 0.85rem; font-weight: 400; color: var(--text-muted);">Flags</span></div>
+                    </div>
+                </div>
+
+                <!-- High-Density Systems Exceptions Real-Time Queue Table Layout -->
+                <div style="padding: 24px; overflow-x: auto;">
+                    <div style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--text-main); margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                        <span>⚠️ Primary Risk Flags Requiring Intervention</span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 400;">Filtered View: 3 Critical Discrepancies Surface Records</span>
+                    </div>
+
+                    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid var(--border-subtle); color: var(--text-muted); font-weight: 600;">
+                                <th style="padding: 12px 8px;">Severity</th>
+                                <th style="padding: 12px 8px;">Employee Identifier</th>
+                                <th style="padding: 12px 8px;">Division / Location</th>
+                                <th style="padding: 12px 8px;">Target Requirement</th>
+                                <th style="padding: 12px 8px;">Target Date</th>
+                                <th style="padding: 12px 8px; text-align: right;">Operations Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                <td style="padding: 14px 8px;"><span style="background: rgba(239,68,68,0.1); color: var(--danger-color); font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">CRITICAL</span></td>
+                                <td style="padding: 14px 8px;"><strong>Marcus Vance</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">ID: EMP-9082</span></td>
+                                <td style="padding: 14px 8px;">Logistics Div.<br><span style="font-size: 0.75rem; color: var(--text-muted);">Chicago Hub</span></td>
+                                <td style="padding: 14px 8px; color: var(--danger-color); font-weight: 500;">DOT Random Breached</td>
+                                <td style="padding: 14px 8px; font-family: monospace; font-weight: 600;">Overdue 4 Days</td>
+                                <td style="padding: 14px 8px; text-align: right;"><button class="btn btn-outline" style="font-size: 0.75rem; padding: 6px 12px; border-radius: 4px;" onclick="alert('Initiating expedited electronic re-notification sequence payload...')">Escalate Alert</button></td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                <td style="padding: 14px 8px;"><span style="background: rgba(245,158,11,0.1); color: var(--warning-color); font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">WARNING</span></td>
+                                <td style="padding: 14px 8px;"><strong>Elena Rostova</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">ID: EMP-4421</span></td>
+                                <td style="padding: 14px 8px;">Manufacturing Corp.<br><span style="font-size: 0.75rem; color: var(--text-muted);">Detroit Site</span></td>
+                                <td style="padding: 14px 8px; color: var(--warning-color); font-weight: 500;">MRO Chain Document Missing</td>
+                                <td style="padding: 14px 8px; font-family: monospace;">Expiring 48 Hours</td>
+                                <td style="padding: 14px 8px; text-align: right;"><button class="btn btn-outline" style="font-size: 0.75rem; padding: 6px 12px; border-radius: 4px;" onclick="alert('Opening multi-tenant file synchronization bridge portal...')">Upload File</button></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 14px 8px;"><span style="background: rgba(99,102,241,0.1); color: var(--brand-accent); font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">ROUTINE</span></td>
+                                <td style="padding: 14px 8px;"><strong>David Kincaid</strong><br><span style="font-size: 0.75rem; color: var(--text-muted);">ID: EMP-0192</span></td>
+                                <td style="padding: 14px 8px;">Energy & Utilities<br><span style="font-size: 0.75rem; color: var(--text-muted);">Houston Field</span></td>
+                                <td style="padding: 14px 8px; color: var(--text-main);">Pre-Employment Screening</td>
+                                <td style="padding: 14px 8px; font-family: monospace;">Awaiting Check-in</td>
+                                <td style="padding: 14px 8px; text-align: right;"><button class="btn btn-outline" style="font-size: 0.75rem; padding: 6px 12px; border-radius: 4px;" onclick="alert('Querying direct geolocation tracking for alternative collection node...')">Track Site</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- REGULATED PROGRAM ARCHITECTURE FRAMEWORK -->
+    <section id="regulated" class="section-padding" style="background-color: #ffffff; border-bottom: 1px solid var(--border-subtle);">
+        <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+            <div>
+                <span class="section-tag">DOT Part 40 Standards</span>
+                <h2 class="section-title">DOT Compliance Is a Workflow. Manage It Like One.</h2>
+                <p class="section-desc" style="margin-bottom: 24px;">
+                    Federal transportation testing requirements demand absolute procedural integrity. Screenings4U treats DOT compliance as a rigorous, continuously monitored lifecycle rather than a simple transaction layer.
+                </p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;">
+                    <div style="border-left: 3px solid var(--brand-accent); padding-left: 12px;">
+                        <strong style="color: var(--brand-primary); display: block; font-size: 0.95rem;">Automated Random Pools</strong>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Strict programmatic selection management.</span>
+                    </div>
+                    <div style="border-left: 3px solid var(--brand-accent); padding-left: 12px;">
+                        <strong style="color: var(--brand-primary); display: block; font-size: 0.95rem;">Audit-Ready Retention</strong>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Immutable storage for MIS reports and documents.</span>
+                    </div>
+                    <div style="border-left: 3px solid var(--brand-accent); padding-left: 12px;">
+                        <strong style="color: var(--brand-primary); display: block; font-size: 0.95rem;">Full Chain Control</strong>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Real-time tracking of custody workflows.</span>
+                    </div>
+                    <div style="border-left: 3px solid var(--brand-accent); padding-left: 12px;">
+                        <strong style="color: var(--brand-primary); display: block; font-size: 0.95rem;">Configurable Triggers</strong>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Workflows for Post-Accident and Return-to-Duty.</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="alert('Accessing federal compliance integration blueprints...')">Explore DOT Workflows</button>
+            </div>
+
+            <!-- Highly Functional Random Testing Interface Card Sandbox -->
+            <div style="background: #f8fafc; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 32px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px; margin-bottom: 24px;">
+                    <div>
+                        <span style="font-size: 0.7rem; font-weight: 700; color: var(--brand-accent); text-transform: uppercase; letter-spacing: 0.5px;">Pool Matrix Tracker</span>
+                        <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--brand-primary); margin-top: 2px;">Active Random Pool: FMCSA_Q3</h4>
+                    </div>
+                    <span style="background: rgba(16,185,129,0.1); color: var(--success-color); font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 20px;">On Track</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; text-align: center;">
+                    <div style="background: #ffffff; padding: 12px; border: 1px solid var(--border-subtle); border-radius: 6px;">
+                        <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">Active Pool</div>
+                        <div style="font-size: 1.25rem; font-weight: 700; color: var(--brand-primary); margin-top: 2px;">2,847</div>
+                    </div>
+                    <div style="background: #ffffff; padding: 12px; border: 1px solid var(--border-subtle); border-radius: 6px;">
+                        <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">Selections</div>
+                        <div style="font-size: 1.25rem; font-weight: 700; color: var(--brand-primary); margin-top: 2px;">142</div>
+                    </div>
+                    <div style="background: #ffffff; padding: 12px; border: 1px solid var(--border-subtle); border-radius: 6px;">
+                        <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">Completed</div>
+                        <div style="font-size: 1.25rem; font-weight: 700; color: var(--success-color); margin-top: 2px;">137</div>
+                    </div>
+                </div>
+
+                <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 16px; font-size: 0.85rem; display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: var(--text-main); font-weight: 500;">Outstanding Selection Window</span>
+                        <span style="font-family: monospace; font-weight: 700; color: var(--danger-color);">5 Remaining</span>
+                    </div>
+                    <div style="width: 100%; background: var(--border-subtle); height: 6px; border-radius: 3px; overflow: hidden;">
+                        <div style="width: 96.4%; background: var(--success-color); height: 100%;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.75rem; padding-top: 4px;">
+                        <span>Current Selection Period: Q3 2026</span>
+                        <span>Auditable Selection Logs Available</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTING METHODS & NON-DOT CONFIGURATOR MATRIX -->
+    <section id="methods" class="section-padding" style="background-color: #f8fafc; border-bottom: 1px solid var(--border-subtle);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Configurable Testing Modalities</span>
+                <h2 class="section-title">One Platform. Multiple Testing Methods.</h2>
+                <p class="section-desc">Maintain centralized authority over every screening model required by your organizational guidelines, separated completely from federal testing frameworks.</p>
+            </div>
+
+            <!-- Highly Functional Cards Grid Covering Key Test Vectors -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+                <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 24px;">
+                    <div style="font-size: 1.5rem; margin-bottom: 12px;">🧪</div>
+                    <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--brand-primary); margin-bottom: 8px;">Urine Drug Testing</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Manage standard laboratory-based analysis across standard employer-defined or federally mandated screening panels.</p>
+                </div>
+                <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 24px;">
+                    <div style="font-size: 1.5rem; margin-bottom: 12px;">👄</div>
+                    <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--brand-primary); margin-bottom: 8px;">Oral Fluid Workflows</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Deploy modern fluid monitoring for immediate confirmation windows where appropriate under local statutes.</p>
+                </div>
+                <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 24px;">
+                    <div style="font-size: 1.5rem; margin-bottom: 12px;">💈</div>
+                    <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--brand-primary); margin-bottom: 8px;">Hair Analysis Infrastructure</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Administer testing profiles requiring extended detection history for critical, long-term safety evaluation.</p>
+                </div>
+                <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 24px;">
+                    <div style="font-size: 1.5rem; margin-bottom: 12px;">⏱️</div>
+                    <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--brand-primary); margin-bottom: 8px;">Alcohol Verifications</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Coordinate breath or fluid metrics cleanly using centralized site verification workflows with automated results logging.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREMIUM HEALTH NETWORKS & INSURANCE CATALOG INTEGRATION -->
+    <section id="insurance-catalog" class="section-padding" style="background-color: #ffffff; border-bottom: 1px solid var(--border-subtle);">
+        <div class="container">
+            <div style="text-align: center; max-width: 760px; margin: 0 auto 48px auto;">
+                <span class="section-tag">Strategic Financial Integrations</span>
+                <h2 class="section-title">Supported Health Networks & Medicare</h2>
+                <p class="section-desc">We coordinate with leading healthcare networks and public insurance structures to maximize the efficiency of your corporate screening allocations.</p>
+            </div>
+
+            <!-- Highly Professional, Structured Grid of Acceptances -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 40px;">
+                <!-- Medicare Card Allocation -->
+                <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 24px; box-shadow: 0 4px 12px rgba(15,23,42,0.01);">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <div style="font-size: 1.25rem; width: 36px; height: 36px; background: rgba(15,23,42,0.04); border-radius: 6px; display: flex; align-items: center; justify-content: center;">🇺🇸</div>
+                        <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--brand-primary); margin: 0;">Medicare Network</h3>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0;">Official federal framework allocations supporting qualified age-eligible and statutory corporate testing parameters.</p>
+                </div>
+                <!-- Blue Cross Blue Shield -->
+                <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 24px; box-shadow: 0 4px 12px rgba(15,23,42,0.01);">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <div style="font-size: 1.25rem; width: 36px; height: 36px; background: rgba(15,23,42,0.04); border-radius: 6px; display: flex; align-items: center; justify-content: center;">🛡️</div>
+                        <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--brand-primary); margin: 0;">Blue Cross Blue Shield</h3>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0;">Broad regional coverage matrix options delivering seamless cross-jurisdictional employee physical integrations.</p>
+                </div>
+                <!-- UnitedHealthcare -->
+                <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 24px; box-shadow: 0 4px 12px rgba(15,23,42,0.01);">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <div style="font-size: 1.25rem; width: 36px; height: 36px; background: rgba(15,23,42,0.04); border-radius: 6px; display: flex; align-items: center; justify-content: center;">🏢</div>
+                        <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--brand-primary); margin: 0;">UnitedHealthcare</h3>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0;">Extensive individualized, family, and employer-sponsored commercial medical policy structures.</p>
+                </div>
+                <!-- Humana -->
+                <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 24px; box-shadow: 0 4px 12px rgba(15,23,42,0.01);">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <div style="font-size: 1.25rem; width: 36px; height: 36px; background: rgba(15,23,42,0.04); border-radius: 6px; display: flex; align-items: center; justify-content: center;">🏥</div>
+                        <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--brand-primary); margin: 0;">Humana Care</h3>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0;">Specialized clinical program guidelines targeting routine preventive checkups and senior occupational healthcare paths.</p>
+                </div>
+                <!-- Cigna -->
+                <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 24px; box-shadow: 0 4px 12px rgba(15,23,42,0.01);">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <div style="font-size: 1.25rem; width: 36px; height: 36px; background: rgba(15,23,42,0.04); border-radius: 6px; display: flex; align-items: center; justify-content: center;">🩺</div>
+                        <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--brand-primary); margin: 0;">Cigna Global</h3>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0;">Global service frameworks providing dedicated corporate wellness support and monitoring configurations.</p>
+                </div>
+                <!-- Aetna -->
+                <div style="background: #ffffff; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 24px; box-shadow: 0 4px 12px rgba(15,23,42,0.01);">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <div style="font-size: 1.25rem; width: 36px; height: 36px; background: rgba(15,23,42,0.04); border-radius: 6px; display: flex; align-items: center; justify-content: center;">💎</div>
+                        <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--brand-primary); margin: 0;">Aetna Healthcare</h3>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin: 0;">Flexible coverage options designed explicitly around diverse workforce demographic tracking requirements.</p>
+                </div>
+            </div>
+
+            <!-- Mandatory Verification Disclaimer Framework Footer Panel -->
+            <div style="background: #fafafa; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 20px; font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 12px;">
+                <span style="font-size: 1.1rem; line-height: 1;">📋</span>
+                <div>
+                    <strong>Enterprise Plan Verification Protocol:</strong> Network alignment configurations vary dynamically based on localized geographical coordinates, required collection method panels, and specific account underwriting parameters. Account administrators are required to verify specific coverage criteria allocations within the client gateway panel prior to dispatching regional collection orders.
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- SECURITY CORE INFRASTRUCTURE MATRIX -->
+    <section id="security" class="section-padding" style="background-color: #0f172a; color: #ffffff; border-bottom: 1px solid #1e293b;">
+        <div class="container">
+            <div style="text-align: center; max-width: 760px; margin: 0 auto 60px auto;">
+                <span class="section-tag" style="background: rgba(99,102,241,0.15); color: #818cf8; border-color: rgba(99,102,241,0.3);">Security Architecture Core</span>
+                <h2 class="section-title" style="color: #ffffff;">Enterprise Security Is Part of the Product.</h2>
+                <p class="section-desc" style="color: #94a3b8;">Sensitive screening datasets demand isolated access controls, multi-tenant database isolation models, and strict cryptographic audit tracking. We don't hide architecture flags behind a footer link.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 52px;">
+                <div style="background: #1e293b; border: 1px solid #334155; padding: 24px; border-radius: 6px;">
+                    <div style="color: var(--brand-accent); font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;">🔒 Data Encryption Layout</div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">Complete hardware encryption parameters applied to datasets in transit and at rest at the column level.</p>
+                </div>
+                <div style="background: #1e293b; border: 1px solid #334155; padding: 24px; border-radius: 6px;">
+                    <div style="color: var(--brand-accent); font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;">🛡️ Row-Level Security Rules</div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">Data isolation rules are structurally enforced inside the core database layer rather than relying on frontend logic checks.</p>
+                </div>
+                <div style="background: #1e293b; border: 1px solid #334155; padding: 24px; border-radius: 6px;">
+                    <div style="color: var(--brand-accent); font-size: 1.25rem; font-weight: 700; margin-bottom: 8px;">🔑 Multi-Tenant Authorization</div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.5;">Granular, role-based directory bounds preventing cross-organizational footprint visibility risks.</p>
+                </div>
+            </div>
+
+            <!-- API / DEVELOPER COMPLIANCE HUB PIPELINES -->
+            <div style="background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%); border: 1px solid #312e81; border-radius: 8px; padding: 40px; display: grid; grid-template-columns: 2fr 1fr; gap: 40px; align-items: center;">
+                <div>
+                    <h3 style="font-size: 1.5rem; font-weight: 800; color: #ffffff; margin-bottom: 12px;">Testing Infrastructure for Your Technology Stack</h3>
+                    <p style="font-size: 0.95rem; color: #94a3b8; line-height: 1.6; margin-bottom: 24px;"> Synchronize workforce directories dynamically via scalable REST endpoints. Automate screening actions directly inside your internal HRIS, applicant tracking platforms, or corporate safety command modules using customizable webhook parameters.</p>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="alert('Redirecting to secure engineering sandbox documentation registry keys...')">Talk to Engineering</button>
+                        <button class="btn btn-outline" style="background: transparent; color: #ffffff; border-color: #334155;" onclick="alert('Compiling API developer parameter references...')">Request API Documentation</button>
+                    </div>
+                </div>
+                <div style="background: #020617; border: 1px solid #1e293b; border-radius: 6px; padding: 20px; font-family: monospace; font-size: 0.8rem; color: #38bdf8; overflow-x: auto;">
+                    <span style="color: #64748b;">// POST /v1/test_orders</span><br>
+                    {<br>
+                    &nbsp;&nbsp;<span style="color: #f43f5e;">"emp_id"</span>: <span style="color: #e2e8f0;">"EMP-9082"</span>,<br>
+                    &nbsp;&nbsp;<span style="color: #f43f5e;">"type"</span>: <span style="color: #e2e8f0;">"DOT-RANDOM"</span>,<br>
+                    &nbsp;&nbsp;<span style="color: #f43f5e;">"panel_code"</span>: <span style="color: #e2e8f0;">"FMCSA-5PANEL"</span>,<br>
+                    &nbsp;&nbsp;<span style="color: #f43f5e;">"routing_zip"</span>: <span style="color: #e2e8f0;">"60601"</span><br>
+                    }<br><br>
+                    <span style="color: #10b981;">&rarr; 201 Created (Pass Issued)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPREHENSIVE PLATFORM FAQ FRAMEWORK -->
+    <section class="section-padding" style="background-color: #ffffff; border-bottom: 1px solid var(--border-subtle);">
+        <div class="container" style="max-width: 900px;">
+            <div class="section-header">
+                <span class="section-tag">Information Architecture</span>
+                <h2 class="section-title">Frequently Answered Parameters</h2>
+                <p class="section-desc">Key technical operational directives covering the enterprise infrastructure application environment.</p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+                <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px;">
+                    <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--brand-primary); margin-bottom: 6px;">What is Screenings4U?</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Screenings4U is an enterprise drug and alcohol testing platform that centralizes workforce testing, compliance workflows, results, reporting, and program administration across every location and business unit.</p>
+                </div>
+                <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px;">
+                    <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--brand-primary); margin-bottom: 6px;">Does Screenings4U support separate DOT and non-DOT testing programs?</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Yes. The platform maps distinct, non-overlapping workflow parameters for federally mandated DOT rules and highly customizable employer-defined non-DOT policy panels.</p>
+                </div>
+                <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 16px;">
+                    <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--brand-primary); margin-bottom: 6px;">Can we manage infrastructure permissions across hundreds of locations?</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Yes. The underlying multi-tier organizational tree scales easily across Parent corporations, subsidiaries, custom logistical hubs, and departments using granular, role-based database constraints.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STRATEGIC FINAL CALL TO ACTION HUB -->
+    <section id="demo" class="section-padding" style="background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%); text-align: center;">
+        <div class="container" style="max-width: 700px;">
+            <h2 style="font-size: 2.25rem; font-weight: 800; color: var(--brand-primary); margin-bottom: 16px; letter-spacing: -0.03em;">Replace Testing Chaos With Operational Control.</h2>
+            <p style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 32px; line-height: 1.6;">One workforce. One testing platform. One source of truth. Screenings4U gives enterprise teams the workspace infrastructure to manage drug and alcohol screening lifecycles at scale.</p>
+            <div style="display: inline-flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+                <button class="btn btn-primary" style="padding: 14px 32px; font-size: 1rem;" onclick="document.getElementById('demo-modal').style.display='flex'">Request an Enterprise Demo</button>
+                <button class="btn btn-outline" style="padding: 14px 32px; font-size: 1rem;" onclick="alert('Routing connection directly to senior sales alignment teams...')">Talk to Sales</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODERN BRAND FOOTER SUMMARY -->
+    <footer style="background-color: var(--brand-primary); color: #94a3b8; padding: 40px 0; font-size: 0.85rem; border-top: 1px solid #1e293b;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+            <div>
+                <strong style="color: #ffffff; font-size: 1rem;">Screenings4U Enterprise Platform</strong><br>
+                <span style="font-size: 0.8rem; color: #64748b;">© 2026 Screenings4U Inc. All critical rights verified under operational standards.</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #64748b;">
+                Designed for strict CIO, CISO, and federal auditor data governance compliance requirements.
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE STRATEGIC DEMO BOOKING MODAL -->
+    <div id="demo-modal" style="display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); backdrop-filter: blur(4px); z-index: 2000; align-items: center; justify-content: center; padding: 20px;">
+        <div style="background: #ffffff; border-radius: 8px; width: 100%; max-width: 460px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); padding: 32px; position: relative;">
+            <button style="position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text-muted);" onclick="document.getElementById('demo-modal').style.display='none'">&times;</button>
+            
+            <div style="text-align: center; margin-bottom: 24px;">
+                <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--brand-primary); margin-bottom: 6px;">See Your Testing Program in One Place</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Tell us how your organization manages workforce testing parameters today.</p>
+            </div>
+
+            <form onsubmit="event.preventDefault(); alert('Enterprise scheduling parameters transmitted securely. An alignment engineer will coordinate within 1 business cycle.'); document.getElementById('demo-modal').style.display='none';">
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-main); margin-bottom: 6px;">Corporate Identity Email</label>
+                    <input type="email" required style="width: 100%; padding: 10px 14px; border: 1px solid var(--border-subtle); border-radius: 6px; font-size: 0.95rem;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-main); margin-bottom: 6px;">Current Workforce Footprint Volume</label>
+                    <select required style="width: 100%; padding: 10px 14px; border: 1px solid var(--border-subtle); border-radius: 6px; font-size: 0.95rem; background: #fff;">
+                        <option value="">Select workforce headcount scale...</option>
+                        <option value="mid">100 - 999 Active Employees</option>
+                        <option value="large">1,000 - 4,999 Fleet/Staff Personnel</option>
+                        <option value="enterprise">5,000+ Distributed National Personnel</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 0.95rem; border-radius: 6px;">Submit Demo Profile Routing</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MAIN CLIENT INTERACTIVE SCRIPT AUTOMATION HUB ENGINE -->
+    <script>
+        /**
+         * Safely opens or resets the user validation dashboard sign-in box modal overlay
+         */
+        function togglePortalState() {
+            const portalFrame = document.getElementById('portal-modal');
+            if (portalFrame) {
+                const currentDisplay = portalFrame.style.display;
+                portalFrame.style.display = (currentDisplay === 'flex') ? 'none' : 'flex';
+                
+                // Clear any leftover message nodes
+                const errNode = document.getElementById('loginErrorMsg');
+                if (errNode) errNode.style.display = 'none';
+            }
+        }
+
+        /**
+         * Processes mock sandboxed authorization requests to prove system dashboard flow
+         */
+        function handlePortalSandboxAuth(event) {
+            event.preventDefault();
+            
+            const emailValue = document.getElementById('loginEmail').value.trim();
+            const passwordValue = document.getElementById('loginPassword').value;
+            const errNode = document.getElementById('loginErrorMsg');
+            
+            if (!errNode) return;
+
+            // Simple sandbox check validating system inputs before allowing access
+            if (emailValue.includes('@renewyou.com') || emailValue.includes('admin') || passwordValue.length >= 4) {
+                errNode.style.display = 'none';
+                alert('Portal Token Verified Successfully. Initializing secure client workspace dashboard modules...');
+                togglePortalState();
+            } else {
+                errNode.innerText = 'Authorization Key Denied: Invalid credentials structure for this multi-tenant database context.';
+                errNode.style.display = 'block';
+            }
+        }
+
+        // Attach simple click escape handlers for mobile burger nav parameter loops
+        document.querySelector('.mobile-menu-toggle')?.addEventListener('click', () => {
+            alert('Opening responsive control panel options menu layout container drop frame...');
+        });
+    </script>
+</body>
+</html>

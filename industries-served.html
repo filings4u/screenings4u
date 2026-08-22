@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Industry-specific workplace drug and alcohol testing programs for transportation, construction, manufacturing, healthcare, staffing, government and small businesses.">
+<title>Industries Served | screenings4u</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --orange:#ff6b00;--orange-dark:#d95800;--orange-soft:#fff0e6;
+  --blue:#325aa3;--blue-dark:#24467f;--blue-deep:#17335f;--blue-darker:#10284b;
+  --blue-soft:#e9f0fb;--blue-pale:#f4f7fc;--ink:#1d2d45;--muted:#667892;
+  --surface:#f4f7fc;--surface-2:#eef3f9;--line:#d9e3f0;--line-strong:#c4d3e5;
+  --white:#fff;--max:1440px;--shadow-sm:0 5px 18px rgba(23,51,95,.08);
+  --shadow:0 18px 45px rgba(23,51,95,.12);--radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.55;overflow-x:hidden}
+a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.container{width:min(var(--max),calc(100% - 80px));margin-inline:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--orange);font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;margin-bottom:14px}
+.eyebrow:before{content:"";width:28px;height:2px;background:var(--orange)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:50px;padding:0 22px;border-radius:7px;border:1px solid transparent;font-size:14px;font-weight:800;transition:.2s ease}
+.btn-orange{color:#fff;background:var(--orange);box-shadow:0 9px 25px rgba(255,107,0,.22)}
+.btn-orange:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.btn-outline{color:var(--blue-dark);border-color:#b9c8db;background:rgba(255,255,255,.78)}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px)}
+.topbar{background:var(--blue-dark);color:#dfe9f5;font-size:12px}
+.topbar-inner{min-height:38px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.topbar-left,.topbar-right{display:flex;align-items:center;gap:18px}.topbar a:hover{color:#fff}
+.site-header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+.nav-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:26px;position:relative}
+.brand{display:flex;align-items:center;flex:0 0 155px;width:155px}.site-logo{display:block;width:145px;height:auto;max-height:48px;object-fit:contain;object-position:left center}
+.nav{display:flex;align-items:center;gap:4px}.nav-item{position:relative}
+.nav-link{display:inline-flex;align-items:center;gap:6px;padding:13px 10px;color:#344054;font-size:13px;font-weight:700;border-radius:7px}
+.nav-link:hover{color:var(--blue);background:#f5f8fc}.nav-link .chevron{font-size:10px;transition:transform .2s ease}
+.dropdown{position:absolute;top:calc(100% + 8px);left:0;min-width:255px;padding:10px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s ease}
+.nav-item:hover .dropdown,.nav-item:focus-within .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-item:hover .chevron{transform:rotate(180deg)}.dropdown a{display:block;padding:11px 12px;border-radius:8px;font-size:13px;color:#475467;font-weight:600}
+.dropdown a:hover{background:#f3f7fc;color:var(--blue)}.nav-actions{display:flex;gap:9px;align-items:center}
+.mobile-toggle{display:none;width:44px;height:42px;border:1px solid var(--line);border-radius:8px;background:#fff}
+
+.hero{position:relative;min-height:700px;display:flex;align-items:center;background:
+linear-gradient(90deg,rgba(7,26,49,.98) 0%,rgba(7,26,49,.93) 31%,rgba(7,26,49,.66) 53%,rgba(7,26,49,.12) 78%,rgba(7,26,49,0) 100%),
+url("images/group-training-hero.png") 38% center/cover no-repeat;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-170px;top:-220px;width:500px;height:500px;background:var(--orange);opacity:.96;transform:rotate(35deg);clip-path:polygon(42% 0,100% 0,100% 58%)}
+.hero-inner{position:relative;z-index:2;padding:92px 0 130px}.hero-copy{max-width:700px;color:#fff}
+.hero-copy .eyebrow{color:#ffad73}.hero-copy .eyebrow:before{background:#ffad73}
+.hero h1{font-size:clamp(48px,6vw,78px);line-height:.98;letter-spacing:-.055em;font-weight:900;margin-bottom:24px}
+.hero h1 span{color:var(--orange)}.hero-lead{max-width:650px;color:#d4e1f0;font-size:18px;line-height:1.7;margin-bottom:32px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:48px}.hero-actions .btn-outline{color:#fff;border-color:rgba(255,255,255,.55);background:transparent}
+.hero-actions .btn-outline:hover{color:var(--blue-dark);background:#fff;border-color:#fff}
+.hero-features{display:grid;grid-template-columns:repeat(4,1fr);max-width:760px;border-top:1px solid rgba(255,255,255,.18);padding-top:22px}
+.hero-feature{padding:0 17px;border-right:1px solid rgba(255,255,255,.18)}
+.hero-feature:first-child{padding-left:0}.hero-feature:last-child{border-right:0}
+.hero-feature strong{display:block;font-size:12px;line-height:1.3}.hero-feature small{display:block;color:#a8bad0;font-size:10px;margin-top:4px}
+
+.intro{padding:105px 0 95px}.intro-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
+.intro h2,.section-heading h2,.process-copy h2{color:var(--blue-dark);font-size:clamp(34px,4vw,51px);line-height:1.05;letter-spacing:-.04em;margin-bottom:18px}
+.intro-copy p{color:var(--muted);font-size:16px;margin-bottom:18px}.check-list{display:grid;gap:13px;margin-top:25px}
+.check-list li{list-style:none;display:flex;gap:12px;align-items:flex-start;color:#344054;font-size:14px;font-weight:600}
+.check-list li:before{content:"✓";flex:0 0 23px;width:23px;height:23px;display:grid;place-items:center;border-radius:50%;background:var(--blue-soft);color:var(--blue);font-weight:900;font-size:12px}
+.info-card{padding:38px;border-radius:20px;background:var(--blue-dark);color:#fff;box-shadow:var(--shadow)}
+.info-card h3{font-size:29px;line-height:1.08;margin-bottom:12px}.info-card p{color:#d4e1f0;font-size:14px;line-height:1.7;margin-bottom:25px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.info-stat{padding:18px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.05)}
+.info-stat strong{display:block;font-size:13px;margin-bottom:4px}.info-stat span{display:block;color:#aebfd3;font-size:11px;line-height:1.45}
+
+.services{padding:105px 0;background:var(--surface-2);border-block:1px solid var(--line)}.section-heading{max-width:780px;margin-bottom:48px}
+.section-heading p{color:var(--muted);font-size:17px;max-width:690px}.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.service-card{padding:29px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);transition:.2s ease}
+.service-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line-strong)}
+.service-number{width:42px;height:42px;display:grid;place-items:center;margin-bottom:18px;border-radius:10px;background:var(--blue-soft);color:var(--blue);font-size:12px;font-weight:900}
+.service-card h3{color:var(--blue-dark);font-size:18px;margin-bottom:8px}.service-card p{color:var(--muted);font-size:12.5px;line-height:1.65}
+.service-link{display:inline-flex;margin-top:18px;color:var(--orange);font-size:12px;font-weight:900}
+
+.requirements{padding:105px 0}.requirements-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.requirement-panel{padding:38px;border-radius:var(--radius);background:var(--blue-dark);color:#fff}.requirement-panel.orange{background:var(--orange)}
+.requirement-panel h3{font-size:28px;line-height:1.1;margin-bottom:12px}.requirement-panel p{color:#d4e1f0;font-size:13px;line-height:1.7}
+.requirement-panel.orange p{color:#fff0e6}.requirement-panel ul{display:grid;gap:11px;margin-top:22px}
+.requirement-panel li{list-style:none;display:flex;gap:10px;color:#fff;font-size:12px}
+.requirement-panel li:before{content:"✓";width:21px;height:21px;flex:0 0 21px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.14);color:var(--orange);font-weight:900}
+
+.process{padding:105px 0;background:var(--blue-pale);border-top:1px solid var(--line)}.process-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:start}
+.process-copy p{color:var(--muted);font-size:15px}.steps{display:grid}.step{display:grid;grid-template-columns:58px 1fr;gap:20px;padding-bottom:30px;position:relative}
+.step:not(:last-child):after{content:"";position:absolute;left:28px;top:58px;bottom:0;width:1px;background:var(--line)}
+.step-num{position:relative;z-index:2;width:58px;height:58px;display:grid;place-items:center;border-radius:50%;color:#fff;background:var(--blue);font-size:14px;font-weight:900;box-shadow:0 0 0 7px #edf3fb}
+.step h3{color:var(--blue-dark);font-size:19px;margin:4px 0 5px}.step p{color:var(--muted);font-size:13px;max-width:580px}
+
+.cta{padding:85px 0;background:#eef3f9;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:30px}.cta h2{font-size:clamp(30px,4vw,45px);line-height:1.05;letter-spacing:-.035em;color:var(--blue-dark);margin-bottom:8px}
+.cta p{color:var(--muted);font-size:15px}.cta-actions{display:flex;flex-wrap:wrap;gap:10px}
+.faq{padding:105px 0}.faq-list{display:grid;gap:10px;max-width:900px}.faq-item{border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
+.faq-question{width:100%;padding:19px 21px;display:flex;justify-content:space-between;align-items:center;border:0;background:#fff;color:var(--blue-dark);text-align:left;font-size:14px;font-weight:800}
+.faq-answer{display:none;padding:0 21px 20px;color:var(--muted);font-size:13px;line-height:1.7}.faq-item.active .faq-answer{display:block}.faq-plus{color:var(--orange);font-size:19px}
+
+@media(max-width:1120px){
+.nav{display:none}.nav-inner.menu-open .nav{display:flex;position:absolute;left:0;right:0;top:82px;flex-direction:column;align-items:stretch;padding:12px;background:#fff;border:1px solid var(--line);border-radius:0 0 12px 12px;box-shadow:var(--shadow)}
+.nav-inner.menu-open .dropdown{position:static;display:none;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;padding:4px 0 8px 15px}
+.nav-item.open .dropdown{display:block!important}.mobile-toggle{display:block}.nav-actions .btn{display:none}
+}
+@media(max-width:900px){
+.hero{min-height:620px}.intro-grid,.requirements-grid,.process-grid{grid-template-columns:1fr}.service-grid{grid-template-columns:1fr 1fr}
+.hero-features{grid-template-columns:1fr 1fr;gap:18px}.hero-feature{border-right:0}.cta-inner{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:600px){
+.container{width:min(var(--max),calc(100% - 32px))}.topbar-left{display:none}.hero{min-height:650px;background-position:60% center}
+.hero-inner{padding:70px 0 90px}.hero h1{font-size:48px}.hero-lead{font-size:15px}.hero-actions{flex-direction:column}
+.hero-actions .btn{width:100%}.hero-features{grid-template-columns:1fr 1fr}.service-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="topbar-left"><span>Nationwide Drug & Alcohol Testing</span><span>•</span><span>Operating Nationwide</span></div>
+    <div class="topbar-right"><span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a></div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container nav-inner" id="navInner">
+    <a href="/" class="brand" aria-label="screenings4u home"><img src="images/logo.png" alt="screenings4u" class="site-logo"></a>
+    <nav class="nav" id="mainNav" aria-label="Main navigation"></nav>
+    <div class="nav-actions">
+      <a href="/personal-drug-and-alcohol-testing" class="btn btn-outline">Order a Test</a>
+      <a href="/contact" class="btn btn-orange">Get Started</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <div class="eyebrow">Employer Solutions</div>
+      <h1>Drug & Alcohol Testing <span>For Your Industry.</span></h1>
+      <p class="hero-lead">screenings4u supports employers across transportation, construction, manufacturing, healthcare, staffing, government and small-business environments with clear, compliant testing programs.</p>
+      <div class="hero-actions">
+        <a href="#industries" class="btn btn-orange">Explore Industries →</a>
+        <a href="contact.html" class="btn btn-outline">Talk to Our Team →</a>
+      </div>
+      <div class="hero-features">
+        <div class="hero-feature"><strong>Nationwide</strong><small>Thousands of certified collection sites</small></div>
+        <div class="hero-feature"><strong>Compliance</strong><small>DOT and Non-DOT support</small></div>
+        <div class="hero-feature"><strong>Digital</strong><small>Donor passes and automated reporting</small></div>
+        <div class="hero-feature"><strong>Flexible</strong><small>Programs tailored to your workplace</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="container intro-grid">
+    <div class="intro-copy">
+      <span class="eyebrow">Why Employers Partner With screenings4u</span>
+      <h2>One testing partner for different workplace environments.</h2>
+      <p>The source page describes testing solutions tailored for safety, compliance and trust across a broad range of employer types.</p>
+      <ul class="check-list">
+        <li>Compliance-focused programs</li>
+        <li>Nationwide collection network</li>
+        <li>Digital donor passes</li>
+        <li>Automated reporting</li>
+        <li>DOT and Non-DOT support</li>
+        <li>Programs tailored to industry needs</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>Testing built around your industry.</h3>
+      <p>Choose a program based on your workforce, risk profile and regulatory environment, then combine testing methods to build a customized workplace solution.</p>
+      <div class="info-grid">
+        <div class="info-stat"><strong>Pre-Employment</strong><span>Screen candidates before they join your workforce.</span></div>
+        <div class="info-stat"><strong>Random</strong><span>Maintain ongoing testing programs throughout employment.</span></div>
+        <div class="info-stat"><strong>Post-Accident</strong><span>Support rapid response after critical incidents.</span></div>
+        <div class="info-stat"><strong>Return-to-Duty</strong><span>Structured programs for employees returning to work.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="industries">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Industry-Specific Use Cases</span>
+      <h2>Programs designed for the way your business operates.</h2>
+      <p>The current screenings4u page identifies six primary employer use cases.</p>
+    </div>
+    <div class="service-grid">
+      <article class="service-card"><div class="service-number">01</div><h3>Transportation & Logistics</h3><p>Specialized FMCSA and DOT-compliant testing protocols tailored for transportation operations.</p></article>
+      <article class="service-card"><div class="service-number">02</div><h3>Construction & Manufacturing</h3><p>Safety-first testing programs designed for high-risk industrial and construction environments.</p></article>
+      <article class="service-card"><div class="service-number">03</div><h3>Healthcare & Care Facilities</h3><p>Compliance-driven screening solutions supporting patient safety and rigorous staffing standards.</p></article>
+      <article class="service-card"><div class="service-number">04</div><h3>Staffing Agencies</h3><p>Fast, reliable pre-employment solutions for rapid hiring and high-volume workforce management.</p></article>
+      <article class="service-card"><div class="service-number">05</div><h3>Government & Municipalities</h3><p>Testing services for regular and safety-sensitive roles in public-sector environments.</p></article>
+      <article class="service-card"><div class="service-number">06</div><h3>Small Business & Office Teams</h3><p>Professional testing programs scaled for smaller workforces and straightforward administration.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="requirements">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Workplace Testing Programs</span>
+      <h2>Match testing events to your workplace needs.</h2>
+      <p>The source page highlights multiple testing events and compliance programs that can be tailored to employer requirements.</p>
+    </div>
+    <div class="requirements-grid">
+      <div class="requirement-panel">
+        <h3>Hiring & Ongoing Safety</h3>
+        <p>Build testing into your workforce lifecycle from recruitment through continued employment.</p>
+        <ul>
+          <li>Pre-employment testing</li>
+          <li>Random testing</li>
+          <li>High-volume hiring support</li>
+          <li>Digital donor passes</li>
+          <li>Automated reporting</li>
+        </ul>
+      </div>
+      <div class="requirement-panel orange">
+        <h3>Incident & Compliance</h3>
+        <p>Support critical testing events and structured programs when workplace or regulatory requirements call for them.</p>
+        <ul>
+          <li>Post-accident testing</li>
+          <li>Reasonable suspicion</li>
+          <li>Return-to-duty testing</li>
+          <li>Follow-up testing</li>
+          <li>DOT and Non-DOT programs</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process">
+  <div class="container process-grid">
+    <div class="process-copy">
+      <span class="eyebrow">Build Your Program</span>
+      <h2>Start with your industry. Build from there.</h2>
+      <p>screenings4u describes a flexible approach that lets employers mix testing types and build a program around their specific safety and compliance requirements.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><div><h3>Identify Your Industry</h3><p>Define your workforce, regulatory environment and operational risks.</p></div></div>
+      <div class="step"><div class="step-num">02</div><div><h3>Select Testing Events</h3><p>Choose pre-employment, random, post-accident, reasonable suspicion, return-to-duty or follow-up testing.</p></div></div>
+      <div class="step"><div class="step-num">03</div><div><h3>Choose Testing Methods</h3><p>Mix and match available drug and alcohol testing methods to meet your program requirements.</p></div></div>
+      <div class="step"><div class="step-num">04</div><div><h3>Centralize Administration</h3><p>Use digital donor passes and automated reporting to simplify employee and administrator workflows.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="services">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Comprehensive Testing Services</span>
+      <h2>Flexible screening options for employer programs.</h2>
+      <p>The source page highlights hair, urine, EtG alcohol, DOT testing, personal testing and accredited services.</p>
+    </div>
+    <div class="service-grid">
+      <article class="service-card"><div class="service-number">01</div><h3>Hair Testing</h3><p>Expanded screening options for employer programs that require hair-based testing.</p></article>
+      <article class="service-card"><div class="service-number">02</div><h3>Urine Testing</h3><p>Flexible urine drug testing options for workplace screening programs.</p></article>
+      <article class="service-card"><div class="service-number">03</div><h3>EtG Alcohol</h3><p>Alcohol screening options for employer programs requiring alcohol testing.</p></article>
+      <article class="service-card"><div class="service-number">04</div><h3>DOT Testing</h3><p>Testing support for federally regulated and safety-sensitive workplaces.</p></article>
+      <article class="service-card"><div class="service-number">05</div><h3>Personal Testing</h3><p>Personal screening services can be incorporated when appropriate for your organization's needs.</p></article>
+      <article class="service-card"><div class="service-number">06</div><h3>Accredited Network</h3><p>Nationwide access to professional collection sites and laboratory testing partners.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container cta-inner">
+    <div><h2>Let's talk about your industry.</h2><p>Tell screenings4u about your workforce and testing requirements so we can design a workplace solution that fits.</p></div>
+    <div class="cta-actions"><a href="contact.html" class="btn btn-orange">Request a Consultation →</a><a href="workplace-drug-and-alcohol-testing.html" class="btn btn-outline">View Workplace Testing →</a></div>
+  </div>
+</section>
+</main>
+
+<footer id="siteFooter"></footer>
+<script src="assets/js/industries-served.js" defer></script>
+<script src="assets/js/navigation.js"></script>
+<script src="assets/js/footer.js"></script>
+</body>
+</html>

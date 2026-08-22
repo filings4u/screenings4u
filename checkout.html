@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | screenings4u</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+:root{--orange:#ff6b00;--blue:#325aa3;--blue-dark:#24467f;--ink:#1d2d45;--muted:#667892;--surface:#f4f7fc;--line:#d9e3f0;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:var(--surface)}
+a{text-decoration:none}.container{width:min(1120px,calc(100% - 36px));margin:auto}
+header{background:#fff;border-bottom:1px solid var(--line)}.header-inner{min-height:78px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:28px;font-weight:900;color:var(--blue-dark);letter-spacing:-.06em}.brand span{color:var(--orange);font-weight:500}
+.back{font-size:13px;font-weight:800;color:var(--blue)}
+main{padding:55px 0 90px}.eyebrow{color:var(--orange);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px}
+h1{color:var(--blue-dark);font-size:clamp(36px,5vw,54px);line-height:1.02;letter-spacing:-.045em;margin:0 0 10px}.intro{color:var(--muted);font-size:14px;margin-bottom:30px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:24px;align-items:start}.card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 14px 40px rgba(23,51,95,.08)}.pad{padding:30px}
+h2{color:var(--blue-dark);font-size:21px;margin:0 0 7px}.sub{color:var(--muted);font-size:12px;margin:0 0 22px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:6px;margin-bottom:12px}.field.full{grid-column:1/-1}
+label{font-size:12px;font-weight:800;color:#344054}input{height:47px;border:1px solid #c8d4e3;border-radius:8px;padding:0 12px;font:inherit;outline:0}input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(50,90,163,.1)}
+.payment{margin-top:18px;padding:18px;border:1px solid var(--line);border-radius:12px;background:#fbfcfe}
+#payment-element{min-height:60px}.notice{padding:12px;border-radius:8px;background:#fff7ed;color:#9a3412;font-size:12px;margin-top:12px;display:none}
+button{width:100%;height:52px;border:0;border-radius:8px;background:var(--orange);color:#fff;font-weight:900;margin-top:18px;cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}
+.secure{text-align:center;color:#7b8da3;font-size:10px;margin-top:10px}
+.summary{position:sticky;top:20px}.category{color:var(--orange);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.09em}.product{color:var(--blue-dark);font-size:20px;font-weight:900;line-height:1.2;margin-top:6px}
+hr{border:0;border-top:1px solid var(--line);margin:22px 0}.label{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#667085;margin-bottom:10px}
+ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}li{font-size:12px;color:#475467}li:before{content:"✓";color:var(--blue);font-weight:900;margin-right:8px}
+.price{display:flex;justify-content:space-between;align-items:center}.price span{font-size:13px;color:var(--muted)}.price strong{font-size:27px;color:var(--blue-dark)}
+.error{display:none;color:#b42318;background:#fef3f2;padding:12px;border-radius:8px;font-size:12px;margin-top:12px}
+@media(max-width:850px){.grid{grid-template-columns:1fr}.summary{position:static;order:-1}}
+@media(max-width:560px){.container{width:min(100% - 28px,1120px)}.pad{padding:22px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}}
+.brand{
+  display:flex;
+  align-items:center;
+}
+
+.brand img{
+  display:block;
+  width:180px;
+  height:auto;
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container header-inner">
+    <a href="/" class="brand">
+      <img src="images/logo.png" alt="screenings4u">
+    </a>
+
+    <a id="backLink" href="/services" class="back">
+      ← Back to Services
+    </a>
+  </div>
+</header>
+
+<main><div class="container">
+  <div class="eyebrow">Secure Checkout</div>
+  <h1>Complete Your Order.</h1>
+  <p class="intro">Review the service you selected, confirm your information and continue to secure payment.</p>
+
+  <div id="loading" class="card pad">Loading your selected service...</div>
+
+  <div id="errorCard" class="card pad" style="display:none">
+    <div class="notice" style="display:block">We could not find the selected service. Please return to the services page and select a service.</div>
+    <a id="errorBackLink" class="back" href="/services">← Return to Services</a>
+  </div>
+
+  <div id="checkoutGrid" class="grid" style="display:none">
+    <section class="card"><div class="pad">
+      <h2>Customer Information</h2>
+      <p class="sub">This information will be used for your order and payment.</p>
+
+      <form id="checkoutForm">
+        <div class="fields">
+          <div class="field"><label for="firstName">First Name</label><input id="firstName" name="firstName" required autocomplete="given-name"></div>
+          <div class="field"><label for="lastName">Last Name</label><input id="lastName" name="lastName" required autocomplete="family-name"></div>
+          <div class="field"><label for="email">Email Address</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+          <div class="field"><label for="phone">Phone Number</label><input id="phone" name="phone" type="tel" required autocomplete="tel"></div>
+          <div class="field full"><label for="address">Billing Address</label><input id="address" name="address" required autocomplete="street-address"></div>
+          <div class="field"><label for="city">City</label><input id="city" name="city" required autocomplete="address-level2"></div>
+          <div class="field"><label for="state">State</label><input id="state" name="state" required autocomplete="address-level1"></div>
+          <div class="field"><label for="zip">ZIP Code</label><input id="zip" name="zip" required autocomplete="postal-code"></div>
+        </div>
+
+        <hr><h2>Payment</h2><p class="sub">Secure card payment powered by Stripe.</p>
+        <div class="payment"><div id="payment-element"></div></div>
+        <div id="setupNotice" class="notice"></div>
+        <div id="paymentError" class="error"></div>
+        <button id="payButton" type="submit" disabled>Continue to Secure Payment</button>
+        <div class="secure">Your card information is handled by Stripe and is not stored in this website.</div>
+      </form>
+    </div></section>
+
+    <aside class="card summary"><div class="pad">
+      <div id="category" class="category"></div>
+      <div id="product" class="product"></div>
+      <div id="serviceUrl" style="margin-top:8px;color:#7b8da3;font-size:10px;"></div>
+      <hr>
+      <div class="label">What's Included</div>
+      <ul id="features"></ul>
+      <hr>
+      <div class="label">Drugs Included</div>
+      <ul id="drugs"></ul>
+      <hr>
+      <div class="price"><span>Test Price</span><strong id="price"></strong></div>
+    </div></aside>
+  </div>
+</div></main>
+
+<script src="assets/js/test-price-list.js"></script>
+<script src="assets/js/checkout.js"></script>
+</body>
+</html>

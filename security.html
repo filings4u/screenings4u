@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Security Architecture & Developer APIs | Screenings4U Enterprise</title>
+    <link rel="stylesheet" href="assets/css/base.css">
+</head>
+<body>
+
+    <!-- REUSABLE COMPLIANCE NAV SYSTEM -->
+    <header class="main-header">
+        <div class="container header-wrap">
+            <a href="index.html" class="brand-logo">
+                <img src="images/logo.png" alt="Screenings4U Industry Logo" onerror="this.style.display='none';">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="platform.html">Platform Engine</a></li>
+                    <li><a href="random.html">Random Autopilot</a></li>
+                    <li><a href="compliance.html">DOT Compliance</a></li>
+                    <li><a href="security.html">Security & API Keys</a></li>
+                </ul>
+            </nav>
+            <div>
+                <a href="index.html#demo" class="btn btn-primary">Request Enterprise Demo</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- CORE TECHNICAL SECURITY HEADER -->
+    <main class="section-padding" style="background-color: var(--bg-light);">
+        <div class="container">
+            <div style="max-width: 900px; margin-bottom: 56px;">
+                <span class="meta-tag">Section 13 // Infrastructure Architecture</span>
+                <h1 style="font-size: 2.75rem; margin-bottom: 24px; line-height: 1.1;">Enterprise Security Is Part of the Product.</h1>
+                <p style="font-size: 1.15rem; color: var(--text-muted); max-width: 800px; line-height: 1.6;">
+                    Sensitive workforce testing data requires disciplined access control, encryption, auditability, and data governance. Screenings4U implements multi-tenant data isolation and authorization at the database layer using strict row-level policies.
+                </p>
+            </div>
+
+            <!-- Technical Capabilities Layout Grid -->
+            <div class="data-table-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="data-panel">
+                    <span style="font-size: 0.75rem; font-family: monospace; color: var(--brand-accent); font-weight: 700; display: block; margin-bottom: 8px;">DATA SEPARATION</span>
+                    <h3>Row-Level Security (RLS)</h3>
+                    <p style="font-size: 0.85rem;">Tenant isolation rules are strictly enforced at the database layer rather than relying on frontend JavaScript checks. Records remain restricted by tenant ID.</p>
+                </div>
+
+                <div class="data-panel">
+                    <span style="font-size: 0.75rem; font-family: monospace; color: var(--brand-accent); font-weight: 700; display: block; margin-bottom: 8px;">CRYPTO CONTROLS</span>
+                    <h3>Encryption Criteria</h3>
+                    <p style="font-size: 0.85rem;">Workforce identity strings, medical records, and drug testing results undergo strict encryption protocol parameters both in transit and at rest.</p>
+                </div>
+
+                <div class="data-panel">
+                    <span style="font-size: 0.75rem; font-family: monospace; color: var(--brand-accent); font-weight: 700; display: block; margin-bottom: 8px;">IMMUTABLE LOGS</span>
+                    <h3>Administrative Audit Trail</h3>
+                    <p style="font-size: 0.85rem;">System changes, permission mutations, result access logs, and data exports generate unalterable records capturing user IDs, timestamps, and IP addresses.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- DEVELOPER REST API INTEGRATION COMPONENT -->
+    <section class="section-padding" style="background-color: #ffffff; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+        <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+            <div>
+                <span class="meta-tag">Section 20-21 // Technology Stack Integration</span>
+                <h2 style="font-size: 2rem; margin-bottom: 20px;">Testing Infrastructure for Your Technology Stack</h2>
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px;">
+                    Connect Screenings4U directly to your existing software systems. Use our REST API and automated webhooks to sync workforce files, trigger candidate screenings automatically from your ATS, and pull completed test statuses directly into your corporate data architecture.
+                </p>
+                <div style="display: flex; gap: 16px;">
+                    <a href="index.html#demo" class="btn btn-primary">Talk to Engineering</a>
+                    <a href="index.html#demo" class="btn btn-outline">Request API Documentation</a>
+                </div>
+            </div>
+
+            <!-- Code Simulation Frame Without Emojis or Gimmicks -->
+            <div style="background-color: #0f172a; border: 1px solid #1e293b; border-radius: 4px; padding: 32px; font-family: monospace; font-size: 0.85rem; color: #38bdf8; overflow-x: auto; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);">
+                <div style="color: #64748b; margin-bottom: 12px; border-bottom: 1px solid #1e293b; padding-bottom: 8px;">// POST /rest/v1/test_orders</div>
+                <div>{</div>
+                <div>&nbsp;&nbsp;"organization_id": <span style="color: #e2e8f0;">"uuid_tenant_string"</span>,</div>
+                <div>&nbsp;&nbsp;"employee_id": <span style="color: #e2e8f0;">"emp_9082"</span>,</div>
+                <div>&nbsp;&nbsp;"testing_program": <span style="color: #e2e8f0;">"DOT-FMCSA"</span>,</div>
+                <div>&nbsp;&nbsp;"test_type": <span style="color: #e2e8f0;">"Urine-5Panel"</span>,</div>
+                <div>&nbsp;&nbsp;"reason": <span style="color: #e2e8f0;">"Random"</span></div>
+                <div>}</div>
+                <div style="margin-top: 16px; color: #10b981;">&rarr; 201 Created [Order Dispatched]</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 40 STRATEGIC MARKETING ACTION FRAME -->
+    <section class="section-padding" style="background-color: var(--bg-light); text-align: center;">
+        <div class="container">
+            <h2 style="font-size: 1.85rem; margin-bottom: 12px;">See Your Testing Program in One Place.</h2>
+            <p style="color: var(--text-muted); font-size: 1rem; max-width: 600px; margin: 0 auto 32px auto; line-height: 1.5;">Tell us how your organization manages workforce testing today. We'll show you how Screenings4U can centralize the workflow.</p>
+            <div style="display: flex; justify-content: center; gap: 16px;">
+                <a href="index.html#demo" class="btn btn-primary">Request an Enterprise Demo</a>
+                <a href="index.html#demo" class="btn btn-outline" style="border-color: var(--border-dark);">Talk to Sales</a>
+            </div>
+        </div>
+    </section>
+
+              <!-- MODERN BRAND FOOTER SUMMARY -->
+    <footer style="background-color: var(--brand-primary); color: #94a3b8; padding: 40px 0; font-size: 0.85rem; border-top: 1px solid #1e293b;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+            <div>
+                <strong style="color: #ffffff; font-size: 1rem;">Screenings4U Enterprise Platform</strong><br>
+                <span style="font-size: 0.8rem; color: #64748b;">© 2026 Screenings4U Inc. All critical rights verified under operational standards.</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #64748b;">
+                Designed for strict CIO, CISO, and federal auditor data governance compliance requirements.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
