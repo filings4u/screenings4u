@@ -1,0 +1,178 @@
+/* Screenings4U Enterprise Platform - Architecture CSS Core */
+:root {
+    --brand-primary: #0f172a;     /* Deep slate blue for primary text and hierarchy dominance */
+    --brand-accent: #325aa3;      /* Tech-focused ocean blue for links, key interactive triggers, and borders */
+    --brand-accent-rgb: 50, 90, 163;
+    --orange-brand: #ff6b00;      /* Primary corporate identity branding color */
+    --text-main: #334155;         /* Dark neutral slate for sustained reading density */
+    --text-muted: #64748b;        /* Controlled secondary neutral for technical captions */
+    --bg-light: #f8fafc;          /* Low-contrast canvas background */
+    --bg-card: #ffffff;
+    --border-subtle: #e2e8f0;     /* Ultra-fine borders for clear data grids */
+    --border-dark: #cbd5e1;
+    --success-color: #10b981;    /* Strict operational green for passing milestones */
+    --danger-color: #ef4444;     /* Operational red for exceptions and compliance breaches */
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #ffffff;
+    color: var(--text-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+/* Strict Typography Scale */
+h1, h2, h3, h4 {
+    color: var(--brand-primary);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+}
+
+/* Global Nav System */
+.main-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border-subtle);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--brand-primary);
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+}
+
+.brand-logo img {
+    height: 28px;
+    width: auto;
+    object-fit: contain;
+}
+
+.brand-logo span {
+    color: var(--orange-brand);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.1s ease;
+}
+
+.nav-links a:hover {
+    color: var(--brand-accent);
+}
+
+/* B2B Technical Actions */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.btn-primary {
+    background-color: var(--brand-accent);
+    color: #ffffff;
+    border: 1px solid transparent;
+}
+
+.btn-primary:hover {
+    background-color: #24437a;
+}
+
+.btn-outline {
+    border: 1px solid var(--border-dark);
+    background-color: #ffffff;
+    color: var(--brand-primary);
+}
+
+.btn-outline:hover {
+    background-color: var(--bg-light);
+    border-color: var(--brand-primary);
+}
+
+/* Layout Matrices */
+.section-padding {
+    padding: 120px 0;
+}
+
+.meta-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--brand-accent);
+    margin-bottom: 16px;
+    display: block;
+}
+
+.data-table-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+}
+
+.data-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    padding: 32px;
+    border-radius: 4px;
+}
+
+.data-panel h3 {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.data-panel p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}

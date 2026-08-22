@@ -1,0 +1,540 @@
+/* Core Structural Styles for the Global Nav Header Elements */
+.app-global-header {
+  background-color: var(--color-surface-pure);
+  border-bottom: 1px solid var(--color-border-subtle);
+  position: sticky; top: 0; z-index: 1000;
+}
+.header-utility-bar {
+  background-color: var(--color-primary-dark);
+  color: var(--color-canvas-light);
+  padding: 8px 0; font-size: 13px; font-weight: 500;
+}
+.utility-flex {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.utility-phone {
+  color: var(--color-accent); text-decoration: none; font-weight: 700;
+}
+.main-nav-row {
+  display: flex; justify-content: space-between; align-items: center; padding-top: 16px; padding-bottom: 16px;
+}
+.brand-identity {
+  font-size: 26px; font-weight: 800; color: var(--color-primary); text-decoration: none; letter-spacing: -0.04em;
+}
+.brand-mark { color: var(--color-accent); }
+.navigation-link-stack { display: flex; gap: 32px; align-items: center; }
+.dropdown-trigger-node { position: relative; }
+.dropdown-btn {
+  background: none; border: none; color: var(--color-base-dark); font-family: var(--font-system);
+  font-size: 15px; font-weight: 600; cursor: pointer; padding: 8px 0;
+}
+.dropdown-panel-menu {
+  display: none; position: absolute; top: 100%; left: -16px; background-color: var(--color-surface-pure);
+  border: 1px solid var(--color-border-subtle); padding: 12px; border-radius: var(--radius-container);
+  width: 240px; box-shadow: var(--elevation-subtle);
+}
+.dropdown-panel-menu a {
+  display: block; color: var(--color-text-body); padding: 10px 14px; text-decoration: none; font-size: 14px; font-weight: 500;
+}
+.dropdown-panel-menu a:hover {
+  background-color: var(--color-canvas-light); color: var(--color-primary); border-radius: var(--radius-interactive);
+}
+.dropdown-trigger-node:hover .dropdown-panel-menu { display: block; }
+.static-nav-link { color: var(--color-base-dark); text-decoration: none; font-weight: 600; font-size: 15px; }
+.static-nav-link:hover, .dropdown-btn:hover { color: var(--color-primary); }
+.header-action-block { display: flex; gap: 12px; }
+.small-btn { padding: 8px 16px; font-size: 13px; }
+.mobile-menu-trigger { display: none; background: none; border: none; font-size: 24px; cursor: pointer; }
+
+/* Structural Custom Styling Rules for Global Footer Layouts */
+.app-global-footer {
+  background-color: var(--color-base-dark); color: var(--color-canvas-light); padding: 80px 0 0 0; margin-top: 100px;
+}
+.footer-grid-layout {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 64px; padding-bottom: 60px;
+}
+.footer-brand-summary h3 { font-size: 28px; font-weight: 800; color: var(--color-surface-pure); margin-bottom: 16px; }
+.footer-brand-summary p { color: var(--color-muted); max-width: 320px; font-size: 14px; }
+.footer-link-group h4, .footer-contact-summary h4 { color: var(--color-accent); font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 24px; }
+.footer-link-group a { display: block; color: var(--color-muted); text-decoration: none; margin-bottom: 12px; font-size: 14px; }
+.footer-link-group a:hover { color: var(--color-surface-pure); }
+.footer-contact-summary p { color: var(--color-muted); font-size: 14px; margin-bottom: 12px; line-height: 1.5; }
+.footer-bottom-bar { border-top: 1px solid #1E293B; padding: 24px 0; font-size: 13px; color: var(--color-muted); }
+.bottom-bar-flex { display: flex; justify-content: space-between; align-items: center; }
+.legal-links a { color: var(--color-muted); text-decoration: none; }
+
+/* Responsive Adaptations Matrix */
+@media (max-width: 992px) {
+  .mobile-menu-trigger { display: block; }
+  .navigation-link-stack {
+    display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--color-surface-pure);
+    flex-direction: column; padding: 24px; border-bottom: 1px solid var(--color-border-subtle); gap: 16px;
+  }
+  .navigation-link-stack.stack-expanded { display: flex; }
+  .dropdown-panel-menu { position: relative; top: 0; left: 0; width: 100%; box-shadow: none; display: block; padding-left: 16px; }
+  .footer-grid-layout { grid-template-columns: 1fr; gap: 40px; }
+  .header-action-block { display: none; }
+}
+
+/* Hero Structural Container Layout */
+.hero-block {
+    background-color: var(--color-light);
+    padding: var(--section-padding);
+    overflow: hidden;
+}
+
+.hero-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+/* Column 1: Marketing Content Architecture */
+.hero-badge {
+    display: inline-block;
+    background-color: rgba(50, 90, 163, 0.1);
+    color: var(--color-secondary);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    line-height: 1.15;
+    font-weight: 800;
+    color: var(--color-dark);
+    letter-spacing: -1.5px;
+    margin: 0 0 1.5rem 0;
+}
+
+.hero-title span {
+    color: var(--color-secondary);
+}
+
+.hero-lead {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #475569; /* Slate 600 */
+    margin: 0 0 2.5rem 0;
+}
+
+/* Button & Conversion Trigger Group Styles */
+.hero-actions-group {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.hero-btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    box-shadow: 0 4px 6px -1px rgba(255, 107, 0, 0.2);
+    transition: var(--transition-smooth);
+}
+
+.hero-btn-primary:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(255, 107, 0, 0.3);
+}
+
+.hero-btn-secondary {
+    background-color: transparent;
+    color: var(--color-dark);
+    border: 2px solid var(--color-border);
+    text-decoration: none;
+    padding: calc(1rem - 2px) 2rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition-smooth);
+}
+
+.hero-btn-secondary:hover {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+    background-color: rgba(50, 90, 163, 0.02);
+}
+
+.arrow-icon {
+    transition: transform 0.2s ease;
+}
+
+.hero-btn-secondary:hover .arrow-icon {
+    transform: translateX(4px);
+}
+
+/* Column 2: Dashboard Visual Engine Card */
+.live-console-mockup {
+    background-color: #0B132B; /* Dark Navy UI Base */
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+}
+
+.console-header {
+    background-color: #111C40;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.window-dots {
+    display: flex;
+    gap: 0.5rem;
+    width: 20%;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.dot.red { background-color: #EF4444; }
+.dot.yellow { background-color: #F59E0B; }
+.dot.green { background-color: #10B981; }
+
+.console-url {
+    width: 60%;
+    text-align: center;
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.environment-badge {
+    width: 20%;
+    text-align: right;
+    font-size: 0.7rem;
+    color: #38BDF8; /* Accent light blue */
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.console-body {
+    padding: 2rem;
+    color: #F8FAFC;
+}
+
+.monitoring-meta {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+.console-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 2rem 0;
+}
+
+/* Metrics Architecture inside Card */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+.metric-card {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 1.25rem;
+}
+
+.metric-label {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.5rem;
+}
+
+.metric-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--color-white);
+}
+
+.metric-value .unit {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 0.25rem;
+}
+
+.metric-value.pass-state {
+    color: #10B981; /* High compliance green */
+}
+
+/* Core Structural Layout Rules */
+.marketing-hero-section {
+    background-color: var(--color-white);
+    padding: 6rem 1.5rem 3rem 1.5rem;
+    position: relative;
+}
+
+.hero-wrapper {
+    max-width: var(--max-width);
+    margin: 0 auto 6rem auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+/* Copywriting Columns Typography Styling */
+.hero-context-badge {
+    display: block;
+    color: var(--color-secondary);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+}
+
+.hero-headline {
+    font-size: 3.5rem;
+    line-height: 1.15;
+    font-weight: 800;
+    color: var(--color-dark);
+    letter-spacing: -1.5px;
+    margin: 0 0 2rem 0;
+}
+
+.hero-description {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #475569;
+    margin: 0 0 3rem 0;
+}
+
+/* Button & Conversion Anchor Frameworks */
+.hero-conversion-cluster {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.cta-btn-primary {
+    background-color: var(--color-secondary); /* Balanced Trust Blue */
+    color: var(--color-white);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    transition: var(--transition-smooth);
+}
+
+.cta-btn-primary:hover {
+    background-color: var(--color-secondary-hover);
+    transform: translateY(-1px);
+}
+
+.cta-btn-secondary {
+    background-color: transparent;
+    color: var(--color-dark);
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    transition: var(--transition-smooth);
+}
+
+.cta-btn-secondary:hover {
+    background-color: var(--color-light);
+    border-color: var(--color-dark);
+}
+
+/* Visual Panel Platform Layout Rules */
+.platform-preview-card {
+    background-color: #0F172A; /* Dark Slate Interface Screen */
+    border-radius: 8px;
+    box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.3);
+    overflow: hidden;
+    color: #F8FAFC;
+}
+
+.card-system-bar {
+    background-color: #1E293B;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: monospace;
+    font-size: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.system-brand { color: rgba(255, 255, 255, 0.5); }
+.system-status { 
+    color: #10B981; 
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.pulse-indicator {
+    width: 6px;
+    height: 6px;
+    background-color: #10B981;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.card-interior-split {
+    display: grid;
+    grid-template-columns: 0.6fr 1.4fr;
+}
+
+/* Simulated Utility App Sidebar */
+.preview-sidebar {
+    background-color: #1E293B;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.preview-sidebar .active-item {
+    color: var(--color-white);
+    font-weight: 700;
+}
+
+/* Simulated Metrics Panel */
+.preview-metrics {
+    padding: 2rem;
+}
+
+.meta-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.headline-metric {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0.25rem 0;
+}
+
+.metric-subtext {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.percentage-pill {
+    display: inline-block;
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10B981;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+}
+
+.activity-monitor { margin-bottom: 1.5rem; }
+.monitor-label {
+    display: block;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 0.5rem;
+}
+
+.mini-bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.35rem;
+    height: 40px;
+}
+
+.mini-bar-chart .bar {
+    width: 20px;
+    background-color: var(--color-secondary);
+    border-radius: 2px;
+}
+
+.status-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 1rem;
+}
+
+.feed-item { color: rgba(255, 255, 255, 0.7); }
+.feed-item.alert-state { color: #F59E0B; }
+
+/* 4-Column Bottom Strip Layout Rules */
+.value-matrix-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    border-top: 1px solid var(--color-border);
+    padding-top: 3rem;
+}
+
+.matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.matrix-card {
+    position: relative;
+    padding: 0 0 0 1rem;
+}
+
+.card-accent-line {
+    position: absolute;
+    left: 0;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    background-color: var(--color-primary); /* Brand Accent Orange Marker */
+}
+
+.matrix-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--color-dark);
+    margin: 0 0 0.25rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.matrix-caption {
+    font-size: 0.95rem;
+    color: #64748B;
+    margin: 0;
+}

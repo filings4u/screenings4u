@@ -1,0 +1,18 @@
+:root {
+    /* Brand Colors */
+    --color-primary: #FF6B00;       /* Vibrant Orange: Conversion & Actions */
+    --color-primary-hover: #E05E00; /* Darker Orange: Action hover states */
+    --color-secondary: #325AA3;     /* Corporate Deep Blue: Trust & Structure */
+    --color-secondary-hover: #264782;/* Darker Blue: Secondary hover states */
+    
+    /* Neutral Palette */
+    --color-dark: #1E293B;          /* Slate 800: High-readability typography */
+    --color-light: #F8FAFC;         /* Slate 50: Clean canvas backgrounds */
+    --color-white: #FFFFFF;
+    --color-border: #E2E8F0;        /* Slate 200: Subtle divider lines */
+    
+    /* Layout Tokens */
+    --max-width: 1280px;
+    --section-padding: 5rem 1.5rem;
+    --transition-smooth: all 0.25s ease-in-out;
+}
