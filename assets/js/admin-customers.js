@@ -26,17 +26,13 @@ document.addEventListener(
          */
 
         if (
-            !window.SCREENINGS4U_SUPABASE_URL ||
-            window.SCREENINGS4U_SUPABASE_URL.includes("YOUR_") ||
-            !window.SCREENINGS4U_SUPABASE_ANON_KEY ||
-            window.SCREENINGS4U_SUPABASE_ANON_KEY.includes("YOUR_")
+            !window.Screenings4uAdmin ||
+            !window.Screenings4uAdmin.supabase
         ) {
-
             showCustomerToast(
-                "Configure admin-config.js with your Supabase credentials.",
+                "Supabase client is not available. Check admin-config.js.",
                 true
             );
-
             return;
         }
 
@@ -47,36 +43,8 @@ document.addEventListener(
          * -----------------------------------------------------
          */
 
-        if (
-            window.screenings4uSupabase &&
-            window.screenings4uSupabase.from
-        ) {
-
-            /*
-             * Reuse the shared client.
-             */
-
-        } else if (
-            window.supabase &&
-            window.SCREENINGS4U_SUPABASE_URL &&
-            window.SCREENINGS4U_SUPABASE_ANON_KEY
-        ) {
-
-            window.screenings4uSupabase =
-                window.supabase.createClient(
-                    window.SCREENINGS4U_SUPABASE_URL,
-                    window.SCREENINGS4U_SUPABASE_ANON_KEY
-                );
-
-        } else {
-
-            showCustomerToast(
-                "Supabase client could not be initialized.",
-                true
-            );
-
-            return;
-        }
+        window.screenings4uSupabase =
+            window.Screenings4uAdmin.supabase;
 
 
         /*
@@ -746,7 +714,7 @@ async function loadCustomerDetail(
 
         trainingTable.innerHTML = `
             <div class="empty-state">
-                Loading training...
+                Loading LMS enrollments...
             </div>
         `;
     }
@@ -992,7 +960,7 @@ async function loadCustomerOrders(
 
 
 /* =========================================================
-   CUSTOMER TRAINING
+   CUSTOMER LMS ACCESS
    ========================================================= */
 
 async function loadCustomerTraining(
@@ -1013,15 +981,15 @@ async function loadCustomerTraining(
     /*
      * Actual relationship:
      *
-     * training_enrollments.course_id
+     * lms_enrollments.course_id
      *        ↓
-     * training_courses.id
+     * lms_courses.id
      *
-     * The profile/customer relationship is:
+     * The customer relationship is:
      *
-     * training_enrollments.user_id
+     * lms_enrollments.user_id
      *        ↓
-     * profiles.id
+     * auth.users.id
      */
 
     const {
@@ -1039,7 +1007,7 @@ async function loadCustomerTraining(
                 enrolled_at,
                 started_at,
                 completed_at,
-                course:training_courses (
+                course:lms_courses (
                     id,
                     title,
                     slug
@@ -1060,7 +1028,7 @@ async function loadCustomerTraining(
     if (error) {
 
         console.error(
-            "Customer training error:",
+            "Customer LMS enrollment error:",
             error
         );
 
@@ -1105,7 +1073,7 @@ async function loadCustomerTraining(
 
         container.innerHTML =
             renderEmpty(
-                "This customer has no training enrollments."
+                "This customer has no LMS enrollments."
             );
 
         return;

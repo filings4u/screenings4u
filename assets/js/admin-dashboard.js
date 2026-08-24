@@ -11,8 +11,8 @@
  * - Dashboard metrics
  * - Customers
  * - Orders
- * - Training courses
- * - Training students
+ * - LMS Courses
+ * - LMS Students
  * - Audit log
  *
  * The service-role key is NEVER used here.
@@ -674,17 +674,17 @@ async function loadMetrics() {
             ),
 
             countRows(
-                "training_enrollments",
+                "lms_enrollments",
                 "status",
                 "active"
             ),
 
             countRows(
-                "training_courses"
+                "lms_courses"
             ),
 
             countRows(
-                "training_enrollments",
+                "lms_enrollments",
                 "status",
                 "completed"
             )
@@ -908,7 +908,7 @@ async function loadRecentStudents() {
                 progress_percent,
                 status,
                 enrolled_at,
-                course:training_courses (
+                course:lms_courses (
                     id,
                     title
                 )
@@ -1105,7 +1105,7 @@ function renderCustomers(
                     customer.last_name,
                     customer.email,
                     customer.phone,
-                    customer.company_name_name,
+                    customer.company_name,
                     customer.city,
                     customer.state
                 ]
@@ -1175,7 +1175,7 @@ function renderCustomers(
 
                                     <td>
                                         ${escapeHtml(
-                                            customer.company_name_name ||
+                                            customer.company_name ||
                                             "—"
                                         )}
                                     </td>
@@ -1471,7 +1471,7 @@ async function loadTraining() {
 
     container.innerHTML = `
         <div class="empty-state">
-            Loading training courses...
+            Loading LMS courses...
         </div>
     `;
 
@@ -1481,7 +1481,7 @@ async function loadTraining() {
         error
     } =
         await window.screenings4uSupabase
-            .from("training_courses")
+            .from("lms_courses")
             .select(`
                 id,
                 slug,
@@ -1489,7 +1489,7 @@ async function loadTraining() {
                 short_description,
                 passing_score,
                 certificate_enabled,
-                is_published,
+                status,
                 created_at
             `)
             .order(
@@ -1524,7 +1524,7 @@ async function loadTraining() {
 
         container.innerHTML =
             renderEmpty(
-                "No training courses have been created."
+                "No LMS courses have been created."
             );
 
         return;
@@ -1602,7 +1602,7 @@ async function loadTraining() {
 
                                     <td>
                                         ${statusBadge(
-                                            course.is_published
+                                            String(course.status || "").toLowerCase() === "published"
                                                 ? "Published"
                                                 : "Draft"
                                         )}
@@ -1644,7 +1644,7 @@ async function loadStudents() {
 
     container.innerHTML = `
         <div class="empty-state">
-            Loading training students...
+            Loading LMS students...
         </div>
     `;
 
@@ -1663,7 +1663,7 @@ async function loadStudents() {
                 enrolled_at,
                 started_at,
                 completed_at,
-                course:training_courses (
+                course:lms_courses (
                     id,
                     title,
                     slug
@@ -1812,8 +1812,8 @@ function renderStudents(
         container.innerHTML =
             renderEmpty(
                 term
-                    ? "No training students match your search."
-                    : "No training students found."
+                    ? "No LMS students match your search."
+                    : "No LMS students found."
             );
         return;
     }
@@ -2188,7 +2188,7 @@ function renderStudentTable(
 ) {
     if (!students.length) {
         return renderEmpty(
-            "No training students yet."
+            "No LMS students yet."
         );
     }
 

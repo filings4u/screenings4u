@@ -16,16 +16,14 @@
   const $ = id => document.getElementById(id);
 
   function db() {
-    const candidates = [
-      window.supabaseClient,
-      window.supabaseAdmin,
-      window.supabase
-    ];
+    const client =
+      window.Screenings4uAdmin?.supabase ||
+      window.supabaseClient;
 
-    const client = candidates.find(v => v && typeof v.from === 'function');
-
-    if (!client) {
-      throw new Error('Supabase client was not found. Check admin-config.js.');
+    if (!client || typeof client.from !== 'function') {
+      throw new Error(
+        'Shared Supabase client was not found. Check admin-config.js.'
+      );
     }
 
     return client;
@@ -206,8 +204,11 @@
   function updateStatusBadge() {
     const status = $('assessmentStatus').value || 'draft';
 
-    $('assessmentStatusBadge').textContent = status;
-    $('assessmentStatusBadge').className = `status-badge ${status}`;
+    const badge = $('assessmentStatusBadge');
+
+    badge.textContent = status;
+    badge.className =
+      `training-assessment-status training-assessment-status-${esc(status)}`;
   }
 
   function updateSummary() {
@@ -790,10 +791,54 @@
     });
   }
 
+  async function enforceAdminGuard() {
+    const client = db();
+
+    const { data, error } = await client.auth.getSession();
+
+    if (
+      error ||
+      !data?.session?.user
+    ) {
+      location.href = 'admin-login.html';
+      return false;
+    }
+
+    const user = data.session.user;
+
+    const { data: adminProfile, error: profileError } = await client
+      .from('admin_profiles')
+      .select('*')
+      .eq('id', user.id)
+      .maybeSingle();
+
+    if (profileError) {
+      console.error('Assessment admin authorization error:', profileError);
+      toast(profileError.message || 'Unable to verify administrator access.', 'error');
+      return false;
+    }
+
+    if (!adminProfile || adminProfile.is_active !== true) {
+      await client.auth.signOut();
+      location.href = 'admin-login.html';
+      return false;
+    }
+
+    window.screenings4uAdminProfile = adminProfile;
+    window.screenings4uAdminRole =
+      String(adminProfile.admin_level || 'admin').toLowerCase() === 'superadmin'
+        ? 'superadmin'
+        : 'admin';
+
+    return true;
+  }
+
   async function init() {
     bindEvents();
 
     try {
+      if (!(await enforceAdminGuard())) return;
+
       await loadLessonContext();
       await loadAssessment();
     } catch (error) {

@@ -196,7 +196,10 @@
 
     renderChecklist(lessonCount);
     renderCurriculum();
-    await loadCourseEnrollments();
+    loadCourseEnrollments().catch(error => {
+      console.error(error);
+      toast(error.message || 'Unable to load enrollments.', 'error');
+    });
     wireDragAndDrop();
     populateCourseSettings();
   }

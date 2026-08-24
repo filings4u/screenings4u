@@ -636,3 +636,21 @@
     grid-column: auto;
   }
 }
+
+/* ---------------------------------------------------------
+   Accessibility / interaction support
+   --------------------------------------------------------- */
+
+.training-assessment-page button:focus-visible,
+.training-assessment-modal button:focus-visible,
+.training-assessment-page input:focus-visible,
+.training-assessment-page select:focus-visible,
+.training-assessment-page textarea:focus-visible {
+  outline: 3px solid rgba(50,90,163,.18);
+  outline-offset: 2px;
+}
+
+.training-assessment-modal-body {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}

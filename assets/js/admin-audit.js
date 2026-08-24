@@ -22,18 +22,32 @@ let auditProfiles = {};
    ========================================================= */
 
 async function initializeAuditPage() {
-    auditClient = getAuditSupabaseClient();
+    try {
+        auditClient = getAuditSupabaseClient();
 
-    if (!auditClient) {
+        if (!auditClient) {
+            setAuditMessage(
+                "Supabase configuration could not be loaded. " +
+                "Check that admin-config.js loads before admin-audit.js."
+            );
+            return;
+        }
+
+        initializeAuditControls();
+
+        await loadAuditEvents();
+    } catch (error) {
+        console.error("Audit Log initialization failed:", error);
         setAuditMessage(
-            "Supabase configuration could not be loaded."
+            error instanceof Error
+                ? error.message
+                : "Unable to initialize the audit log."
         );
-        return;
+        showAuditToast(
+            "Unable to initialize audit log.",
+            "error"
+        );
     }
-
-    initializeAuditControls();
-
-    await loadAuditEvents();
 }
 
 
@@ -43,20 +57,47 @@ async function initializeAuditPage() {
 
 function getAuditSupabaseClient() {
 
+    /*
+     * admin-config.js is the single shared Supabase client for the
+     * screenings4u admin area. It exposes:
+     *
+     *   window.Screenings4uAdmin.supabase
+     *
+     * Do not create a second client on individual admin pages.
+     */
+
+    if (
+        window.Screenings4uAdmin &&
+        window.Screenings4uAdmin.supabase &&
+        typeof window.Screenings4uAdmin.supabase.from === "function"
+    ) {
+        return window.Screenings4uAdmin.supabase;
+    }
+
+    /*
+     * Backward-compatible fallbacks for older pages.
+     */
+
     if (
         window.screenings4uSupabase &&
-        window.screenings4uSupabase.from
+        typeof window.screenings4uSupabase.from === "function"
     ) {
         return window.screenings4uSupabase;
     }
 
+    if (
+        window.supabaseClient &&
+        typeof window.supabaseClient.from === "function"
+    ) {
+        return window.supabaseClient;
+    }
 
     if (
         window.supabase &&
         window.SCREENINGS4U_SUPABASE_URL &&
-        window.SCREENINGS4U_SUPABASE_ANON_KEY
+        window.SCREENINGS4U_SUPABASE_ANON_KEY &&
+        typeof window.supabase.createClient === "function"
     ) {
-
         window.screenings4uSupabase =
             window.supabase.createClient(
                 window.SCREENINGS4U_SUPABASE_URL,
@@ -66,6 +107,10 @@ function getAuditSupabaseClient() {
         return window.screenings4uSupabase;
     }
 
+    console.error(
+        "Audit Log: no shared Supabase client is available. " +
+        "Make sure admin-config.js loads before admin-audit.js."
+    );
 
     return null;
 }
