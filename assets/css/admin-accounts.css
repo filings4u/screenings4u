@@ -1,18 +1,27 @@
-/* =========================================================
-   screenings4u ADMIN ACCOUNTS
-   Shared-navigation integration overrides
-   Brand: #325aa3 / #ff6b00
-   ========================================================= */
+/*
+ * screenings4u — Admin Accounts
+ * Full page redesign. Scoped to .admin-accounts-page so the shared
+ * admin navigation and other pages remain untouched.
+ */
 
 :root {
   --accounts-blue: #325aa3;
+  --accounts-blue-dark: #23477f;
   --accounts-orange: #ff6b00;
+  --accounts-ink: #172033;
+  --accounts-muted: #6d7788;
+  --accounts-line: #e4e8ef;
+  --accounts-surface: #ffffff;
+  --accounts-bg: #f4f6fa;
+  --accounts-green: #17834b;
+  --accounts-red: #c83a3a;
+  --accounts-purple: #7357b7;
 }
 
-/*
- * The redesigned shared navigation owns the sidebar width.
- * Prevent older subpage CSS from creating a second 250px layout.
- */
+.admin-accounts-page {
+  background: var(--accounts-bg);
+}
+
 .admin-accounts-page .admin-app.admin-app-shared-nav {
   display: flex;
   min-height: 100vh;
@@ -25,237 +34,772 @@
   width: auto;
 }
 
-/*
- * Older admin-subpages.css may contain navigation rules using
- * .admin-nav-item. The shared navigation CSS is loaded before
- * this file, so these rules intentionally do not style navigation.
- *
- * Keep account-page controls visually distinct from navigation.
- */
-.admin-accounts-page .admin-header-actions {
+.admin-accounts-page .accounts-shell {
+  width: 100%;
+  max-width: 1540px;
+  margin: 0 auto;
+  padding: 28px 30px 56px;
+}
+
+/* Hero */
+
+.admin-accounts-page .accounts-hero {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 28px;
+  min-height: 190px;
+  padding: 32px 36px;
+  overflow: hidden;
+  border-radius: 22px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(255, 107, 0, .25), transparent 31%),
+    linear-gradient(135deg, #203f73 0%, #325aa3 62%, #244a87 100%);
+  box-shadow: 0 16px 40px rgba(32, 63, 115, .16);
 }
 
-.admin-accounts-page .account-toolbar {
+.admin-accounts-page .accounts-hero::after {
+  content: "";
+  position: absolute;
+  right: -90px;
+  bottom: -120px;
+  width: 340px;
+  height: 340px;
+  border: 1px solid rgba(255, 255, 255, .13);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 45px rgba(255, 255, 255, .025),
+    0 0 0 90px rgba(255, 255, 255, .02);
+}
+
+.admin-accounts-page .accounts-hero-copy,
+.admin-accounts-page .accounts-hero-actions {
+  position: relative;
+  z-index: 1;
+}
+
+.admin-accounts-page .accounts-breadcrumb {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 10px;
+  color: #ffb277;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+
+.admin-accounts-page .accounts-breadcrumb-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accounts-orange);
+  box-shadow: 0 0 0 4px rgba(255, 107, 0, .14);
+}
+
+.admin-accounts-page .accounts-hero h1 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 800;
+  letter-spacing: -.035em;
+  line-height: 1.08;
+}
+
+.admin-accounts-page .accounts-hero p {
+  max-width: 670px;
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, .78);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.admin-accounts-page .accounts-hero-actions {
+  display: flex;
+  align-items: center;
   gap: 10px;
-  flex-wrap: wrap;
+  flex-shrink: 0;
 }
 
-.admin-accounts-page .account-toolbar .search-input {
-  width: min(100%, 320px);
+/* Buttons */
+
+.admin-accounts-page .accounts-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 15px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 750;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .16s ease, box-shadow .16s ease,
+              background-color .16s ease, border-color .16s ease;
 }
 
-.admin-accounts-page .account-toolbar select.search-input {
-  width: 190px;
+.admin-accounts-page .accounts-btn:hover {
+  transform: translateY(-1px);
 }
 
-.admin-accounts-page .secondary-button {
-  border: 1px solid rgba(50, 90, 163, 0.16);
-  color: var(--accounts-blue);
-  background: rgba(50, 90, 163, 0.08);
-  transition:
-    background-color 160ms ease,
-    border-color 160ms ease,
-    color 160ms ease,
-    transform 160ms ease;
-}
-
-.admin-accounts-page .secondary-button:hover {
-  background: rgba(50, 90, 163, 0.14);
-  border-color: rgba(50, 90, 163, 0.28);
-  color: #284d8e;
-}
-
-.admin-accounts-page .secondary-button:focus-visible {
-  outline: 3px solid rgba(50, 90, 163, 0.18);
+.admin-accounts-page .accounts-btn:focus-visible {
+  outline: 3px solid rgba(255, 107, 0, .25);
   outline-offset: 2px;
 }
 
-.admin-accounts-page .admin-header .eyebrow,
-.admin-accounts-page .toolbar .eyebrow,
-.admin-accounts-page .panel-heading .eyebrow {
-  color: var(--accounts-orange);
+.admin-accounts-page .accounts-btn:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+  transform: none;
 }
 
-.admin-accounts-page .metric-card {
-  position: relative;
-  overflow: hidden;
+.admin-accounts-page .accounts-btn-light {
+  color: #fff;
+  border-color: rgba(255, 255, 255, .24);
+  background: rgba(255, 255, 255, .10);
+  backdrop-filter: blur(8px);
 }
 
-.admin-accounts-page .metric-card::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 4px;
-  height: 100%;
-  background: var(--accounts-blue);
+.admin-accounts-page .accounts-btn-light:hover {
+  background: rgba(255, 255, 255, .17);
 }
 
-.admin-accounts-page .metric-card:nth-child(3)::before,
-.admin-accounts-page .metric-card:nth-child(4)::before {
+.admin-accounts-page .accounts-btn-primary {
+  color: #fff;
   background: var(--accounts-orange);
+  box-shadow: 0 7px 18px rgba(255, 107, 0, .25);
 }
 
-.admin-accounts-page .metric-card strong {
+.admin-accounts-page .accounts-btn-primary:hover {
+  background: #f06400;
+}
+
+.admin-accounts-page .accounts-btn-muted {
   color: var(--accounts-blue);
+  border-color: var(--accounts-line);
+  background: #fff;
 }
 
-.admin-accounts-page .table-wrap {
-  min-width: 0;
+.admin-accounts-page .accounts-btn-outline {
+  color: var(--accounts-blue);
+  border-color: rgba(50, 90, 163, .22);
+  background: #fff;
 }
 
-.admin-accounts-page .admin-table {
-  min-width: 760px;
+.admin-accounts-page .accounts-btn-success {
+  color: var(--accounts-green);
+  border-color: rgba(23, 131, 75, .20);
+  background: rgba(23, 131, 75, .07);
 }
 
-.admin-accounts-page .status-badge.status-pending,
-.admin-accounts-page .status-badge.status-processing {
-  background: rgba(255, 107, 0, 0.10);
-  color: #b84f00;
+.admin-accounts-page .accounts-btn-danger {
+  color: var(--accounts-red);
+  border-color: rgba(200, 58, 58, .20);
+  background: rgba(200, 58, 58, .07);
 }
 
-.admin-accounts-page .status-badge.status-active,
-.admin-accounts-page .status-badge.status-accepted,
-.admin-accounts-page .status-badge.status-enabled {
-  background: rgba(23, 131, 75, 0.10);
-  color: #17834b;
-}
+/* KPI */
 
-.admin-accounts-page .status-badge.status-inactive,
-.admin-accounts-page .status-badge.status-disabled,
-.admin-accounts-page .status-badge.status-failed {
-  background: rgba(200, 58, 58, 0.10);
-  color: #c83a3a;
-}
-
-/* Account detail profile */
-.admin-accounts-page .customer-profile-grid {
+.admin-accounts-page .accounts-kpi-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
-  gap: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 18px 0;
 }
 
-.admin-accounts-page .profile-card {
-  min-width: 0;
-}
-
-.admin-accounts-page .profile-heading {
+.admin-accounts-page .accounts-kpi {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 14px;
+  min-width: 0;
+  padding: 18px 20px;
+  overflow: hidden;
+  border: 1px solid var(--accounts-line);
+  border-radius: 15px;
+  background: var(--accounts-surface);
+  box-shadow: 0 5px 18px rgba(30, 45, 70, .045);
 }
 
-.admin-accounts-page .customer-avatar {
+.admin-accounts-page .accounts-kpi::after {
+  content: "";
+  position: absolute;
+  right: -24px;
+  bottom: -35px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--kpi-tint);
+}
+
+.admin-accounts-page .accounts-kpi-blue { --kpi-tint: rgba(50, 90, 163, .06); }
+.admin-accounts-page .accounts-kpi-green { --kpi-tint: rgba(23, 131, 75, .06); }
+.admin-accounts-page .accounts-kpi-orange { --kpi-tint: rgba(255, 107, 0, .07); }
+.admin-accounts-page .accounts-kpi-purple { --kpi-tint: rgba(115, 87, 183, .07); }
+
+.admin-accounts-page .accounts-kpi-icon {
+  position: relative;
+  z-index: 1;
   display: grid;
   place-items: center;
-  width: 54px;
-  height: 54px;
-  flex: 0 0 54px;
-  border-radius: 50%;
-  background: rgba(50, 90, 163, 0.10);
-  color: var(--accounts-blue);
+  width: 43px;
+  height: 43px;
+  flex: 0 0 43px;
+  border-radius: 12px;
+  font-size: 20px;
   font-weight: 800;
 }
 
-.admin-accounts-page .profile-fields {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 22px;
+.admin-accounts-page .accounts-kpi-blue .accounts-kpi-icon {
+  color: var(--accounts-blue);
+  background: rgba(50, 90, 163, .10);
 }
 
-.admin-accounts-page .profile-fields > div {
+.admin-accounts-page .accounts-kpi-green .accounts-kpi-icon {
+  color: var(--accounts-green);
+  background: rgba(23, 131, 75, .10);
+}
+
+.admin-accounts-page .accounts-kpi-orange .accounts-kpi-icon {
+  color: var(--accounts-orange);
+  background: rgba(255, 107, 0, .10);
+}
+
+.admin-accounts-page .accounts-kpi-purple .accounts-kpi-icon {
+  color: var(--accounts-purple);
+  background: rgba(115, 87, 183, .10);
+}
+
+.admin-accounts-page .accounts-kpi span,
+.admin-accounts-page .accounts-kpi strong,
+.admin-accounts-page .accounts-kpi small {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.admin-accounts-page .accounts-kpi span {
+  color: var(--accounts-muted);
+  font-size: 11px;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: .045em;
+}
+
+.admin-accounts-page .accounts-kpi strong {
+  margin: 2px 0;
+  color: var(--accounts-ink);
+  font-size: 27px;
+  line-height: 1.1;
+}
+
+.admin-accounts-page .accounts-kpi small {
+  color: #9aa3b1;
+  font-size: 11px;
+}
+
+/* Panels */
+
+.admin-accounts-page .accounts-panel {
+  border: 1px solid var(--accounts-line);
+  border-radius: 17px;
+  background: #fff;
+  box-shadow: 0 6px 22px rgba(30, 45, 70, .045);
+}
+
+.admin-accounts-page .accounts-panel-top,
+.admin-accounts-page .accounts-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 24px 20px;
+}
+
+.admin-accounts-page .accounts-section-kicker,
+.admin-accounts-page .accounts-profile-label {
+  color: var(--accounts-orange);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .13em;
+}
+
+.admin-accounts-page .accounts-panel h2,
+.admin-accounts-page .accounts-detail h2 {
+  margin: 4px 0 0;
+  color: var(--accounts-ink);
+  font-size: 21px;
+  letter-spacing: -.02em;
+}
+
+.admin-accounts-page .accounts-panel p,
+.admin-accounts-page .accounts-detail-header p {
+  margin: 5px 0 0;
+  color: var(--accounts-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Forms */
+
+.admin-accounts-page .accounts-directory-tools,
+.admin-accounts-page .accounts-inline-tools {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.admin-accounts-page .accounts-field {
   min-width: 0;
 }
 
-.admin-accounts-page .profile-fields span {
+.admin-accounts-page .accounts-field label {
   display: block;
-  margin-bottom: 5px;
+  margin: 0 0 6px 2px;
   color: #687386;
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .06em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
-.admin-accounts-page .profile-fields strong {
-  display: block;
+.admin-accounts-page .accounts-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.admin-accounts-page .accounts-input-wrap > span {
+  position: absolute;
+  left: 12px;
+  color: #9aa3b1;
+  font-size: 17px;
+  pointer-events: none;
+}
+
+.admin-accounts-page .accounts-input,
+.admin-accounts-page .accounts-select {
+  box-sizing: border-box;
+  height: 42px;
+  border: 1px solid #dfe4eb;
+  border-radius: 10px;
+  outline: none;
+  color: var(--accounts-ink);
+  background: #fbfcfe;
+  font: inherit;
+  font-size: 13px;
+  transition: border-color .16s ease, box-shadow .16s ease, background-color .16s ease;
+}
+
+.admin-accounts-page .accounts-input {
+  width: 300px;
+  padding: 0 13px 0 36px;
+}
+
+.admin-accounts-page .accounts-select {
+  width: 170px;
+  padding: 0 34px 0 12px;
+}
+
+.admin-accounts-page .accounts-input:focus,
+.admin-accounts-page .accounts-select:focus {
+  border-color: rgba(50, 90, 163, .55);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(50, 90, 163, .10);
+}
+
+.admin-accounts-page .accounts-input::placeholder {
+  color: #a3aab6;
+}
+
+/* Tables */
+
+.admin-accounts-page .accounts-table-wrap {
+  min-width: 0;
+  overflow-x: auto;
+  border-top: 1px solid #edf0f4;
+}
+
+.admin-accounts-page .accounts-table-wrap-small {
+  min-height: 160px;
+}
+
+.admin-accounts-page .admin-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+}
+
+.admin-accounts-page .admin-table th {
+  padding: 12px 20px;
+  color: #7b8594;
+  background: #fafbfc;
+  border-bottom: 1px solid #e8ebf0;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .075em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.admin-accounts-page .admin-table td {
+  padding: 15px 20px;
+  color: #566173;
+  border-bottom: 1px solid #edf0f4;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.admin-accounts-page .admin-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.admin-accounts-page .admin-table tbody tr {
+  transition: background-color .14s ease;
+}
+
+.admin-accounts-page .admin-table tbody tr:hover {
+  background: #fafcff;
+}
+
+.admin-accounts-page .admin-table td strong {
+  color: var(--accounts-ink);
+  font-weight: 750;
+}
+
+.admin-accounts-page .admin-table td:last-child {
+  text-align: right;
+}
+
+/* Status */
+
+.admin-accounts-page .status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 25px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 850;
+  line-height: 1.2;
+  text-transform: capitalize;
+}
+
+.admin-accounts-page .status-active,
+.admin-accounts-page .status-accepted,
+.admin-accounts-page .status-enabled,
+.admin-accounts-page .status-superadmin {
+  color: var(--accounts-green);
+  background: rgba(23, 131, 75, .09);
+}
+
+.admin-accounts-page .status-pending,
+.admin-accounts-page .status-processing {
+  color: #b84f00;
+  background: rgba(255, 107, 0, .10);
+}
+
+.admin-accounts-page .status-inactive,
+.admin-accounts-page .status-disabled,
+.admin-accounts-page .status-failed,
+.admin-accounts-page .status-expired {
+  color: var(--accounts-red);
+  background: rgba(200, 58, 58, .09);
+}
+
+.admin-accounts-page .status-unknown {
+  color: #5d6878;
+  background: #eef2f7;
+}
+
+/* Loading / empty */
+
+.admin-accounts-page .accounts-loading,
+.admin-accounts-page .empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 145px;
+  padding: 28px;
+  color: #7d8796;
+  font-size: 13px;
+  text-align: center;
+}
+
+.admin-accounts-page .accounts-spinner {
+  width: 16px;
+  height: 16px;
+  margin-right: 9px;
+  border: 2px solid #dfe5ed;
+  border-top-color: var(--accounts-blue);
+  border-radius: 50%;
+  animation: accounts-spin .7s linear infinite;
+}
+
+@keyframes accounts-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Secondary cards */
+
+.admin-accounts-page .accounts-secondary-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(360px, .8fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.admin-accounts-page .accounts-panel-compact {
+  min-width: 0;
+}
+
+.admin-accounts-page .accounts-inline-tools {
+  padding: 0 24px 18px;
+}
+
+.admin-accounts-page .accounts-inline-tools .accounts-input {
+  width: 220px;
+}
+
+.admin-accounts-page .accounts-inline-tools .accounts-select {
+  width: 130px;
+}
+
+.admin-accounts-page .accounts-secure-badge {
+  flex-shrink: 0;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: var(--accounts-green);
+  background: rgba(23, 131, 75, .08);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .1em;
+}
+
+/* Detail */
+
+.admin-accounts-page .accounts-detail {
+  margin-top: 18px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.admin-accounts-page .accounts-detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px;
+  background: linear-gradient(180deg, #f8faff 0%, #fff 100%);
+  border-bottom: 1px solid #e8ecf2;
+}
+
+.admin-accounts-page .accounts-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, .8fr);
+  gap: 16px;
+  padding: 18px 24px;
+}
+
+.admin-accounts-page .accounts-profile-card {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #e4e8ef;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.admin-accounts-page .accounts-profile-top {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.admin-accounts-page .accounts-avatar {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  border-radius: 15px;
+  color: var(--accounts-blue);
+  background: rgba(50, 90, 163, .10);
+  font-size: 16px;
+  font-weight: 850;
+}
+
+.admin-accounts-page .accounts-profile-top h3 {
+  margin: 2px 0 3px;
+  color: var(--accounts-ink);
+  font-size: 18px;
+}
+
+.admin-accounts-page .accounts-profile-top p {
+  margin: 0;
+  color: var(--accounts-muted);
+  font-size: 12px;
   overflow-wrap: anywhere;
 }
 
-/* Administrative action area */
-.admin-accounts-page .certificate-actions {
+.admin-accounts-page .accounts-detail-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.admin-accounts-page .accounts-detail-fields > div {
+  min-width: 0;
+}
+
+.admin-accounts-page .accounts-detail-fields span {
+  display: block;
+  margin-bottom: 5px;
+  color: #818b9a;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.admin-accounts-page .accounts-detail-fields strong {
+  display: block;
+  color: var(--accounts-ink);
+  font-size: 12px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.admin-accounts-page .accounts-actions {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 19px 24px 22px;
+  border-top: 1px solid #e8ecf2;
+  background: #fafbfd;
+}
+
+.admin-accounts-page .accounts-actions h3 {
+  margin: 3px 0 0;
+  color: var(--accounts-ink);
+  font-size: 15px;
+}
+
+.admin-accounts-page .accounts-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 9px;
   flex-wrap: wrap;
-  gap: 10px;
-}
-
-.admin-accounts-page #deactivateAccountButton {
-  color: #c83a3a;
-  background: rgba(200, 58, 58, 0.08);
-  border-color: rgba(200, 58, 58, 0.16);
-}
-
-.admin-accounts-page #deactivateAccountButton:hover {
-  background: rgba(200, 58, 58, 0.14);
 }
 
 /* Toast */
+
 .admin-accounts-page .admin-toast {
   z-index: 3000;
 }
 
-/* =========================================================
-   Responsive
-   ========================================================= */
+/* Responsive */
 
-@media (max-width: 1050px) {
-  .admin-accounts-page .admin-app.admin-app-shared-nav {
-    display: flex;
-    flex-direction: column;
+@media (max-width: 1200px) {
+  .admin-accounts-page .accounts-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .admin-accounts-page .admin-main {
+  .admin-accounts-page .accounts-secondary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-accounts-page .accounts-secondary-grid .accounts-panel-compact {
     width: 100%;
   }
+}
 
-  .admin-accounts-page .customer-profile-grid {
+@media (max-width: 900px) {
+  .admin-accounts-page .accounts-shell {
+    padding: 20px 18px 44px;
+  }
+
+  .admin-accounts-page .accounts-hero {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 28px;
+  }
+
+  .admin-accounts-page .accounts-directory-tools,
+  .admin-accounts-page .accounts-inline-tools {
+    width: 100%;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .admin-accounts-page .accounts-input,
+  .admin-accounts-page .accounts-inline-tools .accounts-input {
+    width: min(100%, 300px);
+  }
+
+  .admin-accounts-page .accounts-detail-grid {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 700px) {
-  .admin-accounts-page .admin-header-actions {
-    justify-content: flex-start;
-  }
-
-  .admin-accounts-page .account-toolbar {
-    width: 100%;
-    justify-content: stretch;
-  }
-
-  .admin-accounts-page .account-toolbar .search-input,
-  .admin-accounts-page .account-toolbar select.search-input {
-    width: 100%;
-  }
-
-  .admin-accounts-page .profile-fields {
+@media (max-width: 650px) {
+  .admin-accounts-page .accounts-kpi-grid {
     grid-template-columns: 1fr;
   }
 
-  .admin-accounts-page .certificate-actions {
+  .admin-accounts-page .accounts-hero-actions {
+    width: 100%;
+  }
+
+  .admin-accounts-page .accounts-hero-actions .accounts-btn {
+    flex: 1;
+  }
+
+  .admin-accounts-page .accounts-panel-top,
+  .admin-accounts-page .accounts-panel-heading,
+  .admin-accounts-page .accounts-detail-header {
     flex-direction: column;
   }
 
-  .admin-accounts-page .certificate-actions .secondary-button {
+  .admin-accounts-page .accounts-directory-tools,
+  .admin-accounts-page .accounts-inline-tools {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-accounts-page .accounts-input,
+  .admin-accounts-page .accounts-select,
+  .admin-accounts-page .accounts-inline-tools .accounts-input,
+  .admin-accounts-page .accounts-inline-tools .accounts-select {
+    width: 100%;
+  }
+
+  .admin-accounts-page .accounts-detail-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-accounts-page .accounts-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-accounts-page .accounts-action-buttons {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-accounts-page .accounts-action-buttons .accounts-btn {
     width: 100%;
   }
 }

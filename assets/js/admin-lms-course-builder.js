@@ -22,66 +22,19 @@
   const $ = (id) => document.getElementById(id);
 
   function getClient() {
-    /*
-     * The rest of the screenings4u admin dashboard uses
-     * window.screenings4uSupabase as the shared Supabase client.
-     * Reuse that same authenticated client first.
-     */
-    if (
-      window.screenings4uSupabase &&
-      typeof window.screenings4uSupabase.from === 'function'
-    ) {
-      return window.screenings4uSupabase;
-    }
+    const client =
+      window.Screenings4uAdmin?.supabase ||
+      window.supabaseClient ||
+      window.screenings4uSupabase;
 
-    if (
-      window.supabaseClient &&
-      typeof window.supabaseClient.from === 'function'
-    ) {
-      window.screenings4uSupabase = window.supabaseClient;
-      return window.supabaseClient;
-    }
-
-    if (
-      window.supabaseAdmin &&
-      typeof window.supabaseAdmin.from === 'function'
-    ) {
-      window.screenings4uSupabase = window.supabaseAdmin;
-      return window.supabaseAdmin;
-    }
-
-    /*
-     * If admin-config.js exposes the project URL/key but has not
-     * created the shared client yet, create it here.
-     */
-    if (
-      window.supabase &&
-      typeof window.supabase.createClient === 'function' &&
-      window.SCREENINGS4U_SUPABASE_URL &&
-      window.SCREENINGS4U_SUPABASE_ANON_KEY &&
-      !String(window.SCREENINGS4U_SUPABASE_URL).includes('YOUR_') &&
-      !String(window.SCREENINGS4U_SUPABASE_ANON_KEY).includes('YOUR_') &&
-      !String(window.SCREENINGS4U_SUPABASE_URL).includes('REPLACE_WITH') &&
-      !String(window.SCREENINGS4U_SUPABASE_ANON_KEY).includes('REPLACE_WITH')
-    ) {
-      window.screenings4uSupabase = window.supabase.createClient(
-        window.SCREENINGS4U_SUPABASE_URL,
-        window.SCREENINGS4U_SUPABASE_ANON_KEY,
-        {
-          auth: {
-            autoRefreshToken: true,
-            persistSession: true,
-            detectSessionInUrl: true
-          }
-        }
+    if (!client || typeof client.from !== 'function') {
+      throw new Error(
+        'Supabase client was not initialized. Check assets/js/admin-config.js.'
       );
-
-      return window.screenings4uSupabase;
     }
 
-    throw new Error(
-      'Supabase client was not initialized. Check assets/js/admin-config.js.'
-    );
+    window.screenings4uSupabase = client;
+    return client;
   }
 
   const db = () => getClient();
@@ -220,9 +173,13 @@
     const title = $('courseTitle').value.trim() || 'New Course';
     $('pageTitle').textContent = state.course ? `Edit: ${title}` : 'New Course';
     $('sidebarCourseTitle').textContent = title;
-    const status = state.course?.status || 'draft';
-    $('courseStatusBadge').textContent = status;
-    $('courseStatusBadge').className = `status-badge ${status}`;
+
+    const status = String(state.course?.status || 'draft').toLowerCase();
+    $('courseStatusBadge').textContent =
+      status.charAt(0).toUpperCase() + status.slice(1);
+
+    $('courseStatusBadge').className =
+      `training-course-status training-course-status-${escapeHtml(status)}`;
   }
 
   async function loadCourse() {
@@ -1023,9 +980,54 @@
     });
   }
 
+  async function enforceAdminGuard() {
+    const client = getClient();
+
+    const { data, error } = await client.auth.getSession();
+
+    if (error) throw error;
+
+    if (!data?.session?.user) {
+      window.location.replace('admin-login.html');
+      return false;
+    }
+
+    const { data: profile, error: profileError } = await client
+      .from('admin_profiles')
+      .select('*')
+      .eq('id', data.session.user.id)
+      .maybeSingle();
+
+    if (profileError) throw profileError;
+
+    if (!profile) {
+      await client.auth.signOut();
+      window.location.replace('admin-login.html');
+      return false;
+    }
+
+    if (
+      Object.prototype.hasOwnProperty.call(profile, 'is_active') &&
+      profile.is_active === false
+    ) {
+      await client.auth.signOut();
+      window.location.replace('admin-login.html');
+      return false;
+    }
+
+    window.screenings4uAdminProfile = profile;
+    window.screenings4uAdminRole =
+      String(profile.admin_level || 'admin').toLowerCase();
+
+    return true;
+  }
+
   async function init() {
     bindEvents();
+
     try {
+      if (!(await enforceAdminGuard())) return;
+
       await loadCourse();
       renderPublishChecklist();
     } catch (error) {

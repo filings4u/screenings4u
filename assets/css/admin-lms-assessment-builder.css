@@ -1,25 +1,85 @@
 /* =========================================================
    screenings4u — LMS Assessment Builder
-   Isolated page stylesheet
+   Page-specific stylesheet
+   Matches the shared Admin Console design system.
    ========================================================= */
 
 .training-assessment-page {
   width: 100%;
   max-width: 1500px;
   margin: 0 auto;
-  box-sizing: border-box;
+  min-width: 0;
 }
 
 .training-assessment-header {
+  position: relative;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
+  padding: 30px 34px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 20px;
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(circle at 88% 20%, rgba(255,107,0,.20), transparent 25%),
+    radial-gradient(circle at 76% 0%, rgba(255,255,255,.10), transparent 32%),
+    linear-gradient(115deg, #24477f 0%, #325aa3 58%, #394f86 100%);
+  box-shadow: 0 18px 42px rgba(24,36,60,.12);
+}
+
+.training-assessment-header::after {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  right: -85px;
+  top: -120px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.training-assessment-header-content,
+.training-assessment-header-actions {
+  position: relative;
+  z-index: 1;
 }
 
 .training-assessment-header-content {
   min-width: 0;
+}
+
+.training-assessment-eyebrow {
+  margin: 0;
+  color: #ff6b00;
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.training-assessment-header .training-assessment-eyebrow {
+  color: #ffb27a;
+}
+
+.training-assessment-header h1 {
+  margin: 7px 0 8px;
+  color: #fff;
+  font-size: clamp(32px, 4vw, 46px);
+  line-height: 1.02;
+  letter-spacing: -1.7px;
+}
+
+.training-assessment-header p:not(.training-assessment-eyebrow) {
+  max-width: 760px;
+  margin: 0;
+  color: rgba(255,255,255,.80);
+  font-size: 14px;
+  line-height: 1.55;
 }
 
 .training-assessment-header-actions {
@@ -30,20 +90,38 @@
   flex-wrap: wrap;
 }
 
-.training-assessment-eyebrow {
-  margin: 0;
-  color: #325aa3;
-  font-size: 10px;
-  font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+.training-assessment-header-actions .secondary-button {
+  border: 1px solid rgba(255,255,255,.25);
+  color: #fff;
+  background: rgba(255,255,255,.10);
+}
+
+.training-assessment-header-actions .secondary-button:hover {
+  background: rgba(255,255,255,.17);
+  border-color: rgba(255,255,255,.38);
+}
+
+.training-assessment-header-actions .primary-button {
+  border: 1px solid #ff6b00;
+  color: #fff;
+  background: #ff6b00;
+  box-shadow: 0 8px 20px rgba(255,107,0,.24);
+}
+
+.training-assessment-header-actions .primary-button:hover {
+  background: #e96000;
+  border-color: #e96000;
+}
+
+.training-assessment-header-actions button:disabled {
+  opacity: .7;
+  cursor: wait;
 }
 
 .training-assessment-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 285px;
-  gap: 22px;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 20px;
   align-items: start;
 }
 
@@ -59,7 +137,7 @@
 
 .training-assessment-sidebar {
   position: sticky;
-  top: 20px;
+  top: 18px;
   display: grid;
   gap: 16px;
 }
@@ -68,8 +146,8 @@
 .training-assessment-sidebar-panel {
   background: #fff;
   border: 1px solid #e1e6ee;
-  border-radius: 11px;
-  box-sizing: border-box;
+  border-radius: 16px;
+  box-shadow: 0 7px 24px rgba(24,36,60,.045);
 }
 
 .training-assessment-panel {
@@ -77,7 +155,7 @@
 }
 
 .training-assessment-sidebar-panel {
-  padding: 18px;
+  padding: 20px;
 }
 
 .training-assessment-panel-heading {
@@ -90,11 +168,15 @@
 }
 
 .training-assessment-panel-heading h2 {
-  margin: 3px 0 0;
+  margin: 4px 0 0;
+  color: #172033;
+  font-size: 20px;
+  letter-spacing: -.3px;
 }
 
 .training-assessment-panel-help {
-  margin: 5px 0 0;
+  max-width: 720px;
+  margin: 6px 0 0;
   color: #687386;
   font-size: 12px;
   line-height: 1.5;
@@ -103,12 +185,14 @@
 .training-assessment-status {
   display: inline-flex;
   align-items: center;
-  min-height: 24px;
+  justify-content: center;
+  min-height: 26px;
   padding: 0 10px;
   border-radius: 999px;
   font-size: 10px;
-  font-weight: 750;
+  font-weight: 900;
   text-transform: uppercase;
+  letter-spacing: .04em;
 }
 
 .training-assessment-status-draft {
@@ -128,7 +212,7 @@
 
 .training-assessment-form-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0,1fr));
   gap: 18px;
   padding: 22px;
 }
@@ -146,7 +230,7 @@
   gap: 7px;
   color: #172033;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 750;
 }
 
 .training-assessment-field input:not([type="checkbox"]),
@@ -157,11 +241,14 @@
   min-width: 0;
   box-sizing: border-box;
   border: 1px solid #d7dde7;
-  border-radius: 8px;
+  border-radius: 9px;
   background: #fff;
   color: #172033;
-  font: inherit;
+  font-family: inherit;
   font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  transition: border-color .16s ease, box-shadow .16s ease;
 }
 
 .training-assessment-field input:not([type="checkbox"]),
@@ -218,7 +305,7 @@
 .training-assessment-summary,
 .training-assessment-rules {
   display: grid;
-  gap: 10px;
+  gap: 11px;
   margin-top: 14px;
 }
 
@@ -250,20 +337,11 @@
   font-size: 13px;
 }
 
-/* ---------------------------------------------------------
-   Existing JS-generated question classes are scoped here.
-   No JS changes are required.
-   --------------------------------------------------------- */
-
-.training-assessment-page .questions-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+/* Questions */
 
 .training-assessment-page .question-card {
   border: 1px solid #e1e6ee;
-  border-radius: 11px;
+  border-radius: 12px;
   background: #fff;
   overflow: hidden;
 }
@@ -283,11 +361,11 @@
 }
 
 .training-assessment-page .question-number {
-  color: #325aa3;
-  font-size: 11px;
-  font-weight: 800;
+  color: #ff6b00;
+  font-size: 10px;
+  font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: .05em;
+  letter-spacing: .08em;
 }
 
 .training-assessment-page .question-title {
@@ -380,6 +458,89 @@
   font-weight: 750;
 }
 
+/* Modal */
+
+.training-assessment-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.training-assessment-modal.open {
+  display: block;
+}
+
+.training-assessment-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15,23,42,.56);
+}
+
+.training-assessment-modal-card {
+  position: relative;
+  z-index: 1;
+  width: min(760px, calc(100vw - 32px));
+  max-height: calc(100vh - 40px);
+  margin: 20px auto;
+  overflow: auto;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #e1e6ee;
+  border-radius: 16px;
+  box-shadow: 0 25px 70px rgba(0,0,0,.24);
+}
+
+.training-assessment-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 22px;
+  border-bottom: 1px solid #e5e9f0;
+}
+
+.training-assessment-modal-header h2 {
+  margin: 4px 0 0;
+  color: #172033;
+}
+
+.training-assessment-modal-close {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #687386;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 7px;
+  font-size: 25px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.training-assessment-modal-close:hover {
+  background: #f2f4f7;
+  color: #172033;
+}
+
+.training-assessment-modal-body {
+  min-width: 0;
+  padding: 22px;
+  overflow-wrap: anywhere;
+}
+
+.training-assessment-modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 22px;
+  border-top: 1px solid #e5e9f0;
+}
+
+/* Modal-generated form */
+
 .training-assessment-page .assessment-modal-form {
   display: grid;
   gap: 15px;
@@ -401,11 +562,13 @@
   min-width: 0;
   box-sizing: border-box;
   border: 1px solid #d7dde7;
-  border-radius: 8px;
+  border-radius: 9px;
   background: #fff;
   color: #172033;
-  font: inherit;
+  font-family: inherit;
   font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
 }
 
 .training-assessment-page .assessment-modal-form input:not([type="checkbox"]),
@@ -484,116 +647,66 @@
   margin-top: 3px;
 }
 
-/* ---------------------------------------------------------
-   Assessment modal
-   --------------------------------------------------------- */
-
-.training-assessment-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-}
-
-.training-assessment-modal.open {
-  display: block;
-}
-
-.training-assessment-modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(15,23,42,.56);
-}
-
-.training-assessment-modal-card {
-  position: relative;
-  z-index: 1;
-  width: min(760px,calc(100vw - 32px));
-  max-height: calc(100vh - 40px);
-  margin: 20px auto;
-  overflow: auto;
-  box-sizing: border-box;
-  background: #fff;
-  border: 1px solid #e1e6ee;
-  border-radius: 14px;
-  box-shadow: 0 25px 70px rgba(0,0,0,.24);
-}
-
-.training-assessment-modal-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 20px 22px;
-  border-bottom: 1px solid #e5e9f0;
-}
-
-.training-assessment-modal-header h2 {
-  margin: 3px 0 0;
-}
-
-.training-assessment-modal-close {
-  appearance: none;
-  border: 0;
-  background: transparent;
-  color: #687386;
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  border-radius: 7px;
-  font-size: 25px;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.training-assessment-modal-close:hover {
-  background: #f2f4f7;
-  color: #172033;
-}
-
-.training-assessment-modal-body {
-  padding: 22px;
-}
-
-.training-assessment-modal-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-  padding: 16px 22px;
-  border-top: 1px solid #e5e9f0;
-}
-
-/* ---------------------------------------------------------
-   Empty state
-   --------------------------------------------------------- */
+/* Empty state */
 
 .training-assessment-page .empty-state {
-  padding: 30px 20px;
+  padding: 34px 20px;
   border: 1px dashed #d7dde7;
-  border-radius: 9px;
+  border-radius: 10px;
   color: #687386;
   text-align: center;
 }
 
-/* ---------------------------------------------------------
-   Responsive
-   --------------------------------------------------------- */
+/* Accessibility */
 
-@media (max-width: 1000px) {
+.training-assessment-page button:focus-visible,
+.training-assessment-modal button:focus-visible,
+.training-assessment-page input:focus-visible,
+.training-assessment-page select:focus-visible,
+.training-assessment-page textarea:focus-visible {
+  outline: 3px solid rgba(50,90,163,.18);
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   Shared admin.css compatibility fixes
+   ========================================================= */
+.training-assessment-page { box-sizing: border-box; }
+.training-assessment-page .training-assessment-header-actions a { text-decoration: none !important; }
+.training-assessment-page .training-assessment-header-actions .secondary-button,
+.training-assessment-page .training-assessment-header-actions .primary-button {
+  min-height: 40px; height: 40px; box-sizing: border-box; display: inline-flex;
+  align-items: center; justify-content: center; padding: 0 15px; border-radius: 9px;
+  font-family: inherit; font-size: 13px; font-weight: 750; line-height: 1;
+}
+.training-assessment-page input:not([type="checkbox"]),
+.training-assessment-page select,
+.training-assessment-page textarea { font-weight: 500 !important; }
+.training-assessment-page select { font-weight: 600 !important; }
+.training-assessment-page input::placeholder,
+.training-assessment-page textarea::placeholder { color: #8a93a3; opacity: 1; font-weight: 400; }
+.training-assessment-page .training-assessment-panel,
+.training-assessment-page .training-assessment-sidebar-panel,
+.training-assessment-page .training-assessment-header { box-sizing: border-box; }
+
+/* Responsive */
+
+@media (max-width: 1100px) {
   .training-assessment-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0,1fr);
   }
 
   .training-assessment-sidebar {
     position: static;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0,1fr));
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .training-assessment-header {
     flex-direction: column;
+    padding: 26px 24px;
   }
 
   .training-assessment-header-actions {
@@ -601,17 +714,22 @@
     justify-content: flex-start;
   }
 
+  .training-assessment-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .training-assessment-field-wide {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 650px) {
   .training-assessment-sidebar {
     grid-template-columns: 1fr;
   }
 
   .training-assessment-panel-heading {
-    align-items: flex-start;
     flex-direction: column;
-  }
-
-  .training-assessment-header-actions {
-    flex-wrap: wrap;
   }
 
   .training-assessment-page .question-card-header {
@@ -628,29 +746,34 @@
     grid-template-columns: 24px minmax(0,1fr) 34px;
   }
 
-  .training-assessment-form-grid {
-    grid-template-columns: 1fr;
+  .training-assessment-header-actions a,
+  .training-assessment-header-actions button {
+    width: 100%;
   }
 
-  .training-assessment-field-wide {
-    grid-column: auto;
+  .training-assessment-modal-card {
+    width: min(100vw - 20px, 760px);
+    margin: 10px auto;
+    max-height: calc(100vh - 20px);
   }
 }
 
-/* ---------------------------------------------------------
-   Accessibility / interaction support
-   --------------------------------------------------------- */
+@media (max-width: 420px) {
+  .training-assessment-header {
+    padding: 22px 18px;
+  }
 
-.training-assessment-page button:focus-visible,
-.training-assessment-modal button:focus-visible,
-.training-assessment-page input:focus-visible,
-.training-assessment-page select:focus-visible,
-.training-assessment-page textarea:focus-visible {
-  outline: 3px solid rgba(50,90,163,.18);
-  outline-offset: 2px;
-}
+  .training-assessment-form-grid,
+  .training-assessment-questions-list,
+  .training-assessment-modal-body {
+    padding: 16px;
+  }
 
-.training-assessment-modal-body {
-  min-width: 0;
-  overflow-wrap: anywhere;
+  .training-assessment-panel-heading {
+    padding: 17px 16px;
+  }
+
+  .training-assessment-sidebar-panel {
+    padding: 17px;
+  }
 }

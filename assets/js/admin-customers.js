@@ -1,1666 +1,546 @@
 /*
- * =========================================================
- * screenings4u — Admin Customers
+ * screenings4u — Admin Audit Center Controller
+ * assets/js/admin-audit.js
  *
- * Location:
- * assets/js/admin-customers.js
- *
- * Purpose:
- * - Protect the page with the admin Supabase session.
- * - Display customer accounts.
- * - Search customers.
- * - Open an individual customer profile.
- * - Display customer orders.
- * - Display customer training enrollments and progress.
- * =========================================================
+ * The audit page reads the existing audit_log records and actor profiles.
+ * It intentionally does not provide controls for modifying audit records.
  */
+(function () {
+  "use strict";
 
-document.addEventListener(
-    "DOMContentLoaded",
-    async function () {
+  let auditClient = null;
+  let allAuditEvents = [];
+  let auditProfiles = {};
+  let auditLoading = false;
 
-        /*
-         * -----------------------------------------------------
-         * SUPABASE CONFIGURATION
-         * -----------------------------------------------------
-         */
+  const $ = (id) => document.getElementById(id);
 
-        if (
-            !window.Screenings4uAdmin ||
-            !window.Screenings4uAdmin.supabase
-        ) {
-            showCustomerToast(
-                "Supabase client is not available. Check admin-config.js.",
-                true
-            );
-            return;
-        }
+  document.addEventListener("DOMContentLoaded", initializeAuditPage, { once: true });
 
+  async function initializeAuditPage() {
+    try {
+      auditClient = getAuditSupabaseClient();
 
-        /*
-         * -----------------------------------------------------
-         * SUPABASE CLIENT
-         * -----------------------------------------------------
-         */
-
-        window.screenings4uSupabase =
-            window.Screenings4uAdmin.supabase;
-
-
-        /*
-         * -----------------------------------------------------
-         * ADMIN GUARD
-         * -----------------------------------------------------
-         */
-
-        const authorized =
-            await enforceAdminGuard();
-
-
-        if (!authorized) {
-            return;
-        }
-
-
-        initializeCustomerPage();
-
-        await loadCustomers();
-    }
-);
-
-/* =========================================================
-   ADMIN AUTHORIZATION
-   ========================================================= */
-
-async function enforceAdminGuard() {
-
-    if (
-        !window.screenings4uSupabase ||
-        !window.screenings4uSupabase.auth
-    ) {
-        window.location.href = "admin-login.html";
-        return false;
-    }
-
-    const {
-        data,
-        error
-    } = await window.screenings4uSupabase.auth.getSession();
-
-    if (
-        error ||
-        !data ||
-        !data.session ||
-        !data.session.user
-    ) {
-        window.location.href = "admin-login.html";
-        return false;
-    }
-
-    const user = data.session.user;
-
-    const userEmail =
-        String(user.email || "")
-            .trim()
-            .toLowerCase();
-
-    const SUPERADMIN_EMAIL =
-        "aerving@screenings4u.com";
-
-    /*
-     * Look up the authenticated user in the
-     * actual admin_profiles table.
-     */
-    const {
-        data: adminProfile,
-        error: profileError
-    } = await window.screenings4uSupabase
-        .from("admin_profiles")
-        .select("*")
-        .eq("id", user.id)
-        .maybeSingle();
-
-    if (profileError) {
-
-        console.error(
-            "Admin authorization error:",
-            profileError
+      if (!auditClient) {
+        throw new Error(
+          "Supabase configuration could not be loaded. Check that admin-config.js loads before admin-audit.js."
         );
+      }
 
-        return false;
+      initializeAuditControls();
+      await loadAuditEvents();
+    } catch (error) {
+      console.error("Audit Center initialization failed:", error);
+
+      setAuditMessage(
+        error instanceof Error
+          ? error.message
+          : "Unable to initialize the audit center."
+      );
+
+      showAuditToast("Unable to initialize audit log.", "error");
     }
+  }
 
+  function getAuditSupabaseClient() {
     /*
-     * The designated superadmin must have an
-     * admin_profiles record and be active.
-     */
-    if (userEmail === SUPERADMIN_EMAIL) {
-
-        if (
-            !adminProfile ||
-            adminProfile.is_active !== true
-        ) {
-            await window.screenings4uSupabase.auth.signOut();
-
-            window.location.href =
-                "admin-login.html";
-
-            return false;
-        }
-
-        window.screenings4uAdminProfile =
-            adminProfile;
-
-        window.screenings4uAdminRole =
-            "superadmin";
-
-        return true;
-    }
-
-    /*
-     * All other administrators must have an
-     * active admin_profiles record.
+     * admin-config.js is the shared source of truth for the admin Supabase
+     * client. Do not create a second client when the shared client exists.
      */
     if (
-        !adminProfile ||
-        adminProfile.is_active !== true
+      window.Screenings4uAdmin &&
+      window.Screenings4uAdmin.supabase &&
+      typeof window.Screenings4uAdmin.supabase.from === "function"
     ) {
-
-        await window.screenings4uSupabase.auth.signOut();
-
-        window.location.href =
-            "admin-login.html";
-
-        return false;
+      return window.Screenings4uAdmin.supabase;
     }
 
-    const adminLevel =
-        String(
-            adminProfile.admin_level || "admin"
-        )
-            .trim()
-            .toLowerCase();
-
-    window.screenings4uAdminProfile =
-        adminProfile;
-
-    window.screenings4uAdminRole =
-        adminLevel === "superadmin"
-            ? "superadmin"
-            : "admin";
-
-    return true;
-}
-
-
-/* =========================================================
-   PAGE EVENTS
-   ========================================================= */
-
-function initializeCustomerPage() {
-
-    /*
-     * -----------------------------------------------------
-     * SIGN OUT
-     * -----------------------------------------------------
-     */
-
-    const signOutButton =
-        document.getElementById(
-            "signOutButton"
-        );
-
-
-    if (signOutButton) {
-
-        signOutButton.addEventListener(
-            "click",
-            async function () {
-
-                signOutButton.disabled =
-                    true;
-
-
-                await window.screenings4uSupabase
-                    .auth
-                    .signOut();
-
-
-                window.location.href =
-                    "admin-login.html";
-            }
-        );
+    /* Backward-compatible fallbacks for older admin pages. */
+    if (
+      window.screenings4uSupabase &&
+      typeof window.screenings4uSupabase.from === "function"
+    ) {
+      return window.screenings4uSupabase;
     }
 
-
-    /*
-     * -----------------------------------------------------
-     * CUSTOMER SEARCH
-     * -----------------------------------------------------
-     */
-
-    const search =
-        document.getElementById(
-            "customerSearch"
-        );
-
-
-    if (search) {
-
-        search.addEventListener(
-            "input",
-            function () {
-
-                renderCustomers(
-                    window.adminCustomers || [],
-                    search.value
-                );
-            }
-        );
+    if (
+      window.supabaseClient &&
+      typeof window.supabaseClient.from === "function"
+    ) {
+      return window.supabaseClient;
     }
 
+    if (
+      window.supabase &&
+      window.SCREENINGS4U_SUPABASE_URL &&
+      window.SCREENINGS4U_SUPABASE_ANON_KEY &&
+      typeof window.supabase.createClient === "function"
+    ) {
+      window.screenings4uSupabase = window.supabase.createClient(
+        window.SCREENINGS4U_SUPABASE_URL,
+        window.SCREENINGS4U_SUPABASE_ANON_KEY
+      );
 
-    /*
-     * -----------------------------------------------------
-     * BACK TO CUSTOMER LIST
-     * -----------------------------------------------------
-     */
-
-    const backButton =
-        document.getElementById(
-            "backToCustomers"
-        );
-
-
-    if (backButton) {
-
-        backButton.addEventListener(
-            "click",
-            showCustomerList
-        );
-    }
-}
-
-
-/* =========================================================
-   CUSTOMER LIST
-   ========================================================= */
-
-async function loadCustomers() {
-
-    const container =
-        document.getElementById(
-            "customerTable"
-        );
-
-
-    if (!container) {
-        return;
+      return window.screenings4uSupabase;
     }
 
-
-    container.innerHTML = `
-        <div class="empty-state">
-            Loading customers...
-        </div>
-    `;
-
-
-    const {
-        data,
-        error
-    } =
-        await window.screenings4uSupabase
-            .from("client_profiles")
-            .select(`
-                id,
-                first_name,
-                last_name,
-                email,
-                phone,
-                company_name,
-                is_active,
-                created_at
-            `)
-         
-            .order(
-                "created_at",
-                {
-                    ascending: false
-                }
-            );
-
-
-    if (error) {
-
-        console.error(
-            "Customer load error:",
-            error
-        );
-
-
-        container.innerHTML =
-            renderError(
-                error.message
-            );
-
-
-        return;
-    }
-
-
-    window.adminCustomers =
-        data || [];
-
-
-    renderCustomers(
-        window.adminCustomers,
-        ""
-    );
-}
-
-
-/* =========================================================
-   RENDER CUSTOMERS
-   ========================================================= */
-
-function renderCustomers(
-    customers,
-    searchTerm
-) {
-
-    const container =
-        document.getElementById(
-            "customerTable"
-        );
-
-
-    if (!container) {
-        return;
-    }
-
-
-    const term =
-        String(
-            searchTerm || ""
-        )
-            .toLowerCase()
-            .trim();
-
-
-    const filtered =
-        customers.filter(
-            function (customer) {
-
-                const searchableText = [
-
-                    customer.first_name,
-
-                    customer.last_name,
-
-                    customer.email,
-
-                    customer.phone,
-
-                    customer.company_name
-
-                ]
-                    .filter(Boolean)
-                    .join(" ")
-                    .toLowerCase();
-
-
-                return (
-                    !term ||
-                    searchableText.includes(
-                        term
-                    )
-                );
-            }
-        );
-
-
-    if (!filtered.length) {
-
-        container.innerHTML =
-            renderEmpty(
-                term
-                    ? "No customers match your search."
-                    : "No customers found."
-            );
-
-
-        return;
-    }
-
-
-    container.innerHTML = `
-        <table class="admin-data-table">
-
-            <thead>
-
-                <tr>
-
-                    <th>Customer</th>
-
-                    <th>Email</th>
-
-                    <th>Phone</th>
-
-                    <th>Company</th>
-
-                    <th>Status</th>
-
-                    <th>Created</th>
-
-                    <th></th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody>
-
-                ${filtered
-                    .map(
-                        function (customer) {
-
-                            return `
-                                <tr>
-
-                                    <td>
-                                        <strong>
-                                            ${escapeHtml(
-                                                getCustomerName(
-                                                    customer
-                                                )
-                                            )}
-                                        </strong>
-                                    </td>
-
-
-                                    <td>
-                                        ${escapeHtml(
-                                            customer.email ||
-                                            "—"
-                                        )}
-                                    </td>
-
-
-                                    <td>
-                                        ${escapeHtml(
-                                            customer.phone ||
-                                            "—"
-                                        )}
-                                    </td>
-
-
-                                    <td>
-                                        ${escapeHtml(
-                                            customer.company_name ||
-                                            "—"
-                                        )}
-                                    </td>
-
-
-                                    <td>
-                                        ${statusBadge(
-                                            customer.is_active
-                                                ? "Active"
-                                                : "Inactive"
-                                        )}
-                                    </td>
-
-
-                                    <td>
-                                        ${formatDate(
-                                            customer.created_at
-                                        )}
-                                    </td>
-
-
-                                    <td>
-
-                                        <button
-                                            type="button"
-                                            class="table-action"
-                                            data-customer-id="${escapeAttribute(
-                                                customer.id
-                                            )}"
-                                        >
-                                            View
-                                        </button>
-
-                                    </td>
-
-                                </tr>
-                            `;
-                        }
-                    )
-                    .join("")}
-
-            </tbody>
-
-        </table>
-    `;
-
-
-    container
-        .querySelectorAll(
-            "[data-customer-id]"
-        )
-        .forEach(
-            function (button) {
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        loadCustomerDetail(
-                            button.dataset.customerId
-                        );
-                    }
-                );
-            }
-        );
-}
-
-
-/* =========================================================
-   CUSTOMER DETAIL
-   ========================================================= */
-
-async function loadCustomerDetail(
-    customerId
-) {
-
-    const customer =
-        (window.adminCustomers || [])
-            .find(
-                function (item) {
-
-                    return (
-                        String(item.id) ===
-                        String(customerId)
-                    );
-                }
-            );
-
-
-    if (!customer) {
-
-        showCustomerToast(
-            "Customer could not be found.",
-            true
-        );
-
-        return;
-    }
-
-
-    const listView =
-        document.getElementById(
-            "customerListView"
-        );
-
-
-    const detailView =
-        document.getElementById(
-            "customerDetailView"
-        );
-
-
-    if (listView) {
-
-        listView.classList.remove(
-            "active"
-        );
-    }
-
-
-    if (detailView) {
-
-        detailView.classList.add(
-            "active"
-        );
-    }
-
-
-    setCustomerText(
-        "customerInitials",
-        getInitials(customer)
-    );
-
-
-    setCustomerText(
-        "detailCustomerName",
-        getCustomerName(customer)
-    );
-
-
-    setCustomerText(
-        "detailCustomerEmail",
-        customer.email || "—"
-    );
-
-
-    setCustomerText(
-        "detailPhone",
-        customer.phone || "—"
-    );
-
-
-    setCustomerText(
-        "detailCompany",
-        customer.company_name || "—"
-    );
-
-
-    setCustomerText(
-        "detailAddress",
-        formatAddress(customer)
-    );
-
-
-    const statusElement =
-        document.getElementById(
-            "detailStatus"
-        );
-
-
-    if (statusElement) {
-
-        statusElement.innerHTML =
-            statusBadge(
-                customer.is_active
-                    ? "Active"
-                    : "Inactive"
-            );
-    }
-
-
-    setCustomerText(
-        "detailCreated",
-        formatDate(
-            customer.created_at
-        )
-    );
-
-
-    const ordersTable =
-        document.getElementById(
-            "customerOrdersTable"
-        );
-
-
-    if (ordersTable) {
-
-        ordersTable.innerHTML = `
-            <div class="empty-state">
-                Loading orders...
-            </div>
-        `;
-    }
-
-
-    const trainingTable =
-        document.getElementById(
-            "customerTrainingTable"
-        );
-
-
-    if (trainingTable) {
-
-        trainingTable.innerHTML = `
-            <div class="empty-state">
-                Loading LMS enrollments...
-            </div>
-        `;
-    }
-
-
-    await Promise.all([
-        loadCustomerOrders(customerId),
-        loadCustomerTraining(customerId)
-    ]);
-
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+    return null;
+  }
+
+  function initializeAuditControls() {
+    $("auditSearch")?.addEventListener("input", renderAuditEvents);
+    $("auditActionFilter")?.addEventListener("change", renderAuditEvents);
+
+    $("clearAuditFiltersButton")?.addEventListener("click", () => {
+      if ($("auditSearch")) $("auditSearch").value = "";
+      if ($("auditActionFilter")) $("auditActionFilter").value = "all";
+      renderAuditEvents();
     });
-}
 
+    $("refreshAuditButton")?.addEventListener("click", loadAuditEvents);
+  }
 
-/* =========================================================
-   CUSTOMER ORDERS
-   ========================================================= */
+  async function loadAuditEvents() {
+    if (auditLoading) return;
 
-async function loadCustomerOrders(
-    customerId
-) {
+    auditLoading = true;
+    setRefreshState(true);
+    setAuditLoadingMessage();
 
-    const container =
-        document.getElementById(
-            "customerOrdersTable"
-        );
+    try {
+      const { data, error } = await auditClient
+        .from("audit_log")
+        .select(`
+          id,
+          actor_user_id,
+          action,
+          entity_type,
+          entity_id,
+          details,
+          created_at
+        `)
+        .order("created_at", { ascending: false });
 
+      if (error) throw error;
 
-    if (!container) {
-        return;
+      allAuditEvents = Array.isArray(data) ? data : [];
+
+      await loadAuditProfiles();
+
+      updateAuditMetrics();
+      renderAuditEvents();
+    } catch (error) {
+      console.error("Unable to load audit log:", error);
+
+      allAuditEvents = [];
+      auditProfiles = {};
+
+      setAuditMessage(
+        "Unable to load the audit log. Check the browser console for the Supabase error."
+      );
+
+      updateAuditMetrics();
+      setText("auditResultCount", "0");
+      showAuditToast("Unable to load audit log.", "error");
+    } finally {
+      auditLoading = false;
+      setRefreshState(false);
     }
+  }
 
+  async function loadAuditProfiles() {
+    auditProfiles = {};
 
-    const {
-        data,
-        error
-    } =
-        await window.screenings4uSupabase
-            .from("orders")
-            .select(`
-                id,
-                order_number,
-                subtotal,
-                tax,
-                total,
-                status,
-                payment_status,
-                created_at
-            `)
-            .eq(
-                "user_id",
-                customerId
-            )
-            .order(
-                "created_at",
-                {
-                    ascending: false
-                }
-            );
+    const actorIds = [
+      ...new Set(
+        allAuditEvents
+          .map((event) => event.actor_user_id)
+          .filter(Boolean)
+          .map(String)
+      )
+    ];
 
+    if (!actorIds.length) return;
 
-    if (error) {
+    try {
+      const { data, error } = await auditClient
+        .from("profiles")
+        .select(`
+          id,
+          first_name,
+          last_name,
+          email,
+          role,
+          is_active
+        `)
+        .in("id", actorIds);
 
-        console.error(
-            "Customer orders error:",
-            error
-        );
+      if (error) throw error;
 
-
-        container.innerHTML =
-            renderError(
-                error.message
-            );
-
-
-        return;
+      (data || []).forEach((profile) => {
+        auditProfiles[String(profile.id)] = profile;
+      });
+    } catch (error) {
+      /*
+       * The audit event itself remains useful even if an actor profile
+       * cannot be resolved. Render those events as system activity instead
+       * of failing the entire page.
+       */
+      console.warn("Unable to load audit actor profiles:", error);
     }
+  }
 
+  function updateAuditMetrics() {
+    const todayKey = getLocalDateKey(new Date());
 
-    const orders =
-        data || [];
+    const todayCount = allAuditEvents.filter((event) => {
+      const date = getEventDate(event);
+      return date && getLocalDateKey(new Date(date)) === todayKey;
+    }).length;
 
+    const loginCount = allAuditEvents.filter(
+      (event) => getAction(event) === "login"
+    ).length;
 
-    setCustomerText(
-        "detailOrderCount",
-        orders.length
+    const changeCount = allAuditEvents.filter((event) =>
+      ["create", "update", "delete"].includes(getAction(event))
+    ).length;
+
+    setText("auditTotal", allAuditEvents.length);
+    setText("auditToday", todayCount);
+    setText("auditLogins", loginCount);
+    setText("auditChanges", changeCount);
+  }
+
+  function renderAuditEvents() {
+    const table = $("auditTable");
+    if (!table) return;
+
+    const search = String($("auditSearch")?.value || "")
+      .trim()
+      .toLowerCase();
+
+    const filter = String(
+      $("auditActionFilter")?.value || "all"
     );
 
-
-    const totalSpent =
-        orders
-            .filter(
-                function (order) {
-
-                    return (
-                        String(
-                            order.payment_status ||
-                            ""
-                        ).toLowerCase() ===
-                        "paid"
-                    );
-                }
-            )
-            .reduce(
-                function (
-                    sum,
-                    order
-                ) {
-
-                    return (
-                        sum +
-                        Number(
-                            order.total || 0
-                        )
-                    );
-                },
-                0
-            );
-
-
-    setCustomerText(
-        "detailTotalSpent",
-        formatCurrency(
-            totalSpent
-        )
-    );
-
-
-    if (!orders.length) {
-
-        container.innerHTML =
-            renderEmpty(
-                "This customer has no orders."
-            );
-
-        return;
-    }
-
-
-    container.innerHTML = `
-        <table class="admin-data-table">
-
-            <thead>
-
-                <tr>
-
-                    <th>Order</th>
-
-                    <th>Subtotal</th>
-
-                    <th>Tax</th>
-
-                    <th>Total</th>
-
-                    <th>Payment</th>
-
-                    <th>Status</th>
-
-                    <th>Date</th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody>
-
-                ${orders
-                    .map(
-                        function (order) {
-
-                            return `
-                                <tr>
-
-                                    <td>
-                                        <strong>
-                                            ${escapeHtml(
-                                                order.order_number ||
-                                                "—"
-                                            )}
-                                        </strong>
-                                    </td>
-
-
-                                    <td>
-                                        ${formatCurrency(
-                                            order.subtotal
-                                        )}
-                                    </td>
-
-
-                                    <td>
-                                        ${formatCurrency(
-                                            order.tax
-                                        )}
-                                    </td>
-
-
-                                    <td>
-                                        <strong>
-                                            ${formatCurrency(
-                                                order.total
-                                            )}
-                                        </strong>
-                                    </td>
-
-
-                                    <td>
-                                        ${statusBadge(
-                                            order.payment_status
-                                        )}
-                                    </td>
-
-
-                                    <td>
-                                        ${statusBadge(
-                                            order.status
-                                        )}
-                                    </td>
-
-
-                                    <td>
-                                        ${formatDate(
-                                            order.created_at
-                                        )}
-                                    </td>
-
-                                </tr>
-                            `;
-                        }
-                    )
-                    .join("")}
-
-            </tbody>
-
-        </table>
-    `;
-}
-
-
-/* =========================================================
-   CUSTOMER LMS ACCESS
-   ========================================================= */
-
-async function loadCustomerTraining(
-    customerId
-) {
-
-    const container =
-        document.getElementById(
-            "customerTrainingTable"
-        );
-
-
-    if (!container) {
-        return;
-    }
-
-
-    /*
-     * Actual relationship:
-     *
-     * lms_enrollments.course_id
-     *        ↓
-     * lms_courses.id
-     *
-     * The customer relationship is:
-     *
-     * lms_enrollments.user_id
-     *        ↓
-     * auth.users.id
-     */
-
-    const {
-        data,
-        error
-    } =
-        await window.screenings4uSupabase
-            .from("lms_enrollments")
-            .select(`
-                id,
-                user_id,
-                course_id,
-                status,
-                progress_percent,
-                enrolled_at,
-                started_at,
-                completed_at,
-                course:lms_courses (
-                    id,
-                    title,
-                    slug
-                )
-            `)
-            .eq(
-                "user_id",
-                customerId
-            )
-            .order(
-                "enrolled_at",
-                {
-                    ascending: false
-                }
-            );
-
-
-    if (error) {
-
-        console.error(
-            "Customer LMS enrollment error:",
-            error
-        );
-
-
-        container.innerHTML =
-            renderError(
-                error.message
-            );
-
-
-        return;
-    }
-
-
-    const enrollments =
-        data || [];
-
-
-    setCustomerText(
-        "detailTrainingCount",
-        enrollments.length
-    );
-
-
-    setCustomerText(
-        "detailCompletedCount",
-        enrollments.filter(
-            function (item) {
-
-                return (
-                    String(
-                        item.status || ""
-                    ).toLowerCase() ===
-                    "completed"
-                );
-            }
-        ).length
-    );
-
-
-    if (!enrollments.length) {
-
-        container.innerHTML =
-            renderEmpty(
-                "This customer has no LMS enrollments."
-            );
-
-        return;
-    }
-
-
-    container.innerHTML = `
-        <table class="admin-data-table">
-
-            <thead>
-
-                <tr>
-
-                    <th>Course</th>
-
-                    <th>Progress</th>
-
-                    <th>Status</th>
-
-                    <th>Enrolled</th>
-
-                    <th>Started</th>
-
-                    <th>Completed</th>
-
-                </tr>
-
-            </thead>
-
-
-            <tbody>
-
-                ${enrollments
-                    .map(
-                        function (enrollment) {
-
-                            const course =
-                                enrollment.course ||
-                                {};
-
-
-                            const progress =
-                                Math.max(
-                                    0,
-                                    Math.min(
-                                        100,
-                                        Number(
-                                            enrollment.progress_percent ||
-                                            0
-                                        )
-                                    )
-                                );
-
-
-                            return `
-                                <tr>
-
-                                    <td>
-
-                                        <strong>
-                                            ${escapeHtml(
-                                                course.title ||
-                                                "—"
-                                            )}
-                                        </strong>
-
-                                        ${
-                                            course.slug
-                                                ? `
-                                                    <small class="table-secondary">
-                                                        ${escapeHtml(
-                                                            course.slug
-                                                        )}
-                                                    </small>
-                                                  `
-                                                : ""
-                                        }
-
-                                    </td>
-
-
-                                    <td>
-
-                                        <div class="progress-cell">
-
-                                            <div class="progress-track">
-
-                                                <span
-                                                    style="width:${progress}%"
-                                                ></span>
-
-                                            </div>
-
-
-                                            <strong>
-                                                ${progress}%
-                                            </strong>
-
-                                        </div>
-
-                                    </td>
-
-
-                                    <td>
-                                        ${statusBadge(
-                                            enrollment.status
-                                        )}
-                                    </td>
-
-
-                                    <td>
-                                        ${formatDate(
-                                            enrollment.enrolled_at
-                                        )}
-                                    </td>
-
-
-                                    <td>
-                                        ${formatDate(
-                                            enrollment.started_at
-                                        )}
-                                    </td>
-
-
-                                    <td>
-                                        ${formatDate(
-                                            enrollment.completed_at
-                                        )}
-                                    </td>
-
-                                </tr>
-                            `;
-                        }
-                    )
-                    .join("")}
-
-            </tbody>
-
-        </table>
-    `;
-}
-
-
-/* =========================================================
-   VIEW HELPERS
-   ========================================================= */
-
-function showCustomerList() {
-
-    const detailView =
-        document.getElementById(
-            "customerDetailView"
-        );
-
-
-    const listView =
-        document.getElementById(
-            "customerListView"
-        );
-
-
-    if (detailView) {
-
-        detailView.classList.remove(
-            "active"
-        );
-    }
-
-
-    if (listView) {
-
-        listView.classList.add(
-            "active"
-        );
-    }
-
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-
-/* =========================================================
-   CUSTOMER NAME
-   ========================================================= */
-
-function getCustomerName(
-    customer
-) {
-
-    if (!customer) {
-        return "Unnamed Customer";
-    }
-
-    const name = [
-        customer.first_name,
-        customer.last_name
-    ]
+    const filtered = allAuditEvents.filter((event) => {
+      const action = getAction(event);
+      const user = getEventUser(event);
+      const detailsText = event.details
+        ? safeStringify(event.details)
+        : "";
+
+      const searchable = [
+        action,
+        event.action,
+        event.entity_type,
+        event.entity_id,
+        event.actor_user_id,
+        user.name,
+        user.email,
+        detailsText
+      ]
         .filter(Boolean)
         .join(" ")
-        .trim();
+        .toLowerCase();
 
-    if (name) {
-        return name;
+      const matchesSearch =
+        !search || searchable.includes(search);
+
+      const matchesFilter =
+        filter === "all" || action === filter;
+
+      return matchesSearch && matchesFilter;
+    });
+
+    setText("auditResultCount", filtered.length);
+
+    if (!filtered.length) {
+      table.innerHTML = `
+        <div class="audit-empty">
+          No audit events match the current filters.
+        </div>
+      `;
+      return;
+    }
+
+    table.innerHTML = `
+      <table class="admin-data-table">
+        <thead>
+          <tr>
+            <th>Date &amp; Time</th>
+            <th>Action</th>
+            <th>User</th>
+            <th>Event</th>
+            <th>Record</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${filtered.map(renderAuditRow).join("")}
+        </tbody>
+      </table>
+    `;
+  }
+
+  function renderAuditRow(event) {
+    const action = getAction(event);
+    const user = getEventUser(event);
+    const eventName = getEventDescription(event);
+    const record = event.entity_id || event.entity_type || "—";
+
+    return `
+      <tr>
+        <td>
+          <span class="audit-time">
+            ${escapeHtml(formatDateTime(getEventDate(event)))}
+          </span>
+        </td>
+
+        <td>
+          <span class="audit-action ${escapeHtml(action)}">
+            ${escapeHtml(formatAction(action))}
+          </span>
+        </td>
+
+        <td>
+          <div class="audit-event">
+            <strong>${escapeHtml(user.name)}</strong>
+            <small>${escapeHtml(user.email)}</small>
+          </div>
+        </td>
+
+        <td>
+          <div class="audit-event">
+            <strong>${escapeHtml(eventName)}</strong>
+            <small>${escapeHtml(getTableName(event))}</small>
+          </div>
+        </td>
+
+        <td>
+          <span class="audit-record">
+            ${escapeHtml(String(record))}
+          </span>
+        </td>
+      </tr>
+    `;
+  }
+
+  function getAction(event) {
+    const raw = event?.action || "activity";
+    const value = String(raw).toLowerCase().trim();
+
+    if (value.includes("login") || value.includes("sign in")) {
+      return "login";
+    }
+
+    if (value.includes("logout") || value.includes("sign out")) {
+      return "logout";
+    }
+
+    if (value.includes("create") || value.includes("insert")) {
+      return "create";
+    }
+
+    if (value.includes("update") || value.includes("edit")) {
+      return "update";
+    }
+
+    if (value.includes("delete") || value.includes("remove")) {
+      return "delete";
+    }
+
+    if (value.includes("complete")) {
+      return "complete";
     }
 
     return (
-        customer.email ||
-        "Unnamed Customer"
+      value
+        .replace(/\s+/g, "-")
+        .replace(/[^a-z0-9_-]/g, "")
+        .slice(0, 40) || "activity"
     );
-}
+  }
 
+  function getEventUser(event) {
+    const actorId = event?.actor_user_id
+      ? String(event.actor_user_id)
+      : "";
 
-/* =========================================================
-   CUSTOMER INITIALS
-   ========================================================= */
+    const profile = actorId
+      ? auditProfiles[actorId]
+      : null;
 
-function getInitials(
-    customer
-) {
+    if (!profile) {
+      return {
+        name: "System",
+        email: "System activity"
+      };
+    }
+
+    const firstName = String(profile.first_name || "").trim();
+    const lastName = String(profile.last_name || "").trim();
 
     const name =
-        getCustomerName(
-            customer
-        );
+      `${firstName} ${lastName}`.trim() ||
+      profile.email ||
+      "Administrator";
 
+    return {
+      name: String(name),
+      email: String(profile.email || "—")
+    };
+  }
 
-    if (!name) {
-        return "?";
+  function getEventDate(event) {
+    return event?.created_at || null;
+  }
+
+  function getEventDescription(event) {
+    const action = getAction(event);
+    const entityType = event?.entity_type || "system";
+
+    const details =
+      event?.details &&
+      typeof event.details === "object"
+        ? event.details
+        : {};
+
+    const descriptionKeys = [
+      "description",
+      "message",
+      "name",
+      "title",
+      "reason"
+    ];
+
+    for (const key of descriptionKeys) {
+      if (
+        details[key] !== undefined &&
+        details[key] !== null &&
+        String(details[key]).trim()
+      ) {
+        return String(details[key]);
+      }
     }
 
+    return `${formatAction(action)} ${formatEntityName(entityType)}`;
+  }
 
-    const parts =
-        String(name)
-            .trim()
-            .split(/\s+/)
-            .filter(Boolean);
+  function getTableName(event) {
+    return formatEntityName(event?.entity_type || "System");
+  }
 
+  function formatEntityName(value) {
+    return String(value || "record")
+      .replace(/[-_]+/g, " ")
+      .replace(/\b\w/g, (letter) => letter.toUpperCase());
+  }
 
-    if (!parts.length) {
-        return "?";
+  function formatAction(action) {
+    return String(action || "activity")
+      .replace(/[-_]+/g, " ")
+      .replace(/\b\w/g, (letter) => letter.toUpperCase());
+  }
+
+  function formatDateTime(value) {
+    if (!value) return "—";
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+      return String(value);
     }
 
+    return date.toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit"
+    });
+  }
 
-    if (parts.length === 1) {
+  function getLocalDateKey(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
 
-        return parts[0]
-            .substring(0, 2)
-            .toUpperCase();
-    }
+    return `${year}-${month}-${day}`;
+  }
 
+  function setRefreshState(isLoading) {
+    const button = $("refreshAuditButton");
+    if (!button) return;
 
-    return (
-        parts[0].charAt(0) +
-        parts[
-            parts.length - 1
-        ].charAt(0)
-    ).toUpperCase();
-}
+    button.disabled = isLoading;
+    button.innerHTML = isLoading
+      ? '<span class="audit-refresh-icon audit-refresh-spinning" aria-hidden="true">↻</span> Refreshing...'
+      : '<span class="audit-refresh-icon" aria-hidden="true">↻</span> Refresh Log';
+  }
 
+  function setAuditLoadingMessage() {
+    const table = $("auditTable");
+    if (!table) return;
 
-/* =========================================================
-   CUSTOMER ADDRESS
-   ========================================================= */
-
-function formatAddress(
-    customer
-) {
-
-    if (!customer) {
-        return "—";
-    }
-
-
-    const addressParts = [
-        customer.address_line_1,
-        customer.address_line_2,
-        customer.city,
-        customer.state,
-        customer.postal_code
-    ]
-        .filter(
-            function (value) {
-
-                return (
-                    value !== null &&
-                    value !== undefined &&
-                    String(value).trim() !== ""
-                );
-            }
-        );
-
-
-    if (!addressParts.length) {
-        return "—";
-    }
-
-
-    /*
-     * Keep address formatting readable.
-     */
-
-    const firstLine = [
-        customer.address_line_1,
-        customer.address_line_2
-    ]
-        .filter(Boolean)
-        .join(", ");
-
-
-    const cityLine = [
-        customer.city,
-        customer.state,
-        customer.postal_code
-    ]
-        .filter(Boolean)
-        .join(", ");
-
-
-    return [
-        firstLine,
-        cityLine
-    ]
-        .filter(Boolean)
-        .join(" • ") || "—";
-}
-
-
-/* =========================================================
-   CURRENCY
-   ========================================================= */
-
-function formatCurrency(
-    value
-) {
-
-    const amount =
-        Number(value || 0);
-
-
-    return amount.toLocaleString(
-        "en-US",
-        {
-            style: "currency",
-            currency: "USD"
-        }
-    );
-}
-
-
-/* =========================================================
-   DATE
-   ========================================================= */
-
-function formatDate(
-    value
-) {
-
-    if (!value) {
-        return "—";
-    }
-
-
-    const date =
-        new Date(value);
-
-
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
-
-        return "—";
-    }
-
-
-    return date.toLocaleDateString(
-        "en-US",
-        {
-            month: "short",
-            day: "numeric",
-            year: "numeric"
-        }
-    );
-}
-
-
-/* =========================================================
-   STATUS BADGE
-   ========================================================= */
-
-function statusBadge(
-    value
-) {
-
-    const text =
-        String(
-            value || "—"
-        );
-
-
-    const normalized =
-        text
-            .toLowerCase()
-            .trim()
-            .replace(
-                /[^a-z0-9_-]+/g,
-                "-"
-            );
-
-
-    return `
-        <span
-            class="status-badge status-${escapeAttribute(
-                normalized
-            )}"
-        >
-            ${escapeHtml(text)}
-        </span>
+    table.innerHTML = `
+      <div class="audit-loading">
+        <span class="audit-spinner" aria-hidden="true"></span>
+        Loading audit activity...
+      </div>
     `;
-}
+  }
 
+  function setAuditMessage(message) {
+    const table = $("auditTable");
+    if (!table) return;
 
-/* =========================================================
-   SET TEXT
-   ========================================================= */
+    table.innerHTML = `
+      <div class="audit-empty">
+        ${escapeHtml(message)}
+      </div>
+    `;
+  }
 
-function setCustomerText(
-    id,
-    value
-) {
-
-    const element =
-        document.getElementById(
-            id
-        );
-
-
-    if (!element) {
-        return;
-    }
-
+  function setText(id, value) {
+    const element = $(id);
+    if (!element) return;
 
     element.textContent =
-        value === null ||
-        value === undefined ||
-        value === ""
-            ? "—"
-            : String(value);
-}
+      value == null || value === ""
+        ? "—"
+        : String(value);
+  }
 
-
-/* =========================================================
-   EMPTY STATE
-   ========================================================= */
-
-function renderEmpty(
-    message
-) {
-
-    return `
-        <div class="empty-state">
-            ${escapeHtml(message)}
-        </div>
-    `;
-}
-
-
-/* =========================================================
-   ERROR STATE
-   ========================================================= */
-
-function renderError(
-    message
-) {
-
-    return `
-        <div class="error-state">
-            ${escapeHtml(message)}
-        </div>
-    `;
-}
-
-
-/* =========================================================
-   CUSTOMER TOAST
-   ========================================================= */
-
-function showCustomerToast(
-    message,
-    isError
-) {
-
-    const toast =
-        document.getElementById(
-            "customerToast"
-        );
-
-
-    if (!toast) {
-
-        console.log(
-            message
-        );
-
-        return;
+  function safeStringify(value) {
+    try {
+      return JSON.stringify(value);
+    } catch {
+      return String(value);
     }
+  }
 
+  function showAuditToast(message, type) {
+    const toast = $("auditToast");
+    if (!toast) return;
 
-    toast.textContent =
-        message;
+    toast.textContent = message;
+    toast.className = "admin-toast " + (type || "");
+    toast.classList.add("show");
 
+    clearTimeout(showAuditToast.timeout);
 
-    toast.className =
-        "admin-toast visible" +
-        (
-            isError
-                ? " error"
-                : ""
-        );
+    showAuditToast.timeout = window.setTimeout(() => {
+      toast.classList.remove("show");
+    }, 3500);
+  }
 
-
-    clearTimeout(
-        window.customerToastTimer
-    );
-
-
-    window.customerToastTimer =
-        setTimeout(
-            function () {
-
-                toast.classList.remove(
-                    "visible"
-                );
-
-            },
-            4000
-        );
-}
-
-
-/* =========================================================
-   ESCAPE HTML
-   ========================================================= */
-
-function escapeHtml(
-    value
-) {
-
-    return String(
-        value ?? ""
-    )
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-}
-
-
-/* =========================================================
-   ESCAPE ATTRIBUTE
-   ========================================================= */
-
-function escapeAttribute(
-    value
-) {
-
-    return escapeHtml(
-        value
-    );
-}
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+})();

@@ -1,0 +1,124 @@
+| Page                                | Decision                        | Role                         |
+| ----------------------------------- | ------------------------------- | ---------------------------- |
+| `admin-dashboard.html`              | **KEEP**                        | Admin home                   |
+| `admin-accounts.html`               | **KEEP**                        | Staff/admin accounts         |
+| `admin-audit.html`                  | **KEEP**                        | Audit/security               |
+| `admin-customers.html`              | **KEEP**                        | Customer management          |
+| `admin-orders.html`                 | **KEEP**                        | Orders                       |
+| `admin-students.html`               | **KEEP**                        | LMS student directory        |
+| `admin-student-detail.html`         | **KEEP**                        | Individual student           |
+| `admin-student-progress.html`       | **KEEP**                        | Detailed LMS progress        |
+| `admin-lms-courses.html`            | **KEEP**                        | Course library / manager     |
+| `admin-lms-course-manager.html`     | **KEEP, BUT RENAME/REPOSITION** | Individual course management |
+| `admin-lms-course-builder.html`     | **KEEP**                        | Course authoring             |
+| `admin-lms-lesson-builder.html`     | **KEEP**                        | Lesson authoring             |
+| `admin-lms-assessment-builder.html` | **KEEP**                        | Assessment authoring         |
+| `admin-lms-course-preview.html`     | **KEEP**                        | Admin course preview         |
+| `admin-lms-lesson-preview.html`     | **KEEP**                        | Admin lesson preview         |
+| `lms-course-player.html`            | **KEEP**                        | Student course player        |
+| `lms-certificate.html`              | **KEEP**                        | Student certificate          |
+| `client-dashboard.html`             | **KEEP**                        | Client/student dashboard     |
+| `client-account.html`               | **KEEP**                        | Account                      |
+| `client-orders.html`                | **KEEP**                        | Orders                       |
+| `client-order-detail.html`          | **KEEP**                        | Order detail                 |
+| `client-certificates.html`          | **KEEP**                        | Certificate library          |
+| `client-training.html`              | **KEEP**                        | My Courses                   |
+
+
+client-dashboard.html
+        │
+        ├── My Courses
+        │       ↓
+        │  client-training.html
+        │       │
+        │       └── Course
+        │             ↓
+        │       lms-course-player.html
+        │             │
+        │             ├── Lesson
+        │             │
+        │             ├── Assessment
+        │             │
+        │             └── Course Complete
+        │                     ↓
+        │              lms-certificate.html
+        │
+        ├── My Orders
+        │
+        ├── My Certificates
+        │
+        └── Account
+
+        
+
+                    LMS
+                     │
+          ┌──────────┴──────────┐
+          │                     │
+        ADMIN                 STUDENT
+          │                     │
+       Courses               My Courses
+          │                     │
+    Course Manager        Course Player
+          │                     │
+     Lesson Builder       Lessons
+          │                     │
+  Assessment Builder      Assessment
+          │                     │
+       Publish           Completion
+                                │
+                           Certificate
+
+
+ADMIN
+│
+└── LMS Courses
+      │
+      ├── admin-lms-courses.html
+      │       Course Library
+      │
+      └── admin-lms-course-manager.html
+              Course Management
+              │
+              ├── Course Settings
+              ├── Sections
+              ├── Lessons
+              ├── Enrollment
+              ├── Publish
+              │
+              └── Open Builder
+                       ↓
+                admin-lms-course-builder.html
+                       │
+                       ├── Course Details
+                       ├── Curriculum
+                       ├── Settings
+                       └── Publish
+                              │
+                              └── Lesson content
+
+
+
+
+ADMIN
+│
+├── LMS Courses
+│       ↓
+├── Course Manager
+│       ↓
+├── Course Builder
+│       ↓
+├── Lesson Builder
+│       ↓
+└── Assessment Builder
+        │
+        ▼
+STUDENT
+│
+├── My Training
+│       ↓
+├── Course Player
+│       ↓
+├── Assessment
+│       ↓
+└── Certificate

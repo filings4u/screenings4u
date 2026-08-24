@@ -43,12 +43,12 @@
     const el = $('assessmentToast');
 
     el.textContent = message;
-    el.className = `admin-toast ${type} show`;
+    el.className = `admin-toast ${type} visible`;
 
     clearTimeout(toast.timer);
 
     toast.timer = setTimeout(() => {
-      el.classList.remove('show');
+      el.classList.remove('visible');
     }, 3500);
   }
 
@@ -458,6 +458,14 @@
   }
 
   async function saveAssessment() {
+    const saveButton = $('saveAssessmentButton');
+    const originalSaveLabel = saveButton?.textContent || 'Save Assessment';
+
+    if (saveButton) {
+      saveButton.disabled = true;
+      saveButton.textContent = 'Saving…';
+    }
+
     const title = $('assessmentTitle').value.trim();
 
     if (!title) {
@@ -544,6 +552,11 @@
     } catch (error) {
       console.error(error);
       toast(error.message || 'Unable to save assessment.', 'error');
+    } finally {
+      if (saveButton) {
+        saveButton.disabled = false;
+        saveButton.textContent = originalSaveLabel;
+      }
     }
   }
 
