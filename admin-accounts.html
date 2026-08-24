@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Account & Invitation Management | screenings4u Admin</title>
+<link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/admin-subpages.css">
+  <link rel="stylesheet" href="assets/css/admin-navigation.css">
+  <link rel="stylesheet" href="assets/css/admin-accounts.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body class="admin-page admin-accounts-page">
+
+  <div class="admin-app admin-app-shared-nav">
+
+    <!-- =====================================================
+         SHARED ADMIN NAVIGATION
+    ====================================================== -->
+
+    <nav
+      id="adminNavigation"
+      aria-label="Admin navigation"
+    ></nav>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="admin-main">
+
+      <!-- ===================================================
+           HEADER
+      ==================================================== -->
+
+      <header class="admin-header">
+
+        <div>
+          <p class="eyebrow">
+            ACCOUNT MANAGEMENT
+          </p>
+
+          <h1>
+            Account & Invitation Management
+          </h1>
+
+          <p>
+            Manage customer accounts, invitations, activation
+            status, and account access.
+          </p>
+        </div>
+
+        <div class="admin-header-actions">
+
+          <a
+            href="admin-customers.html"
+            class="secondary-button"
+          >
+            ← Customers
+          </a>
+
+          <button
+            id="refreshAccountsButton"
+            class="secondary-button"
+            type="button"
+          >
+            Refresh
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- ===================================================
+           ACCOUNT METRICS
+      ==================================================== -->
+
+      <section class="metrics-grid">
+
+        <article class="metric-card">
+          <span>
+            Total Accounts
+          </span>
+
+          <strong id="metricTotalAccounts">
+            —
+          </strong>
+        </article>
+
+
+        <article class="metric-card">
+          <span>
+            Active Accounts
+          </span>
+
+          <strong id="metricActiveAccounts">
+            —
+          </strong>
+        </article>
+
+
+        <article class="metric-card">
+          <span>
+            Pending Invitations
+          </span>
+
+          <strong id="metricPendingInvitations">
+            —
+          </strong>
+        </article>
+
+
+        <article class="metric-card">
+          <span>
+            Accepted Invitations
+          </span>
+
+          <strong id="metricAcceptedInvitations">
+            —
+          </strong>
+        </article>
+
+      </section>
+
+
+      <!-- ===================================================
+           CUSTOMER ACCOUNT DIRECTORY
+      ==================================================== -->
+
+      <section class="panel">
+
+        <div class="toolbar">
+
+          <div>
+            <p class="eyebrow">
+              CUSTOMER ACCOUNTS
+            </p>
+
+            <h2>
+              Account Directory
+            </h2>
+          </div>
+
+          <div class="account-toolbar">
+
+            <input
+              id="accountSearch"
+              class="search-input"
+              type="search"
+              placeholder="Search name, email, company..."
+              autocomplete="off"
+            >
+
+            <select
+              id="accountStatusFilter"
+              class="search-input"
+            >
+              <option value="">
+                All Accounts
+              </option>
+
+              <option value="active">
+                Active
+              </option>
+
+              <option value="inactive">
+                Inactive
+              </option>
+
+              <option value="pending">
+                Pending Invitation
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="accountsTable"
+          class="table-wrap"
+        >
+          <div class="empty-state">
+            Loading accounts...
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           INVITATION DIRECTORY
+      ==================================================== -->
+
+      <section class="panel detail-panel">
+
+        <div class="toolbar">
+
+          <div>
+            <p class="eyebrow">
+              ACCOUNT INVITATIONS
+            </p>
+
+            <h2>
+              Invitations
+            </h2>
+          </div>
+
+          <div class="account-toolbar">
+
+            <input
+              id="invitationSearch"
+              class="search-input"
+              type="search"
+              placeholder="Search invitation..."
+              autocomplete="off"
+            >
+
+            <select
+              id="invitationStatusFilter"
+              class="search-input"
+            >
+              <option value="">
+                All Invitations
+              </option>
+
+              <option value="pending">
+                Pending
+              </option>
+
+              <option value="accepted">
+                Accepted
+              </option>
+
+              <option value="expired">
+                Expired
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="invitationsTable"
+          class="table-wrap"
+        >
+          <div class="empty-state">
+            Loading invitations...
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           ACCOUNT DETAIL
+      ==================================================== -->
+
+      <section
+        id="accountDetailPanel"
+        class="panel detail-panel"
+        hidden
+      >
+
+        <div class="panel-heading">
+
+          <div>
+
+            <p class="eyebrow">
+              ACCOUNT DETAILS
+            </p>
+
+            <h2 id="accountDetailTitle">
+              Customer Account
+            </h2>
+
+          </div>
+
+          <button
+            id="closeAccountDetailButton"
+            class="secondary-button"
+            type="button"
+          >
+            Close
+          </button>
+
+        </div>
+
+
+        <div class="customer-profile-grid">
+
+          <!-- CUSTOMER -->
+
+          <section class="panel profile-card">
+
+            <p class="eyebrow">
+              CUSTOMER
+            </p>
+
+            <div class="profile-heading">
+
+              <div
+                id="accountInitials"
+                class="customer-avatar"
+              >
+                —
+              </div>
+
+              <div>
+
+                <h2 id="accountCustomerName">
+                  Customer
+                </h2>
+
+                <p id="accountCustomerEmail">
+                  —
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="profile-fields">
+
+              <div>
+                <span>Company</span>
+
+                <strong id="accountCompany">
+                  —
+                </strong>
+              </div>
+
+
+              <div>
+                <span>Phone</span>
+
+                <strong id="accountPhone">
+                  —
+                </strong>
+              </div>
+
+
+              <div>
+                <span>Account Status</span>
+
+                <strong id="accountStatus">
+                  —
+                </strong>
+              </div>
+
+
+              <div>
+                <span>Created</span>
+
+                <strong id="accountCreated">
+                  —
+                </strong>
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- INVITATION -->
+
+          <section class="panel">
+
+            <p class="eyebrow">
+              INVITATION STATUS
+            </p>
+
+
+            <div class="profile-fields">
+
+              <div>
+                <span>Invitation Email</span>
+
+                <strong id="detailInvitationEmail">
+                  —
+                </strong>
+              </div>
+
+
+              <div>
+                <span>Status</span>
+
+                <strong id="detailInvitationStatus">
+                  —
+                </strong>
+              </div>
+
+
+              <div>
+                <span>Sent</span>
+
+                <strong id="detailInvitationSent">
+                  —
+                </strong>
+              </div>
+
+
+              <div>
+                <span>Accepted</span>
+
+                <strong id="detailInvitationAccepted">
+                  —
+                </strong>
+              </div>
+
+
+              <div>
+                <span>Expires</span>
+
+                <strong id="detailInvitationExpires">
+                  —
+                </strong>
+              </div>
+
+            </div>
+
+          </section>
+
+        </div>
+
+
+        <!-- =================================================
+             ACCOUNT ACTIONS
+        ================================================== -->
+
+        <section class="panel detail-panel">
+
+          <div class="panel-heading">
+
+            <div>
+              <p class="eyebrow">
+                ADMINISTRATIVE ACTIONS
+              </p>
+
+              <h2>
+                Manage Account
+              </h2>
+            </div>
+
+          </div>
+
+
+          <div class="certificate-actions">
+
+            <button
+              id="resendInvitationButton"
+              class="secondary-button"
+              type="button"
+            >
+              Resend Invitation
+            </button>
+
+
+            <button
+              id="activateAccountButton"
+              class="secondary-button"
+              type="button"
+            >
+              Activate Account
+            </button>
+
+
+            <button
+              id="deactivateAccountButton"
+              class="secondary-button"
+              type="button"
+            >
+              Deactivate Account
+            </button>
+
+          </div>
+
+        </section>
+
+      </section>
+
+
+      <!-- ===================================================
+           ADMIN USERS
+      ==================================================== -->
+
+      <section class="panel detail-panel">
+
+        <div class="panel-heading">
+
+          <div>
+            <p class="eyebrow">
+              ADMIN ACCESS
+            </p>
+
+            <h2>
+              Admin Users
+            </h2>
+          </div>
+
+        </div>
+
+
+        <div
+          id="adminUsersTable"
+          class="table-wrap"
+        >
+          <div class="empty-state">
+            Loading admin users...
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           TOAST
+      ==================================================== -->
+
+      <div
+        id="accountToast"
+        class="admin-toast"
+        role="status"
+      ></div>
+
+    </main>
+
+  </div>
+
+
+  <!-- =======================================================
+       SCRIPTS
+  ======================================================== -->
+
+  <script src="assets/js/admin-config.js"></script>
+  <script src="assets/js/admin-navigation.js"></script>
+  <script src="assets/js/admin-accounts.js"></script>
+
+</body>
+</html>

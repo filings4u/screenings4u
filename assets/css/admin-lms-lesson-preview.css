@@ -1,0 +1,246 @@
+/* =========================================================
+   screenings4u — LMS Lesson Preview
+   ========================================================= */
+
+.lms-lesson-preview-page {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.lms-lesson-preview-page .preview-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.lms-lesson-preview-page .preview-header h1 {
+  margin: 3px 0 0;
+  color: #172033;
+}
+
+.lms-lesson-preview-page .preview-header p:not(.eyebrow) {
+  margin: 7px 0 0;
+  color: #687386;
+}
+
+.lms-lesson-preview-page .preview-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lms-lesson-preview-page .preview-header-actions .secondary-button,
+.lms-lesson-preview-page .preview-error .primary-button {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 9px 14px;
+  border: 1px solid #d7dde7;
+  border-radius: 8px;
+  background: #fff;
+  color: #325aa3;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.lms-lesson-preview-page .preview-header-actions .secondary-button:hover {
+  background: #f5f7fb;
+  border-color: #325aa3;
+}
+
+.lms-lesson-preview-page .preview-shell {
+  border: 1px solid #e1e6ee;
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.lms-lesson-preview-page .preview-content {
+  padding: 32px;
+}
+
+.lms-lesson-preview-page .preview-loading,
+.lms-lesson-preview-page .preview-empty,
+.lms-lesson-preview-page .preview-error {
+  padding: 42px 20px;
+  text-align: center;
+  color: #687386;
+}
+
+.lms-lesson-preview-page .preview-empty h2,
+.lms-lesson-preview-page .preview-error h2 {
+  margin: 0 0 8px;
+  color: #172033;
+}
+
+.lms-lesson-preview-page .preview-error p {
+  margin: 0 0 18px;
+}
+
+.lms-lesson-preview-page .preview-lesson-intro {
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e9f0;
+}
+
+.lms-lesson-preview-page .preview-eyebrow {
+  color: #325aa3;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.lms-lesson-preview-page .preview-lesson-intro h2 {
+  margin: 5px 0 8px;
+  color: #172033;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.lms-lesson-preview-page .preview-lesson-intro p {
+  margin: 0;
+  color: #687386;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.lms-lesson-preview-page .preview-block-list {
+  display: grid;
+  gap: 0;
+}
+
+.lms-lesson-preview-page .preview-block {
+  padding: 24px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.lms-lesson-preview-page .preview-block:last-child {
+  border-bottom: 0;
+}
+
+.lms-lesson-preview-page .preview-block-label {
+  margin: 0 0 12px;
+  color: #172033;
+  font-size: 14px;
+}
+
+.lms-lesson-preview-page .preview-heading h2 {
+  margin: 0;
+  color: #172033;
+  font-size: 22px;
+}
+
+.lms-lesson-preview-page .preview-text {
+  color: #334057;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.lms-lesson-preview-page .preview-block video,
+.lms-lesson-preview-page .preview-block audio,
+.lms-lesson-preview-page .preview-image {
+  display: block;
+  max-width: 100%;
+}
+
+.lms-lesson-preview-page .preview-block video {
+  width: 100%;
+  max-height: 560px;
+  border-radius: 10px;
+  background: #111827;
+}
+
+.lms-lesson-preview-page .preview-block audio {
+  width: 100%;
+}
+
+.lms-lesson-preview-page .preview-image {
+  max-height: 600px;
+  margin: 0 auto;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.lms-lesson-preview-page .preview-file-link,
+.lms-lesson-preview-page .preview-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 9px 14px;
+  border: 1px solid #325aa3;
+  border-radius: 8px;
+  background: #325aa3;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.lms-lesson-preview-page .preview-file-link:hover,
+.lms-lesson-preview-page .preview-link:hover {
+  background: #294d8c;
+}
+
+.lms-lesson-preview-page .preview-placeholder {
+  padding: 18px;
+  border: 1px dashed #d7dde7;
+  border-radius: 9px;
+  background: #fafbfc;
+  color: #687386;
+  font-size: 13px;
+}
+
+.lms-lesson-preview-page .preview-assessment {
+  padding: 20px;
+  border: 1px solid #dfe4ec;
+  border-radius: 10px;
+  background: #f8f9fb;
+}
+
+.lms-lesson-preview-page .preview-assessment h3 {
+  margin: 6px 0;
+  color: #172033;
+}
+
+.lms-lesson-preview-page .preview-assessment p {
+  margin: 0;
+  color: #687386;
+  font-size: 13px;
+}
+
+.lms-lesson-preview-page .preview-assessment-type {
+  color: #325aa3;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.lms-lesson-preview-page .preview-divider {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid #dfe4eb;
+}
+
+@media (max-width: 700px) {
+  .lms-lesson-preview-page .preview-header {
+    flex-direction: column;
+  }
+
+  .lms-lesson-preview-page .preview-header-actions {
+    width: 100%;
+  }
+
+  .lms-lesson-preview-page .preview-content {
+    padding: 20px;
+  }
+}

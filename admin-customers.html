@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Customers | screenings4u Admin</title>
+<link rel="icon" type="image/png" href="images/fav.png">
+  <link
+    rel="stylesheet"
+    href="assets/css/admin.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="assets/css/admin-customers.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="assets/css/admin-navigation.css"
+  >
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+
+
+<body class="admin-page">
+
+
+  <div class="admin-app">
+
+
+    <!-- =====================================================
+         SHARED ADMIN NAVIGATION
+    ====================================================== -->
+
+    <nav
+      id="adminNavigation"
+      aria-label="Admin navigation"
+    ></nav>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="admin-main">
+
+
+      <!-- ===================================================
+           PAGE HEADER
+      ==================================================== -->
+
+      <header class="admin-header">
+
+        <div>
+
+          <p class="eyebrow">
+            CUSTOMER MANAGEMENT
+          </p>
+
+          <h1>
+            Customers
+          </h1>
+
+          <p>
+            Search customers and review their complete account activity.
+          </p>
+
+        </div>
+
+
+        <a
+          class="back-link"
+          href="admin-dashboard.html"
+        >
+          ← Dashboard
+        </a>
+
+      </header>
+
+
+      <!-- ===================================================
+           CUSTOMER DIRECTORY
+      ==================================================== -->
+
+      <section
+        id="customerListView"
+        class="customer-view active"
+      >
+
+        <div class="panel">
+
+
+          <div class="customer-toolbar">
+
+            <div>
+
+              <p class="eyebrow">
+                CUSTOMER DIRECTORY
+              </p>
+
+              <h2>
+                All Customers
+              </h2>
+
+            </div>
+
+
+            <input
+              id="customerSearch"
+              class="search-input"
+              type="search"
+              placeholder="Search name, email, company, phone..."
+              autocomplete="off"
+            >
+
+          </div>
+
+
+          <div
+            id="customerTable"
+            class="table-wrap"
+          >
+
+            <div class="empty-state">
+              Loading customers...
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           CUSTOMER DETAIL
+      ==================================================== -->
+
+      <section
+        id="customerDetailView"
+        class="customer-view"
+      >
+
+
+        <!-- DETAIL HEADER -->
+
+        <div class="detail-header">
+
+          <button
+            id="backToCustomers"
+            class="secondary-button"
+            type="button"
+          >
+            ← Back to Customers
+          </button>
+
+        </div>
+
+
+        <!-- PROFILE + SUMMARY -->
+
+        <div class="customer-profile-grid">
+
+
+          <!-- CUSTOMER PROFILE -->
+
+          <section class="panel profile-card">
+
+            <p class="eyebrow">
+              CUSTOMER PROFILE
+            </p>
+
+
+            <div class="profile-heading">
+
+
+              <div
+                id="customerInitials"
+                class="customer-avatar"
+              >
+                —
+              </div>
+
+
+              <div>
+
+                <h2 id="detailCustomerName">
+                  Customer
+                </h2>
+
+                <p id="detailCustomerEmail">
+                  —
+                </p>
+
+              </div>
+
+
+            </div>
+
+
+            <div class="profile-fields">
+
+
+              <div>
+
+                <span>
+                  Phone
+                </span>
+
+                <strong id="detailPhone">
+                  —
+                </strong>
+
+              </div>
+
+
+              <div>
+
+                <span>
+                  Company
+                </span>
+
+                <strong id="detailCompany">
+                  —
+                </strong>
+
+              </div>
+
+
+              <div>
+
+                <span>
+                  Address
+                </span>
+
+                <strong id="detailAddress">
+                  —
+                </strong>
+
+              </div>
+
+
+              <div>
+
+                <span>
+                  Account Status
+                </span>
+
+                <strong id="detailStatus">
+                  —
+                </strong>
+
+              </div>
+
+
+              <div>
+
+                <span>
+                  Customer Since
+                </span>
+
+                <strong id="detailCreated">
+                  —
+                </strong>
+
+              </div>
+
+
+            </div>
+
+          </section>
+
+
+          <!-- ACCOUNT SUMMARY -->
+
+          <section class="panel">
+
+            <p class="eyebrow">
+              ACCOUNT SUMMARY
+            </p>
+
+
+            <div class="customer-summary-grid">
+
+
+              <div>
+
+                <span>
+                  Orders
+                </span>
+
+                <strong id="detailOrderCount">
+                  0
+                </strong>
+
+              </div>
+
+
+              <div>
+
+                <span>
+                  Training Courses
+                </span>
+
+                <strong id="detailTrainingCount">
+                  0
+                </strong>
+
+              </div>
+
+
+              <div>
+
+                <span>
+                  Completed
+                </span>
+
+                <strong id="detailCompletedCount">
+                  0
+                </strong>
+
+              </div>
+
+
+              <div>
+
+                <span>
+                  Total Spent
+                </span>
+
+                <strong id="detailTotalSpent">
+                  $0.00
+                </strong>
+
+              </div>
+
+
+            </div>
+
+          </section>
+
+
+        </div>
+
+
+        <!-- =================================================
+             ORDER HISTORY
+        ================================================== -->
+
+        <section class="panel detail-panel">
+
+
+          <div class="panel-heading">
+
+            <div>
+
+              <p class="eyebrow">
+                ORDER HISTORY
+              </p>
+
+              <h2>
+                Customer Orders
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="customerOrdersTable"
+            class="table-wrap"
+          >
+
+            <div class="empty-state">
+              Loading orders...
+            </div>
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             TRAINING ACCESS
+        ================================================== -->
+
+        <section class="panel detail-panel">
+
+
+          <div class="panel-heading">
+
+            <div>
+
+              <p class="eyebrow">
+                TRAINING ACCESS
+              </p>
+
+              <h2>
+                Training Enrollments
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="customerTrainingTable"
+            class="table-wrap"
+          >
+
+            <div class="empty-state">
+              Loading training...
+            </div>
+
+          </div>
+
+
+        </section>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           TOAST
+      ==================================================== -->
+
+      <div
+        id="customerToast"
+        class="admin-toast"
+        role="status"
+      ></div>
+
+
+    </main>
+
+
+  </div>
+
+
+  <!-- =======================================================
+       ADMIN CONFIG
+  ======================================================== -->
+
+  <script src="assets/js/admin-config.js"></script>
+
+
+  <!-- =======================================================
+       SHARED ADMIN NAVIGATION
+  ======================================================== -->
+
+  <script src="assets/js/admin-navigation.js"></script>
+
+
+  <!-- =======================================================
+       CUSTOMER PAGE CONTROLLER
+  ======================================================== -->
+
+  <script src="assets/js/admin-customers.js"></script>
+
+
+</body>
+
+</html>

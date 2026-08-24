@@ -1,0 +1,54 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Certificates | screenings4u</title>
+      <link rel="stylesheet" href="assets/css/client.css">
+      <link rel="stylesheet" href="assets/css/client-navigation.css">
+      <link rel="stylesheet" href="assets/css/client-certificates.css">
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    </head>
+    <body class="client-page">
+    <div class="client-app">
+      <nav id="clientNavigation" aria-label="Client navigation"></nav>
+
+      <main class="client-main">
+        <header class="client-header">
+          <div>
+            <p class="eyebrow">TRAINING RECORDS</p>
+            <h1>My Certificates</h1>
+            <p>View your completed training certificates.</p>
+          </div>
+
+          <div
+            id="clientIdentity"
+            class="client-identity"
+          ></div>
+        </header>
+
+        <section class="client-panel">
+          <div class="client-panel-heading">
+            <div>
+              <p class="eyebrow">CERTIFICATES</p>
+              <h2>Completed Training</h2>
+            </div>
+          </div>
+
+          <div
+            id="certificateList"
+            class="certificate-list"
+          >
+            <div class="client-empty-state">
+              Loading certificates...
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="assets/js/client-config.js"></script>
+    <script src="assets/js/client-navigation.js"></script>
+    <script src="assets/js/client-certificates.js"></script>
+    </body>
+    </html>

@@ -1,0 +1,261 @@
+/* =========================================================
+   screenings4u ADMIN ACCOUNTS
+   Shared-navigation integration overrides
+   Brand: #325aa3 / #ff6b00
+   ========================================================= */
+
+:root {
+  --accounts-blue: #325aa3;
+  --accounts-orange: #ff6b00;
+}
+
+/*
+ * The redesigned shared navigation owns the sidebar width.
+ * Prevent older subpage CSS from creating a second 250px layout.
+ */
+.admin-accounts-page .admin-app.admin-app-shared-nav {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.admin-accounts-page .admin-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: auto;
+}
+
+/*
+ * Older admin-subpages.css may contain navigation rules using
+ * .admin-nav-item. The shared navigation CSS is loaded before
+ * this file, so these rules intentionally do not style navigation.
+ *
+ * Keep account-page controls visually distinct from navigation.
+ */
+.admin-accounts-page .admin-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-accounts-page .account-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-accounts-page .account-toolbar .search-input {
+  width: min(100%, 320px);
+}
+
+.admin-accounts-page .account-toolbar select.search-input {
+  width: 190px;
+}
+
+.admin-accounts-page .secondary-button {
+  border: 1px solid rgba(50, 90, 163, 0.16);
+  color: var(--accounts-blue);
+  background: rgba(50, 90, 163, 0.08);
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.admin-accounts-page .secondary-button:hover {
+  background: rgba(50, 90, 163, 0.14);
+  border-color: rgba(50, 90, 163, 0.28);
+  color: #284d8e;
+}
+
+.admin-accounts-page .secondary-button:focus-visible {
+  outline: 3px solid rgba(50, 90, 163, 0.18);
+  outline-offset: 2px;
+}
+
+.admin-accounts-page .admin-header .eyebrow,
+.admin-accounts-page .toolbar .eyebrow,
+.admin-accounts-page .panel-heading .eyebrow {
+  color: var(--accounts-orange);
+}
+
+.admin-accounts-page .metric-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-accounts-page .metric-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accounts-blue);
+}
+
+.admin-accounts-page .metric-card:nth-child(3)::before,
+.admin-accounts-page .metric-card:nth-child(4)::before {
+  background: var(--accounts-orange);
+}
+
+.admin-accounts-page .metric-card strong {
+  color: var(--accounts-blue);
+}
+
+.admin-accounts-page .table-wrap {
+  min-width: 0;
+}
+
+.admin-accounts-page .admin-table {
+  min-width: 760px;
+}
+
+.admin-accounts-page .status-badge.status-pending,
+.admin-accounts-page .status-badge.status-processing {
+  background: rgba(255, 107, 0, 0.10);
+  color: #b84f00;
+}
+
+.admin-accounts-page .status-badge.status-active,
+.admin-accounts-page .status-badge.status-accepted,
+.admin-accounts-page .status-badge.status-enabled {
+  background: rgba(23, 131, 75, 0.10);
+  color: #17834b;
+}
+
+.admin-accounts-page .status-badge.status-inactive,
+.admin-accounts-page .status-badge.status-disabled,
+.admin-accounts-page .status-badge.status-failed {
+  background: rgba(200, 58, 58, 0.10);
+  color: #c83a3a;
+}
+
+/* Account detail profile */
+.admin-accounts-page .customer-profile-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  gap: 18px;
+}
+
+.admin-accounts-page .profile-card {
+  min-width: 0;
+}
+
+.admin-accounts-page .profile-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-accounts-page .customer-avatar {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
+  border-radius: 50%;
+  background: rgba(50, 90, 163, 0.10);
+  color: var(--accounts-blue);
+  font-weight: 800;
+}
+
+.admin-accounts-page .profile-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.admin-accounts-page .profile-fields > div {
+  min-width: 0;
+}
+
+.admin-accounts-page .profile-fields span {
+  display: block;
+  margin-bottom: 5px;
+  color: #687386;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-accounts-page .profile-fields strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+/* Administrative action area */
+.admin-accounts-page .certificate-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-accounts-page #deactivateAccountButton {
+  color: #c83a3a;
+  background: rgba(200, 58, 58, 0.08);
+  border-color: rgba(200, 58, 58, 0.16);
+}
+
+.admin-accounts-page #deactivateAccountButton:hover {
+  background: rgba(200, 58, 58, 0.14);
+}
+
+/* Toast */
+.admin-accounts-page .admin-toast {
+  z-index: 3000;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 1050px) {
+  .admin-accounts-page .admin-app.admin-app-shared-nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .admin-accounts-page .admin-main {
+    width: 100%;
+  }
+
+  .admin-accounts-page .customer-profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .admin-accounts-page .admin-header-actions {
+    justify-content: flex-start;
+  }
+
+  .admin-accounts-page .account-toolbar {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .admin-accounts-page .account-toolbar .search-input,
+  .admin-accounts-page .account-toolbar select.search-input {
+    width: 100%;
+  }
+
+  .admin-accounts-page .profile-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-accounts-page .certificate-actions {
+    flex-direction: column;
+  }
+
+  .admin-accounts-page .certificate-actions .secondary-button {
+    width: 100%;
+  }
+}

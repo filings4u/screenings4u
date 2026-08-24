@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Player | screenings4u</title>
+  <link rel="stylesheet" href="assets/css/lms-course-player.css">
+  <script src="assets/js/lms-course-player.js"></script>
+<link rel="stylesheet" href="assets/css/screenings4u-course-player-polish.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Cloudflare Stream Player SDK is loaded on demand by lms-course-player.js. -->
+</head>
+<body class="lms-player-page">
+
+  <header class="lms-player-header">
+    <div class="lms-player-brand">screenings4u</div>
+
+    <div class="lms-player-course">
+      <span id="courseTitle">Course</span>
+      <span id="courseProgress">0% complete</span>
+    </div>
+
+    <button id="exitCourseButton" class="player-button secondary" type="button">
+      Exit Course
+    </button>
+  </header>
+
+  <div class="lms-player-shell">
+
+    <aside class="lms-player-sidebar" id="courseSidebar">
+      <div class="sidebar-heading">
+        <span class="eyebrow">COURSE CONTENT</span>
+        <strong id="sidebarCourseTitle">Course</strong>
+      </div>
+
+      <div id="courseOutline" class="course-outline">
+        <div class="player-loading">Loading course...</div>
+      </div>
+    </aside>
+
+    <main class="lms-player-main">
+
+      <div id="playerLoading" class="player-state">
+        Loading your course...
+      </div>
+
+      <section id="lessonView" class="lesson-view" hidden>
+
+        <div class="lesson-header">
+          <div>
+            <p id="lessonSectionName" class="eyebrow">SECTION</p>
+            <h1 id="lessonTitle">Lesson</h1>
+            <p id="lessonDescription"></p>
+          </div>
+
+          <div id="lessonRequiredBadge" class="lesson-badge">
+            Required
+          </div>
+        </div>
+
+        <div id="lessonContent" class="lesson-content"></div>
+
+        <section id="assessmentPanel" class="student-assessment-panel" hidden>
+          <div>
+            <p class="eyebrow">ASSESSMENT</p>
+            <h2 id="assessmentTitle">Assessment</h2>
+            <p id="assessmentDescription"></p>
+          </div>
+
+          <div class="assessment-summary">
+            <div><span>Questions</span><strong id="assessmentQuestionCount">0</strong></div>
+            <div><span>Passing Score</span><strong id="assessmentPassingScore">80%</strong></div>
+            <div><span>Attempts</span><strong id="assessmentAttempts">Unlimited</strong></div>
+          </div>
+
+          <button id="startAssessmentButton" class="player-button primary" type="button">
+            Start Assessment
+          </button>
+        </section>
+
+        <div class="lesson-navigation">
+          <button id="previousLessonButton" class="player-button secondary" type="button">
+            ← Previous
+          </button>
+
+          <div id="lessonCompletionStatus" class="completion-status">
+            Lesson not completed
+          </div>
+
+          <button id="nextLessonButton" class="player-button primary" type="button">
+            Next →
+          </button>
+        </div>
+
+      </section>
+
+      <section id="courseCompleteView" class="course-complete" hidden>
+        <div class="complete-icon">✓</div>
+        <p class="eyebrow">COURSE COMPLETE</p>
+        <h1 id="completeCourseTitle">Congratulations</h1>
+        <p>
+          You have completed all required course content.
+        </p>
+        <button id="certificateButton" class="player-button primary" type="button" hidden>
+          View Certificate
+        </button>
+      </section>
+
+    </main>
+  </div>
+
+  <div id="assessmentPlayerModal" class="player-modal" aria-hidden="true">
+    <div class="player-modal-backdrop" data-close-assessment></div>
+
+    <div class="player-modal-card">
+      <header class="player-modal-header">
+        <div>
+          <p class="eyebrow">ASSESSMENT</p>
+          <h2 id="assessmentPlayerTitle">Assessment</h2>
+        </div>
+        <button id="closeAssessmentButton" class="modal-close" type="button">×</button>
+      </header>
+
+      <div id="assessmentPlayerBody" class="player-modal-body"></div>
+
+      <footer id="assessmentPlayerFooter" class="player-modal-footer"></footer>
+    </div>
+  </div>
+
+  <div id="playerToast" class="player-toast" role="status"></div>
+
+  <script src="assets/js/lms-config.js"></script>
+<script src="assets/js/lms-course-player.js"></script>
+<script src="assets/js/screenings4u-course-player-polish.js"></script>
+</body>
+</html>

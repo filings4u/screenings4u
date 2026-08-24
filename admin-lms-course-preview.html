@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Preview | screenings4u Admin</title>
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/admin-navigation.css">
+  <link rel="stylesheet" href="assets/css/admin-lms-course-preview.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="admin-page">
+  <div class="admin-app">
+    <nav id="adminNavigation" aria-label="Admin navigation"></nav>
+
+    <main class="admin-main lms-course-preview-page">
+      <header class="course-preview-header">
+        <div>
+          <button id="backToManager" class="back-link" type="button">← Course Manager</button>
+          <p class="eyebrow">COURSE PREVIEW</p>
+          <h1 id="courseTitle">Course</h1>
+          <p id="courseDescription">Preview the complete student-facing course structure.</p>
+        </div>
+        <div class="preview-actions">
+          <button id="previewLessonBuilderBtn" class="secondary-button" type="button" disabled>Open Lesson Builder</button>
+          <button id="editCourseBtn" class="primary-button" type="button">Edit Course</button>
+        </div>
+      </header>
+
+      <section class="course-hero">
+        <div class="course-hero-copy">
+          <span id="courseStatus" class="preview-status">DRAFT</span>
+          <h2 id="courseHeroTitle">Course</h2>
+          <p id="courseShortDescription">Course description</p>
+
+          <div class="course-stats">
+            <span><strong id="statSections">0</strong> Sections</span>
+            <span><strong id="statLessons">0</strong> Lessons</span>
+            <span><strong id="statPassing">80%</strong> Passing Score</span>
+            <span><strong id="statVideo">90%</strong> Video Completion</span>
+          </div>
+        </div>
+
+        <div class="course-hero-mark">
+          <span>SCREENINGS4U</span>
+          <strong>LMS</strong>
+        </div>
+      </section>
+
+      <div class="course-preview-layout">
+        <aside class="course-outline">
+          <div class="outline-header">
+            <h2>Course Contents</h2>
+            <span id="outlineCount">0 lessons</span>
+          </div>
+          <div id="outlineList" class="outline-list"></div>
+        </aside>
+
+        <section class="student-preview">
+          <div class="student-preview-card">
+            <div class="student-preview-heading">
+              <span class="eyebrow">STUDENT VIEW</span>
+              <h2 id="selectedLessonTitle">Course Overview</h2>
+              <p id="selectedLessonDescription">Select a lesson from the course outline to preview it.</p>
+            </div>
+
+            <div id="lessonPreviewContent" class="lesson-preview-content">
+              <div class="preview-welcome">
+                <div class="welcome-icon">LMS</div>
+                <h3>Welcome to this course</h3>
+                <p>Select a lesson on the left to inspect its student-facing content.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div id="coursePreviewToast" class="admin-toast" role="status"></div>
+
+  <script src="assets/js/admin-config.js"></script>
+  <script src="assets/js/admin-navigation.js"></script>
+  <script src="assets/js/admin-lms-course-preview.js"></script>
+</body>
+</html>

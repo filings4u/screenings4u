@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LMS Course Builder | screenings4u Admin</title>
+<link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/admin-navigation.css">
+  <link rel="stylesheet" href="assets/css/admin-lms-course-builder.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body class="admin-page">
+<div class="admin-app">
+
+  <nav id="adminNavigation" aria-label="Admin navigation"></nav>
+
+  <main class="admin-main training-course-page">
+
+    <header class="training-course-header">
+      <div class="training-course-header-content">
+        <p class="training-course-eyebrow">LEARNING MANAGEMENT SYSTEM</p>
+        <h1 id="pageTitle">New Course</h1>
+        <p>Build the course, curriculum, lessons, content and assessments from one workspace.</p>
+      </div>
+
+      <div class="training-course-header-actions">
+        <button id="previewCourseButton" class="secondary-button" type="button">
+          Preview
+        </button>
+
+        <button id="saveAllButton" class="primary-button" type="button">
+          Save Changes
+        </button>
+
+        <a class="back-link" href="admin-dashboard.html">
+          ← Admin Dashboard
+        </a>
+      </div>
+    </header>
+
+    <div class="training-course-layout">
+
+      <aside class="training-course-sidebar">
+
+        <div class="training-course-sidebar-title">
+          <span class="training-course-eyebrow">COURSE BUILDER</span>
+          <strong id="sidebarCourseTitle">New Course</strong>
+        </div>
+
+        <button class="training-course-nav-item active" data-builder-tab="details" type="button">
+          Course Details
+        </button>
+
+        <button class="training-course-nav-item" data-builder-tab="curriculum" type="button">
+          Curriculum
+        </button>
+
+        <button class="training-course-nav-item" data-builder-tab="settings" type="button">
+          Settings
+        </button>
+
+        <button class="training-course-nav-item" data-builder-tab="publish" type="button">
+          Publish
+        </button>
+
+      </aside>
+
+      <section class="training-course-content">
+
+        <section id="builderTabDetails" class="training-course-tab active">
+
+          <div class="training-course-panel">
+
+            <div class="training-course-panel-heading">
+              <div>
+                <p class="training-course-eyebrow">COURSE INFORMATION</p>
+                <h2>Course Details</h2>
+              </div>
+
+              <span
+                id="courseStatusBadge"
+                class="training-course-status training-course-status-draft"
+              >Draft</span>
+            </div>
+
+            <div class="training-course-form-grid">
+
+              <div class="training-course-field training-course-field-wide">
+                <label for="courseTitle">Course Title</label>
+                <input
+                  id="courseTitle"
+                  type="text"
+                  maxlength="200"
+                  placeholder="DOT Specimen Collector Training"
+                >
+              </div>
+
+              <div class="training-course-field">
+                <label for="courseSlug">Course Slug</label>
+                <input
+                  id="courseSlug"
+                  type="text"
+                  maxlength="200"
+                  placeholder="dot-specimen-collector-training"
+                >
+                <small>Used as the public course identifier.</small>
+              </div>
+
+              <div class="training-course-field training-course-field-wide">
+                <label for="courseShortDescription">Short Description</label>
+                <textarea
+                  id="courseShortDescription"
+                  rows="3"
+                  maxlength="500"
+                ></textarea>
+              </div>
+
+              <div class="training-course-field training-course-field-wide">
+                <label for="courseDescription">Course Description</label>
+                <textarea id="courseDescription" rows="9"></textarea>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+        <section id="builderTabCurriculum" class="training-course-tab">
+
+          <div class="training-course-panel">
+
+            <div class="training-course-panel-heading">
+              <div>
+                <p class="training-course-eyebrow">CURRICULUM</p>
+                <h2>Sections &amp; Lessons</h2>
+                <p class="training-course-panel-help">
+                  Build the course in the order students will experience it.
+                </p>
+              </div>
+
+              <button
+                id="addSectionButton"
+                class="secondary-button"
+                type="button"
+              >+ Add Section</button>
+            </div>
+
+            <div
+              id="curriculumList"
+              class="training-course-curriculum-list"
+            >
+              <div class="empty-state">
+                Save the course first, then add your first section.
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+        <section id="builderTabSettings" class="training-course-tab">
+
+          <div class="training-course-panel">
+
+            <div class="training-course-panel-heading">
+              <div>
+                <p class="training-course-eyebrow">COURSE RULES</p>
+                <h2>Settings</h2>
+              </div>
+            </div>
+
+            <div class="training-course-form-grid">
+
+              <div class="training-course-field">
+                <label for="passingScore">Default Passing Score (%)</label>
+                <input
+                  id="passingScore"
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="0.01"
+                  value="80"
+                >
+              </div>
+
+              <div class="training-course-field">
+                <label for="navigationMode">Lesson Navigation</label>
+                <select id="navigationMode">
+                  <option value="free">Free Navigation</option>
+                  <option value="sequential">
+                    Sequential — complete previous lesson first
+                  </option>
+                </select>
+              </div>
+
+              <div class="training-course-field">
+                <label for="videoCompletionPercent">Video Completion (%)</label>
+                <input
+                  id="videoCompletionPercent"
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value="90"
+                >
+              </div>
+
+              <div class="training-course-field">
+                <label class="training-course-check-row">
+                  <input id="certificateEnabled" type="checkbox" checked>
+                  Certificate enabled
+                </label>
+              </div>
+
+              <div class="training-course-field">
+                <label class="training-course-check-row">
+                  <input id="requireAllLessons" type="checkbox" checked>
+                  Require all required lessons
+                </label>
+              </div>
+
+              <div class="training-course-field">
+                <label class="training-course-check-row">
+                  <input id="requireAssessments" type="checkbox" checked>
+                  Require required assessments
+                </label>
+              </div>
+
+              <div class="training-course-field">
+                <label class="training-course-check-row">
+                  <input id="allowDownloads" type="checkbox" checked>
+                  Allow student downloads
+                </label>
+              </div>
+
+              <div class="training-course-field">
+                <label class="training-course-check-row">
+                  <input id="previewEnabled" type="checkbox" checked>
+                  Allow course preview
+                </label>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+        <section id="builderTabPublish" class="training-course-tab">
+
+          <div class="training-course-panel training-course-publish-panel">
+
+            <p class="training-course-eyebrow">RELEASE</p>
+            <h2>Publish Course</h2>
+
+            <p id="publishSummary">
+              Complete the course details and curriculum before publishing.
+            </p>
+
+            <div
+              id="publishChecklist"
+              class="training-course-publish-checklist"
+            ></div>
+
+            <div class="training-course-action-row">
+
+              <button
+                id="saveDraftButton"
+                class="secondary-button"
+                type="button"
+              >Save as Draft</button>
+
+              <button
+                id="publishButton"
+                class="primary-button"
+                type="button"
+              >Publish Course</button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </section>
+    </div>
+
+  </main>
+</div>
+
+<div
+  id="lmsModal"
+  class="training-course-modal"
+  aria-hidden="true"
+>
+  <div
+    class="training-course-modal-backdrop"
+    data-modal-close
+  ></div>
+
+  <div
+    class="training-course-modal-card"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="lmsModalTitle"
+  >
+    <div class="training-course-modal-header">
+      <div>
+        <p id="lmsModalEyebrow" class="training-course-eyebrow">LMS</p>
+        <h2 id="lmsModalTitle">Confirm</h2>
+      </div>
+
+      <button
+        id="lmsModalClose"
+        class="training-course-modal-close"
+        type="button"
+        aria-label="Close"
+      >×</button>
+    </div>
+
+    <div id="lmsModalBody" class="training-course-modal-body"></div>
+    <div id="lmsModalActions" class="training-course-modal-actions"></div>
+  </div>
+</div>
+
+<div id="lmsToast" class="admin-toast" role="status"></div>
+
+<script src="assets/js/admin-config.js"></script>
+<script src="assets/js/admin-navigation.js"></script>
+<script src="assets/js/admin-lms-course-builder.js"></script>
+
+</body>
+</html>

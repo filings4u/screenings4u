@@ -1,0 +1,48 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Order Details | screenings4u</title>
+      <link rel="stylesheet" href="assets/css/client.css">
+      <link rel="stylesheet" href="assets/css/client-navigation.css">
+      <link rel="stylesheet" href="assets/css/client-order-detail.css">
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    </head>
+    <body class="client-page">
+    <div class="client-app">
+      <nav id="clientNavigation" aria-label="Client navigation"></nav>
+      <main class="client-main">
+        <header class="client-header">
+          <div>
+            <p class="eyebrow">ORDER DETAILS</p>
+            <h1 id="orderTitle">Order</h1>
+            <p id="orderDate">Loading order...</p>
+          </div>
+          <a class="client-secondary-button" href="client-orders.html">← My Orders</a>
+        </header>
+
+        <section class="client-panel">
+          <div class="client-panel-heading">
+            <div><p class="eyebrow">ORDER STATUS</p><h2>Order Summary</h2></div>
+          </div>
+          <div id="orderSummary" class="order-detail-summary">
+            <div class="client-empty-state">Loading order...</div>
+          </div>
+        </section>
+
+        <section class="client-panel">
+          <div class="client-panel-heading">
+            <div><p class="eyebrow">PURCHASED ITEMS</p><h2>Order Items</h2></div>
+          </div>
+          <div id="orderItems" class="client-table-wrap">
+            <div class="client-empty-state">Loading items...</div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="assets/js/client-config.js"></script>
+    <script src="assets/js/client-navigation.js"></script>
+    <script src="assets/js/client-order-detail.js"></script>
+    </body>
+    </html>

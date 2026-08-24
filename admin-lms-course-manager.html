@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Manager | screenings4u Admin</title>
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/admin-navigation.css">
+  <link rel="stylesheet" href="assets/css/admin-lms-course-manager.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="admin-page">
+  <div class="admin-app">
+    <nav id="adminNavigation" aria-label="Admin navigation"></nav>
+
+    <main class="admin-main lms-course-manager-page">
+      <header class="course-manager-header">
+        <div>
+          <button id="backToCourses" class="back-link" type="button">← All Courses</button>
+          <p class="eyebrow">LMS COURSE MANAGER</p>
+          <h1 id="courseTitle">Course</h1>
+          <p id="courseSubtitle">Build and manage your course curriculum.</p>
+        </div>
+        <div class="course-manager-actions">
+          <button id="previewCourseBtn" class="secondary-button" type="button">Preview</button>
+          <button id="courseSettingsBtn" class="secondary-button" type="button">Course Settings</button>
+          <button id="publishCourseBtn" class="primary-button" type="button">Publish</button>
+        </div>
+      </header>
+
+      <section class="course-summary-grid">
+        <article><span>Status</span><strong id="summaryStatus">Draft</strong></article>
+        <article><span>Sections</span><strong id="summarySections">0</strong></article>
+        <article><span>Lessons</span><strong id="summaryLessons">0</strong></article>
+        <article><span>Passing Score</span><strong id="summaryPassing">80%</strong></article>
+      </section>
+
+      <section class="course-manager-layout">
+        <div class="curriculum-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Course Curriculum</h2>
+              <p>Drag sections and lessons into the order students will see them.</p>
+              <div class="reorder-hint">☷ Drag to reorder · changes save automatically</div>
+            </div>
+            <button id="addSectionBtn" class="primary-button" type="button">+ Add Section</button>
+          </div>
+
+          <div id="curriculumList" class="curriculum-list"></div>
+
+          <div id="curriculumEmpty" class="curriculum-empty" hidden>
+            <h3>No sections yet</h3>
+            <p>Add your first section to begin building the course.</p>
+            <button id="emptyAddSectionBtn" class="primary-button" type="button">+ Add First Section</button>
+          </div>
+        </div>
+
+        <aside class="course-sidebar">
+          <div class="sidebar-card">
+            <h3>Course Settings</h3>
+            <div class="sidebar-stat"><span>Navigation</span><strong id="sideNavigation">Free</strong></div>
+            <div class="sidebar-stat"><span>Video completion</span><strong id="sideVideoCompletion">90%</strong></div>
+            <div class="sidebar-stat"><span>Certificate</span><strong id="sideCertificate">Enabled</strong></div>
+            <div class="sidebar-stat"><span>Downloads</span><strong id="sideDownloads">Allowed</strong></div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3>Course Checklist</h3>
+            <ul id="courseChecklist" class="course-checklist"></ul>
+          </div>
+        </aside>
+      </section>
+    
+      <section class="course-enrollment-panel">
+        <div class="panel-heading-row">
+          <div>
+            <p class="eyebrow">STUDENT ACCESS</p>
+            <h2>Course Enrollment</h2>
+            <p>Manage students enrolled in this course.</p>
+          </div>
+          <button id="openEnrollStudentBtn" class="primary-button" type="button">
+            + Enroll Student
+          </button>
+        </div>
+
+        <div class="enrollment-metrics">
+          <div class="enrollment-metric">
+            <span id="enrollmentTotal">0</span>
+            <small>Total Enrolled</small>
+          </div>
+          <div class="enrollment-metric">
+            <span id="enrollmentActive">0</span>
+            <small>Active</small>
+          </div>
+          <div class="enrollment-metric">
+            <span id="enrollmentCompleted">0</span>
+            <small>Completed</small>
+          </div>
+        </div>
+
+        <div class="enrollment-toolbar">
+          <input id="enrollmentSearch" type="search" placeholder="Search student name or email…">
+          <select id="enrollmentStatusFilter">
+            <option value="all">All statuses</option>
+            <option value="active">Active</option>
+            <option value="completed">Completed</option>
+            <option value="suspended">Suspended</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+
+        <div id="enrollmentTable" class="enrollment-table">
+          <div class="enrollment-empty">Loading enrollments…</div>
+        </div>
+      </section>
+
+</main>
+  </div>
+
+  <div id="managerToast" class="admin-toast" role="status"></div>
+
+
+
+  <div id="enrollStudentModal" class="lms-modal" hidden>
+    <div class="lms-modal-card compact">
+      <div class="lms-modal-header">
+        <div>
+          <p class="eyebrow">STUDENT ACCESS</p>
+          <h2>Enroll Student</h2>
+        </div>
+        <button class="modal-close" data-close-modal="enrollStudentModal" type="button">×</button>
+      </div>
+
+      <form id="enrollStudentForm">
+        <label>Find Student
+          <input id="enrollStudentSearch" type="search" autocomplete="off"
+                 placeholder="Search name or email…">
+        </label>
+
+        <div id="enrollStudentResults" class="student-picker-results">
+          <div class="enrollment-empty">Start typing to find a student.</div>
+        </div>
+
+        <input id="selectedStudentId" type="hidden">
+
+        <div id="selectedStudentPreview" class="selected-student-preview" hidden></div>
+
+        <div class="modal-actions">
+          <button class="secondary-button" data-close-modal="enrollStudentModal" type="button">Cancel</button>
+          <button id="confirmEnrollBtn" class="primary-button" type="submit" disabled>
+            Enroll Student
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="moveLessonModal" class="lms-modal" hidden>
+    <div class="lms-modal-card compact">
+      <div class="lms-modal-header">
+        <div>
+          <p class="eyebrow">CURRICULUM</p>
+          <h2>Move Lesson</h2>
+        </div>
+        <button class="modal-close" data-close-modal="moveLessonModal" type="button">×</button>
+      </div>
+
+      <form id="moveLessonForm">
+        <input id="moveLessonIdInput" type="hidden">
+        <p id="moveLessonName" class="move-lesson-name"></p>
+
+        <label>Move to Section
+          <select id="moveLessonTargetSectionInput" required></select>
+        </label>
+
+        <p class="move-lesson-note">
+          The lesson will be appended to the selected section. You can then drag
+          it into the exact position you want.
+        </p>
+
+        <div class="modal-actions">
+          <button class="secondary-button" data-close-modal="moveLessonModal" type="button">Cancel</button>
+          <button class="primary-button" type="submit">Move Lesson</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <div id="publishModal" class="lms-modal" hidden>
+    <div class="lms-modal-card publish-modal-card">
+      <div class="lms-modal-header">
+        <div>
+          <p class="eyebrow">PUBLISHING WORKFLOW</p>
+          <h2 id="publishModalTitle">Publish Course</h2>
+        </div>
+        <button class="modal-close" data-close-modal="publishModal" type="button">×</button>
+      </div>
+
+      <div id="publishSummary" class="publish-summary"></div>
+
+      <div id="publishChecks" class="publish-checks"></div>
+
+      <div id="publishBlockers" class="publish-blockers" hidden>
+        <h3>Publishing blockers</h3>
+        <ul id="publishBlockerList"></ul>
+      </div>
+
+      <div class="modal-actions">
+        <button class="secondary-button" data-close-modal="publishModal" type="button">Cancel</button>
+        <button id="confirmPublishBtn" class="primary-button" type="button">Publish Course</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="courseSettingsModal" class="lms-modal" hidden>
+    <div class="lms-modal-card">
+      <div class="lms-modal-header">
+        <div>
+          <p class="eyebrow">COURSE SETTINGS</p>
+          <h2>Edit Course</h2>
+        </div>
+        <button class="modal-close" data-close-modal="courseSettingsModal" type="button">×</button>
+      </div>
+
+      <form id="courseSettingsForm">
+        <div class="form-grid">
+          <label>Course Title
+            <input id="courseTitleInput" required maxlength="200">
+          </label>
+          <label>Course Slug
+            <input id="courseSlugInput" required maxlength="200">
+          </label>
+        </div>
+
+        <label>Short Description
+          <textarea id="courseShortDescriptionInput" rows="2"></textarea>
+        </label>
+
+        <label>Description
+          <textarea id="courseDescriptionInput" rows="5"></textarea>
+        </label>
+
+        <div class="form-grid">
+          <label>Status
+            <select id="courseStatusInput">
+              <option value="draft">Draft</option>
+              <option value="published">Published</option>
+              <option value="archived">Archived</option>
+            </select>
+          </label>
+
+          <label>Navigation
+            <select id="courseNavigationInput">
+              <option value="free">Free</option>
+              <option value="sequential">Sequential</option>
+            </select>
+          </label>
+
+          <label>Passing Score (%)
+            <input id="coursePassingInput" type="number" min="0" max="100" step="0.01">
+          </label>
+
+          <label>Video Completion (%)
+            <input id="courseVideoCompletionInput" type="number" min="0" max="100" step="0.01">
+          </label>
+        </div>
+
+        <div class="settings-checks">
+          <label><input id="certificateEnabledInput" type="checkbox"> Certificate enabled</label>
+          <label><input id="downloadsEnabledInput" type="checkbox"> Allow student downloads</label>
+          <label><input id="previewEnabledInput" type="checkbox"> Allow course preview</label>
+          <label><input id="requiredLessonsInput" type="checkbox"> Require all required lessons</label>
+          <label><input id="requiredAssessmentsInput" type="checkbox"> Require required assessments</label>
+        </div>
+
+        <div class="modal-actions">
+          <button class="secondary-button" data-close-modal="courseSettingsModal" type="button">Cancel</button>
+          <button class="primary-button" type="submit">Save Course</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="sectionModal" class="lms-modal" hidden>
+    <div class="lms-modal-card compact">
+      <div class="lms-modal-header">
+        <div>
+          <p class="eyebrow">CURRICULUM</p>
+          <h2 id="sectionModalTitle">Add Section</h2>
+        </div>
+        <button class="modal-close" data-close-modal="sectionModal" type="button">×</button>
+      </div>
+      <form id="sectionForm">
+        <input id="sectionIdInput" type="hidden">
+        <label>Section Title
+          <input id="sectionTitleInput" required maxlength="200" placeholder="e.g. Specimen Collection">
+        </label>
+        <label>Description
+          <textarea id="sectionDescriptionInput" rows="3" placeholder="Optional section description"></textarea>
+        </label>
+        <div class="modal-actions">
+          <button class="secondary-button" data-close-modal="sectionModal" type="button">Cancel</button>
+          <button class="primary-button" type="submit">Save Section</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="lessonModal" class="lms-modal" hidden>
+    <div class="lms-modal-card compact">
+      <div class="lms-modal-header">
+        <div>
+          <p class="eyebrow">CURRICULUM</p>
+          <h2 id="lessonModalTitle">Add Lesson</h2>
+        </div>
+        <button class="modal-close" data-close-modal="lessonModal" type="button">×</button>
+      </div>
+      <form id="lessonForm">
+        <input id="lessonIdInput" type="hidden">
+        <input id="lessonSectionIdInput" type="hidden">
+        <label>Lesson Title
+          <input id="lessonTitleInput" required maxlength="200" placeholder="e.g. Urine Specimen Collection">
+        </label>
+        <label>Description
+          <textarea id="lessonDescriptionInput" rows="3"></textarea>
+        </label>
+        <div class="form-grid">
+          <label>Status
+            <select id="lessonStatusInput">
+              <option value="draft">Draft</option>
+              <option value="published">Published</option>
+            </select>
+          </label>
+          <label>Estimated Minutes
+            <input id="lessonMinutesInput" type="number" min="0" step="1">
+          </label>
+        </div>
+        <div class="settings-checks">
+          <label><input id="lessonRequiredInput" type="checkbox"> Required lesson</label>
+          <label><input id="lessonCompletionInput" type="checkbox"> Completion required</label>
+          <label><input id="lessonLockInput" type="checkbox"> Lock until previous lesson complete</label>
+        </div>
+        <div class="modal-actions">
+          <button class="secondary-button" data-close-modal="lessonModal" type="button">Cancel</button>
+          <button class="primary-button" type="submit">Save Lesson</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/admin-config.js"></script>
+  <script src="assets/js/admin-navigation.js"></script>
+  <script src="assets/js/admin-lms-course-manager.js"></script>
+</body>
+</html>

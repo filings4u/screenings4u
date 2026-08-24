@@ -1,0 +1,919 @@
+/* =========================================================
+   screenings4u — LMS Lesson Builder
+   Fixed to match admin-lms-lesson-builder.html
+   ========================================================= */
+
+.training-lesson-page {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.training-lesson-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.training-lesson-header-content {
+  min-width: 0;
+}
+
+.training-lesson-eyebrow {
+  margin: 0 0 5px;
+  color: #325aa3;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.training-lesson-header h1,
+.training-lesson-panel h2,
+.training-lesson-sidebar-panel h3 {
+  margin: 0;
+  color: #172033;
+}
+
+.training-lesson-header h1 {
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 800;
+}
+
+.training-lesson-header-content > p:not(.training-lesson-eyebrow) {
+  margin: 8px 0 0;
+  color: #687386;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.training-lesson-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+/* Keep all lesson-builder buttons consistent. */
+.training-lesson-page .primary-button,
+.training-lesson-page .secondary-button,
+.training-lesson-modal .primary-button,
+.training-lesson-modal .secondary-button {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 40px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.training-lesson-page .primary-button,
+.training-lesson-modal .primary-button {
+  border: 1px solid #325aa3;
+  background: #325aa3;
+  color: #fff;
+}
+
+.training-lesson-page .primary-button:hover,
+.training-lesson-modal .primary-button:hover {
+  border-color: #294d8c;
+  background: #294d8c;
+}
+
+.training-lesson-page .secondary-button,
+.training-lesson-modal .secondary-button {
+  border: 1px solid #d7dde7;
+  background: #fff;
+  color: #325aa3;
+}
+
+.training-lesson-page .secondary-button:hover,
+.training-lesson-modal .secondary-button:hover {
+  border-color: #325aa3;
+  background: #f5f7fb;
+}
+
+.training-lesson-page button:disabled,
+.training-lesson-modal button:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+
+/* Main two-column builder layout. */
+.training-lesson-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 285px;
+  gap: 22px;
+  align-items: start;
+}
+
+.training-lesson-main {
+  min-width: 0;
+  display: grid;
+  gap: 18px;
+}
+
+.training-lesson-sidebar {
+  min-width: 0;
+  position: sticky;
+  top: 20px;
+  display: grid;
+  gap: 16px;
+}
+
+.training-lesson-panel,
+.training-lesson-sidebar-panel {
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #e1e6ee;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(23, 32, 51, .03);
+}
+
+.training-lesson-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 20px 22px;
+  border-bottom: 1px solid #e5e9f0;
+}
+
+.training-lesson-panel-heading h2 {
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.training-lesson-panel-help {
+  margin: 5px 0 0;
+  color: #687386;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.training-lesson-sidebar-panel {
+  padding: 18px;
+}
+
+.training-lesson-sidebar-panel h3 {
+  font-size: 18px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+/* Lesson settings form. */
+.training-lesson-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 18px;
+  padding: 22px;
+}
+
+.training-lesson-field {
+  min-width: 0;
+}
+
+.training-lesson-field-wide {
+  grid-column: 1 / -1;
+}
+
+.training-lesson-field > label:not(.training-lesson-check-row) {
+  display: grid;
+  gap: 7px;
+  color: #172033;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.training-lesson-field input:not([type="checkbox"]),
+.training-lesson-field select,
+.training-lesson-field textarea {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d7dde7;
+  border-radius: 8px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+  font-size: 14px;
+}
+
+.training-lesson-field input:not([type="checkbox"]),
+.training-lesson-field select {
+  height: 43px;
+  padding: 0 12px;
+}
+
+.training-lesson-field textarea {
+  min-height: 110px;
+  padding: 11px 12px;
+  resize: vertical;
+}
+
+.training-lesson-field input:focus,
+.training-lesson-field select:focus,
+.training-lesson-field textarea:focus {
+  outline: none;
+  border-color: #325aa3;
+  box-shadow: 0 0 0 3px rgba(50, 90, 163, .10);
+}
+
+.training-lesson-check-row {
+  display: flex !important;
+  align-items: center;
+  gap: 9px;
+  min-height: 43px;
+  color: #172033;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.training-lesson-check-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #325aa3;
+}
+
+/* Status badge. */
+.training-lesson-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  box-sizing: border-box;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 800;
+  text-transform: capitalize;
+  flex-shrink: 0;
+}
+
+.training-lesson-status-draft {
+  background: #eef1f6;
+  color: #687386;
+}
+
+.training-lesson-status-published {
+  background: #e8f5ed;
+  color: #247044;
+}
+
+.training-lesson-status-archived {
+  background: #f3e9e9;
+  color: #8b3f3f;
+}
+
+/* Sidebar tools. */
+.training-lesson-content-type-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.training-lesson-content-type-list .content-type-button {
+  appearance: none;
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  box-sizing: border-box;
+  padding: 9px 10px;
+  border: 1px solid #dfe4ec;
+  border-radius: 8px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: left;
+  cursor: pointer;
+}
+
+.training-lesson-content-type-list .content-type-button:hover {
+  border-color: #325aa3;
+  background: #f5f7fb;
+  color: #325aa3;
+}
+
+/* Lesson summary. */
+.training-lesson-summary {
+  display: grid;
+  gap: 0;
+  margin-top: 14px;
+}
+
+.training-lesson-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e8ebf0;
+}
+
+.training-lesson-summary-row:first-child {
+  padding-top: 0;
+}
+
+.training-lesson-summary-row:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.training-lesson-summary-row span {
+  color: #687386;
+  font-size: 12px;
+}
+
+.training-lesson-summary-row strong {
+  color: #172033;
+  font-size: 13px;
+}
+
+/* Content blocks rendered by admin-lms-lesson-builder.js. */
+.training-lesson-content-block-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 22px 22px;
+}
+
+.training-lesson-content-block-list .empty-state {
+  padding: 26px 18px;
+  border: 1px dashed #d7dde7;
+  border-radius: 9px;
+  color: #687386;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+  background: #fafbfc;
+}
+
+.content-block {
+  overflow: hidden;
+  border: 1px solid #e1e6ee;
+  border-radius: 11px;
+  background: #fff;
+}
+
+.content-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 13px 15px;
+  background: #f8f9fb;
+  border-bottom: 1px solid #e5e9f0;
+}
+
+.content-block-title {
+  min-width: 0;
+  color: #172033;
+  font-size: 13px;
+  line-height: 1.35;
+  font-weight: 750;
+}
+
+.content-block-type {
+  margin-left: 7px;
+  color: #687386;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.content-block-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.content-block-actions button {
+  min-height: 30px !important;
+  padding: 0 9px !important;
+  font-size: 11px !important;
+}
+
+.content-block-body {
+  padding: 16px;
+}
+
+.block-preview {
+  color: #334057;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.block-preview video,
+.block-preview iframe,
+.block-preview img {
+  display: block;
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.block-preview video {
+  width: 100%;
+  max-height: 420px;
+  background: #111827;
+}
+
+.block-preview img {
+  max-height: 360px;
+  object-fit: contain;
+}
+
+.block-preview .file-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px;
+  border: 1px solid #e1e6ee;
+  border-radius: 9px;
+  background: #fafbfc;
+}
+
+.block-preview .file-card strong {
+  display: block;
+  color: #172033;
+}
+
+.block-preview .file-card span {
+  display: block;
+  margin-top: 3px;
+  color: #687386;
+  font-size: 11px;
+}
+
+.content-block-assessment-action {
+  padding: 0 16px 16px;
+}
+
+/* Modal — matches the actual HTML classes, which are outside the page wrapper. */
+.training-lesson-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+}
+
+.training-lesson-modal.open {
+  display: block;
+}
+
+.training-lesson-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, .58);
+}
+
+.training-lesson-modal-card {
+  position: relative;
+  z-index: 1;
+  width: min(720px, calc(100vw - 32px));
+  max-height: calc(100vh - 40px);
+  margin: 20px auto;
+  overflow: auto;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #dfe4ec;
+  border-radius: 14px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, .24);
+}
+
+.training-lesson-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 22px;
+  border-bottom: 1px solid #e5e9f0;
+}
+
+.training-lesson-modal-header h2 {
+  margin: 3px 0 0;
+  color: #172033;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.training-lesson-modal-close {
+  appearance: none;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #687386;
+  font: inherit;
+  font-size: 25px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.training-lesson-modal-close:hover {
+  background: #f2f4f7;
+  color: #172033;
+}
+
+.training-lesson-modal-body {
+  padding: 22px;
+  box-sizing: border-box;
+}
+
+.training-lesson-modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 22px;
+  border-top: 1px solid #e5e9f0;
+}
+
+/* Content editor forms injected by the JS. */
+.training-lesson-modal .block-form {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.training-lesson-modal .block-form label {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 7px;
+  width: 100%;
+  box-sizing: border-box;
+  color: #172033;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.training-lesson-modal .block-form label.block-check {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 9px;
+  width: auto;
+}
+
+.training-lesson-modal .block-form input:not([type="checkbox"]),
+.training-lesson-modal .block-form select,
+.training-lesson-modal .block-form textarea {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid #d7dde7;
+  border-radius: 8px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+  font-size: 14px;
+}
+
+.training-lesson-modal .block-form input:not([type="checkbox"]),
+.training-lesson-modal .block-form select {
+  height: 43px;
+  padding: 0 12px;
+}
+
+.training-lesson-modal .block-form textarea {
+  min-height: 150px;
+  padding: 11px 12px;
+  resize: vertical;
+}
+
+.training-lesson-modal .block-form input[type="file"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px;
+  border: 1px solid #d7dde7;
+  border-radius: 8px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+  font-size: 13px;
+}
+
+.training-lesson-modal .block-form input:focus,
+.training-lesson-modal .block-form select:focus,
+.training-lesson-modal .block-form textarea:focus {
+  outline: none;
+  border-color: #325aa3;
+  box-shadow: 0 0 0 3px rgba(50, 90, 163, .10);
+}
+
+.training-lesson-modal .block-form input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #325aa3;
+}
+
+.training-lesson-modal .block-form small {
+  display: block;
+  color: #687386;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* The content picker inside the modal. */
+.training-lesson-modal .content-type-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.training-lesson-modal .content-type-button {
+  appearance: none;
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  box-sizing: border-box;
+  padding: 9px 10px;
+  border: 1px solid #dfe4ec;
+  border-radius: 8px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: left;
+  cursor: pointer;
+}
+
+.training-lesson-modal .content-type-button:hover {
+  border-color: #325aa3;
+  background: #f5f7fb;
+  color: #325aa3;
+}
+
+.training-lesson-modal .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Toast: keep it compatible with the existing admin toast class. */
+#lessonToast {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 100000;
+  min-width: 220px;
+  max-width: min(420px, calc(100vw - 44px));
+  padding: 12px 15px;
+  border: 1px solid #d7dde7;
+  border-radius: 9px;
+  background: #fff;
+  color: #172033;
+  box-shadow: 0 12px 35px rgba(23, 32, 51, .18);
+  font-size: 13px;
+  line-height: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+#lessonToast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#lessonToast.error {
+  border-color: #e3b9b9;
+}
+
+#lessonToast.success {
+  border-color: #b9ddc5;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .training-lesson-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .training-lesson-sidebar {
+    position: static;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .training-lesson-header {
+    flex-direction: column;
+  }
+
+  .training-lesson-header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .training-lesson-layout {
+    gap: 16px;
+  }
+
+  .training-lesson-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .training-lesson-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .training-lesson-field-wide {
+    grid-column: auto;
+  }
+
+  .training-lesson-panel-heading {
+    flex-direction: column;
+  }
+
+  .training-lesson-panel-heading > .primary-button {
+    width: 100%;
+  }
+
+  .content-block-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .content-block-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .training-lesson-modal-card {
+    width: calc(100vw - 20px);
+    max-height: calc(100vh - 20px);
+    margin: 10px auto;
+  }
+
+  .training-lesson-modal-header,
+  .training-lesson-modal-body {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .training-lesson-modal-actions {
+    padding: 14px 16px;
+  }
+
+  .training-lesson-modal .content-type-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================================
+   Cloudflare Stream Video Upload UI
+   ========================================================= */
+
+.cloudflare-video-editor {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+}
+
+.cloudflare-video-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #9299a8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.cloudflare-video-divider::before,
+.cloudflare-video-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e5e9f0;
+}
+
+.cloudflare-upload-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cloudflare-upload-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cloudflare-upload-progress-wrap[hidden] {
+  display: none;
+}
+
+.cloudflare-upload-progress-track {
+  flex: 1;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e8edf5;
+}
+
+.cloudflare-upload-progress {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: #325aa3;
+  transition: width .15s ease;
+}
+
+.cloudflare-upload-progress-wrap > span {
+  min-width: 38px;
+  color: #325aa3;
+  font-size: 11px;
+  font-weight: 800;
+  text-align: right;
+}
+
+.cloudflare-upload-status {
+  min-height: 18px;
+  color: #687386;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.cloudflare-upload-status.uploading {
+  color: #325aa3;
+}
+
+.cloudflare-upload-status.processing {
+  color: #9a6500;
+}
+
+.cloudflare-upload-status.success {
+  color: #247044;
+}
+
+.cloudflare-upload-status.error {
+  color: #a33a3a;
+}
+
+.cloudflare-video-card {
+  display: grid;
+  gap: 5px;
+  padding: 14px;
+  border: 1px solid #d9e3f1;
+  border-radius: 9px;
+  background: #f6f9fd;
+}
+
+.cloudflare-video-card strong {
+  color: #325aa3;
+  font-size: 13px;
+}
+
+.cloudflare-video-card span {
+  color: #334057;
+  font-size: 11px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  word-break: break-all;
+}
+
+.cloudflare-video-card small {
+  color: #687386;
+  font-size: 11px;
+}

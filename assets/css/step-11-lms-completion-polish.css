@@ -1,0 +1,221 @@
+:root {
+  --s4u-blue: #325aa3;
+  --s4u-orange: #ff6b00;
+  --s4u-ink: #172033;
+  --s4u-muted: #6d7788;
+  --s4u-line: #e4e8ef;
+  --s4u-success: #18794e;
+  --s4u-success-bg: #eaf8f0;
+}
+
+.s4u-completion-polish {
+  margin-top: 22px;
+  border: 1px solid var(--s4u-line);
+  border-radius: 16px;
+  background: #fff;
+  padding: 22px;
+  box-shadow: 0 10px 35px rgba(18, 31, 55, .06);
+}
+
+.s4u-completion-polish.is-complete {
+  border-color: rgba(24, 121, 78, .28);
+  background: linear-gradient(180deg, #fff, #fbfffc);
+}
+
+.s4u-completion-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+}
+
+.s4u-completion-kicker {
+  display: block;
+  color: var(--s4u-orange);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .15em;
+  margin-bottom: 6px;
+}
+
+.s4u-completion-top h3 {
+  margin: 0;
+  color: var(--s4u-ink);
+  font-size: 1.25rem;
+}
+
+.s4u-completion-top p {
+  color: var(--s4u-muted);
+  margin: 5px 0 0;
+  font-size: .9rem;
+}
+
+.s4u-completion-ring {
+  --completion: 0deg;
+  width: 76px;
+  height: 76px;
+  flex: 0 0 76px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at center, #fff 58%, transparent 59%),
+    conic-gradient(var(--s4u-blue) var(--completion), #e9edf3 0deg);
+}
+
+.s4u-completion-ring strong {
+  font-size: 1rem;
+  color: var(--s4u-blue);
+}
+
+.s4u-completion-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 11px;
+  margin-top: 20px;
+}
+
+.s4u-check {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  border: 1px solid var(--s4u-line);
+  border-radius: 11px;
+  padding: 13px;
+}
+
+.s4u-check-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #edf1f6;
+  color: #758093;
+  font-weight: 900;
+}
+
+.s4u-check.complete {
+  border-color: rgba(24, 121, 78, .25);
+  background: var(--s4u-success-bg);
+}
+
+.s4u-check.complete .s4u-check-icon {
+  background: var(--s4u-success);
+  color: #fff;
+}
+
+.s4u-check strong,
+.s4u-check small {
+  display: block;
+}
+
+.s4u-check small {
+  color: var(--s4u-muted);
+  margin-top: 2px;
+}
+
+.s4u-completion-next {
+  margin-top: 13px;
+  padding: 13px 15px;
+  border-radius: 10px;
+  background: #f6f8fb;
+  color: var(--s4u-muted);
+  font-size: .85rem;
+}
+
+.s4u-completion-next strong {
+  color: var(--s4u-ink);
+  margin-right: 4px;
+}
+
+.s4u-certificate {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 15px;
+  border: 1px solid rgba(24, 121, 78, .25);
+  border-radius: 11px;
+  background: var(--s4u-success-bg);
+}
+
+.s4u-certificate strong,
+.s4u-certificate small {
+  display: block;
+}
+
+.s4u-certificate small {
+  color: var(--s4u-muted);
+  margin-top: 3px;
+}
+
+.s4u-completion-button {
+  border: 0;
+  border-radius: 8px;
+  min-height: 42px;
+  padding: 0 15px;
+  background: var(--s4u-blue);
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.s4u-completion-button:hover {
+  filter: brightness(.96);
+}
+
+.s4u-completion-button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+.s4u-completion-polish > .s4u-completion-button {
+  margin-top: 15px;
+  width: 100%;
+}
+
+#lmsCompletionToast {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 9999;
+  max-width: min(420px, calc(100vw - 44px));
+  padding: 13px 16px;
+  border-radius: 10px;
+  background: #172033;
+  color: #fff;
+  box-shadow: 0 12px 35px rgba(0,0,0,.18);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: .2s ease;
+}
+
+#lmsCompletionToast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 650px) {
+  .s4u-completion-top {
+    align-items: flex-start;
+  }
+
+  .s4u-completion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .s4u-certificate {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .s4u-completion-ring {
+    width: 64px;
+    height: 64px;
+    flex-basis: 64px;
+  }
+}

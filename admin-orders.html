@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orders | screenings4u Admin</title>
+<link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/admin-orders.css">
+  <link rel="stylesheet" href="assets/css/admin-navigation.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body class="admin-page">
+
+  <div class="admin-app">
+
+    <nav id="adminNavigation" aria-label="Admin navigation"></nav>
+
+    <main class="admin-main">
+
+      <header class="admin-header">
+        <div>
+          <p class="eyebrow">ORDER MANAGEMENT</p>
+          <h1>Orders</h1>
+          <p>Search orders, review customer purchases, and manage order status.</p>
+        </div>
+
+        <a class="back-link" href="admin-dashboard.html">
+          ← Dashboard
+        </a>
+      </header>
+
+      <!-- ===================================================
+           ORDER DIRECTORY
+      ==================================================== -->
+
+      <section id="orderListView" class="order-view active">
+
+        <div class="panel">
+
+          <div class="order-toolbar">
+
+            <div>
+              <p class="eyebrow">ORDER DIRECTORY</p>
+              <h2>All Orders</h2>
+            </div>
+
+            <div class="order-toolbar-controls">
+
+              <input
+                id="orderSearch"
+                class="search-input"
+                type="search"
+                placeholder="Search order number, name, email..."
+                autocomplete="off"
+              >
+
+              <select id="orderStatusFilter" class="order-filter">
+                <option value="all">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="processing">Processing</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+
+            </div>
+
+          </div>
+
+          <div id="ordersTable" class="table-wrap">
+            <div class="empty-state">Loading orders...</div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           ORDER DETAIL
+      ==================================================== -->
+
+      <section id="orderDetailView" class="order-view">
+
+        <div class="detail-header">
+
+          <button
+            id="backToOrders"
+            class="secondary-button"
+            type="button"
+          >
+            ← Back to Orders
+          </button>
+
+        </div>
+
+
+        <div class="order-detail-grid">
+
+          <section class="panel">
+
+            <p class="eyebrow">ORDER INFORMATION</p>
+
+            <div class="order-detail-heading">
+
+              <div>
+                <h2 id="detailOrderNumber">Order</h2>
+                <p id="detailOrderDate">—</p>
+              </div>
+
+              <span id="detailOrderStatus" class="status-badge">
+                —
+              </span>
+
+            </div>
+
+            <div class="order-fields">
+
+              <div>
+                <span>Customer</span>
+                <strong id="detailCustomerName">—</strong>
+              </div>
+
+              <div>
+                <span>Email</span>
+                <strong id="detailCustomerEmail">—</strong>
+              </div>
+
+              <div>
+                <span>Payment Status</span>
+                <strong id="detailPaymentStatus">—</strong>
+              </div>
+
+              <div>
+                <span>Subtotal</span>
+                <strong id="detailSubtotal">$0.00</strong>
+              </div>
+
+              <div>
+                <span>Tax</span>
+                <strong id="detailTax">$0.00</strong>
+              </div>
+
+              <div>
+                <span>Total</span>
+                <strong id="detailTotal">$0.00</strong>
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <section class="panel">
+
+            <p class="eyebrow">ORDER STATUS</p>
+
+            <h2>Manage Status</h2>
+
+            <label for="orderStatusSelect">
+              Order Status
+            </label>
+
+            <select
+              id="orderStatusSelect"
+              class="order-status-select"
+            >
+              <option value="pending">Pending</option>
+              <option value="processing">Processing</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+
+            <button
+              id="saveOrderStatus"
+              class="primary-button"
+              type="button"
+            >
+              Save Order Status
+            </button>
+
+          </section>
+
+        </div>
+
+
+        <!-- =================================================
+             ORDER ITEMS
+        ================================================== -->
+
+        <section class="panel detail-panel">
+
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">PURCHASE DETAILS</p>
+              <h2>Order Items</h2>
+            </div>
+          </div>
+
+          <div id="orderItemsTable" class="table-wrap">
+            <div class="empty-state">Loading order items...</div>
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TRAINING PURCHASE
+        ================================================== -->
+
+        <section class="panel detail-panel">
+
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">TRAINING ACCESS</p>
+              <h2>Training Purchases</h2>
+            </div>
+          </div>
+
+          <div id="orderTrainingTable" class="table-wrap">
+            <div class="empty-state">
+              No training information loaded.
+            </div>
+          </div>
+
+        </section>
+
+      </section>
+
+
+      <div id="orderToast" class="admin-toast" role="status"></div>
+
+    </main>
+
+  </div>
+
+  <script src="assets/js/admin-config.js"></script>
+  <script src="assets/js/admin-navigation.js"></script>
+  <script src="assets/js/admin-orders.js"></script>
+
+</body>
+</html>

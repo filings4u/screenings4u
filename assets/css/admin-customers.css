@@ -1,0 +1,369 @@
+/*
+ * screenings4u — Admin Customers Page
+ *
+ * Page-specific styling for:
+ * assets/css/admin-customers.css
+ *
+ * Works with the shared admin.css and admin-navigation.css.
+ */
+
+
+/* =========================================================
+   CUSTOMER VIEW STATES
+   ========================================================= */
+
+.customer-view {
+    display: none;
+}
+
+.customer-view.active {
+    display: block;
+}
+
+
+/* =========================================================
+   CUSTOMER TOOLBAR
+   ========================================================= */
+
+.customer-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.customer-toolbar > div {
+    min-width: 0;
+}
+
+.customer-toolbar .search-input {
+    width: min(100%, 420px);
+    flex: 0 1 420px;
+}
+
+
+/* =========================================================
+   TABLE ACTION
+   ========================================================= */
+
+.table-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 7px 11px;
+    border: 1px solid rgba(50, 90, 163, 0.18);
+    border-radius: 8px;
+    background: rgba(50, 90, 163, 0.07);
+    color: #325aa3;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.2;
+    transition:
+        background-color 0.16s ease,
+        border-color 0.16s ease,
+        color 0.16s ease,
+        transform 0.16s ease;
+}
+
+.table-action:hover {
+    background: #325aa3;
+    border-color: #325aa3;
+    color: #fff;
+}
+
+.table-action:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(50, 90, 163, 0.12);
+}
+
+.table-action:active {
+    transform: translateY(1px);
+}
+
+
+/* =========================================================
+   BACK LINK
+   ========================================================= */
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    color: #325aa3;
+    text-decoration: none;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+/* =========================================================
+   DETAIL HEADER
+   ========================================================= */
+
+.detail-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   CUSTOMER PROFILE LAYOUT
+   ========================================================= */
+
+.customer-profile-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(300px, 1fr);
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   PROFILE HEADING
+   ========================================================= */
+
+.profile-heading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 18px 0 25px;
+}
+
+.profile-heading h2 {
+    margin: 0 0 5px;
+}
+
+.profile-heading p {
+    margin: 0;
+    color: #687386;
+}
+
+
+/* =========================================================
+   CUSTOMER AVATAR
+   ========================================================= */
+
+.customer-avatar {
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    flex: 0 0 58px;
+    border-radius: 50%;
+    color: #fff;
+    background: #325aa3;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+
+/* =========================================================
+   PROFILE FIELDS
+   ========================================================= */
+
+.profile-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.profile-fields > div {
+    min-width: 0;
+}
+
+.profile-fields span,
+.customer-summary-grid span {
+    display: block;
+    margin-bottom: 6px;
+    color: #687386;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    line-height: 1.25;
+    text-transform: uppercase;
+}
+
+.profile-fields strong {
+    display: block;
+    color: #263244;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   CUSTOMER SUMMARY
+   ========================================================= */
+
+.customer-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 25px;
+}
+
+.customer-summary-grid > div {
+    min-width: 0;
+}
+
+.customer-summary-grid strong {
+    display: block;
+    color: #172033;
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+
+/* =========================================================
+   DETAIL PANELS
+   ========================================================= */
+
+.detail-panel {
+    margin-bottom: 18px;
+}
+
+.detail-panel:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
+.progress-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 150px;
+}
+
+.progress-track {
+    flex: 1 1 auto;
+    height: 8px;
+    min-width: 50px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #e8edf4;
+}
+
+.progress-track span {
+    display: block;
+    height: 100%;
+    min-width: 0;
+    border-radius: inherit;
+    background: #325aa3;
+}
+
+
+/* =========================================================
+   TABLE SUPPORTING TEXT
+   ========================================================= */
+
+.table-wrap small {
+    display: block;
+    margin-top: 4px;
+    color: #687386;
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+
+/* =========================================================
+   CUSTOMER TABLE / EMPTY STATE COMPATIBILITY
+   ========================================================= */
+
+.customer-view .table-wrap {
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+}
+
+.customer-view .empty-state {
+    padding: 42px 20px;
+    color: #687386;
+    text-align: center;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   MOBILE / TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .customer-profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .customer-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .customer-toolbar .search-input {
+        width: 100%;
+        flex: 1 1 auto;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .profile-fields {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .customer-summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+    }
+
+    .customer-summary-grid strong {
+        font-size: 22px;
+    }
+
+    .profile-heading {
+        gap: 12px;
+        margin: 15px 0 22px;
+    }
+
+    .customer-avatar {
+        width: 52px;
+        height: 52px;
+        flex-basis: 52px;
+        font-size: 16px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .customer-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .customer-toolbar {
+        gap: 14px;
+    }
+
+}

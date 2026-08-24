@@ -1,0 +1,147 @@
+/**
+ * screenings4u — Admin Audit Log
+ * Location: assets/css/admin-audit.css
+ */
+
+.audit-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.audit-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.audit-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.audit-controls .search-input {
+  min-width: 270px;
+}
+
+.audit-filter {
+  min-height: 42px;
+  min-width: 145px;
+  padding: 9px 12px;
+  border: 1px solid #dfe4eb;
+  border-radius: 8px;
+  background: #fff;
+  color: #263244;
+  font: inherit;
+}
+
+.audit-event {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.audit-event strong {
+  color: #263244;
+}
+
+.audit-event small {
+  color: #7a8492;
+  overflow-wrap: anywhere;
+}
+
+.audit-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-height: 29px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #eef2f7;
+  color: #445064;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.audit-action.login,
+.audit-action.create,
+.audit-action.complete {
+  background: #edf7f0;
+  color: #277043;
+}
+
+.audit-action.update {
+  background: #eef4ff;
+  color: #325aa3;
+}
+
+.audit-action.delete {
+  background: #fff0f0;
+  color: #a23838;
+}
+
+.audit-action.logout {
+  background: #f2f2f2;
+  color: #626b78;
+}
+
+.audit-time {
+  white-space: nowrap;
+  color: #687386;
+  font-size: 13px;
+}
+
+.audit-record {
+  color: #526071;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.back-link {
+  color: #325aa3;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+@media (max-width: 1000px) {
+  .audit-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .audit-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .audit-controls {
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .audit-controls .search-input {
+    min-width: 220px;
+    flex: 1;
+  }
+}
+
+@media (max-width: 650px) {
+  .audit-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .audit-controls {
+    flex-direction: column;
+  }
+
+  .audit-controls .search-input,
+  .audit-filter,
+  .audit-controls button {
+    width: 100%;
+  }
+}

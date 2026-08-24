@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin Dashboard | screenings4u</title>
+<link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/admin-navigation.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body class="admin-page">
+
+  <div id="adminApp" class="admin-app">
+
+    <!-- =====================================================
+         SHARED ADMIN NAVIGATION
+    ====================================================== -->
+
+    <nav
+      id="adminNavigation"
+      aria-label="Admin navigation"
+    ></nav>
+
+
+    <!-- =====================================================
+         ADMIN CONTENT
+    ====================================================== -->
+
+    <main class="admin-main">
+
+      <header class="admin-header">
+
+        <div>
+
+          <p class="eyebrow">
+            SCREENINGS4U
+          </p>
+
+          <h1 id="sectionTitle">
+            Dashboard
+          </h1>
+
+          <p id="sectionDescription">
+            Overview of your customer, order, and training activity.
+          </p>
+
+        </div>
+
+        <div
+          id="adminIdentity"
+          class="admin-identity"
+        ></div>
+
+      </header>
+
+
+      <!-- =====================================================
+           DASHBOARD METRICS
+      ====================================================== -->
+
+      <section
+        id="dashboardSection"
+        class="admin-section active"
+      >
+
+        <div class="metrics-grid">
+
+          <article class="metric-card">
+            <span>Total Customers</span>
+            <strong id="metricCustomers">—</strong>
+          </article>
+
+          <article class="metric-card">
+            <span>Total Orders</span>
+            <strong id="metricOrders">—</strong>
+          </article>
+
+          <article class="metric-card">
+            <span>Pending Orders</span>
+            <strong id="metricPending">—</strong>
+          </article>
+
+          <article class="metric-card">
+            <span>Completed Orders</span>
+            <strong id="metricCompleted">—</strong>
+          </article>
+
+          <article class="metric-card">
+            <span>Training Students</span>
+            <strong id="metricStudents">—</strong>
+          </article>
+
+          <article class="metric-card">
+            <span>Courses</span>
+            <strong id="metricCourses">—</strong>
+          </article>
+
+          <article class="metric-card">
+            <span>Completed Courses</span>
+            <strong id="metricCompletedCourses">—</strong>
+          </article>
+
+        </div>
+
+
+        <!-- ===================================================
+             RECENT ACTIVITY
+        ==================================================== -->
+
+        <div class="panel-grid">
+
+          <section class="panel">
+
+            <div class="panel-heading">
+
+              <div>
+
+                <p class="eyebrow">
+                  RECENT ACTIVITY
+                </p>
+
+                <h2>
+                  Recent Orders
+                </h2>
+
+              </div>
+
+            </div>
+
+            <div
+              id="recentOrders"
+              class="table-wrap"
+            ></div>
+
+          </section>
+
+
+          <section class="panel">
+
+            <div class="panel-heading">
+
+              <div>
+
+                <p class="eyebrow">
+                  TRAINING
+                </p>
+
+                <h2>
+                  Active Students
+                </h2>
+
+              </div>
+
+            </div>
+
+            <div
+              id="recentStudents"
+              class="table-wrap"
+            ></div>
+
+          </section>
+
+        </div>
+
+      </section>
+
+
+      <div
+        id="adminToast"
+        class="admin-toast"
+        role="status"
+      ></div>
+
+    </main>
+
+  </div>
+
+
+  <!-- =======================================================
+       ADMIN CONFIGURATION
+  ======================================================== -->
+
+  <script src="assets/js/admin-config.js"></script>
+
+  <!-- =======================================================
+       SHARED ADMIN NAVIGATION
+  ======================================================== -->
+
+  <script src="assets/js/admin-navigation.js"></script>
+
+  <!-- =======================================================
+       DASHBOARD CONTROLLER
+  ======================================================== -->
+
+  <script src="assets/js/admin-dashboard.js"></script>
+
+</body>
+</html>

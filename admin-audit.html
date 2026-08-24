@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audit Log | screenings4u Admin</title>
+<link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/admin-audit.css">
+  <link rel="stylesheet" href="assets/css/admin-navigation.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body class="admin-page">
+
+  <div class="admin-app">
+
+    <nav id="adminNavigation" aria-label="Admin navigation"></nav>
+
+    <main class="admin-main">
+
+      <header class="admin-header">
+        <div>
+          <p class="eyebrow">SYSTEM SECURITY</p>
+          <h1>Audit Log</h1>
+          <p>Review administrative activity and system events across the screenings4u platform.</p>
+        </div>
+
+        <a class="back-link" href="admin-dashboard.html">
+          ← Dashboard
+        </a>
+      </header>
+
+      <section class="audit-summary-grid">
+        <article class="metric-card">
+          <span>Total Events</span>
+          <strong id="auditTotal">—</strong>
+        </article>
+
+        <article class="metric-card">
+          <span>Today</span>
+          <strong id="auditToday">—</strong>
+        </article>
+
+        <article class="metric-card">
+          <span>Logins</span>
+          <strong id="auditLogins">—</strong>
+        </article>
+
+        <article class="metric-card">
+          <span>Changes</span>
+          <strong id="auditChanges">—</strong>
+        </article>
+      </section>
+
+      <section class="panel">
+
+        <div class="audit-toolbar">
+
+          <div>
+            <p class="eyebrow">ACTIVITY HISTORY</p>
+            <h2>System Events</h2>
+          </div>
+
+          <div class="audit-controls">
+
+            <input
+              id="auditSearch"
+              class="search-input"
+              type="search"
+              placeholder="Search action, user, record..."
+              autocomplete="off"
+            >
+
+            <select id="auditActionFilter" class="audit-filter">
+              <option value="all">All Actions</option>
+              <option value="login">Login</option>
+              <option value="logout">Logout</option>
+              <option value="create">Create</option>
+              <option value="update">Update</option>
+              <option value="delete">Delete</option>
+              <option value="complete">Complete</option>
+            </select>
+
+            <button
+              id="refreshAuditButton"
+              class="secondary-button"
+              type="button"
+            >
+              Refresh
+            </button>
+
+          </div>
+
+        </div>
+
+        <div id="auditTable" class="table-wrap">
+          <div class="empty-state">Loading audit log...</div>
+        </div>
+
+      </section>
+
+      <div id="auditToast" class="admin-toast" role="status"></div>
+
+    </main>
+
+  </div>
+
+  <script src="assets/js/admin-config.js"></script>
+  <script src="assets/js/admin-navigation.js"></script>
+  <script src="assets/js/admin-audit.js"></script>
+
+</body>
+</html>

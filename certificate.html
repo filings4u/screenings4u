@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate | screenings4u</title>
+  <link rel="stylesheet" href="assets/css/screenings4u-certificate.css">
+</head>
+<body class="certificate-page">
+  <main class="certificate-page-wrap">
+    <div class="certificate-actions">
+      <button type="button" id="certificatePrint">Print Certificate</button>
+      <a href="#" id="certificateBack">Back to Course</a>
+    </div>
+
+    <section id="certificateState" class="certificate-state" aria-live="polite">
+      Loading certificate…
+    </section>
+
+    <article id="certificate" class="certificate" hidden>
+      <div class="certificate-border">
+        <div class="certificate-inner">
+          <div class="certificate-brand">
+            <div class="brand-mark">
+              <span class="brand-mark-s">s</span>
+              <span class="brand-mark-4">4</span>
+              <span class="brand-mark-u">u</span>
+            </div>
+            <div class="brand-name">screenings<span>4</span>u</div>
+            <div class="brand-tagline">WORKPLACE SCREENING &amp; TRAINING</div>
+          </div>
+
+          <div class="certificate-rule">
+            <span></span><i></i><span></span>
+          </div>
+
+          <p class="certificate-kicker">CERTIFICATE OF COMPLETION</p>
+
+          <h1>This Certificate Is Proudly Presented To</h1>
+
+          <div id="studentName" class="student-name">Student Name</div>
+
+          <div class="student-rule"></div>
+
+          <p class="certificate-statement">
+            For successfully completing the required training and assessments for
+          </p>
+
+          <h2 id="courseTitle" class="course-title">Course Title</h2>
+
+          <p id="courseDescription" class="course-description"></p>
+
+          <div class="certificate-meta">
+            <div>
+              <span>DATE OF COMPLETION</span>
+              <strong id="completionDate">—</strong>
+            </div>
+            <div class="certificate-seal" aria-label="Completed">
+              <span>✓</span>
+              <small>TRAINING<br>COMPLETED</small>
+            </div>
+            <div>
+              <span>CERTIFICATE NUMBER</span>
+              <strong id="certificateNumber">—</strong>
+            </div>
+          </div>
+
+          <div class="certificate-footer">
+            <div class="signature-block">
+              <div class="signature-line"></div>
+              <strong>screenings4u</strong>
+              <span>Training Administrator</span>
+            </div>
+
+            <div class="verification-block">
+              <span>AUTHENTIC TRAINING RECORD</span>
+              <strong id="verificationNumber">—</strong>
+              <small>Retain this certificate for your records.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <script src="assets/js/screenings4u-certificate.js"></script>
+</body>
+</html>

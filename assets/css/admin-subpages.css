@@ -1,0 +1,228 @@
+/* =========================================================
+   Shared styling for screenings4u admin sub-pages.
+   assets/css/admin-subpages.css
+   ========================================================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-field.full {
+    grid-column: 1 / -1;
+}
+
+.form-field label {
+    font-weight: 700;
+    font-size: 13px;
+    color: #394557;
+}
+
+.back-link {
+    color: #325aa3;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #dfe4eb;
+    border-radius: 8px;
+    padding: 11px 12px;
+    background: #fff;
+    color: #263244;
+    font: inherit;
+}
+
+.form-field textarea {
+    resize: vertical;
+}
+
+.check-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 9px;
+}
+
+.check-row input {
+    width: auto !important;
+}
+
+.action-row,
+.button-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.stack-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.list-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 15px 16px;
+    border: 1px solid #e7ebf0;
+    border-radius: 9px;
+    background: #fff;
+}
+
+.list-card strong,
+.list-card small {
+    display: block;
+}
+
+.list-card small {
+    margin-top: 4px;
+    color: #7a8492;
+}
+
+.primary-button,
+.secondary-button,
+.danger-button {
+    border: 0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.primary-button {
+    background: #325aa3;
+    color: #fff;
+}
+
+.secondary-button {
+    background: #eef2f7;
+    color: #334155;
+}
+
+.danger-button {
+    background: #fff0f0;
+    color: #a23838;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.toolbar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.search-input {
+    min-height: 42px;
+}
+
+.empty-state {
+    padding: 28px 15px;
+    text-align: center;
+    color: #7a8492;
+}
+
+.admin-toast.show {
+    display: block;
+}
+
+
+/* =========================================================
+   ACCOUNT MANAGEMENT — CARD SPACING
+   ========================================================= */
+
+/*
+ * Keep a clear visual separation between each major
+ * account-management card.
+ */
+
+.admin-main > .metrics-grid {
+    margin-bottom: 18px;
+}
+
+.admin-main > section.panel {
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+
+/*
+ * The last visible panel should not create unnecessary
+ * spacing underneath the Admin Users card.
+ */
+
+.admin-main > section.panel:last-of-type {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   ACCOUNT MANAGEMENT — PANEL STACK
+   ========================================================= */
+
+/*
+ * Explicitly preserve the vertical gap even when other
+ * shared admin styles define panel margins.
+ */
+
+.admin-main > section.panel + section.panel {
+    margin-top: 18px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .form-grid,
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-field.full {
+        grid-column: auto;
+    }
+
+    .toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .list-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .button-group {
+        width: 100%;
+    }
+}

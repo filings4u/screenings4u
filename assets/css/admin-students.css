@@ -1,0 +1,181 @@
+/**
+ * screenings4u — Admin Students
+ * Location: assets/css/admin-students.css
+ */
+
+.student-view {
+  display: none;
+}
+
+.student-view.active {
+  display: block;
+}
+
+.student-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.student-toolbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.student-toolbar .search-input {
+  min-width: 290px;
+}
+
+.student-filter {
+  min-height: 42px;
+  min-width: 155px;
+  padding: 9px 12px;
+  border: 1px solid #dfe4eb;
+  border-radius: 8px;
+  background: #fff;
+  color: #263244;
+  font: inherit;
+}
+
+.detail-header {
+  margin-bottom: 18px;
+}
+
+.student-profile-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, .8fr);
+  gap: 20px;
+}
+
+.student-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 16px 0 22px;
+}
+
+.student-heading h2 {
+  margin: 0 0 4px;
+}
+
+.student-heading p {
+  margin: 0;
+  color: #687386;
+}
+
+.student-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  border-radius: 50%;
+  background: #eef2f7;
+  color: #325aa3;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.student-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.student-fields > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.student-fields span,
+.student-summary-grid span {
+  color: #7a8492;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.student-fields strong {
+  color: #263244;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.student-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.student-summary-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 14px;
+  border: 1px solid #edf0f4;
+  border-radius: 9px;
+  background: #fafbfc;
+}
+
+.student-summary-grid strong {
+  color: #263244;
+  font-size: 22px;
+}
+
+.detail-panel {
+  margin-top: 20px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: #eef2f7;
+  color: #445064;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.back-link {
+  color: #325aa3;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .student-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .student-toolbar-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .student-toolbar .search-input,
+  .student-filter {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .student-profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .student-fields,
+  .student-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}

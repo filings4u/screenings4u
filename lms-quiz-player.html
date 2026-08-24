@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assessment | screenings4u</title>
+  <link rel="stylesheet" href="assets/css/client.css">
+  <link rel="stylesheet" href="assets/css/client-navigation.css">
+  <link rel="stylesheet" href="assets/css/lms-quiz-player.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="client-page">
+  <div class="client-app">
+    <nav id="clientNavigation" aria-label="Client navigation"></nav>
+
+    <main class="client-main lms-quiz-page">
+      <header class="client-header quiz-header">
+        <div>
+          <p class="eyebrow">ASSESSMENT</p>
+          <h1 id="quizTitle">Course Assessment</h1>
+          <p id="quizDescription"></p>
+        </div>
+        <a id="quizBackButton" class="client-secondary-button" href="lms-course-player.html">← Course</a>
+      </header>
+
+      <section id="lmsQuizLoading" class="quiz-message">Loading assessment…</section>
+      <section id="lmsQuizError" class="quiz-message quiz-error" hidden></section>
+
+      <section id="lmsQuizEmpty" class="quiz-message" hidden>
+        This assessment is not available.
+      </section>
+
+      <section id="lmsQuizPlayer" class="quiz-shell" hidden>
+        <div class="quiz-meta">
+          <span>Passing score: <strong id="quizPassingScore">80%</strong></span>
+          <span id="quizAttemptInfo">0 attempts used</span>
+          <span id="quizQuestionCount">0 questions</span>
+        </div>
+
+        <div id="quizIntro" class="quiz-intro">
+          <h2>Ready to begin?</h2>
+          <p>Your answers will be scored by the LMS assessment engine.</p>
+          <button id="quizStartButton" class="client-primary-button" type="button">Start Assessment</button>
+        </div>
+
+        <form id="quizForm" hidden>
+          <div id="quizProgress" class="quiz-progress">
+            <div id="quizProgressBar"></div>
+          </div>
+
+          <div id="quizQuestions"></div>
+
+          <button id="quizSubmitButton" class="client-primary-button quiz-submit" type="submit">
+            Submit Assessment
+          </button>
+        </form>
+
+        <section id="quizResult" class="quiz-result" hidden>
+          <div id="quizResultIcon" class="quiz-result-icon"></div>
+          <p id="quizResultEyebrow" class="eyebrow"></p>
+          <h2 id="quizResultHeading"></h2>
+          <div id="quizScore" class="quiz-score"></div>
+          <p id="quizResultMessage"></p>
+          <div id="quizReview" class="quiz-review"></div>
+
+          <div class="quiz-result-actions">
+            <button id="quizRetryButton" class="client-primary-button" type="button" hidden>Try Again</button>
+            <a id="quizBackResultButton" class="client-secondary-button" href="#">Return to Lesson</a>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="assets/js/client-config.js"></script>
+  <script src="assets/js/client-navigation.js"></script>
+  <script src="assets/js/lms-quiz-player.js"></script>
+</body>
+</html>

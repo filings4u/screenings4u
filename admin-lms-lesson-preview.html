@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson Preview | screenings4u Admin</title>
+<link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/admin-navigation.css">
+  <link rel="stylesheet" href="assets/css/admin-lms-lesson-preview.css">
+  <link rel="stylesheet" href="assets/css/admin-lms-lesson-preview-cloudflare.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body class="admin-page">
+  <div class="admin-app">
+
+    <nav id="adminNavigation" aria-label="Admin navigation"></nav>
+
+    <main class="admin-main lms-lesson-preview-page">
+
+      <header class="preview-header">
+        <div>
+          <p class="eyebrow">LESSON PREVIEW</p>
+          <h1 id="previewTitle">Lesson</h1>
+          <p id="previewSubtitle">
+            Preview exactly what this lesson contains.
+          </p>
+        </div>
+
+        <div class="preview-header-actions">
+          <button
+            id="backToLesson"
+            class="secondary-button"
+            type="button"
+          >
+            ← Lesson Builder
+          </button>
+        </div>
+      </header>
+
+      <section class="preview-shell">
+        <div id="previewContent" class="preview-content">
+          <div class="preview-loading">
+            Loading lesson preview...
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div id="previewToast" class="admin-toast" role="status"></div>
+
+  <script src="assets/js/admin-config.js"></script>
+  <script src="assets/js/admin-navigation.js"></script>
+
+  <!--
+    Optional admin-preview fallback.
+    If secure playback is not yet enabled, set this to your Cloudflare
+    customer code so the preview can use:
+    https://customer-CODE.cloudflarestream.com/VIDEO_UID/iframe
+
+    Once cloudflare-stream-token returns embedUrl, this value is not needed.
+  -->
+  <script>
+    window.CLOUDFLARE_STREAM_CUSTOMER_CODE =
+      window.CLOUDFLARE_STREAM_CUSTOMER_CODE || '';
+  </script>
+
+  <script src="assets/js/admin-lms-lesson-preview.js"></script>
+</body>
+</html>
