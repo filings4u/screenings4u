@@ -4,11 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Certificate | screenings4u</title>
+
   <link rel="stylesheet" href="../assets/css/client.css">
   <link rel="stylesheet" href="../assets/css/client-navigation.css">
   <link rel="stylesheet" href="../assets/css/lms-certificate.css">
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body class="client-page certificate-page">
   <div class="client-app">
     <nav id="clientNavigation" aria-label="Client navigation"></nav>
@@ -20,8 +23,11 @@
           <h1>Certificate</h1>
           <p id="certificateHeaderMessage">Loading your certificate…</p>
         </div>
+
         <div class="certificate-actions">
-          <a id="backToTraining" class="client-secondary-button" href="../lms-student-dashboard.html">← Training</a>
+          <a id="backToTraining" class="client-secondary-button" href="../lms-student-dashboard.html">
+            ← Training
+          </a>
           <button id="printCertificateButton" class="client-primary-button" type="button" hidden>
             Print / Save PDF
           </button>
@@ -43,13 +49,23 @@
         <div class="certificate-border">
           <div class="certificate-inner">
             <div class="certificate-logo">screenings4u</div>
+
             <p class="certificate-eyebrow">CERTIFICATE OF COMPLETION</p>
+
             <h2>This certifies that</h2>
-            <div id="certificateStudentName" class="certificate-name">Student</div>
+
+            <div id="certificateStudentName" class="certificate-name">
+              Student
+            </div>
+
             <p class="certificate-copy">
               has successfully completed the training course
             </p>
-            <div id="certificateCourseTitle" class="certificate-course">Course</div>
+
+            <div id="certificateCourseTitle" class="certificate-course">
+              Course
+            </div>
+
             <p class="certificate-copy certificate-completion-copy">
               and satisfied the required course completion and assessment requirements.
             </p>
@@ -59,10 +75,12 @@
                 <span>Certificate Number</span>
                 <strong id="certificateNumber">—</strong>
               </div>
+
               <div>
                 <span>Issued</span>
                 <strong id="certificateIssuedDate">—</strong>
               </div>
+
               <div>
                 <span>Status</span>
                 <strong id="certificateStatus">Valid</strong>
@@ -74,7 +92,8 @@
                 <span>screenings4u</span>
                 <small>Training &amp; Compliance</small>
               </div>
-              <div class="certificate-seal">✓</div>
+
+              <div class="certificate-seal" aria-hidden="true">✓</div>
             </div>
           </div>
         </div>

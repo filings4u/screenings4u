@@ -104,7 +104,7 @@
   async function loadQuiz(id) {
     const { data, error } =
       await client
-        .from("training_quizzes")
+        .from("lms_quizzes")
         .select("*")
         .eq("id", id)
         .maybeSingle();
@@ -121,7 +121,7 @@
   async function loadLesson(lessonId) {
     const { data, error } =
       await client
-        .from("training_lessons")
+        .from("lms_lessons")
         .select("*")
         .eq("id", lessonId)
         .maybeSingle();
@@ -141,7 +141,7 @@
     if (enrollmentId) {
       const { data, error } =
         await client
-          .from("training_enrollments")
+          .from("lms_enrollments")
           .select("id, user_id, course_id")
           .eq("id", enrollmentId)
           .eq("user_id", user.id)
@@ -181,7 +181,7 @@
     if (lesson?.course_id) {
       const { data, error } =
         await client
-          .from("training_enrollments")
+          .from("lms_enrollments")
           .select("id")
           .eq("user_id", user.id)
           .eq("course_id", lesson.course_id)
@@ -207,7 +207,7 @@
   async function loadQuestions(lessonId) {
     const { data, error } =
       await client
-        .from("training_quiz_questions")
+        .from("lms_questions")
         .select(`
           id,
           lesson_id,
@@ -215,7 +215,7 @@
           explanation,
           sort_order,
           points,
-          training_quiz_options (
+          lms_question_options (
             id,
             question_id,
             option_text,
@@ -223,7 +223,7 @@
             sort_order
           )
         `)
-        .eq("lesson_id", lessonId)
+        .eq("quiz_id", quiz.id)
         .order("sort_order", {
           ascending: true
         });
@@ -238,7 +238,7 @@
           explanation: question.explanation || "",
           points: Number(question.points) || 1,
           choices:
-            (question.training_quiz_options || [])
+            (question.lms_question_options || [])
               .sort(function (a, b) {
                 return (
                   Number(a.sort_order) -
@@ -602,15 +602,15 @@
     }
 
     /*
-     * training_quiz_attempts does NOT have quiz_id or profile_id.
-     * It is identified by enrollment_id + lesson_id + attempt_number.
+     * lms_quiz_attempts is identified by enrollment_id + quiz_id + attempt_number.
+     * The attempt is tied directly to the quiz and enrollment.
      */
     const { data: previousAttempts, error: attemptLookupError } =
       await client
-        .from("training_quiz_attempts")
+        .from("lms_quiz_attempts")
         .select("attempt_number")
         .eq("enrollment_id", enrollmentId)
-        .eq("lesson_id", quiz.lesson_id)
+        .eq("quiz_id", quiz.id)
         .order("attempt_number", {
           ascending: false
         })
@@ -631,8 +631,8 @@
       enrollment_id:
         enrollmentId,
 
-      lesson_id:
-        quiz.lesson_id,
+      quiz_id:
+        quiz.id,
 
       attempt_number:
         nextAttemptNumber,
@@ -651,7 +651,7 @@
       data: attempt,
       error: attemptError
     } = await client
-      .from("training_quiz_attempts")
+      .from("lms_quiz_attempts")
       .insert(attemptPayload)
       .select("id")
       .single();
@@ -667,7 +667,7 @@
     }
 
     /*
-     * training_quiz_answers is a separate table.
+     * lms_quiz_answers is a separate table.
      * Save one answer row per question.
      */
     const answerRows =
@@ -690,7 +690,7 @@
     const {
       error: answersError
     } = await client
-      .from("training_quiz_answers")
+      .from("lms_quiz_answers")
       .insert(answerRows);
 
     if (answersError) {
@@ -699,7 +699,7 @@
        * answer rows cannot be saved.
        */
       await client
-        .from("training_quiz_attempts")
+        .from("lms_quiz_attempts")
         .delete()
         .eq("id", attempt.id);
 

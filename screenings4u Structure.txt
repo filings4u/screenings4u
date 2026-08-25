@@ -122,3 +122,138 @@ STUDENT
 ├── Assessment
 │       ↓
 └── Certificate
+
+
+
+
+
+
+
+
+
+
+| Phase  | Build                              |
+| ------ | ---------------------------------- |
+| **1**  | Database/schema audit              |
+| **2**  | Customer + account architecture    |
+| **3**  | Product catalog                    |
+| **4**  | Unified order engine               |
+| **5**  | Stripe payment/webhook             |
+| **6**  | Resend email system                |
+| **7**  | Admin manual Testing/Service Order |
+| **8**  | Admin Orders integration           |
+| **9**  | Customer order/account system      |
+| **10** | Testing operations                 |
+| **11** | Appointments                       |
+| **12** | Training order/enrollment          |
+| **13** | LMS/admin integration              |
+| **14** | Dashboard                          |
+| **15** | Audit Log                          |
+| **16** | Wire marketing website             |
+| **17** | End-to-end testing                 |
+
+
+
+                         SCREENINGS4U
+                              │
+                    ┌─────────┴─────────┐
+                    │                   │
+                 CUSTOMER             ADMIN
+                    │                   │
+                    └─────────┬─────────┘
+                              │
+                         CORE DATA
+                              │
+        ┌─────────────┬───────┼────────┬─────────────┐
+        │             │       │        │             │
+     Products      Orders   Customers Testing      Training
+        │             │       │        │             │
+        └─────────────┴───────┴────────┴─────────────┘
+                              │
+                         Notifications
+                              │
+                            Resend
+                              │
+                           Stripe
+
+
+
+
+                    CUSTOMER CHECKOUT
+                           │
+                           ▼
+                    Create pending order
+                           │
+                           ▼
+                     Stripe payment
+                           │
+                    ┌──────┴──────┐
+                    │             │
+                  FAIL          SUCCESS
+                    │             │
+                    ▼             ▼
+                unpaid         paid
+                                  │
+                                  ▼
+                         Fulfillment engine
+                                  │
+             ┌────────────────────┼────────────────────┐
+             │                    │                    │
+             ▼                    ▼                    ▼
+          Customer             Order              Product
+          account             status              fulfillment
+             │                    │                    │
+             ▼                    ▼                    ▼
+          Invite             completed/          Testing or
+          email              processing           Training
+             │
+             ▼
+          Resend
+
+
+SCREENINGS4U
+│
+├── COMMERCE
+│   ├── Products
+│   ├── Orders
+│   ├── Order Items
+│   └── Payments
+│
+├── CUSTOMERS
+│   └── Client Profiles
+│
+├── TESTING
+│   ├── Testing Orders
+│   ├── Appointments
+│   ├── Testing Events
+│   ├── Random Testing
+│   ├── Post-Accident
+│   ├── Return-to-Duty
+│   ├── Follow-Up
+│   ├── DOT
+│   ├── Workplace
+│   └── Mobile
+│
+├── TRAINING
+│   ├── Courses
+│   ├── Sections
+│   ├── Lessons
+│   ├── Assessments
+│   ├── Quizzes
+│   ├── Enrollments
+│   ├── Progress
+│   └── Certificates
+│
+├── ACCOUNTS
+│   ├── Admin Profiles
+│   ├── Client Profiles
+│   └── Account Invites
+│
+├── COMMUNICATIONS
+│   ├── Customer Receipt
+│   ├── Account Invitation
+│   ├── Order Confirmation
+│   └── Admin New Order
+│
+└── AUDIT
+    └── Audit Log

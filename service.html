@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service | screenings4u</title>
+<meta name="description" content="screenings4u service details and secure checkout.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--orange:#ff6b00;--blue:#325aa3;--blue-dark:#24467f;--ink:#1d2d45;--muted:#667892;--surface:#f4f7fc;--line:#d9e3f0}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--surface);color:var(--ink)}
+a{text-decoration:none}.container{width:min(1100px,calc(100% - 36px));margin:auto}
+header{background:#fff;border-bottom:1px solid var(--line)}.header-inner{min-height:78px;display:flex;align-items:center;justify-content:space-between}
+.brand img{display:block;width:180px}.back{font-size:12px;font-weight:800;color:var(--blue)}
+main{padding:70px 0}.layout{display:grid;grid-template-columns:1.3fr .7fr;gap:22px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px;box-shadow:0 14px 40px rgba(23,51,95,.07)}
+.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.12em;font-weight:900;color:var(--orange)}
+h1{font-size:clamp(38px,6vw,60px);line-height:1.02;letter-spacing:-.05em;color:var(--blue-dark);margin:10px 0 14px}
+.lead{font-size:15px;line-height:1.8;color:var(--muted)}.price{font-size:34px;font-weight:900;color:var(--blue-dark);margin:18px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:8px;font-size:13px;font-weight:900}
+.btn-orange{background:var(--orange);color:#fff}.btn-outline{border:1px solid var(--blue);color:var(--blue)}
+.actions{display:flex;flex-wrap:wrap;gap:10px}.meta{display:grid;gap:14px}.meta-row{padding-bottom:14px;border-bottom:1px solid var(--line)}.label{font-size:10px;text-transform:uppercase;font-weight:900;color:#667085}.value{font-size:13px;font-weight:800;color:var(--blue-dark);margin-top:4px}
+h2{font-size:20px;color:var(--blue-dark)}ul{padding-left:20px;color:var(--muted);line-height:1.8;font-size:13px}
+.error{background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px;color:#b42318}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.container{width:min(100% - 28px,1100px)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="container header-inner">
+    <a class="brand" href="index.html"><img src="images/logo.png" alt="screenings4u"></a>
+    <a class="back" href="services.html">← All Services</a>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div id="service"></div>
+  </div>
+</main>
+
+<script src="assets/js/test-price-list.js"></script>
+<script src="assets/js/service.js"></script>
+</body>
+</html>

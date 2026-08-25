@@ -122,6 +122,28 @@ function initializeStudentControls() {
       showStudentList
     );
   }
+
+  const refreshButton =
+    document.getElementById("refreshStudents");
+
+  if (refreshButton) {
+    refreshButton.addEventListener(
+      "click",
+      async function () {
+        refreshButton.disabled = true;
+        refreshButton.innerHTML =
+          '<span aria-hidden="true">↻</span> Refreshing...';
+
+        try {
+          await loadStudents();
+        } finally {
+          refreshButton.disabled = false;
+          refreshButton.innerHTML =
+            '<span aria-hidden="true">↻</span> Refresh';
+        }
+      }
+    );
+  }
 }
 
 /* =========================================================

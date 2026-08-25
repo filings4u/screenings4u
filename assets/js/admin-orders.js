@@ -165,6 +165,30 @@ function initializeOrderControls() {
             saveSelectedOrderStatus
         );
     }
+
+    const refreshButton =
+        document.getElementById(
+            "refreshOrders"
+        );
+
+    if (refreshButton) {
+
+        refreshButton.addEventListener(
+            "click",
+            async function () {
+
+                refreshButton.disabled = true;
+                refreshButton.textContent = "Refreshing...";
+
+                try {
+                    await loadOrders();
+                } finally {
+                    refreshButton.disabled = false;
+                    refreshButton.textContent = "↻ Refresh Orders";
+                }
+            }
+        );
+    }
 }
 
 

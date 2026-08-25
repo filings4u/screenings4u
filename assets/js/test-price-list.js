@@ -1122,6 +1122,8 @@ const TEST_PRODUCTS = {
 
   etg_plus_5_panel: {
     id: "etg_plus_5_panel",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=etg_plus_5_panel",
     name: "EtG + 5 Panel Drug Test",
     shortName: "EtG + 5 Panel Drug Test",
     category: "EtG Alcohol & Drug Testing",
@@ -1150,6 +1152,8 @@ const TEST_PRODUCTS = {
 
   etg_plus_10_panel: {
     id: "etg_plus_10_panel",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=etg_plus_10_panel",
     name: "EtG + 10 Panel Drug Test",
     shortName: "EtG + 10 Panel Drug Test",
     category: "EtG Alcohol & Drug Testing",
@@ -1183,6 +1187,8 @@ const TEST_PRODUCTS = {
 
   etg_urine_alcohol: {
     id: "etg_urine_alcohol",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=etg_urine_alcohol",
     name: "EtG Urine Alcohol Test",
     shortName: "EtG Urine Alcohol Test",
     category: "EtG Alcohol Testing",
@@ -1207,6 +1213,8 @@ const TEST_PRODUCTS = {
 
   etg_alcohol_hair: {
     id: "etg_alcohol_hair",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=etg_alcohol_hair",
     name: "EtG Alcohol Hair Test",
     shortName: "EtG Alcohol Hair Test",
     category: "EtG Alcohol Testing",
@@ -1408,7 +1416,7 @@ function getTestOrderUrl(productId) {
   }
 
   if (service.orderType === "custom_form") {
-    return "enterprise-testing-form.html";
+    return "contact.html";
   }
 
   return "checkout.html?service=" + encodeURIComponent(service.id);

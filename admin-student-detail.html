@@ -1,11 +1,150 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Student Detail | screenings4u Admin</title>
-<link rel="icon" type="image/png" href="images/fav.png"><link rel="stylesheet" href="assets/css/admin.css"><link rel="stylesheet" href="assets/css/admin-navigation.css"><link rel="stylesheet" href="assets/css/admin-subpages.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head>
-<body class="admin-page"><div class="admin-app"><nav id="adminNavigation" aria-label="Admin navigation"></nav><main class="admin-main">
-<header class="admin-header"><div><p class="eyebrow">STUDENT MANAGEMENT</p><h1 id="studentName">Student Detail</h1><p id="studentEmail">—</p></div><a class="back-link" href="admin-students.html">← Students</a></header>
-<section class="summary-grid"><article class="metric-card"><span>Enrollment Status</span><strong id="enrollmentStatus">—</strong></article><article class="metric-card"><span>Progress</span><strong id="progressValue">0%</strong></article><article class="metric-card"><span>Quiz Attempts</span><strong id="attemptCount">0</strong></article><article class="metric-card"><span>Certificate</span><strong id="certificateStatus">—</strong></article></section>
-<section class="panel"><div class="panel-heading"><div><p class="eyebrow">LESSON PROGRESS</p><h2>Course Progress</h2></div></div><div id="progressTable" class="table-wrap"><div class="empty-state">Loading...</div></div></section>
-<section class="panel"><div class="panel-heading"><div><p class="eyebrow">QUIZZES</p><h2>Quiz Attempts</h2></div></div><div id="attemptTable" class="table-wrap"><div class="empty-state">Loading...</div></div></section>
-<section class="panel"><div class="panel-heading"><div><p class="eyebrow">CERTIFICATE</p><h2>Certificate</h2></div><button id="issueCertificate" class="primary-button">Issue Certificate</button></div><div id="certificatePanel" class="empty-state">Loading...</div></section>
-<div id="studentToast" class="admin-toast"></div></main></div>
-<script src="assets/js/admin-config.js"></script><script src="assets/js/admin-navigation.js"></script><script src="assets/js/admin-student-detail.js"></script></body></html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Detail | screenings4u Admin</title>
+
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/admin-navigation.css">
+  <link rel="stylesheet" href="assets/css/admin-student-detail.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body class="admin-page">
+  <div class="admin-app">
+    <nav id="adminNavigation" aria-label="Admin navigation"></nav>
+
+    <main class="admin-main admin-student-detail-page">
+      <div class="student-detail-inner">
+
+        <header class="student-hero">
+          <div class="student-hero-copy">
+            <p class="eyebrow">STUDENT MANAGEMENT</p>
+            <h1 id="studentName">Student Detail</h1>
+<p id="studentEmail">
+  Review student enrollment, course progress, quiz activity, and certificate status from one place.
+</p>          </div>
+
+          <div class="student-hero-actions">
+            <button id="refreshStudent" class="refresh-button" type="button">
+              <span aria-hidden="true">↻</span> Refresh
+            </button>
+            <a class="back-link" href="admin-students.html">
+              ← Students
+            </a>
+          </div>
+        </header>
+
+        <section class="summary-grid" aria-label="Student summary">
+          <article class="metric-card">
+            <span>Enrollment Status</span>
+            <strong id="enrollmentStatus">—</strong>
+          </article>
+          <article class="metric-card">
+            <span>Progress</span>
+            <strong id="progressValue">0%</strong>
+          </article>
+          <article class="metric-card">
+            <span>Quiz Attempts</span>
+            <strong id="attemptCount">0</strong>
+          </article>
+          <article class="metric-card">
+            <span>Certificate</span>
+            <strong id="certificateStatus">—</strong>
+          </article>
+        </section>
+
+        <section class="panel student-information-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">STUDENT INFORMATION</p>
+              <h2>Enrollment Details</h2>
+            </div>
+          </div>
+
+          <div class="student-fields">
+            <div>
+              <span>Phone</span>
+              <strong id="studentPhone">—</strong>
+            </div>
+            <div>
+              <span>Company</span>
+              <strong id="studentCompany">—</strong>
+            </div>
+            <div>
+              <span>Course</span>
+              <strong id="studentCourse">Training Course</strong>
+            </div>
+            <div>
+              <span>Enrollment Date</span>
+              <strong id="enrollmentDate">—</strong>
+            </div>
+            <div>
+              <span>Started</span>
+              <strong id="startedDate">—</strong>
+            </div>
+            <div>
+              <span>Completed</span>
+              <strong id="completedDate">—</strong>
+            </div>
+            <div>
+              <span>Last Activity</span>
+              <strong id="lastActivityDate">—</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">LESSON PROGRESS</p>
+              <h2>Course Progress</h2>
+            </div>
+          </div>
+          <div id="progressTable" class="table-wrap">
+            <div class="empty-state">Loading...</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">QUIZZES</p>
+              <h2>Quiz Attempts</h2>
+            </div>
+          </div>
+          <div id="attemptTable" class="table-wrap">
+            <div class="empty-state">Loading...</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading certificate-heading">
+            <div>
+              <p class="eyebrow">CERTIFICATE</p>
+              <h2>Certificate</h2>
+            </div>
+            <button id="issueCertificate" class="primary-button" type="button">
+              Issue Certificate
+            </button>
+          </div>
+
+          <div id="certificatePanel" class="empty-state">
+            Loading...
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <div id="studentToast" class="admin-toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/admin-config.js"></script>
+  <script src="assets/js/admin-navigation.js"></script>
+  <script src="assets/js/admin-student-detail.js"></script>
+</body>
+</html>

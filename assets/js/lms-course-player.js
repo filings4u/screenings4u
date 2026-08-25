@@ -1067,7 +1067,7 @@
 
     $('certificateButton').addEventListener('click', () => {
       location.href =
-        `client-certificate.html?course=${encodeURIComponent(courseId)}`;
+        `lms-certificate.html?course=${encodeURIComponent(courseId)}&enrollment=${encodeURIComponent(state.enrollment?.id || enrollmentId || '')}`;
     });
   }
 

@@ -584,6 +584,22 @@
     $("studentStatusFilter").addEventListener("change", applyFilters);
     $("exportStudentsButton").addEventListener("click", exportCsv);
 
+    const refreshButton = $("refreshStudentsButton");
+    if (refreshButton) {
+      refreshButton.addEventListener("click", async () => {
+        refreshButton.disabled = true;
+        refreshButton.innerHTML = '<span aria-hidden="true">↻</span> Refreshing...';
+        try {
+          $("studentDetail").hidden = true;
+          $("studentsTable").parentElement.hidden = false;
+          await load();
+        } finally {
+          refreshButton.disabled = false;
+          refreshButton.innerHTML = '<span aria-hidden="true">↻</span> Refresh';
+        }
+      });
+    }
+
     $("closeDetailButton").addEventListener("click", () => {
       $("studentDetail").hidden = true;
       $("studentsTable").parentElement.hidden = false;

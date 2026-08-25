@@ -234,10 +234,10 @@
       error
     } =
       await supabaseClient
-        .from("training_enrollments")
+        .from("lms_enrollments")
         .select(`
           *,
-          training_courses (
+          course:lms_courses (
             *
           )
         `)
@@ -291,7 +291,7 @@
       error
     } =
       await supabaseClient
-        .from("training_certificates")
+        .from("lms_certificates")
         .select("*")
         .in(
           "enrollment_id",
@@ -508,7 +508,7 @@
   ) {
 
     const course =
-      enrollment.training_courses ||
+      enrollment.course ||
       {};
 
 
@@ -585,7 +585,7 @@
 
 
         <a
-          href="client-training-player.html?enrollment=${encodeURIComponent(
+          href="lms-course-player.html?course=${encodeURIComponent(enrollment.course_id)}&enrollment=${encodeURIComponent(
             enrollmentId
           )}"
           class="client-primary-button"
@@ -787,7 +787,7 @@
           function (enrollment) {
 
             const course =
-              enrollment.training_courses ||
+              enrollment.course ||
               {};
 
 
@@ -840,7 +840,7 @@
                   certificate
                     ? `
                       <a
-                        href="client-certificates.html"
+                        href="lms-certificate.html?enrollment=${encodeURIComponent(enrollment.id)}"
                         class="client-secondary-button"
                       >
                         Certificate

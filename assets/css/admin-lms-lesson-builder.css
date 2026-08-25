@@ -4,11 +4,12 @@
    ========================================================= */
 
 .training-lesson-page {
-  width: min(1280px, calc(100% - 32px));
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0;
+  width: auto;
+  max-width: none;
+  min-width: 0;
+  margin: 0;
   box-sizing: border-box;
+  background: #f7f8fb;
 }
 
 .training-lesson-header {
@@ -796,5 +797,447 @@
 
   .training-lesson-modal .content-type-list {
     grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   SCREENINGS4U LMS — LESSON BUILDER VISUAL SYSTEM
+   Matches admin-lms-courses / admin-lms-course-preview
+   ========================================================= */
+
+.training-lesson-page {
+  width: 100%;
+  max-width: 1500px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 0 42px;
+  box-sizing: border-box;
+  background: #f7f8fb;
+}
+
+.training-lesson-page .training-lesson-header {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 28px;
+  min-height: 158px;
+  margin: 0 0 20px;
+  padding: 28px 32px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #315a9f 0%, #325aa3 55%, #4c587d 100%);
+  box-shadow: 0 10px 28px rgba(31,55,101,.12);
+}
+
+.training-lesson-page .training-lesson-header::after {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  right: -78px;
+  top: -118px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.training-lesson-page .training-lesson-header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.training-lesson-page .training-lesson-header .training-lesson-eyebrow {
+  margin: 0 0 5px;
+  color: #ff9a59;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.training-lesson-page .training-lesson-header h1 {
+  margin: 0 0 7px;
+  color: #fff;
+  font-size: clamp(34px, 4vw, 46px);
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+
+.training-lesson-page .training-lesson-header-content > p:not(.training-lesson-eyebrow) {
+  margin: 0;
+  max-width: 720px;
+  color: rgba(255,255,255,.82);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.training-lesson-page .training-lesson-header-actions {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 9px;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+}
+
+.training-lesson-page .training-lesson-header-actions .secondary-button {
+  border: 1px solid rgba(255,255,255,.15) !important;
+  background: rgba(255,255,255,.14) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+.training-lesson-page .training-lesson-header-actions .secondary-button:hover {
+  background: rgba(255,255,255,.21) !important;
+}
+
+.training-lesson-page .training-lesson-header-actions .primary-button {
+  border: 1px solid #ff6b00 !important;
+  background: #ff6b00 !important;
+  color: #fff !important;
+  box-shadow: 0 7px 16px rgba(20,30,55,.16) !important;
+}
+
+.training-lesson-page .training-lesson-header-actions .primary-button:hover {
+  background: #e96000 !important;
+  border-color: #e96000 !important;
+}
+
+.training-lesson-page .training-lesson-layout {
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 18px;
+}
+
+.training-lesson-page .training-lesson-main {
+  gap: 16px;
+}
+
+.training-lesson-page .training-lesson-sidebar {
+  top: 18px;
+  gap: 14px;
+}
+
+.training-lesson-page .training-lesson-panel,
+.training-lesson-page .training-lesson-sidebar-panel {
+  border: 1px solid #e3e7ee;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(25,38,62,.065);
+}
+
+.training-lesson-page .training-lesson-panel-heading {
+  padding: 18px 20px;
+  border-bottom: 1px solid #e5e9f0;
+}
+
+.training-lesson-page .training-lesson-panel-heading h2 {
+  color: #202638;
+  font-size: 19px;
+}
+
+.training-lesson-page .training-lesson-panel-help {
+  color: #70788a;
+  font-size: 12px;
+}
+
+.training-lesson-page .training-lesson-form-grid {
+  gap: 14px 16px;
+  padding: 20px;
+}
+
+.training-lesson-page .training-lesson-field > label:not(.training-lesson-check-row) {
+  color: #202638;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.training-lesson-page .training-lesson-field input:not([type="checkbox"]),
+.training-lesson-page .training-lesson-field select,
+.training-lesson-page .training-lesson-field textarea {
+  border-color: #dfe4ec;
+  border-radius: 9px;
+  color: #202638;
+  font-size: 13px;
+}
+
+.training-lesson-page .training-lesson-field input:not([type="checkbox"]),
+.training-lesson-page .training-lesson-field select {
+  height: 42px;
+}
+
+.training-lesson-page .training-lesson-field textarea {
+  min-height: 104px;
+}
+
+.training-lesson-page .training-lesson-field input:focus,
+.training-lesson-page .training-lesson-field select:focus,
+.training-lesson-page .training-lesson-field textarea:focus {
+  border-color: rgba(50,90,163,.55);
+  box-shadow: 0 0 0 3px rgba(50,90,163,.08);
+}
+
+.training-lesson-page .training-lesson-status {
+  min-height: 23px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.training-lesson-page .training-lesson-status-draft {
+  background: #eef3fb;
+  color: #325aa3;
+}
+
+.training-lesson-page .training-lesson-status-published {
+  background: #eaf7f0;
+  color: #1d6b45;
+}
+
+.training-lesson-page .training-lesson-status-archived {
+  background: #fff4e7;
+  color: #7b4f16;
+}
+
+.training-lesson-page .training-lesson-content-type-list {
+  gap: 7px;
+  margin-top: 13px;
+}
+
+.training-lesson-page .training-lesson-content-type-list .content-type-button {
+  min-height: 38px;
+  padding: 8px 9px;
+  border: 1px solid #dfe4ec;
+  border-radius: 8px;
+  background: #fff;
+  color: #202638;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.training-lesson-page .training-lesson-content-type-list .content-type-button:hover {
+  border-color: #325aa3;
+  background: #f4f7fc;
+  color: #325aa3;
+}
+
+.training-lesson-page .training-lesson-summary-row {
+  padding: 9px 0;
+}
+
+.training-lesson-page .training-lesson-summary-row span {
+  color: #70788a;
+  font-size: 11px;
+}
+
+.training-lesson-page .training-lesson-summary-row strong {
+  color: #202638;
+  font-size: 13px;
+}
+
+.training-lesson-page .training-lesson-content-block-list {
+  gap: 11px;
+  padding: 17px 20px 20px;
+}
+
+.training-lesson-page .training-lesson-content-block-list .empty-state {
+  padding: 32px 18px;
+  border: 1px dashed #ccd2de;
+  border-radius: 10px;
+  background: #fafbfd;
+  color: #70788a;
+  font-size: 12px;
+}
+
+.training-lesson-page .content-block {
+  border: 1px solid #e3e7ee;
+  border-radius: 11px;
+  box-shadow: none;
+}
+
+.training-lesson-page .content-block-header {
+  padding: 12px 14px;
+  background: #fafbfd;
+  border-bottom: 1px solid #e5e9f0;
+}
+
+.training-lesson-page .content-block-title {
+  color: #202638;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.training-lesson-page .content-block-type {
+  color: #70788a;
+  font-size: 9px;
+}
+
+.training-lesson-page .content-block-actions button {
+  min-height: 29px !important;
+  height: 29px !important;
+  padding: 0 8px !important;
+  border-radius: 7px !important;
+  font-size: 10px !important;
+}
+
+.training-lesson-page .content-block-body {
+  padding: 15px;
+}
+
+.training-lesson-page .block-preview {
+  color: #3d4557;
+  font-size: 12px;
+}
+
+.training-lesson-page .training-lesson-panel .primary-button {
+  border-color: #325aa3 !important;
+  background: #325aa3 !important;
+  color: #fff !important;
+}
+
+.training-lesson-page .training-lesson-panel .secondary-button {
+  border-color: #dfe4ec !important;
+  background: #fff !important;
+  color: #325aa3 !important;
+}
+
+.training-lesson-modal .training-lesson-modal-card {
+  width: min(720px, calc(100vw - 32px));
+  max-height: calc(100vh - 40px);
+  border: 1px solid #dfe4ec;
+  border-radius: 14px;
+}
+
+.training-lesson-modal .training-lesson-modal-header {
+  padding: 18px 20px;
+}
+
+.training-lesson-modal .training-lesson-modal-header .training-lesson-eyebrow {
+  color: #ff6b00;
+}
+
+.training-lesson-modal .training-lesson-modal-header h2 {
+  color: #202638;
+  font-size: 21px;
+}
+
+.training-lesson-modal .training-lesson-modal-body {
+  padding: 20px;
+}
+
+.training-lesson-modal .training-lesson-modal-actions {
+  padding: 14px 20px;
+}
+
+.training-lesson-modal .block-form input:not([type="checkbox"]),
+.training-lesson-modal .block-form select,
+.training-lesson-modal .block-form textarea,
+.training-lesson-modal .block-form input[type="file"] {
+  border-color: #dfe4ec;
+  border-radius: 9px;
+}
+
+@media (max-width: 1000px) {
+  .training-lesson-page .training-lesson-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .training-lesson-page .training-lesson-sidebar {
+    position: static;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .training-lesson-page .training-lesson-header {
+    flex-direction: column;
+    min-height: 0;
+    padding: 24px;
+  }
+
+  .training-lesson-page .training-lesson-header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .training-lesson-page .training-lesson-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .training-lesson-page .training-lesson-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .training-lesson-page .training-lesson-field-wide {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 430px) {
+  .training-lesson-page .training-lesson-header h1 {
+    font-size: 34px;
+  }
+
+  .training-lesson-page .training-lesson-header-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .training-lesson-page .training-lesson-header-actions a,
+  .training-lesson-page .training-lesson-header-actions button {
+    width: 100%;
+  }
+}
+
+
+
+/* =========================================================
+   LESSON BUILDER — EXACT SHARED ADMIN SHELL
+   This <main> is also .admin-main. Match the other admin pages
+   instead of creating a second page container inside the shell.
+   ========================================================= */
+
+.admin-app > main.admin-main.training-lesson-page {
+  width: auto !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 38px !important;
+  box-sizing: border-box !important;
+  background: #f7f8fb !important;
+}
+
+/* The builder itself fills the exact content width created by
+   the shared admin-main padding. */
+.admin-app > main.admin-main.training-lesson-page .training-lesson-header,
+.admin-app > main.admin-main.training-lesson-page .training-lesson-layout {
+  width: 100%;
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1050px) {
+  .admin-app > main.admin-main.training-lesson-page {
+    padding: 30px !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .admin-app > main.admin-main.training-lesson-page {
+    padding: 22px 15px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .admin-app > main.admin-main.training-lesson-page {
+    padding: 20px 12px !important;
   }
 }

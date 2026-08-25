@@ -3,7 +3,56 @@
   'use strict';
 
   const params = new URLSearchParams(location.search);
-  const lessonId = params.get('lesson');
+
+  function resolveLessonId() {
+    const direct =
+      params.get('lesson') ||
+      params.get('lesson_id');
+
+    if (direct) {
+      try {
+        sessionStorage.setItem(
+          'screenings4u_preview_lesson_id',
+          direct
+        );
+      } catch (_) {}
+
+      return direct;
+    }
+
+    /*
+     * If Preview was opened from Lesson Builder in a new tab,
+     * recover the lesson from the referrer when available.
+     */
+    try {
+      if (document.referrer) {
+        const referrerUrl = new URL(document.referrer, location.href);
+        const referrerParams = new URLSearchParams(referrerUrl.search);
+        const referrerLesson =
+          referrerParams.get('lesson') ||
+          referrerParams.get('lesson_id');
+
+        if (referrerLesson) {
+          sessionStorage.setItem(
+            'screenings4u_preview_lesson_id',
+            referrerLesson
+          );
+
+          return referrerLesson;
+        }
+      }
+    } catch (_) {}
+
+    try {
+      return sessionStorage.getItem(
+        'screenings4u_preview_lesson_id'
+      ) || '';
+    } catch (_) {
+      return '';
+    }
+  }
+
+  const lessonId = resolveLessonId();
 
   const state = {
     lesson: null,
@@ -40,7 +89,9 @@
     );
 
     if (!client) {
-      throw new Error('Supabase client was not found. Check admin-config.js.');
+      throw new Error(
+        'Supabase client was not found. Check admin-config.js.'
+      );
     }
 
     return client;
@@ -64,7 +115,10 @@
     el.className = `admin-toast ${type} show`;
 
     clearTimeout(toast.timer);
-    toast.timer = setTimeout(() => el.classList.remove('show'), 4000);
+    toast.timer = setTimeout(
+      () => el.classList.remove('show'),
+      4000
+    );
   }
 
   function blockLabel(type) {
@@ -80,7 +134,9 @@
     const token = data?.session?.access_token;
 
     if (!token) {
-      throw new Error('Your session has expired. Please sign in again.');
+      throw new Error(
+        'Your session has expired. Please sign in again.'
+      );
     }
 
     return token;
@@ -100,7 +156,9 @@
     if (error) throw error;
 
     if (!data?.success) {
-      throw new Error(data?.error || `The ${name} function failed.`);
+      throw new Error(
+        data?.error || `The ${name} function failed.`
+      );
     }
 
     return data;
@@ -110,7 +168,9 @@
     const cleanId = String(videoId || '').trim();
 
     if (!cleanId) {
-      throw new Error('Cloudflare Stream Video ID is missing.');
+      throw new Error(
+        'Cloudflare Stream Video ID is missing.'
+      );
     }
 
     /*
@@ -127,9 +187,10 @@
      * normal Cloudflare Stream UID player for admin preview.
      */
     try {
-      const result = await callSupabaseFunction('cloudflare-stream-token', {
-        videoId: cleanId
-      });
+      const result = await callSupabaseFunction(
+        'cloudflare-stream-token',
+        { videoId: cleanId }
+      );
 
       if (result.embedUrl) {
         return {
@@ -140,13 +201,16 @@
 
       if (result.customerCode && result.token) {
         return {
-          url: `https://customer-${result.customerCode}.cloudflarestream.com/${encodeURIComponent(result.token)}/iframe`,
+          url:
+            `https://customer-${result.customerCode}.cloudflarestream.com/` +
+            `${encodeURIComponent(result.token)}/iframe`,
           secure: true
         };
       }
     } catch (error) {
       console.warn(
-        'Secure Cloudflare playback token was unavailable. Falling back to admin preview playback.',
+        'Secure Cloudflare playback token was unavailable. ' +
+        'Falling back to admin preview playback.',
         error
       );
     }
@@ -156,27 +220,36 @@
      * This works while the Cloudflare video is not configured to require
      * signed URLs. Do not use this fallback for the student-facing player.
      */
-    const customerCode = window.CLOUDFLARE_STREAM_CUSTOMER_CODE;
+    const customerCode =
+      window.CLOUDFLARE_STREAM_CUSTOMER_CODE;
 
     if (!customerCode) {
       throw new Error(
-        'Cloudflare secure playback is not configured yet. Add the customer code to the preview configuration or update the token function.'
+        'Cloudflare secure playback is not configured yet. ' +
+        'Add the customer code to the preview configuration or update the token function.'
       );
     }
 
     return {
-      url: `https://customer-${customerCode}.cloudflarestream.com/${encodeURIComponent(cleanId)}/iframe`,
+      url:
+        `https://customer-${customerCode}.cloudflarestream.com/` +
+        `${encodeURIComponent(cleanId)}/iframe`,
       secure: false
     };
   }
 
   async function resolveMediaUrl(block) {
-    const value = String(block.external_url || '').trim();
+    const value = String(
+      block.external_url || ''
+    ).trim();
 
     if (!value) return '';
 
     // Full external URLs are already usable.
-    if (/^https?:\/\//i.test(value) || /^data:/i.test(value)) {
+    if (
+      /^https?:\/\//i.test(value) ||
+      /^data:/i.test(value)
+    ) {
       return value;
     }
 
@@ -191,7 +264,10 @@
         return data.signedUrl;
       }
     } catch (error) {
-      console.warn('Unable to create signed media URL.', error);
+      console.warn(
+        'Unable to create signed media URL.',
+        error
+      );
     }
 
     return value;
@@ -214,7 +290,8 @@
 
   async function renderBlock(block) {
     const content = block.content || '';
-    const title = block.title || blockLabel(block.block_type);
+    const title =
+      block.title || blockLabel(block.block_type);
 
     if (block.block_type === 'heading') {
       return `
@@ -227,7 +304,10 @@
     if (block.block_type === 'text') {
       return `
         <section class="preview-block preview-text">
-          ${esc(content).replace(/\n/g, '<br>') || '<em>No text entered.</em>'}
+          ${
+            esc(content).replace(/\n/g, '<br>') ||
+            '<em>No text entered.</em>'
+          }
         </section>
       `;
     }
@@ -238,38 +318,55 @@
         block.media?.provider_video_id ||
         '';
 
-      /*
-       * New Cloudflare Stream video.
-       */
       if (cloudflareVideoId) {
         try {
-          const playback = await getCloudflarePlaybackUrl(cloudflareVideoId);
+          const playback =
+            await getCloudflarePlaybackUrl(
+              cloudflareVideoId
+            );
 
           return `
             <section class="preview-block preview-video-block">
-              <h3 class="preview-block-label">${esc(title)}</h3>
+              <h3 class="preview-block-label">
+                ${esc(title)}
+              </h3>
 
-              ${cloudflarePlayerMarkup(playback.url, title)}
+              ${cloudflarePlayerMarkup(
+                playback.url,
+                title
+              )}
 
               <div class="preview-video-meta">
                 <span>Cloudflare Stream</span>
-                ${playback.secure
-                  ? '<span class="preview-video-secure">Secure playback</span>'
-                  : '<span>Admin preview</span>'
+                ${
+                  playback.secure
+                    ? '<span class="preview-video-secure">Secure playback</span>'
+                    : '<span>Admin preview</span>'
                 }
               </div>
             </section>
           `;
         } catch (error) {
-          console.error('Cloudflare video playback failed:', error);
+          console.error(
+            'Cloudflare video playback failed:',
+            error
+          );
 
           return `
             <section class="preview-block preview-video-block">
-              <h3 class="preview-block-label">${esc(title)}</h3>
+              <h3 class="preview-block-label">
+                ${esc(title)}
+              </h3>
+
               <div class="preview-placeholder preview-video-error">
                 Unable to load the Cloudflare video.
                 <br>
-                <small>${esc(error.message || 'Video playback is not configured.')}</small>
+                <small>
+                  ${esc(
+                    error.message ||
+                    'Video playback is not configured.'
+                  )}
+                </small>
               </div>
             </section>
           `;
@@ -283,11 +380,25 @@
 
       return `
         <section class="preview-block preview-video-block">
-          <h3 class="preview-block-label">${esc(title)}</h3>
+          <h3 class="preview-block-label">
+            ${esc(title)}
+          </h3>
+
           ${
             url
-              ? `<video class="preview-native-video" controls preload="metadata" src="${esc(url)}"></video>`
-              : `<div class="preview-placeholder">Video media is not configured.</div>`
+              ? `
+                <video
+                  class="preview-native-video"
+                  controls
+                  preload="metadata"
+                  src="${esc(url)}"
+                ></video>
+              `
+              : `
+                <div class="preview-placeholder">
+                  Video media is not configured.
+                </div>
+              `
           }
         </section>
       `;
@@ -298,11 +409,23 @@
 
       return `
         <section class="preview-block">
-          <h3 class="preview-block-label">${esc(title)}</h3>
+          <h3 class="preview-block-label">
+            ${esc(title)}
+          </h3>
+
           ${
             url
-              ? `<audio controls src="${esc(url)}"></audio>`
-              : `<div class="preview-placeholder">Audio media is not configured.</div>`
+              ? `
+                <audio
+                  controls
+                  src="${esc(url)}"
+                ></audio>
+              `
+              : `
+                <div class="preview-placeholder">
+                  Audio media is not configured.
+                </div>
+              `
           }
         </section>
       `;
@@ -313,22 +436,41 @@
 
       return `
         <section class="preview-block">
-          <h3 class="preview-block-label">${esc(title)}</h3>
+          <h3 class="preview-block-label">
+            ${esc(title)}
+          </h3>
+
           ${
             url
-              ? `<img class="preview-image" src="${esc(url)}" alt="${esc(title)}">`
-              : `<div class="preview-placeholder">Image media is not configured.</div>`
+              ? `
+                <img
+                  class="preview-image"
+                  src="${esc(url)}"
+                  alt="${esc(title)}"
+                >
+              `
+              : `
+                <div class="preview-placeholder">
+                  Image media is not configured.
+                </div>
+              `
           }
         </section>
       `;
     }
 
-    if (block.block_type === 'pdf' || block.block_type === 'download') {
+    if (
+      block.block_type === 'pdf' ||
+      block.block_type === 'download'
+    ) {
       const url = await resolveMediaUrl(block);
 
       return `
         <section class="preview-block preview-file-block">
-          <h3 class="preview-block-label">${esc(title)}</h3>
+          <h3 class="preview-block-label">
+            ${esc(title)}
+          </h3>
+
           ${
             url
               ? `
@@ -338,17 +480,24 @@
                   target="_blank"
                   rel="noopener"
                 >
-                  Open ${esc(blockLabel(block.block_type))}
+                  Open ${esc(
+                    blockLabel(block.block_type)
+                  )}
                 </a>
               `
-              : `<div class="preview-placeholder">File is not configured.</div>`
+              : `
+                <div class="preview-placeholder">
+                  File is not configured.
+                </div>
+              `
           }
         </section>
       `;
     }
 
     if (block.block_type === 'link') {
-      const url = block.external_url || '#';
+      const url =
+        block.external_url || '#';
 
       return `
         <section class="preview-block">
@@ -365,39 +514,64 @@
     }
 
     if (block.block_type === 'embed') {
-      const url = block.external_url || '';
-      const height = Number(block.settings?.height || 350);
+      const url =
+        block.external_url || '';
+
+      const height =
+        Number(block.settings?.height || 350);
 
       return `
         <section class="preview-block">
-          <h3 class="preview-block-label">${esc(title)}</h3>
+          <h3 class="preview-block-label">
+            ${esc(title)}
+          </h3>
+
           ${
             url
               ? `
                 <iframe
                   src="${esc(url)}"
                   title="${esc(title)}"
-                  style="width:100%;height:${Math.max(150, height)}px;border:0;border-radius:10px;"
+                  style="
+                    width:100%;
+                    height:${Math.max(150, height)}px;
+                    border:0;
+                    border-radius:10px;
+                  "
                 ></iframe>
               `
-              : `<div class="preview-placeholder">Embed URL is not configured.</div>`
+              : `
+                <div class="preview-placeholder">
+                  Embed URL is not configured.
+                </div>
+              `
           }
         </section>
       `;
     }
 
     if (block.block_type === 'divider') {
-      return `<hr class="preview-divider">`;
+      return `
+        <hr class="preview-divider">
+      `;
     }
 
-    if (block.block_type === 'quiz' || block.block_type === 'knowledge_check') {
+    if (
+      block.block_type === 'quiz' ||
+      block.block_type === 'knowledge_check'
+    ) {
       return `
         <section class="preview-block preview-assessment">
           <span class="preview-assessment-type">
             ${esc(blockLabel(block.block_type))}
           </span>
+
           <h3>${esc(title)}</h3>
-          <p>This assessment block is connected to the assessment builder.</p>
+
+          <p>
+            This assessment block is connected to
+            the assessment builder.
+          </p>
         </section>
       `;
     }
@@ -405,9 +579,16 @@
     if (block.block_type === 'form') {
       return `
         <section class="preview-block preview-assessment">
-          <span class="preview-assessment-type">FORM</span>
+          <span class="preview-assessment-type">
+            FORM
+          </span>
+
           <h3>${esc(title)}</h3>
-          <p>This form block is connected to the form builder.</p>
+
+          <p>
+            This form block is connected to
+            the form builder.
+          </p>
         </section>
       `;
     }
@@ -421,10 +602,15 @@
 
   async function loadPreview() {
     if (!lessonId) {
-      throw new Error('No lesson ID was provided.');
+      throw new Error(
+        'No lesson ID was provided. Open this preview from the Lesson Builder.'
+      );
     }
 
-    const { data: lesson, error: lessonError } = await db()
+    const {
+      data: lesson,
+      error: lessonError
+    } = await db()
       .from('lms_lessons')
       .select(`
         *,
@@ -443,50 +629,118 @@
 
     if (lessonError) throw lessonError;
 
-    const { data: blocks, error: blocksError } = await db()
+    const {
+      data: blocks,
+      error: blocksError
+    } = await db()
       .from('lms_content_blocks')
       .select('*')
       .eq('lesson_id', lessonId)
-      .order('sort_order', { ascending: true });
+      .order('sort_order', {
+        ascending: true
+      });
 
     if (blocksError) throw blocksError;
 
     state.lesson = lesson;
     state.blocks = blocks || [];
 
-    $('previewTitle').textContent = lesson.title || 'Lesson';
+    try {
+      sessionStorage.setItem(
+        'screenings4u_preview_lesson_id',
+        lessonId
+      );
+    } catch (_) {}
+
+    $('previewTitle').textContent =
+      lesson.title || 'Lesson';
 
     $('previewSubtitle').textContent =
-      `${lesson.lms_sections?.lms_courses?.title || 'Course'} · ${lesson.lms_sections?.title || 'Section'}`;
+      `${
+        lesson.lms_sections?.lms_courses?.title ||
+        'Course'
+      } · ${
+        lesson.lms_sections?.title ||
+        'Section'
+      }`;
 
-    $('backToLesson').addEventListener('click', () => {
-      location.href =
-        `admin-lms-lesson-builder.html?lesson=${encodeURIComponent(lessonId)}`;
-    }, { once: true });
+    $('backToLesson').addEventListener(
+      'click',
+      () => {
+        location.href =
+          `admin-lms-lesson-builder.html?lesson=${
+            encodeURIComponent(lessonId)
+          }`;
+      },
+      { once: true }
+    );
+
+    const refreshButton = $('refreshOrders');
+    if (refreshButton) {
+      refreshButton.onclick = async () => {
+        refreshButton.disabled = true;
+        refreshButton.innerHTML = '<span aria-hidden="true">↻</span> Refreshing...';
+        $('previewContent').innerHTML =
+          '<div class="preview-loading">Refreshing lesson preview...</div>';
+
+        try {
+          await loadPreview();
+          toast('Lesson preview refreshed.', 'success');
+        } catch (error) {
+          console.error(error);
+          toast(
+            error.message || 'Unable to refresh lesson preview.',
+            'error'
+          );
+        } finally {
+          refreshButton.disabled = false;
+          refreshButton.innerHTML =
+            '<span aria-hidden="true">↻</span> Refresh Preview';
+        }
+      };
+    }
 
     if (!state.blocks.length) {
       $('previewContent').innerHTML = `
         <div class="preview-empty">
           <h2>No content yet</h2>
-          <p>This lesson does not contain any content blocks.</p>
+          <p>
+            This lesson does not contain any
+            content blocks.
+          </p>
         </div>
       `;
+
       return;
     }
 
     const rendered = [];
 
     for (const block of state.blocks) {
-      rendered.push(await renderBlock(block));
+      rendered.push(
+        await renderBlock(block)
+      );
     }
 
     $('previewContent').innerHTML = `
       <div class="preview-lesson-intro">
-        <span class="preview-eyebrow">LESSON PREVIEW</span>
-        <h2>${esc(lesson.title || 'Lesson')}</h2>
+        <span class="preview-eyebrow">
+          LESSON PREVIEW
+        </span>
+
+        <h2>
+          ${esc(lesson.title || 'Lesson')}
+        </h2>
+
         ${
           lesson.description
-            ? `<p>${esc(lesson.description).replace(/\n/g, '<br>')}</p>`
+            ? `
+              <p>
+                ${esc(
+                  lesson.description
+                ).replace(/\n/g, '<br>')}
+              </p>
+            `
             : ''
         }
       </div>
@@ -505,8 +759,17 @@
 
       $('previewContent').innerHTML = `
         <div class="preview-error">
-          <h2>Unable to load lesson preview</h2>
-          <p>${esc(error.message || 'An unexpected error occurred.')}</p>
+          <h2>
+            Unable to load lesson preview
+          </h2>
+
+          <p>
+            ${esc(
+              error.message ||
+              'An unexpected error occurred.'
+            )}
+          </p>
+
           <button
             class="primary-button"
             type="button"
@@ -517,7 +780,11 @@
         </div>
       `;
 
-      toast(error.message || 'Unable to load lesson preview.', 'error');
+      toast(
+        error.message ||
+        'Unable to load lesson preview.',
+        'error'
+      );
     }
   }
 

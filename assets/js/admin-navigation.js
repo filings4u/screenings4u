@@ -1,6 +1,6 @@
 /* =========================================================
-   screenings4u ADMIN NAVIGATION — v2
-   Shared navigation for all admin pages
+   screenings4u ADMIN NAVIGATION
+   Shared admin sidebar
    ========================================================= */
 
 (() => {
@@ -13,118 +13,77 @@
     dashboard: "admin-dashboard.html",
     login: "admin-login.html",
     website: "index.html",
-    storageKey: "screenings4u-admin-nav-state"
+
+    storageKey: "screenings4u-admin-sidebar-collapsed"
   };
 
   /*
-   * Navigation is intentionally organized around the actual
-   * admin/LMS workflow already built:
+   * ONLY TOP-LEVEL ADMIN PAGES BELONG HERE.
    *
-   * Overview
-   * Customers
-   * Commerce
-   * LMS Content
-   * Learners
-   * Administration
-   *
-   * Detail/builder pages remain addressable directly and are
-   * automatically associated with their parent section.
+   * Internal/detail/builder pages are intentionally excluded.
    */
-  const groups = [
+  const pages = [
     {
-      id: "overview",
-      label: "Overview",
-      items: [
-        {
-          label: "Dashboard",
-          href: "admin-dashboard.html",
-          icon: "dashboard"
-        }
-      ]
+      id: "dashboard",
+      label: "Dashboard",
+      href: "admin-dashboard.html",
+      icon: "dashboard"
     },
-
     {
       id: "customers",
       label: "Customers",
-      items: [
+      href: "admin-customers.html",
+      icon: "customers"
+    },
+    {
+      id: "accounts",
+      label: "Accounts",
+      href: "admin-accounts.html",
+      icon: "accounts"
+    },
+    {
+      id: "orders",
+      label: "Orders",
+      href: "admin-orders.html",
+      icon: "orders"
+    },
+    {
+      id: "training",
+      label: "Training",
+      icon: "training",
+      dropdown: true,
+      children: [
         {
-          label: "Customers",
-          href: "admin-customers.html",
-          icon: "customers"
+          id: "courses",
+          label: "Courses",
+          href: "admin-lms-courses.html"
         },
         {
-          label: "Accounts",
-          href: "admin-accounts.html",
-          icon: "accounts"
-        }
-      ]
-    },
-
-    {
-      id: "commerce",
-      label: "Commerce",
-      items: [
-        {
-          label: "Orders",
-          href: "admin-orders.html",
-          icon: "orders"
-        }
-      ]
-    },
-
-    {
-      id: "lms-content",
-      label: "LMS Content",
-      items: [
-        {
-          label: "Course Builder",
-          href: "admin-lms-course-builder.html",
-          icon: "course"
+          id: "courseManager",
+          label: "Course Manager",
+          href: "admin-lms-course-manager.html"
         },
         {
-          label: "Lesson Builder",
-          href: "admin-lms-lesson-builder.html",
-          icon: "lesson"
-        },
-        {
-          label: "Assessment Builder",
-          href: "admin-lms-assessment-builder.html",
-          icon: "assessment"
-        }
-      ]
-    },
-
-    {
-      id: "learners",
-      label: "Learners",
-      items: [
-        {
+          id: "students",
           label: "Students",
-          href: "admin-students.html",
-          icon: "students"
+          href: "admin-students.html"
         },
         {
-          label: "Student Detail",
-          href: "admin-student-detail.html",
-          icon: "student-detail"
+          id: "studentProgress",
+          label: "Student Progress",
+          href: "admin-student-progress.html"
         }
       ]
     },
-
     {
-      id: "administration",
-      label: "Administration",
-      items: [
-        {
-          label: "Audit Log",
-          href: "admin-audit.html",
-          icon: "audit"
-        }
-      ]
+      id: "audit",
+      label: "Audit Log",
+      href: "admin-audit.html",
+      icon: "audit"
     }
   ];
 
-  const currentPage = normalizePath(window.location.pathname) || CONFIG.dashboard;
+  const currentPage = normalizePath(window.location.pathname);
 
   const iconPaths = {
     dashboard: `
@@ -133,79 +92,83 @@
       <rect x="3.5" y="13.5" width="7" height="7" rx="1.2"></rect>
       <rect x="13.5" y="13.5" width="7" height="7" rx="1.2"></rect>
     `,
+
     customers: `
       <circle cx="9" cy="8" r="3"></circle>
       <path d="M3.5 20c.5-3.2 2.3-5 5.5-5s5 1.8 5.5 5"></path>
       <path d="M16 5.5c1.8.2 3 1.3 3 3s-1.2 2.8-3 3"></path>
       <path d="M17 15c2 .5 3.2 2 3.5 5"></path>
     `,
+
     accounts: `
       <circle cx="12" cy="8" r="3.2"></circle>
       <path d="M5 21c.5-4.1 2.8-6.5 7-6.5s6.5 2.4 7 6.5"></path>
       <path d="M18.5 4.5v4"></path>
       <path d="M16.5 6.5h4"></path>
     `,
+
     orders: `
       <path d="M5 4.5h14v15H5z"></path>
       <path d="M8 8h8"></path>
       <path d="M8 12h8"></path>
       <path d="M8 16h5"></path>
     `,
-    course: `
-      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22z"></path>
-      <path d="M4 5.5v16"></path>
-      <path d="M8 7h8"></path>
-      <path d="M8 11h8"></path>
-      <path d="M8 15h6"></path>
-    `,
-    lesson: `
-      <path d="M5 4h14v16H5z"></path>
-      <path d="M8 8h8"></path>
-      <path d="M8 12h8"></path>
-      <path d="M8 16h5"></path>
-    `,
-    assessment: `
-      <rect x="4" y="3" width="16" height="18" rx="2"></rect>
-      <path d="m8 9 2 2 4-4"></path>
-      <path d="M8 15h8"></path>
-    `,
+
     students: `
       <circle cx="12" cy="8" r="3"></circle>
       <path d="M5 21c.5-4 2.8-6 7-6s6.5 2 7 6"></path>
     `,
-    "student-detail": `
-      <circle cx="12" cy="8" r="3"></circle>
-      <path d="M5 21c.5-4 2.8-6 7-6s6.5 2 7 6"></path>
-      <path d="M19 4v4"></path>
-      <path d="M17 6h4"></path>
+
+    training: `
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"></path>
+      <path d="M4 5.5V21"></path>
+      <path d="M8 7h8"></path>
+      <path d="M8 11h8"></path>
     `,
+
+    courseManager: `
+      <path d="M4 5h16v14H4z"></path>
+      <path d="M8 9h8"></path>
+      <path d="M8 13h5"></path>
+      <path d="m16 15 2 2 3-4"></path>
+    `,
+
     audit: `
       <path d="M5 4h14v16H5z"></path>
       <path d="M8 8h8"></path>
       <path d="M8 12h8"></path>
       <path d="M8 16h5"></path>
     `,
+
     website: `
       <path d="M14 5h5v5"></path>
       <path d="M10 14 19 5"></path>
       <path d="M19 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"></path>
     `,
+
     logout: `
       <path d="M10 5H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4"></path>
       <path d="m14 8 4 4-4 4"></path>
       <path d="M18 12H9"></path>
     `,
+
+    collapse: `
+      <path d="m15 6-6 6 6 6"></path>
+    `,
+
+    expand: `
+      <path d="m9 6 6 6-6 6"></path>
+    `,
+
     menu: `
       <path d="M4 7h16"></path>
       <path d="M4 12h16"></path>
       <path d="M4 17h16"></path>
     `,
+
     close: `
       <path d="m6 6 12 12"></path>
       <path d="m18 6-12 12"></path>
-    `,
-    chevron: `
-      <path d="m7 10 5 5 5-5"></path>
     `
   };
 
@@ -240,128 +203,165 @@
     `;
   }
 
-  /*
-   * Builder/detail routes can contain query strings. The main
-   * navigation page is still the page filename, so:
-   * admin-lms-lesson-builder.html?lesson=... remains active.
-   */
-  function isCurrent(item) {
-    return normalizePath(item.href) === currentPage;
+  function isActive(page) {
+    if (page.href) {
+      return normalizePath(page.href) === currentPage;
+    }
+
+    if (Array.isArray(page.children)) {
+      return page.children.some(child =>
+        normalizePath(child.href) === currentPage
+      );
+    }
+
+    return false;
   }
 
-  function groupIsActive(group) {
-    return group.items.some(isCurrent);
+  function isTrainingChildActive(page) {
+    return normalizePath(page.href) === currentPage;
   }
 
-  function getSavedState() {
+  function getCollapsedState() {
     try {
-      const raw = localStorage.getItem(CONFIG.storageKey);
-      return raw ? JSON.parse(raw) : {};
+      return localStorage.getItem(CONFIG.storageKey) === "true";
     } catch {
-      return {};
+      return false;
     }
   }
 
-  function saveState(state) {
+  function setCollapsedState(collapsed) {
     try {
-      localStorage.setItem(CONFIG.storageKey, JSON.stringify(state));
+      localStorage.setItem(
+        CONFIG.storageKey,
+        String(collapsed)
+      );
     } catch {
-      /* Storage is optional. */
+      /* Local storage is optional. */
     }
   }
 
-  function renderItem(item) {
-    const active = isCurrent(item);
+  function renderPages() {
+    return pages.map(page => {
+      const active = isActive(page);
 
-    return `
-      <a
-        href="${escapeHtml(item.href)}"
-        class="admin-nav-item ${active ? "active" : ""}"
-        ${active ? 'aria-current="page"' : ""}
-      >
-        <span class="admin-nav-icon">
-          ${icon(item.icon)}
-        </span>
+      if (page.dropdown && Array.isArray(page.children)) {
+        return `
+          <div class="admin-nav-dropdown ${active ? "active" : ""}">
+            <button
+              type="button"
+              class="admin-nav-item admin-nav-dropdown-toggle ${active ? "active" : ""}"
+              aria-expanded="${active ? "true" : "false"}"
+              aria-controls="adminNavDropdown-${escapeHtml(page.id)}"
+            >
+              <span class="admin-nav-icon">
+                ${icon(page.icon)}
+              </span>
 
-        <span class="admin-nav-label">
-          ${escapeHtml(item.label)}
-        </span>
-      </a>
-    `;
-  }
+              <span class="admin-nav-label">
+                ${escapeHtml(page.label)}
+              </span>
 
-  function renderGroup(group, savedState) {
-    const active = groupIsActive(group);
+              <span class="admin-nav-chevron">
+                ${icon(active ? "collapse" : "expand")}
+              </span>
+            </button>
 
-    /*
-     * Active sections are always open. Other sections remember
-     * the administrator's last open/closed preference.
-     */
-    const open =
-      active ||
-      savedState[group.id] === true ||
-      (savedState[group.id] === undefined && group.id !== "administration");
+            <div
+              class="admin-nav-submenu"
+              id="adminNavDropdown-${escapeHtml(page.id)}"
+              ${active ? "" : "hidden"}
+              style="display: ${active ? "grid" : "none"};"
+            >
+              ${page.children.map(child => {
+                const childActive = isTrainingChildActive(child);
 
-    return `
-      <section
-        class="admin-nav-section ${open ? "open" : ""}"
-        data-nav-group="${escapeHtml(group.id)}"
-      >
-        <button
-          type="button"
-          class="admin-nav-group-toggle"
-          aria-expanded="${open ? "true" : "false"}"
-          aria-controls="admin-nav-group-${escapeHtml(group.id)}"
+                return `
+                  <a
+                    href="${escapeHtml(child.href)}"
+                    class="admin-nav-subitem ${childActive ? "active" : ""}"
+                    ${childActive ? 'aria-current="page"' : ""}
+                  >
+                    <span class="admin-nav-subitem-dot"></span>
+                    <span class="admin-nav-subitem-label">
+                      ${escapeHtml(child.label)}
+                    </span>
+                  </a>
+                `;
+              }).join("")}
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <a
+          href="${escapeHtml(page.href)}"
+          class="admin-nav-item ${active ? "active" : ""}"
+          ${active ? 'aria-current="page"' : ""}
         >
-          <span class="admin-nav-group-heading">
-            <span class="admin-nav-group-dot" aria-hidden="true"></span>
-            <span class="admin-nav-group-label">
-              ${escapeHtml(group.label)}
-            </span>
+          <span class="admin-nav-icon">
+            ${icon(page.icon)}
           </span>
 
-          <span class="admin-nav-chevron" aria-hidden="true">
-            ${icon("chevron")}
+          <span class="admin-nav-label">
+            ${escapeHtml(page.label)}
           </span>
-        </button>
-
-        <div
-          id="admin-nav-group-${escapeHtml(group.id)}"
-          class="admin-nav-group-items"
-          ${open ? "" : "hidden"}
-        >
-          ${group.items.map(renderItem).join("")}
-        </div>
-      </section>
-    `;
+        </a>
+      `;
+    }).join("");
   }
 
   function render() {
-    const savedState = getSavedState();
+    const collapsed = getCollapsedState();
+
+    if (collapsed) {
+      document.body.classList.add("admin-nav-collapsed");
+    } else {
+      document.body.classList.remove("admin-nav-collapsed");
+    }
 
     root.innerHTML = `
       <div class="admin-nav-shell">
 
+        <!-- =================================================
+             MOBILE BAR
+             ================================================= -->
+
         <div class="admin-nav-mobile-bar">
+
           <button
             type="button"
             class="admin-nav-mobile-toggle"
             id="adminNavMobileToggle"
             aria-label="Open admin navigation"
             aria-expanded="false"
-            aria-controls="adminNavDrawer"
           >
             ${icon("menu")}
           </button>
 
-          <span class="admin-nav-mobile-title">Admin Console</span>
+          <div class="admin-nav-mobile-brand">
+            <img
+              src="images/logo.png"
+              alt="screenings4u"
+            >
+            <span>Admin Console</span>
+          </div>
+
         </div>
+
+
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
 
         <aside
           class="admin-nav-drawer"
           id="adminNavDrawer"
           aria-label="Admin sidebar"
         >
+
+          <!-- BRAND -->
+
           <header class="admin-nav-brand">
 
             <a
@@ -369,6 +369,7 @@
               class="admin-nav-brand-link"
               aria-label="screenings4u Admin Dashboard"
             >
+
               <span class="admin-nav-brand-logo">
                 <img
                   src="images/logo.png"
@@ -381,30 +382,48 @@
                 <strong>ADMIN CONSOLE</strong>
                 <small>Operations & LMS</small>
               </span>
+
             </a>
+
+
+            <!-- HIDE SIDEBAR -->
 
             <button
               type="button"
               class="admin-nav-collapse"
               id="adminNavCollapse"
-              aria-label="Collapse sidebar"
-              title="Collapse sidebar"
+              aria-label="Hide sidebar"
+              title="Hide sidebar"
             >
-              ${icon("chevron")}
+              ${icon("collapse")}
             </button>
+
           </header>
+
+
+          <!-- STATUS -->
 
           <div class="admin-nav-status">
             <span class="admin-nav-status-dot"></span>
             <span>System Online</span>
           </div>
 
+
+          <!-- NAVIGATION -->
+
           <nav
             class="admin-nav-groups"
             aria-label="Admin navigation"
           >
-            ${groups.map(group => renderGroup(group, savedState)).join("")}
+
+            <div class="admin-nav-page-list">
+              ${renderPages()}
+            </div>
+
           </nav>
+
+
+          <!-- FOOTER -->
 
           <footer class="admin-nav-footer">
 
@@ -414,25 +433,66 @@
               target="_blank"
               rel="noopener"
             >
+
               <span class="admin-nav-footer-icon">
                 ${icon("website")}
               </span>
-              <span class="admin-nav-footer-label">View Website</span>
+
+              <span class="admin-nav-footer-label">
+                View Website
+              </span>
+
             </a>
+
 
             <button
               type="button"
               id="adminSignOutButton"
               class="admin-nav-footer-link admin-signout-button"
             >
+
               <span class="admin-nav-footer-icon">
                 ${icon("logout")}
               </span>
-              <span class="admin-nav-footer-label">Sign Out</span>
+
+              <span class="admin-nav-footer-label">
+                Logout
+              </span>
+
             </button>
 
           </footer>
+
         </aside>
+
+
+        <!-- =================================================
+             COLLAPSED SIDEBAR WIDGET
+             ================================================= -->
+
+        <button
+          type="button"
+          class="admin-nav-expand-widget"
+          id="adminNavExpandWidget"
+          aria-label="Show sidebar"
+          title="Show sidebar"
+        >
+          <span class="admin-nav-expand-widget-logo">
+            <img
+              src="images/logo.png"
+              alt=""
+            >
+          </span>
+
+          <span class="admin-nav-expand-widget-icon">
+            ${icon("expand")}
+          </span>
+        </button>
+
+
+        <!-- =================================================
+             MOBILE OVERLAY
+             ================================================= -->
 
         <div
           class="admin-nav-mobile-overlay"
@@ -447,105 +507,287 @@
   }
 
   function bind() {
-    const savedState = getSavedState();
 
-    root.querySelectorAll(".admin-nav-group-toggle").forEach(toggle => {
-      toggle.addEventListener("click", () => {
-        const section = toggle.closest(".admin-nav-section");
-        if (!section) return;
-
-        const groupId = section.dataset.navGroup;
-        const items = section.querySelector(".admin-nav-group-items");
-        if (!items) return;
-
-        const nextOpen = !section.classList.contains("open");
-
-        section.classList.toggle("open", nextOpen);
-        toggle.setAttribute("aria-expanded", String(nextOpen));
-        items.hidden = !nextOpen;
-
-        savedState[groupId] = nextOpen;
-        saveState(savedState);
-      });
-    });
-
-    root.querySelectorAll(".admin-nav-item").forEach(link => {
-      link.addEventListener("click", () => {
-        closeMobile();
-      });
-    });
-
+    /*
+     * Hide sidebar
+     */
     const collapse = document.getElementById("adminNavCollapse");
+
     if (collapse) {
       collapse.addEventListener("click", () => {
-        document.body.classList.toggle("admin-nav-collapsed");
-        collapse.setAttribute(
-          "aria-label",
-          document.body.classList.contains("admin-nav-collapsed")
-            ? "Expand sidebar"
-            : "Collapse sidebar"
-        );
+        setSidebarCollapsed(true);
       });
     }
 
-    const mobileToggle = document.getElementById("adminNavMobileToggle");
+
+    /*
+     * Show sidebar widget
+     */
+    const expandWidget =
+      document.getElementById("adminNavExpandWidget");
+
+    if (expandWidget) {
+      expandWidget.addEventListener("click", () => {
+        setSidebarCollapsed(false);
+      });
+    }
+
+
+    /*
+     * Mobile menu
+     */
+    const mobileToggle =
+      document.getElementById("adminNavMobileToggle");
+
     if (mobileToggle) {
-      mobileToggle.addEventListener("click", toggleMobile);
+      mobileToggle.addEventListener(
+        "click",
+        toggleMobile
+      );
     }
 
-    const overlay = document.getElementById("adminNavMobileOverlay");
+
+    /*
+     * Mobile overlay
+     */
+    const overlay =
+      document.getElementById("adminNavMobileOverlay");
+
     if (overlay) {
-      overlay.addEventListener("click", closeMobile);
+      overlay.addEventListener(
+        "click",
+        closeMobile
+      );
     }
 
-    const signOut = document.getElementById("adminSignOutButton");
+
+    /*
+     * Training dropdown
+     *
+     * Rules:
+     * 1. Training opens/closes when its header is clicked.
+     * 2. Clicking a Training submenu link navigates normally;
+     *    the destination page is a Training child, so render()
+     *    opens Training again automatically.
+     * 3. Clicking any other top-level page closes Training before
+     *    navigation. The destination page also renders it closed.
+     */
+    root
+      .querySelectorAll(".admin-nav-dropdown-toggle")
+      .forEach(toggle => {
+        toggle.addEventListener("click", event => {
+          event.preventDefault();
+          event.stopPropagation();
+
+          const dropdown = toggle.closest(".admin-nav-dropdown");
+          if (!dropdown) return;
+
+          const submenu = dropdown.querySelector(".admin-nav-submenu");
+          if (!submenu) return;
+
+          const isOpen = dropdown.classList.contains("open");
+
+          // Close every dropdown first.
+          root.querySelectorAll(".admin-nav-dropdown").forEach(item => {
+            item.classList.remove("open");
+
+            const itemSubmenu = item.querySelector(".admin-nav-submenu");
+            const itemToggle = item.querySelector(".admin-nav-dropdown-toggle");
+
+            if (itemSubmenu) {
+              itemSubmenu.hidden = true;
+              itemSubmenu.style.display = "none";
+            }
+
+            if (itemToggle) {
+              itemToggle.setAttribute("aria-expanded", "false");
+              const itemChevron = itemToggle.querySelector(".admin-nav-chevron");
+              if (itemChevron) itemChevron.innerHTML = icon("expand");
+            }
+          });
+
+          // If it was closed, open it. If it was already open, leave it closed.
+          if (!isOpen) {
+            dropdown.classList.add("open");
+            submenu.hidden = false;
+            submenu.style.display = "grid";
+            toggle.setAttribute("aria-expanded", "true");
+
+            const chevron = toggle.querySelector(".admin-nav-chevron");
+            if (chevron) chevron.innerHTML = icon("collapse");
+          }
+        });
+      });
+
+
+    /*
+     * Navigation links
+     *
+     * We don't store the active page.
+     * The URL determines the active page.
+     *
+     * This guarantees that when the administrator
+     * navigates to another page, the previous page
+     * immediately stops being highlighted.
+     */
+    root
+      .querySelectorAll("a.admin-nav-item, .admin-nav-subitem")
+      .forEach(link => {
+        link.addEventListener("click", () => {
+          closeMobile();
+
+          // Training submenu links intentionally do not close the dropdown.
+          // The destination page will reopen Training because it is a child page.
+          if (link.classList.contains("admin-nav-subitem")) {
+            return;
+          }
+
+          // Any other top-level page closes Training before navigation.
+          root.querySelectorAll(".admin-nav-dropdown").forEach(item => {
+            item.classList.remove("open");
+
+            const submenu = item.querySelector(".admin-nav-submenu");
+            const toggle = item.querySelector(".admin-nav-dropdown-toggle");
+
+            if (submenu) {
+              submenu.hidden = true;
+              submenu.style.display = "none";
+            }
+
+            if (toggle) {
+              toggle.setAttribute("aria-expanded", "false");
+              const chevron = toggle.querySelector(".admin-nav-chevron");
+              if (chevron) chevron.innerHTML = icon("expand");
+            }
+          });
+        });
+      });
+
+
+    /*
+     * Logout
+     */
+    const signOut =
+      document.getElementById("adminSignOutButton");
+
     if (signOut) {
-      signOut.addEventListener("click", signOutAdmin);
+      signOut.addEventListener(
+        "click",
+        signOutAdmin
+      );
     }
 
-    document.addEventListener("keydown", handleEscape);
 
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 900) {
-        closeMobile();
-      }
-    });
+    /*
+     * Keyboard support
+     */
+    document.addEventListener(
+      "keydown",
+      handleEscape
+    );
+
+
+    /*
+     * Desktop/mobile transition
+     */
+    window.addEventListener(
+      "resize",
+      handleResize
+    );
   }
+
+
+  function setSidebarCollapsed(collapsed) {
+
+    document.body.classList.toggle(
+      "admin-nav-collapsed",
+      collapsed
+    );
+
+    setCollapsedState(collapsed);
+  }
+
 
   function toggleMobile() {
-    const open = document.body.classList.toggle("admin-nav-mobile-open");
-    const button = document.getElementById("adminNavMobileToggle");
+
+    const open =
+      document.body.classList.toggle(
+        "admin-nav-mobile-open"
+      );
+
+    const button =
+      document.getElementById(
+        "adminNavMobileToggle"
+      );
 
     if (button) {
-      button.setAttribute("aria-expanded", String(open));
-      button.innerHTML = icon(open ? "close" : "menu");
+
+      button.setAttribute(
+        "aria-expanded",
+        String(open)
+      );
+
+      button.innerHTML =
+        icon(open ? "close" : "menu");
+
     }
   }
+
 
   function closeMobile() {
-    document.body.classList.remove("admin-nav-mobile-open");
 
-    const button = document.getElementById("adminNavMobileToggle");
+    document.body.classList.remove(
+      "admin-nav-mobile-open"
+    );
+
+    const button =
+      document.getElementById(
+        "adminNavMobileToggle"
+      );
+
     if (button) {
-      button.setAttribute("aria-expanded", "false");
-      button.innerHTML = icon("menu");
+
+      button.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+      button.innerHTML =
+        icon("menu");
     }
   }
 
+
   function handleEscape(event) {
+
     if (event.key === "Escape") {
       closeMobile();
     }
   }
 
+
+  function handleResize() {
+
+    if (window.innerWidth > 900) {
+      closeMobile();
+    }
+  }
+
+
   async function signOutAdmin() {
-    const button = document.getElementById("adminSignOutButton");
+
+    const button =
+      document.getElementById(
+        "adminSignOutButton"
+      );
+
     if (!button) return;
 
     button.disabled = true;
     button.classList.add("is-loading");
 
     try {
+
       const client =
         window.screenings4uSupabase ||
         window.supabaseClient ||
@@ -558,18 +800,34 @@
       ) {
         await client.auth.signOut();
       }
+
     } catch (error) {
-      console.error("Admin sign out failed:", error);
+
+      console.error(
+        "Admin sign out failed:",
+        error
+      );
+
     } finally {
-      window.location.href = CONFIG.login;
+
+      window.location.href =
+        CONFIG.login;
+
     }
   }
 
+
+  /*
+   * Public API
+   */
   window.Screenings4uAdminNavigation = {
-    groups,
+    pages,
     currentPage,
-    render
+    render,
+    setSidebarCollapsed
   };
 
+
   render();
+
 })();

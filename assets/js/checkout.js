@@ -1,87 +1,329 @@
-/*
- * =========================================================
- * screenings4u — Universal Checkout
- * =========================================================
+/**
+ * screenings4u — Universal Stripe Checkout
  *
- * Uses:
- *   - test-price-list.js for displaying the selected product
- *   - client-config.js for the shared Supabase client
- *   - Supabase Edge Function: create-payment-intent
- *   - Stripe.js for payment collection
+ * PUBLIC MARKETING CHECKOUT
+ *
+ * Flow:
+ *
+ * Customer
+ *    ↓
+ * checkout.html
+ *    ↓
+ * create-payment-intent Edge Function
+ *    ↓
+ * Supabase Order Engine
+ *    ↓
+ * Stripe PaymentIntent
+ *    ↓
+ * Stripe Payment Element
+ *    ↓
+ * payment_intent.succeeded
+ *    ↓
+ * Stripe webhook
+ *    ↓
+ * mark_order_paid()
  *
  * IMPORTANT:
- *
- * The browser NEVER determines the final price.
- *
- * The selected product ID is sent to the Edge Function.
- * The Edge Function looks up the real product and price
- * from public.products.
- *
- * The Stripe webhook then creates:
- *
- *   orders
- *       ↓
- *   order_items
- *       ↓
- *   training_enrollments
- *
- * for training products.
- *
- * =========================================================
+ * - No customer authentication is required.
+ * - The browser sends the SERVICE ID (service SKU), not the price.
+ * - The server is authoritative for pricing.
+ * - The webhook is authoritative for payment completion.
  */
 
 "use strict";
 
-/*
- * =========================================================
- * STRIPE CONFIGURATION
- * =========================================================
- */
+
+/* =========================================================
+   CONFIGURATION
+========================================================= */
 
 const STRIPE_PUBLISHABLE_KEY =
-  "pk_test_51TTy4i0dNjSlvyScX676lZwB34Lby8nEuvs0Rorwo6kGYKkTJYiTyPQA6PVjzwUSjB9Kz90LdHtCh2E1BTMMEkTX00HCLPKUkf";
-
-/*
- * We are no longer using:
- *
- * /api/create-payment-intent
- *
- * The payment intent is created through the Supabase
- * Edge Function:
- *
- * create-payment-intent
- */
+  "pk_test_51TTy4i0dNjSlvyScX676lZwB34Lby8nEuvs0Rorwo6kGYKkTJYiTyPQA6PVjzwUSjB9Kz90LdHtCh2E1BTMMEkTX00HCLPKUk";
 
 const PAYMENT_FUNCTION_NAME =
   "create-payment-intent";
 
 
-/*
- * =========================================================
- * GLOBAL STATE
- * =========================================================
- */
+/* =========================================================
+   STATE
+========================================================= */
 
 let stripe = null;
-
 let elements = null;
-
 let paymentElement = null;
 
-let selectedProduct = null;
+let selectedService = null;
 
 let paymentMounted = false;
+let paymentIntentCreated = false;
+let emailConfirmed = false;
 
-let supabaseClient = null;
+let orderId = null;
+let orderNumber = null;
+let trackingNumber = null;
+let paymentIntentId = null;
 
-let currentUser = null;
+
+/* =========================================================
+   INPUT FORMATTING / MANUAL ENTRY CONTROLS
+========================================================= */
+
+function setupManualEntryFields() {
+
+  const firstName =
+    document.getElementById("firstName");
+
+  const lastName =
+    document.getElementById("lastName");
+
+  const email =
+    document.getElementById("email");
+
+  const phone =
+    document.getElementById("phone");
+
+  const address =
+    document.getElementById("address");
+
+  const city =
+    document.getElementById("city");
+
+  const state =
+    document.getElementById("state");
+
+  const zip =
+    document.getElementById("zip");
+
+  /*
+   * Email:
+   * - Accepts upper/lowercase.
+   * - Normalizes the domain to lowercase.
+   * - Does NOT force the local part to lowercase because
+   *   technically email local parts can be case-sensitive.
+   */
+  if (email) {
+
+    email.setAttribute("autocomplete", "off");
+    email.setAttribute("autocapitalize", "none");
+    email.setAttribute("spellcheck", "false");
+
+    email.addEventListener("input", () => {
+
+      email.value =
+        email.value
+          .replace(/\s/g, "")
+          .slice(0, 254);
+
+      const at =
+        email.value.indexOf("@");
+
+      if (at > 0) {
+
+        const local =
+          email.value.slice(0, at);
+
+        const domain =
+          email.value
+            .slice(at + 1)
+            .toLowerCase();
+
+        email.value =
+          local + "@" + domain;
+      }
+
+      email.setCustomValidity("");
+    });
+  }
+
+  /*
+   * Phone:
+   * Formats as:
+   * (555) 123-4567
+   */
+  if (phone) {
+
+    phone.setAttribute("autocomplete", "off");
+    phone.setAttribute("inputmode", "tel");
+
+    phone.addEventListener("input", () => {
+
+      let digits =
+        phone.value.replace(/\D/g, "");
+
+      if (digits.length > 10 && digits.startsWith("1")) {
+        digits = digits.slice(1);
+      }
+
+      digits =
+        digits.slice(0, 10);
+
+      let formatted = "";
+
+      if (digits.length > 0) {
+        formatted =
+          "(" + digits.slice(0, 3);
+      }
+
+      if (digits.length >= 3) {
+        formatted += ") ";
+      }
+
+      if (digits.length > 3) {
+        formatted +=
+          digits.slice(3, 6);
+      }
+
+      if (digits.length >= 6) {
+        formatted += "-";
+      }
+
+      if (digits.length > 6) {
+        formatted +=
+          digits.slice(6, 10);
+      }
+
+      phone.value =
+        formatted;
+
+      phone.setCustomValidity("");
+    });
+  }
+
+  /*
+   * State:
+   * Two uppercase letters only.
+   */
+  if (state) {
+
+    state.setAttribute("autocomplete", "off");
+    state.setAttribute("autocapitalize", "characters");
+
+    state.addEventListener("input", () => {
+
+      state.value =
+        state.value
+          .replace(/[^A-Za-z]/g, "")
+          .toUpperCase()
+          .slice(0, 2);
+    });
+  }
+
+  /*
+   * ZIP:
+   * 12345 or 12345-6789
+   */
+  if (zip) {
+
+    zip.setAttribute("autocomplete", "off");
+    zip.setAttribute("inputmode", "numeric");
+
+    zip.addEventListener("input", () => {
+
+      let digits =
+        zip.value.replace(/\D/g, "")
+          .slice(0, 9);
+
+      if (digits.length > 5) {
+        zip.value =
+          digits.slice(0, 5) +
+          "-" +
+          digits.slice(5);
+      } else {
+        zip.value = digits;
+      }
+    });
+  }
+
+  /*
+   * Names:
+   * Keep natural capitalization. Remove numbers/symbols
+   * that cannot be part of the supported name format.
+   */
+  [firstName, lastName, city].forEach(input => {
+
+    if (!input) return;
+
+    input.setAttribute("autocomplete", "off");
+
+    input.addEventListener("input", () => {
+
+      input.value =
+        input.value.replace(
+          /[^A-Za-zÀ-ÿ' -]/g,
+          ""
+        );
+    });
+  });
+
+  /*
+   * Address:
+   * Allow normal street-address characters.
+   */
+  if (address) {
+
+    address.setAttribute("autocomplete", "off");
+
+    address.addEventListener("input", () => {
+
+      address.value =
+        address.value.replace(
+          /[^A-Za-z0-9À-ÿ .,'#-]/g,
+          ""
+        );
+    });
+  }
+
+  /*
+   * Disable paste/cut/drop on customer fields.
+   * This is a UI restriction, not a security boundary.
+   */
+  [
+    firstName,
+    lastName,
+    email,
+    phone,
+    address,
+    city,
+    state,
+    zip
+  ].forEach(input => {
+
+    if (!input) return;
+
+    input.addEventListener(
+      "paste",
+      event => {
+        event.preventDefault();
+      }
+    );
+
+    input.addEventListener(
+      "drop",
+      event => {
+        event.preventDefault();
+      }
+    );
+
+    input.addEventListener(
+      "dragover",
+      event => {
+        event.preventDefault();
+      }
+    );
+
+    input.addEventListener(
+      "cut",
+      event => {
+        event.preventDefault();
+      }
+    );
+  });
+}
 
 
-/*
- * =========================================================
- * DOM READY
- * =========================================================
- */
+/* =========================================================
+   INITIALIZATION
+========================================================= */
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -89,197 +331,95 @@ document.addEventListener(
 );
 
 
-/*
- * =========================================================
- * INITIALIZE CHECKOUT
- * =========================================================
- */
-
 async function initCheckout() {
 
   try {
 
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
     /*
-     * -----------------------------------------------------
-     * SUPABASE
-     * -----------------------------------------------------
+     * PUBLIC SERVICE PARAMETER
+     *
+     * Example:
+     * checkout.html?service=dot_personal_test
+     *
+     * The value is the service SKU, not the database UUID.
      */
+    const serviceId =
+      (params.get("service") || "").trim();
 
-    supabaseClient =
-      getSupabaseClient();
 
-    if (!supabaseClient) {
+    /* -----------------------------------------------------
+       Validate service parameter
+    ----------------------------------------------------- */
 
-      showPaymentError(
-        "The customer portal could not be initialized. Please refresh the page."
+    if (!serviceId) {
+
+      showCheckoutError(
+        "No service was selected. Please return to the services page and select a service."
       );
 
       return;
     }
 
 
-    /*
-     * -----------------------------------------------------
-     * CUSTOMER SESSION
-     * -----------------------------------------------------
-     */
-
-    const {
-      data: sessionData,
-      error: sessionError
-    } =
-      await supabaseClient.auth.getSession();
-
-    if (sessionError) {
-
-      throw sessionError;
-    }
-
+    /* -----------------------------------------------------
+       Validate service catalog
+    ----------------------------------------------------- */
 
     if (
-      !sessionData ||
-      !sessionData.session ||
-      !sessionData.session.user
+      typeof getTestProduct !==
+      "function"
     ) {
 
-      /*
-       * Training purchases must be associated with
-       * a customer account because training_enrollments
-       * requires user_id.
-       */
-
-      showLoginRequired();
+      showCheckoutError(
+        "The service catalog could not be loaded."
+      );
 
       return;
     }
 
 
-    currentUser =
-      sessionData.session.user;
+    selectedService =
+      getTestProduct(
+        serviceId
+      );
 
 
-    /*
-     * -----------------------------------------------------
-     * PRODUCT
-     * -----------------------------------------------------
-     */
+    if (!selectedService) {
 
-    const productId =
-      new URLSearchParams(
-        window.location.search
-      ).get("service");
-
-
-    if (
-      !productId ||
-      typeof getTestProduct !== "function"
-    ) {
-
-      showCheckoutError();
+      showCheckoutError(
+        "That service is not available."
+      );
 
       return;
     }
 
 
-    selectedProduct =
-      getTestProduct(productId);
+    /* -----------------------------------------------------
+       Render selected service
+    ----------------------------------------------------- */
 
-
-    if (!selectedProduct) {
-
-      showCheckoutError();
-
-      return;
-    }
-
-
-    /*
-     * -----------------------------------------------------
-     * DISPLAY PRODUCT
-     * -----------------------------------------------------
-     */
-
-    renderProduct(
-      selectedProduct
+    renderService(
+      selectedService
     );
 
 
-    /*
-     * -----------------------------------------------------
-     * SHOW CHECKOUT
-     * -----------------------------------------------------
- */
-
-    const loading =
-      document.getElementById(
-        "loading"
-      );
-
-    const checkoutGrid =
-      document.getElementById(
-        "checkoutGrid"
-      );
-
-    if (loading) {
-
-      loading.style.display =
-        "none";
-    }
-
-    if (checkoutGrid) {
-
-      checkoutGrid.style.display =
-        "grid";
-    }
-
-
-    /*
-     * -----------------------------------------------------
-     * FORM
-     * -----------------------------------------------------
-     */
-
-    const form =
-      document.getElementById(
-        "checkoutForm"
-      );
-
-    if (form) {
-
-      form.addEventListener(
-        "submit",
-        handleSubmit
-      );
-    }
-
-
-    /*
-     * -----------------------------------------------------
-     * STRIPE
-     * -----------------------------------------------------
-     */
-
-    if (
-      STRIPE_PUBLISHABLE_KEY.includes(
-        "REPLACE_WITH"
-      )
-    ) {
-
-      showSetupNotice(
-        "Stripe publishable key has not been configured yet."
-      );
-
-      return;
-    }
-
+    /* -----------------------------------------------------
+       Initialize Stripe
+    ----------------------------------------------------- */
 
     if (
       typeof Stripe !==
       "function"
     ) {
 
-      showPaymentError(
-        "Stripe could not be loaded. Please refresh the page."
+      showCheckoutError(
+        "Stripe could not be loaded. Please refresh the page and try again."
       );
 
       return;
@@ -292,13 +432,117 @@ async function initCheckout() {
       );
 
 
-    /*
-     * -----------------------------------------------------
-     * PREFILL CUSTOMER INFORMATION
-     * -----------------------------------------------------
-     */
+    /* -----------------------------------------------------
+       Show checkout
+    ----------------------------------------------------- */
 
-    prefillCustomerInformation();
+    const loading =
+      document.getElementById(
+        "loading"
+      );
+
+    const checkoutGrid =
+      document.getElementById(
+        "checkoutGrid"
+      );
+
+
+    if (loading) {
+
+      loading.style.display =
+        "none";
+    }
+
+
+    if (checkoutGrid) {
+
+      checkoutGrid.style.display =
+        "grid";
+    }
+
+
+    /* -----------------------------------------------------
+       Configure navigation
+    ----------------------------------------------------- */
+
+    const backLink =
+      document.getElementById(
+        "backLink"
+      );
+
+
+    if (backLink) {
+
+      backLink.href =
+        "service.html?service=" +
+        encodeURIComponent(
+          productId
+        );
+    }
+
+
+    const errorBackLink =
+      document.getElementById(
+        "errorBackLink"
+      );
+
+
+    if (errorBackLink) {
+
+      errorBackLink.href =
+        "services.html";
+    }
+
+
+    /* -----------------------------------------------------
+       Bind checkout form
+    ----------------------------------------------------- */
+
+    const form =
+      document.getElementById(
+        "checkoutForm"
+      );
+
+    if (form) {
+      form.noValidate = true;
+    }
+
+
+    if (!form) {
+
+      throw new Error(
+        "Checkout form could not be found."
+      );
+    }
+
+
+    form.addEventListener(
+      "submit",
+      handleSubmit
+    );
+
+    setupEmailModal();
+
+
+    /* -----------------------------------------------------
+       Initial button state
+    ----------------------------------------------------- */
+
+    const button =
+      document.getElementById(
+        "payButton"
+      );
+
+
+    if (button) {
+
+      button.disabled =
+        false;
+
+      button.textContent =
+        "Continue to Secure Payment";
+    }
+
 
   } catch (error) {
 
@@ -307,218 +551,93 @@ async function initCheckout() {
       error
     );
 
-    showPaymentError(
-      error.message ||
+
+    showCheckoutError(
+      error?.message ||
       "Unable to initialize checkout."
     );
   }
 }
 
 
-/*
- * =========================================================
- * GET SHARED SUPABASE CLIENT
- * =========================================================
- */
+/* =========================================================
+   SERVICE DISPLAY
+========================================================= */
 
-function getSupabaseClient() {
-
-  /*
-   * Preferred method.
-   */
-
-  if (
-    typeof window.getScreenings4uSupabase ===
-      "function"
-  ) {
-
-    return window.getScreenings4uSupabase();
-  }
-
-
-  /*
-   * Existing shared client.
-   */
-
-  if (
-    window.screenings4uSupabase
-  ) {
-
-    return window.screenings4uSupabase;
-  }
-
-
-  /*
-   * Last-resort fallback.
-   */
-
-  if (
-    window.supabase &&
-    typeof window.supabase.createClient ===
-      "function" &&
-    window.SCREENINGS4U_SUPABASE_URL &&
-    window.SCREENINGS4U_SUPABASE_ANON_KEY
-  ) {
-
-    window.screenings4uSupabase =
-      window.supabase.createClient(
-        window.SCREENINGS4U_SUPABASE_URL,
-        window.SCREENINGS4U_SUPABASE_ANON_KEY,
-        {
-          auth: {
-            autoRefreshToken: true,
-            persistSession: true,
-            detectSessionInUrl: true
-          }
-        }
-      );
-
-    return window.screenings4uSupabase;
-  }
-
-
-  console.error(
-    "screenings4u checkout: Supabase client unavailable."
-  );
-
-  return null;
-}
-
-
-/*
- * =========================================================
- * PREFILL CUSTOMER INFORMATION
- * =========================================================
- */
-
-function prefillCustomerInformation() {
-
-  if (!currentUser) {
-    return;
-  }
-
-
-  const emailInput =
-    document.querySelector(
-      '[name="email"]'
-    );
-
-
-  if (
-    emailInput &&
-    !emailInput.value
-  ) {
-
-    emailInput.value =
-      currentUser.email ||
-      "";
-  }
-}
-
-
-/*
- * =========================================================
- * RENDER PRODUCT
- * =========================================================
- */
-
-function renderProduct(product) {
+function renderService(
+  service
+) {
 
   const category =
     document.getElementById(
       "category"
     );
 
-  if (category) {
-
-    category.textContent =
-      product.category || "";
-  }
-
-
   const productElement =
     document.getElementById(
       "product"
     );
-
-  if (productElement) {
-
-    productElement.textContent =
-      product.name || "";
-  }
-
 
   const price =
     document.getElementById(
       "price"
     );
 
-  if (price) {
-
-    price.textContent =
-      formatTestPrice(
-        product.price,
-        product.currency || "USD"
-      );
-  }
-
-
-  /*
-   * -------------------------------------------------------
-   * FEATURES
-   * -------------------------------------------------------
-   */
-
   const features =
     document.getElementById(
       "features"
     );
-
-  if (features) {
-
-    features.innerHTML = "";
-
-    (
-      product.features ||
-      []
-    ).forEach(
-      (item) => {
-
-        const li =
-          document.createElement(
-            "li"
-          );
-
-        li.textContent =
-          item;
-
-        features.appendChild(
-          li
-        );
-      }
-    );
-  }
-
-
-  /*
-   * -------------------------------------------------------
-   * DRUGS
-   * -------------------------------------------------------
-   */
 
   const drugs =
     document.getElementById(
       "drugs"
     );
 
-  if (drugs) {
 
-    drugs.innerHTML = "";
+  if (category) {
 
-    (
-      product.drugs ||
-      []
-    ).forEach(
+    category.textContent =
+      service.category || "";
+  }
+
+
+  if (productElement) {
+
+    productElement.textContent =
+      service.name || "";
+  }
+
+
+  if (price) {
+
+    price.textContent =
+      formatTestPrice(
+        service.price,
+        service.currency ||
+        "USD"
+      );
+  }
+
+
+  /* -------------------------------------------------------
+     Features
+  ------------------------------------------------------- */
+
+  if (features) {
+
+    features.innerHTML =
+      "";
+
+
+    const featureList =
+      Array.isArray(
+        service.features
+      )
+        ? service.features
+        : [];
+
+
+    featureList.forEach(
       (item) => {
 
         const li =
@@ -526,74 +645,501 @@ function renderProduct(product) {
             "li"
           );
 
+
         li.textContent =
           item;
 
-        drugs.appendChild(
+
+        features.appendChild(
           li
         );
       }
+    );
+
+
+    if (!featureList.length) {
+
+      const li =
+        document.createElement(
+          "li"
+        );
+
+
+      li.textContent =
+        "See service details.";
+
+
+      features.appendChild(
+        li
+      );
+    }
+  }
+
+
+  /* -------------------------------------------------------
+     Drugs
+  ------------------------------------------------------- */
+
+  if (drugs) {
+
+    drugs.innerHTML =
+      "";
+
+
+    const drugList =
+      Array.isArray(
+        service.drugs
+      )
+        ? service.drugs
+        : [];
+
+
+    if (!drugList.length) {
+
+      const li =
+        document.createElement(
+          "li"
+        );
+
+
+      li.textContent =
+        "See service details.";
+
+
+      drugs.appendChild(
+        li
+      );
+
+    } else {
+
+      drugList.forEach(
+        (item) => {
+
+          const li =
+            document.createElement(
+              "li"
+            );
+
+
+          li.textContent =
+            item;
+
+
+          drugs.appendChild(
+            li
+          );
+        }
+      );
+    }
+  }
+}
+
+
+/* =========================================================
+   FORM SUBMISSION
+========================================================= */
+
+async function handleSubmit(event) {
+
+  event.preventDefault();
+
+  const form = event.currentTarget;
+
+  clearMessages();
+
+  if (!selectedService || !stripe) {
+    showPaymentError(
+      "Checkout is not ready. Please refresh the page and try again."
+    );
+    return;
+  }
+
+  /*
+   * FIRST SUBMISSION:
+   * Validate customer information only.
+   * Stripe is intentionally NOT mounted yet.
+   */
+  if (!paymentMounted) {
+
+    const validation = validateCustomerForm(form);
+
+    if (!validation.valid) {
+      showPaymentError(validation.message);
+      focusField(validation.field);
+      return;
+    }
+
+    openEmailConfirmation(getInputValue("email"));
+    return;
+  }
+
+  /*
+   * SECOND SUBMISSION:
+   * Stripe Payment Element is mounted, so this submits payment.
+   */
+  const button = document.getElementById("payButton");
+
+  try {
+
+    setButton(button, true, "Processing Payment...");
+
+    await confirmPayment(form);
+
+  } catch (error) {
+
+    console.error("Checkout payment error:", error);
+
+    showPaymentError(
+      error?.message ||
+      "Unable to process the payment."
+    );
+
+    setButton(
+      button,
+      false,
+      "Pay " +
+      formatTestPrice(
+        selectedService.price,
+        selectedService.currency || "USD"
+      )
     );
   }
 }
 
 
-/*
- * =========================================================
- * SUBMIT
- * =========================================================
- */
+/* =========================================================
+   CUSTOMER VALIDATION
+========================================================= */
 
-async function handleSubmit(
-  event
-) {
+const VALIDATION = {
 
-  event.preventDefault();
+  name:
+    /^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' -]{1,49}$/,
+
+  email:
+    null,
+
+  phone:
+    null,
+
+  address:
+    /^\d{1,6}\s+[A-Za-z0-9À-ÿ][A-Za-z0-9À-ÿ .,'#-]{2,99}$/,
+
+  city:
+    /^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' -]{1,49}$/,
+
+  state:
+    /^(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY)$/i,
+
+  zip:
+    /^\d{5}(?:-\d{4})?$/
+};
+
+function isValidEmail(value) {
+
+  const email = String(value || "").trim();
+
+  if (!email) return false;
+
+  const at = email.indexOf("@");
+
+  if (at <= 0) return false;
+
+  if (at !== email.lastIndexOf("@")) return false;
+
+  const local = email.slice(0, at);
+  const domain = email.slice(at + 1);
+
+  if (!local || !domain) return false;
+
+  if (local.length > 64 || email.length > 254) return false;
+
+  if (domain.startsWith(".") || domain.endsWith(".")) {
+    return false;
+  }
+
+  if (domain.includes("..")) {
+    return false;
+  }
+
+  if (!domain.includes(".")) {
+    return false;
+  }
+
+  return /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+$/.test(local)
+    && /^[A-Za-z0-9.-]+$/.test(domain);
+}
 
 
-  /*
-   * -------------------------------------------------------
-   * VALIDATION
-   * -------------------------------------------------------
-   */
+function validateCustomerForm(form) {
 
-  if (!selectedProduct) {
+  const emailInput = document.getElementById("email");
 
-    showPaymentError(
-      "No product was selected."
+  if (emailInput) {
+    emailInput.value = emailInput.value.trim();
+  }
+
+  const emailField =
+    document.getElementById("email");
+
+  if (emailField) {
+    emailField.value =
+      emailField.value.trim();
+
+    const at =
+      emailField.value.indexOf("@");
+
+    if (at > 0) {
+      emailField.value =
+        emailField.value.slice(0, at) +
+        "@" +
+        emailField.value.slice(at + 1).toLowerCase();
+    }
+  }
+
+  const phoneField =
+    document.getElementById("phone");
+
+  if (phoneField) {
+    phoneField.value =
+      phoneField.value
+        .replace(/\D/g, "")
+        .replace(
+          /^(\d{3})(\d{3})(\d{4})$/,
+          "($1) $2-$3"
+        );
+  }
+
+  const fields = {
+    firstName: getInputValue("firstName"),
+    lastName: getInputValue("lastName"),
+    email: getInputValue("email"),
+    phone: getInputValue("phone"),
+    address: getInputValue("address"),
+    city: getInputValue("city"),
+    state: getInputValue("state").toUpperCase(),
+    zip: getInputValue("zip")
+  };
+
+  if (!VALIDATION.name.test(fields.firstName)) {
+    return {
+      valid: false,
+      field: "firstName",
+      message: "Please enter a valid first name."
+    };
+  }
+
+  if (!VALIDATION.name.test(fields.lastName)) {
+    return {
+      valid: false,
+      field: "lastName",
+      message: "Please enter a valid last name."
+    };
+  }
+
+  if (!isValidEmail(fields.email)) {
+
+    console.warn(
+      "Checkout email validation rejected:",
+      JSON.stringify(fields.email)
     );
 
-    return;
+    return {
+      valid: false,
+      field: "email",
+      message: "Please enter a valid email address."
+    };
   }
 
+  const normalizedPhone =
+    fields.phone.replace(/\D/g, "");
 
-  if (!stripe) {
+  if (
+    normalizedPhone.length !== 10 ||
+    !/^[2-9]\d{2}[2-9]\d{2}\d{4}$/.test(normalizedPhone)
+  ) {
+    return {
+      valid: false,
+      field: "phone",
+      message: "Please enter a valid U.S. phone number."
+    };
+  }
 
-    showPaymentError(
-      "Stripe is not configured yet."
+  if (!VALIDATION.address.test(fields.address)) {
+    return {
+      valid: false,
+      field: "address",
+      message: "Please enter a valid street address."
+    };
+  }
+
+  if (!VALIDATION.city.test(fields.city)) {
+    return {
+      valid: false,
+      field: "city",
+      message: "Please enter a valid city."
+    };
+  }
+
+  if (!VALIDATION.state.test(fields.state)) {
+    return {
+      valid: false,
+      field: "state",
+      message: "Please enter a valid two-letter state abbreviation."
+    };
+  }
+
+  if (!VALIDATION.zip.test(fields.zip)) {
+    return {
+      valid: false,
+      field: "zip",
+      message: "Please enter a valid ZIP code."
+    };
+  }
+
+  return { valid: true };
+}
+
+
+function getInputValue(id) {
+
+  const input = document.getElementById(id);
+
+  return input
+    ? input.value.trim()
+    : "";
+}
+
+
+function focusField(id) {
+
+  const field = document.getElementById(id);
+
+  if (!field) return;
+
+  field.focus();
+
+  field.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+}
+
+
+/* =========================================================
+   EMAIL CONFIRMATION
+========================================================= */
+
+function setupEmailModal() {
+
+  const changeButton =
+    document.getElementById("changeEmailBtn");
+
+  const confirmButton =
+    document.getElementById("confirmEmailBtn");
+
+  if (changeButton) {
+
+    changeButton.addEventListener("click", () => {
+
+      closeEmailConfirmation();
+
+      const email =
+        document.getElementById("email");
+
+      if (email) {
+        email.focus();
+        email.select();
+      }
+    });
+  }
+
+  if (confirmButton) {
+
+    confirmButton.addEventListener(
+      "click",
+      handleEmailConfirmation
     );
+  }
+}
 
-    return;
+
+function openEmailConfirmation(email) {
+
+  const modal =
+    document.getElementById("emailConfirmModal");
+
+  const display =
+    document.getElementById("confirmedEmailDisplay");
+
+  if (!modal || !display) {
+    throw new Error(
+      "Email confirmation dialog could not be found."
+    );
   }
 
+  display.textContent = email;
 
-  if (!currentUser) {
+  modal.classList.add("active");
+  modal.style.display = "flex";
 
-    showLoginRequired();
+  modal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
 
-    return;
-  }
+  document.body.style.overflow = "hidden";
+}
 
+
+function closeEmailConfirmation() {
+
+  const modal =
+    document.getElementById("emailConfirmModal");
+
+  if (!modal) return;
+
+  modal.classList.remove("active");
+  modal.style.display = "none";
+
+  modal.setAttribute(
+    "aria-hidden",
+    "true"
+  );
+
+  document.body.style.overflow = "";
+}
+
+
+async function handleEmailConfirmation() {
 
   const form =
-    event.currentTarget;
+    document.getElementById("checkoutForm");
 
+  const validation =
+    validateCustomerForm(form);
 
-  const button =
-    document.getElementById(
-      "payButton"
+  if (!validation.valid) {
+
+    closeEmailConfirmation();
+
+    showPaymentError(
+      validation.message
     );
 
+    focusField(
+      validation.field
+    );
+
+    return;
+  }
+
+  emailConfirmed = true;
+
+  closeEmailConfirmation();
+
+  const button =
+    document.getElementById("payButton");
 
   setButton(
     button,
@@ -601,130 +1147,146 @@ async function handleSubmit(
     "Preparing Secure Payment..."
   );
 
-
-  clearMessages();
-
-
   try {
 
     /*
-     * -----------------------------------------------------
-     * FIRST CLICK
-     *
-     * Create PaymentIntent and mount Stripe.
-     * -----------------------------------------------------
+     * Only after validation + explicit
+     * email confirmation do we create
+     * the server-side order and PaymentIntent.
      */
+    const result =
+      await createPaymentIntent(form);
 
-    if (!paymentMounted) {
-
-      const clientSecret =
-        await createPaymentIntent(
-          form
-        );
-
-
-      mountStripePayment(
-        clientSecret
+    if (!result) {
+      throw new Error(
+        "The payment server returned no data."
       );
-
-
-      setButton(
-        button,
-        false,
-        "Pay " +
-          formatTestPrice(
-            selectedProduct.price,
-            selectedProduct.currency ||
-              "USD"
-          )
-      );
-
-
-      return;
     }
 
+    orderId =
+      result.orderId ||
+      result.order_id ||
+      null;
 
-    /*
-     * -----------------------------------------------------
-     * SECOND CLICK
-     *
-     * Confirm Stripe payment.
-     * -----------------------------------------------------
-     */
+    orderNumber =
+      result.orderNumber ||
+      result.order_number ||
+      null;
 
-    await confirmPayment(
-      form
+    trackingNumber =
+      result.trackingNumber ||
+      result.tracking_number ||
+      null;
+
+    paymentIntentId =
+      result.paymentIntentId ||
+      result.payment_intent_id ||
+      null;
+
+    if (!result.clientSecret) {
+      throw new Error(
+        "The payment server did not return a Stripe client secret."
+      );
+    }
+
+    await mountStripePayment(
+      result.clientSecret
     );
 
-  } catch (error) {
+    paymentIntentCreated = true;
 
-    console.error(
-      "Checkout payment error:",
-      error
-    );
-
-
-    showPaymentError(
-      error.message ||
-      "Unable to process the payment."
-    );
-
+    lockCustomerFields(form);
 
     setButton(
       button,
       false,
       "Pay " +
-        formatTestPrice(
-          selectedProduct.price,
-          selectedProduct.currency ||
-            "USD"
-        )
+      formatTestPrice(
+        selectedService.price,
+        selectedService.currency || "USD"
+      )
+    );
+
+    showOrderNotice();
+
+  } catch (error) {
+
+    console.error(
+      "Payment setup error:",
+      error
+    );
+
+    emailConfirmed = false;
+
+    showPaymentError(
+      error?.message ||
+      "Unable to prepare secure payment."
+    );
+
+    setButton(
+      button,
+      false,
+      "Continue to Secure Payment"
     );
   }
 }
 
 
-/*
- * =========================================================
- * CREATE PAYMENT INTENT
- * =========================================================
- *
- * IMPORTANT:
- *
- * We use:
- *
- * supabase.functions.invoke()
- *
- * instead of fetch().
- *
- * Supabase automatically includes the customer's
- * authentication session with the Edge Function request.
- * =========================================================
- */
+function showOrderNotice() {
 
-async function createPaymentIntent(
-  form
-) {
+  const orderNotice =
+    document.getElementById("orderNotice");
 
-  if (!supabaseClient) {
+  if (!orderNotice) return;
 
-    throw new Error(
-      "Supabase is not configured."
+  const parts = [];
+
+  if (orderNumber) {
+    parts.push(
+      "Order " + orderNumber
     );
   }
 
-
-  if (!currentUser) {
-
-    throw new Error(
-      "Please sign in before purchasing."
+  if (trackingNumber) {
+    parts.push(
+      "Tracking " + trackingNumber
     );
   }
 
+  if (parts.length) {
+
+    orderNotice.textContent =
+      parts.join(" • ") +
+      " is ready for secure payment.";
+
+    orderNotice.style.display =
+      "block";
+  }
+}
+
+
+/* =========================================================
+   CREATE PAYMENT INTENT
+========================================================= */
+
+async function createPaymentIntent(form) {
+
+  const baseUrl =
+    window.SCREENINGS4U_SUPABASE_URL ||
+    "";
+
+  if (
+    !baseUrl ||
+    baseUrl.includes("REPLACE_WITH")
+  ) {
+
+    throw new Error(
+      "Checkout is not configured. Set SCREENINGS4U_SUPABASE_URL in assets/js/site-config.js."
+    );
+  }
 
   const data =
     new FormData(form);
-
 
   const customer = {
 
@@ -768,7 +1330,7 @@ async function createPaymentIntent(
       getFormValue(
         data,
         "state"
-      ),
+      ).toUpperCase(),
 
     zip:
       getFormValue(
@@ -777,90 +1339,77 @@ async function createPaymentIntent(
       )
   };
 
+  const functionUrl =
+    baseUrl.replace(/\/+$/, "") +
+    "/functions/v1/" +
+    PAYMENT_FUNCTION_NAME;
+
+  console.log(
+    "Creating payment intent:",
+    {
+      functionUrl,
+      serviceId:
+        serviceId
+    }
+  );
 
   /*
-   * -------------------------------------------------------
-   * CALL SUPABASE EDGE FUNCTION
-   * -------------------------------------------------------
+   * PUBLIC MARKETING CHECKOUT:
+   *
+   * There is intentionally no Supabase
+   * Authorization header here.
+   *
+   * create-payment-intent must therefore
+   * be deployed with JWT verification OFF.
    */
-
-  const {
-    data: result,
-    error
-  } =
-    await supabaseClient.functions.invoke(
-      PAYMENT_FUNCTION_NAME,
+  const response =
+    await fetch(
+      functionUrl,
       {
-        body: {
+        method: "POST",
 
-          /*
-           * Only send the product ID.
-           *
-           * DO NOT send the browser price as authoritative.
-           */
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
 
-          productId:
-            selectedProduct.id,
+        body:
+          JSON.stringify({
+            serviceId:
+              serviceId,
 
-          customer
-        }
+            customer
+          })
       }
     );
 
+  let result = null;
 
-  if (error) {
+  try {
 
-    console.error(
-      "create-payment-intent function error:",
-      error
-    );
+    result =
+      await response.json();
 
-
-    /*
-     * Supabase may return a generic FunctionsHttpError.
-     * Try to extract the actual server response.
-     */
-
-    let message =
-      error.message ||
-      "The secure payment server could not create the payment.";
-
-
-    try {
-
-      if (
-        error.context &&
-        typeof error.context.json ===
-          "function"
-      ) {
-
-        const body =
-          await error.context.json();
-
-        if (
-          body &&
-          body.error
-        ) {
-
-          message =
-            body.error;
-        }
-      }
-
-    } catch (
-      ignored
-    ) {
-      /*
-       * Keep original error.
-       */
-    }
-
+  } catch {
 
     throw new Error(
-      message
+      "The payment server returned an invalid response."
     );
   }
 
+  console.log(
+    "create-payment-intent response:",
+    result
+  );
+
+  if (!response.ok) {
+
+    throw new Error(
+      result?.error ||
+      result?.message ||
+      "The secure payment server could not create the payment."
+    );
+  }
 
   if (
     !result ||
@@ -868,50 +1417,26 @@ async function createPaymentIntent(
   ) {
 
     throw new Error(
-      "The payment server did not return a client secret."
+      "The payment server did not return a Stripe client secret."
     );
   }
 
-
-  return result.clientSecret;
+  return result;
 }
 
 
-/*
- * =========================================================
- * GET FORM VALUE
- * =========================================================
- */
+/* =========================================================
+   MOUNT STRIPE PAYMENT ELEMENT
+========================================================= */
 
-function getFormValue(
-  formData,
-  name
-) {
-
-  const value =
-    formData.get(name);
-
-
-  return String(
-    value || ""
-  ).trim();
-}
-
-
-/*
- * =========================================================
- * MOUNT STRIPE PAYMENT
- * =========================================================
- */
-
-function mountStripePayment(
+async function mountStripePayment(
   clientSecret
 ) {
 
   if (!stripe) {
 
     throw new Error(
-      "Stripe is not available."
+      "Stripe has not been initialized."
     );
   }
 
@@ -919,7 +1444,7 @@ function mountStripePayment(
   if (!clientSecret) {
 
     throw new Error(
-      "Stripe did not provide a payment client secret."
+      "Stripe client secret is missing."
     );
   }
 
@@ -938,8 +1463,41 @@ function mountStripePayment(
   }
 
 
+  /* -------------------------------------------------------
+     Remove any previous Payment Element
+  ------------------------------------------------------- */
+
+  if (paymentElement) {
+
+    try {
+
+      paymentElement.destroy();
+
+    } catch (error) {
+
+      console.warn(
+        "Unable to destroy previous Payment Element:",
+        error
+      );
+    }
+
+
+    paymentElement =
+      null;
+  }
+
+
+  paymentContainer.innerHTML =
+    "";
+
+
+  /* -------------------------------------------------------
+     Create Elements instance
+  ------------------------------------------------------- */
+
   elements =
     stripe.elements({
+
       clientSecret,
 
       appearance: {
@@ -965,13 +1523,21 @@ function mountStripePayment(
     });
 
 
+  /* -------------------------------------------------------
+     Create Payment Element
+  ------------------------------------------------------- */
+
   paymentElement =
     elements.create(
       "payment"
     );
 
 
-  paymentElement.mount(
+  /* -------------------------------------------------------
+     Mount
+  ------------------------------------------------------- */
+
+  await paymentElement.mount(
     "#payment-element"
   );
 
@@ -980,13 +1546,15 @@ function mountStripePayment(
     true;
 
 
+  /* -------------------------------------------------------
+     Stripe change events
+  ------------------------------------------------------- */
+
   paymentElement.on(
     "change",
     (event) => {
 
-      if (
-        event.error
-      ) {
+      if (event.error) {
 
         showPaymentError(
           event.error.message
@@ -994,41 +1562,47 @@ function mountStripePayment(
 
       } else {
 
-        clearMessages();
+        clearPaymentError();
       }
     }
+  );
+
+
+  console.log(
+    "Stripe Payment Element mounted successfully."
   );
 }
 
 
-/*
- * =========================================================
- * CONFIRM PAYMENT
- * =========================================================
- */
+/* =========================================================
+   CONFIRM PAYMENT
+========================================================= */
 
 async function confirmPayment(
   form
 ) {
 
-  if (!stripe) {
-
+  if (!emailConfirmed) {
     throw new Error(
-      "Stripe is not initialized."
+      "Please confirm your email address before continuing."
     );
   }
 
-
-  if (!elements) {
+  if (
+    !elements ||
+    !paymentElement
+  ) {
 
     throw new Error(
-      "The payment form has not been initialized."
+      "The Stripe payment form has not been initialized."
     );
   }
 
 
   const data =
-    new FormData(form);
+    new FormData(
+      form
+    );
 
 
   const firstName =
@@ -1087,11 +1661,9 @@ async function confirmPayment(
     );
 
 
-  /*
-   * -------------------------------------------------------
-   * STRIPE CONFIRMATION
-   * -------------------------------------------------------
-   */
+  /* -------------------------------------------------------
+     Confirm Stripe payment
+  ------------------------------------------------------- */
 
   const {
     error
@@ -1107,37 +1679,46 @@ async function confirmPayment(
           billing_details: {
 
             name:
-              `${firstName} ${lastName}`.trim(),
+              `${firstName} ${lastName}`
+                .trim(),
 
-            email:
-              email,
+            email,
 
-            phone:
-              phone,
+            phone,
 
             address: {
 
               line1:
                 address,
 
-              city:
-                city,
+              city,
 
-              state:
-                state,
+              state,
 
               postal_code:
-                zip
+                zip,
+
+              country:
+                "US"
             }
           }
         },
 
 
         return_url:
+
           window.location.origin +
-          "/order-confirmation.html?product=" +
+          "/order-confirmation.html?order=" +
           encodeURIComponent(
-            selectedProduct.id
+            orderId || ""
+          ) +
+          "&order_number=" +
+          encodeURIComponent(
+            orderNumber || ""
+          ) +
+          "&tracking_number=" +
+          encodeURIComponent(
+            trackingNumber || ""
           )
       },
 
@@ -1155,114 +1736,77 @@ async function confirmPayment(
   }
 
 
-  /*
-   * IMPORTANT:
-   *
-   * Payment succeeded or was submitted.
-   *
-   * The Stripe webhook is responsible for creating
-   * the order and training enrollment.
-   */
+  /* -------------------------------------------------------
+     Payment submitted
+  ------------------------------------------------------- */
 
   showPaymentSuccess(
-    "Payment submitted successfully. Your order is being processed."
+
+    orderNumber
+
+      ? `Payment submitted for order ${orderNumber}. Your payment is being confirmed.`
+
+      : "Payment submitted successfully. Your payment is being confirmed."
   );
 
 
   setButton(
+
     document.getElementById(
       "payButton"
     ),
+
     true,
+
     "Payment Submitted"
   );
 }
 
 
-/*
- * =========================================================
- * LOGIN REQUIRED
- * =========================================================
- */
+/* =========================================================
+   LOCK CUSTOMER FIELDS
+========================================================= */
 
-function showLoginRequired() {
+function lockCustomerFields(
+  form
+) {
 
-  const loading =
-    document.getElementById(
-      "loading"
+  if (!form) return;
+
+
+  form
+    .querySelectorAll(
+      "input"
+    )
+    .forEach(
+      (input) => {
+
+        input.readOnly =
+          true;
+      }
     );
-
-
-  const checkoutGrid =
-    document.getElementById(
-      "checkoutGrid"
-    );
-
-
-  if (loading) {
-
-    loading.style.display =
-      "none";
-  }
-
-
-  if (checkoutGrid) {
-
-    checkoutGrid.style.display =
-      "none";
-  }
-
-
-  const errorCard =
-    document.getElementById(
-      "errorCard"
-    );
-
-
-  if (errorCard) {
-
-    errorCard.style.display =
-      "block";
-
-
-    errorCard.innerHTML = `
-      <div class="client-empty-state">
-        <strong>Sign in required</strong>
-
-        <p>
-          Please sign in to your screenings4u
-          customer account before purchasing.
-        </p>
-
-        <p>
-          Your purchase will automatically be
-          connected to your customer account,
-          order history, and training dashboard.
-        </p>
-
-        <a
-          class="client-primary-button"
-          href="client-login.html"
-        >
-          Sign In
-        </a>
-      </div>
-    `;
-
-  } else {
-
-    showPaymentError(
-      "Please sign in before purchasing."
-    );
-  }
 }
 
 
-/*
- * =========================================================
- * BUTTON STATE
- * =========================================================
- */
+/* =========================================================
+   FORM VALUE HELPER
+========================================================= */
+
+function getFormValue(
+  formData,
+  name
+) {
+
+  return String(
+    formData.get(name) ||
+    ""
+  ).trim();
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
 
 function setButton(
   button,
@@ -1270,9 +1814,7 @@ function setButton(
   label
 ) {
 
-  if (!button) {
-    return;
-  }
+  if (!button) return;
 
 
   button.disabled =
@@ -1284,13 +1826,13 @@ function setButton(
 }
 
 
-/*
- * =========================================================
- * CHECKOUT ERROR
- * =========================================================
- */
+/* =========================================================
+   CHECKOUT ERROR
+========================================================= */
 
-function showCheckoutError() {
+function showCheckoutError(
+  message
+) {
 
   const loading =
     document.getElementById(
@@ -1315,45 +1857,26 @@ function showCheckoutError() {
 
     errorCard.style.display =
       "block";
+
+
+    const notice =
+      errorCard.querySelector(
+        ".notice"
+      );
+
+
+    if (notice) {
+
+      notice.textContent =
+        message;
+    }
   }
 }
 
 
-/*
- * =========================================================
- * SETUP NOTICE
- * =========================================================
- */
-
-function showSetupNotice(
-  message
-) {
-
-  const box =
-    document.getElementById(
-      "setupNotice"
-    );
-
-
-  if (!box) {
-    return;
-  }
-
-
-  box.textContent =
-    message;
-
-
-  box.style.display =
-    "block";
-}
-
-
-/*
- * =========================================================
- * PAYMENT ERROR
- * =========================================================
- */
+/* =========================================================
+   PAYMENT ERROR
+========================================================= */
 
 function showPaymentError(
   message
@@ -1365,13 +1888,11 @@ function showPaymentError(
     );
 
 
-  if (!box) {
-    return;
-  }
+  if (!box) return;
 
 
   box.className =
-    "notice error";
+    "error";
 
 
   box.textContent =
@@ -1383,11 +1904,29 @@ function showPaymentError(
 }
 
 
-/*
- * =========================================================
- * PAYMENT SUCCESS
- * =========================================================
- */
+function clearPaymentError() {
+
+  const box =
+    document.getElementById(
+      "paymentError"
+    );
+
+
+  if (box) {
+
+    box.style.display =
+      "none";
+
+
+    box.textContent =
+      "";
+  }
+}
+
+
+/* =========================================================
+   PAYMENT SUCCESS
+========================================================= */
 
 function showPaymentSuccess(
   message
@@ -1399,9 +1938,7 @@ function showPaymentSuccess(
     );
 
 
-  if (!box) {
-    return;
-  }
+  if (!box) return;
 
 
   box.className =
@@ -1417,31 +1954,19 @@ function showPaymentSuccess(
 }
 
 
-/*
- * =========================================================
- * CLEAR MESSAGES
- * =========================================================
- */
+/* =========================================================
+   CLEAR MESSAGES
+========================================================= */
 
 function clearMessages() {
 
-  const paymentError =
-    document.getElementById(
-      "paymentError"
-    );
+  clearPaymentError();
 
 
   const setupNotice =
     document.getElementById(
       "setupNotice"
     );
-
-
-  if (paymentError) {
-
-    paymentError.style.display =
-      "none";
-  }
 
 
   if (setupNotice) {

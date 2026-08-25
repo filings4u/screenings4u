@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lesson Preview | screenings4u Admin</title>
-<link rel="icon" type="image/png" href="images/fav.png">
+
+  <link rel="icon" type="image/png" href="images/fav.png">
   <link rel="stylesheet" href="assets/css/admin.css">
   <link rel="stylesheet" href="assets/css/admin-navigation.css">
   <link rel="stylesheet" href="assets/css/admin-lms-lesson-preview.css">
-  <link rel="stylesheet" href="assets/css/admin-lms-lesson-preview-cloudflare.css">
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -19,51 +19,54 @@
     <nav id="adminNavigation" aria-label="Admin navigation"></nav>
 
     <main class="admin-main lms-lesson-preview-page">
+      <div class="lesson-preview-page-inner">
 
-      <header class="preview-header">
-        <div>
-          <p class="eyebrow">LESSON PREVIEW</p>
-          <h1 id="previewTitle">Lesson</h1>
-          <p id="previewSubtitle">
-            Preview exactly what this lesson contains.
-          </p>
-        </div>
-
-        <div class="preview-header-actions">
-          <button
-            id="backToLesson"
-            class="secondary-button"
-            type="button"
-          >
-            ← Lesson Builder
-          </button>
-        </div>
-      </header>
-
-      <section class="preview-shell">
-        <div id="previewContent" class="preview-content">
-          <div class="preview-loading">
-            Loading lesson preview...
+        <header class="preview-header">
+          <div class="preview-header-copy">
+            <p class="eyebrow">LESSON PREVIEW</p>
+            <h1 id="previewTitle">Lesson</h1>
+            <p id="previewSubtitle">Preview exactly what this lesson contains.</p>
           </div>
-        </div>
-      </section>
 
+          <div class="preview-header-actions">
+            <button id="backToLesson" class="secondary-button" type="button">
+              <span aria-hidden="true">←</span>
+              Lesson Builder
+            </button>
+
+            <button id="refreshOrders" class="refresh-button" type="button">
+            ↻ Refresh Orders
+          </button>
+          </div>
+        </header>
+
+        <section class="preview-section-heading" aria-label="Lesson content heading">
+          <div>
+            <p class="section-kicker">LMS CONTENT</p>
+            <h2>Lesson content</h2>
+          </div>
+
+          <div class="live-status">
+            <span class="status-dot" aria-hidden="true"></span>
+            Preview mode
+          </div>
+        </section>
+
+        <section class="preview-shell">
+          <div id="previewContent" class="preview-content">
+            <div class="preview-loading">Loading lesson preview...</div>
+          </div>
+        </section>
+
+      </div>
     </main>
   </div>
 
-  <div id="previewToast" class="admin-toast" role="status"></div>
+  <div id="previewToast" class="admin-toast" role="status" aria-live="polite"></div>
 
   <script src="assets/js/admin-config.js"></script>
   <script src="assets/js/admin-navigation.js"></script>
 
-  <!--
-    Optional admin-preview fallback.
-    If secure playback is not yet enabled, set this to your Cloudflare
-    customer code so the preview can use:
-    https://customer-CODE.cloudflarestream.com/VIDEO_UID/iframe
-
-    Once cloudflare-stream-token returns embedUrl, this value is not needed.
-  -->
   <script>
     window.CLOUDFLARE_STREAM_CUSTOMER_CODE =
       window.CLOUDFLARE_STREAM_CUSTOMER_CODE || '';

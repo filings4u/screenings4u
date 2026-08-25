@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Testing Order | screenings4u Admin</title>
+<link rel="icon" type="image/png" href="images/fav.png">
+<link rel="stylesheet" href="assets/css/admin.css">
+<link rel="stylesheet" href="assets/css/admin-navigation.css">
+<link rel="stylesheet" href="assets/css/admin-create-testing-order.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://js.stripe.com/v3/"></script>
+</head>
+<body class="admin-page">
+<div class="admin-app">
+  <nav id="adminNavigation" aria-label="Admin navigation"></nav>
+
+  <main class="admin-main admin-create-testing-page">
+    <header class="admin-header testing-hero">
+      <div class="testing-hero-copy">
+        <p class="eyebrow">ORDER MANAGEMENT</p>
+        <h1>Create Testing Order</h1>
+        <p>Create a manual drug & alcohol testing order for a customer, with payment or without payment.</p>
+      </div>
+      <div class="testing-hero-actions">
+        <a class="back-link" href="admin-orders.html">← All Orders</a>
+      </div>
+    </header>
+
+    <form id="manualTestingOrderForm" novalidate>
+      <div class="testing-grid">
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">CUSTOMER</p>
+              <h2>Customer Information</h2>
+              <p class="sub">Use an existing customer or enter a new customer for the order.</p>
+            </div>
+          </div>
+
+          <div class="section-body">
+            <div class="customer-search-row">
+              <div class="field grow">
+                <label for="customerSearch">Find Existing Customer</label>
+                <input id="customerSearch" type="search" placeholder="Search name or email..." autocomplete="off">
+                <div id="customerResults" class="search-results" hidden></div>
+              </div>
+              <button id="clearCustomer" class="secondary-button" type="button">New Customer</button>
+            </div>
+
+            <div id="selectedCustomer" class="selected-customer" hidden></div>
+
+            <div class="fields">
+              <div class="field"><label for="firstName">First Name</label><input id="firstName" name="firstName" required></div>
+              <div class="field"><label for="lastName">Last Name</label><input id="lastName" name="lastName" required></div>
+              <div class="field"><label for="email">Email Address</label><input id="email" name="email" type="email" required></div>
+              <div class="field"><label for="phone">Phone Number</label><input id="phone" name="phone" type="tel"></div>
+              <div class="field full"><label for="address">Billing Address</label><input id="address" name="address"></div>
+              <div class="field"><label for="city">City</label><input id="city" name="city"></div>
+              <div class="field"><label for="state">State</label><input id="state" name="state"></div>
+              <div class="field"><label for="zip">ZIP Code</label><input id="zip" name="zip"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">TESTING SERVICE</p>
+              <h2>Select Service</h2>
+              <p class="sub">Products are loaded from the same product catalog used by checkout.</p>
+            </div>
+          </div>
+          <div class="section-body">
+            <div class="field">
+              <label for="productSelect">Testing Service</label>
+              <select id="productSelect" name="productId" required>
+                <option value="">Loading testing services...</option>
+              </select>
+            </div>
+            <div id="productDescription" class="product-description"></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">PAYMENT</p>
+              <h2>Payment Method</h2>
+              <p class="sub">Choose whether staff will collect payment or provide the service at no charge.</p>
+            </div>
+          </div>
+          <div class="section-body">
+            <div class="payment-options">
+              <label class="payment-option">
+                <input type="radio" name="paymentMode" value="pay" checked>
+                <span><strong>Take Payment</strong><small>Collect payment securely through Stripe.</small></span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="paymentMode" value="free">
+                <span><strong>Free / Comped</strong><small>Create the order without charging the customer.</small></span>
+              </label>
+            </div>
+
+            <div id="stripePaymentPanel" class="stripe-panel" hidden>
+              <div id="payment-element"></div>
+              <p class="stripe-note">Card information is handled by Stripe and is not stored in this admin page.</p>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel summary-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">ORDER SUMMARY</p>
+              <h2>Review & Create</h2>
+            </div>
+          </div>
+          <div class="summary-body">
+            <div class="summary-line"><span>Customer</span><strong id="summaryCustomer">—</strong></div>
+            <div class="summary-line"><span>Service</span><strong id="summaryProduct">—</strong></div>
+            <div class="summary-line total"><span>Total</span><strong id="summaryTotal">$0.00</strong></div>
+            <div id="summaryPayment" class="summary-status">Payment required</div>
+            <div id="formMessage" class="form-message" role="alert"></div>
+            <button id="createOrderButton" class="primary-button" type="submit">Create Testing Order</button>
+            <p class="security-note">Manual orders are created through the secure Supabase backend. The browser does not determine the authoritative product price.</p>
+          </div>
+        </aside>
+      </div>
+    </form>
+  </main>
+  <div id="orderToast" class="admin-toast" role="status"></div>
+</div>
+
+<script src="assets/js/admin-config.js"></script>
+<script src="assets/js/admin-navigation.js"></script>
+<script src="assets/js/admin-create-testing-order.js"></script>
+</body>
+</html>

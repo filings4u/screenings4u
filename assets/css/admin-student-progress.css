@@ -1,348 +1,644 @@
-:root {
-  --blue: #325aa3;
-  --orange: #ff6b00;
-  --ink: #172033;
-  --muted: #6d7788;
-  --line: #e4e8ef;
-  --surface: #ffffff;
-  --background: #f6f8fb;
-  --success: #16794a;
-  --warning: #9a6500;
-  --danger: #b42318;
+/* =========================================================
+   screenings4u — Admin Student Progress & Results
+   Master visual reference: assets/css/admin-dashboard.css
+   ========================================================= */
+
+.admin-student-progress-page {
+  --dashboard-blue:#325aa3;
+  --dashboard-blue-dark:#284a83;
+  --dashboard-orange:#ff6b00;
+  --dashboard-ink:#172033;
+  --dashboard-muted:#687386;
+  --dashboard-border:#e2e6ed;
+  --dashboard-background:#f4f6fa;
+  --dashboard-surface:#fff;
+  --dashboard-success:#17834b;
+  --dashboard-danger:#c83a3a;
+  --dashboard-warning:#b86a00;
+  --dashboard-purple:#7357b7;
+  background:var(--dashboard-background);
 }
 
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  background: var(--background);
-  color: var(--ink);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+.admin-app > main.admin-main.admin-student-progress-page {
+  min-width:0;
+  min-height:100%;
+  box-sizing:border-box;
+  background:var(--dashboard-background);
 }
 
-button, input, select { font: inherit; }
-
-.admin-topbar {
-  min-height: 76px;
-  background: #fff;
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 28px;
-  gap: 20px;
+.admin-student-progress-page *,
+.admin-student-progress-page *::before,
+.admin-student-progress-page *::after {
+  box-sizing:border-box;
 }
 
-.admin-brand {
-  color: var(--blue);
-  font-size: 1.25rem;
-  font-weight: 900;
+.admin-student-progress-page .student-progress-inner {
+  width:min(100%,1180px);
+  margin:0 auto;
 }
 
-.admin-eyebrow {
-  color: var(--orange);
-  font-size: .68rem;
-  font-weight: 900;
-  letter-spacing: .15em;
-  margin: 0 0 6px;
+/* Hero */
+
+.admin-student-progress-page .progress-hero {
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+  min-height:190px;
+  margin:0 0 20px;
+  padding:30px 36px;
+  overflow:hidden;
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 86% 25%,rgba(255,255,255,.15),transparent 22%),
+    linear-gradient(110deg,#294d86 0%,#325aa3 55%,#344b7b 100%);
+  box-shadow:0 16px 36px rgba(37,63,111,.14);
+  color:#fff;
 }
 
-.admin-topbar-actions {
-  display: flex;
-  gap: 9px;
-  flex-wrap: wrap;
+.admin-student-progress-page .progress-hero::after {
+  content:"";
+  position:absolute;
+  right:-55px;
+  top:-85px;
+  width:280px;
+  height:280px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:50%;
+  box-shadow:
+    0 0 0 34px rgba(255,255,255,.035),
+    0 0 0 68px rgba(255,255,255,.025);
+  pointer-events:none;
 }
 
-.admin-button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 40px;
-  border-radius: 7px;
-  padding: 0 14px;
-  text-decoration: none;
-  border: 1px solid transparent;
-  cursor: pointer;
-  font-weight: 750;
+.admin-student-progress-page .progress-hero-copy {
+  position:relative;
+  z-index:1;
+  max-width:720px;
 }
 
-.admin-button.secondary {
-  color: var(--blue);
-  background: #fff;
-  border-color: #cfd7e4;
+.admin-student-progress-page .progress-hero .eyebrow {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:0 0 9px;
+  color:#ffad72;
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:.13em;
 }
 
-.admin-button.primary {
-  color: #fff;
-  background: var(--blue);
+.admin-student-progress-page .progress-hero .eyebrow::before {
+  content:"";
+  width:7px;
+  height:7px;
+  flex:0 0 7px;
+  border-radius:50%;
+  background:var(--dashboard-orange);
+  box-shadow:0 0 0 4px rgba(255,107,0,.14);
 }
 
-.admin-shell {
-  width: min(1440px, calc(100% - 40px));
-  margin: 0 auto;
-  padding: 34px 0 60px;
+.admin-student-progress-page .progress-hero h1 {
+  margin:0;
+  color:#fff;
+  font-size:clamp(32px,4vw,43px);
+  font-weight:800;
+  letter-spacing:-1.5px;
+  line-height:1.04;
 }
 
-.page-heading h1 {
-  margin: 0;
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
+.admin-student-progress-page .progress-hero p:not(.eyebrow) {
+  max-width:670px;
+  margin:12px 0 0;
+  color:rgba(255,255,255,.78);
+  font-size:13px;
+  line-height:1.55;
 }
 
-.page-heading p:last-child {
-  margin: 8px 0 0;
-  color: var(--muted);
+.admin-student-progress-page .progress-hero-actions {
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex:0 0 auto;
 }
 
-.metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 14px;
-  margin: 25px 0;
+.admin-student-progress-page .refresh-button,
+.admin-student-progress-page .hero-secondary-button {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  min-height:42px;
+  padding:0 15px;
+  border-radius:10px;
+  font:inherit;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
 }
 
-.metric-card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 19px;
+.admin-student-progress-page .refresh-button {
+  border:1px solid rgba(255,107,0,.45);
+  background:var(--dashboard-orange);
+  color:#fff;
+  box-shadow:0 8px 18px rgba(255,107,0,.22);
 }
 
-.metric-card span,
-.detail-metrics span {
-  display: block;
-  color: var(--muted);
-  font-size: .75rem;
-  font-weight: 700;
+.admin-student-progress-page .refresh-button:hover {
+  background:#f36300;
+  transform:translateY(-1px);
 }
 
-.metric-card strong {
-  display: block;
-  font-size: 1.8rem;
-  margin-top: 5px;
+.admin-student-progress-page .refresh-button:disabled {
+  opacity:.6;
+  cursor:wait;
+  transform:none;
 }
 
-.admin-panel {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 11px;
-  padding: 20px;
-  box-shadow: 0 5px 20px rgba(20, 30, 50, .03);
+.admin-student-progress-page .hero-secondary-button {
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(255,255,255,.10);
+  color:#fff;
 }
 
-.detail-panel { margin-top: 20px; }
-
-.panel-toolbar {
-  display: flex;
-  gap: 14px;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 18px;
+.admin-student-progress-page .hero-secondary-button:hover {
+  background:rgba(255,255,255,.16);
+  transform:translateY(-1px);
 }
 
-.search-wrap { flex: 1; max-width: 650px; }
-.filter-wrap { width: 210px; }
+/* Metrics */
 
-.panel-toolbar label {
-  display: block;
-  color: #4e5869;
-  font-size: .75rem;
-  font-weight: 800;
-  margin-bottom: 6px;
+.admin-student-progress-page .metrics-grid {
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:13px;
+  margin:0 0 17px;
 }
 
-input, select {
-  width: 100%;
-  height: 43px;
-  border: 1px solid #ccd4e0;
-  border-radius: 7px;
-  padding: 0 12px;
-  background: #fff;
-  color: var(--ink);
-  outline: none;
+.admin-student-progress-page .metric-card {
+  min-width:0;
+  padding:16px 17px;
+  border:1px solid var(--dashboard-border);
+  border-radius:12px;
+  background:#fff;
+  box-shadow:0 7px 20px rgba(24,36,60,.035);
 }
 
-input:focus, select:focus {
-  border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(50, 90, 163, .1);
+.admin-student-progress-page .metric-card span,
+.admin-student-progress-page .detail-metrics span {
+  display:block;
+  color:#7b8594;
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:.07em;
+  text-transform:uppercase;
 }
 
-.table-wrap { overflow-x: auto; }
-
-.admin-data-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 760px;
+.admin-student-progress-page .metric-card strong {
+  display:block;
+  margin-top:7px;
+  color:var(--dashboard-ink);
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:-.4px;
 }
 
-.admin-data-table th {
-  text-align: left;
-  color: #687386;
-  font-size: .7rem;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  padding: 12px;
-  background: #fafbfc;
-  border-bottom: 1px solid var(--line);
+/* Panels */
+
+.admin-student-progress-page .admin-panel {
+  min-width:0;
+  margin:0 0 17px;
+  overflow:hidden;
+  border:1px solid var(--dashboard-border);
+  border-radius:16px;
+  background:#fff;
+  box-shadow:0 7px 20px rgba(24,36,60,.04);
+  padding:0;
 }
 
-.admin-data-table td {
-  padding: 13px 12px;
-  border-bottom: 1px solid var(--line);
-  vertical-align: middle;
-  font-size: .88rem;
+.admin-student-progress-page .panel-toolbar {
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:20px;
+  padding:19px 21px 16px;
+  border-bottom:1px solid #edf0f4;
 }
 
-.admin-data-table tr:last-child td { border-bottom: 0; }
-
-.student-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.admin-student-progress-page .search-wrap {
+  flex:1;
+  max-width:650px;
 }
 
-.student-avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  flex: 0 0 auto;
-  background: #eef3fb;
-  color: var(--blue);
-  font-weight: 900;
-  font-size: .78rem;
+.admin-student-progress-page .filter-wrap {
+  width:190px;
 }
 
-.student-row small {
-  display: block;
-  color: var(--muted);
-  margin-top: 3px;
+.admin-student-progress-page .panel-toolbar label {
+  display:block;
+  margin:0 0 7px;
+  color:#6d7787;
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:.055em;
+  text-transform:uppercase;
 }
 
-.progress-cell {
-  min-width: 155px;
+.admin-student-progress-page input,
+.admin-student-progress-page select {
+  width:100%;
+  min-height:42px;
+  padding:0 12px;
+  border:1px solid var(--dashboard-border);
+  border-radius:10px;
+  background:#fff;
+  color:#263244;
+  font:inherit;
+  font-size:11px;
+  outline:none;
 }
 
-.progress-track {
-  height: 7px;
-  background: #edf0f4;
-  border-radius: 999px;
-  overflow: hidden;
-  margin-bottom: 5px;
+.admin-student-progress-page input:focus,
+.admin-student-progress-page select:focus {
+  border-color:rgba(50,90,163,.45);
+  box-shadow:0 0 0 3px rgba(50,90,163,.08);
 }
 
-.progress-track span {
-  display: block;
-  height: 100%;
-  background: var(--blue);
-  border-radius: inherit;
+/* Tables */
+
+.admin-student-progress-page .table-wrap {
+  min-width:0;
+  overflow-x:auto;
 }
 
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 999px;
-  background: #eef2f7;
-  color: #526074;
-  padding: 5px 9px;
-  font-size: .7rem;
-  font-weight: 850;
+.admin-student-progress-page .admin-data-table {
+  width:100%;
+  min-width:760px;
+  border-collapse:collapse;
 }
 
-.status-badge.active { background: #fff5dc; color: var(--warning); }
-.status-badge.completed { background: #e8f7ef; color: var(--success); }
-.status-badge.not-started { background: #eef1f5; color: #657184; }
-.status-badge.revoked { background: #fdecec; color: var(--danger); }
-.status-badge.passed { background: #e8f7ef; color: var(--success); }
-.status-badge.failed { background: #fdecec; color: var(--danger); }
-
-.empty-state {
-  padding: 45px 20px;
-  text-align: center;
-  color: var(--muted);
+.admin-student-progress-page .admin-data-table th {
+  padding:10px 15px;
+  border-bottom:1px solid #e9edf2;
+  background:#fbfcfd;
+  color:#7b8594;
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:.07em;
+  text-align:left;
+  text-transform:uppercase;
+  white-space:nowrap;
 }
 
-.error-state { color: var(--danger); }
-
-.detail-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--line);
+.admin-student-progress-page .admin-data-table td {
+  padding:12px 15px;
+  border-bottom:1px solid #edf0f4;
+  color:#596476;
+  font-size:11px;
+  vertical-align:middle;
 }
 
-.student-identity {
-  display: flex;
-  gap: 13px;
-  align-items: center;
+.admin-student-progress-page .admin-data-table tbody tr:hover {
+  background:#fafcff;
 }
 
-.student-identity .student-avatar {
-  width: 52px;
-  height: 52px;
+.admin-student-progress-page .admin-data-table tbody tr:last-child td {
+  border-bottom:0;
 }
 
-.student-identity h2 { margin: 0; }
-.student-identity p:last-child { color: var(--muted); margin: 5px 0 0; }
-
-.detail-metrics {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  padding: 18px 0;
+.admin-student-progress-page .admin-data-table td strong {
+  color:var(--dashboard-ink);
+  font-size:11px;
+  font-weight:750;
 }
 
-.detail-metrics div {
-  background: #fafbfc;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 14px;
+.admin-student-progress-page .admin-data-table td small {
+  display:block;
+  margin-top:3px;
+  color:#8b94a2;
+  font-size:9px;
 }
 
-.detail-metrics strong {
-  display: block;
-  font-size: 1.45rem;
-  margin-top: 3px;
+/* Student row */
+
+.admin-student-progress-page .student-row {
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.detail-section {
-  border-top: 1px solid var(--line);
-  padding-top: 20px;
-  margin-top: 20px;
+.admin-student-progress-page .student-avatar {
+  display:grid;
+  place-items:center;
+  width:38px;
+  height:38px;
+  flex:0 0 auto;
+  border-radius:50%;
+  background:#eef3fb;
+  color:var(--dashboard-blue);
+  font-size:10px;
+  font-weight:900;
 }
 
-.section-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  margin-bottom: 12px;
+/* Progress */
+
+.admin-student-progress-page .progress-cell {
+  min-width:155px;
 }
 
-.section-title h3 {
-  margin: 0;
-  font-size: 1rem;
+.admin-student-progress-page .progress-track {
+  height:7px;
+  margin-bottom:5px;
+  overflow:hidden;
+  border-radius:999px;
+  background:#edf0f4;
 }
 
-.section-muted {
-  color: var(--muted);
-  font-size: .78rem;
+.admin-student-progress-page .progress-track span {
+  display:block;
+  height:100%;
+  border-radius:inherit;
+  background:var(--dashboard-blue);
 }
 
-@media (max-width: 900px) {
-  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-  .detail-metrics { grid-template-columns: repeat(2, 1fr); }
-  .panel-toolbar { flex-direction: column; align-items: stretch; }
-  .search-wrap, .filter-wrap { max-width: none; width: 100%; }
+/* Status */
+
+.admin-student-progress-page .status-badge {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:23px;
+  padding:4px 8px;
+  border-radius:999px;
+  background:#eef1f5;
+  color:#596477;
+  font-size:9px;
+  font-weight:850;
+  line-height:1;
+  white-space:nowrap;
 }
 
-@media (max-width: 600px) {
-  .admin-topbar { padding: 13px 16px; align-items: flex-start; }
-  .admin-topbar-actions { justify-content: flex-end; }
-  .admin-shell { width: min(100% - 22px, 1440px); padding-top: 24px; }
-  .metrics-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
-  .admin-panel { padding: 14px; }
-  .detail-header { align-items: flex-start; flex-direction: column; }
+.admin-student-progress-page .status-badge.active {
+  background:rgba(184,106,0,.10);
+  color:var(--dashboard-warning);
+}
+
+.admin-student-progress-page .status-badge.completed,
+.admin-student-progress-page .status-badge.passed {
+  background:rgba(23,131,75,.09);
+  color:var(--dashboard-success);
+}
+
+.admin-student-progress-page .status-badge.not-started {
+  background:#eef1f5;
+  color:#657184;
+}
+
+.admin-student-progress-page .status-badge.revoked,
+.admin-student-progress-page .status-badge.failed {
+  background:rgba(200,58,58,.09);
+  color:var(--dashboard-danger);
+}
+
+/* Empty/error */
+
+.admin-student-progress-page .empty-state {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:178px;
+  padding:24px;
+  color:#8a93a1;
+  font-size:11px;
+  text-align:center;
+}
+
+.admin-student-progress-page .error-state {
+  color:var(--dashboard-danger);
+}
+
+/* Detail */
+
+.admin-student-progress-page .detail-panel {
+  margin-top:0;
+}
+
+.admin-student-progress-page .detail-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:19px 21px;
+  border-bottom:1px solid #edf0f4;
+}
+
+.admin-student-progress-page .student-identity {
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.admin-student-progress-page .student-identity .student-avatar {
+  width:52px;
+  height:52px;
+  font-size:12px;
+}
+
+.admin-student-progress-page .student-identity .admin-eyebrow {
+  margin:0 0 5px;
+  color:var(--dashboard-orange);
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:.13em;
+}
+
+.admin-student-progress-page .student-identity h2 {
+  margin:0;
+  color:var(--dashboard-ink);
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:-.25px;
+}
+
+.admin-student-progress-page .student-identity p:last-child {
+  margin:5px 0 0;
+  color:#8a93a1;
+  font-size:10px;
+}
+
+.admin-student-progress-page .admin-button {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:38px;
+  padding:0 13px;
+  border-radius:10px;
+  font:inherit;
+  font-size:10px;
+  font-weight:800;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.admin-student-progress-page .admin-button.secondary {
+  border:1px solid var(--dashboard-border);
+  background:#fff;
+  color:var(--dashboard-blue);
+}
+
+.admin-student-progress-page .admin-button.secondary:hover {
+  border-color:rgba(50,90,163,.23);
+  background:#fbfcfe;
+}
+
+.admin-student-progress-page .detail-metrics {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:1px;
+  margin:0;
+  padding:0;
+  background:#edf0f4;
+}
+
+.admin-student-progress-page .detail-metrics div {
+  min-width:0;
+  padding:15px;
+  background:#fff;
+}
+
+.admin-student-progress-page .detail-metrics strong {
+  display:block;
+  margin-top:6px;
+  color:var(--dashboard-ink);
+  font-size:18px;
+  font-weight:800;
+}
+
+/* Detail sections */
+
+.admin-student-progress-page .detail-section {
+  margin:0;
+  padding:18px 21px 0;
+}
+
+.admin-student-progress-page .detail-section:last-child {
+  padding-bottom:21px;
+}
+
+.admin-student-progress-page .section-title {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin:0 0 12px;
+}
+
+.admin-student-progress-page .section-title h3 {
+  margin:0;
+  color:var(--dashboard-ink);
+  font-size:14px;
+  font-weight:800;
+}
+
+.admin-student-progress-page .section-muted {
+  color:#8a93a1;
+  font-size:9px;
+  font-weight:750;
+}
+
+/* Responsive */
+
+@media(max-width:1180px) {
+  .admin-student-progress-page .student-progress-inner {
+    width:calc(100% - 36px);
+  }
+}
+
+@media(max-width:980px) {
+  .admin-student-progress-page .progress-hero {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .admin-student-progress-page .progress-hero-actions {
+    width:100%;
+  }
+
+  .admin-student-progress-page .refresh-button,
+  .admin-student-progress-page .hero-secondary-button {
+    flex:1;
+  }
+
+  .admin-student-progress-page .metrics-grid {
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+
+  .admin-student-progress-page .panel-toolbar {
+    align-items:stretch;
+    flex-direction:column;
+  }
+
+  .admin-student-progress-page .search-wrap,
+  .admin-student-progress-page .filter-wrap {
+    width:100%;
+    max-width:none;
+  }
+}
+
+@media(max-width:650px) {
+  .admin-student-progress-page .student-progress-inner {
+    width:calc(100% - 24px);
+  }
+
+  .admin-student-progress-page .progress-hero {
+    min-height:auto;
+    padding:25px 22px;
+    border-radius:18px;
+  }
+
+  .admin-student-progress-page .progress-hero-actions {
+    flex-direction:column;
+  }
+
+  .admin-student-progress-page .refresh-button,
+  .admin-student-progress-page .hero-secondary-button {
+    width:100%;
+  }
+
+  .admin-student-progress-page .metrics-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:9px;
+  }
+
+  .admin-student-progress-page .metric-card {
+    padding:14px;
+  }
+
+  .admin-student-progress-page .admin-panel {
+    border-radius:14px;
+  }
+
+  .admin-student-progress-page .detail-header {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .admin-student-progress-page .detail-metrics {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .admin-student-progress-page .detail-section {
+    padding-left:18px;
+    padding-right:18px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  .admin-student-progress-page .refresh-button,
+  .admin-student-progress-page .hero-secondary-button {
+    transition:none;
+  }
 }

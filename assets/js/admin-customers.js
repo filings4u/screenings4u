@@ -164,7 +164,7 @@
 
     try {
       const { data, error } = await auditClient
-        .from("profiles")
+        .from("client_profiles")
         .select(`
           id,
           first_name,

@@ -104,7 +104,7 @@
   async function loadAccounts() {
     try {
       const { data, error } = await supabaseClient
-        .from("clients")
+        .from("client_profiles")
         .select(`
           id,
           role,
@@ -762,7 +762,7 @@
       toggleActionButtons(true);
 
       const { error } = await supabaseClient
-        .from("clients")
+        .from("client_profiles")
         .update({ is_active: isActive })
         .eq("id", selectedAccount.id);
 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | screenings4u</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--orange:#ff6b00;--blue:#325aa3;--blue-dark:#24467f;--ink:#1d2d45;--muted:#667892;--surface:#f4f7fc;--line:#d9e3f0}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--surface);color:var(--ink)}
+a{text-decoration:none}.container{width:min(900px,calc(100% - 36px));margin:auto}header{background:#fff;border-bottom:1px solid var(--line)}
+.header{min-height:78px;display:flex;align-items:center;justify-content:space-between}.logo{width:180px}.back{font-size:12px;font-weight:800;color:var(--blue)}
+main{padding:80px 0}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:38px;box-shadow:0 14px 40px rgba(23,51,95,.07)}
+.eyebrow{color:var(--orange);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.12em}h1{font-size:clamp(38px,6vw,58px);color:var(--blue-dark);line-height:1.03;letter-spacing:-.05em;margin:10px 0 14px}.lead{color:var(--muted);line-height:1.8}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}.contact{padding:20px;border:1px solid var(--line);border-radius:12px}.label{font-size:10px;font-weight:900;text-transform:uppercase;color:#667085}.value{display:block;margin-top:6px;font-weight:800;color:var(--blue-dark)}
+.actions{margin-top:28px;display:flex;gap:10px;flex-wrap:wrap}.btn{min-height:46px;padding:0 18px;border-radius:8px;display:inline-flex;align-items:center;font-size:12px;font-weight:900}.orange{background:var(--orange);color:#fff}.blue{border:1px solid var(--blue);color:var(--blue)}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.container{width:min(100% - 28px,900px)}}
+</style>
+</head>
+<body>
+<header><div class="container header"><a href="index.html"><img class="logo" src="images/logo.png" alt="screenings4u"></a><a class="back" href="services.html">← Services</a></div></header>
+<main><div class="container"><section class="card">
+<div class="eyebrow">Contact screenings4u</div>
+<h1>Let's get you to the right service.</h1>
+<p class="lead">For custom programs, employer services, audits, group training or services that require additional coordination, contact our team.</p>
+<div class="grid">
+<div class="contact"><div class="label">Phone</div><a class="value" href="tel:7732457009">(773) 245-7009</a></div>
+<div class="contact"><div class="label">Email</div><a class="value" href="mailto:support@screenings4u.com">support@screenings4u.com</a></div>
+<div class="contact"><div class="label">Office</div><span class="value">8537 S Pulaski Rd, Chicago, IL 60652</span></div>
+<div class="contact"><div class="label">Dashboard</div><a class="value" href="admin-dashboard.html">Dashboard Login</a></div>
+</div>
+<div class="actions">
+<a class="btn orange" href="services.html">Browse Services</a>
+<a class="btn blue" href="mailto:support@screenings4u.com">Email Us</a>
+</div>
+</section></div></main>
+</body></html>

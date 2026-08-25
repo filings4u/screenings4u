@@ -4,14 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Course Player | screenings4u</title>
+
   <link rel="stylesheet" href="assets/css/lms-course-player.css">
-  <script src="assets/js/lms-course-player.js"></script>
-<link rel="stylesheet" href="assets/css/screenings4u-course-player-polish.css">
+  <link rel="stylesheet" href="assets/css/screenings4u-course-player-polish.css">
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- Cloudflare Stream Player SDK is loaded on demand by lms-course-player.js. -->
 </head>
-<body class="lms-player-page">
 
+<body class="lms-player-page">
   <header class="lms-player-header">
     <div class="lms-player-brand">screenings4u</div>
 
@@ -26,7 +27,6 @@
   </header>
 
   <div class="lms-player-shell">
-
     <aside class="lms-player-sidebar" id="courseSidebar">
       <div class="sidebar-heading">
         <span class="eyebrow">COURSE CONTENT</span>
@@ -39,13 +39,11 @@
     </aside>
 
     <main class="lms-player-main">
-
       <div id="playerLoading" class="player-state">
         Loading your course...
       </div>
 
       <section id="lessonView" class="lesson-view" hidden>
-
         <div class="lesson-header">
           <div>
             <p id="lessonSectionName" class="eyebrow">SECTION</p>
@@ -68,9 +66,18 @@
           </div>
 
           <div class="assessment-summary">
-            <div><span>Questions</span><strong id="assessmentQuestionCount">0</strong></div>
-            <div><span>Passing Score</span><strong id="assessmentPassingScore">80%</strong></div>
-            <div><span>Attempts</span><strong id="assessmentAttempts">Unlimited</strong></div>
+            <div>
+              <span>Questions</span>
+              <strong id="assessmentQuestionCount">0</strong>
+            </div>
+            <div>
+              <span>Passing Score</span>
+              <strong id="assessmentPassingScore">80%</strong>
+            </div>
+            <div>
+              <span>Attempts</span>
+              <strong id="assessmentAttempts">Unlimited</strong>
+            </div>
           </div>
 
           <button id="startAssessmentButton" class="player-button primary" type="button">
@@ -91,46 +98,45 @@
             Next →
           </button>
         </div>
-
       </section>
 
       <section id="courseCompleteView" class="course-complete" hidden>
         <div class="complete-icon">✓</div>
         <p class="eyebrow">COURSE COMPLETE</p>
         <h1 id="completeCourseTitle">Congratulations</h1>
-        <p>
-          You have completed all required course content.
-        </p>
+        <p>You have completed all required course content.</p>
+
         <button id="certificateButton" class="player-button primary" type="button" hidden>
           View Certificate
         </button>
       </section>
-
     </main>
   </div>
 
   <div id="assessmentPlayerModal" class="player-modal" aria-hidden="true">
     <div class="player-modal-backdrop" data-close-assessment></div>
 
-    <div class="player-modal-card">
+    <div class="player-modal-card" role="dialog" aria-modal="true" aria-labelledby="assessmentPlayerTitle">
       <header class="player-modal-header">
         <div>
           <p class="eyebrow">ASSESSMENT</p>
           <h2 id="assessmentPlayerTitle">Assessment</h2>
         </div>
-        <button id="closeAssessmentButton" class="modal-close" type="button">×</button>
+
+        <button id="closeAssessmentButton" class="modal-close" type="button" aria-label="Close assessment">
+          ×
+        </button>
       </header>
 
       <div id="assessmentPlayerBody" class="player-modal-body"></div>
-
       <footer id="assessmentPlayerFooter" class="player-modal-footer"></footer>
     </div>
   </div>
 
-  <div id="playerToast" class="player-toast" role="status"></div>
+  <div id="playerToast" class="player-toast" role="status" aria-live="polite"></div>
 
   <script src="assets/js/lms-config.js"></script>
-<script src="assets/js/lms-course-player.js"></script>
-<script src="assets/js/screenings4u-course-player-polish.js"></script>
+  <script src="assets/js/lms-course-player.js"></script>
+  <script src="assets/js/screenings4u-course-player-polish.js"></script>
 </body>
 </html>

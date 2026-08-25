@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmation | screenings4u</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--orange:#ff6b00;--blue:#325aa3;--blue-dark:#24467f;--muted:#667892;--surface:#f4f7fc;--line:#d9e3f0}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--surface);color:#1d2d45}
+.container{width:min(760px,calc(100% - 36px));margin:auto}.card{margin:90px auto;background:#fff;border:1px solid var(--line);border-radius:18px;padding:44px;box-shadow:0 14px 40px rgba(23,51,95,.07);text-align:center}
+.check{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#e9f2ff;color:var(--blue);font-size:28px;font-weight:900;margin:0 auto 20px}
+.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.12em;font-weight:900;color:var(--orange)}
+h1{font-size:clamp(34px,6vw,52px);color:var(--blue-dark);letter-spacing:-.05em;margin:10px 0}
+p{color:var(--muted);line-height:1.7;font-size:14px}.order{margin:24px 0;padding:18px;background:#f7f9fc;border:1px solid var(--line);border-radius:12px}.order strong{display:block;color:var(--blue-dark);font-size:20px;margin-top:5px}
+.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:25px}.btn{min-height:46px;padding:0 18px;border-radius:8px;display:inline-flex;align-items:center;font-size:12px;font-weight:900;text-decoration:none}.orange{background:var(--orange);color:#fff}.blue{border:1px solid var(--blue);color:var(--blue)}
+</style>
+</head>
+<body>
+<main><div class="container"><section class="card">
+<div class="check">✓</div><div class="eyebrow">Payment Submitted</div>
+<h1>Thank you for your order.</h1>
+<p>Your payment has been submitted to Stripe. The screenings4u webhook will confirm the payment and finalize your order.</p>
+<div class="order"><span>Order Number</span><strong id="orderNumber">—</strong></div>
+<p>Keep your order number for your records. If payment requires additional authentication, complete it in the Stripe window before leaving checkout.</p>
+<div class="actions">
+<a class="btn orange" href="services.html">Browse More Services</a>
+<a class="btn blue" href="index.html">Return Home</a>
+</div>
+</section></div></main>
+<script>
+const params = new URLSearchParams(location.search);
+document.getElementById("orderNumber").textContent =
+  params.get("order_number") || params.get("order") || "Submitted";
+</script>
+</body>
+</html>
