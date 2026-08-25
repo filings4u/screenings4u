@@ -25,7 +25,7 @@
  *
  * IMPORTANT:
  * - No customer authentication is required.
- * - The browser sends the SERVICE ID (service SKU), not the price.
+ * - The browser sends the PRODUCT ID, not the price.
  * - The server is authoritative for pricing.
  * - The webhook is authoritative for payment completion.
  */
@@ -52,7 +52,7 @@ let stripe = null;
 let elements = null;
 let paymentElement = null;
 
-let selectedService = null;
+let selectedProduct = null;
 
 let paymentMounted = false;
 let paymentIntentCreated = false;
@@ -67,6 +67,138 @@ let paymentIntentId = null;
 /* =========================================================
    INPUT FORMATTING / MANUAL ENTRY CONTROLS
 ========================================================= */
+
+const manualEntryFields = new Set();
+let manualEntryNotice = null;
+
+function getManualEntryFieldIds() {
+  return [
+    "firstName",
+    "lastName",
+    "email",
+    "phone",
+    "address",
+    "city",
+    "state",
+    "zip"
+  ];
+}
+
+function markManualEntry(field) {
+  if (field && field.id) {
+    manualEntryFields.add(field.id);
+  }
+}
+
+function showManualEntryNotice(reason = "manual") {
+  if (!manualEntryNotice) {
+    manualEntryNotice = document.createElement("div");
+    manualEntryNotice.id = "manualEntryNotice";
+    manualEntryNotice.setAttribute("role", "dialog");
+    manualEntryNotice.setAttribute("aria-modal", "true");
+    manualEntryNotice.setAttribute("aria-live", "assertive");
+
+    manualEntryNotice.innerHTML = `
+      <div class="manual-entry-backdrop"></div>
+      <div class="manual-entry-card">
+        <div class="manual-entry-icon">!</div>
+        <div class="manual-entry-eyebrow">Manual Entry Required</div>
+        <h2>Please Type Your Information</h2>
+        <p>
+          For checkout verification, please type your customer information
+          directly into the form. Autofill, copy and paste are not supported
+          on this checkout form.
+        </p>
+        <button type="button" id="manualEntryOkBtn">I Understand</button>
+      </div>
+    `;
+
+    const style = document.createElement("style");
+    style.textContent = `
+      #manualEntryNotice {
+        position: fixed; inset: 0; z-index: 100000; display: flex;
+        align-items: center; justify-content: center; padding: 20px;
+      }
+      #manualEntryNotice .manual-entry-backdrop {
+        position: absolute; inset: 0; background: rgba(18,35,61,.62);
+        backdrop-filter: blur(5px);
+      }
+      #manualEntryNotice .manual-entry-card {
+        position: relative; z-index: 2; width: min(460px,100%);
+        padding: 32px; background: #fff; border: 1px solid #d9e3f0;
+        border-radius: 18px; box-shadow: 0 30px 90px rgba(12,32,64,.28);
+        text-align: center; font-family: Inter,Arial,sans-serif;
+      }
+      #manualEntryNotice .manual-entry-icon {
+        width: 46px; height: 46px; margin: 0 auto 16px; display: flex;
+        align-items: center; justify-content: center; border-radius: 50%;
+        background: #fff7ed; color: #ff6b00; font-size: 24px; font-weight: 900;
+      }
+      #manualEntryNotice .manual-entry-eyebrow {
+        color: #ff6b00; font-size: 10px; font-weight: 900;
+        text-transform: uppercase; letter-spacing: .12em; margin-bottom: 7px;
+      }
+      #manualEntryNotice h2 { margin: 0 0 10px; color: #24467f; font-size: 25px; }
+      #manualEntryNotice p { margin: 0; color: #667892; font-size: 13px; line-height: 1.65; }
+      #manualEntryNotice button {
+        width: 100%; height: 50px; margin-top: 22px; border: 0;
+        border-radius: 8px; background: #ff6b00; color: #fff;
+        font-weight: 900; cursor: pointer;
+      }
+      body.manual-entry-notice-active { overflow: hidden; }
+    `;
+
+    document.head.appendChild(style);
+    document.body.appendChild(manualEntryNotice);
+
+    manualEntryNotice
+      .querySelector("#manualEntryOkBtn")
+      .addEventListener("click", closeManualEntryNotice);
+
+    manualEntryNotice
+      .querySelector(".manual-entry-backdrop")
+      .addEventListener("click", closeManualEntryNotice);
+  }
+
+  manualEntryNotice.classList.add("active");
+  document.body.classList.add("manual-entry-notice-active");
+}
+
+function closeManualEntryNotice() {
+  if (!manualEntryNotice) return;
+  manualEntryNotice.remove();
+  manualEntryNotice = null;
+  document.body.classList.remove("manual-entry-notice-active");
+}
+
+function validateManualEntry() {
+  const autofilled = getManualEntryFieldIds()
+    .map(id => document.getElementById(id))
+    .filter(field => field && field.value.trim() && !manualEntryFields.has(field.id));
+
+  if (autofilled.length) {
+    showManualEntryNotice("autofill");
+    autofilled[0].focus();
+    return {
+      valid: false,
+      field: autofilled[0].id,
+      message: "Please type your information directly into the form."
+    };
+  }
+
+  return { valid: true };
+}
+
+function checkForAutofill() {
+  const autofilled = getManualEntryFieldIds()
+    .map(id => document.getElementById(id))
+    .filter(field => field && field.value.trim() && !manualEntryFields.has(field.id));
+
+  if (autofilled.length) {
+    showManualEntryNotice("autofill");
+    autofilled[0].focus();
+  }
+}
 
 function setupManualEntryFields() {
 
@@ -273,6 +405,9 @@ function setupManualEntryFields() {
     });
   }
 
+  window.setTimeout(checkForAutofill, 500);
+  window.setTimeout(checkForAutofill, 1500);
+
   /*
    * Disable paste/cut/drop on customer fields.
    * This is a UI restriction, not a security boundary.
@@ -290,10 +425,32 @@ function setupManualEntryFields() {
 
     if (!input) return;
 
+    input.addEventListener("keydown", event => {
+      if (
+        event.key.length === 1 ||
+        event.key === "Backspace" ||
+        event.key === "Delete"
+      ) {
+        markManualEntry(input);
+      }
+    });
+
+    input.addEventListener("beforeinput", event => {
+      if (
+        event.inputType === "insertText" ||
+        event.inputType === "deleteContentBackward" ||
+        event.inputType === "deleteContentForward"
+      ) {
+        markManualEntry(input);
+      }
+    });
+
     input.addEventListener(
       "paste",
       event => {
         event.preventDefault();
+        showManualEntryNotice("paste");
+        input.focus();
       }
     );
 
@@ -301,6 +458,8 @@ function setupManualEntryFields() {
       "drop",
       event => {
         event.preventDefault();
+        showManualEntryNotice("drop");
+        input.focus();
       }
     );
 
@@ -319,6 +478,8 @@ function setupManualEntryFields() {
     );
   });
 }
+
+
 
 
 /* =========================================================
@@ -342,19 +503,20 @@ async function initCheckout() {
 
 
     /*
-     * PUBLIC SERVICE PARAMETER
+     * Accept both:
      *
-     * Example:
-     * checkout.html?service=dot_personal_test
+     * checkout.html?service=PRODUCT_ID
      *
-     * The value is the service SKU, not the database UUID.
+     * checkout.html?product=PRODUCT_ID
      */
+
     const serviceId =
-      (params.get("service") || "").trim();
+      params.get("service") ||
+      params.get("product");
 
 
     /* -----------------------------------------------------
-       Validate service parameter
+       Validate product parameter
     ----------------------------------------------------- */
 
     if (!serviceId) {
@@ -368,7 +530,7 @@ async function initCheckout() {
 
 
     /* -----------------------------------------------------
-       Validate service catalog
+       Validate product catalog
     ----------------------------------------------------- */
 
     if (
@@ -384,13 +546,13 @@ async function initCheckout() {
     }
 
 
-    selectedService =
+    selectedProduct =
       getTestProduct(
         serviceId
       );
 
 
-    if (!selectedService) {
+    if (!selectedProduct) {
 
       showCheckoutError(
         "That service is not available."
@@ -401,11 +563,11 @@ async function initCheckout() {
 
 
     /* -----------------------------------------------------
-       Render selected service
+       Render selected product
     ----------------------------------------------------- */
 
-    renderService(
-      selectedService
+    renderProduct(
+      selectedProduct
     );
 
 
@@ -476,7 +638,7 @@ async function initCheckout() {
       backLink.href =
         "service.html?service=" +
         encodeURIComponent(
-          productId
+          serviceId
         );
     }
 
@@ -503,10 +665,6 @@ async function initCheckout() {
         "checkoutForm"
       );
 
-    if (form) {
-      form.noValidate = true;
-    }
-
 
     if (!form) {
 
@@ -521,6 +679,7 @@ async function initCheckout() {
       handleSubmit
     );
 
+    setupManualEntryFields();
     setupEmailModal();
 
 
@@ -561,11 +720,11 @@ async function initCheckout() {
 
 
 /* =========================================================
-   SERVICE DISPLAY
+   PRODUCT DISPLAY
 ========================================================= */
 
-function renderService(
-  service
+function renderProduct(
+  product
 ) {
 
   const category =
@@ -597,14 +756,14 @@ function renderService(
   if (category) {
 
     category.textContent =
-      service.category || "";
+      product.category || "";
   }
 
 
   if (productElement) {
 
     productElement.textContent =
-      service.name || "";
+      product.name || "";
   }
 
 
@@ -612,8 +771,8 @@ function renderService(
 
     price.textContent =
       formatTestPrice(
-        service.price,
-        service.currency ||
+        product.price,
+        product.currency ||
         "USD"
       );
   }
@@ -631,9 +790,9 @@ function renderService(
 
     const featureList =
       Array.isArray(
-        service.features
+        product.features
       )
-        ? service.features
+        ? product.features
         : [];
 
 
@@ -688,9 +847,9 @@ function renderService(
 
     const drugList =
       Array.isArray(
-        service.drugs
+        product.drugs
       )
-        ? service.drugs
+        ? product.drugs
         : [];
 
 
@@ -747,7 +906,7 @@ async function handleSubmit(event) {
 
   clearMessages();
 
-  if (!selectedService || !stripe) {
+  if (!selectedProduct || !stripe) {
     showPaymentError(
       "Checkout is not ready. Please refresh the page and try again."
     );
@@ -760,6 +919,12 @@ async function handleSubmit(event) {
    * Stripe is intentionally NOT mounted yet.
    */
   if (!paymentMounted) {
+
+    const manualValidation = validateManualEntry();
+
+    if (!manualValidation.valid) {
+      return;
+    }
 
     const validation = validateCustomerForm(form);
 
@@ -782,12 +947,15 @@ async function handleSubmit(event) {
   try {
 
     setButton(button, true, "Processing Payment...");
+    showPaymentProcessing();
 
     await confirmPayment(form);
 
   } catch (error) {
 
     console.error("Checkout payment error:", error);
+
+    hidePaymentProcessing();
 
     showPaymentError(
       error?.message ||
@@ -799,8 +967,8 @@ async function handleSubmit(event) {
       false,
       "Pay " +
       formatTestPrice(
-        selectedService.price,
-        selectedService.currency || "USD"
+        selectedProduct.price,
+        selectedProduct.currency || "USD"
       )
     );
   }
@@ -817,10 +985,10 @@ const VALIDATION = {
     /^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' -]{1,49}$/,
 
   email:
-    null,
+    /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/,
 
   phone:
-    null,
+    /^(?:\+1[\s.-]?)?(?:\([2-9]\d{2}\)|[2-9]\d{2})[\s.-]?[2-9]\d{2}[\s.-]?\d{4}$/,
 
   address:
     /^\d{1,6}\s+[A-Za-z0-9À-ÿ][A-Za-z0-9À-ÿ .,'#-]{2,99}$/,
@@ -835,80 +1003,8 @@ const VALIDATION = {
     /^\d{5}(?:-\d{4})?$/
 };
 
-function isValidEmail(value) {
-
-  const email = String(value || "").trim();
-
-  if (!email) return false;
-
-  const at = email.indexOf("@");
-
-  if (at <= 0) return false;
-
-  if (at !== email.lastIndexOf("@")) return false;
-
-  const local = email.slice(0, at);
-  const domain = email.slice(at + 1);
-
-  if (!local || !domain) return false;
-
-  if (local.length > 64 || email.length > 254) return false;
-
-  if (domain.startsWith(".") || domain.endsWith(".")) {
-    return false;
-  }
-
-  if (domain.includes("..")) {
-    return false;
-  }
-
-  if (!domain.includes(".")) {
-    return false;
-  }
-
-  return /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+$/.test(local)
-    && /^[A-Za-z0-9.-]+$/.test(domain);
-}
-
 
 function validateCustomerForm(form) {
-
-  const emailInput = document.getElementById("email");
-
-  if (emailInput) {
-    emailInput.value = emailInput.value.trim();
-  }
-
-  const emailField =
-    document.getElementById("email");
-
-  if (emailField) {
-    emailField.value =
-      emailField.value.trim();
-
-    const at =
-      emailField.value.indexOf("@");
-
-    if (at > 0) {
-      emailField.value =
-        emailField.value.slice(0, at) +
-        "@" +
-        emailField.value.slice(at + 1).toLowerCase();
-    }
-  }
-
-  const phoneField =
-    document.getElementById("phone");
-
-  if (phoneField) {
-    phoneField.value =
-      phoneField.value
-        .replace(/\D/g, "")
-        .replace(
-          /^(\d{3})(\d{3})(\d{4})$/,
-          "($1) $2-$3"
-        );
-  }
 
   const fields = {
     firstName: getInputValue("firstName"),
@@ -937,13 +1033,7 @@ function validateCustomerForm(form) {
     };
   }
 
-  if (!isValidEmail(fields.email)) {
-
-    console.warn(
-      "Checkout email validation rejected:",
-      JSON.stringify(fields.email)
-    );
-
+  if (!VALIDATION.email.test(fields.email)) {
     return {
       valid: false,
       field: "email",
@@ -951,13 +1041,7 @@ function validateCustomerForm(form) {
     };
   }
 
-  const normalizedPhone =
-    fields.phone.replace(/\D/g, "");
-
-  if (
-    normalizedPhone.length !== 10 ||
-    !/^[2-9]\d{2}[2-9]\d{2}\d{4}$/.test(normalizedPhone)
-  ) {
+  if (!VALIDATION.phone.test(fields.phone)) {
     return {
       valid: false,
       field: "phone",
@@ -1081,7 +1165,6 @@ function openEmailConfirmation(email) {
   display.textContent = email;
 
   modal.classList.add("active");
-  modal.style.display = "flex";
 
   modal.setAttribute(
     "aria-hidden",
@@ -1100,7 +1183,6 @@ function closeEmailConfirmation() {
   if (!modal) return;
 
   modal.classList.remove("active");
-  modal.style.display = "none";
 
   modal.setAttribute(
     "aria-hidden",
@@ -1202,8 +1284,8 @@ async function handleEmailConfirmation() {
       false,
       "Pay " +
       formatTestPrice(
-        selectedService.price,
-        selectedService.currency || "USD"
+        selectedProduct.price,
+        selectedProduct.currency || "USD"
       )
     );
 
@@ -1215,6 +1297,8 @@ async function handleEmailConfirmation() {
       "Payment setup error:",
       error
     );
+
+    hidePaymentProcessing();
 
     emailConfirmed = false;
 
@@ -1349,7 +1433,7 @@ async function createPaymentIntent(form) {
     {
       functionUrl,
       serviceId:
-        serviceId
+        selectedProduct.id
     }
   );
 
@@ -1376,7 +1460,7 @@ async function createPaymentIntent(form) {
         body:
           JSON.stringify({
             serviceId:
-              serviceId,
+              selectedProduct.id,
 
             customer
           })
@@ -1706,19 +1790,10 @@ async function confirmPayment(
 
 
         return_url:
-
           window.location.origin +
           "/order-confirmation.html?order=" +
           encodeURIComponent(
             orderId || ""
-          ) +
-          "&order_number=" +
-          encodeURIComponent(
-            orderNumber || ""
-          ) +
-          "&tracking_number=" +
-          encodeURIComponent(
-            trackingNumber || ""
           )
       },
 
@@ -1737,29 +1812,37 @@ async function confirmPayment(
 
 
   /* -------------------------------------------------------
-     Payment submitted
+     Successful payment.
+
+     If Stripe requires authentication, Stripe uses
+     return_url and returns to order-confirmation.html.
+
+     Otherwise, redirect there ourselves so every successful
+     payment enters the same post-payment workflow.
   ------------------------------------------------------- */
 
-  showPaymentSuccess(
-
-    orderNumber
-
-      ? `Payment submitted for order ${orderNumber}. Your payment is being confirmed.`
-
-      : "Payment submitted successfully. Your payment is being confirmed."
-  );
-
+  showPaymentProcessing();
 
   setButton(
-
     document.getElementById(
       "payButton"
     ),
-
     true,
-
-    "Payment Submitted"
+    "Payment Confirmed"
   );
+
+  const confirmationUrl =
+    window.location.origin +
+    "/order-confirmation.html?order=" +
+    encodeURIComponent(
+      orderId || ""
+    );
+
+  window.setTimeout(() => {
+    window.location.assign(
+      confirmationUrl
+    );
+  }, 250);
 }
 
 
@@ -1921,6 +2004,140 @@ function clearPaymentError() {
     box.textContent =
       "";
   }
+}
+
+
+/* =========================================================
+   PAYMENT PROCESSING OVERLAY
+========================================================= */
+
+let paymentProcessingOverlay = null;
+
+function createPaymentProcessingOverlay() {
+
+  if (paymentProcessingOverlay) {
+    return paymentProcessingOverlay;
+  }
+
+  const overlay = document.createElement("div");
+
+  overlay.id = "paymentProcessingOverlay";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-live", "polite");
+
+  overlay.innerHTML = `
+    <div class="payment-processing-card">
+      <div class="payment-processing-spinner" aria-hidden="true"></div>
+      <div class="payment-processing-title">
+        Processing Your Payment
+      </div>
+      <div class="payment-processing-message">
+        Your payment has been submitted securely.
+        Please do not close this window or press the
+        payment button again while we confirm your order.
+      </div>
+      <div class="payment-processing-status">
+        Confirming your payment with Stripe...
+      </div>
+    </div>
+  `;
+
+  const style = document.createElement("style");
+
+  style.textContent = `
+    #paymentProcessingOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 29, 50, 0.58);
+      backdrop-filter: blur(4px);
+    }
+
+    #paymentProcessingOverlay.active {
+      display: flex;
+    }
+
+    .payment-processing-card {
+      width: min(440px, 100%);
+      padding: 34px 30px;
+      background: #ffffff;
+      border: 1px solid #d9e3f0;
+      border-radius: 18px;
+      box-shadow: 0 24px 70px rgba(23, 51, 95, 0.24);
+      text-align: center;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    .payment-processing-spinner {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 22px;
+      border: 4px solid #d9e3f0;
+      border-top-color: #325aa3;
+      border-right-color: #ff6b00;
+      border-radius: 50%;
+      animation: screenings4uPaymentSpin .85s linear infinite;
+    }
+
+    .payment-processing-title {
+      color: #24467f;
+      font-size: 22px;
+      line-height: 1.2;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .payment-processing-message {
+      color: #667892;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .payment-processing-status {
+      margin-top: 16px;
+      color: #325aa3;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    @keyframes screenings4uPaymentSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    body.payment-processing-active {
+      overflow: hidden;
+    }
+  `;
+
+  document.head.appendChild(style);
+  document.body.appendChild(overlay);
+
+  paymentProcessingOverlay = overlay;
+
+  return overlay;
+}
+
+function showPaymentProcessing() {
+
+  createPaymentProcessingOverlay().classList.add("active");
+  document.body.classList.add("payment-processing-active");
+}
+
+function hidePaymentProcessing() {
+
+  if (!paymentProcessingOverlay) {
+    return;
+  }
+
+  paymentProcessingOverlay.classList.remove("active");
+  document.body.classList.remove("payment-processing-active");
 }
 
 
