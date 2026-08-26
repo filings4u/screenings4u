@@ -107,7 +107,6 @@
         .from("client_profiles")
         .select(`
           id,
-          role,
           first_name,
           last_name,
           email,
@@ -716,24 +715,39 @@
     );
   }
 
+  async function callAccountAction(payload) {
+    const { data, error } = await supabaseClient.functions.invoke(
+      "admin-account-actions",
+      { body: payload }
+    );
+    if (error) throw error;
+    if (data?.error) throw new Error(data.error);
+    return data;
+  }
+
   async function resendInvitation(invitationId) {
     const invitation = invitations.find(
-      (item) =>
-        String(item.id) === String(invitationId)
+      (item) => String(item.id) === String(invitationId)
     );
-
     if (!invitation) {
-      showToast(
-        "Invitation could not be found.",
-        "error"
-      );
+      showToast("Invitation could not be found.", "error");
       return;
     }
-
-    showToast(
-      "Resend is not wired to a secure invitation service yet.",
-      "error"
-    );
+    try {
+      toggleActionButtons(true);
+      await callAccountAction({
+        action: "resend_invitation",
+        invitation_id: invitation.id,
+        email: invitation.email
+      });
+      showToast("Invitation email sent.", "success");
+      await loadAccountPage();
+    } catch (error) {
+      console.error("Resend invitation error:", error);
+      showToast(error?.message || "Unable to resend invitation.", "error");
+    } finally {
+      toggleActionButtons(false);
+    }
   }
 
   async function updateSelectedAccountStatus(
@@ -761,12 +775,11 @@
     try {
       toggleActionButtons(true);
 
-      const { error } = await supabaseClient
-        .from("client_profiles")
-        .update({ is_active: isActive })
-        .eq("id", selectedAccount.id);
-
-      if (error) throw error;
+      await callAccountAction({
+        action: isActive ? "activate_account" : "deactivate_account",
+        user_id: selectedAccount.id,
+        email: selectedAccount.email || ""
+      });
 
       showToast(
         isActive

@@ -803,3 +803,55 @@
     width: 100%;
   }
 }
+/* =========================================================
+   ROW ACTION BUTTONS / COMPACT ADMIN DIRECTORY
+   ========================================================= */
+.admin-accounts-page .accounts-row-button {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgba(50,90,163,.22);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--accounts-blue);
+  font: 750 12px Inter, Arial, sans-serif;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: 0 2px 7px rgba(23,51,95,.04);
+}
+.admin-accounts-page .accounts-row-button:hover {
+  background: #f5f8fd;
+  border-color: rgba(50,90,163,.4);
+  transform: translateY(-1px);
+}
+.admin-accounts-page #adminUsersTable {
+  overflow: visible;
+}
+.admin-accounts-page #adminUsersTable .admin-table {
+  min-width: 0;
+  table-layout: fixed;
+}
+.admin-accounts-page #adminUsersTable .admin-table th,
+.admin-accounts-page #adminUsersTable .admin-table td {
+  padding-left: 14px;
+  padding-right: 14px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.admin-accounts-page #adminUsersTable .admin-table th:nth-child(1) { width: 27%; }
+.admin-accounts-page #adminUsersTable .admin-table th:nth-child(2) { width: 29%; }
+.admin-accounts-page #adminUsersTable .admin-table th:nth-child(3) { width: 19%; }
+.admin-accounts-page #adminUsersTable .admin-table th:nth-child(4) { width: 13%; }
+.admin-accounts-page #adminUsersTable .admin-table th:nth-child(5) { width: 12%; }
+.admin-accounts-page .accounts-action-buttons {
+  gap: 12px;
+}
+.admin-accounts-page .accounts-action-buttons .accounts-btn {
+  flex: 0 0 auto;
+}

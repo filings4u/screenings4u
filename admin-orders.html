@@ -43,7 +43,7 @@
 
             <div class="order-toolbar-controls">
               <input id="orderSearch" class="search-input" type="search"
-                placeholder="Search order number, name, email..." autocomplete="off">
+                placeholder="Search order, tracking, name, email, payment..." autocomplete="off">
 
               <select id="orderStatusFilter" class="order-filter">
                 <option value="all">All Statuses</option>
@@ -83,10 +83,26 @@
             <div class="order-fields">
               <div><span>Customer</span><strong id="detailCustomerName">—</strong></div>
               <div><span>Email</span><strong id="detailCustomerEmail">—</strong></div>
+              <div><span>Phone</span><strong id="detailCustomerPhone">—</strong></div>
+              <div><span>Tracking Number</span><strong id="detailTrackingNumber">—</strong></div>
+              <div><span>User ID</span><strong id="detailUserId">—</strong></div>
               <div><span>Payment Status</span><strong id="detailPaymentStatus">—</strong></div>
+              <div><span>Payment Provider</span><strong id="detailPaymentProvider">—</strong></div>
+              <div><span>Payment Method</span><strong id="detailPaymentMethod">—</strong></div>
+              <div><span>Payment Reference</span><strong id="detailPaymentReference">—</strong></div>
+              <div><span>Stripe Customer</span><strong id="detailStripeCustomer">—</strong></div>
+              <div><span>Checkout Session</span><strong id="detailCheckoutSession">—</strong></div>
+              <div><span>Currency</span><strong id="detailCurrency">USD</strong></div>
               <div><span>Subtotal</span><strong id="detailSubtotal">$0.00</strong></div>
               <div><span>Tax</span><strong id="detailTax">$0.00</strong></div>
               <div><span>Total</span><strong id="detailTotal">$0.00</strong></div>
+              <div><span>Source</span><strong id="detailSource">—</strong></div>
+              <div><span>Fulfillment Type</span><strong id="detailFulfillmentType">—</strong></div>
+              <div><span>Fulfillment Status</span><strong id="detailFulfillmentStatus">—</strong></div>
+              <div><span>Paid At</span><strong id="detailPaidAt">—</strong></div>
+              <div><span>Fulfilled At</span><strong id="detailFulfilledAt">—</strong></div>
+              <div><span>Cancelled At</span><strong id="detailCancelledAt">—</strong></div>
+              <div><span>Refunded At</span><strong id="detailRefundedAt">—</strong></div>
             </div>
           </section>
 
@@ -122,6 +138,16 @@
         </section>
 
         <section class="panel detail-panel">
+          <div class="panel-heading"><div><p class="eyebrow">BILLING & NOTES</p><h2>Order Context</h2></div></div>
+          <div class="order-fields">
+            <div><span>Billing Address</span><strong id="detailBillingAddress">—</strong></div>
+            <div><span>Customer Notes</span><strong id="detailCustomerNotes">—</strong></div>
+            <div><span>Internal Notes</span><strong id="detailInternalNotes">—</strong></div>
+            <div><span>Payment Override Reason</span><strong id="detailPaymentOverrideReason">—</strong></div>
+          </div>
+        </section>
+
+        <section class="panel detail-panel">
           <div class="panel-heading">
             <div>
               <p class="eyebrow">TRAINING ACCESS</p>
@@ -139,6 +165,7 @@
   </div>
 
   <script src="assets/js/admin-config.js"></script>
+  <script src="assets/js/admin-guard.js"></script>
   <script src="assets/js/admin-navigation.js"></script>
   <script src="assets/js/admin-orders.js"></script>
 </body>

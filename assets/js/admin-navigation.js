@@ -48,6 +48,21 @@
       icon: "orders"
     },
     {
+      id: "dotConsortium",
+      label: "DOT Consortium",
+      icon: "dot",
+      dropdown: true,
+      children: [
+        { id: "dotOverview", label: "Overview", href: "admin-dot-consortium.html" },
+        { id: "dotEmployers", label: "Employers", href: "admin-dot-employers.html" },
+        { id: "dotDrivers", label: "Drivers", href: "admin-dot-drivers.html" },
+        { id: "dotRandom", label: "Random Selection", href: "admin-dot-random.html" },
+        { id: "dotTests", label: "DOT Testing", href: "admin-dot-tests.html" },
+        { id: "dotMis", label: "MIS Reports", href: "admin-dot-mis.html" },
+        { id: "dotCertificates", label: "Certificates", href: "admin-dot-certificates.html" }
+      ]
+    },
+    {
       id: "training",
       label: "Training",
       icon: "training",
@@ -112,6 +127,12 @@
       <path d="M8 8h8"></path>
       <path d="M8 12h8"></path>
       <path d="M8 16h5"></path>
+    `,
+
+    dot: `
+      <path d="M12 3 4 7l8 4 8-4-8-4z"></path>
+      <path d="M6 10v5c1.8 1.5 3.8 2.3 6 2.3s4.2-.8 6-2.3v-5"></path>
+      <path d="M20 8v6"></path>
     `,
 
     students: `
@@ -385,9 +406,6 @@
 
             </a>
 
-
-            <!-- HIDE SIDEBAR -->
-
             <button
               type="button"
               class="admin-nav-collapse"
@@ -467,7 +485,7 @@
 
 
         <!-- =================================================
-             COLLAPSED SIDEBAR WIDGET
+             COLLAPSED SIDEBAR CHAT BUBBLE
              ================================================= -->
 
         <button
@@ -478,14 +496,10 @@
           title="Show sidebar"
         >
           <span class="admin-nav-expand-widget-logo">
-            <img
-              src="images/logo.png"
-              alt=""
-            >
+            <img src="images/logo.png" alt="">
           </span>
-
-          <span class="admin-nav-expand-widget-icon">
-            ${icon("expand")}
+          <span class="admin-nav-expand-widget-icon" aria-hidden="true">
+            ${icon("menu")}
           </span>
         </button>
 
@@ -508,21 +522,13 @@
 
   function bind() {
 
-    /*
-     * Hide sidebar
-     */
+    /* Hide sidebar */
     const collapse = document.getElementById("adminNavCollapse");
-
     if (collapse) {
-      collapse.addEventListener("click", () => {
-        setSidebarCollapsed(true);
-      });
+      collapse.addEventListener("click", () => setSidebarCollapsed(true));
     }
 
-
-    /*
-     * Show sidebar widget
-     */
+    /* Show sidebar chat bubble */
     const expandWidget =
       document.getElementById("adminNavExpandWidget");
 
@@ -798,6 +804,23 @@
         client.auth &&
         typeof client.auth.signOut === "function"
       ) {
+        let session = null;
+        try {
+          const sessionResult = await client.auth.getSession();
+          session = sessionResult?.data?.session || null;
+        } catch {}
+
+        try {
+          await client.rpc("write_audit_event", {
+            p_action: "logout",
+            p_entity_type: "admin_session",
+            p_entity_id: session?.user?.id || null,
+            p_details: { description: "Administrator signed out" }
+          });
+        } catch (auditError) {
+          console.warn("Unable to write logout audit event:", auditError);
+        }
+
         await client.auth.signOut();
       }
 

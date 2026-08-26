@@ -305,6 +305,20 @@ async function handleAdminLogin(event) {
         }
 
 
+        try {
+            await adminAuthClient.rpc("write_audit_event", {
+                p_action: "login",
+                p_entity_type: "admin_session",
+                p_entity_id: data.user.id,
+                p_details: {
+                    description: "Administrator signed in",
+                    email: data.user.email || ""
+                }
+            });
+        } catch (auditError) {
+            console.warn("Unable to write login audit event:", auditError);
+        }
+
         setLoginMessage(
             "Login successful. Loading admin console...",
             "success"

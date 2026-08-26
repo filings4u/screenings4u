@@ -427,12 +427,14 @@ function renderOrders() {
 
                 const customerName =
                     getCustomerName(
-                        customer
+                        customer,
+                        order
                     );
 
 
                 const email =
                     customer.email ||
+                    order.customer_email ||
                     order.email_address ||
                     order.email ||
                     "";
@@ -452,8 +454,16 @@ function renderOrders() {
 
                 const searchable = [
                     orderNumber,
+                    order.tracking_number,
                     customerName,
                     email,
+                    order.customer_phone,
+                    order.payment_status,
+                    order.payment_provider,
+                    order.payment_reference,
+                    order.stripe_payment_intent_id,
+                    order.fulfillment_status,
+                    order.fulfillment_type,
                     status
                 ]
                     .join(" ")
@@ -499,10 +509,12 @@ function renderOrders() {
             <thead>
                 <tr>
                     <th>Order</th>
+                    <th>Tracking</th>
                     <th>Customer</th>
                     <th>Date</th>
                     <th>Status</th>
                     <th>Payment</th>
+                    <th>Fulfillment</th>
                     <th>Total</th>
                     <th></th>
                 </tr>
@@ -556,13 +568,12 @@ function renderOrderRow(order) {
 
 
     const name =
-        getCustomerName(
-            customer
-        );
+        getCustomerName(customer, order);
 
 
     const email =
         customer.email ||
+        order.customer_email ||
         order.email_address ||
         order.email ||
         "—";
@@ -609,6 +620,10 @@ function renderOrderRow(order) {
             </td>
 
             <td>
+                <strong>${escapeHtml(order.tracking_number || "—")}</strong>
+            </td>
+
+            <td>
                 <div>
                     <strong>
                         ${escapeHtml(name)}
@@ -632,6 +647,10 @@ function renderOrderRow(order) {
 
             <td>
                 ${escapeHtml(String(payment))}
+            </td>
+
+            <td>
+                ${escapeHtml(order.fulfillment_status || order.fulfillment_type || "—")}
             </td>
 
             <td>
@@ -746,17 +765,39 @@ function populateOrderDetail(order) {
 
     setText(
         "detailCustomerName",
-        getCustomerName(customer)
+        getCustomerName(customer, order)
     );
 
 
     setText(
         "detailCustomerEmail",
         customer.email ||
+        order.customer_email ||
         order.email_address ||
         order.email ||
         "—"
     );
+
+    setText("detailCustomerPhone", order.customer_phone || customer.phone || "—");
+    setText("detailUserId", order.user_id || "Guest / no account");
+    setText("detailTrackingNumber", order.tracking_number || "—");
+    setText("detailPaymentProvider", order.payment_provider || "—");
+    setText("detailPaymentReference", order.payment_reference || order.stripe_payment_intent_id || "—");
+    setText("detailStripeCustomer", order.stripe_customer_id || "—");
+    setText("detailCheckoutSession", order.stripe_checkout_session_id || "—");
+    setText("detailCurrency", String(order.currency || "usd").toUpperCase());
+    setText("detailFulfillmentType", order.fulfillment_type || "—");
+    setText("detailFulfillmentStatus", order.fulfillment_status || "—");
+    setText("detailPaymentMethod", order.payment_method || "—");
+    setText("detailPaidAt", formatDate(order.paid_at));
+    setText("detailFulfilledAt", formatDate(order.fulfilled_at));
+    setText("detailCancelledAt", formatDate(order.cancelled_at));
+    setText("detailRefundedAt", formatDate(order.refunded_at));
+    setText("detailSource", order.source || "—");
+    setText("detailBillingAddress", [order.billing_address_line_1, order.billing_address_line_2, order.billing_city, order.billing_state, order.billing_postal_code, order.billing_country].filter(Boolean).join(", ") || "—");
+    setText("detailCustomerNotes", order.customer_notes || "—");
+    setText("detailInternalNotes", order.internal_notes || "—");
+    setText("detailPaymentOverrideReason", order.payment_override_reason || "—");
 
 
     setText(
@@ -1332,16 +1373,15 @@ function normalizeStatusValue(status) {
 }
 
 
-function getCustomerName(profile) {
+function getCustomerName(profile, order = null) {
 
-    if (!profile) {
-        return "Customer";
-    }
+    profile = profile || {};
+    order = order || {};
 
     const fullName =
         [
-            profile.first_name,
-            profile.last_name
+            profile.first_name || order.customer_first_name,
+            profile.last_name || order.customer_last_name
         ]
             .filter(Boolean)
             .join(" ")
@@ -1350,6 +1390,7 @@ function getCustomerName(profile) {
     return (
         fullName ||
         profile.email ||
+        order.customer_email ||
         "Customer"
     );
 }

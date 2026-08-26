@@ -1,546 +1,288 @@
 /*
- * screenings4u — Admin Audit Center Controller
- * assets/js/admin-audit.js
+ * screenings4u — Admin Customer Center
  *
- * The audit page reads the existing audit_log records and actor profiles.
- * It intentionally does not provide controls for modifying audit records.
+ * Customer directory is intentionally built from BOTH client_profiles and orders.
+ * Orders are the source of truth for guest/website purchasers; client_profiles is
+ * the source of truth for authenticated customer accounts.
  */
 (function () {
   "use strict";
 
-  let auditClient = null;
-  let allAuditEvents = [];
-  let auditProfiles = {};
-  let auditLoading = false;
-
+  let db = null;
+  let customers = [];
+  let selectedCustomer = null;
+  let loading = false;
   const $ = (id) => document.getElementById(id);
 
-  document.addEventListener("DOMContentLoaded", initializeAuditPage, { once: true });
+  document.addEventListener("DOMContentLoaded", init, { once: true });
 
-  async function initializeAuditPage() {
+  async function init() {
     try {
-      auditClient = getAuditSupabaseClient();
+      db = window.Screenings4uAdmin?.supabase || window.screenings4uSupabase;
+      if (!db) throw new Error("Supabase client could not be initialized.");
+      bindEvents();
+      await loadCustomers();
+    } catch (error) {
+      console.error("Customer Center initialization failed:", error);
+      setTableMessage("Unable to load customer accounts.");
+      toast(error?.message || "Unable to load customer accounts.", "error");
+    }
+  }
 
-      if (!auditClient) {
-        throw new Error(
-          "Supabase configuration could not be loaded. Check that admin-config.js loads before admin-audit.js."
-        );
+  function bindEvents() {
+    $("refreshCustomersButton")?.addEventListener("click", loadCustomers);
+    $("customerSearch")?.addEventListener("input", renderCustomers);
+    $("customerStatusFilter")?.addEventListener("change", renderCustomers);
+    $("clearCustomerFiltersButton")?.addEventListener("click", () => {
+      if ($("customerSearch")) $("customerSearch").value = "";
+      if ($("customerStatusFilter")) $("customerStatusFilter").value = "all";
+      renderCustomers();
+    });
+    $("backToCustomers")?.addEventListener("click", showDirectory);
+  }
+
+  async function loadCustomers() {
+    if (loading) return;
+    loading = true;
+    setTableMessage("Loading customer accounts...");
+    setRefresh(true);
+
+    try {
+      const [profilesResult, ordersResult] = await Promise.all([
+        db.from("client_profiles").select(`
+          id, first_name, last_name, email, phone, company_name,
+          address_line_1, address_line_2, city, state, postal_code,
+          is_active, created_at, updated_at
+        `).order("created_at", { ascending: false }),
+        db.from("orders").select(`
+          id, user_id, customer_email, customer_first_name,
+          customer_last_name, customer_phone, total, payment_status,
+          status, created_at, updated_at, order_number, tracking_number
+        `).order("created_at", { ascending: false })
+      ]);
+
+      if (profilesResult.error) throw profilesResult.error;
+      if (ordersResult.error) throw ordersResult.error;
+
+      customers = mergeCustomers(profilesResult.data || [], ordersResult.data || []);
+      renderCustomers();
+      updateMetrics();
+    } catch (error) {
+      console.error("Unable to load customer accounts:", error);
+      customers = [];
+      setTableMessage("Unable to load customer accounts.");
+      updateMetrics();
+      toast(error?.message || "Unable to load customer accounts.", "error");
+    } finally {
+      loading = false;
+      setRefresh(false);
+    }
+  }
+
+  function mergeCustomers(profiles, orders) {
+    const map = new Map();
+
+    for (const profile of profiles) {
+      const key = profile.id ? `id:${profile.id}` : `email:${norm(profile.email)}`;
+      map.set(key, {
+        id: profile.id || null,
+        first_name: profile.first_name || "",
+        last_name: profile.last_name || "",
+        email: profile.email || "",
+        phone: profile.phone || "",
+        company_name: profile.company_name || "",
+        address_line_1: profile.address_line_1 || "",
+        address_line_2: profile.address_line_2 || "",
+        city: profile.city || "",
+        state: profile.state || "",
+        postal_code: profile.postal_code || "",
+        is_active: profile.is_active !== false,
+        created_at: profile.created_at,
+        orders: []
+      });
+    }
+
+    for (const order of orders) {
+      const idKey = order.user_id ? `id:${order.user_id}` : null;
+      const emailKey = `email:${norm(order.customer_email)}`;
+      let customer = idKey ? map.get(idKey) : null;
+      if (!customer) customer = map.get(emailKey);
+
+      if (!customer) {
+        customer = {
+          id: order.user_id || null,
+          first_name: order.customer_first_name || "",
+          last_name: order.customer_last_name || "",
+          email: order.customer_email || "",
+          phone: order.customer_phone || "",
+          company_name: "",
+          address_line_1: "",
+          address_line_2: "",
+          city: "",
+          state: "",
+          postal_code: "",
+          is_active: true,
+          created_at: order.created_at,
+          orders: []
+        };
+        map.set(idKey || emailKey, customer);
       }
 
-      initializeAuditControls();
-      await loadAuditEvents();
-    } catch (error) {
-      console.error("Audit Center initialization failed:", error);
-
-      setAuditMessage(
-        error instanceof Error
-          ? error.message
-          : "Unable to initialize the audit center."
-      );
-
-      showAuditToast("Unable to initialize audit log.", "error");
+      customer.orders.push(order);
+      if (!customer.email && order.customer_email) customer.email = order.customer_email;
+      if (!customer.first_name && order.customer_first_name) customer.first_name = order.customer_first_name;
+      if (!customer.last_name && order.customer_last_name) customer.last_name = order.customer_last_name;
+      if (!customer.phone && order.customer_phone) customer.phone = order.customer_phone;
     }
+
+    return Array.from(map.values()).sort((a, b) =>
+      new Date(b.created_at || 0) - new Date(a.created_at || 0)
+    );
   }
 
-  function getAuditSupabaseClient() {
-    /*
-     * admin-config.js is the shared source of truth for the admin Supabase
-     * client. Do not create a second client when the shared client exists.
-     */
-    if (
-      window.Screenings4uAdmin &&
-      window.Screenings4uAdmin.supabase &&
-      typeof window.Screenings4uAdmin.supabase.from === "function"
-    ) {
-      return window.Screenings4uAdmin.supabase;
-    }
-
-    /* Backward-compatible fallbacks for older admin pages. */
-    if (
-      window.screenings4uSupabase &&
-      typeof window.screenings4uSupabase.from === "function"
-    ) {
-      return window.screenings4uSupabase;
-    }
-
-    if (
-      window.supabaseClient &&
-      typeof window.supabaseClient.from === "function"
-    ) {
-      return window.supabaseClient;
-    }
-
-    if (
-      window.supabase &&
-      window.SCREENINGS4U_SUPABASE_URL &&
-      window.SCREENINGS4U_SUPABASE_ANON_KEY &&
-      typeof window.supabase.createClient === "function"
-    ) {
-      window.screenings4uSupabase = window.supabase.createClient(
-        window.SCREENINGS4U_SUPABASE_URL,
-        window.SCREENINGS4U_SUPABASE_ANON_KEY
-      );
-
-      return window.screenings4uSupabase;
-    }
-
-    return null;
-  }
-
-  function initializeAuditControls() {
-    $("auditSearch")?.addEventListener("input", renderAuditEvents);
-    $("auditActionFilter")?.addEventListener("change", renderAuditEvents);
-
-    $("clearAuditFiltersButton")?.addEventListener("click", () => {
-      if ($("auditSearch")) $("auditSearch").value = "";
-      if ($("auditActionFilter")) $("auditActionFilter").value = "all";
-      renderAuditEvents();
-    });
-
-    $("refreshAuditButton")?.addEventListener("click", loadAuditEvents);
-  }
-
-  async function loadAuditEvents() {
-    if (auditLoading) return;
-
-    auditLoading = true;
-    setRefreshState(true);
-    setAuditLoadingMessage();
-
-    try {
-      const { data, error } = await auditClient
-        .from("audit_log")
-        .select(`
-          id,
-          actor_user_id,
-          action,
-          entity_type,
-          entity_id,
-          details,
-          created_at
-        `)
-        .order("created_at", { ascending: false });
-
-      if (error) throw error;
-
-      allAuditEvents = Array.isArray(data) ? data : [];
-
-      await loadAuditProfiles();
-
-      updateAuditMetrics();
-      renderAuditEvents();
-    } catch (error) {
-      console.error("Unable to load audit log:", error);
-
-      allAuditEvents = [];
-      auditProfiles = {};
-
-      setAuditMessage(
-        "Unable to load the audit log. Check the browser console for the Supabase error."
-      );
-
-      updateAuditMetrics();
-      setText("auditResultCount", "0");
-      showAuditToast("Unable to load audit log.", "error");
-    } finally {
-      auditLoading = false;
-      setRefreshState(false);
-    }
-  }
-
-  async function loadAuditProfiles() {
-    auditProfiles = {};
-
-    const actorIds = [
-      ...new Set(
-        allAuditEvents
-          .map((event) => event.actor_user_id)
-          .filter(Boolean)
-          .map(String)
-      )
-    ];
-
-    if (!actorIds.length) return;
-
-    try {
-      const { data, error } = await auditClient
-        .from("client_profiles")
-        .select(`
-          id,
-          first_name,
-          last_name,
-          email,
-          role,
-          is_active
-        `)
-        .in("id", actorIds);
-
-      if (error) throw error;
-
-      (data || []).forEach((profile) => {
-        auditProfiles[String(profile.id)] = profile;
-      });
-    } catch (error) {
-      /*
-       * The audit event itself remains useful even if an actor profile
-       * cannot be resolved. Render those events as system activity instead
-       * of failing the entire page.
-       */
-      console.warn("Unable to load audit actor profiles:", error);
-    }
-  }
-
-  function updateAuditMetrics() {
-    const todayKey = getLocalDateKey(new Date());
-
-    const todayCount = allAuditEvents.filter((event) => {
-      const date = getEventDate(event);
-      return date && getLocalDateKey(new Date(date)) === todayKey;
-    }).length;
-
-    const loginCount = allAuditEvents.filter(
-      (event) => getAction(event) === "login"
-    ).length;
-
-    const changeCount = allAuditEvents.filter((event) =>
-      ["create", "update", "delete"].includes(getAction(event))
-    ).length;
-
-    setText("auditTotal", allAuditEvents.length);
-    setText("auditToday", todayCount);
-    setText("auditLogins", loginCount);
-    setText("auditChanges", changeCount);
-  }
-
-  function renderAuditEvents() {
-    const table = $("auditTable");
+  function renderCustomers() {
+    const table = $("customerTable");
     if (!table) return;
 
-    const search = String($("auditSearch")?.value || "")
-      .trim()
-      .toLowerCase();
+    const search = norm($("customerSearch")?.value);
+    const status = $("customerStatusFilter")?.value || "all";
 
-    const filter = String(
-      $("auditActionFilter")?.value || "all"
-    );
-
-    const filtered = allAuditEvents.filter((event) => {
-      const action = getAction(event);
-      const user = getEventUser(event);
-      const detailsText = event.details
-        ? safeStringify(event.details)
-        : "";
-
-      const searchable = [
-        action,
-        event.action,
-        event.entity_type,
-        event.entity_id,
-        event.actor_user_id,
-        user.name,
-        user.email,
-        detailsText
-      ]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase();
-
-      const matchesSearch =
-        !search || searchable.includes(search);
-
-      const matchesFilter =
-        filter === "all" || action === filter;
-
-      return matchesSearch && matchesFilter;
+    const filtered = customers.filter((c) => {
+      const haystack = norm([
+        c.first_name, c.last_name, c.email, c.phone, c.company_name
+      ].join(" "));
+      const statusMatch = status === "all" ||
+        (status === "active" && c.is_active) ||
+        (status === "inactive" && !c.is_active);
+      return (!search || haystack.includes(search)) && statusMatch;
     });
 
-    setText("auditResultCount", filtered.length);
+    $("customerResultCount") && ($("customerResultCount").textContent = String(filtered.length));
 
     if (!filtered.length) {
-      table.innerHTML = `
-        <div class="audit-empty">
-          No audit events match the current filters.
-        </div>
-      `;
+      table.innerHTML = `<div class="customer-empty">No customer accounts match the current filters.</div>`;
       return;
     }
 
     table.innerHTML = `
       <table class="admin-data-table">
-        <thead>
-          <tr>
-            <th>Date &amp; Time</th>
-            <th>Action</th>
-            <th>User</th>
-            <th>Event</th>
-            <th>Record</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${filtered.map(renderAuditRow).join("")}
-        </tbody>
-      </table>
-    `;
-  }
+        <thead><tr>
+          <th>Customer</th><th>Email</th><th>Company</th><th>Orders</th><th>Status</th><th></th>
+        </tr></thead>
+        <tbody>${filtered.map(renderCustomerRow).join("")}</tbody>
+      </table>`;
 
-  function renderAuditRow(event) {
-    const action = getAction(event);
-    const user = getEventUser(event);
-    const eventName = getEventDescription(event);
-    const record = event.entity_id || event.entity_type || "—";
-
-    return `
-      <tr>
-        <td>
-          <span class="audit-time">
-            ${escapeHtml(formatDateTime(getEventDate(event)))}
-          </span>
-        </td>
-
-        <td>
-          <span class="audit-action ${escapeHtml(action)}">
-            ${escapeHtml(formatAction(action))}
-          </span>
-        </td>
-
-        <td>
-          <div class="audit-event">
-            <strong>${escapeHtml(user.name)}</strong>
-            <small>${escapeHtml(user.email)}</small>
-          </div>
-        </td>
-
-        <td>
-          <div class="audit-event">
-            <strong>${escapeHtml(eventName)}</strong>
-            <small>${escapeHtml(getTableName(event))}</small>
-          </div>
-        </td>
-
-        <td>
-          <span class="audit-record">
-            ${escapeHtml(String(record))}
-          </span>
-        </td>
-      </tr>
-    `;
-  }
-
-  function getAction(event) {
-    const raw = event?.action || "activity";
-    const value = String(raw).toLowerCase().trim();
-
-    if (value.includes("login") || value.includes("sign in")) {
-      return "login";
-    }
-
-    if (value.includes("logout") || value.includes("sign out")) {
-      return "logout";
-    }
-
-    if (value.includes("create") || value.includes("insert")) {
-      return "create";
-    }
-
-    if (value.includes("update") || value.includes("edit")) {
-      return "update";
-    }
-
-    if (value.includes("delete") || value.includes("remove")) {
-      return "delete";
-    }
-
-    if (value.includes("complete")) {
-      return "complete";
-    }
-
-    return (
-      value
-        .replace(/\s+/g, "-")
-        .replace(/[^a-z0-9_-]/g, "")
-        .slice(0, 40) || "activity"
-    );
-  }
-
-  function getEventUser(event) {
-    const actorId = event?.actor_user_id
-      ? String(event.actor_user_id)
-      : "";
-
-    const profile = actorId
-      ? auditProfiles[actorId]
-      : null;
-
-    if (!profile) {
-      return {
-        name: "System",
-        email: "System activity"
-      };
-    }
-
-    const firstName = String(profile.first_name || "").trim();
-    const lastName = String(profile.last_name || "").trim();
-
-    const name =
-      `${firstName} ${lastName}`.trim() ||
-      profile.email ||
-      "Administrator";
-
-    return {
-      name: String(name),
-      email: String(profile.email || "—")
-    };
-  }
-
-  function getEventDate(event) {
-    return event?.created_at || null;
-  }
-
-  function getEventDescription(event) {
-    const action = getAction(event);
-    const entityType = event?.entity_type || "system";
-
-    const details =
-      event?.details &&
-      typeof event.details === "object"
-        ? event.details
-        : {};
-
-    const descriptionKeys = [
-      "description",
-      "message",
-      "name",
-      "title",
-      "reason"
-    ];
-
-    for (const key of descriptionKeys) {
-      if (
-        details[key] !== undefined &&
-        details[key] !== null &&
-        String(details[key]).trim()
-      ) {
-        return String(details[key]);
-      }
-    }
-
-    return `${formatAction(action)} ${formatEntityName(entityType)}`;
-  }
-
-  function getTableName(event) {
-    return formatEntityName(event?.entity_type || "System");
-  }
-
-  function formatEntityName(value) {
-    return String(value || "record")
-      .replace(/[-_]+/g, " ")
-      .replace(/\b\w/g, (letter) => letter.toUpperCase());
-  }
-
-  function formatAction(action) {
-    return String(action || "activity")
-      .replace(/[-_]+/g, " ")
-      .replace(/\b\w/g, (letter) => letter.toUpperCase());
-  }
-
-  function formatDateTime(value) {
-    if (!value) return "—";
-
-    const date = new Date(value);
-
-    if (Number.isNaN(date.getTime())) {
-      return String(value);
-    }
-
-    return date.toLocaleString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-      hour: "numeric",
-      minute: "2-digit"
+    table.querySelectorAll("[data-customer-index]").forEach((button) => {
+      button.addEventListener("click", () => showDetail(filtered[Number(button.dataset.customerIndex)]));
     });
   }
 
-  function getLocalDateKey(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
+  function renderCustomerRow(customer, index) {
+    const name = fullName(customer) || "Customer";
+    return `<tr>
+      <td><strong>${esc(name)}</strong><small>${esc(customer.phone || "—")}</small></td>
+      <td>${esc(customer.email || "—")}</td>
+      <td>${esc(customer.company_name || "—")}</td>
+      <td>${customer.orders.length}</td>
+      <td><span class="customer-status ${customer.is_active ? "active" : "inactive"}">${customer.is_active ? "Active" : "Inactive"}</span></td>
+      <td><button type="button" class="customers-btn customers-btn-muted" data-customer-index="${index}">View</button></td>
+    </tr>`;
   }
 
-  function setRefreshState(isLoading) {
-    const button = $("refreshAuditButton");
-    if (!button) return;
+  async function showDetail(customer) {
+    selectedCustomer = customer;
+    $("customerListView")?.classList.remove("active");
+    $("customerDetailView")?.classList.add("active");
 
-    button.disabled = isLoading;
-    button.innerHTML = isLoading
-      ? '<span class="audit-refresh-icon audit-refresh-spinning" aria-hidden="true">↻</span> Refreshing...'
-      : '<span class="audit-refresh-icon" aria-hidden="true">↻</span> Refresh Log';
-  }
+    const name = fullName(customer) || "Customer";
+    setText("customerInitials", initials(name));
+    setText("detailCustomerName", name);
+    setText("detailCustomerEmail", customer.email || "—");
+    setText("detailPhone", customer.phone || "—");
+    setText("detailCompany", customer.company_name || "—");
+    setText("detailAddress", formatAddress(customer));
+    setText("detailCreated", formatDate(customer.created_at));
+    setText("detailStatus", customer.is_active ? "Active" : "Inactive");
+    setText("detailOrderCount", customer.orders.length);
+    setText("detailTotalSpent", currency(customer.orders.reduce((sum, o) => sum + Number(o.total || 0), 0)));
 
-  function setAuditLoadingMessage() {
-    const table = $("auditTable");
-    if (!table) return;
+    const ordersTable = $("customerOrdersTable");
+    if (ordersTable) {
+      ordersTable.innerHTML = customer.orders.length
+        ? `<table class="admin-data-table"><thead><tr><th>Order</th><th>Tracking</th><th>Status</th><th>Payment</th><th>Total</th><th>Date</th></tr></thead><tbody>${customer.orders.map(o => `<tr><td>${esc(o.order_number || "—")}</td><td>${esc(o.tracking_number || "—")}</td><td>${esc(o.status || "—")}</td><td>${esc(o.payment_status || "—")}</td><td>${currency(o.total)}</td><td>${formatDate(o.created_at)}</td></tr>`).join("")}</tbody></table>`
+        : `<div class="customer-empty">No orders found.</div>`;
+    }
 
-    table.innerHTML = `
-      <div class="audit-loading">
-        <span class="audit-spinner" aria-hidden="true"></span>
-        Loading audit activity...
-      </div>
-    `;
-  }
+    const training = $("customerTrainingTable");
+    if (training) training.innerHTML = `<div class="customer-loading">Loading training...</div>`;
 
-  function setAuditMessage(message) {
-    const table = $("auditTable");
-    if (!table) return;
+    if (!customer.id) {
+      setText("detailTrainingCount", 0);
+      setText("detailCompletedCount", 0);
+      if (training) training.innerHTML = `<div class="customer-empty">This customer has no linked account yet.</div>`;
+      return;
+    }
 
-    table.innerHTML = `
-      <div class="audit-empty">
-        ${escapeHtml(message)}
-      </div>
-    `;
-  }
-
-  function setText(id, value) {
-    const element = $(id);
-    if (!element) return;
-
-    element.textContent =
-      value == null || value === ""
-        ? "—"
-        : String(value);
-  }
-
-  function safeStringify(value) {
     try {
-      return JSON.stringify(value);
-    } catch {
-      return String(value);
+      const { data: enrollments, error } = await db
+        .from("lms_enrollments")
+        .select("id, course_id, status, progress_percent, enrolled_at, completed_at")
+        .eq("user_id", customer.id)
+        .order("enrolled_at", { ascending: false });
+      if (error) throw error;
+
+      const rows = enrollments || [];
+      setText("detailTrainingCount", rows.length);
+      setText("detailCompletedCount", rows.filter(e => e.status === "completed" || e.completed_at).length);
+      if (training) training.innerHTML = rows.length
+        ? `<table class="admin-data-table"><thead><tr><th>Course</th><th>Status</th><th>Progress</th><th>Enrolled</th></tr></thead><tbody>${rows.map(e => `<tr><td>${esc(e.course_id)}</td><td>${esc(e.status || "—")}</td><td>${Number(e.progress_percent || 0)}%</td><td>${formatDate(e.enrolled_at)}</td></tr>`).join("")}</tbody></table>`
+        : `<div class="customer-empty">No training enrollments found.</div>`;
+    } catch (error) {
+      console.warn("Unable to load customer training:", error);
+      setText("detailTrainingCount", 0);
+      setText("detailCompletedCount", 0);
+      if (training) training.innerHTML = `<div class="customer-empty">Training data could not be loaded.</div>`;
     }
   }
 
-  function showAuditToast(message, type) {
-    const toast = $("auditToast");
-    if (!toast) return;
-
-    toast.textContent = message;
-    toast.className = "admin-toast " + (type || "");
-    toast.classList.add("show");
-
-    clearTimeout(showAuditToast.timeout);
-
-    showAuditToast.timeout = window.setTimeout(() => {
-      toast.classList.remove("show");
-    }, 3500);
+  function showDirectory() {
+    $("customerDetailView")?.classList.remove("active");
+    $("customerListView")?.classList.add("active");
   }
 
-  function escapeHtml(value) {
-    return String(value ?? "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+  function updateMetrics() {
+    setText("customerMetricTotal", customers.length);
+    setText("customerMetricActive", customers.filter(c => c.is_active).length);
+    setText("customerMetricInactive", customers.filter(c => !c.is_active).length);
+    setText("customerMetricCompanies", new Set(customers.map(c => norm(c.company_name)).filter(Boolean)).size);
   }
+
+  function setTableMessage(message) {
+    const table = $("customerTable");
+    if (table) table.innerHTML = `<div class="customer-loading">${esc(message)}</div>`;
+  }
+
+  function setRefresh(loadingState) {
+    const button = $("refreshCustomersButton");
+    if (!button) return;
+    button.disabled = loadingState;
+    button.innerHTML = loadingState ? "↻ Refreshing..." : "↻ Refresh Customers";
+  }
+
+  function toast(message, type = "") {
+    const element = $("customerToast");
+    if (!element) return;
+    element.textContent = message;
+    element.className = `admin-toast ${type} show`;
+    setTimeout(() => element.classList.remove("show"), 3500);
+  }
+
+  function fullName(c) { return `${c.first_name || ""} ${c.last_name || ""}`.trim(); }
+  function initials(name) { return name.split(/\s+/).slice(0, 2).map(x => x[0]).join("").toUpperCase() || "—"; }
+  function formatAddress(c) { return [c.address_line_1, c.address_line_2, [c.city, c.state].filter(Boolean).join(", "), c.postal_code].filter(Boolean).join(", ") || "—"; }
+  function currency(value) { return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(Number(value || 0)); }
+  function formatDate(value) { if (!value) return "—"; const d = new Date(value); return Number.isNaN(d.getTime()) ? "—" : d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }); }
+  function norm(value) { return String(value || "").trim().toLowerCase(); }
+  function setText(id, value) { const e = $(id); if (e) e.textContent = value == null || value === "" ? "—" : String(value); }
+  function esc(value) { return String(value ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;"); }
 })();
