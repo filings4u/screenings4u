@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Donor Pass | screenings4u</title>
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--orange:#ff6b00;--blue:#325aa3;--blue-dark:#24467f;--muted:#667892;--surface:#f4f7fc;--line:#d9e3f0}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--surface);color:#1d2d45}
+    .container{width:min(820px,calc(100% - 36px));margin:auto}
+    .card{margin:55px auto;background:#fff;border:1px solid var(--line);border-radius:20px;padding:40px;box-shadow:0 16px 48px rgba(23,51,95,.08)}
+    .pass{border-top:5px solid var(--orange)}
+    .brand{font-weight:900;color:var(--blue);font-size:15px;letter-spacing:-.02em}
+    .eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.12em;font-weight:900;color:var(--orange);margin-top:28px}
+    h1{font-size:clamp(32px,6vw,50px);color:var(--blue-dark);letter-spacing:-.05em;margin:8px 0}
+    .intro{color:var(--muted);font-size:13px;line-height:1.7}
+    .tracking{margin:25px 0;padding:18px;background:#f7f9fc;border:1px solid var(--line);border-radius:12px}
+    .tracking span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.1em;font-weight:900;color:var(--muted)}
+    .tracking strong{display:block;margin-top:6px;font-size:21px;letter-spacing:.03em;color:var(--blue-dark)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+    .panel{border:1px solid var(--line);border-radius:12px;padding:17px;background:#fff}
+    .panel.full{grid-column:1/-1}
+    .label{font-size:10px;text-transform:uppercase;letter-spacing:.09em;font-weight:900;color:var(--muted)}
+    .value{margin-top:6px;font-size:14px;font-weight:800;color:var(--blue-dark);line-height:1.55}
+    .instructions{margin-top:20px;padding:18px;background:#eef4ff;border:1px solid #cfddf3;border-radius:12px}
+    .instructions strong{color:var(--blue-dark);font-size:12px}
+    .instructions p{margin:7px 0 0;color:var(--muted);font-size:12px;line-height:1.65}
+    .actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:28px}
+    .btn{min-height:46px;padding:0 18px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;text-decoration:none;border:1px solid var(--blue);cursor:pointer}
+    .orange{background:var(--orange);border-color:var(--orange);color:#fff}
+    .blue{background:#fff;color:var(--blue)}
+    .notice{display:none;margin-top:18px;padding:13px 15px;border-radius:9px;background:#fff1f0;border:1px solid #f3c5c1;color:#b42318;font-size:12px}
+    @media(max-width:640px){.card{margin:25px auto;padding:27px 20px}.grid{grid-template-columns:1fr}.panel.full{grid-column:auto}}
+    @media print{
+      body{background:#fff}
+      .card{margin:0;box-shadow:none;border:1px solid #bbb}
+      .actions{display:none}
+    }
+
+    .brand img {
+  display: block;
+  width: 180px;
+  height: auto;
+}
+
+  </style>
+</head>
+<body>
+<main>
+  <div class="container">
+    <section class="card pass">
+<div class="brand">
+  <img src="images/logo.png" alt="screenings4u">
+</div>      <div class="eyebrow">Official Donor Pass</div>
+      <h1>Your Donor Pass</h1>
+      <p class="intro">Keep this pass available when you arrive for your testing appointment. Bring a valid government-issued photo ID and follow the testing location's instructions.</p>
+
+      <div class="tracking">
+        <span>S4U Tracking Number</span>
+        <strong id="trackingNumber">Loading...</strong>
+      </div>
+
+      <div class="grid">
+        <div class="panel">
+          <div class="label">Customer</div>
+          <div class="value" id="customerName">—</div>
+        </div>
+
+        <div class="panel">
+          <div class="label">Service</div>
+          <div class="value" id="serviceName">—</div>
+        </div>
+
+        <div class="panel full">
+          <div class="label">Testing Location</div>
+          <div class="value" id="locationName">Loading...</div>
+          <div class="value" id="locationAddress"></div>
+          <div class="value" id="locationPhone"></div>
+        </div>
+      </div>
+
+      <div class="instructions">
+        <strong>Important</strong>
+        <p id="instructionsText">Bring this donor pass and valid identification. Your testing location information is shown above.</p>
+      </div>
+
+      <div id="resultNotice" class="notice" role="alert"></div>
+
+      <div class="actions">
+        <button class="btn orange" id="downloadButton" type="button">Download Donor Pass</button>
+        <button class="btn blue" id="printButton" type="button">Print Donor Pass</button>
+        <a class="btn blue" href="services.html">Browse Services</a>
+      </div>
+    </section>
+  </div>
+</main>
+<script src="assets/js/site-config.js"></script>
+<script src="assets/js/donor-pass-result.js"></script>
+</body>
+</html>

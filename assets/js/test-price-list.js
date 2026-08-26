@@ -10,7 +10,7 @@
  * - This file is the frontend service catalog used by the checkout page.
  */
 
-const TEST_PRODUCTS = {
+const TEST_SERVICES = {
   /* =========================================================
      DOT URINE DRUG TESTS
      ========================================================= */
@@ -1342,26 +1342,26 @@ const TEST_PRODUCTS = {
 /**
  * Get a service by its ID.
  */
-function getTestProduct(productId) {
-  if (!productId || !TEST_PRODUCTS[productId]) {
+function getTestService(serviceId) {
+  if (!serviceId || !TEST_SERVICES[serviceId]) {
     return null;
   }
 
-  return TEST_PRODUCTS[productId];
+  return TEST_SERVICES[serviceId];
 }
 
 /**
  * Return every service in the catalog.
  */
-function getAllTestProducts() {
-  return Object.values(TEST_PRODUCTS);
+function getAllTestServices() {
+  return Object.values(TEST_SERVICES);
 }
 
 /**
- * Return products belonging to a category.
+ * Return services belonging to a category.
  */
-function getTestProductsByCategory(category) {
-  return getAllTestProducts().filter(
+function getTestServicesByCategory(category) {
+  return getAllTestServices().filter(
     (service) => service.category === category
   );
 }
@@ -1382,8 +1382,8 @@ function formatTestPrice(priceInCents, currency = "USD") {
 /**
  * Get the Stripe-compatible amount in cents.
  */
-function getStripeAmount(productId) {
-  const service = getTestProduct(productId);
+function getStripeAmount(serviceId) {
+  const service = getTestService(serviceId);
 
   return service ? service.price : null;
 }
@@ -1397,11 +1397,11 @@ function getStripeAmount(productId) {
 /**
  * Returns the correct customer-facing order destination for a service.
  *
- * Paid products use the universal checkout page with the service/service ID.
- * Custom-pricing products use their designated inquiry form.
+ * Paid services use the universal checkout page with the service ID.
+ * Custom-pricing services use their designated inquiry form.
  */
-function getTestOrderUrl(productId) {
-  const service = getTestProduct(productId);
+function getTestOrderUrl(serviceId) {
+  const service = getTestService(serviceId);
 
   if (!service) {
     return null;
@@ -1422,8 +1422,8 @@ function getTestOrderUrl(productId) {
   return "checkout.html?service=" + encodeURIComponent(service.id);
 }
 
-function validateTestProduct(productId) {
-  const service = getTestProduct(productId);
+function validateTestService(serviceId) {
+  const service = getTestService(serviceId);
 
   if (!service) {
     return {
@@ -1458,11 +1458,11 @@ function validateTestProduct(productId) {
    ========================================================= */
 
 window.Screenings4UTestCatalog = {
-  products: TEST_PRODUCTS,
-  getTestProduct,
-  getAllTestProducts,
-  getTestProductsByCategory,
+  services: TEST_SERVICES,
+  getTestService,
+  getAllTestServices,
+  getTestServicesByCategory,
   formatTestPrice,
   getStripeAmount,
-  validateTestProduct
+  validateTestService
 };

@@ -4,200 +4,744 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checkout | screenings4u</title>
+  <link rel="icon" type="image/png" href="images/fav.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://js.stripe.com/v3/"></script>
 <style>
-:root{--orange:#ff6b00;--blue:#325aa3;--blue-dark:#24467f;--ink:#1d2d45;--muted:#667892;--surface:#f4f7fc;--line:#d9e3f0;--white:#fff}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:var(--surface)}
-a{text-decoration:none}.container{width:min(1120px,calc(100% - 36px));margin:auto}
-header{background:#fff;border-bottom:1px solid var(--line)}.header-inner{min-height:78px;display:flex;align-items:center;justify-content:space-between}
-.brand{font-size:28px;font-weight:900;color:var(--blue-dark);letter-spacing:-.06em}.brand span{color:var(--orange);font-weight:500}
-.back{font-size:13px;font-weight:800;color:var(--blue)}
-main{padding:55px 0 90px}.eyebrow{color:var(--orange);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px}
-h1{color:var(--blue-dark);font-size:clamp(36px,5vw,54px);line-height:1.02;letter-spacing:-.045em;margin:0 0 10px}.intro{color:var(--muted);font-size:14px;margin-bottom:30px}
-.grid{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:24px;align-items:start}.card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 14px 40px rgba(23,51,95,.08)}.pad{padding:30px}
-h2{color:var(--blue-dark);font-size:21px;margin:0 0 7px}.sub{color:var(--muted);font-size:12px;margin:0 0 22px}
-.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:6px;margin-bottom:12px}.field.full{grid-column:1/-1}
-label{font-size:12px;font-weight:800;color:#344054}input{height:47px;border:1px solid #c8d4e3;border-radius:8px;padding:0 12px;font:inherit;outline:0}input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(50,90,163,.1)}
-.payment{margin-top:18px;padding:18px;border:1px solid var(--line);border-radius:12px;background:#fbfcfe}
-#payment-element{min-height:60px}.notice{padding:12px;border-radius:8px;background:#fff7ed;color:#9a3412;font-size:12px;margin-top:12px;display:none}
-button{width:100%;height:52px;border:0;border-radius:8px;background:var(--orange);color:#fff;font-weight:900;margin-top:18px;cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}
-.secure{text-align:center;color:#7b8da3;font-size:10px;margin-top:10px}
-.summary{position:sticky;top:20px}.category{color:var(--orange);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.09em}.product{color:var(--blue-dark);font-size:20px;font-weight:900;line-height:1.2;margin-top:6px}
-hr{border:0;border-top:1px solid var(--line);margin:22px 0}.label{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:#667085;margin-bottom:10px}
-ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}li{font-size:12px;color:#475467}li:before{content:"✓";color:var(--blue);font-weight:900;margin-right:8px}
-.price{display:flex;justify-content:space-between;align-items:center}.price span{font-size:13px;color:var(--muted)}.price strong{font-size:27px;color:var(--blue-dark)}
-.error{display:none;color:#b42318;background:#fef3f2;padding:12px;border-radius:8px;font-size:12px;margin-top:12px}
-.input-invalid{border-color:#b42318!important;box-shadow:0 0 0 3px rgba(180,35,24,.08)!important}
+:root {
+    --orange: #ff6b00;
+    --blue: #325aa3;
+    --blue-dark: #24467f;
+    --ink: #1d2d45;
+    --muted: #667892;
+    --surface: #f4f7fc;
+    --line: #d9e3f0;
+    --white: #fff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--surface);
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    width: min(1120px, calc(100% - 36px));
+    margin: auto;
+}
+
+header {
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+}
+
+.brand img {
+    display: block;
+    width: 180px;
+    height: auto;
+}
+
+.brand span {
+    color: var(--orange);
+    font-weight: 500;
+}
+
+.back {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--blue);
+}
+
+main {
+    padding: 55px 0 90px;
+}
+
+.eyebrow {
+    color: var(--orange);
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    margin-bottom: 10px;
+}
+
+h1 {
+    color: var(--blue-dark);
+    font-size: clamp(36px, 5vw, 54px);
+    line-height: 1.02;
+    letter-spacing: -.045em;
+    margin: 0 0 10px;
+}
+
+.intro {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 390px;
+    gap: 24px;
+    align-items: start;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 0 14px 40px rgba(23, 51, 95, .08);
+}
+
+.pad {
+    padding: 30px;
+}
+
+h2 {
+    color: var(--blue-dark);
+    font-size: 21px;
+    margin: 0 0 7px;
+}
+
+.sub {
+    color: var(--muted);
+    font-size: 12px;
+    margin: 0 0 22px;
+}
+
+.fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.field {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.field.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-size: 12px;
+    font-weight: 800;
+    color: #344054;
+}
+
+.optional {
+    font-weight: 500;
+    color: var(--muted);
+}
+
+input,
+select {
+    height: 47px;
+    border: 1px solid #c8d4e3;
+    border-radius: 8px;
+    padding: 0 12px;
+    font: inherit;
+    outline: 0;
+    background: #fff;
+    color: var(--ink);
+    width: 100%;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(50, 90, 163, .1);
+}
+
+.payment {
+    margin-top: 18px;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fbfcfe;
+}
+
+#payment-element {
+    min-height: 60px;
+}
+
+.payment-section {
+    display: block;
+}
+
+.payment-section[aria-hidden="true"] {
+    visibility: hidden;
+}
+
+.payment-section[aria-hidden="false"] {
+    visibility: visible;
+}
+
+.notice {
+    padding: 12px;
+    border-radius: 8px;
+    background: #fff7ed;
+    color: #9a3412;
+    font-size: 12px;
+    margin-top: 12px;
+    display: none;
+}
+
+button {
+    width: 100%;
+    height: 52px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--orange);
+    color: #fff;
+    font-weight: 900;
+    margin-top: 18px;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+.secure {
+    text-align: center;
+    color: #7b8da3;
+    font-size: 10px;
+    margin-top: 10px;
+}
+
+.summary {
+    position: sticky;
+    top: 20px;
+}
+
+.category {
+    color: var(--orange);
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+}
+
+.product {
+    color: var(--blue-dark);
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-top: 6px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--line);
+    margin: 22px 0;
+}
+
+.label {
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: #667085;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+}
+
+li {
+    font-size: 12px;
+    color: #475467;
+}
+
+li:before {
+    content: "✓";
+    color: var(--blue);
+    font-weight: 900;
+    margin-right: 8px;
+}
+
+.price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price span {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.price strong {
+    font-size: 27px;
+    color: var(--blue-dark);
+}
+
+.error {
+    display: none;
+    color: #b42318;
+    background: #fef3f2;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-top: 12px;
+}
 
 /* =========================================================
    EMAIL CONFIRMATION MODAL
-========================================================= */
+   ========================================================= */
 
-.email-modal{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+.email-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
-.email-modal.active{
-  display:flex;
+.email-modal.active {
+    display: flex;
 }
 
-.email-modal-backdrop{
-  position:absolute;
-  inset:0;
-  background:rgba(18,35,61,.62);
-  backdrop-filter:blur(5px);
+.email-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(18, 35, 61, .62);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
-.email-modal-card{
-  position:relative;
-  z-index:2;
-  width:min(500px,100%);
-  background:#fff;
-  border-radius:20px;
-  padding:34px;
-  box-shadow:0 30px 90px rgba(12,32,64,.28);
-  animation:emailModalIn .18s ease-out;
+.email-modal-card {
+    position: relative;
+    z-index: 2;
+    width: min(500px, 100%);
+    background: #fff;
+    border-radius: 20px;
+    padding: 34px;
+    box-shadow: 0 30px 90px rgba(12, 32, 64, .28);
+    animation: emailModalIn .18s ease-out;
 }
 
-@keyframes emailModalIn{
-  from{
-    opacity:0;
-    transform:translateY(12px) scale(.98);
-  }
+@keyframes emailModalIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(.98);
+    }
 
-  to{
-    opacity:1;
-    transform:translateY(0) scale(1);
-  }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
-.email-modal-icon{
-  width:46px;
-  height:46px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#eef4ff;
-  color:var(--blue);
-  font-size:22px;
-  font-weight:900;
-  margin-bottom:18px;
+.email-modal-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef4ff;
+    color: var(--blue);
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 18px;
 }
 
-.email-modal-eyebrow{
-  color:var(--orange);
-  font-size:10px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.12em;
-  margin-bottom:7px;
+.email-modal-eyebrow {
+    color: var(--orange);
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    margin-bottom: 7px;
 }
 
-.email-modal-card h2{
-  margin:0 0 10px;
-  color:var(--blue-dark);
-  font-size:28px;
-  letter-spacing:-.035em;
+.email-modal-card h2 {
+    margin: 0 0 10px;
+    color: var(--blue-dark);
+    font-size: 28px;
+    letter-spacing: -.035em;
 }
 
-.email-modal-copy{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.65;
-  margin:0 0 18px;
+.email-modal-copy {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.65;
+    margin: 0 0 18px;
 }
 
-.confirmed-email{
-  padding:14px 16px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  background:#f7faff;
-  color:var(--blue-dark);
-  font-size:14px;
-  font-weight:800;
-  word-break:break-word;
+.confirmed-email {
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #f7faff;
+    color: var(--blue-dark);
+    font-size: 14px;
+    font-weight: 800;
+    word-break: break-word;
 }
 
-.email-modal-security{
-  display:grid;
-  gap:4px;
-  margin-top:16px;
-  padding:14px;
-  border-radius:10px;
-  background:#fff7ed;
-  color:#9a3412;
-  font-size:11px;
-  line-height:1.5;
+.email-modal-security {
+    display: grid;
+    gap: 4px;
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 10px;
+    background: #fff7ed;
+    color: #9a3412;
+    font-size: 11px;
+    line-height: 1.5;
 }
 
-.email-modal-security strong{
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.06em;
+.email-modal-security strong {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
 }
 
-.email-modal-actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:22px;
+.email-modal-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 22px;
 }
 
-.email-modal-actions button{
-  margin-top:0;
+.email-modal-actions button {
+    margin-top: 0;
 }
 
-.modal-secondary{
-  background:#fff;
-  color:var(--blue-dark);
-  border:1px solid #c8d4e3;
+.modal-secondary {
+    background: #fff;
+    color: var(--blue-dark);
+    border: 1px solid #c8d4e3;
 }
 
-.modal-secondary:hover{
-  background:#f4f7fc;
+.modal-secondary:hover {
+    background: #f4f7fc;
 }
 
-.modal-primary{
-  background:var(--orange);
-  color:#fff;
+.modal-primary {
+    background: var(--orange);
+    color: #fff;
 }
 
-.modal-primary:hover{
-  filter:brightness(.96);
+.modal-primary:hover {
+    filter: brightness(.96);
 }
 
-@media(max-width:560px){
+/* =========================================================
+   USPS ADDRESS VALIDATION MODAL
+   ========================================================= */
 
-  .email-modal-card{
-    padding:24px;
-  }
+#addressValidationOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99998;
 
-  .email-modal-actions{
-    grid-template-columns:1fr;
-  }
+    display: none;
+    align-items: center;
+    justify-content: center;
 
+    padding: 20px;
+
+    background: rgba(18, 35, 61, .62);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
-@media(max-width:850px){.grid{grid-template-columns:1fr}.summary{position:static;order:-1}}
-@media(max-width:560px){.container{width:min(100% - 28px,1120px)}.pad{padding:22px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}}
-.brand{
-  display:flex;
-  align-items:center;
+
+#addressValidationOverlay.active {
+    display: flex;
 }
 
-.brand img{
-  display:block;
-  width:180px;
-  height:auto;
+.address-validation-card {
+    position: relative;
+    z-index: 2;
+
+    width: min(500px, 100%);
+
+    padding: 34px;
+
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+
+    box-shadow: 0 30px 90px rgba(12, 32, 64, .28);
+
+    text-align: center;
+
+    font-family: Inter, Arial, sans-serif;
+
+    animation: addressValidationModalIn .18s ease-out;
+}
+
+@keyframes addressValidationModalIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.address-validation-spinner {
+    width: 46px;
+    height: 46px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background: #eef4ff;
+
+    color: var(--blue);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+    font-weight: 900;
+
+    border: 0;
+
+    animation: none;
+}
+
+.address-validation-spinner.error {
+    background: #fff7ed;
+    color: var(--orange);
+    border: 0;
+    animation: none;
+}
+
+.address-validation-spinner.error::after {
+    content: "!";
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    color: var(--orange);
+
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.address-validation-title {
+    margin: 0 0 10px;
+
+    color: var(--blue-dark);
+
+    font-size: 28px;
+    line-height: 1.15;
+
+    font-weight: 900;
+
+    letter-spacing: -.035em;
+}
+
+.address-validation-message {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.address-validation-status {
+    margin-top: 16px;
+
+    color: var(--blue);
+
+    font-size: 11px;
+    line-height: 1.5;
+
+    font-weight: 800;
+}
+
+.address-validation-action {
+    display: none;
+
+    width: 100% !important;
+    min-width: 0;
+
+    height: 52px !important;
+    min-height: 52px;
+
+    margin: 22px 0 0 !important;
+    padding: 0 18px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: var(--orange);
+
+    color: #fff;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 900;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background .15s ease,
+        transform .15s ease,
+        box-shadow .15s ease;
+}
+
+.address-validation-action:hover {
+    background: #e85f00;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 6px 16px rgba(255, 107, 0, .20);
+}
+
+.address-validation-action:active {
+    transform: translateY(0);
+}
+
+.address-validation-action:focus-visible {
+    outline: 0;
+
+    box-shadow:
+        0 0 0 3px rgba(50, 90, 163, .15),
+        0 6px 16px rgba(255, 107, 0, .20);
+}
+
+.address-validation-spinner.success {
+    background: #eef4ff;
+    color: var(--blue);
+
+    border: 0;
+
+    animation: none;
+}
+
+.address-validation-spinner.success::after {
+    content: "✓";
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    color: var(--blue);
+
+    font-size: 22px;
+    font-weight: 900;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 850px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .summary {
+        position: static;
+        order: -1;
+    }
+}
+
+@media (max-width: 560px) {
+    .container {
+        width: min(100% - 28px, 1120px);
+    }
+
+    .pad {
+        padding: 22px;
+    }
+
+    .fields {
+        grid-template-columns: 1fr;
+    }
+
+    .field.full {
+        grid-column: auto;
+    }
+
+    .email-modal-card {
+        padding: 24px;
+    }
+
+    .email-modal-actions {
+        grid-template-columns: 1fr;
+    }
+
+    #addressValidationOverlay {
+        padding: 16px;
+    }
+
+    .address-validation-card {
+        width: 100%;
+        padding: 26px 22px;
+        border-radius: 18px;
+    }
+
+    .address-validation-title {
+        font-size: 24px;
+    }
+
+    .address-validation-message {
+        font-size: 13px;
+    }
+
+    .address-validation-action {
+        height: 50px !important;
+        min-height: 50px;
+    }
 }
 </style>
 </head>
@@ -235,20 +779,111 @@ ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}li{font-size:12px;col
         <div class="fields">
           <div class="field"><label for="firstName">First Name</label><input id="firstName" name="firstName" required autocomplete="given-name"></div>
           <div class="field"><label for="lastName">Last Name</label><input id="lastName" name="lastName" required autocomplete="family-name"></div>
-          <div class="field"><label for="email">Email Address</label><input id="email" name="email" type="text" inputmode="email" required autocomplete="email"></div>
+          <div class="field"><label for="email">Email Address</label><input id="email" name="email" type="email" required autocomplete="email"></div>
           <div class="field"><label for="phone">Phone Number</label><input id="phone" name="phone" type="tel" required autocomplete="tel"></div>
-          <div class="field full"><label for="address">Billing Address</label><input id="address" name="address" required autocomplete="street-address"></div>
-          <div class="field"><label for="city">City</label><input id="city" name="city" required autocomplete="address-level2"></div>
-          <div class="field"><label for="state">State</label><input id="state" name="state" required autocomplete="address-level1"></div>
-          <div class="field"><label for="zip">ZIP Code</label><input id="zip" name="zip" required autocomplete="postal-code"></div>
+<div class="field full">
+            <label for="address">Billing Address</label>
+            <input id="address" name="address" type="text" autocomplete="address-line1"
+              maxlength="100" placeholder="123 Main Street" required>
+          </div>
+
+          <div class="field full">
+            <label for="address2">Apt / Suite / Unit <span class="optional">(Optional)</span></label>
+            <input id="address2" name="address2" type="text" autocomplete="address-line2"
+              maxlength="50" placeholder="Apt 4B">
+          </div>
+
+          <div class="field">
+            <label for="city">City</label>
+            <input id="city" name="city" type="text" autocomplete="address-level2"
+              maxlength="50" required>
+          </div>
+
+          <div class="field">
+            <label for="state">State</label>
+            <select id="state" name="state" autocomplete="address-level1" required>
+              <option value="">Select State</option>
+              <option value="AL">Alabama</option><option value="AK">Alaska</option>
+              <option value="AZ">Arizona</option><option value="AR">Arkansas</option>
+              <option value="CA">California</option><option value="CO">Colorado</option>
+              <option value="CT">Connecticut</option><option value="DE">Delaware</option>
+              <option value="FL">Florida</option><option value="GA">Georgia</option>
+              <option value="HI">Hawaii</option><option value="ID">Idaho</option>
+              <option value="IL">Illinois</option><option value="IN">Indiana</option>
+              <option value="IA">Iowa</option><option value="KS">Kansas</option>
+              <option value="KY">Kentucky</option><option value="LA">Louisiana</option>
+              <option value="ME">Maine</option><option value="MD">Maryland</option>
+              <option value="MA">Massachusetts</option><option value="MI">Michigan</option>
+              <option value="MN">Minnesota</option><option value="MS">Mississippi</option>
+              <option value="MO">Missouri</option><option value="MT">Montana</option>
+              <option value="NE">Nebraska</option><option value="NV">Nevada</option>
+              <option value="NH">New Hampshire</option><option value="NJ">New Jersey</option>
+              <option value="NM">New Mexico</option><option value="NY">New York</option>
+              <option value="NC">North Carolina</option><option value="ND">North Dakota</option>
+              <option value="OH">Ohio</option><option value="OK">Oklahoma</option>
+              <option value="OR">Oregon</option><option value="PA">Pennsylvania</option>
+              <option value="RI">Rhode Island</option><option value="SC">South Carolina</option>
+              <option value="SD">South Dakota</option><option value="TN">Tennessee</option>
+              <option value="TX">Texas</option><option value="UT">Utah</option>
+              <option value="VT">Vermont</option><option value="VA">Virginia</option>
+              <option value="WA">Washington</option><option value="WV">West Virginia</option>
+              <option value="WI">Wisconsin</option><option value="WY">Wyoming</option>
+              <option value="DC">District of Columbia</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="zip">ZIP Code</label>
+            <input id="zip" name="zip" type="text" inputmode="numeric"
+              autocomplete="postal-code" maxlength="10" placeholder="75001" required>
+          </div>
         </div>
 
-        <hr><h2>Payment</h2><p class="sub">Secure card payment powered by Stripe.</p>
-        <div class="payment"><div id="payment-element"></div></div>
-        <div id="setupNotice" class="notice"></div>
-        <div id="paymentError" class="error"></div>
-        <div id="orderNotice" class="notice"></div><button id="payButton" type="submit">Continue to Secure Payment</button>
-        <div class="secure">Your card information is handled by Stripe and is not stored in this website.</div>
+        <div id="addressValidationMessage" role="status" aria-live="polite" style="display:none;"></div>
+
+        
+
+        <!-- =====================================================
+             Hidden until the customer:
+             1. Completes all required customer information.
+             2. Confirms their email in the confirmation modal.
+             3. The server successfully creates the PaymentIntent.
+
+             Stripe is NOT mounted while this section is hidden.
+        ====================================================== -->
+        <div
+          id="paymentSection"
+          class="payment-section"
+          style="display:none"
+          aria-hidden="true"
+        >
+          <hr>
+          <h2>Payment</h2>
+          <p class="sub">Secure card payment powered by Stripe.</p>
+
+          <div class="payment">
+            <div id="payment-element"></div>
+          </div>
+
+          <div id="setupNotice" class="notice"></div>
+          <div id="paymentError" class="error"></div>
+          <div id="orderNotice" class="notice"></div>
+
+          <div class="secure">
+            Your card information is handled by Stripe and is not stored in this website.
+          </div>
+        </div>
+
+        <!-- Visible before email confirmation so the customer
+             can submit their information and open the email
+             confirmation dialog. After confirmation, checkout.js
+             changes this button to the final Pay button. -->
+        <button
+          id="payButton"
+          type="submit"
+        >
+          Continue to Secure Payment
+        </button>
       </form>
     </div></section>
 

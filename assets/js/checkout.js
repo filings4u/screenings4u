@@ -1,48 +1,47 @@
+
+
 /**
  * screenings4u — Universal Stripe Checkout
  *
  * PUBLIC MARKETING CHECKOUT
  *
- * Flow:
+ * SERVICE-BASED CHECKOUT
  *
- * Customer
- *    ↓
- * checkout.html
- *    ↓
- * create-payment-intent Edge Function
- *    ↓
- * Supabase Order Engine
- *    ↓
- * Stripe PaymentIntent
- *    ↓
- * Stripe Payment Element
- *    ↓
- * payment_intent.succeeded
- *    ↓
- * Stripe webhook
- *    ↓
- * mark_order_paid()
+ * Flow:
+ *   checkout.html?service=SERVICE_ID
+ *        ↓
+ *   create-payment-intent Edge Function
+ *        ↓
+ *   Supabase Order Engine
+ *        ↓
+ *   Stripe PaymentIntent
+ *        ↓
+ *   Stripe Payment Element
+ *        ↓
+ *   payment_intent.succeeded
+ *        ↓
+ *   Stripe webhook
+ *        ↓
+ *   mark_order_paid()
  *
  * IMPORTANT:
- * - No customer authentication is required.
- * - The browser sends the PRODUCT ID, not the price.
+ * - Everything in this checkout is SERVICE based.
+ * - The browser sends the SERVICE ID, not a Stripe price ID.
  * - The server is authoritative for pricing.
  * - The webhook is authoritative for payment completion.
+ * - Customer fields must be entered manually.
  */
 
 "use strict";
-
 
 /* =========================================================
    CONFIGURATION
 ========================================================= */
 
 const STRIPE_PUBLISHABLE_KEY =
-  "pk_test_51TTy4i0dNjSlvyScX676lZwB34Lby8nEuvs0Rorwo6kGYKkTJYiTyPQA6PVjzwUSjB9Kz90LdHtCh2E1BTMMEkTX00HCLPKUk";
+  "pk_test_51U8CQQ2QEeEuL3QXzML14sIufQvcjU2fxNkTCylTwCR2cJvtx4nBVbiZ2bvbD97oFL2aScbitB21htQyxoETfY2x00rtvDvxUm";
 
-const PAYMENT_FUNCTION_NAME =
-  "create-payment-intent";
-
+const PAYMENT_FUNCTION_NAME = "create-payment-intent";
 
 /* =========================================================
    STATE
@@ -52,192 +51,674 @@ let stripe = null;
 let elements = null;
 let paymentElement = null;
 
-let selectedProduct = null;
+let selectedService = null;
 
 let paymentMounted = false;
 let paymentIntentCreated = false;
 let emailConfirmed = false;
+
+/*
+ * Prevent duplicate Confirm Email clicks from starting two
+ * PaymentIntent / Stripe mount operations at the same time.
+ */
+let emailConfirmationInProgress = false;
 
 let orderId = null;
 let orderNumber = null;
 let trackingNumber = null;
 let paymentIntentId = null;
 
+let paymentProcessingOverlay = null;
+let addressValidationOverlay = null;
+let addressConfirmationOverlay = null;
+let manualEntryWarning = null;
+let manualEntryBaseline = Object.create(null);
+
+/*
+ * Every customer field gets a manual-entry flag.
+ * This prevents browser autofill from silently satisfying
+ * the checkout validation.
+ */
+const MANUAL_ENTRY_FIELDS = [
+  "firstName",
+  "lastName",
+  "email",
+  "phone",
+  "address",
+  "city",
+  "state",
+  "zip"
+];
 
 /* =========================================================
-   INPUT FORMATTING / MANUAL ENTRY CONTROLS
+   MANUAL ENTRY WARNING
 ========================================================= */
 
-const manualEntryFields = new Set();
-let manualEntryNotice = null;
+function createManualEntryWarning() {
 
-function getManualEntryFieldIds() {
-  return [
-    "firstName",
-    "lastName",
-    "email",
-    "phone",
+  if (manualEntryWarning) {
+    return manualEntryWarning;
+  }
+
+  const overlay = document.createElement("div");
+
+  overlay.id = "manualEntryWarning";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-hidden", "true");
+
+  overlay.innerHTML = `
+    <div class="manual-entry-warning-card">
+      <button
+        type="button"
+        class="manual-entry-warning-close"
+        id="manualEntryWarningClose"
+        aria-label="Close message"
+      >&times;</button>
+
+      <div class="manual-entry-warning-icon" aria-hidden="true">
+        !
+      </div>
+
+      <div class="manual-entry-warning-title">
+        Please Type Your Information
+      </div>
+
+      <div class="manual-entry-warning-message">
+        For security and verification purposes, your customer
+        information must be entered directly into this form.
+        Please type your information instead of using browser
+        autofill, copy and paste, or drag and drop.
+      </div>
+
+      <button
+        type="button"
+        class="manual-entry-warning-button"
+        id="manualEntryWarningButton"
+      >
+        I Understand
+      </button>
+    </div>
+  `;
+
+  const style = document.createElement("style");
+
+  style.textContent = `
+    #manualEntryWarning {
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 29, 50, 0.58);
+      backdrop-filter: blur(4px);
+    }
+
+    #manualEntryWarning.active {
+      display: flex;
+    }
+
+    .manual-entry-warning-card {
+      position: relative;
+      width: min(470px, 100%);
+      padding: 34px 30px 30px;
+      background: #fff;
+      border: 1px solid #d9e3f0;
+      border-radius: 18px;
+      box-shadow: 0 24px 70px rgba(23, 51, 95, 0.24);
+      text-align: center;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    .manual-entry-warning-close {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      background: transparent;
+      color: #71829a;
+      font-size: 26px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .manual-entry-warning-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 18px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff3e8;
+      color: #ff6b00;
+      font-size: 25px;
+      font-weight: 900;
+    }
+
+    .manual-entry-warning-title {
+      color: #24467f;
+      font-size: 22px;
+      line-height: 1.25;
+      font-weight: 900;
+      margin-bottom: 11px;
+    }
+
+    .manual-entry-warning-message {
+      color: #667892;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .manual-entry-warning-button {
+      margin-top: 22px;
+      min-width: 150px;
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 9px;
+      background: #325aa3;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .manual-entry-warning-button:hover {
+      background: #24467f;
+    }
+
+    @keyframes screenings4uAutofillDetected {
+      from {
+        opacity: 0.99;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    input:-webkit-autofill {
+      animation-name: screenings4uAutofillDetected;
+      animation-duration: 0.01s;
+    }
+  `;
+
+  document.head.appendChild(style);
+  document.body.appendChild(overlay);
+
+  manualEntryWarning = overlay;
+
+  const close = () => closeManualEntryWarning();
+
+  overlay.querySelector("#manualEntryWarningClose")
+    ?.addEventListener("click", close);
+
+  overlay.querySelector("#manualEntryWarningButton")
+    ?.addEventListener("click", close);
+
+  overlay.addEventListener("click", event => {
+    if (event.target === overlay) {
+      close();
+    }
+  });
+
+  return overlay;
+}
+
+function showManualEntryWarning(fieldId = null) {
+
+  const overlay = createManualEntryWarning();
+
+  overlay.classList.add("active");
+  overlay.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+
+  const field = fieldId
+    ? document.getElementById(fieldId)
+    : null;
+
+  if (field) {
+    field.classList.add("manual-entry-warning-field");
+  }
+}
+
+function closeManualEntryWarning() {
+
+  if (!manualEntryWarning) {
+    return;
+  }
+
+  manualEntryWarning.classList.remove("active");
+  manualEntryWarning.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+
+  document
+    .querySelectorAll(".manual-entry-warning-field")
+    .forEach(field => {
+      field.classList.remove("manual-entry-warning-field");
+    });
+}
+
+/* =========================================================
+   MANUAL ENTRY FIELD SETUP
+========================================================= */
+
+function markFieldAsManuallyTyped(input) {
+
+  if (!input) {
+    return;
+  }
+
+  input.dataset.manualTyped = "true";
+  input.dataset.autofilled = "false";
+  input.dataset.manualEntryVerified = "true";
+}
+
+function markAllFieldsUnconfirmed() {
+
+  MANUAL_ENTRY_FIELDS.forEach(id => {
+
+    const input = document.getElementById(id);
+
+    if (!input) {
+      return;
+    }
+
+    input.dataset.manualTyped = "false";
+    input.dataset.autofilled = "false";
+    input.dataset.manualEntryVerified = "false";
+    input.dataset.pendingKeyboardEdit = "false";
+    input.dataset.keyboardValueBefore = input.value || "";
+  });
+}
+
+function fieldWasManuallyTyped(id) {
+
+  const input = document.getElementById(id);
+
+  return Boolean(
+    input &&
+    input.dataset.manualTyped === "true" &&
+    input.dataset.manualEntryVerified === "true"
+  );
+}
+
+/*
+ * A keydown by itself is NOT proof of manual entry.
+ *
+ * Chrome can fire keyboard events while a customer is navigating
+ * an autofill/saved-address suggestion. The old implementation
+ * marked the field as manually typed on keydown, which allowed
+ * that autofill to satisfy checkout validation.
+ *
+ * We now require:
+ *   1. A trusted printable/editing keyboard event.
+ *   2. A subsequent trusted input event.
+ *   3. The resulting value change to be consistent with a small
+ *      keyboard edit rather than a complete autofill replacement.
+ */
+function beginKeyboardEdit(input, event) {
+
+  if (!input || !event.isTrusted) {
+    return;
+  }
+
+  const isPrintable =
+    event.key &&
+    event.key.length === 1 &&
+    !event.ctrlKey &&
+    !event.metaKey &&
+    !event.altKey;
+
+  const isDelete =
+    event.key === "Backspace" ||
+    event.key === "Delete";
+
+  if (!isPrintable && !isDelete) {
+    return;
+  }
+
+  input.dataset.pendingKeyboardEdit = "true";
+  input.dataset.keyboardValueBefore = input.value || "";
+}
+
+function verifyKeyboardInput(input, event) {
+
+  if (!input || !event.isTrusted) {
+    return;
+  }
+
+  if (input.dataset.pendingKeyboardEdit !== "true") {
+    return;
+  }
+
+  const before =
+    input.dataset.keyboardValueBefore || "";
+
+  const after =
+    input.value || "";
+
+  input.dataset.pendingKeyboardEdit = "false";
+
+  /*
+   * A normal keyboard edit changes the value by a very small amount.
+   * This intentionally rejects one-shot autofill replacements.
+   */
+  const lengthDelta =
+    Math.abs(after.length - before.length);
+
+  const isSmallEdit =
+    lengthDelta <= 1 ||
+    (
+      before.length === after.length &&
+      before !== after
+    );
+
+  if (isSmallEdit) {
+    markFieldAsManuallyTyped(input);
+  } else {
+    input.dataset.manualTyped = "false";
+    input.dataset.manualEntryVerified = "false";
+    input.dataset.autofilled = "true";
+
+    showManualEntryWarning(input.id);
+  }
+}
+
+function captureManualEntryBaseline() {
+  manualEntryBaseline = Object.create(null);
+
+  MANUAL_ENTRY_FIELDS.forEach(id => {
+    const input = document.getElementById(id);
+
+    if (input) {
+      manualEntryBaseline[id] = input.value || "";
+    }
+  });
+}
+
+function resetAddressFields() {
+  const addressFieldIds = [
     "address",
+    "address2",
     "city",
     "state",
     "zip"
   ];
-}
 
-function markManualEntry(field) {
-  if (field && field.id) {
-    manualEntryFields.add(field.id);
-  }
-}
+  addressFieldIds.forEach(id => {
+    const input = document.getElementById(id);
 
-function showManualEntryNotice(reason = "manual") {
-  if (!manualEntryNotice) {
-    manualEntryNotice = document.createElement("div");
-    manualEntryNotice.id = "manualEntryNotice";
-    manualEntryNotice.setAttribute("role", "dialog");
-    manualEntryNotice.setAttribute("aria-modal", "true");
-    manualEntryNotice.setAttribute("aria-live", "assertive");
+    if (!input) {
+      return;
+    }
 
-    manualEntryNotice.innerHTML = `
-      <div class="manual-entry-backdrop"></div>
-      <div class="manual-entry-card">
-        <div class="manual-entry-icon">!</div>
-        <div class="manual-entry-eyebrow">Manual Entry Required</div>
-        <h2>Please Type Your Information</h2>
-        <p>
-          For checkout verification, please type your customer information
-          directly into the form. Autofill, copy and paste are not supported
-          on this checkout form.
-        </p>
-        <button type="button" id="manualEntryOkBtn">I Understand</button>
-      </div>
-    `;
+    input.value = "";
 
-    const style = document.createElement("style");
-    style.textContent = `
-      #manualEntryNotice {
-        position: fixed; inset: 0; z-index: 100000; display: flex;
-        align-items: center; justify-content: center; padding: 20px;
-      }
-      #manualEntryNotice .manual-entry-backdrop {
-        position: absolute; inset: 0; background: rgba(18,35,61,.62);
-        backdrop-filter: blur(5px);
-      }
-      #manualEntryNotice .manual-entry-card {
-        position: relative; z-index: 2; width: min(460px,100%);
-        padding: 32px; background: #fff; border: 1px solid #d9e3f0;
-        border-radius: 18px; box-shadow: 0 30px 90px rgba(12,32,64,.28);
-        text-align: center; font-family: Inter,Arial,sans-serif;
-      }
-      #manualEntryNotice .manual-entry-icon {
-        width: 46px; height: 46px; margin: 0 auto 16px; display: flex;
-        align-items: center; justify-content: center; border-radius: 50%;
-        background: #fff7ed; color: #ff6b00; font-size: 24px; font-weight: 900;
-      }
-      #manualEntryNotice .manual-entry-eyebrow {
-        color: #ff6b00; font-size: 10px; font-weight: 900;
-        text-transform: uppercase; letter-spacing: .12em; margin-bottom: 7px;
-      }
-      #manualEntryNotice h2 { margin: 0 0 10px; color: #24467f; font-size: 25px; }
-      #manualEntryNotice p { margin: 0; color: #667892; font-size: 13px; line-height: 1.65; }
-      #manualEntryNotice button {
-        width: 100%; height: 50px; margin-top: 22px; border: 0;
-        border-radius: 8px; background: #ff6b00; color: #fff;
-        font-weight: 900; cursor: pointer;
-      }
-      body.manual-entry-notice-active { overflow: hidden; }
-    `;
+    input.dataset.manualTyped = "false";
+    input.dataset.autofilled = "false";
+    input.dataset.manualEntryVerified = "false";
+    input.dataset.pendingKeyboardEdit = "false";
+    input.dataset.keyboardValueBefore = "";
+  });
 
-    document.head.appendChild(style);
-    document.body.appendChild(manualEntryNotice);
+  /*
+   * The customer is intentionally starting a new address.
+   * Make the empty address fields the new baseline so the
+   * autofill watcher does not immediately reopen the warning.
+   */
+  captureManualEntryBaseline();
 
-    manualEntryNotice
-      .querySelector("#manualEntryOkBtn")
-      .addEventListener("click", closeManualEntryNotice);
+  const addressField = document.getElementById("address");
 
-    manualEntryNotice
-      .querySelector(".manual-entry-backdrop")
-      .addEventListener("click", closeManualEntryNotice);
-  }
-
-  manualEntryNotice.classList.add("active");
-  document.body.classList.add("manual-entry-notice-active");
-}
-
-function closeManualEntryNotice() {
-  if (!manualEntryNotice) return;
-  manualEntryNotice.remove();
-  manualEntryNotice = null;
-  document.body.classList.remove("manual-entry-notice-active");
-}
-
-function validateManualEntry() {
-  const autofilled = getManualEntryFieldIds()
-    .map(id => document.getElementById(id))
-    .filter(field => field && field.value.trim() && !manualEntryFields.has(field.id));
-
-  if (autofilled.length) {
-    showManualEntryNotice("autofill");
-    autofilled[0].focus();
-    return {
-      valid: false,
-      field: autofilled[0].id,
-      message: "Please type your information directly into the form."
-    };
-  }
-
-  return { valid: true };
-}
-
-function checkForAutofill() {
-  const autofilled = getManualEntryFieldIds()
-    .map(id => document.getElementById(id))
-    .filter(field => field && field.value.trim() && !manualEntryFields.has(field.id));
-
-  if (autofilled.length) {
-    showManualEntryNotice("autofill");
-    autofilled[0].focus();
+  if (addressField) {
+    addressField.focus();
   }
 }
 
 function setupManualEntryFields() {
 
-  const firstName =
-    document.getElementById("firstName");
+  const firstName = document.getElementById("firstName");
+  const lastName = document.getElementById("lastName");
+  const email = document.getElementById("email");
+  const phone = document.getElementById("phone");
+  const address = document.getElementById("address");
+  const city = document.getElementById("city");
+  const state = document.getElementById("state");
+  const zip = document.getElementById("zip");
 
-  const lastName =
-    document.getElementById("lastName");
+  markAllFieldsUnconfirmed();
 
-  const email =
-    document.getElementById("email");
+  const fields = [
+    firstName,
+    lastName,
+    email,
+    phone,
+    address,
+    city,
+    state,
+    zip
+  ].filter(Boolean);
 
-  const phone =
-    document.getElementById("phone");
+  fields.forEach(input => {
 
-  const address =
-    document.getElementById("address");
+    /*
+     * Do not use "off" alone for Chrome autofill. Chrome may ignore
+     * autocomplete="off" for customer/contact fields.
+     *
+     * The non-standard metadata below also discourages common
+     * password managers, but validation remains authoritative.
+     */
+    input.setAttribute("autocomplete", "new-password");
+    input.setAttribute("data-form-type", "other");
+    input.setAttribute("data-lpignore", "true");
+    input.setAttribute("data-1p-ignore", "true");
 
-  const city =
-    document.getElementById("city");
+    /*
+     * Keyboard typing.
+     *
+     * IMPORTANT: keydown only records intent. It does not validate
+     * the field. Validation happens after the corresponding input
+     * event has actually changed the value.
+     */
+    input.addEventListener("keydown", event => {
+      beginKeyboardEdit(input, event);
+    });
 
-  const state =
-    document.getElementById("state");
+    /*
+     * beforeinput is intentionally NOT used to mark a field as
+     * manually typed. Autofill and other browser-controlled changes
+     * can produce input/beforeinput sequences that are not equivalent
+     * to a customer typing the information.
+     */
+    input.addEventListener("beforeinput", event => {
 
-  const zip =
-    document.getElementById("zip");
+      if (
+        !event.isTrusted ||
+        !event.inputType
+      ) {
+        return;
+      }
+
+      if (
+        event.inputType === "insertFromPaste" ||
+        event.inputType === "insertFromDrop" ||
+        event.inputType === "insertReplacementText"
+      ) {
+        event.preventDefault();
+
+        input.dataset.pendingKeyboardEdit = "false";
+        input.dataset.manualTyped = "false";
+        input.dataset.manualEntryVerified = "false";
+        input.dataset.autofilled = "true";
+
+        showManualEntryWarning(input.id);
+      }
+    });
+
+    /*
+     * The input event is where a keyboard edit becomes verified.
+     */
+    input.addEventListener("input", event => {
+      verifyKeyboardInput(input, event);
+    }, true);
+
+    /*
+     * Browser autofill detection.
+     */
+    input.addEventListener("animationstart", event => {
+
+      if (
+        event.animationName ===
+        "screenings4uAutofillDetected"
+      ) {
+        input.dataset.autofilled = "true";
+        input.dataset.manualTyped = "false";
+        input.dataset.manualEntryVerified = "false";
+        input.dataset.pendingKeyboardEdit = "false";
+
+        showManualEntryWarning(input.id);
+      }
+    });
+
+    /*
+     * Explicitly block paste.
+     */
+    input.addEventListener("paste", event => {
+
+      event.preventDefault();
+
+      input.dataset.pendingKeyboardEdit = "false";
+      input.dataset.manualTyped = "false";
+      input.dataset.manualEntryVerified = "false";
+      input.dataset.autofilled = "true";
+
+      showManualEntryWarning(input.id);
+    });
+
+    /*
+     * Explicitly block drop.
+     */
+    input.addEventListener("drop", event => {
+
+      event.preventDefault();
+
+      input.dataset.pendingKeyboardEdit = "false";
+      input.dataset.manualTyped = "false";
+      input.dataset.manualEntryVerified = "false";
+      input.dataset.autofilled = "true";
+
+      showManualEntryWarning(input.id);
+    });
+
+    input.addEventListener("dragover", event => {
+      event.preventDefault();
+    });
+
+    /*
+     * Explicitly block cut.
+     */
+    input.addEventListener("cut", event => {
+
+      event.preventDefault();
+
+      input.dataset.pendingKeyboardEdit = "false";
+      input.dataset.manualTyped = "false";
+      input.dataset.manualEntryVerified = "false";
+
+      showManualEntryWarning(input.id);
+    });
+  });
 
   /*
-   * Email:
-   * - Accepts upper/lowercase.
-   * - Normalizes the domain to lowercase.
-   * - Does NOT force the local part to lowercase because
-   *   technically email local parts can be case-sensitive.
+   * Detect values that appear after checkout initialization.
+   *
+   * IMPORTANT:
+   * We compare against a baseline instead of treating every
+   * unverified populated field as autofill. The previous watcher
+   * reopened the warning simply because a customer clicked a field
+   * or returned to the page with browser-restored values.
+   *
+   * A value that was present when the baseline was captured is left
+   * alone. A new value appearing without verified manual typing is
+   * treated as possible browser autofill.
+   */
+  captureManualEntryBaseline();
+
+  let autofillWatchCycles = 0;
+
+  const autofillWatcher = window.setInterval(() => {
+
+    autofillWatchCycles += 1;
+
+    for (const id of MANUAL_ENTRY_FIELDS) {
+
+      const input =
+        document.getElementById(id);
+
+      if (
+        !input ||
+        input.dataset.manualTyped === "true"
+      ) {
+        continue;
+      }
+
+      const currentValue =
+        input.value || "";
+
+      const baselineValue =
+        manualEntryBaseline[id] || "";
+
+      if (
+        currentValue.trim() &&
+        currentValue !== baselineValue
+      ) {
+
+        input.dataset.manualTyped = "false";
+        input.dataset.manualEntryVerified = "false";
+        input.dataset.autofilled = "true";
+
+        showManualEntryWarning(id);
+        return;
+      }
+    }
+
+    /*
+     * The watcher only needs to cover the period in which browsers
+     * normally inject saved contact information.
+     */
+    if (autofillWatchCycles >= 40) {
+      window.clearInterval(autofillWatcher);
+    }
+
+  }, 250);
+
+  /*
+   * Browser back/forward navigation can restore form values without
+   * a real customer edit. Treat the restored values as the new
+   * baseline so clicking Back or returning to the checkout does not
+   * trigger the manual-entry warning by itself.
+   */
+  window.addEventListener("pageshow", () => {
+    window.setTimeout(() => {
+      captureManualEntryBaseline();
+
+      if (manualEntryWarning) {
+        closeManualEntryWarning();
+      }
+    }, 0);
+  });
+
+  /*
+   * Email.
    */
   if (email) {
 
-    email.setAttribute("autocomplete", "off");
     email.setAttribute("autocapitalize", "none");
     email.setAttribute("spellcheck", "false");
+    email.setAttribute("inputmode", "email");
 
     email.addEventListener("input", () => {
 
@@ -246,8 +727,7 @@ function setupManualEntryFields() {
           .replace(/\s/g, "")
           .slice(0, 254);
 
-      const at =
-        email.value.indexOf("@");
+      const at = email.value.indexOf("@");
 
       if (at > 0) {
 
@@ -268,13 +748,10 @@ function setupManualEntryFields() {
   }
 
   /*
-   * Phone:
-   * Formats as:
-   * (555) 123-4567
+   * Phone.
    */
   if (phone) {
 
-    phone.setAttribute("autocomplete", "off");
     phone.setAttribute("inputmode", "tel");
 
     phone.addEventListener("input", () => {
@@ -282,18 +759,19 @@ function setupManualEntryFields() {
       let digits =
         phone.value.replace(/\D/g, "");
 
-      if (digits.length > 10 && digits.startsWith("1")) {
+      if (
+        digits.length > 10 &&
+        digits.startsWith("1")
+      ) {
         digits = digits.slice(1);
       }
 
-      digits =
-        digits.slice(0, 10);
+      digits = digits.slice(0, 10);
 
       let formatted = "";
 
       if (digits.length > 0) {
-        formatted =
-          "(" + digits.slice(0, 3);
+        formatted = "(" + digits.slice(0, 3);
       }
 
       if (digits.length >= 3) {
@@ -301,8 +779,7 @@ function setupManualEntryFields() {
       }
 
       if (digits.length > 3) {
-        formatted +=
-          digits.slice(3, 6);
+        formatted += digits.slice(3, 6);
       }
 
       if (digits.length >= 6) {
@@ -310,72 +787,82 @@ function setupManualEntryFields() {
       }
 
       if (digits.length > 6) {
-        formatted +=
-          digits.slice(6, 10);
+        formatted += digits.slice(6, 10);
       }
 
-      phone.value =
-        formatted;
-
+      phone.value = formatted;
       phone.setCustomValidity("");
     });
   }
 
   /*
-   * State:
-   * Two uppercase letters only.
+   * State.
+   *
+   * A <select> does not use the same keyboard/input verification path
+   * as text fields. The previous implementation therefore left the
+   * state field permanently unverified. The autofill watcher would
+   * then see the selected state and incorrectly show the manual-entry
+   * warning even when every field had been entered by the customer.
+   *
+   * A trusted change event is the correct signal for a state selection.
    */
   if (state) {
 
-    state.setAttribute("autocomplete", "off");
     state.setAttribute("autocapitalize", "characters");
 
-    state.addEventListener("input", () => {
+    state.addEventListener("change", event => {
 
-      state.value =
-        state.value
-          .replace(/[^A-Za-z]/g, "")
-          .toUpperCase()
-          .slice(0, 2);
+      if (!event.isTrusted) {
+        return;
+      }
+
+      if (!state.value) {
+        state.dataset.manualTyped = "false";
+        state.dataset.manualEntryVerified = "false";
+        state.dataset.autofilled = "false";
+        return;
+      }
+
+      markFieldAsManuallyTyped(state);
     });
   }
 
   /*
-   * ZIP:
-   * 12345 or 12345-6789
+   * ZIP.
    */
   if (zip) {
 
-    zip.setAttribute("autocomplete", "off");
     zip.setAttribute("inputmode", "numeric");
 
     zip.addEventListener("input", () => {
 
-      let digits =
-        zip.value.replace(/\D/g, "")
+      const digits =
+        zip.value
+          .replace(/\D/g, "")
           .slice(0, 9);
 
       if (digits.length > 5) {
+
         zip.value =
           digits.slice(0, 5) +
           "-" +
           digits.slice(5);
+
       } else {
+
         zip.value = digits;
       }
     });
   }
 
   /*
-   * Names:
-   * Keep natural capitalization. Remove numbers/symbols
-   * that cannot be part of the supported name format.
+   * Names and city.
    */
   [firstName, lastName, city].forEach(input => {
 
-    if (!input) return;
-
-    input.setAttribute("autocomplete", "off");
+    if (!input) {
+      return;
+    }
 
     input.addEventListener("input", () => {
 
@@ -388,12 +875,9 @@ function setupManualEntryFields() {
   });
 
   /*
-   * Address:
-   * Allow normal street-address characters.
+   * Address.
    */
   if (address) {
-
-    address.setAttribute("autocomplete", "off");
 
     address.addEventListener("input", () => {
 
@@ -404,83 +888,57 @@ function setupManualEntryFields() {
         );
     });
   }
-
-  window.setTimeout(checkForAutofill, 500);
-  window.setTimeout(checkForAutofill, 1500);
-
-  /*
-   * Disable paste/cut/drop on customer fields.
-   * This is a UI restriction, not a security boundary.
-   */
-  [
-    firstName,
-    lastName,
-    email,
-    phone,
-    address,
-    city,
-    state,
-    zip
-  ].forEach(input => {
-
-    if (!input) return;
-
-    input.addEventListener("keydown", event => {
-      if (
-        event.key.length === 1 ||
-        event.key === "Backspace" ||
-        event.key === "Delete"
-      ) {
-        markManualEntry(input);
-      }
-    });
-
-    input.addEventListener("beforeinput", event => {
-      if (
-        event.inputType === "insertText" ||
-        event.inputType === "deleteContentBackward" ||
-        event.inputType === "deleteContentForward"
-      ) {
-        markManualEntry(input);
-      }
-    });
-
-    input.addEventListener(
-      "paste",
-      event => {
-        event.preventDefault();
-        showManualEntryNotice("paste");
-        input.focus();
-      }
-    );
-
-    input.addEventListener(
-      "drop",
-      event => {
-        event.preventDefault();
-        showManualEntryNotice("drop");
-        input.focus();
-      }
-    );
-
-    input.addEventListener(
-      "dragover",
-      event => {
-        event.preventDefault();
-      }
-    );
-
-    input.addEventListener(
-      "cut",
-      event => {
-        event.preventDefault();
-      }
-    );
-  });
 }
 
+/*
+ * Browser autofill is not perfectly detectable on every browser.
+ * This additional check catches the important case where values
+ * have appeared without manual keyboard entry.
+ */
+function detectUnconfirmedFieldValues() {
 
+  for (const id of MANUAL_ENTRY_FIELDS) {
 
+    const input = document.getElementById(id);
+
+    if (!input) {
+      continue;
+    }
+
+    /*
+     * Any populated field must have both verification flags.
+     * A browser-filled value therefore can never satisfy checkout.
+     */
+    if (
+      input.value.trim() &&
+      (
+        input.dataset.manualTyped !== "true" ||
+        input.dataset.manualEntryVerified !== "true"
+      )
+    ) {
+      return id;
+    }
+  }
+
+  return null;
+}
+
+function requireManualEntry() {
+
+  const unconfirmedField =
+    detectUnconfirmedFieldValues();
+
+  if (unconfirmedField) {
+
+    showManualEntryWarning(
+      unconfirmedField
+    );
+
+    return false;
+  }
+
+  return true;
+}
 
 /* =========================================================
    INITIALIZATION
@@ -491,33 +949,116 @@ document.addEventListener(
   initCheckout
 );
 
+/*
+ * SERVICE CATALOG SAFETY LOADER
+ *
+ * checkout.js depends on test-price-list.js for:
+ *   - TEST_SERVICES
+ *   - getTestService()
+ *   - formatTestPrice()
+ *
+ * If checkout.html already loads test-price-list.js, this does nothing.
+ * If that script tag is missing or loads after checkout.js, load it here
+ * before the checkout initialization continues.
+ */
+let serviceCatalogLoadPromise = null;
+
+async function ensureServiceCatalogLoaded() {
+  if (
+    typeof getTestService === "function" &&
+    typeof formatTestPrice === "function"
+  ) {
+    return true;
+  }
+
+  if (!serviceCatalogLoadPromise) {
+    serviceCatalogLoadPromise = new Promise((resolve, reject) => {
+      const existing = document.querySelector(
+        'script[src$="test-price-list.js"]'
+      );
+
+      if (existing) {
+        existing.addEventListener("load", () => {
+          if (
+            typeof getTestService === "function" &&
+            typeof formatTestPrice === "function"
+          ) {
+            resolve(true);
+          } else {
+            reject(
+              new Error(
+                "The service catalog script loaded, but the service catalog functions are unavailable."
+              )
+            );
+          }
+        }, { once: true });
+
+        existing.addEventListener("error", () => {
+          reject(
+            new Error(
+              "The service catalog script could not be loaded."
+            )
+          );
+        }, { once: true });
+
+        return;
+      }
+
+      const script = document.createElement("script");
+
+      script.src = "assets/js/test-price-list.js";
+      script.async = false;
+
+      script.onload = () => {
+        if (
+          typeof getTestService === "function" &&
+          typeof formatTestPrice === "function"
+        ) {
+          resolve(true);
+        } else {
+          reject(
+            new Error(
+              "The service catalog loaded, but getTestService() is unavailable."
+            )
+          );
+        }
+      };
+
+      script.onerror = () => {
+        reject(
+          new Error(
+            "The service catalog could not be loaded. Make sure assets/js/test-price-list.js exists."
+          )
+        );
+      };
+
+      document.head.appendChild(script);
+    });
+  }
+
+  return serviceCatalogLoadPromise;
+}
 
 async function initCheckout() {
 
   try {
+
+    createManualEntryWarning();
+    createAddressValidationOverlay();
+    createUSPSAddressConfirmationModal();
 
     const params =
       new URLSearchParams(
         window.location.search
       );
 
-
     /*
-     * Accept both:
+     * SERVICE ONLY.
      *
-     * checkout.html?service=PRODUCT_ID
-     *
-     * checkout.html?product=PRODUCT_ID
+     * We intentionally accept only ?service=.
      */
-
     const serviceId =
-      params.get("service") ||
-      params.get("product");
-
-
-    /* -----------------------------------------------------
-       Validate product parameter
-    ----------------------------------------------------- */
+      params.get("service");
 
     if (!serviceId) {
 
@@ -528,16 +1069,33 @@ async function initCheckout() {
       return;
     }
 
+    /*
+     * SERVICE CATALOG.
+     *
+     * Do not remove this dependency. The checkout page uses the
+     * service catalog for the service name, price, features, drugs,
+     * order type, and checkout eligibility.
+     */
+    try {
+      await ensureServiceCatalogLoaded();
+    } catch (catalogError) {
+      console.error(
+        "Service catalog initialization error:",
+        catalogError
+      );
 
-    /* -----------------------------------------------------
-       Validate product catalog
-    ----------------------------------------------------- */
+      showCheckoutError(
+        catalogError?.message ||
+        "The service catalog could not be loaded."
+      );
+
+      return;
+    }
 
     if (
-      typeof getTestProduct !==
+      typeof getTestService !==
       "function"
     ) {
-
       showCheckoutError(
         "The service catalog could not be loaded."
       );
@@ -545,35 +1103,34 @@ async function initCheckout() {
       return;
     }
 
+    selectedService =
+      getTestService(serviceId);
 
-    selectedProduct =
-      getTestProduct(
-        serviceId
-      );
-
-
-    if (!selectedProduct) {
+    if (!selectedService) {
 
       showCheckoutError(
-        "That service is not available."
+        "Unable to verify the selected service. Please return to the services page and select the service again."
       );
 
       return;
     }
 
+    /*
+     * Only checkout services are allowed through this page.
+     */
+    if (
+      selectedService.orderType !==
+      "checkout"
+    ) {
 
-    /* -----------------------------------------------------
-       Render selected product
-    ----------------------------------------------------- */
+      showCheckoutError(
+        "This service requires a different order process. Please return to the services page."
+      );
 
-    renderProduct(
-      selectedProduct
-    );
+      return;
+    }
 
-
-    /* -----------------------------------------------------
-       Initialize Stripe
-    ----------------------------------------------------- */
+    renderService(selectedService);
 
     if (
       typeof Stripe !==
@@ -587,84 +1144,44 @@ async function initCheckout() {
       return;
     }
 
-
     stripe =
       Stripe(
         STRIPE_PUBLISHABLE_KEY
       );
 
-
-    /* -----------------------------------------------------
-       Show checkout
-    ----------------------------------------------------- */
-
     const loading =
-      document.getElementById(
-        "loading"
-      );
+      document.getElementById("loading");
 
     const checkoutGrid =
-      document.getElementById(
-        "checkoutGrid"
-      );
-
+      document.getElementById("checkoutGrid");
 
     if (loading) {
-
-      loading.style.display =
-        "none";
+      loading.style.display = "none";
     }
-
 
     if (checkoutGrid) {
-
-      checkoutGrid.style.display =
-        "grid";
+      checkoutGrid.style.display = "grid";
     }
 
-
-    /* -----------------------------------------------------
-       Configure navigation
-    ----------------------------------------------------- */
-
     const backLink =
-      document.getElementById(
-        "backLink"
-      );
-
+      document.getElementById("backLink");
 
     if (backLink) {
 
       backLink.href =
         "service.html?service=" +
-        encodeURIComponent(
-          serviceId
-        );
+        encodeURIComponent(serviceId);
     }
-
 
     const errorBackLink =
-      document.getElementById(
-        "errorBackLink"
-      );
-
+      document.getElementById("errorBackLink");
 
     if (errorBackLink) {
-
-      errorBackLink.href =
-        "services.html";
+      errorBackLink.href = "services.html";
     }
 
-
-    /* -----------------------------------------------------
-       Bind checkout form
-    ----------------------------------------------------- */
-
     const form =
-      document.getElementById(
-        "checkoutForm"
-      );
-
+      document.getElementById("checkoutForm");
 
     if (!form) {
 
@@ -673,35 +1190,24 @@ async function initCheckout() {
       );
     }
 
-
     form.addEventListener(
       "submit",
       handleSubmit
     );
 
     setupManualEntryFields();
+    setupBillingAddressValidationState();
     setupEmailModal();
 
-
-    /* -----------------------------------------------------
-       Initial button state
-    ----------------------------------------------------- */
-
     const button =
-      document.getElementById(
-        "payButton"
-      );
-
+      document.getElementById("payButton");
 
     if (button) {
 
-      button.disabled =
-        false;
-
+      button.disabled = false;
       button.textContent =
         "Continue to Secure Payment";
     }
-
 
   } catch (error) {
 
@@ -710,7 +1216,6 @@ async function initCheckout() {
       error
     );
 
-
     showCheckoutError(
       error?.message ||
       "Unable to initialize checkout."
@@ -718,181 +1223,110 @@ async function initCheckout() {
   }
 }
 
-
 /* =========================================================
-   PRODUCT DISPLAY
+   SERVICE DISPLAY
 ========================================================= */
 
-function renderProduct(
-  product
-) {
+function renderService(service) {
 
   const category =
-    document.getElementById(
-      "category"
-    );
+    document.getElementById("category");
 
-  const productElement =
-    document.getElementById(
-      "product"
-    );
+  const serviceElement =
+    document.getElementById("service");
 
   const price =
-    document.getElementById(
-      "price"
-    );
+    document.getElementById("price");
 
   const features =
-    document.getElementById(
-      "features"
-    );
+    document.getElementById("features");
 
   const drugs =
-    document.getElementById(
-      "drugs"
-    );
-
+    document.getElementById("drugs");
 
   if (category) {
-
     category.textContent =
-      product.category || "";
+      service.category || "";
   }
 
-
-  if (productElement) {
-
-    productElement.textContent =
-      product.name || "";
+  if (serviceElement) {
+    serviceElement.textContent =
+      service.name || "";
   }
-
 
   if (price) {
 
     price.textContent =
       formatTestPrice(
-        product.price,
-        product.currency ||
-        "USD"
+        service.price,
+        service.currency || "USD"
       );
   }
 
-
-  /* -------------------------------------------------------
-     Features
-  ------------------------------------------------------- */
-
   if (features) {
 
-    features.innerHTML =
-      "";
-
+    features.innerHTML = "";
 
     const featureList =
-      Array.isArray(
-        product.features
-      )
-        ? product.features
+      Array.isArray(service.features)
+        ? service.features
         : [];
 
+    featureList.forEach(item => {
 
-    featureList.forEach(
-      (item) => {
+      const li =
+        document.createElement("li");
 
-        const li =
-          document.createElement(
-            "li"
-          );
+      li.textContent = item;
 
-
-        li.textContent =
-          item;
-
-
-        features.appendChild(
-          li
-        );
-      }
-    );
-
+      features.appendChild(li);
+    });
 
     if (!featureList.length) {
 
       const li =
-        document.createElement(
-          "li"
-        );
-
+        document.createElement("li");
 
       li.textContent =
         "See service details.";
 
-
-      features.appendChild(
-        li
-      );
+      features.appendChild(li);
     }
   }
 
-
-  /* -------------------------------------------------------
-     Drugs
-  ------------------------------------------------------- */
-
   if (drugs) {
 
-    drugs.innerHTML =
-      "";
-
+    drugs.innerHTML = "";
 
     const drugList =
-      Array.isArray(
-        product.drugs
-      )
-        ? product.drugs
+      Array.isArray(service.drugs)
+        ? service.drugs
         : [];
-
 
     if (!drugList.length) {
 
       const li =
-        document.createElement(
-          "li"
-        );
-
+        document.createElement("li");
 
       li.textContent =
         "See service details.";
 
-
-      drugs.appendChild(
-        li
-      );
+      drugs.appendChild(li);
 
     } else {
 
-      drugList.forEach(
-        (item) => {
+      drugList.forEach(item => {
 
-          const li =
-            document.createElement(
-              "li"
-            );
+        const li =
+          document.createElement("li");
 
+        li.textContent = item;
 
-          li.textContent =
-            item;
-
-
-          drugs.appendChild(
-            li
-          );
-        }
-      );
+        drugs.appendChild(li);
+      });
     }
   }
 }
-
 
 /* =========================================================
    FORM SUBMISSION
@@ -906,54 +1340,140 @@ async function handleSubmit(event) {
 
   clearMessages();
 
-  if (!selectedProduct || !stripe) {
+  if (!selectedService || !stripe) {
+
     showPaymentError(
       "Checkout is not ready. Please refresh the page and try again."
     );
+
+    return;
+  }
+
+
+  /*
+   * Require actual manual entry before validation.
+   */
+  if (!requireManualEntry()) {
     return;
   }
 
   /*
    * FIRST SUBMISSION:
    * Validate customer information only.
-   * Stripe is intentionally NOT mounted yet.
    */
   if (!paymentMounted) {
 
-    const manualValidation = validateManualEntry();
-
-    if (!manualValidation.valid) {
-      return;
-    }
-
-    const validation = validateCustomerForm(form);
+    const validation =
+      validateCustomerForm(form);
 
     if (!validation.valid) {
-      showPaymentError(validation.message);
-      focusField(validation.field);
+
+      showPaymentError(
+        validation.message
+      );
+
+      focusField(
+        validation.field
+      );
+
       return;
     }
 
-    openEmailConfirmation(getInputValue("email"));
+    /*
+     * USPS BILLING ADDRESS VALIDATION
+     *
+     * Validate and standardize the billing address before we create
+     * the PaymentIntent. USPS credentials remain server-side inside
+     * the Supabase Edge Function.
+     */
+    try {
+      const uspsResult =
+        await validateBillingAddressWithUSPS(form);
+
+      if (!uspsResult.valid) {
+        showPaymentError(
+          uspsResult.message ||
+          "USPS could not validate this billing address. Please check the address and try again."
+        );
+        return;
+      }
+
+      /*
+       * USPS has validated the address, but we do NOT overwrite the
+       * customer's billing fields automatically.
+       *
+       * First show the USPS success state, then ask the customer whether
+       * they want to use USPS's standardized version.
+       */
+      const useUSPSAddress =
+        await confirmUSPSAddress(uspsResult.address);
+
+      if (!useUSPSAddress) {
+        const addressField =
+          document.getElementById("address");
+
+        if (addressField) {
+          addressField.focus();
+        }
+
+        return;
+      }
+
+      /*
+       * Only after the customer explicitly approves the USPS version do
+       * we place the standardized address into the checkout form.
+       */
+      applyUSPSAddressToForm(uspsResult.address);
+
+      /*
+       * Address is now verified and accepted. Move automatically to the
+       * existing email-confirmation step.
+       */
+      openEmailConfirmation(
+        getInputValue("email")
+      );
+
+    } catch (error) {
+      console.error(
+        "USPS billing address validation error:",
+        error
+      );
+
+      showPaymentError(
+        error?.message ||
+        "We could not verify your billing address right now. Please try again."
+      );
+      return;
+    }
+
     return;
   }
 
   /*
    * SECOND SUBMISSION:
-   * Stripe Payment Element is mounted, so this submits payment.
+   * Stripe Payment Element is mounted.
    */
-  const button = document.getElementById("payButton");
+  const button =
+    document.getElementById("payButton");
 
   try {
 
-    setButton(button, true, "Processing Payment...");
+    setButton(
+      button,
+      true,
+      "Processing Payment..."
+    );
+
     showPaymentProcessing();
 
     await confirmPayment(form);
 
   } catch (error) {
 
-    console.error("Checkout payment error:", error);
+    console.error(
+      "Checkout payment error:",
+      error
+    );
 
     hidePaymentProcessing();
 
@@ -967,13 +1487,12 @@ async function handleSubmit(event) {
       false,
       "Pay " +
       formatTestPrice(
-        selectedProduct.price,
-        selectedProduct.currency || "USD"
+        selectedService.price,
+        selectedService.currency || "USD"
       )
     );
   }
 }
-
 
 /* =========================================================
    CUSTOMER VALIDATION
@@ -984,6 +1503,11 @@ const VALIDATION = {
   name:
     /^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' -]{1,49}$/,
 
+  /*
+   * IMPORTANT:
+   * This is a JavaScript regex literal.
+   * The dot is escaped once, not twice.
+   */
   email:
     /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/,
 
@@ -997,109 +1521,144 @@ const VALIDATION = {
     /^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' -]{1,49}$/,
 
   state:
-    /^(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY)$/i,
+    /^(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI)$/i,
 
   zip:
     /^\d{5}(?:-\d{4})?$/
 };
 
-
 function validateCustomerForm(form) {
 
   const fields = {
-    firstName: getInputValue("firstName"),
-    lastName: getInputValue("lastName"),
-    email: getInputValue("email"),
-    phone: getInputValue("phone"),
-    address: getInputValue("address"),
-    city: getInputValue("city"),
-    state: getInputValue("state").toUpperCase(),
-    zip: getInputValue("zip")
+
+    firstName:
+      getInputValue("firstName"),
+
+    lastName:
+      getInputValue("lastName"),
+
+    email:
+      getInputValue("email"),
+
+    phone:
+      getInputValue("phone"),
+
+    address:
+      getInputValue("address"),
+
+    city:
+      getInputValue("city"),
+
+    state:
+      getInputValue("state").toUpperCase(),
+
+    zip:
+      getInputValue("zip")
   };
 
   if (!VALIDATION.name.test(fields.firstName)) {
+
     return {
       valid: false,
       field: "firstName",
-      message: "Please enter a valid first name."
+      message:
+        "Please enter a valid first name."
     };
   }
 
   if (!VALIDATION.name.test(fields.lastName)) {
+
     return {
       valid: false,
       field: "lastName",
-      message: "Please enter a valid last name."
+      message:
+        "Please enter a valid last name."
     };
   }
 
   if (!VALIDATION.email.test(fields.email)) {
+
     return {
       valid: false,
       field: "email",
-      message: "Please enter a valid email address."
+      message:
+        "Please enter a valid email address."
     };
   }
 
   if (!VALIDATION.phone.test(fields.phone)) {
+
     return {
       valid: false,
       field: "phone",
-      message: "Please enter a valid U.S. phone number."
+      message:
+        "Please enter a valid U.S. phone number."
     };
   }
 
   if (!VALIDATION.address.test(fields.address)) {
+
     return {
       valid: false,
       field: "address",
-      message: "Please enter a valid street address."
+      message:
+        "Please enter a valid street address."
     };
   }
 
   if (!VALIDATION.city.test(fields.city)) {
+
     return {
       valid: false,
       field: "city",
-      message: "Please enter a valid city."
+      message:
+        "Please enter a valid city."
     };
   }
 
   if (!VALIDATION.state.test(fields.state)) {
+
     return {
       valid: false,
       field: "state",
-      message: "Please enter a valid two-letter state abbreviation."
+      message:
+        "Please enter a valid two-letter state abbreviation."
     };
   }
 
   if (!VALIDATION.zip.test(fields.zip)) {
+
     return {
       valid: false,
       field: "zip",
-      message: "Please enter a valid ZIP code."
+      message:
+        "Please enter a valid ZIP code."
     };
   }
 
-  return { valid: true };
+  return {
+    valid: true
+  };
 }
-
 
 function getInputValue(id) {
 
-  const input = document.getElementById(id);
+  const input =
+    document.getElementById(id);
 
   return input
     ? input.value.trim()
     : "";
 }
 
-
 function focusField(id) {
 
-  const field = document.getElementById(id);
+  const field =
+    document.getElementById(id);
 
-  if (!field) return;
+  if (!field) {
+    return;
+  }
 
   field.focus();
 
@@ -1109,33 +1668,226 @@ function focusField(id) {
   });
 }
 
-
 /* =========================================================
    EMAIL CONFIRMATION
 ========================================================= */
 
+function createEmailConfirmationModal() {
+
+  let modal =
+    document.getElementById("emailConfirmModal");
+
+  if (modal) {
+    return modal;
+  }
+
+  modal = document.createElement("div");
+
+  modal.id = "emailConfirmModal";
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
+  modal.setAttribute("aria-hidden", "true");
+
+  modal.innerHTML = `
+    <div class="email-confirm-card">
+      <div class="email-confirm-icon" aria-hidden="true">✓</div>
+
+      <div class="email-confirm-title">
+        Confirm Your Email
+      </div>
+
+      <div class="email-confirm-message">
+        Please confirm that this is the correct email address
+        for your order and payment confirmation.
+      </div>
+
+      <div class="email-confirm-address">
+        <span id="confirmedEmailDisplay"></span>
+      </div>
+
+      <div class="email-confirm-actions">
+        <button
+          type="button"
+          class="email-confirm-change"
+          id="changeEmailBtn"
+        >
+          Change Email
+        </button>
+
+        <button
+          type="button"
+          class="email-confirm-continue"
+          id="confirmEmailBtn"
+        >
+          Continue to Payment
+        </button>
+      </div>
+    </div>
+  `;
+
+  const style = document.createElement("style");
+
+  style.textContent = `
+    #emailConfirmModal {
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 29, 50, 0.58);
+      backdrop-filter: blur(4px);
+    }
+
+    #emailConfirmModal.active {
+      display: flex;
+    }
+
+    .email-confirm-card {
+      width: min(470px, 100%);
+      padding: 34px 30px 30px;
+      background: #ffffff;
+      border: 1px solid #d9e3f0;
+      border-radius: 18px;
+      box-shadow: 0 24px 70px rgba(23, 51, 95, 0.24);
+      text-align: center;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    .email-confirm-icon {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 18px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #edf5ff;
+      color: #325aa3;
+      font-size: 25px;
+      font-weight: 900;
+    }
+
+    .email-confirm-title {
+      color: #24467f;
+      font-size: 22px;
+      line-height: 1.25;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .email-confirm-message {
+      color: #667892;
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+
+    .email-confirm-address {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 13px 15px;
+      border: 1px solid #d9e3f0;
+      border-radius: 9px;
+      background: #f7faff;
+      color: #24467f;
+      font-size: 14px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .email-confirm-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 22px;
+    }
+
+    .email-confirm-actions button {
+      min-height: 44px;
+      padding: 11px 18px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease;
+    }
+
+    .email-confirm-change {
+      border: 1px solid #d1dce9;
+      background: #ffffff;
+      color: #325aa3;
+    }
+
+    .email-confirm-change:hover {
+      background: #f5f8fc;
+      border-color: #b8c8dc;
+    }
+
+    .email-confirm-continue {
+      border: 0;
+      background: #325aa3;
+      color: #ffffff;
+    }
+
+    .email-confirm-continue:hover {
+      background: #24467f;
+    }
+
+    .email-confirm-continue:disabled {
+      opacity: .65;
+      cursor: wait;
+    }
+
+    @media (max-width: 520px) {
+      .email-confirm-card {
+        padding: 30px 20px 22px;
+      }
+
+      .email-confirm-actions {
+        flex-direction: column-reverse;
+      }
+
+      .email-confirm-actions button {
+        width: 100%;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+  document.body.appendChild(modal);
+
+  return modal;
+}
+
 function setupEmailModal() {
 
+  const modal =
+    createEmailConfirmationModal();
+
   const changeButton =
-    document.getElementById("changeEmailBtn");
+    modal.querySelector("#changeEmailBtn");
 
   const confirmButton =
-    document.getElementById("confirmEmailBtn");
+    modal.querySelector("#confirmEmailBtn");
 
   if (changeButton) {
 
-    changeButton.addEventListener("click", () => {
+    changeButton.addEventListener(
+      "click",
+      () => {
 
-      closeEmailConfirmation();
+        closeEmailConfirmation();
 
-      const email =
-        document.getElementById("email");
+        const email =
+          document.getElementById("email");
 
-      if (email) {
-        email.focus();
-        email.select();
+        if (email) {
+          email.focus();
+          email.select();
+        }
       }
-    });
+    );
   }
 
   if (confirmButton) {
@@ -1147,18 +1899,19 @@ function setupEmailModal() {
   }
 }
 
-
 function openEmailConfirmation(email) {
 
   const modal =
-    document.getElementById("emailConfirmModal");
+    createEmailConfirmationModal();
 
   const display =
-    document.getElementById("confirmedEmailDisplay");
+    modal.querySelector(
+      "#confirmedEmailDisplay"
+    );
 
-  if (!modal || !display) {
+  if (!display) {
     throw new Error(
-      "Email confirmation dialog could not be found."
+      "Email confirmation dialog could not be initialized."
     );
   }
 
@@ -1174,13 +1927,26 @@ function openEmailConfirmation(email) {
   document.body.style.overflow = "hidden";
 }
 
-
 function closeEmailConfirmation() {
 
   const modal =
     document.getElementById("emailConfirmModal");
 
-  if (!modal) return;
+  if (!modal) {
+    return;
+  }
+
+  /*
+   * Remove focus from a modal control BEFORE applying
+   * aria-hidden so the browser does not report that a focused
+   * descendant was hidden from assistive technology.
+   */
+  if (
+    document.activeElement &&
+    modal.contains(document.activeElement)
+  ) {
+    document.activeElement.blur();
+  }
 
   modal.classList.remove("active");
 
@@ -1192,17 +1958,43 @@ function closeEmailConfirmation() {
   document.body.style.overflow = "";
 }
 
-
 async function handleEmailConfirmation() {
+
+  /*
+   * Ignore a second click while the first confirmation is still
+   * preparing the secure payment form.
+   */
+  if (emailConfirmationInProgress) {
+    return;
+  }
+
+  /*
+   * If Stripe is already mounted, do not recreate it.
+   */
+  if (paymentMounted && paymentElement && elements) {
+    closeEmailConfirmation();
+    return;
+  }
 
   const form =
     document.getElementById("checkoutForm");
+
+  const confirmButton =
+    document.getElementById("confirmEmailBtn");
+
+  if (!form) {
+    return;
+  }
+
+  if (!requireManualEntry()) {
+    closeEmailConfirmation();
+    return;
+  }
 
   const validation =
     validateCustomerForm(form);
 
   if (!validation.valid) {
-
     closeEmailConfirmation();
 
     showPaymentError(
@@ -1214,6 +2006,16 @@ async function handleEmailConfirmation() {
     );
 
     return;
+  }
+
+  emailConfirmationInProgress = true;
+
+  if (confirmButton) {
+    confirmButton.disabled = true;
+    confirmButton.setAttribute(
+      "aria-busy",
+      "true"
+    );
   }
 
   emailConfirmed = true;
@@ -1231,11 +2033,6 @@ async function handleEmailConfirmation() {
 
   try {
 
-    /*
-     * Only after validation + explicit
-     * email confirmation do we create
-     * the server-side order and PaymentIntent.
-     */
     const result =
       await createPaymentIntent(form);
 
@@ -1271,9 +2068,23 @@ async function handleEmailConfirmation() {
       );
     }
 
+    /*
+     * The PaymentIntent exists. Reveal the payment section and
+     * mount Stripe exactly once.
+     */
     await mountStripePayment(
       result.clientSecret
     );
+
+    if (
+      !paymentMounted ||
+      !paymentElement ||
+      !elements
+    ) {
+      throw new Error(
+        "Stripe did not finish loading the secure payment form."
+      );
+    }
 
     paymentIntentCreated = true;
 
@@ -1284,12 +2095,13 @@ async function handleEmailConfirmation() {
       false,
       "Pay " +
       formatTestPrice(
-        selectedProduct.price,
-        selectedProduct.currency || "USD"
+        selectedService.price,
+        selectedService.currency || "USD"
       )
     );
 
     showOrderNotice();
+    clearPaymentError();
 
   } catch (error) {
 
@@ -1298,37 +2110,50 @@ async function handleEmailConfirmation() {
       error
     );
 
-    hidePaymentProcessing();
-
-    emailConfirmed = false;
-
+    /*
+     * Do NOT hide the Payment section here. Hiding its parent after
+     * Stripe begins mounting causes the exact flicker/disappear
+     * behavior we are trying to eliminate.
+     */
     showPaymentError(
       error?.message ||
       "Unable to prepare secure payment."
     );
+
+    emailConfirmed = false;
 
     setButton(
       button,
       false,
       "Continue to Secure Payment"
     );
+
+  } finally {
+
+    emailConfirmationInProgress = false;
+
+    if (confirmButton) {
+      confirmButton.disabled = false;
+      confirmButton.removeAttribute(
+        "aria-busy"
+      );
+    }
   }
 }
-
 
 function showOrderNotice() {
 
   const orderNotice =
     document.getElementById("orderNotice");
 
-  if (!orderNotice) return;
+  if (!orderNotice) {
+    return;
+  }
 
   const parts = [];
 
   if (orderNumber) {
-    parts.push(
-      "Order " + orderNumber
-    );
+    parts.push("Order " + orderNumber);
   }
 
   if (trackingNumber) {
@@ -1348,6 +2173,826 @@ function showOrderNotice() {
   }
 }
 
+/* =========================================================
+   USPS BILLING ADDRESS VALIDATION
+========================================================= */
+
+async function validateBillingAddressWithUSPS(form) {
+
+  const baseUrl =
+    window.SCREENINGS4U_SUPABASE_URL ||
+    "";
+
+  if (
+    !baseUrl ||
+    baseUrl.includes("REPLACE_WITH")
+  ) {
+    throw new Error(
+      "Checkout is not configured. Set SCREENINGS4U_SUPABASE_URL in assets/js/site-config.js."
+    );
+  }
+
+  const data = new FormData(form);
+
+  const payload = {
+    streetAddress:
+      getFormValue(data, "address"),
+
+    secondaryAddress:
+      getFormValue(data, "address2"),
+
+    city:
+      getFormValue(data, "city"),
+
+    state:
+      getFormValue(data, "state").toUpperCase(),
+
+    ZIPCode:
+      getFormValue(data, "zip")
+        .replace(/\D/g, "")
+        .slice(0, 5)
+  };
+
+  showAddressValidation();
+
+  try {
+
+    const supabaseAnonKey =
+      window.SCREENINGS4U_SUPABASE_ANON_KEY ||
+      "";
+
+    if (!supabaseAnonKey) {
+      throw new Error(
+        "Checkout is not configured. Set SCREENINGS4U_SUPABASE_ANON_KEY in assets/js/site-config.js."
+      );
+    }
+
+    const response = await fetch(
+      "https://rgsrubdtljyxmnihwlah.supabase.co/functions/v1/validate-usps-address",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": supabaseAnonKey,
+          "Authorization": `Bearer ${supabaseAnonKey}`
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    let result = null;
+
+    try {
+      result = await response.json();
+    } catch {
+      result = null;
+    }
+
+    if (!response.ok) {
+      throw new Error(
+        result?.message ||
+        "USPS address verification is temporarily unavailable. Please try again."
+      );
+    }
+
+    if (!result?.valid) {
+      /*
+       * USPS answered the request. Keep the validation dialog visible long
+       * enough to show the customer that the address was rejected, then
+       * let the customer return to the form.
+       */
+      await showAddressValidationError(
+        result?.message ||
+        "USPS could not validate this billing address. Please check your street address, apartment or suite number, city, state, and ZIP code."
+      );
+
+      return {
+        valid: false,
+        message:
+          result?.message ||
+          "USPS could not validate this billing address."
+      };
+    }
+
+    /*
+     * USPS has successfully validated the address. Keep the same overlay
+     * on screen, stop the spinner, show a success check, and briefly show
+     * the successful validation state before the address-choice modal.
+     */
+    await showAddressValidationSuccess();
+
+    return {
+      valid: true,
+      address: result.address || null
+    };
+
+  } finally {
+    hideAddressValidation();
+  }
+}
+
+function applyUSPSAddressToForm(address) {
+
+  if (!address) {
+    return;
+  }
+
+  const street = document.getElementById("address");
+  const address2 = document.getElementById("address2");
+  const city = document.getElementById("city");
+  const state = document.getElementById("state");
+  const zip = document.getElementById("zip");
+
+  if (street && address.streetAddress) {
+    street.value = address.streetAddress;
+    markFieldAsManuallyTyped(street);
+  }
+
+  if (address2 && address.secondaryAddress !== undefined) {
+    address2.value =
+      address.secondaryAddress || "";
+  }
+
+  if (city && address.city) {
+    city.value = address.city;
+    markFieldAsManuallyTyped(city);
+  }
+
+  if (state && address.state) {
+    state.value =
+      String(address.state).toUpperCase();
+
+    /*
+     * USPS is standardizing the address, not the customer
+     * manually selecting a state here. Keep the field verified
+     * for the current checkout flow because this standardized
+     * value came from our trusted server-side validation.
+     */
+    markFieldAsManuallyTyped(state);
+  }
+
+  if (zip && address.ZIPCode) {
+
+    const five =
+      String(address.ZIPCode)
+        .replace(/\D/g, "")
+        .slice(0, 5);
+
+    const plus4 =
+      String(address.ZIPPlus4 || "")
+        .replace(/\D/g, "")
+        .slice(0, 4);
+
+    zip.value =
+      five +
+      (plus4 ? "-" + plus4 : "");
+
+    markFieldAsManuallyTyped(zip);
+  }
+}
+
+/* =========================================================
+   USPS ADDRESS CONFIRMATION
+   Customer must explicitly approve the standardized address.
+========================================================= */
+
+function createUSPSAddressConfirmationModal() {
+
+  if (addressConfirmationOverlay) {
+    return addressConfirmationOverlay;
+  }
+
+  const overlay = document.createElement("div");
+
+  overlay.id = "uspsAddressConfirmation";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-hidden", "true");
+
+  overlay.innerHTML = `
+    <div class="usps-address-confirmation-card">
+      <div class="usps-address-confirmation-icon" aria-hidden="true">
+        ✓
+      </div>
+
+      <div class="usps-address-confirmation-eyebrow">
+        USPS ADDRESS VALIDATED
+      </div>
+
+      <h2 class="usps-address-confirmation-title">
+        We Found Your Address.
+      </h2>
+
+      <p class="usps-address-confirmation-message">
+        USPS has validated your address and found the standardized version below.
+        Would you like to use this address for your order?
+      </p>
+
+      <div class="usps-standardized-address">
+        <div class="usps-address-line" id="uspsConfirmStreet"></div>
+        <div class="usps-address-line" id="uspsConfirmSecondary"></div>
+        <div class="usps-address-line" id="uspsConfirmCityStateZip"></div>
+      </div>
+
+      <div class="usps-address-confirmation-actions">
+        <button
+          type="button"
+          class="usps-address-secondary-button"
+          id="uspsEnterAnotherAddress"
+        >
+          Enter Another Address
+        </button>
+
+        <button
+          type="button"
+          class="usps-address-primary-button"
+          id="uspsUseAddress"
+        >
+          Use This Address
+        </button>
+      </div>
+    </div>
+  `;
+
+  const style = document.createElement("style");
+
+  style.textContent = `
+    #uspsAddressConfirmation {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 29, 50, 0.58);
+      backdrop-filter: blur(4px);
+    }
+
+    #uspsAddressConfirmation.active {
+      display: flex;
+    }
+
+    .usps-address-confirmation-card {
+      width: min(500px, 100%);
+      padding: 34px 30px 30px;
+      background: #fff;
+      border: 1px solid #d9e3f0;
+      border-radius: 18px;
+      box-shadow: 0 24px 70px rgba(23, 51, 95, 0.24);
+      text-align: center;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    .usps-address-confirmation-icon {
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 16px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #eaf3ff;
+      color: #325aa3;
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .usps-address-confirmation-eyebrow {
+      color: #ff6b00;
+      font-size: 11px;
+      letter-spacing: .12em;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .usps-address-confirmation-title {
+      margin: 0 0 10px;
+      color: #24467f;
+      font-size: 24px;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .usps-address-confirmation-message {
+      margin: 0;
+      color: #667892;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .usps-standardized-address {
+      margin: 20px 0;
+      padding: 18px;
+      border: 1px solid #d9e3f0;
+      border-radius: 12px;
+      background: #f7faff;
+      text-align: left;
+      color: #24467f;
+      font-size: 14px;
+      line-height: 1.7;
+      font-weight: 700;
+    }
+
+    .usps-address-line:empty {
+      display: none;
+    }
+
+    .usps-address-confirmation-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .usps-address-primary-button,
+    .usps-address-secondary-button {
+      min-height: 44px;
+      padding: 12px 18px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .usps-address-primary-button {
+      border: 0;
+      background: #ff6b00;
+      color: #fff;
+    }
+
+    .usps-address-primary-button:hover {
+      background: #e85f00;
+    }
+
+    .usps-address-secondary-button {
+      border: 1px solid #325aa3;
+      background: #fff;
+      color: #325aa3;
+    }
+
+    .usps-address-secondary-button:hover {
+      background: #f2f6fc;
+    }
+  `;
+
+  document.head.appendChild(style);
+  document.body.appendChild(overlay);
+
+  addressConfirmationOverlay = overlay;
+
+  overlay.querySelector("#uspsUseAddress")
+    ?.addEventListener("click", () => {
+      resolveUSPSAddressConfirmation(true);
+    });
+
+  overlay.querySelector("#uspsEnterAnotherAddress")
+    ?.addEventListener("click", () => {
+      resetAddressFields();
+      resolveUSPSAddressConfirmation(false);
+    });
+
+  return overlay;
+}
+
+let uspsAddressConfirmationResolver = null;
+
+function confirmUSPSAddress(address) {
+
+  const modal =
+    createUSPSAddressConfirmationModal();
+
+  const street =
+    modal.querySelector("#uspsConfirmStreet");
+
+  const secondary =
+    modal.querySelector("#uspsConfirmSecondary");
+
+  const cityStateZip =
+    modal.querySelector("#uspsConfirmCityStateZip");
+
+  const stateName =
+    getStateName(address?.state);
+
+  const zip =
+    address?.ZIPPlus4
+      ? `${address?.ZIPCode || ""}-${address.ZIPPlus4}`
+      : address?.ZIPCode || "";
+
+  if (street) {
+    street.textContent =
+      address?.streetAddress || "";
+  }
+
+  if (secondary) {
+    secondary.textContent =
+      address?.secondaryAddress || "";
+  }
+
+  if (cityStateZip) {
+    cityStateZip.textContent =
+      [
+        address?.city || "",
+        stateName || address?.state || "",
+        zip
+      ].filter(Boolean).join(", ");
+  }
+
+  modal.classList.add("active");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+
+  return new Promise(resolve => {
+    uspsAddressConfirmationResolver = resolve;
+  });
+}
+
+function resolveUSPSAddressConfirmation(useAddress) {
+
+  const modal =
+    addressConfirmationOverlay;
+
+  if (!modal) {
+    return;
+  }
+
+  if (
+    document.activeElement &&
+    modal.contains(document.activeElement)
+  ) {
+    document.activeElement.blur();
+  }
+
+  modal.classList.remove("active");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+
+  const resolver =
+    uspsAddressConfirmationResolver;
+
+  uspsAddressConfirmationResolver = null;
+
+  if (resolver) {
+    resolver(Boolean(useAddress));
+  }
+}
+
+function getStateName(abbreviation) {
+
+  const states = {
+    AL: "Alabama", AK: "Alaska", AZ: "Arizona", AR: "Arkansas",
+    CA: "California", CO: "Colorado", CT: "Connecticut", DE: "Delaware",
+    FL: "Florida", GA: "Georgia", HI: "Hawaii", ID: "Idaho",
+    IL: "Illinois", IN: "Indiana", IA: "Iowa", KS: "Kansas",
+    KY: "Kentucky", LA: "Louisiana", ME: "Maine", MD: "Maryland",
+    MA: "Massachusetts", MI: "Michigan", MN: "Minnesota",
+    MS: "Mississippi", MO: "Missouri", MT: "Montana", NE: "Nebraska",
+    NV: "Nevada", NH: "New Hampshire", NJ: "New Jersey",
+    NM: "New Mexico", NY: "New York", NC: "North Carolina",
+    ND: "North Dakota", OH: "Ohio", OK: "Oklahoma", OR: "Oregon",
+    PA: "Pennsylvania", RI: "Rhode Island", SC: "South Carolina",
+    SD: "South Dakota", TN: "Tennessee", TX: "Texas", UT: "Utah",
+    VT: "Vermont", VA: "Virginia", WA: "Washington", WV: "West Virginia",
+    WI: "Wisconsin", WY: "Wyoming", DC: "District of Columbia"
+  };
+
+  return states[String(abbreviation || "").toUpperCase()] || "";
+}
+
+/* =========================================================
+   ADDRESS VALIDATION OVERLAY
+   Matches the existing payment-processing spinner style.
+========================================================= */
+
+function createAddressValidationOverlay() {
+
+  if (addressValidationOverlay) {
+    return addressValidationOverlay;
+  }
+
+  const overlay =
+    document.createElement("div");
+
+  overlay.id =
+    "addressValidationOverlay";
+
+  overlay.setAttribute(
+    "role",
+    "dialog"
+  );
+
+  overlay.setAttribute(
+    "aria-modal",
+    "true"
+  );
+
+  overlay.setAttribute(
+    "aria-live",
+    "polite"
+  );
+
+  overlay.innerHTML = `
+    <div class="address-validation-card">
+
+      <div
+        class="address-validation-spinner"
+        id="addressValidationIndicator"
+        aria-hidden="true"
+      ></div>
+
+      <div class="address-validation-title" id="addressValidationTitle">
+        Verifying Your Address
+      </div>
+
+      <div class="address-validation-message" id="addressValidationMessage">
+        We are checking your billing address with USPS.
+        Please wait while we verify and standardize the address.
+      </div>
+
+      <div class="address-validation-status" id="addressValidationStatus">
+        Connecting securely to USPS...
+      </div>
+
+      <button
+        type="button"
+        class="address-validation-action"
+        id="addressValidationAction"
+        style="display:none;"
+      >
+        Try Again
+      </button>
+
+    </div>
+  `;
+
+  const style =
+    document.createElement("style");
+
+  style.textContent = `
+    #addressValidationOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99998;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 29, 50, 0.58);
+      backdrop-filter: blur(4px);
+    }
+
+    #addressValidationOverlay.active {
+      display: flex;
+    }
+
+    .address-validation-card {
+      width: min(440px, 100%);
+      padding: 34px 30px;
+      background: #ffffff;
+      border: 1px solid #d9e3f0;
+      border-radius: 18px;
+      box-shadow: 0 24px 70px rgba(23, 51, 95, 0.24);
+      text-align: center;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    .address-validation-spinner {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 22px;
+      border: 4px solid #d9e3f0;
+      border-top-color: #325aa3;
+      border-right-color: #ff6b00;
+      border-radius: 50%;
+      animation: screenings4uAddressSpin .85s linear infinite;
+    }
+
+    .address-validation-title {
+      color: #24467f;
+      font-size: 22px;
+      line-height: 1.2;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .address-validation-message {
+      color: #667892;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .address-validation-status {
+      margin-top: 16px;
+      color: #325aa3;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .address-validation-action {
+      margin-top: 20px;
+      min-width: 150px;
+      min-height: 42px;
+      padding: 11px 18px;
+      border: 0;
+      border-radius: 9px;
+      background: #ff6b00;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .address-validation-action:hover {
+      background: #e85f00;
+    }
+
+    .address-validation-spinner.success {
+      border: 0;
+      background: #eaf3ff;
+      position: relative;
+      animation: none;
+    }
+
+    .address-validation-spinner.success::after {
+      content: "✓";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #325aa3;
+      font-size: 29px;
+      font-weight: 900;
+    }
+
+    .address-validation-spinner.error {
+      border: 0;
+      background: #fff3e8;
+      position: relative;
+      animation: none;
+    }
+
+    .address-validation-spinner.error::after {
+      content: "!";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #ff6b00;
+      font-size: 27px;
+      font-weight: 900;
+    }
+
+    @keyframes screenings4uAddressSpin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    body.address-validation-active {
+      overflow: hidden;
+    }
+  `;
+
+  document.head.appendChild(style);
+  document.body.appendChild(overlay);
+
+  addressValidationOverlay = overlay;
+
+  return overlay;
+}
+
+function showAddressValidation() {
+
+  createAddressValidationOverlay()
+    .classList.add("active");
+
+  document.body.classList.add(
+    "address-validation-active"
+  );
+}
+
+function setAddressValidationContent({
+  state = "loading",
+  title,
+  message,
+  status,
+  actionLabel = "",
+  onAction = null
+} = {}) {
+
+  const overlay =
+    createAddressValidationOverlay();
+
+  const indicator =
+    overlay.querySelector("#addressValidationIndicator");
+
+  const titleEl =
+    overlay.querySelector("#addressValidationTitle");
+
+  const messageEl =
+    overlay.querySelector("#addressValidationMessage");
+
+  const statusEl =
+    overlay.querySelector("#addressValidationStatus");
+
+  const action =
+    overlay.querySelector("#addressValidationAction");
+
+  if (indicator) {
+    indicator.classList.remove("success", "error");
+
+    if (state === "success") {
+      indicator.classList.add("success");
+    } else if (state === "error") {
+      indicator.classList.add("error");
+    }
+  }
+
+  if (titleEl) {
+    titleEl.textContent =
+      title || "Verifying Your Address";
+  }
+
+  if (messageEl) {
+    messageEl.textContent =
+      message ||
+      "We are checking your billing address with USPS. Please wait while we verify and standardize the address.";
+  }
+
+  if (statusEl) {
+    statusEl.textContent =
+      status || "Connecting securely to USPS...";
+  }
+
+  if (action) {
+    action.style.display =
+      actionLabel ? "inline-flex" : "none";
+
+    action.textContent =
+      actionLabel || "";
+
+    action.onclick =
+      typeof onAction === "function"
+        ? onAction
+        : null;
+  }
+}
+
+function showAddressValidationSuccess() {
+
+  setAddressValidationContent({
+    state: "success",
+    title: "Address Validated",
+    message:
+      "USPS has successfully validated your billing address.",
+    status:
+      "Address verified successfully."
+  });
+
+  return new Promise(resolve => {
+    window.setTimeout(resolve, 900);
+  });
+}
+
+function showAddressValidationError(message) {
+
+  return new Promise(resolve => {
+
+    setAddressValidationContent({
+      state: "error",
+      title: "We Couldn't Verify This Address",
+      message:
+        message ||
+        "We could not verify the address you entered with USPS. Please check your street address, apartment or suite number, city, state, and ZIP code.",
+      status:
+        "Please review the address and try again.",
+      actionLabel:
+        "Enter Another Address",
+      onAction: () => {
+        resetAddressFields();
+        resolve();
+      }
+    });
+
+    /*
+     * The overlay is already visible. Keep it visible until the customer
+     * acknowledges the failed validation.
+     */
+  });
+}
+
+function hideAddressValidation() {
+
+  if (!addressValidationOverlay) {
+    return;
+  }
+
+  addressValidationOverlay
+    .classList.remove("active");
+
+  document.body.classList.remove(
+    "address-validation-active"
+  );
+}
 
 /* =========================================================
    CREATE PAYMENT INTENT
@@ -1404,6 +3049,12 @@ async function createPaymentIntent(form) {
         "address"
       ),
 
+    address2:
+      getFormValue(
+        data,
+        "address2"
+      ),
+
     city:
       getFormValue(
         data,
@@ -1433,19 +3084,10 @@ async function createPaymentIntent(form) {
     {
       functionUrl,
       serviceId:
-        selectedProduct.id
+        selectedService.id
     }
   );
 
-  /*
-   * PUBLIC MARKETING CHECKOUT:
-   *
-   * There is intentionally no Supabase
-   * Authorization header here.
-   *
-   * create-payment-intent must therefore
-   * be deployed with JWT verification OFF.
-   */
   const response =
     await fetch(
       functionUrl,
@@ -1459,8 +3101,12 @@ async function createPaymentIntent(form) {
 
         body:
           JSON.stringify({
+
+            /*
+             * SERVICE ID ONLY.
+             */
             serviceId:
-              selectedProduct.id,
+              selectedService.id,
 
             customer
           })
@@ -1508,7 +3154,6 @@ async function createPaymentIntent(form) {
   return result;
 }
 
-
 /* =========================================================
    MOUNT STRIPE PAYMENT ELEMENT
 ========================================================= */
@@ -1517,126 +3162,183 @@ async function mountStripePayment(
   clientSecret
 ) {
 
-  if (!stripe) {
+  /*
+   * Never destroy and recreate a working Payment Element.
+   * Re-mounting can make Stripe appear briefly and then disappear.
+   */
+  if (
+    paymentMounted &&
+    paymentElement &&
+    elements
+  ) {
+    return;
+  }
 
+  paymentMounted = false;
+
+  if (!stripe) {
     throw new Error(
       "Stripe has not been initialized."
     );
   }
 
-
   if (!clientSecret) {
-
     throw new Error(
       "Stripe client secret is missing."
     );
   }
 
-
   const paymentContainer =
-    document.getElementById(
-      "payment-element"
-    );
-
+    document.getElementById("payment-element");
 
   if (!paymentContainer) {
-
     throw new Error(
       "The Stripe payment element could not be found."
     );
   }
 
+  /*
+   * =========================================================
+   * SHOW PAYMENT SECTION
+   *
+   * The Payment Element must be mounted into a real,
+   * visible DOM container. Some checkout layouts keep the
+   * payment area hidden until the customer confirms email.
+   * Reveal it BEFORE calling Stripe.mount().
+   * =========================================================
+   */
 
-  /* -------------------------------------------------------
-     Remove any previous Payment Element
-  ------------------------------------------------------- */
+  revealPaymentSection(paymentContainer);
 
+  /*
+   * Give the browser one rendering cycle to apply the
+   * visibility/layout changes before Stripe mounts.
+   */
+  await new Promise(resolve => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(resolve);
+    });
+  });
+
+  /*
+   * A zero-size container is a strong indication that the
+   * payment section is still hidden by the page CSS/layout.
+   */
+  const rect =
+    paymentContainer.getBoundingClientRect();
+
+  if (
+    rect.width <= 0 ||
+    rect.height <= 0
+  ) {
+    console.error(
+      "Stripe Payment Element container is not visible:",
+      {
+        width: rect.width,
+        height: rect.height,
+        display:
+          window.getComputedStyle(paymentContainer).display,
+        visibility:
+          window.getComputedStyle(paymentContainer).visibility
+      }
+    );
+
+    throw new Error(
+      "The secure payment form is hidden and cannot be loaded. Please refresh the page and try again."
+    );
+  }
+
+  /*
+   * Remove any previous Payment Element.
+   */
   if (paymentElement) {
-
     try {
-
       paymentElement.destroy();
-
     } catch (error) {
-
       console.warn(
         "Unable to destroy previous Payment Element:",
         error
       );
     }
 
-
-    paymentElement =
-      null;
+    paymentElement = null;
   }
 
+  elements = null;
+  paymentContainer.innerHTML = "";
 
-  paymentContainer.innerHTML =
-    "";
-
-
-  /* -------------------------------------------------------
-     Create Elements instance
-  ------------------------------------------------------- */
+  /*
+   * =========================================================
+   * CREATE STRIPE ELEMENTS
+   * =========================================================
+   */
 
   elements =
     stripe.elements({
-
       clientSecret,
 
       appearance: {
-
-        theme:
-          "stripe",
+        theme: "stripe",
 
         variables: {
-
-          colorPrimary:
-            "#325aa3",
-
-          colorText:
-            "#1d2d45",
-
-          borderRadius:
-            "8px",
-
+          colorPrimary: "#325aa3",
+          colorText: "#1d2d45",
+          borderRadius: "8px",
           fontFamily:
             "Inter, Arial, sans-serif"
         }
       }
     });
 
-
-  /* -------------------------------------------------------
-     Create Payment Element
-  ------------------------------------------------------- */
+  /*
+   * =========================================================
+   * CREATE PAYMENT ELEMENT
+   * =========================================================
+   */
 
   paymentElement =
-    elements.create(
-      "payment"
+    elements.create("payment");
+
+  /*
+   * =========================================================
+   * MOUNT PAYMENT ELEMENT
+   * =========================================================
+   */
+
+  try {
+
+    await paymentElement.mount(
+      paymentContainer
     );
 
+  } catch (error) {
 
-  /* -------------------------------------------------------
-     Mount
-  ------------------------------------------------------- */
+    paymentMounted = false;
+    paymentElement = null;
+    elements = null;
 
-  await paymentElement.mount(
-    "#payment-element"
-  );
+    console.error(
+      "Stripe Payment Element mount failed:",
+      error
+    );
+
+    throw new Error(
+      "Stripe could not load the secure payment form. Please refresh the page and try again."
+    );
+  }
+
+  /*
+   * Stripe has successfully mounted the Payment Element.
+   */
+  paymentMounted = true;
 
 
-  paymentMounted =
-    true;
-
-
-  /* -------------------------------------------------------
-     Stripe change events
-  ------------------------------------------------------- */
-
+  /*
+   * Stripe Payment Element change events.
+   */
   paymentElement.on(
     "change",
-    (event) => {
+    event => {
 
       if (event.error) {
 
@@ -1651,22 +3353,189 @@ async function mountStripePayment(
     }
   );
 
-
   console.log(
     "Stripe Payment Element mounted successfully."
   );
 }
 
 
+/*
+ * =========================================================
+ * REVEAL PAYMENT SECTION
+ * =========================================================
+ *
+ * This intentionally handles common checkout layouts:
+ *
+ * - display:none
+ * - hidden
+ * - opacity:0
+ * - collapsed max-height
+ * - hidden parent containers
+ * - [hidden] attributes
+ *
+ * The Payment Element is revealed BEFORE Stripe.mount().
+ */
+
+function revealPaymentSection(
+  paymentContainer
+) {
+
+  let current =
+    paymentContainer;
+
+  const elementsToReveal = [];
+
+  while (
+    current &&
+    current !== document.body
+  ) {
+
+    elementsToReveal.push(current);
+    current = current.parentElement;
+  }
+
+  elementsToReveal.forEach(element => {
+
+    /*
+     * The payment wrapper starts with aria-hidden="true".
+     * It becomes available to assistive technology only after
+     * the customer confirms the email and the PaymentIntent
+     * has been created successfully.
+     */
+    if (
+      element.id === "paymentSection"
+    ) {
+      element.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+    }
+
+    if (
+      element.hasAttribute("hidden")
+    ) {
+      element.removeAttribute("hidden");
+    }
+
+    element.classList.remove(
+      "hidden",
+      "is-hidden",
+      "payment-hidden",
+      "checkout-hidden",
+      "collapsed",
+      "closed"
+    );
+
+    const computed =
+      window.getComputedStyle(element);
+
+    if (
+      computed.display === "none"
+    ) {
+      element.style.display = "";
+    }
+
+    if (
+      window.getComputedStyle(element).display === "none"
+    ) {
+      element.style.display = "block";
+    }
+
+    if (
+      window.getComputedStyle(element).visibility === "hidden"
+    ) {
+      element.style.visibility = "visible";
+    }
+
+    if (
+      parseFloat(
+        window.getComputedStyle(element).opacity
+      ) === 0
+    ) {
+      element.style.opacity = "1";
+    }
+
+    /*
+     * Only remove inline max-height when it is actually
+     * preventing the payment section from being displayed.
+     */
+    if (
+      computed.maxHeight !== "none" &&
+      parseFloat(computed.maxHeight) === 0
+    ) {
+      element.style.maxHeight = "none";
+    }
+
+  });
+
+  /*
+   * The actual Stripe mount container must always be usable.
+   */
+  paymentContainer.style.display = "block";
+  paymentContainer.style.visibility = "visible";
+  paymentContainer.style.opacity = "1";
+  paymentContainer.style.minHeight = "120px";
+
+  const paymentSection =
+    document.getElementById("paymentSection");
+
+  if (paymentSection) {
+    paymentSection.style.display = "block";
+    paymentSection.style.visibility = "visible";
+    paymentSection.style.opacity = "1";
+    paymentSection.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+  }
+}
+
+
+/*
+ * Find the nearest useful visual section surrounding the
+ * Payment Element for scrolling after Stripe mounts.
+ */
+function findPaymentSection(
+  paymentContainer
+) {
+
+  let current =
+    paymentContainer;
+
+  for (
+    let i = 0;
+    i < 5 && current;
+    i++
+  ) {
+
+    if (
+      current.matches &&
+      (
+        current.matches("section") ||
+        current.matches(".card") ||
+        current.matches(".payment-card") ||
+        current.matches(".checkout-card") ||
+        current.matches(".payment-section")
+      )
+    ) {
+      return current;
+    }
+
+    current =
+      current.parentElement;
+  }
+
+  return paymentContainer;
+}
+
 /* =========================================================
    CONFIRM PAYMENT
 ========================================================= */
 
-async function confirmPayment(
-  form
-) {
+async function confirmPayment(form) {
 
   if (!emailConfirmed) {
+
     throw new Error(
       "Please confirm your email address before continuing."
     );
@@ -1682,76 +3551,34 @@ async function confirmPayment(
     );
   }
 
-
   const data =
-    new FormData(
-      form
-    );
-
+    new FormData(form);
 
   const firstName =
-    getFormValue(
-      data,
-      "firstName"
-    );
-
+    getFormValue(data, "firstName");
 
   const lastName =
-    getFormValue(
-      data,
-      "lastName"
-    );
-
+    getFormValue(data, "lastName");
 
   const email =
-    getFormValue(
-      data,
-      "email"
-    );
-
+    getFormValue(data, "email");
 
   const phone =
-    getFormValue(
-      data,
-      "phone"
-    );
-
+    getFormValue(data, "phone");
 
   const address =
-    getFormValue(
-      data,
-      "address"
-    );
-
+    getFormValue(data, "address");
 
   const city =
-    getFormValue(
-      data,
-      "city"
-    );
-
+    getFormValue(data, "city");
 
   const state =
-    getFormValue(
-      data,
-      "state"
-    );
-
+    getFormValue(data, "state");
 
   const zip =
-    getFormValue(
-      data,
-      "zip"
-    );
+    getFormValue(data, "zip");
 
-
-  /* -------------------------------------------------------
-     Confirm Stripe payment
-  ------------------------------------------------------- */
-
-  const {
-    error
-  } =
+  const { error } =
     await stripe.confirmPayment({
 
       elements,
@@ -1763,8 +3590,7 @@ async function confirmPayment(
           billing_details: {
 
             name:
-              `${firstName} ${lastName}`
-                .trim(),
+              `${firstName} ${lastName}`.trim(),
 
             email,
 
@@ -1788,7 +3614,6 @@ async function confirmPayment(
           }
         },
 
-
         return_url:
           window.location.origin +
           "/order-confirmation.html?order=" +
@@ -1797,11 +3622,9 @@ async function confirmPayment(
           )
       },
 
-
       redirect:
         "if_required"
     });
-
 
   if (error) {
 
@@ -1809,17 +3632,6 @@ async function confirmPayment(
       error.message
     );
   }
-
-
-  /* -------------------------------------------------------
-     Successful payment.
-
-     If Stripe requires authentication, Stripe uses
-     return_url and returns to order-confirmation.html.
-
-     Otherwise, redirect there ourselves so every successful
-     payment enters the same post-payment workflow.
-  ------------------------------------------------------- */
 
   showPaymentProcessing();
 
@@ -1831,45 +3643,39 @@ async function confirmPayment(
     "Payment Confirmed"
   );
 
-  const confirmationUrl =
-    window.location.origin +
-    "/order-confirmation.html?order=" +
-    encodeURIComponent(
-      orderId || ""
-    );
+const confirmationUrl =
+  window.location.origin +
+  "/order-confirmation.html?order=" +
+  encodeURIComponent(orderId || "") +
+  "&tracking=" +
+  encodeURIComponent(trackingNumber || "");
 
   window.setTimeout(() => {
+
     window.location.assign(
       confirmationUrl
     );
+
   }, 250);
 }
-
 
 /* =========================================================
    LOCK CUSTOMER FIELDS
 ========================================================= */
 
-function lockCustomerFields(
+function lockCustomerFields(form) {
+
+  if (!form) {
+    return;
+  }
+
   form
-) {
+    .querySelectorAll("input")
+    .forEach(input => {
 
-  if (!form) return;
-
-
-  form
-    .querySelectorAll(
-      "input"
-    )
-    .forEach(
-      (input) => {
-
-        input.readOnly =
-          true;
-      }
-    );
+      input.readOnly = true;
+    });
 }
-
 
 /* =========================================================
    FORM VALUE HELPER
@@ -1886,7 +3692,6 @@ function getFormValue(
   ).trim();
 }
 
-
 /* =========================================================
    BUTTON
 ========================================================= */
@@ -1897,121 +3702,76 @@ function setButton(
   label
 ) {
 
-  if (!button) return;
+  if (!button) {
+    return;
+  }
 
-
-  button.disabled =
-    disabled;
-
-
-  button.textContent =
-    label;
+  button.disabled = disabled;
+  button.textContent = label;
 }
-
 
 /* =========================================================
    CHECKOUT ERROR
 ========================================================= */
 
-function showCheckoutError(
-  message
-) {
+function showCheckoutError(message) {
 
   const loading =
-    document.getElementById(
-      "loading"
-    );
-
+    document.getElementById("loading");
 
   const errorCard =
-    document.getElementById(
-      "errorCard"
-    );
-
+    document.getElementById("errorCard");
 
   if (loading) {
-
-    loading.style.display =
-      "none";
+    loading.style.display = "none";
   }
-
 
   if (errorCard) {
 
-    errorCard.style.display =
-      "block";
-
+    errorCard.style.display = "block";
 
     const notice =
-      errorCard.querySelector(
-        ".notice"
-      );
-
+      errorCard.querySelector(".notice");
 
     if (notice) {
-
-      notice.textContent =
-        message;
+      notice.textContent = message;
     }
   }
 }
-
 
 /* =========================================================
    PAYMENT ERROR
 ========================================================= */
 
-function showPaymentError(
-  message
-) {
+function showPaymentError(message) {
 
   const box =
-    document.getElementById(
-      "paymentError"
-    );
+    document.getElementById("paymentError");
 
+  if (!box) {
+    return;
+  }
 
-  if (!box) return;
-
-
-  box.className =
-    "error";
-
-
-  box.textContent =
-    message;
-
-
-  box.style.display =
-    "block";
+  box.className = "error";
+  box.textContent = message;
+  box.style.display = "block";
 }
-
 
 function clearPaymentError() {
 
   const box =
-    document.getElementById(
-      "paymentError"
-    );
-
+    document.getElementById("paymentError");
 
   if (box) {
 
-    box.style.display =
-      "none";
-
-
-    box.textContent =
-      "";
+    box.style.display = "none";
+    box.textContent = "";
   }
 }
-
 
 /* =========================================================
    PAYMENT PROCESSING OVERLAY
 ========================================================= */
-
-let paymentProcessingOverlay = null;
 
 function createPaymentProcessingOverlay() {
 
@@ -2019,31 +3779,54 @@ function createPaymentProcessingOverlay() {
     return paymentProcessingOverlay;
   }
 
-  const overlay = document.createElement("div");
+  const overlay =
+    document.createElement("div");
 
-  overlay.id = "paymentProcessingOverlay";
-  overlay.setAttribute("role", "dialog");
-  overlay.setAttribute("aria-modal", "true");
-  overlay.setAttribute("aria-live", "polite");
+  overlay.id =
+    "paymentProcessingOverlay";
+
+  overlay.setAttribute(
+    "role",
+    "dialog"
+  );
+
+  overlay.setAttribute(
+    "aria-modal",
+    "true"
+  );
+
+  overlay.setAttribute(
+    "aria-live",
+    "polite"
+  );
 
   overlay.innerHTML = `
     <div class="payment-processing-card">
-      <div class="payment-processing-spinner" aria-hidden="true"></div>
+
+      <div
+        class="payment-processing-spinner"
+        aria-hidden="true"
+      ></div>
+
       <div class="payment-processing-title">
         Processing Your Payment
       </div>
+
       <div class="payment-processing-message">
         Your payment has been submitted securely.
         Please do not close this window or press the
         payment button again while we confirm your order.
       </div>
+
       <div class="payment-processing-status">
         Confirming your payment with Stripe...
       </div>
+
     </div>
   `;
 
-  const style = document.createElement("style");
+  const style =
+    document.createElement("style");
 
   style.textContent = `
     #paymentProcessingOverlay {
@@ -2126,8 +3909,12 @@ function createPaymentProcessingOverlay() {
 
 function showPaymentProcessing() {
 
-  createPaymentProcessingOverlay().classList.add("active");
-  document.body.classList.add("payment-processing-active");
+  createPaymentProcessingOverlay()
+    .classList.add("active");
+
+  document.body.classList.add(
+    "payment-processing-active"
+  );
 }
 
 function hidePaymentProcessing() {
@@ -2136,40 +3923,38 @@ function hidePaymentProcessing() {
     return;
   }
 
-  paymentProcessingOverlay.classList.remove("active");
-  document.body.classList.remove("payment-processing-active");
-}
+  paymentProcessingOverlay
+    .classList.remove("active");
 
+  document.body.classList.remove(
+    "payment-processing-active"
+  );
+}
 
 /* =========================================================
    PAYMENT SUCCESS
 ========================================================= */
 
-function showPaymentSuccess(
-  message
-) {
+function showPaymentSuccess(message) {
 
   const box =
     document.getElementById(
       "paymentError"
     );
 
-
-  if (!box) return;
-
+  if (!box) {
+    return;
+  }
 
   box.className =
     "notice success";
 
-
   box.textContent =
     message;
-
 
   box.style.display =
     "block";
 }
-
 
 /* =========================================================
    CLEAR MESSAGES
@@ -2179,16 +3964,547 @@ function clearMessages() {
 
   clearPaymentError();
 
-
   const setupNotice =
     document.getElementById(
       "setupNotice"
     );
 
-
   if (setupNotice) {
-
     setupNotice.style.display =
       "none";
   }
 }
+
+/**
+ * screenings4u — Checkout Billing Address Validation
+ *
+ * Add this script after checkout.js OR copy these functions
+ * into checkout.js.
+ *
+ * Required IDs:
+ *   address
+ *   address2
+ *   city
+ *   state
+ *   zip
+ *
+ * Optional:
+ *   addressValidationMessage
+ *
+ * The browser calls our Supabase Edge Function.
+ * USPS credentials NEVER appear in this file.
+ *
+ * NOTE: checkout submission uses validateBillingAddress() below.
+ * This legacy helper is retained only for reference and is not called.
+ */
+
+"use strict";
+
+let billingAddressVerified = false;
+let billingAddressVerificationKey = "";
+
+
+/* =========================================================
+   ADDRESS FIELD
+========================================================= */
+
+function getBillingAddressData() {
+
+  return {
+    streetAddress:
+      getInputValue("address"),
+
+    secondaryAddress:
+      getInputValue("address2"),
+
+    city:
+      getInputValue("city"),
+
+    state:
+      getInputValue("state")
+        .toUpperCase(),
+
+    ZIPCode:
+      getInputValue("zip")
+        .replace(/\D/g, "")
+        .slice(0, 5)
+  };
+}
+
+
+function getBillingAddressVerificationKey() {
+
+  const data =
+    getBillingAddressData();
+
+  return [
+    data.streetAddress,
+    data.secondaryAddress,
+    data.city,
+    data.state,
+    data.ZIPCode
+  ]
+    .map(
+      value =>
+        String(value || "")
+          .trim()
+          .toLowerCase()
+    )
+    .join("|");
+}
+
+
+/* =========================================================
+   INVALIDATE AFTER EDIT
+========================================================= */
+
+function invalidateBillingAddressVerification() {
+
+  billingAddressVerified = false;
+  billingAddressVerificationKey = "";
+
+  hideAddressValidationMessage();
+}
+
+
+function setupBillingAddressValidationState() {
+
+  [
+    "address",
+    "address2",
+    "city",
+    "state",
+    "zip"
+  ].forEach(id => {
+
+    const input =
+      document.getElementById(id);
+
+    if (!input) {
+      return;
+    }
+
+    input.addEventListener(
+      "input",
+      invalidateBillingAddressVerification
+    );
+
+    input.addEventListener(
+      "change",
+      invalidateBillingAddressVerification
+    );
+  });
+}
+
+
+/* =========================================================
+   VALIDATE WITH OUR EDGE FUNCTION
+========================================================= */
+
+async function validateBillingAddress() {
+
+  const address =
+    getBillingAddressData();
+
+  if (
+    !address.streetAddress ||
+    !address.city ||
+    !address.state ||
+    !address.ZIPCode
+  ) {
+
+    return {
+      verified: false,
+      code:
+        "ADDRESS_INCOMPLETE",
+      message:
+        "Please complete your billing street address, city, state, and ZIP code."
+    };
+  }
+
+
+  const currentKey =
+    getBillingAddressVerificationKey();
+
+  if (
+    billingAddressVerified &&
+    billingAddressVerificationKey ===
+      currentKey
+  ) {
+
+    return {
+      verified: true,
+      cached: true
+    };
+  }
+
+
+  showAddressValidationMessage(
+    "Verifying your billing address..."
+  );
+
+
+  const supabaseUrl =
+    window.SCREENINGS4U_SUPABASE_URL ||
+    "";
+
+  if (
+    !supabaseUrl ||
+    supabaseUrl.includes(
+      "REPLACE_WITH"
+    )
+  ) {
+
+    return {
+      verified: false,
+      code:
+        "USPS_NOT_CONFIGURED",
+      message:
+        "Address validation is not configured yet."
+    };
+  }
+
+
+  const functionUrl =
+    supabaseUrl.replace(/\/+$/, "") +
+    "/functions/v1/validate-address";
+
+
+  try {
+
+    const response =
+      await fetch(
+        functionUrl,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify(
+              address
+            )
+        }
+      );
+
+
+    let result = null;
+
+    try {
+      result =
+        await response.json();
+    } catch {
+      result = null;
+    }
+
+
+    if (!response.ok) {
+
+      return {
+        verified: false,
+
+        code:
+          result?.code ||
+          `HTTP_${response.status}`,
+
+        message:
+          result?.error ||
+          result?.message ||
+          "We could not verify your billing address."
+      };
+    }
+
+
+    if (!result?.verified) {
+
+      return {
+        verified: false,
+
+        code:
+          result?.code ||
+          "ADDRESS_NOT_VERIFIED",
+
+        message:
+          result?.message ||
+          "We could not verify your billing address."
+      };
+    }
+
+
+    billingAddressVerified =
+      true;
+
+    billingAddressVerificationKey =
+      currentKey;
+
+
+    showAddressValidationSuccess(
+      result
+    );
+
+
+    return result;
+
+  } catch (error) {
+
+    console.error(
+      "Billing address validation error:",
+      error
+    );
+
+    return {
+      verified: false,
+      code:
+        "ADDRESS_VALIDATION_NETWORK_ERROR",
+      message:
+        "We could not reach the address validation service. Please try again."
+    };
+  }
+}
+
+
+/* =========================================================
+   DISPLAY
+========================================================= */
+
+function getAddressValidationMessageElement() {
+
+  let element =
+    document.getElementById(
+      "addressValidationMessage"
+    );
+
+  if (element) {
+    return element;
+  }
+
+
+  const addressInput =
+    document.getElementById(
+      "address"
+    );
+
+  if (!addressInput) {
+    return null;
+  }
+
+
+  element =
+    document.createElement(
+      "div"
+    );
+
+  element.id =
+    "addressValidationMessage";
+
+  element.setAttribute(
+    "role",
+    "status"
+  );
+
+  element.style.cssText = `
+    display:none;
+    margin-top:10px;
+    padding:11px 13px;
+    border-radius:9px;
+    font-size:12px;
+    line-height:1.5;
+  `;
+
+
+  addressInput
+    .closest(
+      ".form-group, .field, .input-group, div"
+    )
+    ?.appendChild(
+      element
+    );
+
+
+  return element;
+}
+
+
+function showAddressValidationMessage(
+  message
+) {
+
+  const element =
+    getAddressValidationMessageElement();
+
+  if (!element) {
+    return;
+  }
+
+  element.textContent =
+    message;
+
+  element.style.display =
+    "block";
+
+  element.style.background =
+    "#f7f9fc";
+
+  element.style.border =
+    "1px solid #d9e3f0";
+
+  element.style.color =
+    "#667892";
+}
+
+
+function showAddressValidationSuccess(
+  result
+) {
+
+  const element =
+    getAddressValidationMessageElement();
+
+  if (!element) {
+    return;
+  }
+
+
+  const standardized =
+    result?.standardizedAddress;
+
+
+  let text =
+    "Billing address verified.";
+
+  if (
+    standardized?.ZIPPlus4
+  ) {
+
+    text +=
+      ` USPS verified ZIP+4: ${standardized.ZIPCode}-${standardized.ZIPPlus4}.`;
+  }
+
+
+  element.textContent =
+    text;
+
+  element.style.display =
+    "block";
+
+  element.style.background =
+    "#eef8f1";
+
+  element.style.border =
+    "1px solid #c8e4cf";
+
+  element.style.color =
+    "#23643a";
+}
+
+
+function hideAddressValidationMessage() {
+
+  const element =
+    document.getElementById(
+      "addressValidationMessage"
+    );
+
+  if (!element) {
+    return;
+  }
+
+  element.style.display =
+    "none";
+}
+
+
+/* =========================================================
+   LOCAL BILLING ADDRESS VALIDATION
+========================================================= */
+
+function validateBillingAddressFormat() {
+
+  const address =
+    getBillingAddressData();
+
+
+  if (
+    !/^\d{1,6}\s+/.test(
+      address.streetAddress
+    )
+  ) {
+
+    return {
+      valid: false,
+      field: "address",
+      message:
+        "Please enter a complete street address, including the street number."
+    };
+  }
+
+
+  if (
+    address.secondaryAddress.length >
+    0 &&
+    address.secondaryAddress.length >
+    50
+  ) {
+
+    return {
+      valid: false,
+      field: "address2",
+      message:
+        "Please enter a valid Apt, Suite, or Unit."
+    };
+  }
+
+
+  if (
+    !/^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' .-]{1,49}$/.test(
+      address.city
+    )
+  ) {
+
+    return {
+      valid: false,
+      field: "city",
+      message:
+        "Please enter a valid city."
+    };
+  }
+
+
+  if (
+    !/^[A-Z]{2}$/.test(
+      address.state
+    )
+  ) {
+
+    return {
+      valid: false,
+      field: "state",
+      message:
+        "Please select a valid state."
+    };
+  }
+
+
+  if (
+    !/^\d{5}$/.test(
+      address.ZIPCode
+    )
+  ) {
+
+    return {
+      valid: false,
+      field: "zip",
+      message:
+        "Please enter a valid five-digit ZIP code."
+    };
+  }
+
+
+  return {
+    valid: true
+  };
+}
+
