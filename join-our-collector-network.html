@@ -1,0 +1,2604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Join the screenings4u Collector Network and receive opportunities for mobile drug and alcohol testing assignments in your area."
+  >
+
+  <title>Join Our Collector Network | screenings4u</title>
+
+  <link rel="icon" type="image/png" href="images/fav.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --orange: #ff6b00;
+      --orange-dark: #d95800;
+      --orange-soft: #fff0e6;
+
+      --blue: #325aa3;
+      --blue-dark: #24467f;
+      --blue-deep: #17335f;
+
+      --ink: #1d2d45;
+      --muted: #667892;
+
+      --surface: #f4f7fc;
+      --surface-2: #eef3f9;
+
+      --line: #d9e3f0;
+      --line-strong: #c4d3e5;
+
+      --white: #ffffff;
+
+      --max: 1440px;
+
+      --shadow-sm: 0 5px 18px rgba(23, 51, 95, 0.08);
+      --shadow: 0 18px 45px rgba(23, 51, 95, 0.12);
+
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 80px));
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      color: var(--orange);
+
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+
+      margin-bottom: 14px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: var(--orange);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+
+      min-height: 52px;
+      padding: 0 24px;
+
+      border-radius: 7px;
+      border: 1px solid transparent;
+
+      font-size: 14px;
+      font-weight: 800;
+
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      color: #ffffff;
+      background: var(--orange);
+
+      box-shadow: 0 9px 25px rgba(255, 107, 0, 0.22);
+    }
+
+    .btn-primary:hover {
+      background: var(--orange-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      color: var(--blue-dark);
+      border-color: #b9c8db;
+      background: #ffffff;
+    }
+
+    .btn-outline:hover {
+      color: var(--blue);
+      border-color: var(--blue);
+      transform: translateY(-1px);
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      position: relative;
+
+      min-height: 710px;
+
+      display: flex;
+      align-items: center;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(7, 26, 49, 0.98) 0%,
+          rgba(7, 26, 49, 0.94) 34%,
+          rgba(7, 26, 49, 0.72) 57%,
+          rgba(7, 26, 49, 0.20) 82%,
+          rgba(7, 26, 49, 0) 100%
+        ),
+        url("images/join-collector-network-hero.png")
+        center / cover no-repeat;
+
+      background-color: var(--blue-deep);
+    }
+
+    .hero::after {
+      content: "";
+
+      position: absolute;
+
+      top: -220px;
+      right: -150px;
+
+      width: 520px;
+      height: 520px;
+
+      background: var(--orange);
+
+      transform: rotate(35deg);
+
+      clip-path: polygon(42% 0, 100% 0, 100% 58%);
+
+      opacity: 0.96;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+
+      padding: 100px 0 130px;
+    }
+
+    .hero-copy {
+      max-width: 750px;
+      color: #ffffff;
+    }
+
+    .hero-copy .eyebrow {
+      color: #ffad73;
+    }
+
+    .hero-copy .eyebrow::before {
+      background: #ffad73;
+    }
+
+    .hero h1 {
+      max-width: 760px;
+
+      font-size: clamp(48px, 6vw, 78px);
+      font-weight: 900;
+
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: var(--orange);
+    }
+
+    .hero-lead {
+      max-width: 680px;
+
+      color: #d4e1f0;
+
+      font-size: 18px;
+      line-height: 1.7;
+
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+
+      margin-bottom: 52px;
+    }
+
+    .hero-actions .btn-outline {
+      color: #ffffff;
+
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.55);
+    }
+
+    .hero-actions .btn-outline:hover {
+      color: var(--blue-dark);
+
+      background: #ffffff;
+      border-color: #ffffff;
+    }
+
+    .hero-features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+
+      max-width: 850px;
+
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+
+      padding-top: 24px;
+    }
+
+    .hero-feature {
+      padding: 0 18px;
+
+      border-right: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .hero-feature:first-child {
+      padding-left: 0;
+    }
+
+    .hero-feature:last-child {
+      border-right: 0;
+    }
+
+    .hero-feature strong {
+      display: block;
+
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .hero-feature small {
+      display: block;
+
+      color: #a8bad0;
+
+      font-size: 10px;
+      line-height: 1.5;
+
+      margin-top: 4px;
+    }
+
+    /* =========================================================
+       INTRO
+    ========================================================= */
+
+    .intro {
+      padding: 110px 0 100px;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+
+      gap: 75px;
+
+      align-items: center;
+    }
+
+    .intro h2,
+    .section-heading h2,
+    .process-copy h2,
+    .form-heading h2 {
+      color: var(--blue-dark);
+
+      font-size: clamp(34px, 4vw, 51px);
+      line-height: 1.05;
+
+      letter-spacing: -0.04em;
+
+      margin-bottom: 18px;
+    }
+
+    .intro-copy p {
+      color: var(--muted);
+
+      font-size: 16px;
+
+      margin-bottom: 18px;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 13px;
+
+      margin-top: 28px;
+    }
+
+    .check-list li {
+      list-style: none;
+
+      display: flex;
+      align-items: flex-start;
+
+      gap: 12px;
+
+      color: #344054;
+
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .check-list li::before {
+      content: "✓";
+
+      flex: 0 0 23px;
+
+      width: 23px;
+      height: 23px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: var(--blue-soft, #e9f0fb);
+      color: var(--blue);
+
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .intro-card {
+      padding: 40px;
+
+      border-radius: 20px;
+
+      background: var(--blue-dark);
+      color: #ffffff;
+
+      box-shadow: var(--shadow);
+    }
+
+    .intro-card h3 {
+      font-size: 30px;
+      line-height: 1.1;
+
+      margin-bottom: 14px;
+    }
+
+    .intro-card > p {
+      color: #d4e1f0;
+
+      font-size: 14px;
+      line-height: 1.75;
+
+      margin-bottom: 26px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      gap: 12px;
+    }
+
+    .stat-box {
+      padding: 19px;
+
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 12px;
+
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .stat-box strong {
+      display: block;
+
+      font-size: 14px;
+
+      margin-bottom: 5px;
+    }
+
+    .stat-box span {
+      display: block;
+
+      color: #b8c8da;
+
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    /* =========================================================
+       BENEFITS
+    ========================================================= */
+
+    .benefits {
+      padding: 110px 0;
+
+      background: var(--surface-2);
+
+      border-block: 1px solid var(--line);
+    }
+
+    .section-heading {
+      max-width: 780px;
+
+      margin-bottom: 50px;
+    }
+
+    .section-heading p {
+      max-width: 700px;
+
+      color: var(--muted);
+
+      font-size: 17px;
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+
+      gap: 16px;
+    }
+
+    .benefit-card {
+      padding: 28px;
+
+      background: #ffffff;
+
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+
+      box-shadow: var(--shadow-sm);
+
+      transition: 0.2s ease;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-4px);
+
+      box-shadow: var(--shadow);
+
+      border-color: var(--line-strong);
+    }
+
+    .benefit-number {
+      display: inline-flex;
+
+      width: 42px;
+      height: 42px;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 10px;
+
+      background: #e9f0fb;
+      color: var(--blue);
+
+      font-size: 12px;
+      font-weight: 900;
+
+      margin-bottom: 18px;
+    }
+
+    .benefit-card h3 {
+      color: var(--blue-dark);
+
+      font-size: 17px;
+      line-height: 1.25;
+
+      margin-bottom: 9px;
+    }
+
+    .benefit-card p {
+      color: var(--muted);
+
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    /* =========================================================
+       WHO SHOULD JOIN
+    ========================================================= */
+
+    .network {
+      padding: 110px 0;
+    }
+
+    .network-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+
+      gap: 70px;
+
+      align-items: start;
+    }
+
+    .network-copy p {
+      color: var(--muted);
+
+      font-size: 16px;
+
+      margin-bottom: 18px;
+    }
+
+    .qualification-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      gap: 16px;
+    }
+
+    .qualification-card {
+      padding: 27px;
+
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+
+      background: #ffffff;
+
+      box-shadow: var(--shadow-sm);
+    }
+
+    .qualification-card h3 {
+      color: var(--blue-dark);
+
+      font-size: 17px;
+
+      margin-bottom: 8px;
+    }
+
+    .qualification-card p {
+      color: var(--muted);
+
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    /* =========================================================
+       PROCESS
+    ========================================================= */
+
+    .process {
+      padding: 110px 0;
+
+      background: #f4f7fc;
+
+      border-block: 1px solid var(--line);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+
+      gap: 75px;
+    }
+
+    .process-copy p {
+      color: var(--muted);
+
+      font-size: 15px;
+    }
+
+    .steps {
+      display: grid;
+    }
+
+    .step {
+      position: relative;
+
+      display: grid;
+      grid-template-columns: 58px 1fr;
+
+      gap: 20px;
+
+      padding-bottom: 32px;
+    }
+
+    .step:not(:last-child)::after {
+      content: "";
+
+      position: absolute;
+
+      left: 28px;
+      top: 58px;
+      bottom: 0;
+
+      width: 1px;
+
+      background: var(--line);
+    }
+
+    .step-number {
+      position: relative;
+      z-index: 2;
+
+      width: 58px;
+      height: 58px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      color: #ffffff;
+      background: var(--blue);
+
+      font-size: 14px;
+      font-weight: 900;
+
+      box-shadow: 0 0 0 7px #edf3fb;
+    }
+
+    .step h3 {
+      color: var(--blue-dark);
+
+      font-size: 20px;
+
+      margin: 4px 0 6px;
+    }
+
+    .step p {
+      color: var(--muted);
+
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    /* =========================================================
+       APPLICATION
+    ========================================================= */
+
+    .application {
+      padding: 110px 0;
+    }
+
+    .application-layout {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+
+      gap: 55px;
+
+      align-items: start;
+    }
+
+    .form-copy {
+      position: sticky;
+      top: 30px;
+    }
+
+    .form-copy p {
+      color: var(--muted);
+
+      font-size: 15px;
+
+      margin-bottom: 22px;
+    }
+
+    .form-note {
+      padding: 20px;
+
+      border-left: 4px solid var(--orange);
+
+      background: var(--orange-soft);
+
+      color: #7a3d14;
+
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .application-form {
+      padding: 36px;
+
+      border: 1px solid var(--line);
+      border-radius: 20px;
+
+      background: #ffffff;
+
+      box-shadow: var(--shadow);
+    }
+
+    .form-section {
+      margin-bottom: 32px;
+    }
+
+    .form-section:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .form-section-title {
+      color: var(--blue-dark);
+
+      font-size: 18px;
+      font-weight: 800;
+
+      margin-bottom: 18px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      gap: 16px;
+    }
+
+    .form-grid.full {
+      grid-template-columns: 1fr;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      color: #344054;
+
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+
+      min-height: 48px;
+
+      padding: 12px 14px;
+
+      color: var(--ink);
+
+      border: 1px solid var(--line-strong);
+      border-radius: 7px;
+
+      background: #ffffff;
+
+      outline: none;
+
+      transition: 0.2s ease;
+    }
+
+    .field textarea {
+      min-height: 115px;
+
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--blue);
+
+      box-shadow: 0 0 0 3px rgba(50, 90, 163, 0.1);
+    }
+
+    .checkbox-group {
+      display: grid;
+      gap: 11px;
+    }
+
+    .checkbox-option {
+      display: flex;
+      align-items: flex-start;
+
+      gap: 10px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .checkbox-option input {
+      margin-top: 2px;
+    }
+
+    .form-submit {
+      width: 100%;
+
+      margin-top: 30px;
+    }
+
+    .form-success {
+      display: none;
+
+      margin-top: 20px;
+      padding: 16px;
+
+      border-radius: 8px;
+
+      background: #eaf7ef;
+      border: 1px solid #b8dfc5;
+
+      color: #23683a;
+
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .form-success.active {
+      display: block;
+    }
+
+    /* =========================================================
+       FAQ
+    ========================================================= */
+
+    .faq {
+      padding: 110px 0;
+
+      background: var(--surface-2);
+
+      border-top: 1px solid var(--line);
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 10px;
+
+      max-width: 920px;
+    }
+
+    .faq-item {
+      overflow: hidden;
+
+      border: 1px solid var(--line);
+      border-radius: 12px;
+
+      background: #ffffff;
+    }
+
+    .faq-question {
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 20px 22px;
+
+      border: 0;
+
+      background: #ffffff;
+
+      color: var(--blue-dark);
+
+      text-align: left;
+
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .faq-plus {
+      flex: 0 0 auto;
+
+      margin-left: 20px;
+
+      color: var(--orange);
+
+      font-size: 20px;
+    }
+
+    .faq-answer {
+      display: none;
+
+      padding: 0 22px 25px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    /* =========================================================
+       CTA
+    ========================================================= */
+
+    .cta {
+      padding: 90px 0;
+
+      background: #ffffff;
+
+      border-top: 1px solid var(--line);
+    }
+
+    .cta-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 30px;
+    }
+
+    .cta h2 {
+      color: var(--blue-dark);
+
+      font-size: clamp(31px, 4vw, 47px);
+      line-height: 1.05;
+
+      letter-spacing: -0.04em;
+
+      margin-bottom: 9px;
+    }
+
+    .cta p {
+      color: var(--muted);
+
+      font-size: 15px;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 12px;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 1100px) {
+      .benefit-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .application-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .form-copy {
+        position: static;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .intro-grid,
+      .network-grid,
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-features {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 18px;
+      }
+
+      .hero-feature {
+        border-right: 0;
+      }
+
+      .cta-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .benefit-grid,
+      .qualification-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(var(--max), calc(100% - 32px));
+      }
+
+      .hero {
+        min-height: 680px;
+      }
+
+      .hero-inner {
+        padding: 75px 0 95px;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+      }
+
+      .hero-lead {
+        font-size: 15px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-features,
+      .benefit-grid,
+      .qualification-grid,
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-feature {
+        padding: 0 0 16px;
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+      }
+
+      .hero-feature:last-child {
+        border-bottom: 0;
+      }
+
+      .intro-card,
+      .application-form {
+        padding: 26px;
+      }
+
+      .cta-actions {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .cta-actions .btn {
+        width: 100%;
+      }
+    }
+
+        /* TOP BAR */
+    .topbar {
+      background: var(--blue-dark);
+      color: #dfe9f5;
+      font-size: 12px;
+    }
+
+    .topbar-inner {
+      min-height: 38px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .topbar-left, .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .topbar a:hover { color: var(--white); }
+
+    /* NAVIGATION */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 26px;
+    }
+
+ .brand {
+  display: flex;
+  align-items: center;
+  flex: 0 0 155px;
+  width: 155px;
+}
+
+.site-logo {
+  display: block;
+  width: 145px;
+  height: auto;
+  max-height: 48px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 13px 10px;
+      color: #334d70;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 7px;
+    }
+
+    .nav-link:hover { color: var(--blue); background: var(--blue-pale); }
+
+    .nav-link .chevron {
+      font-size: 10px;
+      transition: transform .2s ease;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 255px;
+      padding: 10px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px);
+      transition: .18s ease;
+    }
+
+    .nav-item:hover .dropdown,
+    .nav-item:focus-within .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-item:hover .chevron { transform: rotate(180deg); }
+
+    .dropdown a {
+      display: block;
+      padding: 11px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #475467;
+      font-weight: 600;
+    }
+
+    .dropdown a:hover {
+      background: var(--blue-pale);
+      color: var(--blue);
+    }
+
+    .nav-actions { display: flex; gap: 9px; align-items: center; }
+
+    .mobile-toggle {
+      display: none;
+      width: 44px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+    }
+
+    
+.faq-answer{display:none;padding:0 21px 20px;color:var(--muted);font-size:13px;line-height:1.7}.faq-item.active .faq-answer{display:block}.faq-plus{color:var(--orange);font-size:19px}
+
+
+.faq-answer {
+  display: none;
+  padding: 0 28px 28px;
+  line-height: 1.75;
+}
+
+.faq-item.active .faq-answer {
+  display: block;
+}
+
+  </style>
+
+  
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span>Nationwide Drug & Alcohol Testing</span>
+        <span>•</span>
+        <span>Operating Nationwide</span>
+      </div>
+      <div class="topbar-right">
+        <span>Mon–Fri, 8AM–8PM CST</span>
+        <a href="tel:7732457009">(773) 245-7009</a>
+      </div>
+    </div>
+  </div>
+
+<header class="site-header">
+  <div class="container nav-inner" id="navInner">
+
+    <a href="index.html" class="brand" aria-label="screenings4u home">
+      <img src="images/logo.png" alt="screenings4u" class="site-logo">
+    </a>
+
+<nav class="nav" id="mainNav" aria-label="Main navigation"></nav>
+
+    <div class="nav-actions">
+      <a href="services.html" class="btn btn-outline">
+        Order a Test
+      </a>
+
+      <div class="nav-account-menu">
+        <button
+          type="button"
+          class="nav-login"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Account Login
+          <span class="nav-login-chevron">▼</span>
+        </button>
+
+        <div class="nav-account-dropdown">
+          <a href="https://portal.screenings4u.com/customer-login.html">
+            Customer Login
+          </a>
+
+          <a href="https://portal.screenings4u.com/employer-login.html">
+            Employer Login
+          </a>
+        </div>
+      </div>
+
+      <button
+        class="mobile-toggle"
+        id="mobileToggle"
+        aria-label="Open menu"
+        aria-expanded="false">
+        ☰
+      </button>
+    </div>
+
+  </div>
+</header>
+
+  <main>
+
+    <!-- =======================================================
+         HERO
+    ======================================================== -->
+
+    <section class="hero">
+
+      <div class="container hero-inner">
+
+        <div class="hero-copy">
+
+          <span class="eyebrow">
+            Collector Opportunities
+          </span>
+
+          <h1>
+            Join the
+            <span>screenings4u</span>
+            Collector Network.
+          </h1>
+
+          <p class="hero-lead">
+            Expand your opportunities with a growing network of
+            professional collectors supporting drug and alcohol
+            testing assignments across the United States.
+          </p>
+
+          <div class="hero-actions">
+
+            <a
+              href="#join-network"
+              class="btn btn-primary"
+            >
+              Join the Network →
+            </a>
+
+            <a
+              href="#how-it-works"
+              class="btn btn-outline"
+            >
+              How It Works →
+            </a>
+
+          </div>
+
+          <div class="hero-features">
+
+            <div class="hero-feature">
+              <strong>Nationwide Network</strong>
+              <small>
+                Opportunities across the United States
+              </small>
+            </div>
+
+            <div class="hero-feature">
+              <strong>Flexible Assignments</strong>
+              <small>
+                Work opportunities based on your availability
+              </small>
+            </div>
+
+            <div class="hero-feature">
+              <strong>Professional Network</strong>
+              <small>
+                Built for qualified collection professionals
+              </small>
+            </div>
+
+            <div class="hero-feature">
+              <strong>Growing Coverage</strong>
+              <small>
+                Help us expand access where testing is needed
+              </small>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         INTRO
+    ======================================================== -->
+
+    <section class="intro">
+
+      <div class="container intro-grid">
+
+        <div class="intro-copy">
+
+          <span class="eyebrow">
+            Expand Your Opportunities
+          </span>
+
+          <h2>
+            Put your collection experience to work when opportunities arise.
+          </h2>
+
+          <p>
+            screenings4u is building a nationwide network of qualified
+            collection professionals who can help support workplace,
+            DOT and other drug and alcohol testing needs.
+          </p>
+
+          <p>
+            By joining the network, you can provide your professional
+            information and service capabilities so our team can identify
+            potential opportunities in your coverage area.
+          </p>
+
+          <ul class="check-list">
+
+            <li>
+              Receive notifications about potential assignments
+              in your service area
+            </li>
+
+            <li>
+              Share the collection services you are qualified
+              to perform
+            </li>
+
+            <li>
+              Identify mobile and fixed-location capabilities
+            </li>
+
+            <li>
+              Provide coverage information for your local market
+            </li>
+
+            <li>
+              Join a growing professional screening network
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <aside class="intro-card">
+
+          <h3>
+            One network. More potential opportunities.
+          </h3>
+
+          <p>
+            Your information helps screenings4u understand where
+            qualified collectors are available and what services
+            they can provide.
+          </p>
+
+          <div class="stat-grid">
+
+            <div class="stat-box">
+              <strong>
+                Mobile Collection
+              </strong>
+
+              <span>
+                Support employers and testing events at off-site locations.
+              </span>
+            </div>
+
+            <div class="stat-box">
+              <strong>
+                Fixed Locations
+              </strong>
+
+              <span>
+                Tell us about collection sites where clients can be served.
+              </span>
+            </div>
+
+            <div class="stat-box">
+              <strong>
+                Multiple Services
+              </strong>
+
+              <span>
+                Share the types of collection services you provide.
+              </span>
+            </div>
+
+            <div class="stat-box">
+              <strong>
+                Local Coverage
+              </strong>
+
+              <span>
+                Help us identify the geographic areas you can support.
+              </span>
+            </div>
+
+          </div>
+
+        </aside>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         BENEFITS
+    ======================================================== -->
+
+    <section class="benefits">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="eyebrow">
+            Why Join
+          </span>
+
+          <h2>
+            Build new opportunities around the services you already provide.
+          </h2>
+
+          <p>
+            The screenings4u Collector Network is designed to connect
+            qualified professionals with potential testing assignments
+            when needs arise in their service areas.
+          </p>
+
+        </div>
+
+
+        <div class="benefit-grid">
+
+          <article class="benefit-card">
+
+            <div class="benefit-number">
+              01
+            </div>
+
+            <h3>
+              Assignment Opportunities
+            </h3>
+
+            <p>
+              Receive information about potential testing assignments
+              that match your service area and capabilities.
+            </p>
+
+          </article>
+
+
+          <article class="benefit-card">
+
+            <div class="benefit-number">
+              02
+            </div>
+
+            <h3>
+              Flexible Opportunities
+            </h3>
+
+            <p>
+              Network opportunities can complement your existing
+              collection business and schedule.
+            </p>
+
+          </article>
+
+
+          <article class="benefit-card">
+
+            <div class="benefit-number">
+              03
+            </div>
+
+            <h3>
+              Compliance Focus
+            </h3>
+
+            <p>
+              Join a network built around professional workplace
+              screening and collection support.
+            </p>
+
+          </article>
+
+
+          <article class="benefit-card">
+
+            <div class="benefit-number">
+              04
+            </div>
+
+            <h3>
+              Extended Operations
+            </h3>
+
+            <p>
+              Some collection needs can arise outside traditional
+              business hours depending on client requirements.
+            </p>
+
+          </article>
+
+
+          <article class="benefit-card">
+
+            <div class="benefit-number">
+              05
+            </div>
+
+            <h3>
+              Nationwide Growth
+            </h3>
+
+            <p>
+              Be part of a growing network designed to expand
+              professional testing coverage across the country.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         WHO SHOULD JOIN
+    ======================================================== -->
+
+    <section class="network">
+
+      <div class="container network-grid">
+
+        <div class="network-copy">
+
+          <span class="eyebrow">
+            Who Should Join
+          </span>
+
+          <h2>
+            Professional collectors and collection providers.
+          </h2>
+
+          <p>
+            We are interested in learning about qualified professionals
+            and organizations that provide drug and alcohol testing
+            collection services.
+          </p>
+
+          <p>
+            Your available qualifications, collection capabilities,
+            location and coverage area help us understand how your
+            services may fit future assignment needs.
+          </p>
+
+        </div>
+
+
+        <div class="qualification-grid">
+
+          <article class="qualification-card">
+
+            <h3>
+              Mobile Collectors
+            </h3>
+
+            <p>
+              Professionals available to travel to employer locations,
+              worksites or other approved testing locations.
+            </p>
+
+          </article>
+
+
+          <article class="qualification-card">
+
+            <h3>
+              Collection Sites
+            </h3>
+
+            <p>
+              Fixed locations with established hours and the ability
+              to support scheduled testing collections.
+            </p>
+
+          </article>
+
+
+          <article class="qualification-card">
+
+            <h3>
+              DOT Collection Professionals
+            </h3>
+
+            <p>
+              Collectors with qualifications and experience supporting
+              DOT-regulated testing programs.
+            </p>
+
+          </article>
+
+
+          <article class="qualification-card">
+
+            <h3>
+              Specialized Collection Services
+            </h3>
+
+            <p>
+              Providers offering services such as hair, oral fluid,
+              alcohol or other authorized testing collections.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         HOW IT WORKS
+    ======================================================== -->
+
+    <section
+      class="process"
+      id="how-it-works"
+    >
+
+      <div class="container process-grid">
+
+        <div class="process-copy">
+
+          <span class="eyebrow">
+            How It Works
+          </span>
+
+          <h2>
+            A simple process to join the network.
+          </h2>
+
+          <p>
+            Start by telling us about your collection services,
+            qualifications and coverage area. Our team can use that
+            information when evaluating future testing needs.
+          </p>
+
+        </div>
+
+
+        <div class="steps">
+
+          <article class="step">
+
+            <div class="step-number">
+              01
+            </div>
+
+            <div>
+              <h3>
+                Complete Your Profile
+              </h3>
+
+              <p>
+                Provide your contact information, business details
+                and the geographic areas you serve.
+              </p>
+            </div>
+
+          </article>
+
+
+          <article class="step">
+
+            <div class="step-number">
+              02
+            </div>
+
+            <div>
+              <h3>
+                Share Your Capabilities
+              </h3>
+
+              <p>
+                Let us know what types of collection services,
+                testing support and scheduling availability you provide.
+              </p>
+            </div>
+
+          </article>
+
+
+          <article class="step">
+
+            <div class="step-number">
+              03
+            </div>
+
+            <div>
+              <h3>
+                Join the Network
+              </h3>
+
+              <p>
+                Your information is added to the collector network
+                for consideration when opportunities arise in areas
+                you may be able to support.
+              </p>
+            </div>
+
+          </article>
+
+
+          <article class="step">
+
+            <div class="step-number">
+              04
+            </div>
+
+            <div>
+              <h3>
+                Receive Opportunity Notifications
+              </h3>
+
+              <p>
+                When appropriate assignments become available,
+                our team may contact qualified providers in the
+                relevant service area.
+              </p>
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         APPLICATION
+    ======================================================== -->
+
+    <section
+      class="application"
+      id="join-network"
+    >
+
+      <div class="container application-layout">
+
+        <div class="form-copy">
+
+          <span class="eyebrow">
+            Join the Network
+          </span>
+
+          <h2>
+            Tell us about your collection services.
+          </h2>
+
+          <p>
+            Complete the information below so we can learn more
+            about your business, qualifications and coverage area.
+          </p>
+
+          <div class="form-note">
+            Submitting this form expresses your interest in joining
+            the screenings4u Collector Network. Submission does not
+            guarantee assignments or establish an employment relationship.
+          </div>
+
+        </div>
+
+
+        <form
+          class="application-form"
+          id="collectorNetworkForm"
+        >
+
+          <!-- PERSONAL INFORMATION -->
+
+          <div class="form-section">
+
+            <h3 class="form-section-title">
+              Your Information
+            </h3>
+
+            <div class="form-grid">
+
+              <div class="field">
+                <label for="firstName">
+                  First Name *
+                </label>
+
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  required
+                >
+              </div>
+
+
+              <div class="field">
+                <label for="lastName">
+                  Last Name *
+                </label>
+
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  required
+                >
+              </div>
+
+
+              <div class="field">
+                <label for="email">
+                  Email Address *
+                </label>
+
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                >
+              </div>
+
+
+              <div class="field">
+                <label for="phone">
+                  Phone Number *
+                </label>
+
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                >
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- BUSINESS INFORMATION -->
+
+          <div class="form-section">
+
+            <h3 class="form-section-title">
+              Business Information
+            </h3>
+
+            <div class="form-grid">
+
+              <div class="field full-width">
+
+                <label for="businessName">
+                  Business Name
+                </label>
+
+                <input
+                  type="text"
+                  id="businessName"
+                  name="businessName"
+                >
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="city">
+                  City *
+                </label>
+
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  required
+                >
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="state">
+                  State *
+                </label>
+
+                <select
+                  id="state"
+                  name="state"
+                  required
+                >
+                  <option value="">
+                    Select State
+                  </option>
+
+                  <option>Alabama</option>
+                  <option>Alaska</option>
+                  <option>Arizona</option>
+                  <option>Arkansas</option>
+                  <option>California</option>
+                  <option>Colorado</option>
+                  <option>Connecticut</option>
+                  <option>Delaware</option>
+                  <option>Florida</option>
+                  <option>Georgia</option>
+                  <option>Hawaii</option>
+                  <option>Idaho</option>
+                  <option>Illinois</option>
+                  <option>Indiana</option>
+                  <option>Iowa</option>
+                  <option>Kansas</option>
+                  <option>Kentucky</option>
+                  <option>Louisiana</option>
+                  <option>Maine</option>
+                  <option>Maryland</option>
+                  <option>Massachusetts</option>
+                  <option>Michigan</option>
+                  <option>Minnesota</option>
+                  <option>Mississippi</option>
+                  <option>Missouri</option>
+                  <option>Montana</option>
+                  <option>Nebraska</option>
+                  <option>Nevada</option>
+                  <option>New Hampshire</option>
+                  <option>New Jersey</option>
+                  <option>New Mexico</option>
+                  <option>New York</option>
+                  <option>North Carolina</option>
+                  <option>North Dakota</option>
+                  <option>Ohio</option>
+                  <option>Oklahoma</option>
+                  <option>Oregon</option>
+                  <option>Pennsylvania</option>
+                  <option>Rhode Island</option>
+                  <option>South Carolina</option>
+                  <option>South Dakota</option>
+                  <option>Tennessee</option>
+                  <option>Texas</option>
+                  <option>Utah</option>
+                  <option>Vermont</option>
+                  <option>Virginia</option>
+                  <option>Washington</option>
+                  <option>West Virginia</option>
+                  <option>Wisconsin</option>
+                  <option>Wyoming</option>
+
+                </select>
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="zipCode">
+                  ZIP Code
+                </label>
+
+                <input
+                  type="text"
+                  id="zipCode"
+                  name="zipCode"
+                >
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="mobileAvailability">
+                  Do You Provide Mobile Collection?
+                </label>
+
+                <select
+                  id="mobileAvailability"
+                  name="mobileAvailability"
+                >
+                  <option value="">
+                    Select an Option
+                  </option>
+
+                  <option value="yes">
+                    Yes
+                  </option>
+
+                  <option value="no">
+                    No
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- SERVICES -->
+
+          <div class="form-section">
+
+            <h3 class="form-section-title">
+              Collection Services
+            </h3>
+
+            <div class="form-grid">
+
+              <div class="field full-width">
+
+                <label for="services">
+                  What Collection Services Do You Provide?
+                </label>
+
+                <textarea
+                  id="services"
+                  name="services"
+                  placeholder="Example: DOT urine collection, non-DOT collection, breath alcohol testing, oral fluid collection, hair collection..."
+                ></textarea>
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="dotExperience">
+                  DOT Collection Experience
+                </label>
+
+                <select
+                  id="dotExperience"
+                  name="dotExperience"
+                >
+                  <option value="">
+                    Select an Option
+                  </option>
+
+                  <option value="yes">
+                    Yes
+                  </option>
+
+                  <option value="no">
+                    No
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="availability">
+                  General Availability
+                </label>
+
+                <select
+                  id="availability"
+                  name="availability"
+                >
+                  <option value="">
+                    Select an Option
+                  </option>
+
+                  <option value="business-hours">
+                    Business Hours
+                  </option>
+
+                  <option value="extended-hours">
+                    Extended Hours
+                  </option>
+
+                  <option value="24-7">
+                    24/7 Availability
+                  </option>
+
+                  <option value="varies">
+                    Varies
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="field full-width">
+
+                <label for="coverageArea">
+                  What Geographic Area Do You Cover?
+                </label>
+
+                <textarea
+                  id="coverageArea"
+                  name="coverageArea"
+                  placeholder="List cities, counties, ZIP codes or other areas you are able to serve."
+                ></textarea>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ADDITIONAL INFORMATION -->
+
+          <div class="form-section">
+
+            <h3 class="form-section-title">
+              Additional Information
+            </h3>
+
+            <div class="form-grid full">
+
+              <div class="field">
+
+                <label for="additionalNotes">
+                  Anything Else We Should Know?
+                </label>
+
+                <textarea
+                  id="additionalNotes"
+                  name="additionalNotes"
+                  placeholder="Tell us about additional qualifications, certifications, services or scheduling capabilities."
+                ></textarea>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- CONSENT -->
+
+          <div class="checkbox-group">
+
+            <label class="checkbox-option">
+
+              <input
+                type="checkbox"
+                id="accuracyConfirmation"
+                required
+              >
+
+              <span>
+                I confirm that the information provided is accurate
+                to the best of my knowledge.
+              </span>
+
+            </label>
+
+
+            <label class="checkbox-option">
+
+              <input
+                type="checkbox"
+                id="networkConsent"
+                required
+              >
+
+              <span>
+                I understand that submitting this form does not
+                guarantee assignments or employment with screenings4u.
+              </span>
+
+            </label>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="btn btn-primary form-submit"
+          >
+            Submit Collector Network Application →
+          </button>
+
+
+          <div
+            class="form-success"
+            id="formSuccess"
+            role="status"
+          >
+            Thank you for your interest in joining the screenings4u
+            Collector Network. Your information has been received.
+          </div>
+
+        </form>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         FAQ
+    ======================================================== -->
+
+    <section class="faq">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <span class="eyebrow">
+            Frequently Asked Questions
+          </span>
+
+          <h2>
+            Questions about joining the network?
+          </h2>
+
+        </div>
+
+
+        <div class="faq-list">
+
+          <div class="faq-item">
+
+            <button
+              class="faq-question"
+              type="button"
+              data-faq-toggle
+              aria-expanded="false"
+            >
+              Who can join the screenings4u Collector Network?
+
+              <span class="faq-plus">
+                +
+              </span>
+
+            </button>
+
+            <div class="faq-answer">
+              The network is intended for professional collectors,
+              collection sites and qualified providers that offer
+              drug and alcohol testing collection services.
+            </div>
+
+          </div>
+
+
+          <div class="faq-item">
+
+            <button
+              class="faq-question"
+              type="button"
+              data-faq-toggle
+              aria-expanded="false"
+            >
+              Does joining the network guarantee assignments?
+
+              <span class="faq-plus">
+                +
+              </span>
+
+            </button>
+
+            <div class="faq-answer">
+              No. Joining the network allows screenings4u to learn
+              about your services and coverage area. Assignment
+              availability depends on client needs, location and
+              service requirements.
+            </div>
+
+          </div>
+
+
+          <div class="faq-item">
+
+            <button
+              class="faq-question"
+              type="button"
+              data-faq-toggle
+              aria-expanded="false"
+            >
+              Can mobile collectors join?
+
+              <span class="faq-plus">
+                +
+              </span>
+
+            </button>
+
+            <div class="faq-answer">
+              Yes. The application allows you to identify whether
+              you provide mobile collection services and describe
+              the geographic areas you can cover.
+            </div>
+
+          </div>
+
+
+          <div class="faq-item">
+
+            <button
+              class="faq-question"
+              type="button"
+              data-faq-toggle
+              aria-expanded="false"
+            >
+              What information should I provide?
+
+              <span class="faq-plus">
+                +
+              </span>
+
+            </button>
+
+            <div class="faq-answer">
+              Provide accurate contact information, your business
+              details, available collection services, qualifications
+              and the areas where you are able to provide services.
+            </div>
+
+          </div>
+
+
+          <div class="faq-item">
+
+            <button
+              class="faq-question"
+              type="button"
+              data-faq-toggle
+              aria-expanded="false"
+            >
+              What happens after I submit the form?
+
+              <span class="faq-plus">
+                +
+              </span>
+
+            </button>
+
+            <div class="faq-answer">
+              Your information can be reviewed and maintained as part
+              of the collector network. Qualified providers may be
+              contacted when appropriate opportunities arise in areas
+              they are able to support.
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         CTA
+    ======================================================== -->
+
+    <section class="cta">
+
+      <div class="container cta-inner">
+
+        <div>
+
+          <h2>
+            Ready to join the network?
+          </h2>
+
+          <p>
+            Tell us about your collection services and coverage area.
+          </p>
+
+        </div>
+
+
+        <div class="cta-actions">
+
+          <a
+            href="#join-network"
+            class="btn btn-primary"
+          >
+            Join the Network →
+          </a>
+
+
+          <a
+            href="contact.html"
+            class="btn btn-outline"
+          >
+            Contact Us →
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       SHARED FOOTER
+  ========================================================== -->
+
+  <footer id="siteFooter"></footer>
+
+
+  <!-- =========================================================
+       SCRIPTS
+  ========================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/site-config.js"></script>
+
+<script src="assets/js/navigation.js"></script>
+<script src="assets/js/footer.js"></script>
+<script src="assets/js/collector-network.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const faqButtons = document.querySelectorAll("[data-faq-toggle]");
+
+  faqButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const faqItem = button.closest(".faq-item");
+
+      if (!faqItem) return;
+
+      const isActive = faqItem.classList.contains("active");
+
+      // Close all FAQ items
+      document.querySelectorAll(".faq-item").forEach(function (item) {
+        item.classList.remove("active");
+
+        const itemButton = item.querySelector("[data-faq-toggle]");
+        const plus = item.querySelector(".faq-plus");
+
+        if (itemButton) {
+          itemButton.setAttribute("aria-expanded", "false");
+        }
+
+        if (plus) {
+          plus.textContent = "+";
+        }
+      });
+
+      // Open the clicked FAQ unless it was already open
+      if (!isActive) {
+        faqItem.classList.add("active");
+        button.setAttribute("aria-expanded", "true");
+
+        const plus = faqItem.querySelector(".faq-plus");
+
+        if (plus) {
+          plus.textContent = "−";
+        }
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>

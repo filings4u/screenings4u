@@ -467,10 +467,32 @@ h1{
     width:135px;
   }
 }
+
+
+/* =========================================================
+   SERVICES PAGE NAVIGATION + WIDTH FIX
+   ========================================================= */
+.topbar{background:#f7f9fc;border-bottom:1px solid var(--line);color:#53657f;font-size:12px}
+.topbar-inner{min-height:38px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.topbar-left,.topbar-right{display:flex;align-items:center;gap:10px;min-width:0}.topbar a{color:var(--blue-dark);font-weight:800;white-space:nowrap}
+#mainNav.nav{display:flex;align-items:center;justify-content:center;gap:0;flex:1 1 auto;min-width:0}
+#mainNav .nav-item{position:relative;flex:0 0 auto}
+#mainNav .nav-link{padding:13px 8px;font-size:12px;white-space:nowrap}
+#mainNav .dropdown{z-index:1200}
+.nav-actions{flex:0 0 auto}.nav-login{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 15px;border:1px solid var(--blue);border-radius:8px;background:var(--blue);color:#fff;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
+.nav-account-menu{position:relative}.nav-account-dropdown{position:absolute;top:calc(100% + 9px);right:0;min-width:205px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 45px rgba(23,51,95,.14);opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s ease;z-index:1200}
+.nav-account-menu:hover .nav-account-dropdown,.nav-account-menu:focus-within .nav-account-dropdown,.nav-account-menu.open .nav-account-dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-account-dropdown a{display:block;padding:11px 12px;border-radius:8px;color:#334d70;font-size:13px;font-weight:700}.nav-account-dropdown a:hover{background:#f4f7fc;color:var(--blue)}
+@media(max-width:1270px){#mainNav .nav-link{padding-left:6px;padding-right:6px;font-size:11px}.nav-actions .btn-outline{display:none}}
+@media(max-width:1120px){.site-header{position:relative}#mainNav.nav{display:none}.nav-inner.menu-open #mainNav.nav{display:flex;position:absolute;left:0;right:0;top:82px;flex-direction:column;align-items:stretch;justify-content:flex-start;padding:12px;background:#fff;border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;box-shadow:0 18px 45px rgba(23,51,95,.12);z-index:1100}.nav-inner.menu-open .nav-item{width:100%}.nav-inner.menu-open .nav-link{width:100%;justify-content:space-between;padding:13px 12px;font-size:13px}.nav-inner.menu-open .dropdown{position:static;display:none;opacity:1;visibility:visible;transform:none;width:100%;min-width:0;box-shadow:none;border:0;padding:4px 0 8px 15px}.nav-item.open .dropdown{display:block!important}.nav-item.open .chevron{transform:rotate(180deg)}.mobile-toggle{display:block}.nav-account-dropdown{position:static;display:none;width:100%;min-width:0;margin-top:8px;opacity:1;visibility:visible;transform:none;box-shadow:none}.nav-account-menu.open .nav-account-dropdown{display:block}}
+@media(max-width:700px){.topbar-inner{min-height:auto;padding:9px 0;flex-direction:column;align-items:flex-start;gap:5px}.topbar-left,.topbar-right{flex-wrap:wrap}}
+@media(max-width:600px){.topbar-inner{font-size:11px}.nav-inner.menu-open #mainNav.nav{top:74px}.nav-actions{gap:6px}.nav-login{min-height:40px;padding:0 11px;font-size:11px}}
+
 </style>
 </head>
 
 <body>
+
 
 <header class="site-header">
   <div class="container nav-inner" id="navInner">
@@ -486,12 +508,27 @@ h1{
         Order a Test
       </a>
 
-       <a
-        href="client-login.html"
-        class="btn btn-orange"
-      >
-        Client Login
-      </a>
+      <div class="nav-account-menu">
+        <button
+          type="button"
+          class="nav-login"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Account Login
+          <span class="nav-login-chevron">▼</span>
+        </button>
+
+        <div class="nav-account-dropdown">
+          <a href="https://portal.screenings4u.com/customer-login.html">
+            Customer Login
+          </a>
+
+          <a href="https://portal.screenings4u.com/employer-login.html">
+            Employer Login
+          </a>
+        </div>
+      </div>
 
       <button
         class="mobile-toggle"

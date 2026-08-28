@@ -1487,69 +1487,55 @@ footer{
 </head>
 
 <body>
-
-
-<!-- =========================================================
-     TOP BAR
-========================================================= -->
-
-<div class="topbar">
-
-  <div class="container topbar-inner">
-
-    <div class="topbar-left">
-      <span>Nationwide Drug & Alcohol Testing</span>
-      <span>•</span>
-      <span>Operating Nationwide</span>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span>Nationwide Drug & Alcohol Testing</span>
+        <span>•</span>
+        <span>Operating Nationwide</span>
+      </div>
+      <div class="topbar-right">
+        <span>Mon–Fri, 8AM–8PM CST</span>
+        <a href="tel:7732457009">(773) 245-7009</a>
+      </div>
     </div>
-
-    <div class="topbar-right">
-      <span>Mon–Fri, 8AM–8PM CST</span>
-      <a href="tel:7732457009">(773) 245-7009</a>
-    </div>
-
   </div>
 
-</div>
-
-
-<!-- =========================================================
-     HEADER
-========================================================= -->
-
 <header class="site-header">
-
   <div class="container nav-inner" id="navInner">
 
-    <a
-      href="index.html"
-      class="brand"
-      aria-label="screenings4u home"
-    >
-
-      <img
-        src="images/logo.png"
-        alt="screenings4u"
-        class="site-logo"
-      >
-
+    <a href="index.html" class="brand" aria-label="screenings4u home">
+      <img src="images/logo.png" alt="screenings4u" class="site-logo">
     </a>
 
-
-    <nav class="nav" id="mainNav" aria-label="Main navigation"></nav>
-
+<nav class="nav" id="mainNav" aria-label="Main navigation"></nav>
 
     <div class="nav-actions">
       <a href="services.html" class="btn btn-outline">
         Order a Test
       </a>
 
-      <a
-        href="client-login.html"
-        class="btn btn-orange"
-      >
-        Client Login
-      </a>
+      <div class="nav-account-menu">
+        <button
+          type="button"
+          class="nav-login"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Account Login
+          <span class="nav-login-chevron">▼</span>
+        </button>
+
+        <div class="nav-account-dropdown">
+          <a href="https://portal.screenings4u.com/customer-login.html">
+            Customer Login
+          </a>
+
+          <a href="https://portal.screenings4u.com/employer-login.html">
+            Employer Login
+          </a>
+        </div>
+      </div>
 
       <button
         class="mobile-toggle"

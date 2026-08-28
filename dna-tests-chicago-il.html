@@ -118,12 +118,19 @@ url("images/dna-tests-chicago-il-hero.png") 38% center/cover no-repeat;overflow:
 </head>
 
 <body>
-<div class="topbar">
-  <div class="container topbar-inner">
-    <div class="topbar-left"><span>Nationwide Drug & Alcohol Testing</span><span>•</span><span>Operating Nationwide</span></div>
-    <div class="topbar-right"><span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a></div>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span>Nationwide Drug & Alcohol Testing</span>
+        <span>•</span>
+        <span>Operating Nationwide</span>
+      </div>
+      <div class="topbar-right">
+        <span>Mon–Fri, 8AM–8PM CST</span>
+        <a href="tel:7732457009">(773) 245-7009</a>
+      </div>
+    </div>
   </div>
-</div>
 
 <header class="site-header">
   <div class="container nav-inner" id="navInner">
@@ -139,12 +146,27 @@ url("images/dna-tests-chicago-il-hero.png") 38% center/cover no-repeat;overflow:
         Order a Test
       </a>
 
-       <a
-        href="client-login.html"
-        class="btn btn-orange"
-      >
-        Client Login
-      </a>
+      <div class="nav-account-menu">
+        <button
+          type="button"
+          class="nav-login"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Account Login
+          <span class="nav-login-chevron">▼</span>
+        </button>
+
+        <div class="nav-account-dropdown">
+          <a href="https://portal.screenings4u.com/customer-login.html">
+            Customer Login
+          </a>
+
+          <a href="https://portal.screenings4u.com/employer-login.html">
+            Employer Login
+          </a>
+        </div>
+      </div>
 
       <button
         class="mobile-toggle"

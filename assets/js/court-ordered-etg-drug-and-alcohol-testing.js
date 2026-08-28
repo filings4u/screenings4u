@@ -1,97 +1,148 @@
 /**
- * screenings4u - Court-Ordered Drug & Alcohol Testing Page Controller
- * Location: assets/js/court-ordered-etg-drug-and-alcohol-testing.js
+ * ============================================================
+ * screenings4u - Court-Ordered Drug & Alcohol Testing
+ * Page Controller
+ * Location:
+ * assets/js/court-ordered-etg-drug-and-alcohol-testing.js
+ * ============================================================
  */
 
 (function () {
-  'use strict';
+  "use strict";
 
   function initializePage() {
     initializeFaq();
     initializeSmoothScroll();
   }
 
+  /* ============================================================
+     FAQ ACCORDION
+     ============================================================ */
+
   function initializeFaq() {
-    document.addEventListener('click', function (event) {
-      var button = event.target.closest('[data-faq-toggle]');
+    document.addEventListener("click", function (event) {
+      var button = event.target.closest("[data-faq-toggle]");
 
       if (!button) return;
 
-      var item = button.closest('.faq-item');
+      var item = button.closest(".faq-item");
 
       if (!item) return;
 
       event.preventDefault();
 
-      var wasOpen = item.classList.contains('active');
+      var wasOpen = item.classList.contains("active");
 
-      document.querySelectorAll('.faq-item.active').forEach(function (openItem) {
-        openItem.classList.remove('active');
+      document
+        .querySelectorAll(".faq-item.active")
+        .forEach(function (openItem) {
+          openItem.classList.remove("active");
 
-        var openButton = openItem.querySelector('[data-faq-toggle]');
+          var openButton = openItem.querySelector(
+            "[data-faq-toggle]"
+          );
 
-        if (openButton) {
-          openButton.setAttribute('aria-expanded', 'false');
+          if (openButton) {
+            openButton.setAttribute(
+              "aria-expanded",
+              "false"
+            );
 
-          var openPlus = openButton.querySelector('.faq-plus');
+            var openPlus =
+              openButton.querySelector(".faq-plus");
 
-          if (openPlus) {
-            openPlus.textContent = '+';
+            if (openPlus) {
+              openPlus.textContent = "+";
+            }
           }
-        }
-      });
+        });
 
       if (!wasOpen) {
-        item.classList.add('active');
-        button.setAttribute('aria-expanded', 'true');
+        item.classList.add("active");
 
-        var plus = button.querySelector('.faq-plus');
+        button.setAttribute(
+          "aria-expanded",
+          "true"
+        );
+
+        var plus =
+          button.querySelector(".faq-plus");
 
         if (plus) {
-          plus.textContent = '−';
+          plus.textContent = "−";
         }
       }
     });
   }
 
+  /* ============================================================
+     SMOOTH SCROLL
+     ============================================================ */
+
   function initializeSmoothScroll() {
-    document.addEventListener('click', function (event) {
-      var link = event.target.closest('a[href^="#"]');
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest(
+        'a[href^="#"]'
+      );
 
       if (!link) return;
 
-      var targetId = link.getAttribute('href');
+      var targetId = link.getAttribute("href");
 
-      if (!targetId || targetId === '#') return;
+      if (!targetId || targetId === "#") return;
 
-      var target = document.querySelector(targetId);
+      var target;
+
+      try {
+        target = document.querySelector(targetId);
+      } catch (error) {
+        return;
+      }
 
       if (!target) return;
 
       event.preventDefault();
 
-      var header = document.querySelector('.site-header');
-      var headerHeight = header ? header.offsetHeight : 0;
+      var header =
+        document.querySelector(".site-header") ||
+        document.querySelector(".nav");
+
+      var headerHeight =
+        header ? header.offsetHeight : 0;
 
       var targetTop =
         target.getBoundingClientRect().top +
         window.pageYOffset -
         headerHeight -
-        12;
+        16;
 
       window.scrollTo({
         top: Math.max(0, targetTop),
-        behavior: 'smooth'
+        behavior: "smooth"
       });
 
-      if (window.history && window.history.replaceState) {
-        window.history.replaceState(null, '', targetId);
+      if (
+        window.history &&
+        window.history.replaceState
+      ) {
+        window.history.replaceState(
+          null,
+          "",
+          targetId
+        );
       }
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializePage);
+  /* ============================================================
+     INITIALIZE
+     ============================================================ */
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      initializePage
+    );
   } else {
     initializePage();
   }

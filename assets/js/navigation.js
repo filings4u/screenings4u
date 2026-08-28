@@ -10,9 +10,11 @@ document.addEventListener("DOMContentLoaded", initializeUniversalNavigation);
 
 function initializeUniversalNavigation() {
   const target = document.getElementById("mainNav");
+
   if (!target) return;
 
   target.innerHTML = getNavigationMarkup();
+
   injectNavigationStyles();
   initializeNavigationBehavior();
 }
@@ -31,6 +33,7 @@ function getNavigationMarkup() {
       <a class="nav-link" href="dot-services.html">
         DOT & Transportation <span class="chevron">▼</span>
       </a>
+
       <div class="dropdown">
         <a href="dot-services.html">DOT Services</a>
         <a href="dot-urine-drug-tests.html">DOT Drug Testing</a>
@@ -44,6 +47,7 @@ function getNavigationMarkup() {
       <a class="nav-link" href="business-services.html">
         Employers <span class="chevron">▼</span>
       </a>
+
       <div class="dropdown">
         <a href="business-services.html">Business Services</a>
         <a href="consulting-services.html">Consulting Services</a>
@@ -58,12 +62,23 @@ function getNavigationMarkup() {
       <a class="nav-link" href="personal-drug-and-alcohol-testing.html">
         Personal <span class="chevron">▼</span>
       </a>
+
       <div class="dropdown">
-        <a href="personal-drug-and-alcohol-testing.html">Personal Drug & Alcohol Testing</a>
-        <a href="court-ordered-etg-drug-and-alcohol-testing.html">Court-Ordered Testing</a>
-        <a href="dna-tests-chicago-il.html">DNA Tests — Chicago, IL</a>
-        <a href="non-dot-breathalyzer-services.html">NON-DOT Breathalyzer</a>
-        <a href="nursing-school-drug-tests.html">Nursing School Drug Tests</a>
+        <a href="personal-drug-and-alcohol-testing.html">
+          Personal Drug & Alcohol Testing
+        </a>
+        <a href="court-ordered-etg-drug-and-alcohol-testing.html">
+          Court-Ordered Testing
+        </a>
+        <a href="dna-tests-chicago-il.html">
+          DNA Tests — Chicago, IL
+        </a>
+        <a href="non-dot-breathalyzer-services.html">
+          NON-DOT Breathalyzer
+        </a>
+        <a href="nursing-school-drug-tests.html">
+          Nursing School Drug Tests
+        </a>
       </div>
     </div>
 
@@ -71,9 +86,14 @@ function getNavigationMarkup() {
       <a class="nav-link" href="dot-specimen-collector-training.html">
         Training <span class="chevron">▼</span>
       </a>
+
       <div class="dropdown">
-        <a href="dot-specimen-collector-training.html">DOT Specimen Collector Training</a>
-        <a href="dot-specimen-collector-training-group-training.html">Group Training</a>
+        <a href="dot-specimen-collector-training.html">
+          DOT Specimen Collector Training
+        </a>
+        <a href="dot-specimen-collector-training-group-training.html">
+          Group Training
+        </a>
       </div>
     </div>
 
@@ -82,7 +102,51 @@ function getNavigationMarkup() {
     </div>
 
     <div class="nav-item">
-      <a class="nav-link" href="contact.html">Contact</a>
+      <a class="nav-link" href="/resources">
+        Resources <span class="chevron">▼</span>
+      </a>
+
+      <div class="dropdown">
+        <a href="join-our-collector-network.html">
+          Collector Network
+        </a>
+
+        <a href="contact.html">
+          Contact Us
+        </a>
+
+        <a href="about-us.html">
+          About Us
+        </a>
+
+        <a href="house-lab-account-setup.html">
+          Lab Accounts
+        </a>
+
+        <a href="become-a-clearinghouse-consortium-third-party-administrator.html">
+          Become a C/TPA
+        </a>
+
+        <!-- <a href="/affiliate">
+          Affiliate Program
+        </a> -->
+
+        <!-- <a href="/education">
+        Education
+        </a> -->
+
+        <!-- <a href="/client-stories">
+          Client Stories
+        </a> -->
+
+       <!-- <a href="start-a-mobile-drug-testing-business.html">
+          Mobile Drug Test Business
+        </a> -->
+
+        <!-- <a href="/start-a-drug-testing-business">
+          Drug Test Business
+        </a> -->
+      </div>
     </div>
   `;
 }
@@ -91,6 +155,7 @@ function injectNavigationStyles() {
   if (document.getElementById("screenings4u-nav-styles")) return;
 
   const style = document.createElement("style");
+
   style.id = "screenings4u-nav-styles";
 
   style.textContent = `
@@ -113,7 +178,10 @@ function injectNavigationStyles() {
       font-weight: 800;
       text-decoration: none;
       white-space: nowrap;
-      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+      transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
     }
 
     .nav-login:hover,
@@ -145,7 +213,10 @@ function injectNavigationStyles() {
       opacity: 0;
       visibility: hidden;
       transform: translateY(6px);
-      transition: opacity .18s ease, visibility .18s ease, transform .18s ease;
+      transition:
+        opacity .18s ease,
+        visibility .18s ease,
+        transform .18s ease;
       z-index: 1200;
     }
 
@@ -165,12 +236,20 @@ function injectNavigationStyles() {
       font-size: 13px;
       font-weight: 700;
       text-decoration: none;
-      transition: background .18s ease, color .18s ease;
+      transition:
+        background .18s ease,
+        color .18s ease;
     }
 
     .nav-account-dropdown a:hover {
       background: #f4f7fc;
       color: #325aa3;
+    }
+
+    /* Resources dropdown can contain more links. */
+    .nav-item .dropdown {
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
     }
 
     @media (max-width: 1120px) {
@@ -206,6 +285,11 @@ function injectNavigationStyles() {
       .nav-account-menu.open:hover .nav-account-dropdown {
         display: block;
       }
+
+      .nav-item .dropdown {
+        max-height: none;
+        overflow: visible;
+      }
     }
   `;
 
@@ -233,15 +317,20 @@ function initializeNavigationBehavior() {
       event.preventDefault();
 
       navItems.forEach((other) => {
-        if (other !== item) other.classList.remove("open");
+        if (other !== item) {
+          other.classList.remove("open");
+        }
       });
 
       item.classList.toggle("open");
     });
   });
 
-  const accountMenu = document.querySelector(".nav-account-menu");
-  const accountButton = document.querySelector(".nav-login");
+  const accountMenu =
+    document.querySelector(".nav-account-menu");
+
+  const accountButton =
+    document.querySelector(".nav-login");
 
   if (accountMenu && accountButton) {
     accountButton.addEventListener("click", (event) => {
@@ -249,7 +338,9 @@ function initializeNavigationBehavior() {
 
       event.preventDefault();
       event.stopPropagation();
+
       accountMenu.classList.toggle("open");
+
       accountButton.setAttribute(
         "aria-expanded",
         String(accountMenu.classList.contains("open"))
@@ -261,35 +352,69 @@ function initializeNavigationBehavior() {
     mobileToggle.addEventListener("click", (event) => {
       event.stopPropagation();
 
-      const open = navInner.classList.toggle("menu-open");
+      const open =
+        navInner.classList.toggle("menu-open");
 
-      mobileToggle.setAttribute("aria-expanded", String(open));
+      mobileToggle.setAttribute(
+        "aria-expanded",
+        String(open)
+      );
+
       mobileToggle.setAttribute(
         "aria-label",
         open ? "Close menu" : "Open menu"
       );
-      mobileToggle.textContent = open ? "✕" : "☰";
+
+      mobileToggle.textContent =
+        open ? "✕" : "☰";
 
       if (!open) {
+        navItems.forEach((item) =>
+          item.classList.remove("open")
+        );
+
         accountMenu?.classList.remove("open");
-        accountButton?.setAttribute("aria-expanded", "false");
+
+        accountButton?.setAttribute(
+          "aria-expanded",
+          "false"
+        );
       }
     });
   }
 
   document.addEventListener("click", (event) => {
-    if (navInner && navInner.contains(event.target)) return;
+    if (
+      navInner &&
+      navInner.contains(event.target)
+    ) {
+      return;
+    }
 
     navInner?.classList.remove("menu-open");
 
-    navItems.forEach((item) => item.classList.remove("open"));
+    navItems.forEach((item) =>
+      item.classList.remove("open")
+    );
 
     accountMenu?.classList.remove("open");
-    accountButton?.setAttribute("aria-expanded", "false");
+
+    accountButton?.setAttribute(
+      "aria-expanded",
+      "false"
+    );
 
     if (mobileToggle) {
-      mobileToggle.setAttribute("aria-expanded", "false");
-      mobileToggle.setAttribute("aria-label", "Open menu");
+      mobileToggle.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+      mobileToggle.setAttribute(
+        "aria-label",
+        "Open menu"
+      );
+
       mobileToggle.textContent = "☰";
     }
   });
@@ -297,17 +422,34 @@ function initializeNavigationBehavior() {
   window.addEventListener("resize", () => {
     if (window.innerWidth > 1120) {
       navInner?.classList.remove("menu-open");
-      navItems.forEach((item) => item.classList.remove("open"));
+
+      navItems.forEach((item) =>
+        item.classList.remove("open")
+      );
+
       accountMenu?.classList.remove("open");
-      accountButton?.setAttribute("aria-expanded", "false");
+
+      accountButton?.setAttribute(
+        "aria-expanded",
+        "false"
+      );
 
       if (mobileToggle) {
-        mobileToggle.setAttribute("aria-expanded", "false");
-        mobileToggle.setAttribute("aria-label", "Open menu");
+        mobileToggle.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+        mobileToggle.setAttribute(
+          "aria-label",
+          "Open menu"
+        );
+
         mobileToggle.textContent = "☰";
       }
     }
   });
 }
 
-window.refreshUniversalNavigation = initializeUniversalNavigation;
+window.refreshUniversalNavigation =
+  initializeUniversalNavigation;
