@@ -4,454 +4,285 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact | screenings4u</title>
-<link rel="icon" type="image/png" href="images/fav.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta name="description" content="Contact screenings4u for personal testing, employer services, workplace programs, training, and general support.">
 
 <style>
-:root{
-  --orange:#ff6b00;
+:root {
   --blue:#325aa3;
   --blue-dark:#24467f;
-  --ink:#1d2d45;
-  --muted:#667892;
-  --surface:#f4f7fc;
-  --line:#d9e3f0;
+  --orange:#ff6b00;
+  --ink:#183153;
+  --muted:#60708a;
+  --soft:#f4f7fb;
+  --line:#dce5f0;
   --white:#fff;
-  --shadow:0 14px 40px rgba(23,51,95,.07);
 }
-
 *{box-sizing:border-box}
-
-html{scroll-behavior:smooth}
-
-body{
-  margin:0;
-  font-family:Inter,Arial,sans-serif;
-  background:var(--surface);
-  color:var(--ink);
-}
-
-a{text-decoration:none;color:inherit}
-
-button,input,select,textarea{font:inherit}
-
-.container{
-  width:min(1200px,calc(100% - 40px));
-  margin:auto;
-}
-
-/* =========================================================
-   HEADER / UNIVERSAL NAVIGATION
-   ========================================================= */
-
-.site-header{
-  background:#fff;
-  border-bottom:1px solid var(--line);
-  position:sticky;
-  top:0;
-  z-index:1000;
-}
-
-.nav-inner{
-  min-height:82px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:22px;
-  position:relative;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  flex:0 0 155px;
-  width:155px;
-}
-
-.site-logo{
-  display:block;
-  width:145px;
-  height:auto;
-  max-height:48px;
-  object-fit:contain;
-  object-position:left center;
-}
-
-.nav{
-  display:flex;
-  align-items:center;
-  gap:4px;
-}
-
-.nav-item{
-  position:relative;
-}
-
-.nav-link{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:13px 10px;
-  color:#344054;
-  font-size:13px;
-  font-weight:700;
-  border-radius:7px;
-}
-
-.nav-link:hover{
-  color:var(--blue);
-  background:#f5f8fc;
-}
-
-.nav-link .chevron{
-  font-size:10px;
-  transition:transform .2s ease;
-}
-
-.dropdown{
-  position:absolute;
-  top:calc(100% + 8px);
-  left:0;
-  min-width:255px;
-  padding:10px;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:12px;
-  box-shadow:0 18px 45px rgba(23,51,95,.12);
-  opacity:0;
-  visibility:hidden;
-  transform:translateY(6px);
-  transition:.18s ease;
-}
-
-.nav-item:hover .dropdown,
-.nav-item:focus-within .dropdown{
-  opacity:1;
-  visibility:visible;
-  transform:translateY(0);
-}
-
-.nav-item:hover .chevron{
-  transform:rotate(180deg);
-}
-
-.dropdown a{
-  display:block;
-  padding:11px 12px;
-  border-radius:8px;
-  font-size:13px;
-  color:#475467;
-  font-weight:600;
-}
-
-.dropdown a:hover{
-  background:#f3f7fc;
-  color:var(--blue);
-}
-
-.nav-actions{
-  display:flex;
-  gap:9px;
-  align-items:center;
-}
-
-.nav-actions .btn{
-  min-height:42px;
-  padding:0 15px;
-}
-
-.mobile-toggle{
-  display:none;
-  width:44px;
-  height:42px;
-  border:1px solid var(--line);
-  border-radius:8px;
-  background:#fff;
-  color:var(--blue-dark);
-  font-size:18px;
-}
-
-/* =========================================================
-   PAGE
-   ========================================================= */
-
-main{
-  padding:80px 0;
-}
-
-.card{
-  max-width:900px;
-  margin:auto;
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:38px;
-  box-shadow:var(--shadow);
-}
-
-.eyebrow{
-  color:var(--orange);
-  font-size:10px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.12em;
-}
-
-h1{
-  font-size:clamp(38px,6vw,58px);
-  color:var(--blue-dark);
-  line-height:1.03;
-  letter-spacing:-.05em;
-  margin:10px 0 14px;
-}
-
-.lead{
-  color:var(--muted);
-  line-height:1.8;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-  margin-top:28px;
-}
-
-.contact{
-  padding:20px;
-  border:1px solid var(--line);
-  border-radius:12px;
-}
-
-.label{
-  font-size:10px;
-  font-weight:900;
-  text-transform:uppercase;
-  color:#667085;
-}
-
-.value{
-  display:block;
-  margin-top:6px;
-  font-weight:800;
-  color:var(--blue-dark);
-}
-
-.actions{
-  margin-top:28px;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.btn{
-  min-height:46px;
-  padding:0 18px;
-  border-radius:8px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  font-size:12px;
-  font-weight:900;
-  border:1px solid transparent;
-}
-
-.orange{
-  background:var(--orange);
-  color:#fff;
-}
-
-.orange:hover{
-  background:var(--blue-dark);
-}
-
-.blue{
-  border-color:var(--blue);
-  color:var(--blue);
-  background:#fff;
-}
-
-.blue:hover{
-  background:#f4f7fc;
-}
-
-/* =========================================================
-   RESPONSIVE NAVIGATION
-   ========================================================= */
-
-@media(max-width:1120px){
-
-  .nav{
-    display:none;
-  }
-
-  .nav-inner.menu-open .nav{
-    display:flex;
-    position:absolute;
-    left:0;
-    right:0;
-    top:82px;
-    flex-direction:column;
-    align-items:stretch;
-    padding:12px;
-    background:#fff;
-    border:1px solid var(--line);
-    border-radius:0 0 12px 12px;
-    box-shadow:0 18px 45px rgba(23,51,95,.12);
-  }
-
-  .nav-inner.menu-open .dropdown{
-    position:static;
-    display:none;
-    opacity:1;
-    visibility:visible;
-    transform:none;
-    box-shadow:none;
-    border:0;
-    padding:4px 0 8px 15px;
-  }
-
-  .nav-item.open .dropdown{
-    display:block !important;
-  }
-
-  .mobile-toggle{
-    display:block;
-  }
-
-  .nav-actions .desktop-action{
-    display:none;
-  }
-}
-
-@media(max-width:600px){
-
-  .container{
-    width:min(100% - 28px,1200px);
-  }
-
-  main{
-    padding:55px 0;
-  }
-
-  .card{
-    padding:26px 20px;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .nav-inner{
-    min-height:74px;
-  }
-
-  .nav-inner.menu-open .nav{
-    top:74px;
-  }
-
-  .site-logo{
-    width:135px;
-  }
-}
-
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fff;line-height:1.6}
+a{color:inherit}
+.container{width:min(1180px,calc(100% - 40px));margin:auto}
+.hero{background:linear-gradient(135deg,#eef4fc 0%,#fff 58%,#fff3ea 100%);padding:84px 0 76px;border-bottom:1px solid var(--line)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--orange);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
+h1{font-size:clamp(44px,6vw,72px);line-height:1.02;letter-spacing:-.045em;margin:16px 0 20px;color:var(--blue-dark)}
+.hero p{font-size:18px;color:var(--muted);max-width:690px;margin:0}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 21px;border-radius:9px;font-size:14px;font-weight:800;text-decoration:none;border:1px solid transparent;transition:.2s ease}
+.btn-primary{background:var(--blue);color:#fff}.btn-primary:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.btn-outline{border-color:var(--blue);color:var(--blue);background:#fff}.btn-outline:hover{background:var(--soft)}
+.hero-panel{background:var(--blue-dark);color:#fff;padding:34px;border-radius:20px;box-shadow:0 22px 50px rgba(36,70,127,.18)}
+.hero-panel .mini-label{color:#bcd1f2;text-transform:uppercase;font-size:11px;font-weight:800;letter-spacing:.1em}
+.hero-panel h2{font-size:28px;line-height:1.15;margin:10px 0 14px}
+.hero-panel p{color:#d9e5f5;font-size:15px}
+.hero-points{display:grid;gap:14px;margin-top:24px}
+.hero-point{display:flex;gap:12px;align-items:flex-start}
+.hero-point b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--orange);color:#fff;font-size:13px;flex:0 0 28px}
+.section{padding:84px 0}
+.section-soft{background:var(--soft)}
+.section-heading{max-width:700px;margin-bottom:38px}
+.section-heading h2{font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-.035em;margin:10px 0 12px;color:var(--blue-dark)}
+.section-heading p{color:var(--muted);margin:0}
+.contact-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:28px;align-items:start}
+.info-stack{display:grid;gap:14px}
+.info-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:23px}
+.info-icon{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:#eef4fc;color:var(--blue);font-weight:900;margin-bottom:14px}
+.info-card small{display:block;color:var(--muted);text-transform:uppercase;font-size:10px;font-weight:800;letter-spacing:.09em}
+.info-card h3{margin:5px 0 3px;font-size:18px;color:var(--blue-dark)}
+.info-card a,.info-card span{font-weight:700;text-decoration:none}
+.form-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px;box-shadow:0 16px 42px rgba(31,59,103,.07)}
+.form-card h2{margin:0 0 8px;font-size:30px;color:var(--blue-dark)}
+.form-card>p{margin:0 0 24px;color:var(--muted)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:grid;gap:7px}
+.field.full{grid-column:1/-1}
+label{font-size:13px;font-weight:800;color:#334d70}
+input,select,textarea{width:100%;border:1px solid #cfd9e6;border-radius:9px;padding:13px 14px;font:inherit;color:var(--ink);background:#fff}
+textarea{min-height:150px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:3px solid rgba(50,90,163,.12);border-color:var(--blue)}
+.form-card .btn[type="submit"]{margin-top:26px}.form-note{font-size:12px;color:var(--muted);margin-top:14px}
+.topic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.topic{background:#fff;border:1px solid var(--line);border-radius:16px;padding:25px;text-decoration:none;transition:.2s ease}
+.topic:hover{transform:translateY(-3px);box-shadow:0 16px 35px rgba(31,59,103,.09);border-color:#b9cbe3}
+.topic-num{color:var(--orange);font-size:11px;font-weight:900;letter-spacing:.1em}
+.topic h3{margin:9px 0 7px;color:var(--blue-dark);font-size:20px}
+.topic p{margin:0;color:var(--muted);font-size:14px}
+.process{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.step{padding:28px;border-radius:16px;background:#fff;border:1px solid var(--line)}
+.step-no{color:var(--orange);font-size:12px;font-weight:900}
+.step h3{margin:10px 0 7px;color:var(--blue-dark)}
+.step p{margin:0;color:var(--muted);font-size:14px}
+.cta{background:var(--blue-dark);padding:62px 0;color:#fff}
+.cta-wrap{display:flex;justify-content:space-between;align-items:center;gap:30px}
+.cta h2{font-size:clamp(30px,4vw,46px);line-height:1.1;margin:0 0 10px}
+.cta p{margin:0;color:#d6e3f4;max-width:650px}
+.btn-light{background:#fff;color:var(--blue-dark)}.btn-light:hover{background:#edf3fb}
+.status{display:none;margin-top:14px;padding:12px 14px;border-radius:9px;font-weight:700;font-size:14px}
+.status.success{display:block;background:#edf8f0;color:#216838}.status.error{display:block;background:#fff0f0;color:#a62f2f}
+@media(max-width:900px){.hero-grid,.contact-grid{grid-template-columns:1fr}.topic-grid,.process{grid-template-columns:1fr 1fr}.cta-wrap{display:block}.cta .btn{margin-top:22px}}
+@media(max-width:620px){.container{width:min(100% - 28px,1180px)}.hero,.section{padding:62px 0}.hero-panel,.form-card{padding:24px}.form-grid,.topic-grid,.process{grid-template-columns:1fr}.field.full{grid-column:auto}h1{font-size:45px}}
 </style>
 </head>
-
 <body>
 
-<header class="site-header">
-  <div class="container nav-inner" id="navInner">
-
-    <a href="index.html" class="brand" aria-label="screenings4u home">
-      <img src="images/logo.png" alt="screenings4u" class="site-logo">
-    </a>
-
-<nav class="nav" id="mainNav" aria-label="Main navigation"></nav>
-
-    <div class="nav-actions">
-      <a href="services.html" class="btn btn-outline">
-        Order a Test
-      </a>
-
-       <a
-        href="client-login.html"
-        class="btn btn-orange"
-      >
-        Client Login
-      </a>
-
-      <button
-        class="mobile-toggle"
-        id="mobileToggle"
-        aria-label="Open menu"
-        aria-expanded="false">
-        ☰
-      </button>
-    </div>
-
-  </div>
-</header>
+<header class="site-header"><div id="siteHeader"></div></header>
 
 <main>
-  <div class="container">
-    <section class="card">
-
-      <div class="eyebrow">Contact screenings4u</div>
-
-      <h1>Let's get you to the right service.</h1>
-
-      <p class="lead">
-        For custom programs, employer services, audits, group training or services
-        that require additional coordination, contact our team.
-      </p>
-
-      <div class="grid">
-
-        <div class="contact">
-          <div class="label">Phone</div>
-          <a class="value" href="tel:7732457009">(773) 245-7009</a>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Contact screenings4u</span>
+        <h1>Tell us what you need. We'll help you find the right next step.</h1>
+        <p>Whether you need personal testing, employer support, workplace program assistance, training information, or help with an existing request, our team is here to help.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact-form">Send a Message</a>
+          <a class="btn btn-outline" href="services.html">Explore Services</a>
         </div>
-
-        <div class="contact">
-          <div class="label">Email</div>
-          <a class="value" href="mailto:support@screenings4u.com">
-            support@screenings4u.com
-          </a>
-        </div>
-
-        <div class="contact">
-          <div class="label">Office</div>
-          <span class="value">
-            8537 S Pulaski Rd, Chicago, IL 60652
-          </span>
-        </div>
-
-        <div class="contact">
-          <div class="label">Dashboard</div>
-          <a class="value" href="admin-dashboard.html">
-            Dashboard Login
-          </a>
-        </div>
-
       </div>
 
-      <div class="actions">
-        <a class="btn orange" href="services.html">Browse Services</a>
-        <a class="btn blue" href="mailto:support@screenings4u.com">Email Us</a>
+      <aside class="hero-panel">
+        <span class="mini-label">How we can help</span>
+        <h2>One place to start the conversation.</h2>
+        <p>Share a few details about what you need and we can direct your request to the appropriate team or service.</p>
+        <div class="hero-points">
+          <div class="hero-point"><b>01</b><span>Personal testing and service questions</span></div>
+          <div class="hero-point"><b>02</b><span>Employer and workplace program support</span></div>
+          <div class="hero-point"><b>03</b><span>Training, consulting and general inquiries</span></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="contact-form">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">Get in touch</span>
+        <h2>Start with the information that is easiest for you.</h2>
+        <p>Call, email, visit our office, or send a message using the form below.</p>
       </div>
 
-    </section>
-  </div>
+      <div class="contact-grid">
+        <div class="info-stack">
+          <article class="info-card">
+            <div class="info-icon">☎</div>
+            <small>Phone</small>
+            <h3>Speak with our team</h3>
+            <a href="tel:7732457009">(773) 245-7009</a>
+          </article>
+
+          <article class="info-card">
+            <div class="info-icon">@</div>
+            <small>Email</small>
+            <h3>Send us a message</h3>
+            <a href="mailto:support@screenings4u.com">support@screenings4u.com</a>
+          </article>
+
+          <article class="info-card">
+            <div class="info-icon">⌖</div>
+            <small>Office</small>
+            <h3>Chicago location</h3>
+            <span>8537 S Pulaski Rd<br>Chicago, IL 60652</span>
+          </article>
+
+          <article class="info-card">
+            <div class="info-icon">↗</div>
+            <small>Existing customers</small>
+            <h3>Access your account</h3>
+            <a href="https://portal.screenings4u.com/customer-login.html">Customer Portal →</a>
+          </article>
+        </div>
+
+        <form class="form-card" id="contactForm">
+          <h2>Send us a message</h2>
+          <p>Tell us what you need help with and include any details that will help us understand your request.</p>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="firstName">First Name</label>
+              <input id="firstName" name="firstName" autocomplete="given-name" required>
+            </div>
+            <div class="field">
+              <label for="lastName">Last Name</label>
+              <input id="lastName" name="lastName" autocomplete="family-name" required>
+            </div>
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel">
+            </div>
+            <div class="field full">
+              <label for="topic">What can we help with?</label>
+              <select id="topic" name="topic" required>
+                <option value="">Select an option</option>
+                <option>Personal Testing</option>
+                <option>Employer Services</option>
+                <option>DOT or Workplace Program Support</option>
+                <option>Consulting Services</option>
+                <option>Training</option>
+                <option>Existing Order or Account</option>
+                <option>General Question</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us how we can help..." required></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Send Message →</button>
+          <div id="formStatus" class="status" role="status"></div>
+          <p class="form-note">For urgent or time-sensitive questions, please call our office.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">Choose a starting point</span>
+        <h2>Not sure who to contact?</h2>
+        <p>These options can help you get to the right part of screenings4u faster.</p>
+      </div>
+
+      <div class="topic-grid">
+        <a class="topic" href="personal-drug-and-alcohol-testing.html">
+          <div class="topic-num">01 / PERSONAL</div>
+          <h3>Personal Testing</h3>
+          <p>Questions about individual testing options, requirements or getting started.</p>
+        </a>
+        <a class="topic" href="business-services.html">
+          <div class="topic-num">02 / EMPLOYERS</div>
+          <h3>Employer Services</h3>
+          <p>Support for businesses managing workplace testing and ongoing programs.</p>
+        </a>
+        <a class="topic" href="consulting-services.html">
+          <div class="topic-num">03 / CONSULTING</div>
+          <h3>Program Support</h3>
+          <p>Help reviewing workflows, policies, records and program requirements.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">What happens next</span>
+        <h2>A simple path from question to next step.</h2>
+      </div>
+
+      <div class="process">
+        <article class="step"><div class="step-no">STEP 01</div><h3>Tell us what you need</h3><p>Share the service, program or question you need help with.</p></article>
+        <article class="step"><div class="step-no">STEP 02</div><h3>We review your request</h3><p>Our team reviews the information and identifies the appropriate next step.</p></article>
+        <article class="step"><div class="step-no">STEP 03</div><h3>Move forward with clarity</h3><p>You'll receive direction on the service, process or follow-up needed.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container cta-wrap">
+      <div>
+        <h2>Prefer to start by exploring services?</h2>
+        <p>Browse available testing, employer and training solutions to find the option that best fits your needs.</p>
+      </div>
+      <a class="btn btn-light" href="services.html">Browse Services →</a>
+    </div>
+  </section>
 </main>
 
 <footer id="siteFooter"></footer>
 
 <script src="assets/js/navigation.js"></script>
 <script src="assets/js/footer.js"></script>
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  const status = document.getElementById("formStatus");
+  status.className = "status success";
+  status.textContent = "Thank you. Your message has been prepared for submission. Contact form delivery will be connected to the website email workflow.";
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const header = document.getElementById("siteHeader");
+  if (header && !header.innerHTML.trim()) {
+    header.innerHTML = `
+      <nav style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 20px;max-width:1180px;margin:auto;">
+        <a href="index.html" style="font-weight:900;font-size:20px;color:#325aa3;text-decoration:none;">screenings4u</a>
+        <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;">
+          <a href="about-us.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="contact.html">Contact</a>
+          <a href="https://portal.screenings4u.com/customer-login.html" style="background:#325aa3;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:800;">Account Login</a>
+        </div>
+      </nav>`;
+  }
+});
+</script>
 
 </body>
 </html>

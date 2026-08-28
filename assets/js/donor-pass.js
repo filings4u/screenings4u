@@ -1,148 +1,157 @@
 /**
- * screenings4u — Donor Pass Location
+ * ============================================================
+ * screenings4u — Donor Pass Result
+ * ============================================================
  *
- * Current mode:
- * - USPS address validation is enabled.
- * - CRL testing-location integration will be added later.
- * - The S4U tracking number is preserved throughout the workflow.
+ * IMPORTANT:
+ * This page is only a temporary status/location display.
+ * The official donor pass is created manually by the screenings4u
+ * team and will be uploaded to the customer's portal account.
+ * The customer will receive an email notification when it is available.
+ *
+ * This script does NOT create or automate a CRL donor pass.
  */
 
 "use strict";
 
-document.addEventListener("DOMContentLoaded", initDonorPassLocation);
+document.addEventListener("DOMContentLoaded", initDonorPassResult);
 
-async function initDonorPassLocation() {
+async function initDonorPassResult() {
   const params = new URLSearchParams(window.location.search);
 
-  const orderId = String(
-    params.get("order") ||
-    params.get("order_id") ||
-    ""
-  ).trim();
-
-  const tracking = String(
-    params.get("tracking") ||
-    params.get("tracking_number") ||
-    ""
-  ).trim();
-
-  // IMPORTANT: render the tracking number immediately when it is
-  // available in the URL. If only the order UUID is supplied,
-  // the database lookup below will resolve the tracking number.
-  const trackingEl = document.getElementById("trackingNumber");
-  if (trackingEl) {
-    trackingEl.textContent = tracking || "Loading...";
-  }
+  const orderId = String(params.get("order") || "").trim();
+  const tracking = String(params.get("tracking") || "").trim();
 
   if (!tracking && !orderId) {
     showNotice(
       "No S4U tracking number or order was provided.",
       "error"
     );
-    disableForm();
     return;
   }
 
-  const form = document.getElementById("donorPassForm");
-  if (form) {
-    form.addEventListener("submit", handleSubmit);
-  }
+  document
+    .getElementById("printButton")
+    ?.addEventListener("click", () => window.print());
 
-  formatZip();
+  document
+    .getElementById("downloadButton")
+    ?.addEventListener("click", downloadDonorPass);
 
   try {
-    const order = await loadPaidOrderWithRetry(
-      tracking,
-      orderId
-    );
+    const order = await loadOrder(tracking, orderId);
 
-    // Always prefer the database value once the order has loaded.
     const actualTracking =
       order.tracking_number || tracking;
 
-    if (trackingEl) {
-      trackingEl.textContent =
-        actualTracking || "—";
-    }
+    renderOrder(order, actualTracking);
 
-    const item = Array.isArray(order.order_items)
-      ? order.order_items[0]
-      : null;
+    updatePageUrl(order.id, actualTracking);
 
-    const serviceEl =
-      document.getElementById("serviceName");
-
-    if (serviceEl) {
-      serviceEl.textContent =
-        item?.metadata?.service_name ||
-        item?.metadata?.product_name ||
-        item?.metadata?.serviceName ||
-        "Your purchased service";
-    }
-
-    // Preserve both identifiers for the rest of the workflow.
-    const back =
-      document.getElementById("backButton");
-
-    if (back) {
-      back.href =
-        "order-confirmation.html?order=" +
-        encodeURIComponent(order.id || orderId) +
-        "&tracking=" +
-        encodeURIComponent(actualTracking);
-    }
-
-    const existing =
-      await loadExistingLocation(order.id);
-
-    if (existing) {
-      populateLocation(existing);
-    }
-  } catch (error) {
-    console.error(
-      "Donor pass location initialization error:",
-      error
+    /*
+     * A donor pass is no longer treated as something this public
+     * page automatically generates or downloads.
+     *
+     * The team manually prepares the donor pass and uploads the
+     * completed document to the customer's portal account.
+     */
+    showNotice(
+      "Your order has been received. Your donor pass will be prepared and uploaded to your customer account when it is available.",
+      "info"
     );
 
-    // Do not erase the tracking number if the secondary
-    // order lookup fails.
+  } catch (error) {
+    console.error("Donor pass load error:", error);
+
     showNotice(
       error?.message ||
-      "Unable to load your order.",
+        "Unable to load your order information.",
       "error"
     );
   }
 }
 
+/* ============================================================
+   SUPABASE CLIENT
+   ============================================================ */
+
+async function loadExternalScript(src, test) {
+  if (typeof test === "function" && test()) {
+    return;
+  }
+
+  await new Promise((resolve, reject) => {
+    const existing = document.querySelector(
+      `script[data-screenings4u-loader="${src}"]`
+    );
+
+    if (existing) {
+      existing.addEventListener("load", resolve, {
+        once: true
+      });
+
+      existing.addEventListener("error", reject, {
+        once: true
+      });
+
+      return;
+    }
+
+    const script = document.createElement("script");
+
+    script.src = src;
+    script.async = false;
+    script.dataset.screenings4uLoader = src;
+
+    script.onload = resolve;
+
+    script.onerror = () => {
+      reject(
+        new Error(
+          `Unable to load required script: ${src}`
+        )
+      );
+    };
+
+    document.head.appendChild(script);
+  });
+}
+
 async function getSupabaseClient() {
-  /*
-   * Use the site's shared Supabase client when available.
-   * This is the preferred path because it keeps configuration
-   * centralized in the screenings4u site.
-   */
-  if (typeof window.getScreenings4uSupabase === "function") {
-    const client = await window.getScreenings4uSupabase();
+  if (
+    typeof window.getScreenings4uSupabase ===
+    "function"
+  ) {
+    const client =
+      await window.getScreenings4uSupabase();
 
     if (client) {
       return client;
     }
   }
 
-  /*
-   * Support an already-created global client.
-   */
   if (window.screenings4uSupabase) {
     return window.screenings4uSupabase;
   }
 
-  /*
-   * Fallback: create the public browser client directly.
-   *
-   * IMPORTANT:
-   * SCREENINGS4U_SUPABASE_ANON_KEY must be the PUBLIC anon/publishable
-   * key only. Never expose the Supabase service-role key here.
-   */
-  const supabaseLib = window.supabase;
+  await loadExternalScript(
+    "assets/js/site-config.js",
+    () =>
+      Boolean(
+        window.SCREENINGS4U_SUPABASE_URL &&
+        window.SCREENINGS4U_SUPABASE_ANON_KEY
+      )
+  );
+
+  await loadExternalScript(
+    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2",
+    () =>
+      Boolean(
+        window.supabase &&
+        typeof window.supabase.createClient ===
+        "function"
+      )
+  );
 
   const supabaseUrl =
     window.SCREENINGS4U_SUPABASE_URL ||
@@ -155,14 +164,17 @@ async function getSupabaseClient() {
     "";
 
   if (
-    supabaseLib &&
-    typeof supabaseLib.createClient === "function" &&
+    window.supabase &&
+    typeof window.supabase.createClient ===
+    "function" &&
     supabaseUrl &&
     supabaseAnonKey
   ) {
-    if (!window.__screenings4uDonorPassClient) {
+    if (
+      !window.__screenings4uDonorPassClient
+    ) {
       window.__screenings4uDonorPassClient =
-        supabaseLib.createClient(
+        window.supabase.createClient(
           supabaseUrl,
           supabaseAnonKey
         );
@@ -172,79 +184,23 @@ async function getSupabaseClient() {
   }
 
   throw new Error(
-    "The customer account connection could not be initialized. " +
-    "Make sure site-config.js contains SCREENINGS4U_SUPABASE_URL " +
-    "and SCREENINGS4U_SUPABASE_ANON_KEY, and that Supabase JS is loaded."
+    "The customer account connection could not be initialized."
   );
 }
 
-async function loadOrder(tracking) {
-  const client = await getSupabaseClient();
+/* ============================================================
+   LOAD ORDER
+   ============================================================ */
 
-  const { data, error } = await client
-    .from("orders")
-    .select(`
-      id,
-      tracking_number,
-      order_number,
-      customer_email,
-      customer_first_name,
-      customer_last_name,
-      payment_status,
-      status,
-      order_items (
-        id,
-        quantity,
-        metadata
-      )
-    `)
-    .eq("tracking_number", tracking)
-    .maybeSingle();
+async function loadOrder(tracking, orderId) {
+  const client =
+    await getSupabaseClient();
 
-  if (error) throw error;
+  let data = null;
+  let error = null;
 
-  if (!data) {
-    throw new Error("We could not find an order for that tracking number.");
-  }
-
-  if (data.payment_status !== "paid") {
-    throw new Error(
-      "Your payment is still being confirmed. Please wait a moment and try again."
-    );
-  }
-
-  return data;
-}
-
-async function loadPaidOrderWithRetry(
-  tracking,
-  orderId
-) {
-  /*
-   * Stripe payment confirmation and the webhook update to
-   * orders.payment_status can happen a moment apart.
-   *
-   * Give the webhook a short window to mark the order paid.
-   *
-   * The lookup supports either:
-   *   - S4U tracking number
-   *   - internal order UUID
-   *
-   * If both are supplied, the returned order is verified
-   * against both identifiers.
-   */
-  const maxAttempts = 8;
-  const delayMs = 1000;
-
-  for (
-    let attempt = 1;
-    attempt <= maxAttempts;
-    attempt++
-  ) {
-    const client =
-      await getSupabaseClient();
-
-    let query = client
+  if (orderId) {
+    const result = await client
       .from("orders")
       .select(`
         id,
@@ -260,355 +216,208 @@ async function loadPaidOrderWithRetry(
           quantity,
           metadata
         )
-      `);
+      `)
+      .eq("id", orderId)
+      .maybeSingle();
 
-    if (orderId) {
-      query = query.eq("id", orderId);
-    } else {
-      query = query.eq(
+    data = result.data;
+    error = result.error;
+  }
+
+  if (
+    !data &&
+    !error &&
+    tracking
+  ) {
+    const result = await client
+      .from("orders")
+      .select(`
+        id,
+        tracking_number,
+        order_number,
+        customer_email,
+        customer_first_name,
+        customer_last_name,
+        payment_status,
+        status,
+        order_items (
+          id,
+          quantity,
+          metadata
+        )
+      `)
+      .eq(
         "tracking_number",
         tracking
-      );
-    }
+      )
+      .maybeSingle();
 
-    const {
-      data,
-      error
-    } = await query.maybeSingle();
-
-    if (error) {
-      throw error;
-    }
-
-    if (!data) {
-      throw new Error(
-        "We could not find an order for that S4U tracking number."
-      );
-    }
-
-    /*
-     * If both identifiers were supplied, make sure they
-     * refer to the same order.
-     */
-    if (
-      tracking &&
-      data.tracking_number &&
-      data.tracking_number !== tracking
-    ) {
-      throw new Error(
-        "The S4U tracking number does not match the selected order."
-      );
-    }
-
-    if (data.payment_status === "paid") {
-      return data;
-    }
-
-    if (attempt < maxAttempts) {
-      await new Promise((resolve) =>
-        setTimeout(resolve, delayMs)
-      );
-    }
+    data = result.data;
+    error = result.error;
   }
-
-  throw new Error(
-    "Your payment is still being confirmed. Please wait a moment and try again."
-  );
-}
-
-async function loadExistingLocation(orderId) {
-  const client = await getSupabaseClient();
-
-  const { data, error } = await client
-    .from("order_donor_locations")
-    .select("*")
-    .eq("order_id", orderId)
-    .maybeSingle();
-
-  if (error) throw error;
-
-  return data || null;
-}
-
-async function handleSubmit(event) {
-  event.preventDefault();
-  clearNotice();
-
-  const params = new URLSearchParams(window.location.search);
-  const orderId = String(
-    params.get("order") ||
-    params.get("order_id") ||
-    ""
-  ).trim();
-
-  const tracking = String(
-    params.get("tracking") ||
-    params.get("tracking_number") ||
-    ""
-  ).trim();
-
-  if (!tracking && !orderId) {
-    showNotice(
-      "No S4U tracking number or order was provided.",
-      "error"
-    );
-    return;
-  }
-
-  const values = {
-    address_line_1: getValue("address"),
-    address_line_2: getValue("address2"),
-    city: getValue("city"),
-    state: getValue("state").toUpperCase(),
-    postal_code: getValue("zip")
-  };
-
-  const validation = validateLocation(values);
-
-  if (!validation.valid) {
-    showNotice(validation.message, "error");
-    document.getElementById(validation.field)?.focus();
-    return;
-  }
-
-  const button = document.getElementById("generatePassButton");
-  setButton(button, true, "Validating Address...");
-
-  try {
-    // Load the paid order first. This also verifies the tracking number.
-    const order = await loadPaidOrderWithRetry(tracking, orderId);
-
-    if (orderId && order.id !== orderId) {
-      throw new Error(
-        "The order information does not match the S4U tracking number."
-      );
-    }
-
-    // USPS validation happens server-side so the Consumer Key/Secret
-    // never reaches the customer's browser.
-    const usps = await validateWithUSPS(values);
-
-    if (!usps.valid) {
-      throw new Error(
-        usps.message ||
-        "USPS could not validate this address. Please check the address and try again."
-      );
-    }
-
-    const standardized = usps.address || {};
-
-    // Save USPS-standardized values through the SECURITY DEFINER RPC.
-    // Do not write directly to order_donor_locations from the browser.
-    const addressLine1 =
-      standardized.streetAddress || values.address_line_1;
-
-    const addressLine2 =
-      standardized.secondaryAddress || values.address_line_2 || null;
-
-    const city =
-      standardized.city || values.city;
-
-    const state =
-      standardized.state || values.state;
-
-    const postalCode =
-      standardized.ZIPCode
-        ? standardized.ZIPPlus4
-          ? `${standardized.ZIPCode}-${standardized.ZIPPlus4}`
-          : standardized.ZIPCode
-        : values.postal_code;
-
-    const metadata = {
-      ...(standardized || {}),
-      usps_validated: true,
-      usps_validated_at: new Date().toISOString()
-    };
-
-    setButton(button, true, "Saving Location...");
-
-    const client = await getSupabaseClient();
-
-    const { data: savedId, error: saveError } = await client.rpc(
-      "save_customer_donor_location",
-      {
-        p_order_id: order.id,
-        p_tracking_number: order.tracking_number || tracking,
-        p_address_line_1: addressLine1,
-        p_address_line_2: addressLine2,
-        p_city: city,
-        p_state: state,
-        p_postal_code: postalCode,
-        p_country: "US",
-        p_source: "usps",
-        p_metadata: metadata
-      }
-    );
-
-    if (saveError) {
-      console.error("Donor location RPC error:", saveError);
-      throw new Error(
-        saveError.message ||
-        "The testing location could not be saved."
-      );
-    }
-
-    if (!savedId) {
-      throw new Error("The testing location could not be saved.");
-    }
-
-    const actualTracking = order.tracking_number || tracking;
-
-    // Preserve BOTH order UUID and tracking number.
-    window.location.assign(
-      "donor-pass-result.html?order=" +
-      encodeURIComponent(order.id) +
-      "&tracking=" +
-      encodeURIComponent(actualTracking)
-    );
-  } catch (error) {
-    console.error("Donor location save/validation error:", error);
-
-    showNotice(
-      error?.message || "Unable to save your testing location.",
-      "error"
-    );
-
-    setButton(button, false, "Continue to Donor Pass →");
-  }
-}
-
-async function validateWithUSPS(values) {
-  const client = await getSupabaseClient();
-
-  const { data, error } = await client.functions.invoke(
-    "validate-usps-address",
-    {
-      body: {
-        streetAddress: values.address_line_1,
-        secondaryAddress: values.address_line_2 || "",
-        city: values.city,
-        state: values.state,
-        ZIPCode: values.postal_code.replace(/\D/g, "").slice(0, 5)
-      }
-    }
-  );
 
   if (error) {
-    console.error("USPS validation function error:", error);
+    throw error;
+  }
+
+  if (!data) {
     throw new Error(
-      "We could not verify the address right now. Please try again."
+      "We could not find an order for that S4U tracking number."
     );
   }
 
-  return data || {
-    valid: false,
-    message: "No address validation response was returned."
-  };
-}
-
-function validateLocation(values) {
-  if (values.address_line_1.length < 3) {
-    return {
-      valid: false,
-      field: "address",
-      message: "Please enter your street address."
-    };
+  if (
+    data.payment_status !== "paid"
+  ) {
+    throw new Error(
+      "Your order is not available until payment has been confirmed."
+    );
   }
 
-  if (!values.city || values.city.length < 2) {
-    return {
-      valid: false,
-      field: "city",
-      message: "Please enter your city."
-    };
+  if (
+    tracking &&
+    data.tracking_number &&
+    data.tracking_number !== tracking
+  ) {
+    throw new Error(
+      "The S4U tracking number does not match the selected order."
+    );
   }
 
-  if (!/^[A-Z]{2}$/.test(values.state)) {
-    return {
-      valid: false,
-      field: "state",
-      message: "Please select your state."
-    };
+  return data;
+}
+
+/* ============================================================
+   RENDER ORDER
+   ============================================================ */
+
+function renderOrder(order, tracking) {
+  const trackingElement =
+    document.getElementById(
+      "trackingNumber"
+    );
+
+  if (trackingElement) {
+    trackingElement.textContent =
+      order.tracking_number ||
+      tracking ||
+      "—";
   }
 
-  if (!/^\d{5}(?:-\d{4})?$/.test(values.postal_code)) {
-    return {
-      valid: false,
-      field: "zip",
-      message: "Please enter a valid ZIP code."
-    };
+  const customerName = [
+    order.customer_first_name,
+    order.customer_last_name
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .trim();
+
+  const customerElement =
+    document.getElementById(
+      "customerName"
+    );
+
+  if (customerElement) {
+    customerElement.textContent =
+      customerName ||
+      "Customer";
   }
 
-  return { valid: true };
+  const item =
+    Array.isArray(order.order_items)
+      ? order.order_items[0]
+      : null;
+
+  /*
+   * Service terminology only.
+   * product_name has been intentionally removed.
+   */
+  const serviceName =
+    item?.metadata?.service_name ||
+    item?.metadata?.serviceName ||
+    "Purchased service";
+
+  const serviceElement =
+    document.getElementById(
+      "serviceName"
+    );
+
+  if (serviceElement) {
+    serviceElement.textContent =
+      serviceName;
+  }
 }
 
-function populateLocation(location) {
-  setValue("address", location.address_line_1);
-  setValue("address2", location.address_line_2 || "");
-  setValue("city", location.city);
-  setValue("state", location.state);
-  setValue("zip", location.postal_code);
+/* ============================================================
+   DOWNLOAD / PRINT
+   ============================================================ */
+
+function downloadDonorPass() {
+  /*
+   * The official donor pass is uploaded to the customer portal.
+   * Do not pretend that this page generates a CRL donor pass.
+   */
+  showNotice(
+    "When your donor pass is ready, it will be available in your customer account documents.",
+    "info"
+  );
 }
 
-function formatZip() {
-  const zip = document.getElementById("zip");
-  if (!zip) return;
+/* ============================================================
+   KEEP BOTH IDENTIFIERS IN THE URL
+   ============================================================ */
 
-  zip.addEventListener("input", () => {
-    const digits = zip.value.replace(/\D/g, "").slice(0, 9);
+function updatePageUrl(orderId, tracking) {
+  if (!orderId && !tracking) {
+    return;
+  }
 
-    zip.value =
-      digits.length > 5
-        ? digits.slice(0, 5) + "-" + digits.slice(5)
-        : digits;
-  });
+  const params =
+    new URLSearchParams();
+
+  if (orderId) {
+    params.set("order", orderId);
+  }
+
+  if (tracking) {
+    params.set("tracking", tracking);
+  }
+
+  const newUrl =
+    window.location.pathname +
+    "?" +
+    params.toString();
+
+  window.history.replaceState(
+    {},
+    "",
+    newUrl
+  );
 }
 
-function getValue(id) {
-  return String(document.getElementById(id)?.value || "").trim();
-}
+/* ============================================================
+   NOTICE
+   ============================================================ */
 
-function setValue(id, value) {
-  const element = document.getElementById(id);
-  if (element) element.value = value || "";
-}
-
-function setButton(button, disabled, label) {
-  if (!button) return;
-  button.disabled = disabled;
-  button.textContent = label;
-}
-
-function disableForm() {
-  document
-    .querySelectorAll(
-      "#donorPassForm input, #donorPassForm select, #donorPassForm button"
-    )
-    .forEach((element) => {
-      element.disabled = true;
-    });
-}
-
-function showNotice(message, type) {
+function showNotice(
+  message,
+  type = "error"
+) {
   const notice =
-    document.getElementById("formMessage") ||
-    document.getElementById("locationNotice");
+    document.getElementById(
+      "resultNotice"
+    );
 
-  if (!notice) return;
+  if (!notice) {
+    return;
+  }
 
-  notice.className = "notice " + type;
-  notice.textContent = message;
-  notice.style.display = "block";
-}
+  notice.className =
+    "notice " + type;
 
-function clearNotice() {
-  const notice =
-    document.getElementById("formMessage") ||
-    document.getElementById("locationNotice");
+  notice.textContent =
+    message;
 
-  if (!notice) return;
-
-  notice.className = "notice";
-  notice.textContent = "";
-  notice.style.display = "none";
+  notice.style.display =
+    "block";
 }

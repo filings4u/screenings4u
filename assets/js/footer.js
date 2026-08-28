@@ -1,8 +1,7 @@
 /*
+ * ============================================================
  * screenings4u — Universal Marketing Footer
- *
- * Global marketing footer.
- * Dark blue treatment used consistently across the marketing site.
+ * ============================================================
  */
 
 document.addEventListener("DOMContentLoaded", initializeUniversalFooter);
@@ -15,275 +14,898 @@ function initializeUniversalFooter() {
   injectFooterStyles();
 
   target.innerHTML = `
-    <div class="container footer-grid">
+    <div class="container footer-shell">
 
-      <div>
+      <!-- =====================================================
+           FOOTER BRAND
+           ===================================================== -->
+      <div class="footer-brand-area">
+
         <div class="footer-brand">
-          <img src="images/logo2.png" alt="screenings4u" class="footer-logo">
+          <img
+            src="images/logo2.png"
+            alt="screenings4u"
+            class="footer-logo"
+          >
         </div>
 
         <p class="footer-about">
-          Nationwide drug and alcohol testing, DOT compliance services,
-          workplace screening and professional training through one trusted partner.
+          Nationwide drug and alcohol testing, DOT compliance,
+          workplace screening, and professional training through
+          one trusted partner.
         </p>
 
         <div class="footer-contact">
-          <a href="tel:7732457009">(773) 245-7009</a>
-          <a href="mailto:support@screenings4u.com">support@screenings4u.com</a>
-          <span>8537 S Pulaski Rd, Chicago, IL 60652</span>
+
+          <a href="tel:7732457009">
+            (773) 245-7009
+          </a>
+
+          <a href="mailto:support@screenings4u.com">
+            support@screenings4u.com
+          </a>
+
+          <span>
+            8537 S Pulaski Rd, Chicago, IL 60652
+          </span>
+
         </div>
+
       </div>
 
-      <div class="footer-col">
-        <h4>Services</h4>
-        <a href="services.html">All Services</a>
-        <a href="dot-urine-drug-tests.html">DOT Urine Tests</a>
-        <a href="dot-breathalyzer-services.html">DOT Breath Alcohol</a>
-        <a href="dot-physical-exam-services.html">DOT Physicals</a>
-        <a href="dot-specimen-collector-training.html">Training</a>
-      </div>
 
-      <div class="footer-col">
-        <h4>Business</h4>
-        <a href="business-services.html">Business Services</a>
-        <a href="mobile-drug-and-alcohol-testing.html">Mobile Testing</a>
-        <a href="consulting-services.html">Consulting</a>
-        <a href="background-checks.html">Background Checks</a>
-        <a href="new-entrant-audit.html">New Entrant Audit</a>
-      </div>
+      <!-- =====================================================
+           FOOTER LINKS
+           6 SECTIONS
+           ===================================================== -->
+      <div class="footer-links-grid">
 
-      <div class="footer-col">
-        <h4>Company</h4>
-        <a href="industries-served.html">Industries</a>
-        <a href="contact.html">Contact</a>
-        <a href="client-dashboard.html">Client Login</a>
+
+        <!-- COMPANY -->
+        <div class="footer-col">
+
+          <h4>Company</h4>
+
+          <a href="about-us.html">About Us</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="faq.html">FAQ</a>
+
+        </div>
+
+
+        <!-- SERVICES -->
+        <div class="footer-col">
+
+          <h4>Services</h4>
+
+          <a href="services.html">All Services</a>
+
+          <a href="dot-urine-drug-tests.html">
+            DOT Drug Testing
+          </a>
+
+          <a href="dot-breathalyzer-services.html">
+            DOT Alcohol Testing
+          </a>
+
+          <a href="dot-physical-exam-services.html">
+            DOT Physicals
+          </a>
+
+          <a href="workplace-drug-testing.html">
+            Workplace Testing
+          </a>
+
+        </div>
+
+
+        <!-- BUSINESS -->
+        <div class="footer-col">
+
+          <h4>Business</h4>
+
+          <a href="business-services.html">
+            Business Services
+          </a>
+
+          <a href="mobile-drug-and-alcohol-testing.html">
+            Mobile Testing
+          </a>
+
+          <a href="consulting-services.html">
+            Consulting
+          </a>
+
+          <a href="background-checks.html">
+            Background Checks
+          </a>
+
+          <a href="new-entrant-audit.html">
+            New Entrant Audit
+          </a>
+
+        </div>
+
+
+        <!-- ACCOUNT ACCESS -->
+        <div class="footer-col">
+
+          <h4>Account Access</h4>
+
+          <a
+            href="https://portal.screenings4u.com/customer-login.html"
+          >
+            Customer Login
+          </a>
+
+          <a
+            href="https://portal.screenings4u.com/employer-login.html"
+          >
+            Employer Login
+          </a>
+
+          <a
+            href="https://training.screenings4u.com/training-login.html"
+          >
+            Access Training
+          </a>
+
+        </div>
+
+
+        <!-- RESOURCES -->
+        <div class="footer-col">
+
+          <h4>Resources</h4>
+
+          <a href="blog.html">
+            Blog
+          </a>
+
+          <a href="training.html">
+            Training
+          </a>
+
+          <a href="contact.html">
+            Support
+          </a>
+
+          <a href="industries-served.html">
+            Industries Served
+          </a>
+
+        </div>
+
+
+        <!-- LEGAL -->
+        <div class="footer-col">
+
+          <h4>Legal</h4>
+
+          <a href="terms.html">
+            Terms of Use
+          </a>
+
+          <a href="privacy.html">
+            Privacy Policy
+          </a>
+
+          <a href="refund-policy.html">
+            Refund Policy
+          </a>
+
+          <a href="cookie-policy.html">
+            Cookie Policy
+          </a>
+
+          <a href="accessibility.html">
+            Accessibility
+          </a>
+
+          <a href="disclaimer.html">
+            Disclaimer
+          </a>
+
+        </div>
+
       </div>
 
     </div>
 
-    <div class="container footer-bottom">
-      <span>
-        © 2026 screenings4u. All rights reserved.
-        A Subsidiary of Roseland Companies, LLC.
-      </span>
 
-      <span>Trust. Transparency. Compliance.</span>
+    <!-- =======================================================
+         BOTTOM FOOTER
+         ======================================================= -->
+    <div class="container footer-bottom">
+
+
+      <!-- LEFT -->
+      <div class="footer-bottom-left">
+
+        <div class="footer-bottom-copy">
+          © <span id="footerYear"></span> screenings4u.
+          All rights reserved.
+        </div>
+
+      </div>
+
+
+      <!-- RIGHT -->
+      <div class="footer-bottom-right">
+
+        <a href="terms.html">
+          Terms
+        </a>
+
+        <span class="footer-separator">|</span>
+
+        <a href="privacy.html">
+          Privacy
+        </a>
+
+        <span class="footer-separator">|</span>
+
+        <a href="refund-policy.html">
+          Refund Policy
+        </a>
+
+        <span class="footer-separator">|</span>
+
+        <a
+          href="https://portal.screenings4u.com/admin-login.html"
+          class="footer-admin-login"
+        >
+          Admin Login
+        </a>
+
+      </div>
+
     </div>
   `;
+
+
+  const footerYear = document.getElementById("footerYear");
+
+  if (footerYear) {
+    footerYear.textContent = new Date().getFullYear();
+  }
 }
 
+
 function injectFooterStyles() {
-  if (document.getElementById("screenings4u-footer-styles")) return;
+
+  if (
+    document.getElementById(
+      "screenings4u-footer-styles"
+    )
+  ) {
+    return;
+  }
+
 
   const style = document.createElement("style");
 
   style.id = "screenings4u-footer-styles";
 
+
   style.textContent = `
+
     /* =========================================================
        screenings4u — GLOBAL FOOTER
-       Dark blue treatment matching the index page
        ========================================================= */
 
     #siteFooter {
-      --footer-blue-dark: #10284b;
-      --footer-blue-deep: #17335f;
-      --footer-blue: #24467f;
-      --footer-text: #d5e1ef;
-      --footer-muted: #9aacc3;
-      --footer-link: #b7c6d8;
+
+      --footer-dark: #10284b;
+      --footer-blue: #325aa3;
+      --footer-orange: #ff6b00;
+
+      --footer-text: #dce6f3;
+      --footer-muted: #9fb0c6;
+      --footer-link: #c5d2e1;
 
       display: block;
       width: 100%;
-      background: var(--footer-blue-dark) !important;
-      background-color: var(--footer-blue-dark) !important;
+
+      background: var(--footer-dark);
+
       color: var(--footer-text);
 
-      padding: 70px 0 25px;
+      padding: 65px 0 30px;
 
       position: relative;
+
       overflow: hidden;
+
       isolation: isolate;
+
     }
 
-    /*
-     * Keep the footer a solid dark blue.
-     * These subtle blue glows sit behind the content and do not
-     * turn the footer into the lighter blue seen on other pages.
-     */
-    #siteFooter::before {
-      content: "";
-      position: absolute;
-      width: 360px;
-      height: 360px;
-      left: -180px;
-      top: -190px;
 
-      background: rgba(36, 70, 127, .22);
+    /* =========================================================
+       SUBTLE BACKGROUND ACCENTS
+       ========================================================= */
+
+    #siteFooter::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 420px;
+      height: 420px;
+
+      left: -220px;
+      top: -240px;
+
+      background: rgba(50, 90, 163, .20);
+
       border-radius: 50%;
-      filter: blur(80px);
+
+      filter: blur(90px);
 
       pointer-events: none;
+
       z-index: -1;
+
     }
+
 
     #siteFooter::after {
-      content: "";
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      right: -150px;
-      bottom: -180px;
 
-      background: rgba(36, 70, 127, .16);
+      content: "";
+
+      position: absolute;
+
+      width: 350px;
+      height: 350px;
+
+      right: -180px;
+      bottom: -220px;
+
+      background: rgba(50, 90, 163, .15);
+
       border-radius: 50%;
-      filter: blur(75px);
+
+      filter: blur(90px);
 
       pointer-events: none;
+
       z-index: -1;
+
     }
 
-    #siteFooter .footer-grid {
+
+    /* =========================================================
+       MAIN FOOTER SHELL
+       ========================================================= */
+
+    #siteFooter .footer-shell {
+
       position: relative;
+
       z-index: 1;
 
       display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap: 35px;
 
-      padding-bottom: 45px;
+      grid-template-columns:
+        minmax(240px, 1fr)
+        2fr;
+
+      gap: 70px;
+
+      padding-bottom: 50px;
+
     }
+
+
+    /* =========================================================
+       BRAND AREA
+       ========================================================= */
+
+    #siteFooter .footer-brand-area {
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: flex-start;
+
+    }
+
 
     #siteFooter .footer-brand {
+
       display: flex;
+
       align-items: flex-start;
-      margin-bottom: 15px;
+
+      margin-bottom: 18px;
+
     }
+
 
     #siteFooter .footer-logo {
+
       display: block;
-      width: 150px;
+
+      width: 165px;
+
       max-width: 100%;
+
       height: auto;
+
     }
+
 
     #siteFooter .footer-about {
-      color: var(--footer-text);
-      font-size: 12px;
-      line-height: 1.7;
-      max-width: 360px;
+
       margin: 0;
+
+      max-width: 360px;
+
+      color: var(--footer-text);
+
+      font-size: 13px;
+
+      line-height: 1.7;
+
     }
 
+
+    /* =========================================================
+       CONTACT
+       ========================================================= */
+
     #siteFooter .footer-contact {
+
       display: flex;
+
       flex-direction: column;
-      gap: 8px;
-      margin-top: 20px;
+
+      gap: 9px;
+
+      margin-top: 22px;
+
     }
+
 
     #siteFooter .footer-contact a,
     #siteFooter .footer-contact span {
+
       color: var(--footer-link);
+
       font-size: 12px;
+
       line-height: 1.5;
+
     }
+
 
     #siteFooter .footer-contact a {
+
       text-decoration: none;
+
       transition: color .18s ease;
+
     }
+
 
     #siteFooter .footer-contact a:hover {
-      color: #fff;
+
+      color: var(--footer-orange);
+
     }
+
+
+    /* =========================================================
+       6 FOOTER SECTIONS
+       DESKTOP: 3 COLUMNS x 2 ROWS
+       ========================================================= */
+
+    #siteFooter .footer-links-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 40px 45px;
+
+      align-content: start;
+
+    }
+
 
     #siteFooter .footer-col {
+
       display: flex;
+
       flex-direction: column;
+
+      min-width: 0;
+
     }
+
 
     #siteFooter .footer-col h4 {
-      color: #fff;
+
+      margin: 0 0 16px;
+
+      color: #ffffff;
+
       font-size: 13px;
-      margin: 0 0 15px;
+
       font-weight: 800;
+
+      letter-spacing: .02em;
+
     }
+
 
     #siteFooter .footer-col a {
+
       display: block;
+
+      width: fit-content;
+
+      max-width: 100%;
+
+      margin: 0 0 10px;
+
       color: var(--footer-link);
+
       font-size: 12px;
-      margin: 9px 0;
+
+      line-height: 1.5;
+
       text-decoration: none;
-      transition: color .18s ease, transform .18s ease;
+
+      transition:
+        color .18s ease,
+        transform .18s ease;
+
     }
+
 
     #siteFooter .footer-col a:hover {
-      color: #fff;
-      transform: translateX(2px);
+
+      color: var(--footer-orange);
+
+      transform: translateX(3px);
+
     }
+
+
+    /* =========================================================
+       BOTTOM FOOTER
+       DESKTOP — ONE HORIZONTAL LINE
+       ========================================================= */
 
     #siteFooter .footer-bottom {
+
       position: relative;
+
       z-index: 1;
 
-      border-top: 1px solid rgba(255, 255, 255, .09);
+      border-top:
+        1px solid rgba(255, 255, 255, 0.10);
 
-      padding: 20px 0 0;
+      padding-top: 22px;
 
       display: flex;
-      justify-content: space-between;
+
       align-items: center;
 
-      gap: 20px;
+      justify-content: space-between;
 
-      color: #7186a2;
-      font-size: 10px;
+      gap: 24px;
+
+      text-align: left;
+
+      color: var(--footer-muted);
+
+      font-size: 11px;
+
     }
 
-    @media(max-width:900px) {
-      #siteFooter .footer-grid {
-        grid-template-columns: 1.5fr 1fr 1fr;
-      }
 
-      #siteFooter .footer-grid > div:first-child {
-        grid-column: 1 / -1;
-      }
+    /* LEFT SIDE */
+
+    #siteFooter .footer-bottom-left {
+
+      display: flex;
+
+      align-items: center;
+
+      flex-shrink: 0;
+
     }
 
-    @media(max-width:768px) {
+
+    #siteFooter .footer-bottom-copy {
+
+      color: var(--footer-text);
+
+      font-weight: 600;
+
+      white-space: nowrap;
+
+    }
+
+
+    /* =========================================================
+       RIGHT SIDE — ALL LINKS TOGETHER
+       ========================================================= */
+
+    #siteFooter .footer-bottom-right {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: flex-end;
+
+      gap: 12px;
+
+      white-space: nowrap;
+
+      margin-left: auto;
+
+    }
+
+
+    #siteFooter .footer-bottom-right a {
+
+      color: var(--footer-link);
+
+      font-size: 11px;
+
+      text-decoration: none;
+
+      transition: color .18s ease;
+
+    }
+
+
+    #siteFooter .footer-bottom-right a:hover {
+
+      color: var(--footer-orange);
+
+    }
+
+
+    #siteFooter .footer-separator {
+
+      color: rgba(255, 255, 255, 0.30);
+
+      font-size: 11px;
+
+      line-height: 1;
+
+      user-select: none;
+
+    }
+
+
+    #siteFooter .footer-admin-login {
+
+      color: rgba(197, 210, 225, 0.85);
+
+    }
+
+
+    /* =========================================================
+       TABLET
+       ========================================================= */
+
+    @media (max-width: 1050px) {
+
+      #siteFooter .footer-shell {
+
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+
+      }
+
+
+      #siteFooter .footer-brand-area {
+
+        max-width: 600px;
+
+      }
+
+
+      #siteFooter .footer-links-grid {
+
+        grid-template-columns:
+          repeat(3, minmax(0, 1fr));
+
+      }
+
+    }
+
+
+    /* =========================================================
+       MOBILE
+       2 COLUMNS x 3 ROWS
+       ========================================================= */
+
+    @media (max-width: 768px) {
+
       #siteFooter {
-        padding: 55px 0 25px;
+
+        padding: 55px 0 28px;
+
       }
 
-      #siteFooter .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 30px 25px;
+
+      #siteFooter .footer-shell {
+
+        gap: 40px;
+
       }
 
-      #siteFooter .footer-grid > div:first-child {
-        grid-column: 1 / -1;
+
+      #siteFooter .footer-brand-area {
+
+        align-items: center;
+
+        text-align: center;
+
       }
+
+
+      #siteFooter .footer-about {
+
+        max-width: 500px;
+
+      }
+
+
+      #siteFooter .footer-contact {
+
+        align-items: center;
+
+      }
+
+
+      #siteFooter .footer-links-grid {
+
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+
+        gap: 34px 25px;
+
+      }
+
+
+      #siteFooter .footer-col {
+
+        align-items: center;
+
+        text-align: center;
+
+      }
+
+
+      #siteFooter .footer-col a {
+
+        width: auto;
+
+      }
+
+
+      #siteFooter .footer-col a:hover {
+
+        transform: none;
+
+      }
+
+
+      /* BOTTOM FOOTER */
 
       #siteFooter .footer-bottom {
+
         flex-direction: column;
-        align-items: flex-start;
+
+        align-items: center;
+
+        justify-content: center;
+
+        text-align: center;
+
+        gap: 14px;
+
       }
+
+
+      #siteFooter .footer-bottom-left {
+
+        justify-content: center;
+
+      }
+
+
+      #siteFooter .footer-bottom-copy {
+
+        white-space: normal;
+
+      }
+
+
+      #siteFooter .footer-bottom-right {
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        white-space: normal;
+
+        margin-left: 0;
+
+        gap: 10px;
+
+      }
+
     }
 
-    @media(max-width:480px) {
-      #siteFooter .footer-grid {
-        grid-template-columns: 1fr;
+
+    /* =========================================================
+       SMALL MOBILE
+       KEEP 2 x 3 AS REQUESTED
+       ========================================================= */
+
+    @media (max-width: 420px) {
+
+      #siteFooter .footer-links-grid {
+
+        gap: 30px 16px;
+
       }
 
-      #siteFooter .footer-grid > div:first-child {
-        grid-column: auto;
+
+      #siteFooter .footer-col h4 {
+
+        font-size: 12px;
+
       }
+
+
+      #siteFooter .footer-col a {
+
+        font-size: 11px;
+
+      }
+
+
+      #siteFooter .footer-logo {
+
+        width: 145px;
+
+      }
+
+
+      #siteFooter .footer-bottom-right {
+
+        gap: 8px;
+
+      }
+
     }
+
   `;
 
+
   document.head.appendChild(style);
+
 }
 
-window.refreshUniversalFooter = initializeUniversalFooter;
+
+/* ============================================================
+   OPTIONAL GLOBAL REFRESH
+   ============================================================ */
+
+window.refreshUniversalFooter =
+  initializeUniversalFooter;

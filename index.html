@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="screenings4u provides nationwide drug and alcohol testing, DOT compliance services, personal testing, employer solutions, and digital donor passes.">
+  <meta name="description" content="screenings4u provides nationwide drug and alcohol testing, DOT compliance services, personal testing, employer solutions, and secure account access.">
   <title>screenings4u | Nationwide Drug & Alcohol Testing</title>
   <link rel="icon" type="image/png" href="images/fav.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
   --blue-dark: #24467f;
   --blue-deep: #17335f;
   --blue-darker: #10284b;
-  --blue-soft: var(--blue-soft);
+  --blue-soft: #e8eff9;
   --blue-pale: #f4f7fc;
 
   /* Blue-tinted neutrals */
@@ -879,12 +879,27 @@
         Order a Test
       </a>
 
-       <a
-        href="client-login.html"
-        class="btn btn-orange"
-      >
-        Client Login
-      </a>
+      <div class="nav-account-menu">
+        <button
+          type="button"
+          class="nav-login"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Account Login
+          <span class="nav-login-chevron">▼</span>
+        </button>
+
+        <div class="nav-account-dropdown">
+          <a href="https://portal.screenings4u.com/customer-login.html">
+            Customer Login
+          </a>
+
+          <a href="https://portal.screenings4u.com/employer-login.html">
+            Employer Login
+          </a>
+        </div>
+      </div>
 
       <button
         class="mobile-toggle"
@@ -919,8 +934,8 @@
               <small>Thousands of collection locations</small>
             </div>
             <div class="hero-feature">
-              <strong>Digital Donor Passes</strong>
-              <small>Delivered directly by email</small>
+              <strong>Secure Account Access</strong>
+              <small>Documents and updates in one place</small>
             </div>
             <div class="hero-feature">
               <strong>Secure Reporting</strong>
@@ -958,18 +973,19 @@
           <span class="eyebrow">The screenings4u Difference</span>
           <h2>Move from complicated screening to a simpler process.</h2>
           <p>
-            screenings4u combines a nationwide collection network with digital donor passes and secure result workflows so employers and individuals can order the screening they need without unnecessary friction.
+            screenings4u combines a nationwide collection network with secure account access and result workflows so employers and individuals can order the screening they need without unnecessary friction.
           </p>
 
           <ul class="check-list">
             <li>Nationwide access to professional collection locations</li>
-            <li>Digital donor passes delivered after purchase</li>
+            <li>Order documents and updates available through your account</li>
             <li>Workplace and DOT-focused compliance solutions</li>
             <li>Personal testing with privacy and convenience in mind</li>
           </ul>
 
-          <a href="index.html" class="btn btn-outline">Learn About screenings4u →</a>
-        </div>
+<a href="about-us.html" class="btn btn-outline">
+  Learn About screenings4u →
+</a>        </div>
       </div>
     </section>
 
@@ -1026,7 +1042,7 @@
             <div class="service-number">06</div>
             <div class="service-icon">P</div>
             <h3>Personal Testing</h3>
-            <p>Private testing options with digital donor passes and access to professional collection locations.</p>
+            <p>Private testing options with convenient ordering and access to professional collection locations.</p>
             <a href="personal-drug-and-alcohol-testing.html">Explore Personal Testing →</a>
           </article>
         </div>
@@ -1050,11 +1066,11 @@
           </div>
           <div class="step">
             <div class="step-num">02</div>
-            <div><h3>Receive Your Digital Donor Pass</h3><p>Your donor pass is sent to your email with the information needed for collection.</p></div>
+            <div><h3>Receive Order Updates</h3><p>Your account is created and you receive confirmation and instructions from the screenings4u team.</p></div>
           </div>
           <div class="step">
             <div class="step-num">03</div>
-            <div><h3>Visit a Collection Site</h3><p>Take your pass to a participating professional collection location.</p></div>
+            <div><h3>Receive Collection Instructions</h3><p>Our team provides the collection instructions needed for your testing appointment.</p></div>
           </div>
           <div class="step">
             <div class="step-num">04</div>
@@ -1092,7 +1108,7 @@
           <article class="audience-card">
             <span class="eyebrow">For Individuals</span>
             <h3>Get the test you need without the employer in the middle.</h3>
-            <p>Private personal testing with convenient ordering, digital donor passes and nationwide collection access.</p>
+            <p>Private personal testing with convenient ordering and nationwide collection access.</p>
             <div class="audience-links">
               <a href="personal-drug-and-alcohol-testing.html">Personal Testing</a>
               <a href="services.html">Urine Tests</a>

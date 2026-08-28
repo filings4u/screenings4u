@@ -1,11 +1,9 @@
 /**
  * screenings4u — Universal Marketing Navigation
  *
- * Marketing site only:
- * - No customer authentication
- * - Services is the central service catalog
- * - Dashboard Login points to the protected admin/client dashboard
- * - No legacy/admin-only pages appear in public navigation
+ * Public marketing site only.
+ * Customer and employer account access uses portal.screenings4u.com.
+ * Admin access remains in the footer.
  */
 
 document.addEventListener("DOMContentLoaded", initializeUniversalNavigation);
@@ -35,10 +33,9 @@ function getNavigationMarkup() {
       </a>
       <div class="dropdown">
         <a href="dot-services.html">DOT Services</a>
-        <a href="dot-urine-drug-tests.html">DOT Urine Drug Tests</a>
-        <a href="dot-breathalyzer-services.html">DOT Breathalyzer</a>
+        <a href="dot-urine-drug-tests.html">DOT Drug Testing</a>
+        <a href="dot-breathalyzer-services.html">DOT Alcohol Testing</a>
         <a href="dot-physical-exam-services.html">DOT Physicals</a>
-        <a href="post-accident-testing.html">Post-Accident Testing</a>
         <a href="new-entrant-audit.html">New Entrant Audit</a>
       </div>
     </div>
@@ -87,8 +84,6 @@ function getNavigationMarkup() {
     <div class="nav-item">
       <a class="nav-link" href="contact.html">Contact</a>
     </div>
-
-
   `;
 }
 
@@ -97,33 +92,123 @@ function injectNavigationStyles() {
 
   const style = document.createElement("style");
   style.id = "screenings4u-nav-styles";
+
   style.textContent = `
+    .nav-account-menu {
+      position: relative;
+    }
+
     .nav-login {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:38px;
-      padding:0 14px;
-      border-radius:8px;
-      background:#325aa3;
-      color:#fff !important;
-      font-weight:800;
-      text-decoration:none;
-      white-space:nowrap;
-      transition:background .2s ease, transform .2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 1px solid #325aa3;
+      border-radius: 8px;
+      background: #325aa3;
+      color: #ffffff !important;
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
     }
-    .nav-login:hover {
-      background:#24467f;
-      transform:translateY(-1px);
+
+    .nav-login:hover,
+    .nav-account-menu.open .nav-login {
+      background: #24467f;
+      border-color: #24467f;
+      transform: translateY(-1px);
     }
-    @media (max-width:1120px) {
+
+    .nav-login-chevron {
+      font-size: 9px;
+      transition: transform .2s ease;
+    }
+
+    .nav-account-menu.open .nav-login-chevron {
+      transform: rotate(180deg);
+    }
+
+    .nav-account-dropdown {
+      position: absolute;
+      top: calc(100% + 9px);
+      right: 0;
+      min-width: 205px;
+      padding: 8px;
+      background: #ffffff;
+      border: 1px solid #d9e3f0;
+      border-radius: 12px;
+      box-shadow: 0 18px 45px rgba(23, 51, 95, .14);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px);
+      transition: opacity .18s ease, visibility .18s ease, transform .18s ease;
+      z-index: 1200;
+    }
+
+    .nav-account-menu:hover .nav-account-dropdown,
+    .nav-account-menu:focus-within .nav-account-dropdown,
+    .nav-account-menu.open .nav-account-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-account-dropdown a {
+      display: block;
+      padding: 11px 12px;
+      border-radius: 8px;
+      color: #334d70;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background .18s ease, color .18s ease;
+    }
+
+    .nav-account-dropdown a:hover {
+      background: #f4f7fc;
+      color: #325aa3;
+    }
+
+    @media (max-width: 1120px) {
+      .nav-account-menu {
+        width: 100%;
+      }
+
       .nav-login {
-        display:flex;
-        width:100%;
-        margin-top:8px;
+        width: 100%;
+      }
+
+      .nav-account-dropdown {
+        position: static;
+        display: none;
+        width: 100%;
+        min-width: 0;
+        margin-top: 8px;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .nav-account-menu.open .nav-account-dropdown {
+        display: block;
+      }
+
+      .nav-account-menu:hover .nav-account-dropdown,
+      .nav-account-menu:focus-within .nav-account-dropdown {
+        display: none;
+      }
+
+      .nav-account-menu.open:hover .nav-account-dropdown {
+        display: block;
       }
     }
   `;
+
   document.head.appendChild(style);
 }
 
@@ -131,6 +216,7 @@ function initializeNavigationBehavior() {
   const navInner = document.getElementById("navInner");
   const mobileToggle = document.getElementById("mobileToggle");
   const nav = document.getElementById("mainNav");
+
   if (!nav) return;
 
   const navItems = nav.querySelectorAll(".nav-item");
@@ -138,32 +224,69 @@ function initializeNavigationBehavior() {
   navItems.forEach((item) => {
     const dropdown = item.querySelector(".dropdown");
     const link = item.querySelector(".nav-link");
+
     if (!dropdown || !link) return;
 
     link.addEventListener("click", (event) => {
       if (window.innerWidth > 1120) return;
+
       event.preventDefault();
 
       navItems.forEach((other) => {
         if (other !== item) other.classList.remove("open");
       });
+
       item.classList.toggle("open");
     });
   });
 
+  const accountMenu = document.querySelector(".nav-account-menu");
+  const accountButton = document.querySelector(".nav-login");
+
+  if (accountMenu && accountButton) {
+    accountButton.addEventListener("click", (event) => {
+      if (window.innerWidth > 1120) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+      accountMenu.classList.toggle("open");
+      accountButton.setAttribute(
+        "aria-expanded",
+        String(accountMenu.classList.contains("open"))
+      );
+    });
+  }
+
   if (navInner && mobileToggle) {
-    mobileToggle.addEventListener("click", () => {
+    mobileToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+
       const open = navInner.classList.toggle("menu-open");
+
       mobileToggle.setAttribute("aria-expanded", String(open));
-      mobileToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      mobileToggle.setAttribute(
+        "aria-label",
+        open ? "Close menu" : "Open menu"
+      );
       mobileToggle.textContent = open ? "✕" : "☰";
+
+      if (!open) {
+        accountMenu?.classList.remove("open");
+        accountButton?.setAttribute("aria-expanded", "false");
+      }
     });
   }
 
   document.addEventListener("click", (event) => {
-    if (!navInner || navInner.contains(event.target)) return;
-    navInner.classList.remove("menu-open");
+    if (navInner && navInner.contains(event.target)) return;
+
+    navInner?.classList.remove("menu-open");
+
     navItems.forEach((item) => item.classList.remove("open"));
+
+    accountMenu?.classList.remove("open");
+    accountButton?.setAttribute("aria-expanded", "false");
+
     if (mobileToggle) {
       mobileToggle.setAttribute("aria-expanded", "false");
       mobileToggle.setAttribute("aria-label", "Open menu");
@@ -175,6 +298,9 @@ function initializeNavigationBehavior() {
     if (window.innerWidth > 1120) {
       navInner?.classList.remove("menu-open");
       navItems.forEach((item) => item.classList.remove("open"));
+      accountMenu?.classList.remove("open");
+      accountButton?.setAttribute("aria-expanded", "false");
+
       if (mobileToggle) {
         mobileToggle.setAttribute("aria-expanded", "false");
         mobileToggle.setAttribute("aria-label", "Open menu");

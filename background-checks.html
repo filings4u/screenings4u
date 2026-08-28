@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Comprehensive background checks including criminal records, MVR, employment and education verification, with reports typically available within 48 hours or less.">
 <title>Background Checks | screenings4u</title>
+  <link rel="icon" type="image/png" href="images/fav.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -113,6 +115,20 @@ url("images/background-check-hero.png") 38% center/cover no-repeat;overflow:hidd
 .hero-actions .btn{width:100%}.hero-features{grid-template-columns:1fr 1fr}.service-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr}
 }
 </style>
+
+<style id="account-login-fix">
+.nav-account-menu{position:relative}
+.nav-login{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border:1px solid #325aa3;border-radius:8px;background:#325aa3;color:#fff!important;font-size:14px;font-weight:800;white-space:nowrap;cursor:pointer}
+.nav-login:hover,.nav-account-menu.open .nav-login{background:#24467f;border-color:#24467f}
+.nav-login-chevron{font-size:9px;transition:transform .2s ease}
+.nav-account-menu.open .nav-login-chevron{transform:rotate(180deg)}
+.nav-account-dropdown{position:absolute;top:calc(100% + 9px);right:0;min-width:205px;padding:8px;background:#fff;border:1px solid #d9e3f0;border-radius:12px;box-shadow:0 18px 45px rgba(23,51,95,.14);opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s ease;z-index:1200}
+.nav-account-menu:hover .nav-account-dropdown,.nav-account-menu:focus-within .nav-account-dropdown,.nav-account-menu.open .nav-account-dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-account-dropdown a{display:block;padding:11px 12px;border-radius:8px;color:#334d70;font-size:13px;font-weight:700;text-decoration:none}
+.nav-account-dropdown a:hover{background:#f4f7fc;color:#325aa3}
+@media(max-width:1120px){.nav-account-menu{width:100%}.nav-login{width:100%}.nav-account-dropdown{position:static;display:none;width:100%;min-width:0;margin-top:8px;opacity:1;visibility:visible;transform:none;box-shadow:none}.nav-account-menu.open .nav-account-dropdown{display:block}.nav-actions .nav-account-menu{display:block!important}}
+</style>
+
 </head>
 
 <body>
@@ -136,13 +152,15 @@ url("images/background-check-hero.png") 38% center/cover no-repeat;overflow:hidd
       <a href="services.html" class="btn btn-outline">
         Order a Test
       </a>
-
-       <a
-        href="client-login.html"
-        class="btn btn-orange"
-      >
-        Client Login
-      </a>
+      <div class="nav-account-menu">
+        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">
+          Account Login <span class="nav-login-chevron">▼</span>
+        </button>
+        <div class="nav-account-dropdown">
+          <a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a>
+          <a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>
+        </div>
+      </div>
 
       <button
         class="mobile-toggle"
@@ -182,7 +200,7 @@ url("images/background-check-hero.png") 38% center/cover no-repeat;overflow:hidd
     <div class="intro-copy">
       <span class="eyebrow">The screenings4u Process</span>
       <h2>Background screening without the confusion.</h2>
-      <p>The current screenings4u page describes a straightforward process for submitting a request, conducting database and verification checks, and receiving a detailed report.</p>
+      <p>Submit a request, select the verification options that fit your needs, and receive clear reporting as the screening process is completed.</p>
       <ul class="check-list">
         <li>Secure online request submission</li>
         <li>Criminal record database checks</li>
@@ -210,7 +228,7 @@ url("images/background-check-hero.png") 38% center/cover no-repeat;overflow:hidd
     <div class="process-copy">
       <span class="eyebrow">Three-Step Process</span>
       <h2>From request to report in three steps.</h2>
-      <p>The source page emphasizes process clarity and a fast turnaround while noting that actual timing can vary with the nature of the request and third-party responses.</p>
+      <p>Our process is designed to keep requests organized and expectations clear while recognizing that timing can vary with the information requested and third-party response times.</p>
     </div>
     <div class="steps">
       <div class="step"><div class="step-num">01</div><div><h3>Submit Online Request</h3><p>Complete the secure online request form with the necessary individual details to initiate the screening process.</p></div></div>
@@ -225,7 +243,7 @@ url("images/background-check-hero.png") 38% center/cover no-repeat;overflow:hidd
     <div class="section-heading">
       <span class="eyebrow">Our Background Check Services</span>
       <h2>Choose the screening that fits your needs.</h2>
-      <p>The current screenings4u page lists six background-check services.</p>
+      <p>Choose from background screening and verification options based on your hiring, housing or organizational needs.</p>
     </div>
     <div class="service-grid">
       <article class="service-card"><div class="service-number">01</div><h3>Basic Background Check</h3><p>Essential screening of public and criminal databases.</p><a class="service-link" href="contact.html">Order Now →</a></article>
@@ -243,7 +261,7 @@ url("images/background-check-hero.png") 38% center/cover no-repeat;overflow:hidd
     <div class="section-heading">
       <span class="eyebrow">Industry Use Cases</span>
       <h2>Background checks for real-world decisions.</h2>
-      <p>The source page identifies three primary use cases for its background screening services.</p>
+      <p>Background screening can support hiring, housing and other situations where reliable verification matters.</p>
     </div>
     <div class="requirements-grid">
       <div class="requirement-panel">
@@ -299,5 +317,23 @@ url("images/background-check-hero.png") 38% center/cover no-repeat;overflow:hidd
 <script src="assets/js/background-checks.js" defer></script>
 <script src="assets/js/navigation.js"></script>
 <script src="assets/js/footer.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  const menu=document.querySelector(".nav-account-menu");
+  const button=document.querySelector(".nav-login");
+  if(!menu||!button)return;
+  button.addEventListener("click",function(e){
+    if(window.innerWidth>1120)return;
+    e.preventDefault(); e.stopPropagation();
+    menu.classList.toggle("open");
+    button.setAttribute("aria-expanded",String(menu.classList.contains("open")));
+  });
+  document.addEventListener("click",function(e){
+    if(!menu.contains(e.target)){menu.classList.remove("open");button.setAttribute("aria-expanded","false");}
+  });
+});
+</script>
+
 </body>
 </html>
