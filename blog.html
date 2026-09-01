@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Screenings4u articles about drug and alcohol testing, DOT compliance, workplace screening, and training.">
+  <title>Resources & Insights | screenings4u</title>
+  <link rel="icon" href="images/fav.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/blog.css">
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left"><span>Nationwide Drug &amp; Alcohol Testing</span><span>•</span><span>Operating Nationwide</span></div>
+      <div class="topbar-right"><span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a></div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav-inner" id="navInner">
+      <a href="index.html" class="brand" aria-label="screenings4u home"><img src="images/logo.png" alt="screenings4u" class="site-logo"></a>
+      <nav class="nav" id="mainNav" aria-label="Main navigation"></nav>
+      <div class="nav-actions">
+        <a href="services.html" class="btn btn-outline">Order a Test</a>
+        <div class="nav-account-menu">
+          <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron">▼</span></button>
+          <div class="nav-account-dropdown"><a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a><a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a></div>
+        </div>
+        <button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div id="blogListView">
+      <section class="blog-hero">
+        <div class="container blog-hero-inner"><span class="eyebrow">Resources &amp; Insights</span><h1>Screening knowledge for confident decisions.</h1><p>Practical articles about workplace testing, DOT compliance, background screening, training, and safer operations.</p></div>
+      </section>
+      <section class="blog-section">
+        <div class="container">
+          <div class="blog-toolbar">
+            <div><span class="eyebrow">Latest Articles</span><h2>Explore our resource library</h2></div>
+            <label class="blog-search"><span class="sr-only">Search articles</span><input id="blogSearch" type="search" placeholder="Search articles..." autocomplete="off"></label>
+          </div>
+          <div id="blogCategories" class="blog-categories" aria-label="Filter articles by category"></div>
+          <div id="blogLoading" class="blog-state" role="status">Loading articles...</div>
+          <div id="blogError" class="blog-state blog-error" hidden></div>
+          <section id="blogFeatured" class="blog-featured" hidden aria-label="Featured article"></section>
+          <div id="blogGrid" class="blog-grid"></div>
+          <div id="blogEmpty" class="blog-state" hidden>No published articles match your search.</div>
+        </div>
+      </section>
+    </div>
+
+    <div id="blogArticleView" hidden>
+      <div id="articleLoading" class="blog-state article-loading" role="status">Loading article...</div>
+      <article id="blogArticle" hidden>
+        <header class="article-hero"><div class="container article-heading"><a class="back-link" href="blog.html">← All articles</a><div id="articleCategory" class="article-category"></div><h1 id="articleTitle"></h1><p id="articleExcerpt" class="article-excerpt"></p><div id="articleMeta" class="article-meta"></div></div></header>
+        <div id="articleImageWrap" class="article-image-wrap" hidden><img id="articleImage" alt=""></div>
+        <div class="container article-layout"><div id="articleContent" class="article-content"></div><aside class="article-aside"><strong>Need screening support?</strong><p>Connect with screenings4u for testing, compliance, and training services.</p><a class="btn btn-orange" href="contact.html">Contact Us</a></aside></div>
+      </article>
+      <div id="articleError" class="blog-state blog-error article-loading" hidden></div>
+    </div>
+  </main>
+
+  <footer id="siteFooter"></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/site-config.js"></script>
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/footer.js"></script>
+  <script src="assets/js/blog.js"></script>
+</body>
+</html>

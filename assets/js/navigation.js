@@ -17,6 +17,7 @@ function initializeUniversalNavigation() {
 
   injectNavigationStyles();
   initializeNavigationBehavior();
+  initializeScrollToTop();
 }
 
 function getNavigationMarkup() {
@@ -453,3 +454,139 @@ function initializeNavigationBehavior() {
 
 window.refreshUniversalNavigation =
   initializeUniversalNavigation;
+
+
+function initializeScrollToTop() {
+  if (document.getElementById("s4uScrollToTop")) return;
+
+  const button = document.createElement("button");
+
+  button.id = "s4uScrollToTop";
+  button.className = "s4u-scroll-top";
+  button.type = "button";
+  button.setAttribute("aria-label", "Scroll to top");
+  button.setAttribute("title", "Back to top");
+  button.innerHTML = `
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 19V5"></path>
+      <path d="m6 11 6-6 6 6"></path>
+    </svg>
+  `;
+
+  document.body.appendChild(button);
+  injectScrollToTopStyles();
+
+  let ticking = false;
+
+  const updateVisibility = () => {
+    button.classList.toggle(
+      "is-visible",
+      window.scrollY > 500
+    );
+
+    ticking = false;
+  };
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (ticking) return;
+
+      ticking = true;
+      window.requestAnimationFrame(updateVisibility);
+    },
+    { passive: true }
+  );
+
+  button.addEventListener("click", () => {
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    window.scrollTo({
+      top: 0,
+      behavior: reduceMotion ? "auto" : "smooth"
+    });
+  });
+
+  updateVisibility();
+}
+
+
+function injectScrollToTopStyles() {
+  if (document.getElementById("screenings4u-scroll-top-styles")) return;
+
+  const style = document.createElement("style");
+
+  style.id = "screenings4u-scroll-top-styles";
+  style.textContent = `
+    .s4u-scroll-top {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 1400;
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 50%;
+      background: #ff6b00;
+      color: #ffffff;
+      box-shadow: 0 14px 34px rgba(23,51,95,.24);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      cursor: pointer;
+      transition:
+        opacity .2s ease,
+        visibility .2s ease,
+        transform .2s ease,
+        background .2s ease;
+    }
+
+    .s4u-scroll-top.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .s4u-scroll-top:hover {
+      background: #325aa3;
+      transform: translateY(-2px);
+    }
+
+    .s4u-scroll-top:focus-visible {
+      outline: 3px solid rgba(50,90,163,.3);
+      outline-offset: 3px;
+    }
+
+    .s4u-scroll-top svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    @media (max-width: 620px) {
+      .s4u-scroll-top {
+        right: 16px;
+        bottom: 16px;
+        width: 44px;
+        height: 44px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .s4u-scroll-top {
+        transition: none;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+}
