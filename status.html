@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Current Screenings4u service availability, provider incidents, and outage updates.">
+  <title>System Status | screenings4u</title>
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+  --orange: #ff6b00;
+  --blue: #325aa3;
+
+  /* Orange family */
+  --orange-dark: #d95800;
+  --orange-deep: #b84700;
+  --orange-soft: #fff0e6;
+  --orange-pale: #fff7f2;
+
+  /* Blue family */
+  --blue-dark: #24467f;
+  --blue-deep: #17335f;
+  --blue-darker: #10284b;
+  --blue-soft: #e8eff9;
+  --blue-pale: #f4f7fc;
+
+  /* Blue-tinted neutrals */
+  --ink: #1d2d45;
+  --muted: #667892;
+  --surface: #f4f7fc;
+  --surface-2: #eef3f9;
+  --line: #d9e3f0;
+  --line-strong: #c4d3e5;
+  --white: #ffffff;
+
+  /* Brand-matched depth */
+  --shadow-sm: 0 5px 18px rgba(23, 51, 95, .08);
+  --shadow: 0 18px 45px rgba(23, 51, 95, .12);
+  --shadow-lg: 0 28px 70px rgba(23, 51, 95, .16);
+
+  --max: 1440px;
+  --radius: 18px;
+}
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+
+    .container {
+      width: min(var(--max), calc(100% - 80px));
+      margin-inline: auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: var(--orange);
+    }
+
+    .section-heading {
+      max-width: 780px;
+      margin-bottom: 48px;
+    }
+
+    .section-heading h2 {
+      color: var(--blue-dark);
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 1.08;
+      letter-spacing: -.035em;
+      margin-bottom: 16px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 690px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 50px;
+      padding: 0 22px;
+      border-radius: 7px;
+      border: 1px solid transparent;
+      font-size: 14px;
+      font-weight: 800;
+      transition: .2s ease;
+    }
+
+    .btn-orange {
+      color: var(--white);
+      background: var(--orange);
+      box-shadow: 0 9px 25px rgba(255,107,0,.20);
+    }
+
+    .btn-orange:hover {
+      background: var(--blue-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      color: var(--blue);
+      border-color: var(--line-strong);
+      background: rgba(255,255,255,.78);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--blue);
+      color: var(--white);
+      background: var(--blue);
+      transform: translateY(-1px);
+    }
+
+    .btn-white {
+      color: var(--blue-dark);
+      background: var(--white);
+    }
+
+    .btn-white:hover { transform: translateY(-1px); }
+
+    /* TOP BAR */
+    .topbar {
+      background: var(--blue-dark);
+      color: #dfe9f5;
+      font-size: 12px;
+    }
+
+    .topbar-inner {
+      min-height: 38px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .topbar-left, .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .topbar a:hover { color: var(--white); }
+
+    /* NAVIGATION */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 26px;
+    }
+
+ .brand {
+  display: flex;
+  align-items: center;
+  flex: 0 0 155px;
+  width: 155px;
+}
+
+.site-logo {
+  display: block;
+  width: 145px;
+  height: auto;
+  max-height: 48px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 13px 10px;
+      color: #334d70;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 7px;
+    }
+
+    .nav-link:hover { color: var(--blue); background: var(--blue-pale); }
+
+    .nav-link .chevron {
+      font-size: 10px;
+      transition: transform .2s ease;
+    }
+
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 255px;
+      padding: 10px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px);
+      transition: .18s ease;
+    }
+
+    .nav-item:hover .dropdown,
+    .nav-item:focus-within .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-item:hover .chevron { transform: rotate(180deg); }
+
+    .dropdown a {
+      display: block;
+      padding: 11px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #475467;
+      font-weight: 600;
+    }
+
+    .dropdown a:hover {
+      background: var(--blue-pale);
+      color: var(--blue);
+    }
+
+    .nav-actions { display: flex; gap: 9px; align-items: center; }
+
+    .mobile-toggle {
+      display: none;
+      width: 44px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(90deg, rgba(16,40,75,.98) 0%, rgba(16,40,75,.93) 31%, rgba(16,40,75,.66) 53%, rgba(16,40,75,.12) 78%, rgba(16,40,75,0) 100%),
+        url("images/hero.png") center right / cover no-repeat;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -170px;
+      top: -220px;
+      width: 500px;
+      height: 500px;
+      background: var(--orange);
+      opacity: .96;
+      transform: rotate(35deg);
+      clip-path: polygon(42% 0,100% 0,100% 58%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      padding: 92px 0 130px;
+    }
+
+    .hero-copy { max-width: 700px; color: var(--white); }
+
+    .hero-copy .eyebrow { color: #ffad73; }
+    .hero-copy .eyebrow::before { background: #ffad73; }
+
+    .hero h1 {
+      font-size: clamp(48px, 6vw, 78px);
+      line-height: .98;
+      letter-spacing: -.055em;
+      font-weight: 900;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span { color: var(--orange); }
+
+    .hero-lead {
+      max-width: 630px;
+      color: #d4e1f0;
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 48px; }
+
+    .hero-actions .btn-outline {
+      color: var(--white);
+      border-color: rgba(255,255,255,.55);
+      background: transparent;
+    }
+
+    .hero-actions .btn-outline:hover {
+      color: var(--blue-dark);
+      background: var(--white);
+      border-color: var(--white);
+    }
+
+    .hero-features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 740px;
+      border-top: 1px solid rgba(255,255,255,.18);
+      padding-top: 22px;
+    }
+
+    .hero-feature {
+      padding: 0 17px;
+      border-right: 1px solid rgba(255,255,255,.18);
+    }
+
+    .hero-feature:first-child { padding-left: 0; }
+    .hero-feature:last-child { border-right: 0; }
+
+    .hero-feature strong {
+      display: block;
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .hero-feature small {
+      display: block;
+      color: #a8bad0;
+      font-size: 10px;
+      margin-top: 4px;
+    }
+
+    /* TRUST STRIP */
+    .trust-strip {
+      background: var(--blue-dark);
+      color: var(--white);
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+    }
+
+    .trust-item {
+      min-height: 112px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 18px;
+      border-right: 1px solid rgba(255,255,255,.1);
+    }
+
+    .trust-item:last-child { border-right: 0; }
+
+    .trust-item strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .trust-item span {
+      display: block;
+      color: #9eb0c6;
+      font-size: 11px;
+    }
+
+    /* VALUE / INTRO */
+    .intro {
+      padding: 110px 0 95px;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 75px;
+      align-items: center;
+    }
+
+    .intro-card {
+      position: relative;
+      min-height: 440px;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        url("images/second-hero.jpg") center / cover;
+      box-shadow: var(--shadow);
+    }
+
+    .intro-card::before {
+      content: "";
+      position: absolute;
+      left: 35px;
+      top: 32px;
+      color: rgba(255,255,255,.9);
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: -.06em;
+    }
+
+    .intro-card-panel {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 28px;
+      padding: 26px;
+      border-radius: 15px;
+      background: rgba(255,255,255,.96);
+    }
+
+    .intro-card-panel strong {
+      display: block;
+      color: var(--blue-dark);
+      font-size: 23px;
+      margin-bottom: 7px;
+    }
+
+    .intro-card-panel span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .intro-copy h2 {
+      color: var(--blue-dark);
+      font-size: clamp(34px, 4vw, 51px);
+      line-height: 1.05;
+      letter-spacing: -.04em;
+      margin-bottom: 19px;
+    }
+
+    .intro-copy > p {
+      color: var(--muted);
+      font-size: 16px;
+      margin-bottom: 27px;
+    }
+
+    .check-list { display: grid; gap: 14px; margin-bottom: 30px; }
+
+    .check-list li {
+      list-style: none;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: #334d70;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      flex: 0 0 23px;
+      width: 23px;
+      height: 23px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-weight: 900;
+      font-size: 12px;
+    }
+
+    /* SERVICES */
+    .services {
+      padding: 105px 0;
+      background: var(--surface);
+      border-block: 1px solid var(--line);
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      position: relative;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 31px;
+      min-height: 265px;
+      transition: .2s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--line-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .service-number {
+      color: #8fa4c0;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      margin-bottom: 26px;
+    }
+
+    .service-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--blue);
+      background: var(--blue-soft);
+      margin-bottom: 19px;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .service-card h3 {
+      color: var(--blue-dark);
+      font-size: 19px;
+      margin-bottom: 8px;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+      margin-bottom: 17px;
+    }
+
+    .service-card a {
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    /* PROCESS */
+    .process { padding: 110px 0; }
+
+    .process-layout {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 75px;
+      align-items: start;
+    }
+
+    .process-copy h2 {
+      color: var(--blue-dark);
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -.04em;
+      margin-bottom: 17px;
+    }
+
+    .process-copy p { color: var(--muted); max-width: 480px; }
+
+    .steps { display: grid; gap: 0; }
+
+    .step {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 20px;
+      padding: 0 0 30px;
+      position: relative;
+    }
+
+    .step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 28px;
+      top: 58px;
+      bottom: 0;
+      width: 1px;
+      background: var(--line);
+    }
+
+    .step-num {
+      position: relative;
+      z-index: 2;
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--white);
+      background: var(--blue);
+      font-size: 14px;
+      font-weight: 900;
+      box-shadow: 0 0 0 7px var(--blue-soft);
+    }
+
+    .step h3 {
+      color: var(--blue-dark);
+      font-size: 19px;
+      margin: 4px 0 5px;
+    }
+
+    .step p { color: var(--muted); font-size: 13px; max-width: 580px; }
+
+    /* EMPLOYERS / PERSONAL */
+    .audiences {
+      padding: 105px 0;
+      background: var(--blue-dark);
+      color: var(--white);
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .audience-card {
+      padding: 44px;
+      min-height: 330px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px;
+      background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
+    }
+
+    .audience-card .eyebrow { color: #ffad73; }
+    .audience-card .eyebrow::before { background: #ffad73; }
+
+    .audience-card h3 {
+      font-size: 30px;
+      line-height: 1.1;
+      margin-bottom: 13px;
+    }
+
+    .audience-card p {
+      color: #b7c7dc;
+      font-size: 14px;
+      max-width: 540px;
+      margin-bottom: 26px;
+    }
+
+    .audience-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .audience-links a {
+      padding: 9px 12px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 7px;
+      color: #e7eff9;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .audience-links a:hover { border-color: var(--orange); color: var(--white); }
+
+  /* CTA */
+.cta {
+  padding: 85px 0;
+  background: var(--surface-2);
+  color: var(--blue-dark);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.cta h2 {
+  font-size: clamp(30px, 4vw, 45px);
+  line-height: 1.05;
+  letter-spacing: -.035em;
+  color: var(--blue-dark);
+  margin-bottom: 8px;
+}
+
+.cta p {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Primary CTA button */
+.cta .btn-white {
+  color: var(--white);
+  background: var(--orange);
+  border-color: var(--orange-dark);
+}
+
+.cta .btn-white:hover {
+  color: var(--white);
+  background: var(--blue-dark);
+  border-color: var(--blue-dark);
+  transform: translateY(-1px);
+}
+
+/* Secondary CTA button */
+.cta .btn-outline {
+  color: var(--blue-dark);
+  background: transparent;
+  border: 1px solid var(--blue-dark);
+}
+
+.cta .btn-outline:hover {
+  color: var(--white);
+  background: var(--blue-dark);
+  border-color: var(--blue-dark);
+  transform: translateY(-1px);
+}
+
+    /* MOBILE */
+    @media (max-width: 1120px) {
+      .nav { display: none; }
+      .nav-actions .btn-outline { display: none; }
+      .mobile-toggle { display: block; }
+      .nav-inner.menu-open .nav {
+        display: flex;
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        top: 76px;
+        padding: 12px;
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-inner.menu-open .nav-item .nav-link { width: 100%; justify-content: space-between; }
+      .nav-inner.menu-open .dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        display: none;
+        box-shadow: none;
+        border: 0;
+        padding: 0 0 8px 10px;
+      }
+      .nav-inner.menu-open .nav-item.open .dropdown { display: block; }
+      .nav-inner.menu-open .nav-item:hover .dropdown { display: none; }
+      .nav-inner.menu-open .nav-item.open:hover .dropdown { display: block; }
+      .nav-inner.menu-open .nav-link .chevron { display: inline-block; }
+      .hero-features { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .hero-feature:nth-child(2) { border-right: 0; }
+      .service-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 800px) {
+      .container { width: min(var(--max), calc(100% - 38px)); }
+      .topbar-left span:nth-child(2) { display: none; }
+      .topbar-right span { display: none; }
+      .hero {
+        min-height: auto;
+        background:
+          linear-gradient(90deg, rgba(16,40,75,.96), rgba(16,40,75,.83)),
+          url("images/hero.png") center / cover no-repeat;
+      }
+      .hero-inner { padding: 75px 0 105px; }
+      .hero::after { width: 300px; height: 300px; right: -150px; top: -160px; }
+      .hero-features { max-width: 100%; }
+      .trust-grid { grid-template-columns: repeat(2, 1fr); }
+      .trust-item:nth-child(even) { border-right: 0; }
+      .trust-item:last-child { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.1); }
+      .intro-grid, .process-layout { grid-template-columns: 1fr; gap: 45px; }
+      .intro-card { min-height: 330px; }
+      .service-grid { grid-template-columns: 1fr; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .cta-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .topbar-inner { justify-content: center; }
+      .topbar-left { gap: 10px; }
+      .brand { flex-basis: 130px; width: 130px; }
+      .site-logo { width: 125px; max-height: 44px; }
+      .nav-actions .btn-orange { min-height: 43px; padding: 0 13px; font-size: 12px; }
+      .hero h1 { font-size: 49px; }
+      .hero-lead { font-size: 15px; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; }
+      .hero-features { grid-template-columns: 1fr 1fr; }
+      .hero-feature { border-right: 0; padding: 0 7px; }
+      .trust-grid { grid-template-columns: 1fr; }
+      .trust-item, .trust-item:last-child { border-right: 0; border-top: 1px solid rgba(255,255,255,.1); }
+      .trust-item:first-child { border-top: 0; }
+      .audience-card { padding: 30px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; }
+    }
+
+    /* STATUS PAGE */
+    .status-page { background: var(--surface); min-height: 640px; padding: 72px 0 90px; }
+    .status-shell { max-width: 1040px; }
+    .status-heading { text-align: center; margin: 0 auto 34px; max-width: 760px; }
+    .status-heading h1 { color: var(--blue-dark); font-size: clamp(38px, 6vw, 62px); line-height: 1.05; letter-spacing: -.045em; margin-bottom: 16px; }
+    .status-heading p { color: var(--muted); font-size: 17px; }
+    .status-summary { position: relative; overflow: hidden; display: flex; align-items: center; gap: 20px; padding: 28px 30px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); box-shadow: var(--shadow-sm); }
+    .status-summary::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 6px; background: var(--blue); }
+    .status-icon { flex: 0 0 54px; width: 54px; height: 54px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: var(--blue); }
+    .status-icon svg { width: 26px; height: 26px; }
+    .status-copy { flex: 1; min-width: 0; }
+    .status-copy h2 { color: var(--blue-dark); font-size: 23px; line-height: 1.2; margin-bottom: 5px; }
+    .status-copy p { color: var(--muted); font-size: 14px; }
+    .status-updated { flex: 0 0 auto; color: var(--muted); font-size: 12px; text-align: right; }
+    .status-summary[data-level="operational"]::after, .status-summary[data-level="operational"] .status-icon { background: #16835b; }
+    .status-summary[data-level="degraded"]::after, .status-summary[data-level="degraded"] .status-icon { background: #d88200; }
+    .status-summary[data-level="outage"]::after, .status-summary[data-level="outage"] .status-icon { background: #c93c3c; }
+    .status-summary[data-level="unknown"]::after, .status-summary[data-level="unknown"] .status-icon { background: var(--muted); }
+    .status-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; margin-top: 24px; }
+    .status-card { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); box-shadow: var(--shadow-sm); }
+    .status-card h2 { color: var(--blue-dark); font-size: 20px; margin-bottom: 18px; }
+    .component-list { list-style: none; }
+    .component-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line); }
+    .component-row:first-child { border-top: 0; padding-top: 0; }
+    .component-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .component-state { display: inline-flex; align-items: center; gap: 8px; color: #16835b; font-size: 12px; font-weight: 800; text-align: right; }
+    .component-state::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: currentColor; }
+    .component-state[data-state="degraded_performance"], .component-state[data-state="partial_outage"], .component-state[data-state="under_maintenance"] { color: #d88200; }
+    .component-state[data-state="major_outage"] { color: #c93c3c; }
+    .component-state[data-state="unknown"] { color: var(--muted); }
+    .incident-empty { padding: 22px; border-radius: 12px; color: var(--muted); background: var(--blue-pale); font-size: 14px; }
+    .incident-item { padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--orange-pale); }
+    .incident-item + .incident-item { margin-top: 12px; }
+    .incident-item h3 { color: var(--blue-dark); font-size: 15px; line-height: 1.4; margin-bottom: 7px; }
+    .incident-meta { color: var(--orange-dark); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 9px; }
+    .incident-item p { color: var(--muted); font-size: 13px; }
+    .incident-item a { display: inline-flex; margin-top: 12px; color: var(--blue); font-size: 12px; font-weight: 800; }
+    .status-note { margin-top: 24px; padding: 18px 20px; border-radius: 12px; color: var(--muted); background: var(--blue-soft); font-size: 13px; }
+    .status-note strong { color: var(--blue-dark); }
+    .status-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
+    .status-spinner { width: 21px; height: 21px; border: 3px solid rgba(255,255,255,.45); border-top-color: #fff; border-radius: 50%; animation: status-spin .8s linear infinite; }
+    @keyframes status-spin { to { transform: rotate(360deg); } }
+    @media (max-width: 800px) { .status-page { padding-top: 50px; } .status-grid { grid-template-columns: 1fr; } .status-summary { align-items: flex-start; flex-wrap: wrap; } .status-updated { width: 100%; text-align: left; padding-left: 74px; } }
+    @media (max-width: 560px) { .status-page { padding: 38px 0 60px; } .status-summary, .status-card { padding: 22px; } .status-updated { padding-left: 0; } }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span>Nationwide Drug & Alcohol Testing</span>
+        <span>•</span>
+        <span>Operating Nationwide</span>
+      </div>
+      <div class="topbar-right">
+        <span>Mon–Fri, 8AM–8PM CST</span>
+        <a href="tel:7732457009">(773) 245-7009</a>
+      </div>
+    </div>
+  </div>
+
+<header class="site-header">
+  <div class="container nav-inner" id="navInner">
+
+    <a href="index.html" class="brand" aria-label="screenings4u home">
+      <img src="images/logo.png" alt="screenings4u" class="site-logo">
+    </a>
+
+<nav class="nav" id="mainNav" aria-label="Main navigation"></nav>
+
+    <div class="nav-actions">
+      <a href="services.html" class="btn btn-outline">
+        Order a Test
+      </a>
+
+      <div class="nav-account-menu">
+        <button
+          type="button"
+          class="nav-login"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Account Login
+          <span class="nav-login-chevron">▼</span>
+        </button>
+
+        <div class="nav-account-dropdown">
+          <a href="https://portal.screenings4u.com/customer-login.html">
+            Customer Login
+          </a>
+
+          <a href="https://portal.screenings4u.com/employer-login.html">
+            Employer Login
+          </a>
+        </div>
+      </div>
+
+      <button
+        class="mobile-toggle"
+        id="mobileToggle"
+        aria-label="Open menu"
+        aria-expanded="false">
+        ☰
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<main class="status-page">
+  <div class="container status-shell">
+    <div class="status-heading">
+      <span class="eyebrow">Live Service Information</span>
+      <h1>Screenings4u System Status</h1>
+      <p>Check the current availability of the cloud services that support our website, portals, scheduling, and training systems.</p>
+    </div>
+
+    <section class="status-summary" id="statusSummary" data-level="unknown" aria-live="polite" aria-busy="true">
+      <div class="status-icon" id="statusIcon"><span class="status-spinner" aria-hidden="true"></span></div>
+      <div class="status-copy">
+        <h2 id="statusTitle">Checking system status…</h2>
+        <p id="statusMessage">Connecting to our infrastructure provider for the latest update.</p>
+      </div>
+      <div class="status-updated">Last checked<br><strong id="lastChecked">—</strong></div>
+    </section>
+
+    <div class="status-grid">
+      <section class="status-card" aria-labelledby="servicesTitle">
+        <h2 id="servicesTitle">Service availability</h2>
+        <ul class="component-list" id="componentList">
+          <li class="component-row"><span class="component-name">Loading services…</span><span class="component-state" data-state="unknown">Checking</span></li>
+        </ul>
+      </section>
+
+      <section class="status-card" aria-labelledby="incidentsTitle">
+        <h2 id="incidentsTitle">Active incidents</h2>
+        <div id="incidentList"><div class="incident-empty">Checking for active incidents…</div></div>
+      </section>
+    </div>
+
+    <div class="status-note">
+      <strong>About this page:</strong> Status information is retrieved from Supabase, our infrastructure provider. A provider incident may affect only certain products or regions and does not always mean every Screenings4u service is unavailable.
+    </div>
+
+    <div class="status-actions">
+      <button class="btn btn-orange" id="refreshStatus" type="button">Refresh Status</button>
+      <a class="btn btn-outline" href="https://status.supabase.com/" target="_blank" rel="noopener noreferrer">View Provider Status</a>
+      <a class="btn btn-outline" href="contact.html">Contact Support</a>
+    </div>
+  </div>
+</main>
+
+<footer id="siteFooter"></footer>
+
+ 
+
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/footer.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const STATUS_URL = "https://status.supabase.com/api/v2/summary.json";
+      const SERVICES = ["API Gateway", "Auth", "Database", "Storage", "Realtime", "Edge Functions", "us-east-2"];
+      const LABELS = {
+        operational: "Operational",
+        degraded_performance: "Degraded performance",
+        partial_outage: "Partial outage",
+        major_outage: "Major outage",
+        under_maintenance: "Maintenance",
+        unknown: "Unavailable"
+      };
+      const ORDER = { operational: 0, under_maintenance: 1, degraded_performance: 2, partial_outage: 3, major_outage: 4, unknown: 5 };
+
+      const summary = document.getElementById("statusSummary");
+      const title = document.getElementById("statusTitle");
+      const message = document.getElementById("statusMessage");
+      const icon = document.getElementById("statusIcon");
+      const checked = document.getElementById("lastChecked");
+      const componentList = document.getElementById("componentList");
+      const incidentList = document.getElementById("incidentList");
+      const refreshButton = document.getElementById("refreshStatus");
+
+      function escapeHtml(value) {
+        return String(value || "").replace(/[&<>\"']/g, function (character) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#039;" }[character];
+        });
+      }
+
+      function formatTime(value) {
+        const date = value ? new Date(value) : new Date();
+        return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit", timeZoneName: "short" }).format(date);
+      }
+
+      function levelFor(state) {
+        if (state === "major_outage" || state === "partial_outage") return "outage";
+        if (state === "degraded_performance" || state === "under_maintenance") return "degraded";
+        if (state === "operational") return "operational";
+        return "unknown";
+      }
+
+      function setIcon(level) {
+        const paths = level === "operational"
+          ? '<path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'
+          : '<path d="M12 8v5m0 4h.01M10.3 3.8 2.1 18a2 2 0 0 0 1.7 3h16.4a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+        icon.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + paths + '</svg>';
+      }
+
+      function renderIncidents(incidents) {
+        const relevant = (incidents || []).filter(function (incident) {
+          return (incident.components || []).some(function (component) { return SERVICES.includes(component.name); });
+        });
+        if (!relevant.length) {
+          incidentList.innerHTML = '<div class="incident-empty">No active incidents are currently reported for the services used by Screenings4u.</div>';
+          return;
+        }
+        incidentList.innerHTML = relevant.map(function (incident) {
+          const latest = (incident.incident_updates || [])[0];
+          const body = latest && latest.body ? latest.body.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim() : "Our provider is investigating this incident.";
+          return '<article class="incident-item"><div class="incident-meta">' + escapeHtml(incident.status) + ' · ' + formatTime(incident.updated_at) + '</div><h3>' + escapeHtml(incident.name) + '</h3><p>' + escapeHtml(body) + '</p><a href="' + encodeURI(incident.shortlink || "https://status.supabase.com/") + '" target="_blank" rel="noopener noreferrer">Read provider updates →</a></article>';
+        }).join("");
+      }
+
+      async function loadStatus() {
+        summary.setAttribute("aria-busy", "true");
+        refreshButton.disabled = true;
+        refreshButton.textContent = "Refreshing…";
+        try {
+          const response = await fetch(STATUS_URL, { cache: "no-store", headers: { Accept: "application/json" } });
+          if (!response.ok) throw new Error("Status request failed");
+          const data = await response.json();
+          const components = SERVICES.map(function (name) {
+            return (data.components || []).find(function (component) { return component.name === name; }) || { name: name, status: "unknown" };
+          });
+          const worst = components.reduce(function (current, component) {
+            return (ORDER[component.status] || 0) > (ORDER[current] || 0) ? component.status : current;
+          }, "operational");
+          const level = levelFor(worst);
+
+          summary.dataset.level = level;
+          setIcon(level);
+          if (level === "operational") {
+            title.textContent = "All monitored systems are operational";
+            message.textContent = "No provider issues are currently reported for the services used by Screenings4u.";
+          } else if (level === "degraded") {
+            title.textContent = "Some systems are experiencing delays";
+            message.textContent = "Screenings4u may be slower than usual while our infrastructure provider works on an issue.";
+          } else if (level === "outage") {
+            title.textContent = "A service interruption is in progress";
+            message.textContent = "Some Screenings4u features may be temporarily unavailable. Please check the active incident updates below.";
+          } else {
+            title.textContent = "Status information is temporarily unavailable";
+            message.textContent = "We could not confirm the condition of every monitored service. Please try again shortly.";
+          }
+
+          componentList.innerHTML = components.map(function (component) {
+            const state = component.status || "unknown";
+            return '<li class="component-row"><span class="component-name">' + escapeHtml(component.name) + '</span><span class="component-state" data-state="' + escapeHtml(state) + '">' + escapeHtml(LABELS[state] || "Unavailable") + '</span></li>';
+          }).join("");
+          renderIncidents(data.incidents);
+          checked.textContent = formatTime();
+        } catch (error) {
+          summary.dataset.level = "unknown";
+          setIcon("unknown");
+          title.textContent = "Status information is temporarily unavailable";
+          message.textContent = "The provider status feed could not be reached. This does not necessarily mean Screenings4u is offline.";
+          componentList.innerHTML = SERVICES.map(function (name) { return '<li class="component-row"><span class="component-name">' + escapeHtml(name) + '</span><span class="component-state" data-state="unknown">Unable to check</span></li>'; }).join("");
+          incidentList.innerHTML = '<div class="incident-empty">Incident details could not be loaded. Use the provider status link below for another check.</div>';
+          checked.textContent = formatTime();
+        } finally {
+          summary.setAttribute("aria-busy", "false");
+          refreshButton.disabled = false;
+          refreshButton.textContent = "Refresh Status";
+        }
+      }
+
+      refreshButton.addEventListener("click", loadStatus);
+      loadStatus();
+      window.setInterval(loadStatus, 60000);
+    }());
+  </script>
+</body>
+</html>
