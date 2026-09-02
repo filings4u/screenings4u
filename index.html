@@ -848,6 +848,355 @@
     }
   </style>
   <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
+
+  <style>
+    /* Page-specific responsive layout. Kept after the shared stylesheet so
+       this page remains predictable on tablets and phones. */
+    @media (max-width: 800px) {
+      html,
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      img,
+      svg,
+      video,
+      iframe {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .container {
+        width: min(100% - 32px, var(--max));
+      }
+
+      .site-header {
+        top: 0;
+      }
+
+      .nav-inner {
+        min-height: 70px;
+        gap: 10px;
+      }
+
+      .nav-inner.menu-open .nav {
+        position: absolute;
+        top: calc(100% + 1px);
+        left: 16px;
+        right: 16px;
+        max-height: calc(100vh - 105px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
+
+      .nav-link,
+      .dropdown a {
+        min-height: 44px;
+      }
+
+      /* Image first, content second on mobile. */
+      .hero {
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        background: var(--blue-deep);
+        overflow: visible;
+      }
+
+      .hero::before {
+        content: "";
+        position: relative;
+        z-index: 1;
+        display: block;
+        width: 100%;
+        height: clamp(250px, 66vw, 440px);
+        flex: 0 0 auto;
+        background: url("images/hero.png") center center / cover no-repeat;
+      }
+
+      .hero::after {
+        display: none;
+      }
+
+      .hero-inner {
+        width: 100%;
+        padding: 48px 0 52px;
+        background: var(--blue-deep);
+      }
+
+      .hero-copy {
+        max-width: none;
+      }
+
+      .hero h1 {
+        max-width: 650px;
+        font-size: clamp(42px, 10vw, 62px);
+        line-height: 1.02;
+        overflow-wrap: anywhere;
+      }
+
+      .hero-lead {
+        max-width: 620px;
+      }
+
+      .hero-features {
+        width: 100%;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-feature {
+        min-width: 0;
+      }
+
+      .intro,
+      .services,
+      .process,
+      .audiences,
+      .cta {
+        padding: 72px 0;
+      }
+
+      .section-heading {
+        margin-bottom: 32px;
+      }
+
+      .section-heading h2,
+      .intro-copy h2,
+      .process-copy h2 {
+        font-size: clamp(32px, 8vw, 44px);
+        overflow-wrap: anywhere;
+      }
+
+      .intro-grid,
+      .process-layout,
+      .service-grid,
+      .audience-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .intro-card {
+        width: 100%;
+        min-height: 430px;
+      }
+
+      .service-card,
+      .audience-card {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .cta-inner,
+      .cta-actions {
+        width: 100%;
+      }
+
+      input,
+      select,
+      textarea,
+      button {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 28px, var(--max));
+      }
+
+      .topbar {
+        font-size: 11px;
+      }
+
+      .topbar-inner {
+        min-height: 34px;
+      }
+
+      .nav-inner {
+        min-height: 66px;
+      }
+
+      .brand {
+        width: 118px;
+        flex-basis: 118px;
+      }
+
+      .site-logo {
+        width: 116px;
+      }
+
+      .nav-actions {
+        gap: 6px;
+      }
+
+      .nav-actions .btn-orange {
+        min-height: 40px;
+        padding-inline: 11px;
+        white-space: nowrap;
+      }
+
+      .mobile-toggle {
+        width: 42px;
+        min-width: 42px;
+        height: 40px;
+      }
+
+      .hero::before {
+        height: clamp(230px, 72vw, 340px);
+        background-position: center center;
+      }
+
+      .hero-inner {
+        padding: 40px 0 44px;
+      }
+
+      .hero h1 {
+        font-size: clamp(38px, 12vw, 50px);
+        margin-bottom: 20px;
+      }
+
+      .hero-lead {
+        font-size: 15px;
+        line-height: 1.65;
+        margin-bottom: 26px;
+      }
+
+      .hero-actions {
+        margin-bottom: 36px;
+      }
+
+      .hero-actions .btn,
+      .cta-actions .btn,
+      .intro-copy > .btn {
+        width: 100%;
+      }
+
+      .hero-features {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+        padding-top: 10px;
+      }
+
+      .hero-feature,
+      .hero-feature:first-child {
+        padding: 14px 0;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255,255,255,.16);
+      }
+
+      .hero-feature:last-child {
+        border-bottom: 0;
+      }
+
+      .trust-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .trust-item,
+      .trust-item:last-child {
+        min-height: 92px;
+        grid-column: auto;
+      }
+
+      .intro,
+      .services,
+      .process,
+      .audiences,
+      .cta {
+        padding: 56px 0;
+      }
+
+      .intro-grid,
+      .process-layout {
+        gap: 34px;
+      }
+
+      .intro-card {
+        min-height: 400px;
+        display: flex;
+        align-items: flex-end;
+        padding: 190px 16px 16px;
+        background-position: center top;
+      }
+
+      .intro-card-panel {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        padding: 20px;
+      }
+
+      .intro-card-panel strong {
+        font-size: 20px;
+        line-height: 1.25;
+      }
+
+      .service-card,
+      .audience-card {
+        min-height: 0;
+        padding: 26px 22px;
+      }
+
+      .audience-card h3 {
+        font-size: 25px;
+      }
+
+      .audience-links {
+        flex-direction: column;
+      }
+
+      .audience-links a {
+        width: 100%;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+      }
+
+      .step {
+        grid-template-columns: 46px minmax(0, 1fr);
+        gap: 15px;
+      }
+
+      .step-num {
+        width: 46px;
+        height: 46px;
+        box-shadow: 0 0 0 5px var(--blue-soft);
+      }
+
+      .step:not(:last-child)::after {
+        left: 22px;
+        top: 46px;
+      }
+
+      .step h3 {
+        font-size: 17px;
+      }
+
+      .cta-inner {
+        gap: 24px;
+      }
+
+      .cta-actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 380px) {
+      .container {
+        width: min(100% - 22px, var(--max));
+      }
+
+      .nav-actions .btn-orange {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 37px;
+      }
+    }
+  </style>
 </head>
 
 <body>
