@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -891,8 +891,13 @@
     .about-ecosystem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .ecosystem-card { min-height: 310px; padding: 36px; border-radius: 22px; background: var(--blue-pale); display: flex; flex-direction: column; }
     .ecosystem-card-blue { background: var(--blue-dark); }
-    .ecosystem-card-blue h3, .ecosystem-card-blue p, .ecosystem-card-blue .text-link { color: #fff; }
-    .ecosystem-card-blue p { color: rgba(255,255,255,.72); }
+    .ecosystem-card.ecosystem-card-blue h3,
+    .ecosystem-card.ecosystem-card-blue .text-link {
+      color: #ffffff;
+    }
+    .ecosystem-card.ecosystem-card-blue p {
+      color: rgba(255,255,255,.82);
+    }
     .ecosystem-card-blue .eyebrow { color: #ffb477; }
     .ecosystem-card-blue .eyebrow::before { background: #ffb477; }
     .ecosystem-card h3 { color: var(--blue-dark); font-size: 26px; line-height: 1.22; margin-bottom: 14px; }
@@ -918,6 +923,27 @@
         display: none;
       }
 
+      body {
+        font-size: 16px;
+        line-height: 1.65;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font-size: 16px;
+      }
+
+      input,
+      select,
+      textarea,
+      form,
+      fieldset {
+        width: 100%;
+        min-width: 0;
+      }
+
       img,
       svg,
       video,
@@ -940,8 +966,21 @@
         left: 16px;
         right: 16px;
         max-height: calc(100vh - 86px);
+        max-height: calc(100dvh - 86px);
         overflow-y: auto;
         overscroll-behavior: contain;
+      }
+
+      .nav-inner.menu-open .nav,
+      .nav-inner.menu-open .dropdown {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-inner.menu-open .dropdown a {
+        display: flex;
+        align-items: center;
+        width: 100%;
       }
 
       .nav-link,
@@ -955,7 +994,8 @@
 
       .about-hero-grid {
         width: 100%;
-        grid-template-columns: minmax(0, 1fr);
+        display: flex;
+        flex-direction: column;
         gap: 0;
       }
 
@@ -1008,6 +1048,13 @@
         width: 100%;
         min-width: 0;
         min-height: 0;
+      }
+
+      .about-audience-grid,
+      .about-ecosystem-grid,
+      .hero-actions,
+      .cta-actions {
+        align-items: stretch;
       }
 
       .about-principles-copy {
@@ -1071,6 +1118,7 @@
 
       .about-hero-copy h1 {
         font-size: clamp(37px, 11vw, 48px);
+        line-height: 1.08;
       }
 
       .hero-actions,
@@ -1109,6 +1157,13 @@
       .about-audience-card,
       .ecosystem-card {
         padding: 26px 22px;
+      }
+
+      .btn {
+        width: 100%;
+        min-height: 48px;
+        padding-inline: 18px;
+        text-align: center;
       }
 
       .about-number {
@@ -1195,6 +1250,7 @@
       </div>
 
       <button
+        type="button"
         class="mobile-toggle"
         id="mobileToggle"
         aria-label="Open menu"
@@ -1214,7 +1270,7 @@
           <h1>Built to make screening easier to navigate.</h1>
           <p class="about-hero-lead">screenings4u brings testing, workplace support, DOT services, and professional training into a clearer experience for individuals and organizations.</p>
           <div class="hero-actions">
-            <a href="services.html" class="btn btn-primary">Explore Services →</a>
+            <a href="services.html" class="btn btn-orange">Explore Services →</a>
             <a href="contact.html" class="btn btn-outline">Talk With Our Team →</a>
           </div>
         </div>

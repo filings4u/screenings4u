@@ -56,6 +56,9 @@ function getNavigationMarkup() {
         <a href="background-checks.html">Background Checks</a>
         <a href="drug-alcohol-policy-creation.html">Drug & Alcohol Policy</a>
         <a href="new-entrant-audit.html">New Entrant Audit</a>
+        <a href="audit-preparation.html">Audit Preparation</a>
+
+
       </div>
     </div>
 
