@@ -105,7 +105,8 @@
       word-break: break-word;
     }
 
-    .email-notice {
+    .email-notice,
+    .confirmation-status {
       margin: 18px auto 24px;
       padding: 17px 18px;
       background: #fff8f2;
@@ -118,6 +119,12 @@
 
     .email-notice strong {
       color: var(--blue-dark);
+    }
+
+    .confirmation-status {
+      background: #fff4f2;
+      border-color: #efc7c2;
+      color: #8b2d25;
     }
 
     .donor-pass-card {
@@ -181,6 +188,13 @@
       box-shadow: 0 8px 22px rgba(50, 90, 163, .16);
     }
 
+    .btn.is-disabled,
+    .btn[aria-disabled="true"] {
+      opacity: .55;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
     .secondary-note {
       margin-top: 18px;
       font-size: 11px;
@@ -204,6 +218,7 @@
       .actions .btn { width: 100%; }
     }
   </style>
+
   <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
 </head>
 
@@ -211,9 +226,7 @@
   <main>
     <div class="container">
       <section class="card">
-
         <div class="check" aria-hidden="true">✓</div>
-
         <div class="eyebrow">Payment Submitted</div>
 
         <h1>Thank you for your order.</h1>
@@ -231,9 +244,17 @@
 
         <div class="email-notice">
           <strong>Watch your email.</strong><br>
-          Check your inbox and spam folder for your confirmation,
-          order receipt, and account creation email.
+          Check your inbox and spam folder for your order receipt.
+          If you are a new customer, you will also receive an email
+          to set up your Customer Portal account.
         </div>
+
+        <div
+          class="confirmation-status"
+          id="confirmationStatus"
+          role="alert"
+          hidden
+        ></div>
 
         <div class="donor-pass-card">
           <h2>Your testing location is next.</h2>
@@ -247,7 +268,8 @@
           <a
             class="btn orange donor-pass-btn"
             id="donorPassButton"
-            href="donor-pass.html"
+            href="#"
+            aria-disabled="true"
           >
             Generate Your Donor Pass
           </a>
@@ -263,11 +285,10 @@
           <a class="btn orange" href="services.html">Browse More Services</a>
           <a class="btn blue" href="index.html">Return Home</a>
         </div>
-
       </section>
     </div>
   </main>
 
-  <script src="assets/js/order-confirmation.js"></script>
+  <script src="assets/js/order-confirmation.js?v=20260902-1"></script>
 </body>
 </html>
