@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -903,6 +903,244 @@
 
   </style>
   <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
+
+  <style>
+    /* About-page mobile layout */
+    @media (max-width: 800px) {
+      html,
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      .topbar,
+      .nav-account-menu {
+        display: none;
+      }
+
+      img,
+      svg,
+      video,
+      iframe {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .container {
+        width: min(100% - 32px, var(--max));
+      }
+
+      .nav-inner {
+        min-height: 70px;
+        gap: 10px;
+      }
+
+      .nav-inner.menu-open .nav {
+        top: calc(100% + 1px);
+        left: 16px;
+        right: 16px;
+        max-height: calc(100vh - 86px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
+
+      .nav-link,
+      .dropdown a {
+        min-height: 44px;
+      }
+
+      .about-hero {
+        padding: 0 0 58px;
+      }
+
+      .about-hero-grid {
+        width: 100%;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+      }
+
+      .about-hero-visual {
+        order: -1;
+        width: 100%;
+        min-height: clamp(280px, 67vw, 450px);
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .about-hero-copy {
+        width: min(100% - 32px, var(--max));
+        margin-inline: auto;
+        padding-top: 44px;
+      }
+
+      .about-hero-copy h1,
+      .about-intro h2,
+      .about-principles h2,
+      .about-center-heading h2 {
+        font-size: clamp(32px, 8vw, 48px);
+        overflow-wrap: anywhere;
+      }
+
+      .about-hero-lead {
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .about-intro,
+      .about-audiences,
+      .about-principles {
+        padding: 72px 0;
+      }
+
+      .about-ecosystem {
+        padding-bottom: 72px;
+      }
+
+      .about-intro-grid,
+      .about-principles-grid,
+      .about-audience-grid,
+      .about-ecosystem-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .about-audience-card,
+      .ecosystem-card {
+        width: 100%;
+        min-width: 0;
+        min-height: 0;
+      }
+
+      .about-principles-copy {
+        position: static;
+      }
+
+      .cta-inner,
+      .cta-actions {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container,
+      .about-hero-copy {
+        width: min(100% - 28px, var(--max));
+      }
+
+      .nav-inner {
+        min-height: 66px;
+      }
+
+      .brand {
+        width: 118px;
+        flex-basis: 118px;
+      }
+
+      .site-logo {
+        width: 116px;
+      }
+
+      .mobile-toggle {
+        width: 42px;
+        min-width: 42px;
+        height: 40px;
+      }
+
+      .about-hero {
+        padding-bottom: 50px;
+      }
+
+      .about-hero-visual {
+        min-height: clamp(250px, 76vw, 360px);
+      }
+
+      .about-visual-card {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        padding: 18px;
+      }
+
+      .about-visual-card strong {
+        font-size: 19px;
+        line-height: 1.25;
+      }
+
+      .about-hero-copy {
+        padding-top: 38px;
+      }
+
+      .about-hero-copy h1 {
+        font-size: clamp(37px, 11vw, 48px);
+      }
+
+      .hero-actions,
+      .cta-actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        width: 100%;
+      }
+
+      .hero-actions .btn,
+      .cta-actions .btn {
+        width: 100%;
+      }
+
+      .about-intro,
+      .about-audiences,
+      .about-principles,
+      .cta {
+        padding: 56px 0;
+      }
+
+      .about-intro-grid,
+      .about-principles-grid {
+        gap: 32px;
+      }
+
+      .about-center-heading {
+        margin-bottom: 32px;
+        text-align: left;
+      }
+
+      .about-center-heading .eyebrow {
+        justify-content: flex-start;
+      }
+
+      .about-audience-card,
+      .ecosystem-card {
+        padding: 26px 22px;
+      }
+
+      .about-number {
+        margin-bottom: 20px;
+      }
+
+      .principle-item {
+        grid-template-columns: 40px minmax(0, 1fr);
+        gap: 14px;
+        padding: 24px 0;
+      }
+
+      .principle-item h3 {
+        font-size: 19px;
+      }
+
+      .about-ecosystem {
+        padding-bottom: 56px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .container,
+      .about-hero-copy {
+        width: min(100% - 22px, var(--max));
+      }
+
+      .about-hero-copy h1 {
+        font-size: 36px;
+      }
+    }
+  </style>
 </head>
 
 <body>

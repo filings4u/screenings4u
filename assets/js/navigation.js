@@ -149,6 +149,21 @@ function getNavigationMarkup() {
         </a> -->
       </div>
     </div>
+
+    <div class="nav-item mobile-account-nav">
+      <a class="nav-link" href="#account-logins">
+        Account Login <span class="chevron">▼</span>
+      </a>
+
+      <div class="dropdown">
+        <a href="https://portal.screenings4u.com/customer-login.html">
+          Customer Login
+        </a>
+        <a href="https://portal.screenings4u.com/employer-login.html">
+          Employer Login
+        </a>
+      </div>
+    </div>
   `;
 }
 
@@ -247,6 +262,10 @@ function injectNavigationStyles() {
       color: #325aa3;
     }
 
+    .mobile-account-nav {
+      display: none;
+    }
+
     /* Resources dropdown can contain more links. */
     .nav-item .dropdown {
       max-height: calc(100vh - 120px);
@@ -254,37 +273,31 @@ function injectNavigationStyles() {
     }
 
     @media (max-width: 1120px) {
-      .nav-account-menu {
-        width: 100%;
+      .nav-actions .nav-account-menu {
+        display: none !important;
       }
 
-      .nav-login {
-        width: 100%;
-      }
-
-      .nav-account-dropdown {
-        position: static;
-        display: none;
-        width: 100%;
-        min-width: 0;
-        margin-top: 8px;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        box-shadow: none;
-      }
-
-      .nav-account-menu.open .nav-account-dropdown {
+      .mobile-account-nav {
         display: block;
       }
 
-      .nav-account-menu:hover .nav-account-dropdown,
-      .nav-account-menu:focus-within .nav-account-dropdown {
-        display: none;
+      .mobile-account-nav > .nav-link {
+        color: #24467f;
+        background: #f4f7fc;
+        border: 1px solid #d9e3f0;
       }
 
-      .nav-account-menu.open:hover .nav-account-dropdown {
-        display: block;
+      .mobile-account-nav > .nav-link:hover,
+      .mobile-account-nav.open > .nav-link {
+        color: #ffffff;
+        background: #325aa3;
+        border-color: #325aa3;
+      }
+
+      .mobile-account-nav .dropdown a {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
       }
 
       .nav-item .dropdown {
