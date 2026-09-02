@@ -1,0 +1,150 @@
+/* screenings4u — shared responsive safeguards */
+*,*::before,*::after{box-sizing:border-box}
+html{width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{width:100%;min-width:0;overflow-x:hidden}
+img,svg,video,canvas{max-width:100%;height:auto}
+iframe{max-width:100%}
+main,section,article,aside,header,footer,nav,div{min-width:0}
+table{max-width:100%}
+input,select,textarea,button{max-width:100%;font:inherit}
+input,select,textarea{min-width:0}
+[hidden]{display:none!important}
+.container{max-width:1450px}
+
+@media (max-width:900px){
+  .container{width:min(100% - 40px,1450px)!important;margin-inline:auto!important}
+
+  /* Marketing and service heroes */
+  .hero,.lab-hero,.about-hero,.service-hero,.dot-hero,.legal-hero{
+    min-height:0!important;
+    height:auto!important;
+    background-position:center center!important;
+  }
+  .hero-inner,.hero-grid,.lab-hero-content,.about-hero-inner,.service-hero-inner,.dot-hero-inner{
+    padding-top:72px!important;
+    padding-bottom:72px!important;
+  }
+  .hero-grid,.intro-grid,.contact-grid,.process-grid,.process-layout,.requirements-grid,
+  .requirements-layout,.testing-grid,.urine-intro-grid,.workflow-grid,.about-grid,
+  .lab-intro-grid,.lab-process-grid,.lab-pricing-grid,.checkout-grid,.summary-grid,
+  .panel-grid,.data-grid,.support-grid,.footer-grid{
+    grid-template-columns:1fr!important;
+  }
+  .hero-copy,.hero-content,.lab-hero-content{max-width:760px!important}
+  .hero h1,.hero-content h1,.lab-hero h1,.about-hero h1,.service-hero h1,.dot-hero h1{
+    font-size:clamp(2.4rem,8vw,4.25rem)!important;
+    line-height:1.02!important;
+    letter-spacing:-.04em!important;
+    overflow-wrap:anywhere;
+  }
+  .hero-lead,.hero p,.lab-hero p,.about-hero p,.service-hero p,.dot-hero p{
+    font-size:1rem!important;
+    line-height:1.65!important;
+  }
+  .hero-features{grid-template-columns:repeat(2,minmax(0,1fr))!important;width:100%!important}
+  .service-grid,.info-grid,.topic-grid,.process,.trust-grid,.audience-grid,.benefit-grid,
+  .about-audience-grid,.qualification-grid,.lab-feature-grid,.workflow-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  .cta-inner,.cta-wrap{align-items:flex-start!important;flex-direction:column!important}
+  .legal-layout{grid-template-columns:1fr!important;gap:28px!important}
+  .legal-toc{position:static!important;top:auto!important;max-height:none!important}
+  .legal-content{min-width:0!important}
+  .nav-inner{gap:12px!important}
+  .nav-actions{margin-left:auto!important}
+  section,.section,.intro,.services,.requirements,.process,.faq,.cta{scroll-margin-top:90px}
+}
+
+@media (max-width:640px){
+  .container{width:min(100% - 28px,1450px)!important}
+  .topbar-inner{min-height:34px!important}
+  .topbar-left{display:none!important}
+  .topbar-right{width:100%!important;justify-content:center!important;gap:10px!important;font-size:.75rem!important}
+  .site-header{position:sticky!important;top:0!important}
+  .nav-inner{min-height:68px!important}
+  .brand{flex:0 1 132px!important;width:132px!important}
+  .site-logo,.brand-logo{width:124px!important;max-height:44px!important;object-fit:contain!important}
+  .mobile-toggle{width:44px!important;height:44px!important;flex:0 0 44px!important}
+  .nav-actions .btn,.nav-actions>a.btn{display:none!important}
+  .nav-account-dropdown{position:fixed!important;left:14px!important;right:14px!important;width:auto!important;max-width:none!important}
+
+  .hero,.lab-hero,.about-hero,.service-hero,.dot-hero{
+    background-position:62% center!important;
+  }
+  .hero-inner,.hero-grid,.lab-hero-content,.about-hero-inner,.service-hero-inner,.dot-hero-inner{
+    padding-top:58px!important;
+    padding-bottom:62px!important;
+  }
+  .hero::after,.lab-hero::after,.about-hero::after,.service-hero::after,.dot-hero::after{
+    opacity:.35!important;
+    transform:scale(.65) rotate(35deg)!important;
+    transform-origin:top right!important;
+  }
+  .hero h1,.hero-content h1,.lab-hero h1,.about-hero h1,.service-hero h1,.dot-hero h1,
+  .legal-hero h1,h1{
+    font-size:clamp(2.15rem,11vw,3.15rem)!important;
+    line-height:1.04!important;
+    letter-spacing:-.035em!important;
+    overflow-wrap:anywhere;
+  }
+  h2,.section-heading h2,.intro h2,.process-copy h2{
+    font-size:clamp(1.8rem,8.5vw,2.5rem)!important;
+    line-height:1.1!important;
+    overflow-wrap:anywhere;
+  }
+  h3{overflow-wrap:anywhere}
+  p,li{font-size:max(.9375rem,14px);line-height:1.65}
+  .eyebrow{font-size:.7rem!important;line-height:1.4!important;letter-spacing:.09em!important}
+  .hero-actions,.cta-actions,.actions,.lab-hero-actions{display:grid!important;grid-template-columns:1fr!important;width:100%!important;gap:10px!important}
+  .hero-actions .btn,.cta-actions .btn,.actions .btn,.lab-hero-actions .btn,
+  .btn.full,.submit,.form-card button[type="submit"]{width:100%!important}
+  .btn,button,a.btn{min-height:46px!important;white-space:normal!important;text-align:center!important}
+  .hero-features,.service-grid,.info-grid,.topic-grid,.process,.trust-grid,.audience-grid,
+  .benefit-grid,.about-audience-grid,.qualification-grid,.lab-feature-grid,.workflow-grid,
+  .requirements-grid,.testing-grid,.grid-3,.form-grid,.radio-grid,.footer-grid{
+    grid-template-columns:1fr!important;
+  }
+  .hero-feature{padding:12px 0!important;border-right:0!important;border-bottom:1px solid rgba(255,255,255,.16)}
+  .hero-feature:last-child{border-bottom:0}
+  .info-card,.service-card,.requirement-panel,.form-card,.panel,.card,.topic,
+  .lab-feature-card,.lab-pricing-card,.qualification-card{padding:22px!important}
+  .intro,.services,.requirements,.process,.faq,.section,.cta{padding-top:64px!important;padding-bottom:64px!important}
+  .section-heading{margin-bottom:30px!important}
+  .cta-inner,.cta-wrap{display:flex!important;gap:22px!important}
+  .step{grid-template-columns:44px minmax(0,1fr)!important;gap:14px!important}
+  .step-num,.step-number{width:44px!important;height:44px!important}
+  .step:not(:last-child)::after{left:21px!important;top:44px!important}
+
+  .legal-hero{padding:58px 0!important}
+  .legal-layout{padding-top:36px!important;padding-bottom:60px!important}
+  .legal-toc{padding:20px!important}
+  .legal-section{scroll-margin-top:86px}
+  .legal-section h2{font-size:1.6rem!important}
+  .legal-content p,.legal-content li{font-size:.96rem!important;line-height:1.72!important}
+  .legal-links{display:grid!important;grid-template-columns:1fr!important}
+
+  form,.form-section,.panel-section{min-width:0!important}
+  label{font-size:.875rem!important}
+  input,select,textarea{width:100%!important;min-height:46px!important;font-size:16px!important}
+  textarea{min-height:120px!important}
+  .field.full,.full-width{grid-column:auto!important}
+  .radio-grid,.checkbox-grid{grid-template-columns:1fr!important}
+
+  table{display:block!important;width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+  th,td{min-width:110px}
+  .table-wrap,.table-responsive,.data-table-wrap{width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+  pre,code{max-width:100%;overflow-wrap:anywhere;white-space:pre-wrap}
+
+  .status-shell,.status-card,.tracking-card,.summary,.checkout-card{width:100%!important;max-width:100%!important;padding:22px!important}
+  .footer-bottom{flex-direction:column!important;align-items:flex-start!important;gap:14px!important}
+}
+
+@media (max-width:380px){
+  .container{width:min(100% - 22px,1450px)!important}
+  .hero h1,.legal-hero h1,h1{font-size:2.05rem!important}
+  .info-card,.service-card,.requirement-panel,.form-card,.panel,.card{padding:18px!important}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}

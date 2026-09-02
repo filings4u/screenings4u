@@ -1331,6 +1331,35 @@ const TEST_SERVICES = {
       "Propoxyphene (PPX)",
       "Methamphetamine (MET)"
     ]
+  },
+
+  /* =========================================================
+     SPECIMEN COLLECTOR TRAINING SUPPLIES
+     ========================================================= */
+
+  specimen_collector_training_supplies: {
+    id: "specimen_collector_training_supplies",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=specimen_collector_training_supplies",
+    name: "Specimen Collector Training Supplies",
+    shortName: "Collector Training Kit",
+    category: "Training Supplies",
+    specimen: "Training Kit",
+    price: 7500,
+    currency: "usd",
+    stripePriceId: "",
+    results: "Physical kit and digital downloads",
+    description: "The supplies DOT Specimen Collector Training students need to complete their five required mock collections.",
+    features: [
+      "5 DOT Collection Kits",
+      "10 Federal Custody and Control Forms (CCFs)",
+      "Mock Collection Checklist - Digital Download",
+      "Mock Procedures - Digital Download",
+      "Collection Site Security - Digital Download",
+      "Memorandum for Record - Digital Download",
+      "1 Ball Point Pen",
+      "2 Pair of NON Latex Gloves"
+    ]
   }
 };
 

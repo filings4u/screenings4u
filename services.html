@@ -16,12 +16,27 @@
 :root{
   --orange:#ff6b00;
   --blue:#325aa3;
+  --orange-dark:#d95800;
+  --orange-deep:#b84700;
+  --orange-soft:#fff0e6;
+  --orange-pale:#fff7f2;
   --blue-dark:#24467f;
+  --blue-deep:#17335f;
+  --blue-darker:#10284b;
+  --blue-soft:#e8eff9;
+  --blue-pale:#f4f7fc;
   --ink:#1d2d45;
   --muted:#667892;
   --surface:#f4f7fc;
+  --surface-2:#eef3f9;
   --line:#d9e3f0;
-  --white:#fff;
+  --line-strong:#c4d3e5;
+  --white:#ffffff;
+  --shadow-sm:0 5px 18px rgba(23,51,95,.08);
+  --shadow:0 18px 45px rgba(23,51,95,.12);
+  --shadow-lg:0 28px 70px rgba(23,51,95,.16);
+  --max:1440px;
+  --radius:18px;
 }
 
 *{
@@ -50,7 +65,7 @@ select{
 }
 
 .container{
-  width:min(1200px,calc(100% - 40px));
+  width:min(var(--max),calc(100% - 40px));
   margin:auto;
 }
 
@@ -59,7 +74,7 @@ select{
    ========================================================= */
 
 .site-header{
-  background:#fff;
+  background:var(--white);
   border-bottom:1px solid var(--line);
   position:sticky;
   top:0;
@@ -106,7 +121,7 @@ select{
   align-items:center;
   gap:6px;
   padding:13px 10px;
-  color:#344054;
+  color:var(--ink);
   font-size:13px;
   font-weight:700;
   border-radius:7px;
@@ -114,7 +129,7 @@ select{
 
 .nav-link:hover{
   color:var(--blue);
-  background:#f5f8fc;
+  background:var(--blue-pale);
 }
 
 .chevron{
@@ -132,10 +147,10 @@ select{
   left:0;
   min-width:255px;
   padding:10px;
-  background:#fff;
+  background:var(--white);
   border:1px solid var(--line);
   border-radius:12px;
-  box-shadow:0 18px 45px rgba(23,51,95,.12);
+  box-shadow:var(--shadow);
   opacity:0;
   visibility:hidden;
   transform:translateY(6px);
@@ -154,12 +169,12 @@ select{
   padding:11px 12px;
   border-radius:8px;
   font-size:13px;
-  color:#475467;
+  color:var(--muted);
   font-weight:600;
 }
 
 .dropdown a:hover{
-  background:#f3f7fc;
+  background:var(--blue-pale);
   color:var(--blue);
 }
 
@@ -180,7 +195,7 @@ select{
   height:42px;
   border:1px solid var(--line);
   border-radius:8px;
-  background:#fff;
+  background:var(--white);
   color:var(--blue-dark);
   font-size:18px;
   cursor:pointer;
@@ -204,12 +219,12 @@ select{
 .btn-outline{
   border:1px solid var(--blue);
   color:var(--blue);
-  background:#fff;
+  background:var(--white);
 }
 
 .btn-orange{
   background:var(--orange);
-  color:#fff;
+  color:var(--white);
 }
 
 .btn-orange:hover{
@@ -256,7 +271,7 @@ h1{
 
 .filter{
   border:1px solid var(--line);
-  background:#fff;
+  background:var(--white);
   color:var(--blue-dark);
   padding:10px 14px;
   border-radius:999px;
@@ -267,7 +282,7 @@ h1{
 
 .filter.active{
   background:var(--blue);
-  color:#fff;
+  color:var(--white);
   border-color:var(--blue);
 }
 
@@ -288,11 +303,11 @@ h1{
 }
 
 .card{
-  background:#fff;
+  background:var(--white);
   border:1px solid var(--line);
   border-radius:16px;
   padding:24px;
-  box-shadow:0 10px 28px rgba(23,51,95,.06);
+  box-shadow:var(--shadow-sm);
   display:flex;
   flex-direction:column;
   min-height:235px;
@@ -341,7 +356,7 @@ h1{
 
 .quote{
   margin-top:18px;
-  background:#fff;
+  background:var(--white);
   border:1px solid var(--line);
   border-radius:16px;
   padding:26px;
@@ -365,7 +380,7 @@ h1{
 
 .empty{
   padding:30px;
-  background:#fff;
+  background:var(--white);
   border:1px solid var(--line);
   border-radius:16px;
   color:var(--muted);
@@ -390,10 +405,10 @@ h1{
     flex-direction:column;
     align-items:stretch;
     padding:12px;
-    background:#fff;
+    background:var(--white);
     border:1px solid var(--line);
     border-radius:0 0 12px 12px;
-    box-shadow:0 18px 45px rgba(23,51,95,.12);
+    box-shadow:var(--shadow);
   }
 
   .nav-inner.menu-open .nav-item{
@@ -472,27 +487,100 @@ h1{
 /* =========================================================
    SERVICES PAGE NAVIGATION + WIDTH FIX
    ========================================================= */
-.topbar{background:#f7f9fc;border-bottom:1px solid var(--line);color:#53657f;font-size:12px}
+.topbar{background:var(--blue-pale);border-bottom:1px solid var(--line);color:var(--muted);font-size:12px}
 .topbar-inner{min-height:38px;display:flex;align-items:center;justify-content:space-between;gap:18px}
 .topbar-left,.topbar-right{display:flex;align-items:center;gap:10px;min-width:0}.topbar a{color:var(--blue-dark);font-weight:800;white-space:nowrap}
 #mainNav.nav{display:flex;align-items:center;justify-content:center;gap:0;flex:1 1 auto;min-width:0}
 #mainNav .nav-item{position:relative;flex:0 0 auto}
 #mainNav .nav-link{padding:13px 8px;font-size:12px;white-space:nowrap}
 #mainNav .dropdown{z-index:1200}
-.nav-actions{flex:0 0 auto}.nav-login{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 15px;border:1px solid var(--blue);border-radius:8px;background:var(--blue);color:#fff;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
-.nav-account-menu{position:relative}.nav-account-dropdown{position:absolute;top:calc(100% + 9px);right:0;min-width:205px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 45px rgba(23,51,95,.14);opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s ease;z-index:1200}
+.nav-actions{flex:0 0 auto}.nav-login{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 15px;border:1px solid var(--blue);border-radius:8px;background:var(--blue);color:var(--white);font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
+.nav-account-menu{position:relative}.nav-account-dropdown{position:absolute;top:calc(100% + 9px);right:0;min-width:205px;padding:8px;background:var(--white);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s ease;z-index:1200}
 .nav-account-menu:hover .nav-account-dropdown,.nav-account-menu:focus-within .nav-account-dropdown,.nav-account-menu.open .nav-account-dropdown{opacity:1;visibility:visible;transform:translateY(0)}
-.nav-account-dropdown a{display:block;padding:11px 12px;border-radius:8px;color:#334d70;font-size:13px;font-weight:700}.nav-account-dropdown a:hover{background:#f4f7fc;color:var(--blue)}
+.nav-account-dropdown a{display:block;padding:11px 12px;border-radius:8px;color:var(--ink);font-size:13px;font-weight:700}.nav-account-dropdown a:hover{background:var(--blue-pale);color:var(--blue)}
 @media(max-width:1270px){#mainNav .nav-link{padding-left:6px;padding-right:6px;font-size:11px}.nav-actions .btn-outline{display:none}}
-@media(max-width:1120px){.site-header{position:relative}#mainNav.nav{display:none}.nav-inner.menu-open #mainNav.nav{display:flex;position:absolute;left:0;right:0;top:82px;flex-direction:column;align-items:stretch;justify-content:flex-start;padding:12px;background:#fff;border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;box-shadow:0 18px 45px rgba(23,51,95,.12);z-index:1100}.nav-inner.menu-open .nav-item{width:100%}.nav-inner.menu-open .nav-link{width:100%;justify-content:space-between;padding:13px 12px;font-size:13px}.nav-inner.menu-open .dropdown{position:static;display:none;opacity:1;visibility:visible;transform:none;width:100%;min-width:0;box-shadow:none;border:0;padding:4px 0 8px 15px}.nav-item.open .dropdown{display:block!important}.nav-item.open .chevron{transform:rotate(180deg)}.mobile-toggle{display:block}.nav-account-dropdown{position:static;display:none;width:100%;min-width:0;margin-top:8px;opacity:1;visibility:visible;transform:none;box-shadow:none}.nav-account-menu.open .nav-account-dropdown{display:block}}
+@media(max-width:1120px){.site-header{position:relative}#mainNav.nav{display:none}.nav-inner.menu-open #mainNav.nav{display:flex;position:absolute;left:0;right:0;top:82px;flex-direction:column;align-items:stretch;justify-content:flex-start;padding:12px;background:var(--white);border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;box-shadow:var(--shadow);z-index:1100}.nav-inner.menu-open .nav-item{width:100%}.nav-inner.menu-open .nav-link{width:100%;justify-content:space-between;padding:13px 12px;font-size:13px}.nav-inner.menu-open .dropdown{position:static;display:none;opacity:1;visibility:visible;transform:none;width:100%;min-width:0;box-shadow:none;border:0;padding:4px 0 8px 15px}.nav-item.open .dropdown{display:block!important}.nav-item.open .chevron{transform:rotate(180deg)}.mobile-toggle{display:block}.nav-account-dropdown{position:static;display:none;width:100%;min-width:0;margin-top:8px;opacity:1;visibility:visible;transform:none;box-shadow:none}.nav-account-menu.open .nav-account-dropdown{display:block}}
 @media(max-width:700px){.topbar-inner{min-height:auto;padding:9px 0;flex-direction:column;align-items:flex-start;gap:5px}.topbar-left,.topbar-right{flex-wrap:wrap}}
 @media(max-width:600px){.topbar-inner{font-size:11px}.nav-inner.menu-open #mainNav.nav{top:74px}.nav-actions{gap:6px}.nav-login{min-height:40px;padding:0 11px;font-size:11px}}
 
 </style>
+  <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
+<style id="services-redesign-styles">
+  body.services-page{background:var(--white);overflow-x:hidden}
+  .services-page .container{width:min(1450px,calc(100% - 48px))}
+  .services-page .topbar{background:var(--blue-darker);border:0;color:var(--blue-soft)}
+  .services-page .topbar a{color:var(--white);text-decoration:none}
+  .services-page .site-header{background:rgba(255,255,255,.97);backdrop-filter:blur(14px)}
+  .services-page main{padding:0}
+  .services-hero{position:relative;min-height:570px;display:flex;align-items:center;overflow:hidden;color:var(--white);background:linear-gradient(90deg,rgba(16,40,75,.99),rgba(23,51,95,.92) 46%,rgba(36,70,127,.48)),url("images/service-hero.png") center/cover no-repeat}
+  .services-hero:after{content:"";position:absolute;right:-150px;top:-220px;width:490px;height:490px;background:var(--orange);opacity:.92;transform:rotate(35deg);clip-path:polygon(42% 0,100% 0,100% 58%)}
+  .services-hero-inner{position:relative;z-index:2;max-width:850px;padding:90px 0 122px}
+  .services-hero .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--orange);font-size:12px}
+  .services-hero .eyebrow:before{content:"";width:27px;height:2px;background:currentColor}
+  .services-hero h1{max-width:820px;margin:16px 0 22px;color:var(--white);font-size:clamp(50px,6vw,78px);line-height:.98;letter-spacing:-.055em}
+  .services-hero h1 span{color:var(--orange)}
+  .services-hero .lead{max-width:700px;margin:0;color:var(--blue-soft);font-size:18px;line-height:1.7}
+  .services-hero-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:31px}
+  .services-hero .btn{min-height:49px;padding:0 21px;font-size:14px}
+  .services-hero .btn-outline{color:var(--white);background:transparent;border-color:rgba(255,255,255,.55)}
+  .services-hero .btn-outline:hover{color:var(--blue-darker);background:var(--white)}
+  .hero-assurance{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:790px;margin-top:45px;padding-top:20px;border-top:1px solid rgba(255,255,255,.18)}
+  .assurance{padding:0 18px;border-right:1px solid rgba(255,255,255,.18)}
+  .assurance:first-child{padding-left:0}.assurance:last-child{border:0}
+  .assurance strong{display:block;font-size:12px}.assurance span{display:block;margin-top:4px;color:var(--line-strong);font-size:11px}
+  .catalog-section{position:relative;z-index:3;margin-top:-54px;padding:0 0 96px}
+  .catalog-panel{padding:37px;border:1px solid var(--line);border-radius:var(--radius);background:var(--white);box-shadow:var(--shadow-lg)}
+  .catalog-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:25px;padding-bottom:25px;border-bottom:1px solid var(--line)}
+  .catalog-heading-copy{max-width:760px}
+  .catalog-kicker{color:var(--orange);font-size:11px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+  .catalog-heading h2{margin:8px 0 7px;color:var(--blue-darker);font-size:clamp(30px,4vw,43px);line-height:1.08;letter-spacing:-.035em}
+  .catalog-heading p{margin:0;color:var(--muted);font-size:14px}
+  .catalog-note{flex:0 0 auto;padding:10px 13px;border-radius:999px;color:var(--blue-dark);background:var(--blue-soft);font-size:11px;font-weight:800;white-space:nowrap}
+  .services-page .catalog-tools{margin:0 0 29px;padding:12px;border-radius:13px;background:var(--blue-pale)}
+  .services-page .filter{min-height:42px;padding:0 16px;border-radius:8px;font-size:12px;transition:.18s}
+  .services-page .filter:hover{border-color:var(--blue);color:var(--blue)}
+  .services-page .filter.active{color:var(--white);background:var(--blue);box-shadow:var(--shadow-sm)}
+  .services-page .section{margin:0}
+  .services-page .section h2{display:flex;align-items:center;gap:10px;margin:0 0 18px;color:var(--blue-darker);font-size:22px}
+  .services-page .section h2:before{content:"";width:5px;height:25px;border-radius:3px;background:var(--orange)}
+  .services-page .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  .services-page .card{position:relative;min-height:270px;padding:27px;border-radius:15px;box-shadow:none;overflow:hidden;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+  .services-page .card:before{content:"";position:absolute;left:0;top:0;width:100%;height:4px;background:linear-gradient(90deg,var(--blue),var(--orange));opacity:0;transition:.18s}
+  .services-page .card:hover{transform:translateY(-4px);border-color:var(--line-strong);box-shadow:var(--shadow)}
+  .services-page .card:hover:before{opacity:1}
+  .services-page .card .tag{font-size:10px}
+  .services-page .card h3{margin:12px 0 9px;color:var(--blue-darker);font-size:20px;line-height:1.25}
+  .services-page .card p{font-size:13px;line-height:1.7}
+  .services-page .card-bottom{padding-top:17px;border-top:1px solid var(--line)}
+  .services-page .price{font-size:21px;color:var(--blue-darker)}
+  .services-page .link{color:var(--orange);font-size:12px}
+  .services-page .empty{grid-column:1/-1;padding:48px;text-align:center}
+  .business-section{padding:92px 0;background:var(--surface-2);border-top:1px solid var(--line)}
+  .business-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:22px;align-items:stretch}
+  .business-intro{padding:37px;border-radius:var(--radius);background:var(--blue-darker);color:var(--white);box-shadow:var(--shadow)}
+  .business-intro .eyebrow{color:var(--orange)}
+  .business-intro h2{margin:14px 0 12px;font-size:36px;line-height:1.08;letter-spacing:-.035em}
+  .business-intro p{margin:0;color:var(--blue-soft);font-size:14px}
+  .business-intro .btn{margin-top:27px;min-height:49px;padding:0 20px;font-size:13px}
+  .business-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .business-option{padding:25px;border:1px solid var(--line);border-radius:15px;background:var(--white);text-decoration:none;transition:.18s}
+  .business-option:hover{transform:translateY(-3px);border-color:var(--line-strong);box-shadow:var(--shadow)}
+  .business-option span{color:var(--orange);font-size:10px;font-weight:900;letter-spacing:.1em}
+  .business-option h3{margin:17px 0 7px;color:var(--blue-darker);font-size:19px}
+  .business-option p{margin:0;color:var(--muted);font-size:13px;line-height:1.65}
+  .services-cta{padding:76px 0;background:var(--blue-darker);color:var(--white)}
+  .services-cta-inner{display:flex;align-items:center;justify-content:space-between;gap:30px}
+  .services-cta h2{margin:0 0 8px;font-size:clamp(30px,4vw,44px);line-height:1.08;letter-spacing:-.035em}
+  .services-cta p{max-width:650px;margin:0;color:var(--blue-soft)}
+  .btn-light{color:var(--blue-darker);background:var(--white)}
+  @media(max-width:1000px){.services-page .grid{grid-template-columns:repeat(2,minmax(0,1fr))}.business-grid{grid-template-columns:1fr}.catalog-heading{align-items:flex-start;flex-direction:column}.catalog-note{white-space:normal}}
+  @media(max-width:700px){.services-page .container{width:min(100% - 28px,1450px)}.services-hero{min-height:0;background-position:62% center}.services-hero:after{opacity:.28;transform:scale(.65) rotate(35deg);transform-origin:top right}.services-hero-inner{padding:61px 0 92px}.services-hero h1{font-size:clamp(41px,12vw,54px);line-height:1.01}.services-hero .lead{font-size:15px}.services-hero-actions{display:grid;grid-template-columns:1fr}.services-hero-actions .btn{width:100%}.hero-assurance{grid-template-columns:1fr;margin-top:34px}.assurance{padding:12px 0;border-right:0;border-bottom:1px solid rgba(255,255,255,.16)}.catalog-section{margin-top:-38px;padding-bottom:68px}.catalog-panel{padding:23px}.catalog-heading{margin-bottom:20px;padding-bottom:20px}.services-page .catalog-tools{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:9px}.services-page .filter{width:100%;white-space:normal}.services-page .grid,.business-options{grid-template-columns:1fr}.services-page .card{min-height:245px;padding:23px}.business-section{padding:68px 0}.business-intro{padding:26px}.business-intro h2{font-size:31px}.services-cta{padding:62px 0}.services-cta-inner{align-items:flex-start;flex-direction:column}.services-cta .btn{width:100%}}
+</style>
 </head>
 
-<body>
+<body class="services-page">
 
+<div class="topbar"><div class="container topbar-inner"><div class="topbar-left"><span>Nationwide Drug &amp; Alcohol Testing</span><span>•</span><span>Operating Nationwide</span></div><div class="topbar-right"><span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a></div></div></div>
 
 <header class="site-header">
   <div class="container nav-inner" id="navInner">
@@ -543,46 +631,13 @@ h1{
 </header>
 
 <main>
-  <div class="container">
+  <section class="services-hero"><div class="container"><div class="services-hero-inner"><div class="eyebrow">Testing, compliance &amp; training</div><h1>Find the service.<br><span>We’ll help with the next step.</span></h1><p class="lead">Browse drug and alcohol testing, DOT services, physicals, training, and professional support from one trusted nationwide partner.</p><div class="services-hero-actions"><a class="btn btn-orange" href="#service-catalog">Browse Services →</a><a class="btn btn-outline" href="contact.html">Talk With Our Team</a></div><div class="hero-assurance"><div class="assurance"><strong>Nationwide Access</strong><span>Collection locations across the country</span></div><div class="assurance"><strong>Secure Checkout</strong><span>Protected online ordering and payment</span></div><div class="assurance"><strong>Expert Support</strong><span>Help choosing the appropriate service</span></div></div></div></div></section>
 
-    <div class="eyebrow">Services</div>
+  <section class="catalog-section" id="service-catalog"><div class="container"><div class="catalog-panel"><div class="catalog-heading"><div class="catalog-heading-copy"><div class="catalog-kicker">Screenings4u service catalog</div><h2>Choose a service category.</h2><p>Filter the catalog, compare available services, and select an option to review its details before ordering.</p></div><div class="catalog-note">Live services and current pricing</div></div><div id="filters" class="catalog-tools" aria-label="Service categories"></div><section class="section"><h2>Testing &amp; Training</h2><div id="catalog" class="grid"><div class="empty">Loading services…</div></div></section></div></div></section>
 
-    <h1>Find the right service.</h1>
+  <section class="business-section"><div class="container business-grid"><div class="business-intro"><div class="eyebrow">Professional services</div><h2>Need more than a single test?</h2><p>Build a workplace program, prepare for an audit, review policies and records, or create a customized compliance solution with our team.</p><a class="btn btn-orange" href="business-services.html">Explore Business Services →</a></div><div class="business-options"><a class="business-option" href="consulting-services.html"><span>01 / CONSULTING</span><h3>Compliance Consulting</h3><p>Guidance for policies, workflows, records, and program requirements.</p></a><a class="business-option" href="new-entrant-audit.html"><span>02 / AUDITS</span><h3>Audit Preparation</h3><p>Support preparing documentation and processes for regulatory review.</p></a><a class="business-option" href="mobile-drug-and-alcohol-testing.html"><span>03 / MOBILE</span><h3>Mobile Testing</h3><p>On-site collection and testing support for workplace needs.</p></a><a class="business-option" href="dot-specimen-collector-training.html"><span>04 / TRAINING</span><h3>Professional Training</h3><p>Training resources for collectors, employers, and regulated programs.</p></a></div></div></section>
 
-    <p class="lead">
-      Browse the current screenings4u catalog. Select a service to review what is included,
-      then continue to the secure Stripe checkout for paid services.
-    </p>
-
-    <div id="filters" class="catalog-tools" aria-label="Service categories"></div>
-
-    <section class="section">
-      <h2>Testing &amp; Training</h2>
-
-      <div id="catalog" class="grid">
-        <div class="empty">Loading services…</div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Professional &amp; Business Services</h2>
-
-      <div class="quote">
-        <div>
-          <h3>Need a program, audit or custom solution?</h3>
-          <p>
-            Explore business, compliance, consulting and specialized services,
-            then contact screenings4u for a customized plan.
-          </p>
-        </div>
-
-        <a class="btn btn-orange" href="business-services.html">
-          Explore Business Services
-        </a>
-      </div>
-    </section>
-
-  </div>
+  <section class="services-cta"><div class="container services-cta-inner"><div><h2>Not sure which service is right?</h2><p>Tell us what you need and our team will help identify the appropriate next step.</p></div><a class="btn btn-light" href="contact.html">Contact screenings4u →</a></div></section>
 </main>
 
 <footer id="siteFooter"></footer>
