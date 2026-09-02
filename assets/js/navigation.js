@@ -1,5 +1,5 @@
 /**
- * screenings4u — Universal Marketing Navigation
+ * screenings4u - Universal Marketing Navigation
  *
  * Public marketing site only.
  * Customer and employer account access uses portal.screenings4u.com.
@@ -32,7 +32,7 @@ function getNavigationMarkup() {
 
     <div class="nav-item">
       <a class="nav-link" href="dot-services.html">
-        DOT & Transportation <span class="chevron">▼</span>
+        DOT & Transportation <span class="chevron" aria-hidden="true">&#9662;</span>
       </a>
 
       <div class="dropdown">
@@ -46,7 +46,7 @@ function getNavigationMarkup() {
 
     <div class="nav-item">
       <a class="nav-link" href="business-services.html">
-        Employers <span class="chevron">▼</span>
+        Employers <span class="chevron" aria-hidden="true">&#9662;</span>
       </a>
 
       <div class="dropdown">
@@ -61,7 +61,7 @@ function getNavigationMarkup() {
 
     <div class="nav-item">
       <a class="nav-link" href="personal-drug-and-alcohol-testing.html">
-        Personal <span class="chevron">▼</span>
+        Personal <span class="chevron" aria-hidden="true">&#9662;</span>
       </a>
 
       <div class="dropdown">
@@ -72,7 +72,7 @@ function getNavigationMarkup() {
           Court-Ordered Testing
         </a>
         <a href="dna-tests-chicago-il.html">
-          DNA Tests — Chicago, IL
+          DNA Tests &mdash; Chicago, IL
         </a>
         <a href="non-dot-breathalyzer-services.html">
           NON-DOT Breathalyzer
@@ -85,7 +85,7 @@ function getNavigationMarkup() {
 
     <div class="nav-item">
       <a class="nav-link" href="dot-specimen-collector-training.html">
-        Training <span class="chevron">▼</span>
+        Training <span class="chevron" aria-hidden="true">&#9662;</span>
       </a>
 
       <div class="dropdown">
@@ -104,7 +104,7 @@ function getNavigationMarkup() {
 
     <div class="nav-item">
       <a class="nav-link" href="/resources">
-        Resources <span class="chevron">▼</span>
+        Resources <span class="chevron" aria-hidden="true">&#9662;</span>
       </a>
 
       <div class="dropdown">
@@ -152,7 +152,7 @@ function getNavigationMarkup() {
 
     <div class="nav-item mobile-account-nav">
       <a class="nav-link" href="#account-logins">
-        Account Login <span class="chevron">▼</span>
+        Account Login <span class="chevron" aria-hidden="true">&#9662;</span>
       </a>
 
       <div class="dropdown">
@@ -273,6 +273,10 @@ function injectNavigationStyles() {
     }
 
     @media (max-width: 1120px) {
+      .topbar {
+        display: none !important;
+      }
+
       .nav-actions .nav-account-menu {
         display: none !important;
       }
@@ -380,7 +384,7 @@ function initializeNavigationBehavior() {
       );
 
       mobileToggle.textContent =
-        open ? "✕" : "☰";
+        open ? "\u2715" : "\u2630";
 
       if (!open) {
         navItems.forEach((item) =>
@@ -429,7 +433,7 @@ function initializeNavigationBehavior() {
         "Open menu"
       );
 
-      mobileToggle.textContent = "☰";
+      mobileToggle.textContent = "\u2630";
     }
   });
 
@@ -459,7 +463,7 @@ function initializeNavigationBehavior() {
           "Open menu"
         );
 
-        mobileToggle.textContent = "☰";
+        mobileToggle.textContent = "\u2630";
       }
     }
   });

@@ -1,7 +1,7 @@
 
 
 /**
- * screenings4u — Universal Stripe Checkout
+ * screenings4u â€” Universal Stripe Checkout
  *
  * PUBLIC MARKETING CHECKOUT
  *
@@ -9,19 +9,19 @@
  *
  * Flow:
  *   checkout.html?service=SERVICE_ID
- *        ↓
+ *        â†“
  *   create-payment-intent Edge Function
- *        ↓
+ *        â†“
  *   Supabase Order Engine
- *        ↓
+ *        â†“
  *   Stripe PaymentIntent
- *        ↓
+ *        â†“
  *   Stripe Payment Element
- *        ↓
+ *        â†“
  *   payment_intent.succeeded
- *        ↓
+ *        â†“
  *   Stripe webhook
- *        ↓
+ *        â†“
  *   mark_order_paid()
  *
  * IMPORTANT:
@@ -29,7 +29,7 @@
  * - The browser sends the SERVICE ID, not a Stripe price ID.
  * - The server is authoritative for pricing.
  * - The webhook is authoritative for payment completion.
- * - Customer fields must be entered manually.
+ * - Customer fields support browser autofill, paste, and normal editing.
  */
 
 "use strict";
@@ -56,6 +56,7 @@ let selectedService = null;
 let paymentMounted = false;
 let paymentIntentCreated = false;
 let emailConfirmed = false;
+let confirmedEmailValue = "";
 
 /*
  * Prevent duplicate Confirm Email clicks from starting two
@@ -478,7 +479,108 @@ function resetAddressFields() {
   }
 }
 
-function setupManualEntryFields() {
+function setupCustomerFields() {
+
+  const firstName = document.getElementById("firstName");
+  const lastName = document.getElementById("lastName");
+  const email = document.getElementById("email");
+  const phone = document.getElementById("phone");
+  const address = document.getElementById("address");
+  const address2 = document.getElementById("address2");
+  const city = document.getElementById("city");
+  const state = document.getElementById("state");
+  const zip = document.getElementById("zip");
+
+  const autocomplete = new Map([
+    [firstName, "given-name"],
+    [lastName, "family-name"],
+    [email, "email"],
+    [phone, "tel"],
+    [address, "address-line1"],
+    [address2, "address-line2"],
+    [city, "address-level2"],
+    [state, "address-level1"],
+    [zip, "postal-code"]
+  ]);
+
+  autocomplete.forEach((value, input) => {
+    if (input) {
+      input.setAttribute("autocomplete", value);
+      input.removeAttribute("data-form-type");
+      input.removeAttribute("data-lpignore");
+      input.removeAttribute("data-1p-ignore");
+    }
+  });
+
+  if (email) {
+    email.setAttribute("autocapitalize", "none");
+    email.setAttribute("spellcheck", "false");
+    email.setAttribute("inputmode", "email");
+    email.addEventListener("input", () => {
+      email.value = email.value.replace(/\s/g, "").slice(0, 254);
+      const at = email.value.indexOf("@");
+      if (at > 0) {
+        email.value = email.value.slice(0, at) + "@" +
+          email.value.slice(at + 1).toLowerCase();
+      }
+
+      if (
+        confirmedEmailValue &&
+        email.value.trim().toLowerCase() !==
+          confirmedEmailValue
+      ) {
+        emailConfirmed = false;
+        confirmedEmailValue = "";
+      }
+
+      email.setCustomValidity("");
+    });
+  }
+
+  if (phone) {
+    phone.setAttribute("inputmode", "tel");
+    phone.addEventListener("input", () => {
+      let digits = phone.value.replace(/\D/g, "");
+      if (digits.length > 10 && digits.startsWith("1")) {
+        digits = digits.slice(1);
+      }
+      digits = digits.slice(0, 10);
+      let formatted = "";
+      if (digits.length) formatted = "(" + digits.slice(0, 3);
+      if (digits.length >= 3) formatted += ") ";
+      if (digits.length > 3) formatted += digits.slice(3, 6);
+      if (digits.length >= 6) formatted += "-";
+      if (digits.length > 6) formatted += digits.slice(6, 10);
+      phone.value = formatted;
+      phone.setCustomValidity("");
+    });
+  }
+
+  if (zip) {
+    zip.setAttribute("inputmode", "numeric");
+    zip.addEventListener("input", () => {
+      const digits = zip.value.replace(/\D/g, "").slice(0, 9);
+      zip.value = digits.length > 5
+        ? digits.slice(0, 5) + "-" + digits.slice(5)
+        : digits;
+    });
+  }
+
+  [firstName, lastName, city].forEach(input => {
+    input?.addEventListener("input", () => {
+      input.value = input.value.replace(/[^\p{L}' -]/gu, "");
+    });
+  });
+
+  address?.addEventListener("input", () => {
+    address.value = address.value.replace(/[^\p{L}\p{N} .,'#-]/gu, "");
+  });
+
+  return;
+
+  /* Legacy manual-entry enforcement retained below only as unreachable
+     reference code. It is not initialized and cannot block autofill. */
+  {
 
   const firstName = document.getElementById("firstName");
   const lastName = document.getElementById("lastName");
@@ -868,7 +970,7 @@ function setupManualEntryFields() {
 
       input.value =
         input.value.replace(
-          /[^A-Za-zÀ-ÿ' -]/g,
+          /[^\p{L}' -]/gu,
           ""
         );
     });
@@ -883,10 +985,11 @@ function setupManualEntryFields() {
 
       address.value =
         address.value.replace(
-          /[^A-Za-z0-9À-ÿ .,'#-]/g,
+          /[^\p{L}\p{N} .,'#-]/gu,
           ""
         );
     });
+  }
   }
 }
 
@@ -1043,7 +1146,6 @@ async function initCheckout() {
 
   try {
 
-    createManualEntryWarning();
     createAddressValidationOverlay();
     createUSPSAddressConfirmationModal();
 
@@ -1195,7 +1297,7 @@ async function initCheckout() {
       handleSubmit
     );
 
-    setupManualEntryFields();
+    setupCustomerFields();
     setupBillingAddressValidationState();
     setupEmailModal();
 
@@ -1351,13 +1453,6 @@ async function handleSubmit(event) {
 
 
   /*
-   * Require actual manual entry before validation.
-   */
-  if (!requireManualEntry()) {
-    return;
-  }
-
-  /*
    * FIRST SUBMISSION:
    * Validate customer information only.
    */
@@ -1376,6 +1471,36 @@ async function handleSubmit(event) {
         validation.field
       );
 
+      return;
+    }
+
+    /*
+     * USPS has already validated and the customer has already accepted
+     * this exact address. A failed PaymentIntent setup must not force the
+     * customer through address validation again. Editing any address field
+     * clears this state through setupBillingAddressValidationState().
+     */
+    if (
+      billingAddressVerified &&
+      billingAddressVerificationKey ===
+        getBillingAddressVerificationKey()
+    ) {
+      const currentEmail =
+        getInputValue("email")
+          .trim()
+          .toLowerCase();
+
+      if (
+        emailConfirmed &&
+        confirmedEmailValue === currentEmail
+      ) {
+        await handleEmailConfirmation();
+        return;
+      }
+
+      openEmailConfirmation(
+        getInputValue("email")
+      );
       return;
     }
 
@@ -1424,6 +1549,10 @@ async function handleSubmit(event) {
        * we place the standardized address into the checkout form.
        */
       applyUSPSAddressToForm(uspsResult.address);
+
+      billingAddressVerified = true;
+      billingAddressVerificationKey =
+        getBillingAddressVerificationKey();
 
       /*
        * Address is now verified and accepted. Move automatically to the
@@ -1501,7 +1630,7 @@ async function handleSubmit(event) {
 const VALIDATION = {
 
   name:
-    /^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' -]{1,49}$/,
+    /^\p{L}[\p{L}' -]{1,49}$/u,
 
   /*
    * IMPORTANT:
@@ -1515,10 +1644,10 @@ const VALIDATION = {
     /^(?:\+1[\s.-]?)?(?:\([2-9]\d{2}\)|[2-9]\d{2})[\s.-]?[2-9]\d{2}[\s.-]?\d{4}$/,
 
   address:
-    /^\d{1,6}\s+[A-Za-z0-9À-ÿ][A-Za-z0-9À-ÿ .,'#-]{2,99}$/,
+    /^\d{1,6}\s+[\p{L}\p{N}][\p{L}\p{N} .,'#-]{2,99}$/u,
 
   city:
-    /^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' -]{1,49}$/,
+    /^\p{L}[\p{L}' -]{1,49}$/u,
 
   state:
     /^(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI)$/i,
@@ -1690,7 +1819,7 @@ function createEmailConfirmationModal() {
 
   modal.innerHTML = `
     <div class="email-confirm-card">
-      <div class="email-confirm-icon" aria-hidden="true">✓</div>
+      <div class="email-confirm-icon" aria-hidden="true">âœ“</div>
 
       <div class="email-confirm-title">
         Confirm Your Email
@@ -1877,6 +2006,9 @@ function setupEmailModal() {
       "click",
       () => {
 
+        emailConfirmed = false;
+        confirmedEmailValue = "";
+
         closeEmailConfirmation();
 
         const email =
@@ -1986,11 +2118,6 @@ async function handleEmailConfirmation() {
     return;
   }
 
-  if (!requireManualEntry()) {
-    closeEmailConfirmation();
-    return;
-  }
-
   const validation =
     validateCustomerForm(form);
 
@@ -2019,6 +2146,10 @@ async function handleEmailConfirmation() {
   }
 
   emailConfirmed = true;
+  confirmedEmailValue =
+    getInputValue("email")
+      .trim()
+      .toLowerCase();
 
   closeEmailConfirmation();
 
@@ -2120,8 +2251,6 @@ async function handleEmailConfirmation() {
       "Unable to prepare secure payment."
     );
 
-    emailConfirmed = false;
-
     setButton(
       button,
       false,
@@ -2165,7 +2294,7 @@ function showOrderNotice() {
   if (parts.length) {
 
     orderNotice.textContent =
-      parts.join(" • ") +
+      parts.join(" â€¢ ") +
       " is ready for secure payment.";
 
     orderNotice.style.display =
@@ -2372,7 +2501,7 @@ function createUSPSAddressConfirmationModal() {
   overlay.innerHTML = `
     <div class="usps-address-confirmation-card">
       <div class="usps-address-confirmation-icon" aria-hidden="true">
-        ✓
+        âœ“
       </div>
 
       <div class="usps-address-confirmation-eyebrow">
@@ -2813,7 +2942,7 @@ function createAddressValidationOverlay() {
     }
 
     .address-validation-spinner.success::after {
-      content: "✓";
+      content: "âœ“";
       position: absolute;
       inset: 0;
       display: grid;
@@ -3134,10 +3263,28 @@ async function createPaymentIntent(form) {
 
   if (!response.ok) {
 
+    const serverErrorParts = [
+      result?.error || result?.message,
+      result?.stage ? "Stage: " + result.stage : "",
+      result?.code ? "Code: " + result.code : "",
+      result?.details ? "Details: " + result.details : ""
+    ].filter(Boolean);
+
+    const serverErrorMessage =
+      serverErrorParts.join(" | ") ||
+      "The secure payment server could not create the payment.";
+
+    console.error(
+      "create-payment-intent failed:",
+      {
+        status: response.status,
+        statusText: response.statusText,
+        result
+      }
+    );
+
     throw new Error(
-      result?.error ||
-      result?.message ||
-      "The secure payment server could not create the payment."
+      serverErrorMessage
     );
   }
 
@@ -3976,7 +4123,7 @@ function clearMessages() {
 }
 
 /**
- * screenings4u — Checkout Billing Address Validation
+ * screenings4u â€” Checkout Billing Address Validation
  *
  * Add this script after checkout.js OR copy these functions
  * into checkout.js.
@@ -4414,4 +4561,96 @@ function hideAddressValidationMessage() {
 
   element.style.display =
     "none";
+}
+
+
+/* =========================================================
+   LOCAL BILLING ADDRESS VALIDATION
+========================================================= */
+
+function validateBillingAddressFormat() {
+
+  const address =
+    getBillingAddressData();
+
+
+  if (
+    !/^\d{1,6}\s+/.test(
+      address.streetAddress
+    )
+  ) {
+
+    return {
+      valid: false,
+      field: "address",
+      message:
+        "Please enter a complete street address, including the street number."
+    };
+  }
+
+
+  if (
+    address.secondaryAddress.length >
+    0 &&
+    address.secondaryAddress.length >
+    50
+  ) {
+
+    return {
+      valid: false,
+      field: "address2",
+      message:
+        "Please enter a valid Apt, Suite, or Unit."
+    };
+  }
+
+
+  if (
+    !/^\p{L}[\p{L}' .-]{1,49}$/u.test(
+      address.city
+    )
+  ) {
+
+    return {
+      valid: false,
+      field: "city",
+      message:
+        "Please enter a valid city."
+    };
+  }
+
+
+  if (
+    !/^[A-Z]{2}$/.test(
+      address.state
+    )
+  ) {
+
+    return {
+      valid: false,
+      field: "state",
+      message:
+        "Please select a valid state."
+    };
+  }
+
+
+  if (
+    !/^\d{5}$/.test(
+      address.ZIPCode
+    )
+  ) {
+
+    return {
+      valid: false,
+      field: "zip",
+      message:
+        "Please enter a valid five-digit ZIP code."
+    };
+  }
+
+
+  return {
+    valid: true
+  };
 }

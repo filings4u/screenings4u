@@ -1334,6 +1334,32 @@ const TEST_SERVICES = {
   },
 
   /* =========================================================
+     LIVE CHECKOUT TEST SERVICE
+     ========================================================= */
+
+  live_checkout_test_1_dollar: {
+    id: "live_checkout_test_1_dollar",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=live_checkout_test_1_dollar",
+    name: "Live Checkout Test - $1.00",
+    shortName: "$1 Live Checkout Test",
+    category: "Checkout Testing",
+    specimen: "Test Transaction",
+    price: 100,
+    currency: "usd",
+    stripePriceId: "",
+    results: "Immediate checkout verification",
+    description: "A $1.00 service used to verify the complete live checkout, Stripe payment, order, webhook, and receipt workflow.",
+    features: [
+      "Exactly $1.00",
+      "Live Stripe Payment Element Test",
+      "Order Creation Verification",
+      "Webhook Processing Verification",
+      "Payment Receipt Verification"
+    ]
+  },
+
+  /* =========================================================
      SPECIMEN COLLECTOR TRAINING SUPPLIES
      ========================================================= */
 
