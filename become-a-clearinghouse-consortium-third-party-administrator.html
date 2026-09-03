@@ -966,6 +966,133 @@
     }
   </style>
   <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
+
+  <style id="mobile-page-layout">
+    /* Keep outline buttons visible on light backgrounds. */
+    .btn-outline{
+      color:var(--blue);
+      background:transparent;
+      border-color:var(--blue);
+    }
+
+    .btn:focus-visible,
+    .price-btn:focus-visible,
+    .faq-question:focus-visible{
+      outline:3px solid rgba(255,107,0,.42);
+      outline-offset:3px;
+    }
+
+    @media(max-width:800px){
+      html,body{max-width:100%;overflow-x:hidden}
+      .topbar,.nav-account-menu{display:none!important}
+      body{font-size:16px;line-height:1.65}
+      button,input,select,textarea{font:inherit;font-size:16px}
+      form,fieldset,input,select,textarea{width:100%;min-width:0}
+      img,svg,video,iframe{max-width:100%;height:auto}
+      .container{width:min(100% - 32px,var(--max))}
+
+      .nav-inner{min-height:70px;gap:10px}
+      .nav-inner.menu-open .nav{
+        top:calc(100% + 1px);
+        left:16px;
+        right:16px;
+        max-height:calc(100vh - 86px);
+        max-height:calc(100dvh - 86px);
+        overflow-y:auto;
+        overscroll-behavior:contain;
+      }
+      .nav-inner.menu-open .nav,
+      .nav-inner.menu-open .dropdown{flex-direction:column;align-items:stretch}
+      .nav-inner.menu-open .nav-link,
+      .nav-inner.menu-open .dropdown a{
+        display:flex;
+        align-items:center;
+        width:100%;
+        min-height:44px;
+      }
+
+      .ctpa-hero-grid{
+        min-height:auto;
+        display:flex;
+        flex-direction:column;
+        gap:34px;
+        padding:42px 0 56px;
+      }
+      .hero-panel{
+        order:-1;
+        width:100%;
+        max-width:none;
+      }
+      .ctpa-hero-copy{width:100%}
+      .ctpa-hero h1{
+        font-size:clamp(37px,9vw,56px);
+        line-height:1.04;
+        overflow-wrap:anywhere;
+      }
+      .ctpa-hero p{font-size:16px}
+
+      .section,.services-section,.workflow-section,
+      .pricing-section,.faq-section,.final-cta{padding:72px 0}
+      .intro-grid,.service-grid,.workflow-grid,.pricing-grid{
+        grid-template-columns:minmax(0,1fr);
+      }
+      .intro-copy h2,.section-heading h2,.workflow-heading h2{
+        font-size:clamp(32px,8vw,45px);
+        overflow-wrap:anywhere;
+      }
+      .service-card,.workflow-card,.price-card,
+      .compliance-card,.portal-card,.final-card{
+        width:100%;
+        min-width:0;
+      }
+      .portal-grid{grid-template-columns:minmax(0,1fr)}
+      .price-card.featured{transform:none}
+      .price-card h3,.price-note{min-height:0}
+      .final-card{flex-direction:column;align-items:stretch;padding:38px}
+      .final-card .btn{width:100%}
+    }
+
+    @media(max-width:560px){
+      .container{width:min(100% - 28px,var(--max))}
+      .nav-inner{min-height:66px}
+      .brand{width:118px;flex-basis:118px}
+      .site-logo{width:116px;max-height:44px}
+      .mobile-toggle{width:42px;min-width:42px;height:40px}
+      .ctpa-hero-grid{padding:28px 0 48px}
+      .hero-panel{padding:24px 20px}
+      .hero-panel h2{font-size:24px}
+      .ctpa-hero h1{font-size:clamp(35px,11vw,47px)}
+      .ctpa-hero p{font-size:15px}
+      .hero-actions{
+        display:grid;
+        grid-template-columns:minmax(0,1fr);
+        width:100%;
+      }
+      .hero-actions .btn,
+      .final-card .btn,
+      .price-btn{
+        width:100%;
+        min-height:48px;
+        padding-inline:18px;
+        text-align:center;
+      }
+      .section,.services-section,.workflow-section,
+      .pricing-section,.faq-section,.final-cta{padding:56px 0}
+      .intro-grid{gap:34px}
+      .service-card,.workflow-card,.price-card{padding:26px 22px}
+      .compliance-card{min-height:0;padding:16px}
+      .portal-card{min-height:0;padding:20px}
+      .portal-top{align-items:flex-start;gap:12px;flex-direction:column}
+      .final-card{padding:30px 22px}
+      .faq-question{padding:18px 16px;font-size:14px;gap:14px}
+      .faq-answer{padding:0 16px 20px}
+    }
+
+    @media(max-width:380px){
+      .container{width:min(100% - 22px,var(--max))}
+      .ctpa-hero h1{font-size:34px}
+    }
+  </style>
 </head>
 
 <body>
@@ -1020,6 +1147,7 @@
       </div>
 
       <button
+        type="button"
         class="mobile-toggle"
         id="mobileToggle"
         aria-label="Open menu"
@@ -1035,7 +1163,7 @@
 
     <section class="ctpa-hero">
       <div class="container ctpa-hero-grid">
-        <div>
+        <div class="ctpa-hero-copy">
           <span class="eyebrow">FMCSA Compliance Solutions</span>
           <h1>Become a Certified <span>Clearinghouse C/TPA.</span></h1>
           <p>Expand your drug testing business by offering professional FMCSA Clearinghouse management services. Build a stronger compliance offering for trucking companies and owner-operators.</p>
@@ -1211,61 +1339,80 @@
           <p>Start with professional setup or choose expanded management tools for a more complete compliance service operation.</p>
         </div>
 
-        <div class="pricing-grid">
+ <div class="pricing-grid">
 
-          <article class="price-card">
-            <h3>C/TPA Setup</h3>
-            <div class="price">$295</div>
-            <p class="price-note">Professional Clearinghouse C/TPA setup</p>
-            <div class="price-divider"></div>
-            <ul class="price-list">
-              <li>Clearinghouse account setup</li>
-              <li>C/TPA status activation</li>
-              <li>Direct registry listing support</li>
-              <li>Compliance guide</li>
-            </ul>
-            <a class="price-btn" href="checkout.html?service=ctpa-setup">Get Started</a>
-          </article>
+  <article class="price-card" data-service-id="ctpa_setup">
+    <h3>C/TPA Setup</h3>
+    <div class="price" data-service-price>$295</div>
+    <p class="price-note">Professional Clearinghouse C/TPA setup</p>
 
-          <article class="price-card featured">
-            <span class="popular">Most Popular</span>
-            <h3>C/TPA Pro Management</h3>
-            <div class="price">$595</div>
-            <p class="price-note">Setup plus expanded management support</p>
-            <div class="price-divider"></div>
-            <ul class="price-list">
-              <li>Clearinghouse account setup</li>
-              <li>C/TPA status activation</li>
-              <li>C/TPA registry listing support</li>
-              <li>Compliance guide</li>
-              <li>Random consortium software onboarding</li>
-              <li>Driver query handling workflows</li>
-              <li>Violation entry workflows</li>
-              <li>Management of multiple clients</li>
-              <li>Consortium certificate resources</li>
-              <li>Consortium agreement resources</li>
-            </ul>
-            <a class="price-btn" href="checkout.html?service=ctpa-pro-management">Get Started</a>
-          </article>
+    <div class="price-divider"></div>
 
-          <article class="price-card">
-            <h3>C/TPA Custom Solutions</h3>
-            <div class="price custom">Custom</div>
-            <p class="price-note">For multi-office and high-volume operations</p>
-            <div class="price-divider"></div>
-            <ul class="price-list">
-              <li>Advanced Clearinghouse workflows</li>
-              <li>Random consortium software support</li>
-              <li>High-volume client management</li>
-              <li>Multi-office scaling</li>
-              <li>White-label support options</li>
-              <li>Audit-focused workflow planning</li>
-              <li>Dedicated account support</li>
-            </ul>
-            <a class="price-btn" href="contact.html?subject=ctpa-custom-solutions">Request a Quote</a>
-          </article>
+    <ul class="price-list">
+      <li>Clearinghouse account setup</li>
+      <li>C/TPA status activation</li>
+      <li>Direct registry listing support</li>
+      <li>Compliance guide</li>
+    </ul>
 
-        </div>
+    <a class="price-btn" data-service-link href="checkout.html?service=ctpa_setup">
+      Get Started
+    </a>
+  </article>
+
+
+  <article class="price-card featured" data-service-id="ctpa_pro_management">
+    <span class="popular">Most Popular</span>
+
+    <h3>C/TPA Pro Management</h3>
+    <div class="price" data-service-price>$595</div>
+    <p class="price-note">Setup plus expanded management support</p>
+
+    <div class="price-divider"></div>
+
+    <ul class="price-list">
+      <li>Clearinghouse account setup</li>
+      <li>C/TPA status activation</li>
+      <li>C/TPA registry listing support</li>
+      <li>Compliance guide</li>
+      <li>Random consortium software onboarding</li>
+      <li>Driver query handling workflows</li>
+      <li>Violation entry workflows</li>
+      <li>Management of multiple clients</li>
+      <li>Consortium certificate resources</li>
+      <li>Consortium agreement resources</li>
+    </ul>
+
+    <a class="price-btn" data-service-link href="checkout.html?service=ctpa_pro_management">
+      Get Started
+    </a>
+  </article>
+
+
+  <article class="price-card" data-service-id="ctpa_custom_solutions">
+    <h3>C/TPA Custom Solutions</h3>
+    <div class="price custom" data-service-price>Custom</div>
+    <p class="price-note">For multi-office and high-volume operations</p>
+
+    <div class="price-divider"></div>
+
+    <ul class="price-list">
+      <li>Advanced Clearinghouse workflows</li>
+      <li>Random consortium software support</li>
+      <li>High-volume client management</li>
+      <li>Multi-office scaling</li>
+      <li>White-label support options</li>
+      <li>Audit-focused workflow planning</li>
+      <li>Dedicated account support</li>
+    </ul>
+
+    <a class="price-btn" data-service-link href="contact.html?subject=ctpa-custom-solutions">
+      Request a Quote
+    </a>
+  </article>
+
+</div>
+
 
         <p class="pricing-disclaimer">Employer clients remain responsible for meeting their applicable FMCSA and Clearinghouse compliance obligations. C/TPA access and activities are subject to applicable registration, designation, authorization, and consent requirements.</p>
       </div>
@@ -1349,8 +1496,9 @@
 
   <footer id="siteFooter"></footer>
 
-  <script src="assets/js/navigation.js"></script>
-  <script src="assets/js/footer.js"></script>
+<script src="assets/js/navigation.js"></script>
+<script src="assets/js/footer.js"></script>
+
 
   <script>
     document.querySelectorAll(".faq-question").forEach(function(button){
