@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -613,8 +613,10 @@ h1{
     }
     .services-page .nav-account-menu.open .nav-account-dropdown{display:block}
 
-    .services-hero{background-position:66% center}
-    .services-hero-inner{padding:52px 0 82px}
+    .services-hero{display:block;background:var(--blue-darker)}
+    .services-hero:after{display:none}
+    .services-hero-image{display:block;width:100%;height:clamp(230px,67vw,390px);background:url("images/service-hero.png") center/cover no-repeat}
+    .services-hero-inner{max-width:none;padding:36px 0 72px}
     .services-hero .eyebrow{font-size:11px}
     .services-hero h1{margin:14px 0 18px;font-size:clamp(36px,11vw,48px);letter-spacing:-.04em}
     .services-hero .lead{font-size:16px;line-height:1.6}
@@ -666,7 +668,10 @@ h1{
     .services-page .nav-login-chevron{display:none}
     .services-page .mobile-toggle{width:42px;height:42px}
     .catalog-panel{padding:18px 12px}
+    .services-hero-image{height:240px}
   }
+
+  @media(min-width:768px){.services-hero-image{display:none}}
 </style>
 </head>
 
@@ -723,7 +728,7 @@ h1{
 </header>
 
 <main>
-  <section class="services-hero"><div class="container"><div class="services-hero-inner"><div class="eyebrow">Testing, compliance &amp; training</div><h1>Find the service.<br><span>We’ll help with the next step.</span></h1><p class="lead">Browse drug and alcohol testing, DOT services, physicals, training, and professional support from one trusted nationwide partner.</p><div class="services-hero-actions"><a class="btn btn-orange" href="#service-catalog">Browse Services →</a><a class="btn btn-outline" href="contact.html">Talk With Our Team</a></div><div class="hero-assurance"><div class="assurance"><strong>Nationwide Access</strong><span>Collection locations across the country</span></div><div class="assurance"><strong>Secure Checkout</strong><span>Protected online ordering and payment</span></div><div class="assurance"><strong>Expert Support</strong><span>Help choosing the appropriate service</span></div></div></div></div></section>
+  <section class="services-hero"><div class="services-hero-image" role="img" aria-label="Screenings4u testing and compliance services"></div><div class="container"><div class="services-hero-inner"><div class="eyebrow">Testing, compliance &amp; training</div><h1>Find the service.<br><span>We’ll help with the next step.</span></h1><p class="lead">Browse drug and alcohol testing, DOT services, physicals, training, and professional support from one trusted nationwide partner.</p><div class="services-hero-actions"><a class="btn btn-orange" href="#service-catalog">Browse Services →</a><a class="btn btn-outline" href="contact.html">Talk With Our Team</a></div><div class="hero-assurance"><div class="assurance"><strong>Nationwide Access</strong><span>Collection locations across the country</span></div><div class="assurance"><strong>Secure Checkout</strong><span>Protected online ordering and payment</span></div><div class="assurance"><strong>Expert Support</strong><span>Help choosing the appropriate service</span></div></div></div></div></section>
 
   <section class="catalog-section" id="service-catalog"><div class="container"><div class="catalog-panel"><div class="catalog-heading"><div class="catalog-heading-copy"><div class="catalog-kicker">Screenings4u service catalog</div><h2>Choose a service category.</h2><p>Filter the catalog, compare available services, and select an option to review its details before ordering.</p></div><div class="catalog-note">Live services and current pricing</div></div><div id="filters" class="catalog-tools" aria-label="Service categories"></div><section class="section"><h2>Testing &amp; Training</h2><div id="catalog" class="grid"><div class="empty">Loading services…</div></div></section></div></div></section>
 
