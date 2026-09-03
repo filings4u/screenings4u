@@ -1440,16 +1440,29 @@ function renderService(service) {
    DISCOUNT CODES
 ========================================================= */
 
+/*
+ * Discount/order totals returned by Supabase are DECIMAL DOLLARS.
+ * The service catalog price is stored in MINOR UNITS (cents) and
+ * formatTestPrice() is designed for that catalog representation.
+ *
+ * Do not pass server discount amounts such as 20.00 through
+ * formatTestPrice(), or they will display as $0.20.
+ */
 function money(value, currency = null) {
-  return formatTestPrice(
-    Number(value || 0),
-    currency || selectedService?.currency || "USD"
-  );
+  const amount = Number(value || 0);
+
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: currency || selectedService?.currency || "USD"
+  }).format(Number.isFinite(amount) ? amount : 0);
 }
 
 function getBaseCheckoutPrice() {
-  const value = Number(selectedService?.price || 0);
-  return Number.isFinite(value) ? value : 0;
+  const catalogPriceInCents = Number(selectedService?.price || 0);
+
+  return Number.isFinite(catalogPriceInCents)
+    ? catalogPriceInCents / 100
+    : 0;
 }
 
 function renderDiscountSummary() {
