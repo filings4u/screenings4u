@@ -130,6 +130,9 @@ function getNavigationMarkup() {
         <a href="become-a-clearinghouse-consortium-third-party-administrator.html">
           Become a C/TPA
         </a>
+           <a href="compliance-guidance.html">
+          Compliance Guidance
+        </a>
 
         <!-- <a href="/affiliate">
           Affiliate Program
@@ -150,6 +153,7 @@ function getNavigationMarkup() {
         <!-- <a href="/start-a-drug-testing-business">
           Drug Test Business
         </a> -->
+        
       </div>
     </div>
 

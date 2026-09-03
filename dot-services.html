@@ -1004,7 +1004,19 @@
 }
 
 </style>
-  <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
+<style>
+.mobile-nav-actions{display:none}
+@media(max-width:1120px){.nav-actions>.nav-account-menu{display:none}.nav-inner.menu-open .nav{max-height:calc(100vh - 82px);overflow-y:auto}}
+@media(max-width:767px){
+:root{--mobile-gutter:20px}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{min-width:320px;font-size:16px;overflow-x:hidden}.container{width:100%;padding-inline:var(--mobile-gutter)}.topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}
+.nav-inner{min-height:64px;gap:12px}.brand{flex-basis:145px;width:145px}.site-logo{width:140px;max-height:42px}.mobile-toggle{display:grid;place-items:center;min-width:44px;height:44px;font-size:23px}.nav-actions{margin-left:auto}.nav-actions>.btn,.nav-actions>.nav-account-menu{display:none!important}.nav-inner.menu-open .nav{left:0;right:0;top:64px;max-height:calc(100dvh - 64px);padding:10px var(--mobile-gutter) max(18px,env(safe-area-inset-bottom));border-radius:0 0 12px 12px}.nav-link,.dropdown a{width:100%;min-height:44px;padding:12px 8px;font-size:16px}.nav-inner.menu-open .dropdown{padding-left:12px}.nav-item{width:100%}.mobile-nav-actions{display:grid;grid-template-columns:1fr;gap:10px;width:100%;padding-top:14px}.mobile-nav-actions .btn{width:100%;min-height:48px}.mobile-nav-actions .btn-outline{background:#fff}
+.hero{display:block;min-height:0;padding-top:290px;background:var(--blue-darker)}.hero::before{content:"";position:absolute;inset:0 0 auto;height:290px;background:url("images/dot-hero.png") center center/cover no-repeat}.hero::after{display:none}.hero-inner{padding:34px var(--mobile-gutter) 40px;background:var(--blue-darker)}.hero-copy{max-width:none}.hero h1{font-size:clamp(2.15rem,9.5vw,2.95rem);line-height:1.04;letter-spacing:-.045em;margin-bottom:16px}.hero-lead{font-size:16px;line-height:1.6;margin-bottom:24px}.hero-actions,.cta-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:0}.hero-actions .btn,.cta-actions .btn{width:100%;min-height:52px}.hero-features{grid-template-columns:1fr;margin-top:30px;padding-top:20px;gap:0}.hero-feature,.hero-feature:first-child{padding:10px 0;border:0;border-bottom:1px solid rgba(255,255,255,.12)}.hero-feature:last-child{border-bottom:0}.hero-feature strong{font-size:13px}.hero-feature small{font-size:12px;line-height:1.45}
+.dot-intro,.dot-services,.dot-compliance,.dot-faq{padding:54px 0}.dot-intro-grid,.dot-grid,.dot-compliance-grid,.dot-stats{grid-template-columns:1fr;gap:20px}.section-heading{margin-bottom:28px}.section-heading h2,.dot-intro h2,.dot-compliance h2{font-size:clamp(1.8rem,8vw,2.3rem);line-height:1.1}.section-heading p,.dot-intro p,.dot-compliance p{font-size:16px;line-height:1.65}.dot-card,.dot-panel{padding:24px}.dot-card h3,.dot-panel h3{font-size:1.45rem}.dot-card p,.dot-panel p,.dot-checks li{font-size:14px;line-height:1.6}.dot-stat{padding:16px}.dot-stat strong{font-size:14px}.dot-stat span{font-size:13px}.dot-num{font-size:13px}
+.dot-faq-question{min-height:56px;padding:16px;gap:14px;font-size:15px;line-height:1.4}.dot-faq-answer{padding:0 16px 18px;font-size:14px;line-height:1.65}.dot-faq-plus{flex:0 0 auto}.cta{padding:52px 0}.cta-inner{display:grid;grid-template-columns:1fr;gap:24px}.cta h2{font-size:clamp(1.85rem,8vw,2.35rem)}.cta p{font-size:16px;line-height:1.6}
+}
+@media(max-width:380px){:root{--mobile-gutter:16px}.brand{flex-basis:132px;width:132px}.site-logo{width:128px}.hero{padding-top:250px}.hero::before{height:250px}.dot-card,.dot-panel{padding:21px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
 </head>
 <body>
   <div class="topbar">
@@ -1060,6 +1072,7 @@
       <button
         class="mobile-toggle"
         id="mobileToggle"
+        aria-controls="mainNav"
         aria-label="Open menu"
         aria-expanded="false">
         ☰
@@ -1126,5 +1139,16 @@
 <script src="assets/js/dot-services.js" defer></script>
   <script src="assets/js/navigation.js"></script>
   <script src="assets/js/footer.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  const nav=document.getElementById("mainNav");
+  if(nav&&!nav.querySelector(".mobile-nav-actions")){
+    const actions=document.createElement("div");
+    actions.className="mobile-nav-actions";
+    actions.innerHTML='<a class="btn btn-orange" href="services.html">Order a Test</a><a class="btn btn-outline" href="https://portal.screenings4u.com/customer-login.html">Customer Login</a><a class="btn btn-outline" href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>';
+    nav.append(actions);
+  }
+});
+</script>
 </body>
 </html>

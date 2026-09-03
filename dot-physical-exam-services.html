@@ -191,7 +191,13 @@ button{cursor:pointer}
   .footer-bottom{flex-direction:column}
 }
 </style>
-  <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
+<style>
+.nav-account-menu{position:relative}.nav-login{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 18px;border:1px solid var(--blue);border-radius:8px;background:var(--blue);color:#fff;font-size:14px;font-weight:800;white-space:nowrap}.nav-account-dropdown{position:absolute;top:calc(100% + 9px);right:0;z-index:1200;min-width:205px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(6px)}.nav-account-menu:hover .nav-account-dropdown,.nav-account-menu:focus-within .nav-account-dropdown{opacity:1;visibility:visible;transform:none}.nav-account-dropdown a{display:block;padding:11px 12px}.mobile-nav-actions{display:none}
+@media(max-width:1120px){.nav-actions>.nav-account-menu{display:none}.nav-inner.menu-open .nav{max-height:calc(100vh - 82px);overflow-y:auto}}
+@media(max-width:767px){:root{--mobile-gutter:20px}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{min-width:320px;font-size:16px}.container{width:100%;padding-inline:var(--mobile-gutter)}.topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}.nav-inner{min-height:64px;gap:12px}.brand{flex-basis:145px;width:145px}.site-logo{width:140px;max-height:42px}.mobile-toggle{display:grid;place-items:center;min-width:44px;height:44px;font-size:23px}.nav-actions{margin-left:auto}.nav-inner.menu-open .nav{top:64px;max-height:calc(100dvh - 64px);padding:10px var(--mobile-gutter) max(18px,env(safe-area-inset-bottom));border-radius:0 0 12px 12px}.nav-link,.dropdown a{width:100%;min-height:44px;padding:12px 8px;font-size:16px}.nav-inner.menu-open .dropdown{padding-left:12px}.nav-item{width:100%}.mobile-nav-actions{display:grid;grid-template-columns:1fr;gap:10px;width:100%;padding-top:14px}.mobile-nav-actions .btn{width:100%;min-height:48px}.mobile-nav-actions .btn-outline{background:#fff}.hero{display:block;min-height:0;padding-top:290px;background:var(--blue-darker)}.hero::before{content:"";position:absolute;inset:0 0 auto;height:290px;background:url("images/dot-physical-hero.png") center center/cover no-repeat}.hero::after{display:none}.hero-inner{padding:34px var(--mobile-gutter) 40px;background:var(--blue-darker)}.hero-copy{max-width:none}.hero h1{font-size:clamp(2.15rem,9.5vw,2.95rem);line-height:1.04;letter-spacing:-.045em;margin-bottom:16px}.hero-lead{font-size:16px;line-height:1.6;margin-bottom:24px}.hero-actions,.cta-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:0}.hero-actions .btn,.cta-actions .btn{width:100%;min-height:52px}.hero-features{grid-template-columns:1fr;margin-top:30px;padding-top:20px;gap:0}.hero-feature,.hero-feature:first-child{padding:10px 0;border:0;border-bottom:1px solid rgba(255,255,255,.12)}.hero-feature:last-child{border-bottom:0}.hero-feature strong{font-size:13px}.hero-feature small{font-size:12px;line-height:1.45}.intro,.services,.requirements,.process,.faq{padding:54px 0}.intro-grid,.requirements-grid,.process-grid,.service-grid,.info-grid{grid-template-columns:1fr;gap:20px}.intro-grid{align-items:start}.intro h2,.section-heading h2,.process-copy h2{font-size:clamp(1.8rem,8vw,2.3rem);line-height:1.1}.intro-copy p,.process-copy p,.section-heading p{font-size:16px;line-height:1.65}.section-heading{margin-bottom:28px}.check-list{gap:12px;margin-top:22px}.check-list li{font-size:14px;line-height:1.5}.info-card,.requirement-panel,.service-card{padding:24px}.info-card h3,.requirement-panel h3{font-size:1.65rem}.info-card p,.requirement-panel p,.requirement-panel li,.service-card p{font-size:14px}.info-stat{padding:16px}.info-stat strong{font-size:14px}.info-stat span{font-size:13px}.service-card h3{font-size:19px}.service-number{width:auto;min-width:52px;padding:0 11px}.service-link{font-size:14px;min-height:44px;align-items:center}.step{grid-template-columns:44px 1fr;gap:14px;padding-bottom:26px}.step-num{width:44px;height:44px;font-size:13px;box-shadow:0 0 0 5px #edf3fb}.step:not(:last-child)::after{left:21px;top:44px}.step h3{font-size:18px}.step p{font-size:14px;line-height:1.6}.faq-question{min-height:56px;padding:16px;gap:14px;font-size:15px;line-height:1.4}.faq-answer{padding:0 16px 18px;font-size:14px;line-height:1.65}.faq-plus{flex:0 0 auto}.cta{padding:52px 0}.cta-inner{display:grid;grid-template-columns:1fr;gap:24px}.cta h2{font-size:clamp(1.85rem,8vw,2.35rem)}.cta p{font-size:16px;line-height:1.6}}
+@media(max-width:380px){:root{--mobile-gutter:16px}.brand{flex-basis:132px;width:132px}.site-logo{width:128px}.hero{padding-top:250px}.hero::before{height:250px}.info-card,.requirement-panel,.service-card{padding:21px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
 </head>
 
 <body>
@@ -248,6 +254,7 @@ button{cursor:pointer}
       <button
         class="mobile-toggle"
         id="mobileToggle"
+        aria-controls="mainNav"
         aria-label="Open menu"
         aria-expanded="false">
         ☰
@@ -600,5 +607,16 @@ button{cursor:pointer}
 <script src="assets/js/dot-physical-exam-services.js" defer></script>
   <script src="assets/js/navigation.js"></script>
   <script src="assets/js/footer.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  const nav=document.getElementById("mainNav");
+  if(nav&&!nav.querySelector(".mobile-nav-actions")){
+    const actions=document.createElement("div");
+    actions.className="mobile-nav-actions";
+    actions.innerHTML='<a class="btn btn-orange" href="services.html">Order a Test</a><a class="btn btn-outline" href="https://portal.screenings4u.com/customer-login.html">Customer Login</a><a class="btn btn-outline" href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>';
+    nav.append(actions);
+  }
+});
+</script>
 </body>
 </html>

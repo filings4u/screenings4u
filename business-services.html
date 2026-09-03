@@ -31,6 +31,58 @@
 </style>
 
   <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
+  <!-- Mobile-only overrides: no desktop selector is changed. -->
+  <style>
+    @media (max-width: 767px) {
+      :root { --mobile-gutter: 20px; }
+      html { -webkit-text-size-adjust: 100%; }
+      body { font-size: 16px; line-height: 1.55; }
+      .container { width: 100%; padding-inline: var(--mobile-gutter); }
+      .topbar { display: none !important; }
+
+      .nav-inner { min-height: 64px; gap: 12px; }
+      .site-logo { max-height: 42px; width: 145px; }
+      .mobile-toggle { display: grid; place-items: center; width: 44px; height: 44px; font-size: 24px; }
+      .nav-inner.menu-open .nav { top: 64px; max-height: calc(100vh - 64px); overflow: auto; padding: 8px var(--mobile-gutter) 16px; }
+      .nav-link, .dropdown a { min-height: 44px; padding: 12px 8px; font-size: 16px; }
+      .nav-inner.menu-open .dropdown { padding-left: 12px; }
+      .nav-actions { gap: 8px; }
+      .nav-login { min-height: 44px; padding-inline: 12px; font-size: 13px; }
+      .nav-actions > .btn, .nav-actions > .nav-account-menu { display: none !important; }
+      .mobile-nav-actions { display: grid; gap: 10px; padding-top: 14px; }
+      .mobile-nav-actions .btn { width: 100%; }
+
+      /* Separate the hero image and copy: image first, text below, never overlaid. */
+      .hero { display: block; min-height: 0; padding-top: 290px; background: var(--blue-darker); }
+      .hero::before { content: ""; position: absolute; inset: 0 0 auto; height: 290px; background: url("images/business-services-hero-mobile.png") center/cover no-repeat; }
+      .hero::after { display: none; }
+      .hero-inner { z-index: 1; padding: 34px var(--mobile-gutter) 38px; background: var(--blue-darker); }
+      .hero h1 { font-size: clamp(2.25rem, 10vw, 3rem); line-height: 1.05; margin-bottom: 16px; }
+      .hero-lead { font-size: 1rem; line-height: 1.6; margin-bottom: 24px; }
+      .hero-actions, .cta-actions { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 0; }
+      .hero-actions .btn, .cta-actions .btn { width: 100%; }
+      .hero-features { grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; padding-top: 18px; }
+      .hero-feature, .hero-feature:first-child { padding: 0; border: 0; }
+      .hero-feature small { font-size: 11px; }
+
+      .intro, .services, .requirements, .process, .faq { padding-block: 54px; }
+      .intro-grid, .requirements-grid, .process-grid, .service-grid { grid-template-columns: 1fr; gap: 20px; }
+      .intro h2, .section-heading h2, .process-copy h2 { font-size: clamp(1.75rem, 8vw, 2.25rem); line-height: 1.1; }
+      .section-heading { margin-bottom: 28px; }
+      .section-heading p { font-size: 1rem; }
+      .info-card, .requirement-panel, .service-card { padding: 24px; }
+      .info-grid { grid-template-columns: 1fr; gap: 10px; }
+      .info-card h3, .requirement-panel h3 { font-size: 1.6rem; }
+      .step { grid-template-columns: 44px 1fr; gap: 14px; padding-bottom: 24px; }
+      .step-num { width: 44px; height: 44px; font-size: 13px; }
+      .step:not(:last-child)::after { left: 21px; top: 44px; }
+      .faq-question { padding: 17px; font-size: 15px; }
+      .faq-answer { padding: 0 17px 17px; font-size: 14px; }
+      .cta { padding-block: 52px; }
+      .cta-inner { display: grid; grid-template-columns: 1fr; gap: 24px; }
+      input, select, textarea, button { font: inherit; }
+    }
+  </style>
 </head>
 <body>
 <div class="topbar"><div class="container topbar-inner"><div class="topbar-left"><span>Nationwide Drug & Alcohol Testing</span><span>•</span><span>Operating Nationwide</span></div><div class="topbar-right"><span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a></div></div></div>
@@ -91,6 +143,18 @@ document.addEventListener("DOMContentLoaded",function(){
   document.addEventListener("click",function(e){
     if(!menu.contains(e.target)){menu.classList.remove("open");button.setAttribute("aria-expanded","false");}
   });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  if (!window.matchMedia("(max-width: 767px)").matches) return;
+  const nav = document.getElementById("mainNav");
+  if (!nav || nav.querySelector(".mobile-nav-actions")) return;
+  const actions = document.createElement("div");
+  actions.className = "mobile-nav-actions";
+  actions.innerHTML = '<a class="btn btn-orange" href="services.html">Order a Test</a><a class="btn btn-outline" href="https://portal.screenings4u.com/customer-login.html">Customer Login</a><a class="btn btn-outline" href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>';
+  nav.append(actions);
 });
 </script>
 

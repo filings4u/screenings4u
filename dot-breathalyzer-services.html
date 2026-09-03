@@ -1483,8 +1483,23 @@ footer{
 
 }
 
+.mobile-nav-actions{display:none}
+@media(max-width:767px){
+  :root{--mobile-gutter:20px}
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{min-width:320px;font-size:16px;overflow-x:hidden}
+  .container{width:100%;padding-inline:var(--mobile-gutter)}
+  .topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}
+  .nav-inner{min-height:64px;gap:12px}.brand{flex:0 0 145px;width:145px}.site-logo{width:140px;max-height:42px}.nav-actions{margin-left:auto}.nav-actions>.btn,.nav-actions>.nav-account-menu{display:none!important}.mobile-toggle{display:grid;place-items:center;min-width:44px;width:44px;height:44px;font-size:23px}.nav-inner.menu-open .nav{left:0;right:0;top:64px;max-height:calc(100dvh - 64px);overflow-y:auto;padding:10px var(--mobile-gutter) max(18px,env(safe-area-inset-bottom));border-radius:0 0 12px 12px}.nav-item{width:100%}.nav-link,.dropdown a{width:100%;min-height:44px;padding:12px 8px;font-size:16px}.nav-inner.menu-open .dropdown{padding-left:12px}.mobile-nav-actions{display:grid;grid-template-columns:1fr;gap:10px;width:100%;padding-top:14px}.mobile-nav-actions .btn{display:flex;width:100%;min-height:48px}.mobile-nav-actions .btn-outline{background:#fff}
+  .hero{display:block;min-height:0;padding-top:290px;background:var(--blue-darker)}.hero::before{content:"";position:absolute;inset:0 0 auto;height:290px;background:url("images/dot-breathalyzer-hero.png") center center/cover no-repeat}.hero::after{display:none}.hero-inner{padding:34px var(--mobile-gutter) 40px;background:var(--blue-darker)}.hero-copy{max-width:none}.hero h1{font-size:clamp(2.2rem,9.7vw,3rem);line-height:1.04;letter-spacing:-.045em;margin-bottom:16px}.hero-lead{font-size:16px;line-height:1.6;margin-bottom:24px}.hero-actions,.cta-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:0}.hero-actions .btn,.cta-actions .btn{width:100%;min-height:52px}.hero-features{grid-template-columns:1fr;margin-top:30px;padding-top:20px;gap:0}.hero-feature,.hero-feature:first-child{padding:10px 0;border:0;border-bottom:1px solid rgba(255,255,255,.12)}.hero-feature:last-child{border-bottom:0}.hero-feature strong{font-size:13px}.hero-feature small{font-size:12px;line-height:1.45}
+  .breath-intro,.testing-types,.panel-section,.process,.faq{padding:54px 0}.breath-intro-grid,.testing-grid,.panel-grid,.process-grid,.info-card-grid{grid-template-columns:1fr;gap:20px}.section-heading{margin-bottom:28px}.section-heading h2,.breath-intro-copy h2,.process-copy h2{font-size:clamp(1.8rem,8vw,2.3rem);line-height:1.1}.section-heading p,.breath-intro-copy p,.process-copy p{font-size:16px;line-height:1.65}.check-list{gap:12px;margin-top:22px}.check-list li{font-size:14px;line-height:1.5}.info-card,.testing-card,.panel{padding:24px}.info-card h3,.panel h3,.testing-card h3{font-size:1.55rem}.info-card p,.panel p,.testing-card p{font-size:14px;line-height:1.6}.info-stat{padding:16px}.info-stat strong{font-size:14px}.info-stat span{font-size:13px}.testing-order{display:flex;min-height:48px;align-items:center;justify-content:center}.testing-price{font-size:22px}.testing-number{font-size:13px}
+  .step{grid-template-columns:44px 1fr;gap:14px;padding-bottom:26px}.step-num{width:44px;height:44px;font-size:13px}.step:not(:last-child)::after{left:21px;top:44px}.step h3{font-size:18px}.step p{font-size:14px;line-height:1.6}.faq-question{min-height:56px;padding:16px;gap:14px;font-size:15px;line-height:1.4}.faq-answer{padding:0 16px 18px;font-size:14px;line-height:1.65}.faq-plus{flex:0 0 auto}.cta{padding:52px 0}.cta-inner{display:grid;grid-template-columns:1fr;gap:24px}.cta h2{font-size:clamp(1.85rem,8vw,2.35rem)}.cta p{font-size:16px;line-height:1.6}
+  .footer-grid{grid-template-columns:1fr;gap:30px}.footer-bottom{flex-direction:column;align-items:flex-start}.footer-col a,.footer-contact a{min-height:42px;display:flex;align-items:center}
+}
+@media(max-width:380px){:root{--mobile-gutter:16px}.brand{flex-basis:132px;width:132px}.site-logo{width:128px}.hero{padding-top:250px}.hero::before{height:250px}.hero-inner{padding-top:30px}.info-card,.testing-card,.panel{padding:21px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
 </style>
-  <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
 </head>
 
 <body>
@@ -1541,6 +1556,7 @@ footer{
       <button
         class="mobile-toggle"
         id="mobileToggle"
+        aria-controls="mainNav"
         aria-label="Open menu"
         aria-expanded="false">
         ☰
@@ -2578,6 +2594,17 @@ footer{
 <script src="assets/js/test-price-list.js" defer></script>
 <script src="assets/js/dot-breathalyzer-services.js" defer></script>
 <script src="assets/js/navigation.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  const nav=document.getElementById("mainNav");
+  if(nav&&!nav.querySelector(".mobile-nav-actions")){
+    const actions=document.createElement("div");
+    actions.className="mobile-nav-actions";
+    actions.innerHTML='<a class="btn btn-orange" href="services.html">Order a Test</a><a class="btn btn-outline" href="https://portal.screenings4u.com/customer-login.html">Customer Login</a><a class="btn btn-outline" href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>';
+    nav.append(actions);
+  }
+});
+</script>
 
 </body>
 </html>
