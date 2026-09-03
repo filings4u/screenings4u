@@ -893,7 +893,10 @@
     @media (max-width: 560px) { .status-page { padding: 38px 0 60px; } .status-summary, .status-card { padding: 22px; } .status-updated { padding-left: 0; } }
   </style>
   <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
-</head>
+<style>
+@media(max-width:767px){html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{min-width:320px;font-size:16px;overflow-x:hidden}.container{width:100%;padding-inline:20px}.topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}.nav-inner{min-height:64px}.site-logo{width:140px;max-width:42vw}.nav-actions>.btn,.nav-account-menu{display:none!important}.mobile-toggle{display:inline-grid!important;place-items:center}.nav{display:none!important}.nav-inner.menu-open .nav{display:flex!important;top:64px;max-height:calc(100dvh - 64px);overflow:auto;border-radius:0}.status-page{padding:38px 0 60px}.status-page h1{font-size:clamp(2.1rem,10vw,2.8rem);line-height:1.08}.status-grid,.service-grid,.trust-grid,.audience-grid,.intro-grid,.process-layout{grid-template-columns:minmax(0,1fr);gap:18px}.status-summary,.status-card{padding:22px}.status-summary{align-items:flex-start}.status-updated{width:100%;padding-left:0;text-align:left}.status-card{min-width:0}.status-row{gap:12px}.footer-grid{grid-template-columns:1fr}}
+@media(max-width:380px){.container{padding-inline:15px}.status-summary,.status-card{padding:18px}}
+</style></head>
 
 <body>
   <div class="topbar">
@@ -949,7 +952,9 @@
       <button
         class="mobile-toggle"
         id="mobileToggle"
+        type="button"
         aria-label="Open menu"
+        aria-controls="mainNav"
         aria-expanded="false">
         ☰
       </button>

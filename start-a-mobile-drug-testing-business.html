@@ -151,13 +151,16 @@
     }
   </style>
   <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
-</head>
+<style>
+@media(max-width:767px){html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{min-width:320px;font-size:16px;overflow-x:hidden}.container{width:100%;padding-inline:20px}.topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}header .container{min-height:64px}.brand img,.logo{max-width:140px}.hero{display:block;min-height:0;padding-top:280px;background:var(--navy)}.hero:before{content:"";position:absolute;inset:0 0 auto;height:280px;background-image:var(--hero-image,none);background-position:center;background-size:cover}.hero:after{display:none}.hero .container,.hero-inner{padding-top:34px;padding-bottom:42px;background:var(--navy)}.hero h1{font-size:clamp(2.15rem,10vw,2.85rem);line-height:1.06}.hero p{font-size:1rem;line-height:1.65}.hero-actions,.path-grid,.support-grid,.dark-grid,.faq-grid,.footer-grid{grid-template-columns:minmax(0,1fr)}.hero-actions .btn,.cta .btn{width:100%}section{padding-block:54px}.intro-grid{grid-template-columns:minmax(0,1fr);gap:28px}.path-card,.support-card,.cta{padding:24px}}
+@media(max-width:380px){.container{padding-inline:15px}.hero{padding-top:235px}.hero:before{height:235px}.hero h1{font-size:2rem}}
+</style><style>@media(max-width:767px){.hero:before{background:url("https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&w=1200&q=85") center/cover no-repeat}}</style></head>
 
 <body>
 <header class="site-header">
   <div class="container nav-shell" id="navInner">
     <a class="brand" href="index.html"><img src="images/logo.png" alt="screenings4u"></a>
-    <button id="mobileToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <button id="mobileToggle" type="button" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false">☰</button>
 
     <nav id="mainNav" aria-label="Main navigation">
       <div class="nav-item"><a class="nav-link" href="index.html">Home</a></div>

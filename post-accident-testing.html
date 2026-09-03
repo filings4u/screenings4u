@@ -114,8 +114,15 @@ url("images/post-accident-testing-hero.png") 38% center/cover no-repeat;overflow
 .hero-inner{padding:70px 0 90px}.hero h1{font-size:48px}.hero-lead{font-size:15px}.hero-actions{flex-direction:column}
 .hero-actions .btn{width:100%}.hero-features{grid-template-columns:1fr 1fr}.service-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr}
 }
+@media(max-width:767px){
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{min-width:320px;font-size:16px}.container{width:100%;padding-inline:20px}.topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}
+.nav-inner{min-height:64px}.site-logo{width:140px;max-width:42vw}.nav-actions>.btn,.nav-account-menu{display:none!important}.mobile-toggle{display:inline-grid;place-items:center!important;flex:0 0 44px;font-size:23px}.nav{display:none!important}.nav-inner.menu-open .nav{display:flex!important;top:64px;max-height:calc(100dvh - 64px);overflow-y:auto;padding:14px 20px 22px;border-radius:0}.nav-link{width:100%;min-height:46px;justify-content:space-between}
+.hero{display:block;min-height:0;padding-top:280px;background:var(--blue-deep)}.hero:before{content:"";position:absolute;inset:0 0 auto;height:280px;background:url("images/post-accident-testing-hero.png") center/cover no-repeat}.hero:after{display:none}.hero-inner{min-height:0;padding-top:34px;padding-bottom:40px;background:var(--blue-deep)}.hero h1{font-size:clamp(2.15rem,10vw,2.85rem);line-height:1.06}.hero-lead{font-size:1rem;line-height:1.65}.hero-actions,.cta-actions{display:grid;grid-template-columns:1fr;gap:12px;width:100%}.hero-actions .btn,.cta-actions .btn{width:100%}.hero-features{grid-template-columns:1fr;gap:0}.hero-feature{padding:14px 0;border:0;border-bottom:1px solid rgba(255,255,255,.16)}.hero-feature:last-child{border-bottom:0}
+.intro,.services,.requirements,.process,.faq,.cta{padding-block:54px}.intro h2,.section-heading h2,.process-copy h2,.cta h2{font-size:clamp(1.8rem,8vw,2.35rem)}.intro-grid,.service-grid,.requirements-grid,.process-grid,.info-grid{grid-template-columns:minmax(0,1fr);gap:20px}.info-card,.service-card,.requirement-panel{padding:24px}.cta-inner{align-items:stretch}.faq-question{min-height:56px;padding:17px 18px}.faq-answer{padding:0 18px 20px}
+}
+@media(max-width:380px){.container{padding-inline:16px}.hero{padding-top:235px}.hero:before{height:235px}.hero h1{font-size:2rem}.info-card,.service-card,.requirement-panel{padding:20px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
-  <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
 </head>
 
 <body>
@@ -150,7 +157,9 @@ url("images/post-accident-testing-hero.png") 38% center/cover no-repeat;overflow
       <button
         class="mobile-toggle"
         id="mobileToggle"
+        type="button"
         aria-label="Open menu"
+        aria-controls="mainNav"
         aria-expanded="false">
         ☰
       </button>

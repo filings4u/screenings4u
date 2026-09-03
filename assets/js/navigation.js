@@ -57,6 +57,7 @@ function getNavigationMarkup() {
         <a href="drug-alcohol-policy-creation.html">Drug & Alcohol Policy</a>
         <a href="new-entrant-audit.html">New Entrant Audit</a>
         <a href="audit-preparation.html">Audit Preparation</a>
+        <a href="testing-workflow-review.html">Work Flow Review</a>
 
 
       </div>
@@ -130,9 +131,16 @@ function getNavigationMarkup() {
         <a href="become-a-clearinghouse-consortium-third-party-administrator.html">
           Become a C/TPA
         </a>
+        <a href="compliance-guidance.html">
+          Compliance Guidance
+        </a>
+        <a href="specimen_collector_training_supplies.html">
+          Collector Training Supplies
+        </a>
            <a href="compliance-guidance.html">
           Compliance Guidance
         </a>
+
 
         <!-- <a href="/affiliate">
           Affiliate Program
