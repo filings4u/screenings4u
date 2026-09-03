@@ -1333,6 +1333,83 @@ const TEST_SERVICES = {
     ]
   },
 
+    /* =========================================================
+     CLEARINGHOUSE C/TPA SERVICES
+     ========================================================= */
+
+  ctpa_setup: {
+    id: "ctpa_setup",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=ctpa_setup",
+    name: "C/TPA Setup",
+    shortName: "C/TPA Setup",
+    category: "Clearinghouse C/TPA Services",
+    specimen: "N/A",
+    price: 29500,
+    currency: "usd",
+    stripePriceId: "",
+    results: "Setup Service",
+    description: "Professional Clearinghouse C/TPA setup and compliance support.",
+    features: [
+      "Clearinghouse account setup",
+      "C/TPA status activation",
+      "Direct registry listing support",
+      "Compliance guide"
+    ]
+  },
+
+  ctpa_pro_management: {
+    id: "ctpa_pro_management",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=ctpa_pro_management",
+    name: "C/TPA Pro Management",
+    shortName: "C/TPA Pro Management",
+    category: "Clearinghouse C/TPA Services",
+    specimen: "N/A",
+    price: 59500,
+    currency: "usd",
+    stripePriceId: "",
+    results: "Setup & Management",
+    description: "Professional C/TPA setup plus expanded Clearinghouse and client management support.",
+    features: [
+      "Clearinghouse account setup",
+      "C/TPA status activation",
+      "C/TPA registry listing support",
+      "Compliance guide",
+      "Random consortium software onboarding",
+      "Driver query handling workflows",
+      "Violation entry workflows",
+      "Management of multiple clients",
+      "Consortium certificate resources",
+      "Consortium agreement resources"
+    ]
+  },
+
+  ctpa_custom_solutions: {
+    id: "ctpa_custom_solutions",
+    orderType: "contact",
+    orderUrl: "contact.html?subject=ctpa-custom-solutions",
+    name: "C/TPA Custom Solutions",
+    shortName: "C/TPA Custom Solutions",
+    category: "Clearinghouse C/TPA Services",
+    specimen: "N/A",
+    price: 0,
+    currency: "usd",
+    stripePriceId: "",
+    results: "Custom",
+    description: "Custom Clearinghouse C/TPA solutions for multi-office and high-volume operations.",
+    features: [
+      "Advanced Clearinghouse workflows",
+      "Random consortium software support",
+      "High-volume client management",
+      "Multi-office scaling",
+      "White-label support options",
+      "Audit-focused workflow planning",
+      "Dedicated account support"
+    ]
+  },
+
+
   /* =========================================================
      LIVE CHECKOUT TEST SERVICE
      ========================================================= */

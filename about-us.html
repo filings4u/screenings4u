@@ -764,6 +764,27 @@
   transform: translateY(-1px);
 }
 
+/* Context-aware buttons on light page sections */
+.about-hero .hero-actions .btn-outline,
+.cta .cta-actions .btn-outline {
+  color: var(--white);
+  background: var(--blue);
+  border-color: var(--blue);
+  box-shadow: 0 9px 25px rgba(50, 90, 163, .18);
+}
+
+.about-hero .hero-actions .btn-outline:hover,
+.cta .cta-actions .btn-outline:hover {
+  color: var(--white);
+  background: var(--blue-dark);
+  border-color: var(--blue-dark);
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(255, 107, 0, .42);
+  outline-offset: 3px;
+}
+
     /* MOBILE */
     @media (max-width: 1120px) {
       .nav { display: none; }

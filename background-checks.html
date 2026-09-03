@@ -86,6 +86,7 @@ url("images/background-check-hero.png") 38% center/cover no-repeat;overflow:hidd
 .requirement-panel.orange p{color:#fff0e6}.requirement-panel ul{display:grid;gap:11px;margin-top:22px}
 .requirement-panel li{list-style:none;display:flex;gap:10px;color:#fff;font-size:12px}
 .requirement-panel li:before{content:"✓";width:21px;height:21px;flex:0 0 21px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.14);color:var(--orange);font-weight:900}
+.requirement-panel.orange li:before{color:#fff}
 
 .process{padding:105px 0;background:var(--blue-pale);border-top:1px solid var(--line)}.process-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:start}
 .process-copy p{color:var(--muted);font-size:15px}.steps{display:grid}.step{display:grid;grid-template-columns:58px 1fr;gap:20px;padding-bottom:30px;position:relative}
@@ -129,7 +130,145 @@ url("images/background-check-hero.png") 38% center/cover no-repeat;overflow:hidd
 @media(max-width:1120px){.nav-account-menu{width:100%}.nav-login{width:100%}.nav-account-dropdown{position:static;display:none;width:100%;min-width:0;margin-top:8px;opacity:1;visibility:visible;transform:none;box-shadow:none}.nav-account-menu.open .nav-account-dropdown{display:block}.nav-actions .nav-account-menu{display:block!important}}
 </style>
 
-  <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
+<link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
+
+<style id="mobile-page-layout">
+/* Context-aware button contrast */
+.cta .cta-actions .btn-outline{
+  color:#fff;
+  background:var(--blue);
+  border-color:var(--blue);
+  box-shadow:0 9px 25px rgba(50,90,163,.18);
+}
+.cta .cta-actions .btn-outline:hover{
+  color:#fff;
+  background:var(--blue-dark);
+  border-color:var(--blue-dark);
+}
+.btn:focus-visible{
+  outline:3px solid rgba(255,107,0,.42);
+  outline-offset:3px;
+}
+
+@media(max-width:800px){
+  html,body{max-width:100%;overflow-x:hidden}
+  .topbar,.nav-account-menu{display:none!important}
+  body{font-size:16px;line-height:1.65}
+  button,input,select,textarea{font:inherit;font-size:16px}
+  form,fieldset,input,select,textarea{width:100%;min-width:0}
+  img,svg,video,iframe{max-width:100%;height:auto}
+  .container{width:min(100% - 32px,var(--max))}
+  .nav-inner{min-height:70px;gap:10px}
+  .nav-inner.menu-open .nav{
+    top:calc(100% + 1px);
+    left:16px;
+    right:16px;
+    max-height:calc(100vh - 86px);
+    max-height:calc(100dvh - 86px);
+    overflow-y:auto;
+    overscroll-behavior:contain;
+  }
+  .nav-inner.menu-open .nav,
+  .nav-inner.menu-open .dropdown{flex-direction:column;align-items:stretch}
+  .nav-inner.menu-open .nav-link,
+  .nav-inner.menu-open .dropdown a{
+    display:flex;
+    align-items:center;
+    width:100%;
+    min-height:44px;
+  }
+
+  .hero{
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    background:var(--blue-deep);
+    overflow:visible;
+  }
+  .hero:before{
+    content:"";
+    position:relative;
+    z-index:1;
+    display:block;
+    width:100%;
+    height:clamp(260px,68vw,440px);
+    flex:0 0 auto;
+    background:url("images/background-check-hero.png") 48% center/cover no-repeat;
+  }
+  .hero:after{display:none}
+  .hero-inner{width:100%;padding:48px 0 54px;background:var(--blue-deep)}
+  .hero-copy{max-width:none}
+  .hero h1{
+    font-size:clamp(38px,10vw,58px);
+    line-height:1.04;
+    overflow-wrap:anywhere;
+  }
+  .hero-lead{max-width:none;font-size:16px}
+  .hero-features{
+    width:100%;
+    max-width:none;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .intro,.process,.services,.requirements,.cta{padding:72px 0}
+  .intro-grid,.process-grid,.service-grid,.requirements-grid{
+    grid-template-columns:minmax(0,1fr);
+  }
+  .intro h2,.section-heading h2,.process-copy h2{
+    font-size:clamp(32px,8vw,45px);
+    overflow-wrap:anywhere;
+  }
+  .service-card,.requirement-panel,.info-card{
+    width:100%;
+    min-width:0;
+  }
+  .service-grid,.requirements-grid,.info-grid{align-items:stretch}
+  .cta-inner,.cta-actions{width:100%}
+}
+
+@media(max-width:560px){
+  .container{width:min(100% - 28px,var(--max))}
+  .nav-inner{min-height:66px}
+  .brand{width:118px;flex-basis:118px}
+  .site-logo{width:116px}
+  .mobile-toggle{width:42px;min-width:42px;height:40px}
+  .hero:before{height:clamp(235px,74vw,350px)}
+  .hero-inner{padding:40px 0 46px}
+  .hero h1{font-size:clamp(36px,11vw,47px)}
+  .hero-lead{font-size:15px}
+  .hero-actions,.cta-actions{
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    width:100%;
+  }
+  .hero-actions .btn,.cta-actions .btn{
+    width:100%;
+    min-height:48px;
+    padding-inline:18px;
+    text-align:center;
+  }
+  .hero-features{grid-template-columns:minmax(0,1fr);gap:0;padding-top:10px}
+  .hero-feature,.hero-feature:first-child{
+    padding:14px 0;
+    border-right:0;
+    border-bottom:1px solid rgba(255,255,255,.16);
+  }
+  .hero-feature:last-child{border-bottom:0}
+  .intro,.process,.services,.requirements,.cta{padding:56px 0}
+  .intro-grid,.process-grid{gap:34px}
+  .service-card,.requirement-panel,.info-card{padding:26px 22px}
+  .info-grid{grid-template-columns:minmax(0,1fr)}
+  .step{grid-template-columns:46px minmax(0,1fr);gap:15px}
+  .step-num{width:46px;height:46px;box-shadow:0 0 0 5px #edf3fb}
+  .step:not(:last-child):after{left:22px;top:46px}
+}
+
+@media(max-width:380px){
+  .container{width:min(100% - 22px,var(--max))}
+  .hero h1{font-size:35px}
+}
+</style>
 </head>
 
 <body>
@@ -164,6 +303,7 @@ url("images/background-check-hero.png") 38% center/cover no-repeat;overflow:hidd
       </div>
 
       <button
+        type="button"
         class="mobile-toggle"
         id="mobileToggle"
         aria-label="Open menu"
