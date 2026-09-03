@@ -1,0 +1,26 @@
+Screenings4u SEO readiness pass
+Domain: https://screenings4u.com
+
+HTML files reviewed: 52
+Indexable URLs in sitemap: 43
+Noindex pages: 9
+
+Changes applied:
+- Added self-referencing canonical tags to indexable pages.
+- Added robots index/follow directives to public landing pages.
+- Added noindex/follow directives to checkout, confirmation, donor-pass workflow, status, duplicate-home, form-only, and generic service-detail pages.
+- Added Open Graph metadata.
+- Added Twitter card metadata.
+- Added Organization + WebSite JSON-LD to the homepage.
+- Fixed incorrect Accessibility page title/description.
+- Fixed incorrect Privacy Policy page title/description.
+- Removed an empty duplicate H1 from the Blog page.
+- Rebuilt sitemap.xml from indexable files.
+- Rebuilt robots.txt.
+
+Important deployment checks:
+- Upload these files to the production site, preserving filenames.
+- Confirm every sitemap URL returns HTTP 200.
+- Confirm https://screenings4u.com redirects/normalizes consistently if www is also reachable.
+- Do not add portal/admin/account pages to the sitemap.
+- Submit /sitemap.xml to Google Search Console and Bing Webmaster Tools after deployment.

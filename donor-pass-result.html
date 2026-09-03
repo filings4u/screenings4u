@@ -1,17 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#325aa3" />
-
-  <meta name="description" content="View, download, or print your screenings4u donor pass and testing-location details.">
-  <title>Your Donor Pass | screenings4u</title>
-  <link rel="icon" type="image/png" href="images/fav.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#325aa3" name="theme-color">
+<meta content="View, download, or print your screenings4u donor pass and testing-location details." name="description"/>
+<title>Your Donor Pass | screenings4u</title>
+<link href="images/fav.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<style>
     :root{--orange:#ff6b00;--blue:#325aa3;--blue-dark:#24467f;--muted:#667892;--surface:#f4f7fc;--line:#d9e3f0}
     *{box-sizing:border-box}
     body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--surface);color:#1d2d45}
@@ -71,55 +71,48 @@
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
   </style>
-</head>
+</meta><meta content="noindex,follow" name="robots"/><link href="https://screenings4u.com/donor-pass-result.html" rel="canonical"/><meta content="website" property="og:type"/><meta content="screenings4u" property="og:site_name"/><meta content="Your Donor Pass | screenings4u" property="og:title"/><meta content="View, download, or print your screenings4u donor pass and testing-location details." property="og:description"/><meta content="https://screenings4u.com/donor-pass-result.html" property="og:url"/><meta content="summary" name="twitter:card"/><meta content="Your Donor Pass | screenings4u" name="twitter:title"/><meta content="View, download, or print your screenings4u donor pass and testing-location details." name="twitter:description"/></head>
 <body>
 <main>
-  <div class="container">
-    <section class="card pass">
+<div class="container">
+<section class="card pass">
 <div class="brand">
-  <img src="images/logo.png" alt="screenings4u">
-</div>      <div class="eyebrow">Official Donor Pass</div>
-      <h1>Your Donor Pass</h1>
-      <p class="intro">Keep this pass available when you arrive for your testing appointment. Bring a valid government-issued photo ID and follow the testing location's instructions.</p>
-
-      <div class="tracking">
-        <span>S4U Tracking Number</span>
-        <strong id="trackingNumber">Loading...</strong>
-      </div>
-
-      <div class="grid">
-        <div class="panel">
-          <div class="label">Customer</div>
-          <div class="value" id="customerName">—</div>
-        </div>
-
-        <div class="panel">
-          <div class="label">Service</div>
-          <div class="value" id="serviceName">—</div>
-        </div>
-
-        <div class="panel full">
-          <div class="label">Testing Location</div>
-          <div class="value" id="locationName">Loading...</div>
-          <div class="value" id="locationAddress"></div>
-          <div class="value" id="locationPhone"></div>
-        </div>
-      </div>
-
-      <div class="instructions">
-        <strong>Important</strong>
-        <p id="instructionsText">Bring this donor pass and valid identification. Your testing location information is shown above.</p>
-      </div>
-
-      <div id="resultNotice" class="notice" role="alert"></div>
-
-      <div class="actions">
-        <button class="btn orange" id="downloadButton" type="button">Download Donor Pass</button>
-        <button class="btn blue" id="printButton" type="button">Print Donor Pass</button>
-        <a class="btn blue" href="services.html">Browse Services</a>
-      </div>
-    </section>
-  </div>
+<img alt="screenings4u" src="images/logo.png"/>
+</div> <div class="eyebrow">Official Donor Pass</div>
+<h1>Your Donor Pass</h1>
+<p class="intro">Keep this pass available when you arrive for your testing appointment. Bring a valid government-issued photo ID and follow the testing location's instructions.</p>
+<div class="tracking">
+<span>S4U Tracking Number</span>
+<strong id="trackingNumber">Loading...</strong>
+</div>
+<div class="grid">
+<div class="panel">
+<div class="label">Customer</div>
+<div class="value" id="customerName">—</div>
+</div>
+<div class="panel">
+<div class="label">Service</div>
+<div class="value" id="serviceName">—</div>
+</div>
+<div class="panel full">
+<div class="label">Testing Location</div>
+<div class="value" id="locationName">Loading...</div>
+<div class="value" id="locationAddress"></div>
+<div class="value" id="locationPhone"></div>
+</div>
+</div>
+<div class="instructions">
+<strong>Important</strong>
+<p id="instructionsText">Bring this donor pass and valid identification. Your testing location information is shown above.</p>
+</div>
+<div class="notice" id="resultNotice" role="alert"></div>
+<div class="actions">
+<button class="btn orange" id="downloadButton" type="button">Download Donor Pass</button>
+<button class="btn blue" id="printButton" type="button">Print Donor Pass</button>
+<a class="btn blue" href="services.html">Browse Services</a>
+</div>
+</section>
+</div>
 </main>
 <script src="assets/js/site-config.js"></script>
 <script src="assets/js/donor-pass-result.js"></script>

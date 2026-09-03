@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+Disallow: /checkout.html
+Disallow: /order-confirmation.html
+Disallow: /donor-pass.html
+Disallow: /donor-pass-location.html
+Disallow: /donor-pass-result.html
+Disallow: /post-accident-testing-form.html
+Disallow: /status.html
+Disallow: /index%20copy.html
+
+Sitemap: https://screenings4u.com/sitemap.xml
