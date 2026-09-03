@@ -68,6 +68,10 @@ let orderId = null;
 let orderNumber = null;
 let trackingNumber = null;
 let paymentIntentId = null;
+let appliedDiscountCode = "";
+let appliedDiscount = null;
+let checkoutAmount = null;
+let discountValidationInProgress = false;
 
 let paymentProcessingOverlay = null;
 let addressValidationOverlay = null;
@@ -1300,6 +1304,7 @@ async function initCheckout() {
     setupCustomerFields();
     setupBillingAddressValidationState();
     setupEmailModal();
+    setupDiscountCode();
 
     const button =
       document.getElementById("payButton");
@@ -1428,6 +1433,266 @@ function renderService(service) {
       });
     }
   }
+}
+
+
+/* =========================================================
+   DISCOUNT CODES
+========================================================= */
+
+function money(value, currency = null) {
+  return formatTestPrice(
+    Number(value || 0),
+    currency || selectedService?.currency || "USD"
+  );
+}
+
+function getBaseCheckoutPrice() {
+  const value = Number(selectedService?.price || 0);
+  return Number.isFinite(value) ? value : 0;
+}
+
+function renderDiscountSummary() {
+  const subtotal = getBaseCheckoutPrice();
+  const discountAmount = Number(appliedDiscount?.discountAmount || 0);
+  const total = Math.max(0, subtotal - discountAmount);
+
+  const subtotalElement = document.getElementById("discountSubtotal");
+  const discountRow = document.getElementById("discountRow");
+  const discountLabel = document.getElementById("discountLabel");
+  const discountAmountElement = document.getElementById("discountAmount");
+  const totalElement = document.getElementById("discountTotal");
+
+  if (subtotalElement) subtotalElement.textContent = money(subtotal);
+  if (totalElement) totalElement.textContent = money(total);
+
+  if (discountRow && discountAmountElement) {
+    if (appliedDiscountCode && discountAmount > 0) {
+      discountRow.style.display = "flex";
+      discountAmountElement.textContent = "-" + money(discountAmount);
+      if (discountLabel) discountLabel.textContent = "Discount (" + appliedDiscountCode + ")";
+    } else {
+      discountRow.style.display = "none";
+      discountAmountElement.textContent = "";
+      if (discountLabel) discountLabel.textContent = "Discount";
+    }
+  }
+}
+
+function setDiscountMessage(message = "", type = "") {
+  const element = document.getElementById("discountMessage");
+  if (!element) return;
+
+  element.textContent = message;
+  element.className = "discount-message" + (type ? " " + type : "");
+  element.style.display = message ? "block" : "none";
+}
+
+function resetAppliedDiscount({ keepInput = true } = {}) {
+  appliedDiscountCode = "";
+  appliedDiscount = null;
+  checkoutAmount = null;
+
+  if (!keepInput) {
+    const input = document.getElementById("discountCode");
+    if (input) input.value = "";
+  }
+
+  renderDiscountSummary();
+}
+
+async function validateDiscountCode() {
+  if (paymentIntentCreated || paymentMounted) {
+    setDiscountMessage(
+      "The discount cannot be changed after secure payment has been prepared.",
+      "error"
+    );
+    return;
+  }
+
+  const input = document.getElementById("discountCode");
+  const button = document.getElementById("applyDiscountButton");
+  const code = String(input?.value || "").trim().toUpperCase();
+
+  if (!code) {
+    resetAppliedDiscount({ keepInput: true });
+    setDiscountMessage("Enter a discount code.", "error");
+    input?.focus();
+    return;
+  }
+
+  if (!selectedService?.id || discountValidationInProgress) return;
+
+  discountValidationInProgress = true;
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Checking...";
+  }
+  setDiscountMessage("Checking discount code...");
+
+  try {
+    const baseUrl = window.SCREENINGS4U_SUPABASE_URL || "";
+    const anonKey = window.SCREENINGS4U_SUPABASE_ANON_KEY || "";
+
+    if (!baseUrl || baseUrl.includes("REPLACE_WITH")) {
+      throw new Error("Checkout is not configured.");
+    }
+
+    const headers = { "Content-Type": "application/json" };
+    if (anonKey) {
+      headers.apikey = anonKey;
+      headers.Authorization = "Bearer " + anonKey;
+    }
+
+    const response = await fetch(
+      baseUrl.replace(/\/+$/, "") + "/functions/v1/validate-discount-code",
+      {
+        method: "POST",
+        headers,
+        body: JSON.stringify({
+          code,
+          serviceId: selectedService.id,
+          customerEmail: getInputValue("email") || null,
+          channel: "website"
+        })
+      }
+    );
+
+    let result = null;
+    try {
+      result = await response.json();
+    } catch {
+      result = null;
+    }
+
+    if (!response.ok || !result?.valid) {
+      resetAppliedDiscount({ keepInput: true });
+      throw new Error(result?.message || "That discount code is not valid.");
+    }
+
+    appliedDiscountCode = String(result.code || code).toUpperCase();
+    appliedDiscount = result;
+    if (input) input.value = appliedDiscountCode;
+
+    renderDiscountSummary();
+    setDiscountMessage(
+      (result.name && result.name !== appliedDiscountCode
+        ? result.name + " — "
+        : "") +
+      money(result.discountAmount, result.currency) +
+      " discount applied.",
+      "success"
+    );
+  } catch (error) {
+    setDiscountMessage(
+      error?.message || "Unable to validate the discount code.",
+      "error"
+    );
+  } finally {
+    discountValidationInProgress = false;
+    if (button) {
+      button.disabled = false;
+      button.textContent = appliedDiscountCode ? "Applied" : "Apply";
+    }
+  }
+}
+
+function setupDiscountCode() {
+  const input = document.getElementById("discountCode");
+  const button = document.getElementById("applyDiscountButton");
+
+  renderDiscountSummary();
+
+  button?.addEventListener("click", validateDiscountCode);
+
+  input?.addEventListener("input", () => {
+    const normalized = String(input.value || "")
+      .toUpperCase()
+      .replace(/[^A-Z0-9_-]/g, "")
+      .slice(0, 50);
+
+    input.value = normalized;
+
+    if (appliedDiscountCode && normalized !== appliedDiscountCode) {
+      resetAppliedDiscount({ keepInput: true });
+      setDiscountMessage("Code changed. Select Apply to validate it again.");
+      if (button) button.textContent = "Apply";
+    }
+  });
+
+  input?.addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      validateDiscountCode();
+    }
+  });
+}
+
+function updateCheckoutFromServer(result) {
+  const serverSubtotal = Number(result?.subtotal);
+  const serverDiscount = Number(result?.discountAmount || 0);
+  const serverTotal = Number(
+    result?.total ??
+    (Number.isFinite(result?.amount) ? Number(result.amount) / 100 : NaN)
+  );
+
+  if (Number.isFinite(serverTotal)) checkoutAmount = serverTotal;
+
+  if (result?.discountCode && serverDiscount > 0) {
+    appliedDiscountCode = String(result.discountCode).toUpperCase();
+    appliedDiscount = {
+      ...(appliedDiscount || {}),
+      code: appliedDiscountCode,
+      discountAmount: serverDiscount,
+      subtotal: Number.isFinite(serverSubtotal) ? serverSubtotal : getBaseCheckoutPrice(),
+      discountedSubtotal: serverTotal
+    };
+  }
+
+  const subtotalElement = document.getElementById("discountSubtotal");
+  const discountRow = document.getElementById("discountRow");
+  const discountLabel = document.getElementById("discountLabel");
+  const discountAmountElement = document.getElementById("discountAmount");
+  const totalElement = document.getElementById("discountTotal");
+
+  if (subtotalElement && Number.isFinite(serverSubtotal)) {
+    subtotalElement.textContent = money(serverSubtotal, result?.currency);
+  }
+
+  if (discountRow && discountAmountElement) {
+    if (serverDiscount > 0) {
+      discountRow.style.display = "flex";
+      discountAmountElement.textContent = "-" + money(serverDiscount, result?.currency);
+      if (discountLabel) {
+        discountLabel.textContent =
+          "Discount" + (result?.discountCode ? " (" + result.discountCode + ")" : "");
+      }
+    } else {
+      discountRow.style.display = "none";
+    }
+  }
+
+  if (totalElement && Number.isFinite(serverTotal)) {
+    totalElement.textContent = money(serverTotal, result?.currency);
+  }
+
+  const input = document.getElementById("discountCode");
+  const applyButton = document.getElementById("applyDiscountButton");
+  if (input) input.disabled = true;
+  if (applyButton) applyButton.disabled = true;
+}
+
+function currentPayLabel() {
+  const amount =
+    Number.isFinite(checkoutAmount)
+      ? checkoutAmount
+      : Math.max(
+          0,
+          getBaseCheckoutPrice() -
+          Number(appliedDiscount?.discountAmount || 0)
+        );
+
+  return "Pay " + money(amount);
 }
 
 /* =========================================================
@@ -1614,11 +1879,7 @@ async function handleSubmit(event) {
     setButton(
       button,
       false,
-      "Pay " +
-      formatTestPrice(
-        selectedService.price,
-        selectedService.currency || "USD"
-      )
+      currentPayLabel()
     );
   }
 }
@@ -2193,6 +2454,8 @@ async function handleEmailConfirmation() {
       result.payment_intent_id ||
       null;
 
+    updateCheckoutFromServer(result);
+
     if (!result.clientSecret) {
       throw new Error(
         "The payment server did not return a Stripe client secret."
@@ -2224,11 +2487,7 @@ async function handleEmailConfirmation() {
     setButton(
       button,
       false,
-      "Pay " +
-      formatTestPrice(
-        selectedService.price,
-        selectedService.currency || "USD"
-      )
+      currentPayLabel()
     );
 
     showOrderNotice();
@@ -3236,6 +3495,9 @@ async function createPaymentIntent(form) {
              */
             serviceId:
               selectedService.id,
+
+            discountCode:
+              appliedDiscountCode || null,
 
             customer
           })
