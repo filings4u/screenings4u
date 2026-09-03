@@ -1437,6 +1437,34 @@ const TEST_SERVICES = {
   },
 
   /* =========================================================
+     LIVE DOT SPECIMEN COLLECTOR TRAINING CHECKOUT TEST
+     ========================================================= */
+
+  live_dot_specimen_collector_training_1_dollar: {
+    id: "live_dot_specimen_collector_training_1_dollar",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=live_dot_specimen_collector_training_1_dollar",
+    name: "DOT Specimen Collector Training - $1 Checkout Test",
+    shortName: "$1 DOT Collector Training Test",
+    category: "DOT Specimen Collector Training",
+    specimen: "N/A",
+    price: 100,
+    currency: "usd",
+    stripePriceId: "",
+    results: "60-day training access",
+    description: "A $1.00 live checkout version of DOT Specimen Collector Training used to verify payment, order creation, account linking, and LMS enrollment.",
+    features: [
+      "Exactly $1.00",
+      "DOT Specimen Collector Training",
+      "60-Day Access",
+      "Self-Paced Learning Modules",
+      "5 DOT Online Video Mock Collections",
+      "Completion Certificate",
+      "Live Order and Enrollment Verification"
+    ]
+  },
+
+  /* =========================================================
      SPECIMEN COLLECTOR TRAINING SUPPLIES
      ========================================================= */
 
