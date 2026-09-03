@@ -202,24 +202,50 @@
     }
 
     @media (max-width: 640px) {
-      .card {
-        margin: 28px auto;
-        padding: 30px 20px;
+      html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
       }
 
-      h1 { font-size: 36px; }
+      body { min-width: 320px; }
+
+      .container {
+        width: 100%;
+        padding-inline: 16px;
+      }
+
+      .card {
+        margin: 16px auto;
+        padding: 28px 18px;
+        border-radius: 14px;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 10vw, 2.5rem);
+        line-height: 1.08;
+      }
 
       .tracking-number { font-size: 18px; }
+
+      .tracking-card,
+      .donor-pass-card { padding: 18px 14px; }
 
       .actions {
         flex-direction: column;
       }
 
-      .actions .btn { width: 100%; }
+      .actions .btn,
+      .donor-pass-btn {
+        width: 100%;
+        min-height: 50px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .container { padding-inline: 10px; }
+      .card { padding-inline: 14px; }
     }
   </style>
-
-  <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
 </head>
 
 <body>

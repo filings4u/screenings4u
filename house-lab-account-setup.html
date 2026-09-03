@@ -227,7 +227,17 @@
     }
 
 </style>
-  <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
+<style>
+.mobile-lab-actions{display:none}
+@media(max-width:767px){
+:root{--mobile-gutter:20px}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{min-width:320px;font-size:16px}.container{width:100%;padding-inline:var(--mobile-gutter)}.topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}
+.nav-inner{min-height:64px;gap:12px}.brand{flex-basis:145px;width:145px}.site-logo{width:140px;max-height:42px}.nav-actions{margin-left:auto}.nav-actions>.btn,.nav-actions>.nav-account-menu{display:none!important}.mobile-toggle{display:grid;place-items:center;min-width:44px;height:44px;font-size:23px}.nav-inner.menu-open .nav{left:0;right:0;top:64px;max-height:calc(100dvh - 64px);overflow-y:auto;padding:10px var(--mobile-gutter) max(18px,env(safe-area-inset-bottom));border-radius:0 0 12px 12px}.nav-item{width:100%}.nav-link,.dropdown a{width:100%;min-height:44px;padding:12px 8px;font-size:16px}.nav-inner.menu-open .dropdown{padding-left:12px}.mobile-lab-actions{display:grid;grid-template-columns:1fr;gap:10px;width:100%;padding-top:14px}.mobile-lab-actions .btn{width:100%;min-height:48px}.mobile-lab-actions .btn-outline{background:#fff}
+.lab-hero{display:block;min-height:0;padding-top:290px;background:var(--blue-darker)}.lab-hero::before{content:"";position:absolute;inset:0 0 auto;height:290px;background:url("images/lab-account-hero.png") center center/cover no-repeat}.lab-hero::after{display:none}.lab-hero-content{max-width:none;padding:34px var(--mobile-gutter) 40px;background:var(--blue-darker)}.lab-hero h1{font-size:clamp(2.15rem,9.5vw,2.95rem);line-height:1.04;letter-spacing:-.045em;margin-bottom:16px}.lab-hero p{font-size:16px;line-height:1.6}.lab-hero-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:24px}.lab-hero-actions .btn{width:100%;min-height:52px}
+.lab-intro,.lab-features,.lab-pricing,.lab-process,.lab-faq{padding:54px 0}.lab-intro-grid,.lab-feature-grid,.lab-pricing-grid,.lab-process-grid{grid-template-columns:1fr;gap:20px}.lab-image-wrap{min-height:300px;order:-1}.lab-intro h2,.lab-features-heading h2,.lab-pricing-heading h2,.lab-process-heading h2,.lab-faq-heading h2{font-size:clamp(1.8rem,8vw,2.3rem);line-height:1.1}.lab-intro-copy p,.lab-features-heading p,.lab-pricing-heading p,.lab-process-heading p,.lab-faq-heading p{font-size:16px;line-height:1.65}.lab-features-heading,.lab-pricing-heading,.lab-process-heading,.lab-faq-heading{margin-bottom:28px;text-align:left}.lab-highlight-list li,.lab-plan-list li{font-size:14px;line-height:1.55}.lab-feature-card,.lab-pricing-card,.lab-step{padding:24px}.lab-feature-card h3,.lab-pricing-card h3,.lab-step h3{font-size:19px}.lab-feature-card p,.lab-step p{font-size:14px;line-height:1.6}.lab-price{font-size:38px}.lab-plan-btn{min-height:52px}.faq-question{min-height:58px;padding:16px;gap:14px;font-size:15px;line-height:1.4}.faq-answer{padding:0 16px 18px;font-size:14px;line-height:1.65}.lab-final-cta{padding:52px 0}.lab-final-card{display:grid;grid-template-columns:1fr;gap:24px;padding:26px 22px}.lab-final-card h2{font-size:clamp(1.85rem,8vw,2.35rem)}.lab-final-card p{font-size:16px;line-height:1.6}.lab-final-card .btn{width:100%;min-height:52px}
+}
+@media(max-width:380px){:root{--mobile-gutter:16px}.brand{flex-basis:132px;width:132px}.site-logo{width:128px}.lab-hero{padding-top:250px}.lab-hero::before{height:250px}.lab-image-wrap{min-height:250px}.lab-feature-card,.lab-pricing-card,.lab-step{padding:21px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
 </head>
 <body>
 <div class="topbar"><div class="container topbar-inner"><div class="topbar-left"><span>Nationwide Drug & Alcohol Testing</span><span>•</span><span>Operating Nationwide</span></div><div class="topbar-right"><span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a></div></div></div>
@@ -245,7 +255,7 @@
           <a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>
         </div>
       </div>
-      <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+<button class="mobile-toggle" id="mobileToggle" aria-controls="mainNav" aria-label="Open menu" aria-expanded="false">☰</button>
     </div>
   </div>
 </header>
@@ -370,5 +380,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+<script>document.addEventListener("DOMContentLoaded",function(){const nav=document.getElementById("mainNav");if(nav&&!nav.querySelector(".mobile-lab-actions")){const actions=document.createElement("div");actions.className="mobile-lab-actions";actions.innerHTML='<a class="btn btn-orange" href="services.html">Order a Test</a><a class="btn btn-outline" href="https://portal.screenings4u.com/customer-login.html">Customer Login</a><a class="btn btn-outline" href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>';nav.append(actions);}});</script>
 </body>
 </html>

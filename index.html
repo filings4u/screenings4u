@@ -847,7 +847,6 @@
       .footer-bottom { flex-direction: column; }
     }
   </style>
-  <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
 
   <style>
     /* Page-specific responsive layout. Kept after the shared stylesheet so
@@ -1197,6 +1196,20 @@
       }
     }
   </style>
+  <style>
+    .mobile-home-actions{display:none}
+    @media(max-width:767px){
+      :root{--mobile-gutter:20px}
+      html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+      body{min-width:320px;font-size:16px}
+      .container{width:100%;padding-inline:var(--mobile-gutter)}
+      .topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}
+      .nav-inner{min-height:64px;gap:12px}.brand{width:145px;flex-basis:145px}.site-logo{width:140px;max-height:42px}.nav-actions{margin-left:auto}.nav-actions>.btn,.nav-actions>.nav-account-menu{display:none!important}.mobile-toggle{display:grid;place-items:center;min-width:44px;width:44px;height:44px;font-size:23px}.nav-inner.menu-open .nav{left:0;right:0;top:64px;max-height:calc(100dvh - 64px);padding:10px var(--mobile-gutter) max(18px,env(safe-area-inset-bottom));border-radius:0 0 12px 12px}.nav-item{width:100%}.nav-link,.dropdown a{width:100%;min-height:44px;padding:12px 8px;font-size:16px}.nav-inner.menu-open .dropdown{padding-left:12px}.mobile-home-actions{display:grid;grid-template-columns:1fr;gap:10px;width:100%;padding-top:14px}.mobile-home-actions .btn{width:100%;min-height:48px}.mobile-home-actions .btn-outline{background:#fff}
+      .hero::before{height:290px}.hero-inner{padding:34px 0 40px}.hero h1{font-size:clamp(2.25rem,10vw,3rem);line-height:1.04}.hero-lead{font-size:16px;line-height:1.6}.hero-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:30px}.hero-actions .btn{width:100%;min-height:52px}.intro,.services,.process,.audiences,.cta{padding:54px 0}.section-heading h2,.intro-copy h2,.process-copy h2{font-size:clamp(1.8rem,8vw,2.3rem);line-height:1.1}.section-heading p,.intro-copy p,.process-copy p{font-size:16px;line-height:1.65}.service-card,.audience-card{padding:24px}.intro-card{min-height:360px}.cta-inner{display:grid;grid-template-columns:1fr;gap:24px}.cta-actions{grid-template-columns:1fr}.cta-actions .btn{min-height:52px}
+    }
+    @media(max-width:380px){:root{--mobile-gutter:16px}.brand{width:132px;flex-basis:132px}.site-logo{width:128px}.hero::before{height:250px}.service-card,.audience-card{padding:21px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+  </style>
 </head>
 
 <body>
@@ -1253,6 +1266,7 @@
       <button
         class="mobile-toggle"
         id="mobileToggle"
+        aria-controls="mainNav"
         aria-label="Open menu"
         aria-expanded="false">
         ☰
@@ -1489,5 +1503,6 @@
 
   <script src="assets/js/navigation.js"></script>
   <script src="assets/js/footer.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){const nav=document.getElementById("mainNav");if(nav&&!nav.querySelector(".mobile-home-actions")){const actions=document.createElement("div");actions.className="mobile-home-actions";actions.innerHTML='<a class="btn btn-orange" href="services.html">Order a Test</a><a class="btn btn-outline" href="https://portal.screenings4u.com/customer-login.html">Customer Login</a><a class="btn btn-outline" href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>';nav.append(actions);}});</script>
 </body>
 </html>
