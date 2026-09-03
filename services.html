@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -575,11 +575,100 @@ h1{
   .btn-light{color:var(--blue-darker);background:var(--white)}
   @media(max-width:1000px){.services-page .grid{grid-template-columns:repeat(2,minmax(0,1fr))}.business-grid{grid-template-columns:1fr}.catalog-heading{align-items:flex-start;flex-direction:column}.catalog-note{white-space:normal}}
   @media(max-width:700px){.services-page .container{width:min(100% - 28px,1450px)}.services-hero{min-height:0;background-position:62% center}.services-hero:after{opacity:.28;transform:scale(.65) rotate(35deg);transform-origin:top right}.services-hero-inner{padding:61px 0 92px}.services-hero h1{font-size:clamp(41px,12vw,54px);line-height:1.01}.services-hero .lead{font-size:15px}.services-hero-actions{display:grid;grid-template-columns:1fr}.services-hero-actions .btn{width:100%}.hero-assurance{grid-template-columns:1fr;margin-top:34px}.assurance{padding:12px 0;border-right:0;border-bottom:1px solid rgba(255,255,255,.16)}.catalog-section{margin-top:-38px;padding-bottom:68px}.catalog-panel{padding:23px}.catalog-heading{margin-bottom:20px;padding-bottom:20px}.services-page .catalog-tools{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:9px}.services-page .filter{width:100%;white-space:normal}.services-page .grid,.business-options{grid-template-columns:1fr}.services-page .card{min-height:245px;padding:23px}.business-section{padding:68px 0}.business-intro{padding:26px}.business-intro h2{font-size:31px}.services-cta{padding:62px 0}.services-cta-inner{align-items:flex-start;flex-direction:column}.services-cta .btn{width:100%}}
+
+  /* =======================================================
+     MOBILE PAGE STANDARD
+     Applied to every phone-sized layout in this page.
+     ======================================================= */
+  @media(max-width:767px){
+    html{font-size:16px}
+    body{font-size:16px;line-height:1.55}
+    .services-page .topbar{display:none}
+    .services-page .container{width:calc(100% - 32px)}
+
+    .services-page .site-header{position:sticky;top:0}
+    .services-page .nav-inner{min-height:72px;gap:10px}
+    .services-page .brand{flex:0 1 132px;width:132px;min-width:0}
+    .services-page .brand img{width:128px;max-width:100%}
+    .services-page .nav-actions{margin-left:auto;gap:8px}
+    .services-page .nav-login{min-height:42px;padding:0 10px;font-size:12px}
+    .services-page .mobile-toggle{display:block;flex:0 0 44px}
+    .services-page .nav-inner.menu-open #mainNav.nav{
+      top:72px;
+      max-height:calc(100vh - 72px);
+      overflow-y:auto;
+      border-radius:0 0 12px 12px;
+    }
+    .services-page .nav-inner.menu-open #mainNav .nav-item,
+    .services-page .nav-inner.menu-open #mainNav .nav-link,
+    .services-page .nav-inner.menu-open #mainNav .dropdown a{width:100%}
+    .services-page .nav-account-dropdown{
+      position:absolute;
+      right:0;
+      top:calc(100% + 8px);
+      width:min(260px,calc(100vw - 32px));
+      min-width:0;
+      margin:0;
+      box-shadow:var(--shadow);
+    }
+    .services-page .nav-account-menu.open .nav-account-dropdown{display:block}
+
+    .services-hero{background-position:66% center}
+    .services-hero-inner{padding:52px 0 82px}
+    .services-hero .eyebrow{font-size:11px}
+    .services-hero h1{margin:14px 0 18px;font-size:clamp(36px,11vw,48px);letter-spacing:-.04em}
+    .services-hero .lead{font-size:16px;line-height:1.6}
+    .services-hero-actions{grid-template-columns:1fr}
+    .services-hero-actions .btn{width:100%;min-height:48px;padding:12px 16px;text-align:center}
+    .hero-assurance{grid-template-columns:1fr}
+    .assurance{padding:13px 0;border-right:0;border-bottom:1px solid rgba(255,255,255,.16)}
+    .assurance strong{font-size:13px}
+    .assurance span{font-size:12px}
+
+    .catalog-section{margin-top:-30px;padding-bottom:56px}
+    .catalog-panel{padding:20px 16px;border-radius:14px}
+    .catalog-heading{align-items:stretch;gap:16px;margin-bottom:18px;padding-bottom:18px}
+    .catalog-heading h2{font-size:30px}
+    .catalog-heading p{font-size:15px;line-height:1.6}
+    .catalog-note{width:100%;border-radius:8px;text-align:center;white-space:normal}
+    .services-page .catalog-tools{display:grid;grid-template-columns:1fr;gap:8px;padding:8px}
+    .services-page .filter{width:100%;min-height:46px;padding:10px 14px;font-size:14px;white-space:normal}
+    .services-page .section h2{font-size:21px}
+    .services-page .grid{grid-template-columns:1fr}
+    .services-page .card{min-height:0;padding:21px}
+    .services-page .card h3{font-size:20px}
+    .services-page .card p{font-size:15px;line-height:1.65}
+    .services-page .card-bottom{align-items:stretch;flex-direction:column}
+    .services-page .price{font-size:21px}
+    .services-page .link{display:flex;align-items:center;justify-content:center;min-height:44px;border:1px solid var(--orange);border-radius:8px;font-size:14px}
+    .services-page .empty{padding:30px 18px}
+
+    .business-section{padding:56px 0}
+    .business-grid,.business-options{grid-template-columns:1fr}
+    .business-intro,.business-option{padding:22px}
+    .business-intro h2{font-size:30px}
+    .business-intro p,.business-option p{font-size:15px;line-height:1.6}
+    .business-intro .btn{width:100%;min-height:48px;padding:12px 16px;text-align:center}
+    .business-option h3{font-size:20px}
+
+    .services-cta{padding:52px 0}
+    .services-cta-inner{align-items:stretch;flex-direction:column}
+    .services-cta h2{font-size:30px}
+    .services-cta p{font-size:15px;line-height:1.6}
+    .services-cta .btn{width:100%;min-height:48px;padding:12px 16px;text-align:center}
+  }
+
+  @media(max-width:420px){
+    .services-page .container{width:calc(100% - 24px)}
+    .services-page .brand{flex-basis:112px;width:112px}
+    .services-page .brand img{width:110px}
+    .services-page .nav-login{padding:0 8px;font-size:11px}
+    .services-page .nav-login-chevron{display:none}
+    .services-page .mobile-toggle{width:42px;height:42px}
+    .catalog-panel{padding:18px 12px}
+  }
 </style>
-<style>
-@media(max-width:767px){html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{min-width:320px;font-size:16px}.services-page .container{width:100%;padding-inline:20px}.topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}.nav-inner{min-height:64px}.site-logo{width:140px;max-width:42vw}.nav-actions>.btn,.nav-account-menu{display:none!important}.mobile-toggle{display:inline-grid!important;place-items:center}.nav-inner.menu-open #mainNav.nav{top:64px;max-height:calc(100dvh - 64px);overflow:auto;border-radius:0;padding:14px 20px 22px}.services-hero{display:block;min-height:0;padding-top:280px;background:var(--blue-deep)}.services-hero:before{content:"";position:absolute;inset:0 0 auto;height:280px;background:url("images/services-hero.png") center/cover no-repeat}.services-hero:after{display:none}.services-hero-inner{padding:34px 0 72px;background:var(--blue-deep)}.services-hero h1{font-size:clamp(2.15rem,10vw,2.85rem);line-height:1.06}.services-hero .lead{font-size:1rem;line-height:1.65}.services-hero-actions,.services-page .catalog-tools,.services-page .grid,.business-grid,.business-options{grid-template-columns:minmax(0,1fr)}.services-hero-actions .btn,.services-cta .btn{width:100%}.hero-assurance{grid-template-columns:1fr}.catalog-panel{padding:22px}.services-page .card,.business-intro,.business-option{padding:22px}.services-cta-inner{align-items:stretch}}
-@media(max-width:380px){.services-page .container{padding-inline:15px}.services-hero{padding-top:235px}.services-hero:before{height:235px}.services-hero h1{font-size:2rem}}
-</style></head>
+</head>
 
 <body class="services-page">
 
@@ -624,9 +713,7 @@ h1{
       <button
         class="mobile-toggle"
         id="mobileToggle"
-        type="button"
         aria-label="Open menu"
-        aria-controls="mainNav"
         aria-expanded="false">
         ☰
       </button>
