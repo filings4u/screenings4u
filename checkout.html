@@ -1035,6 +1035,267 @@ li:before {
         transition-duration: .01ms !important;
     }
 }
+
+/* =========================================================
+   CHECKOUT RESPONSIVE OVERRIDES
+   Desktop + Tablet + Mobile
+   ========================================================= */
+
+/* Keep the page fluid on desktop */
+main > .container {
+    width: min(100% - 32px, 1440px);
+    margin-inline: auto;
+}
+
+.grid {
+    grid-template-columns: minmax(0, 1.65fr) minmax(320px, .65fr);
+}
+
+/* Prevent grid children from forcing overflow */
+.grid > *,
+.fields > *,
+.discount-entry > * {
+    min-width: 0;
+}
+
+/* Make all form controls honor container width */
+input,
+select,
+button {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Discount row - desktop */
+.discount-entry {
+    grid-template-columns: minmax(0, 1fr) 104px;
+    align-items: stretch;
+}
+
+.discount-entry input,
+.discount-entry button {
+    width: 100%;
+}
+
+.discount-entry button {
+    min-width: 0;
+    white-space: nowrap;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    main > .container {
+        width: min(100% - 28px, 960px);
+    }
+
+    .grid {
+        grid-template-columns: minmax(0, 1fr) 330px;
+        gap: 20px;
+    }
+
+    .pad {
+        padding: 24px;
+    }
+
+    .discount-entry {
+        grid-template-columns: minmax(0, 1fr) 92px;
+    }
+}
+
+/* Stack checkout before it gets cramped */
+@media (max-width: 850px) {
+    main > .container {
+        width: min(100% - 24px, 760px);
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .summary {
+        position: static;
+        order: -1;
+    }
+}
+
+/* Phones */
+@media (max-width: 767px) {
+    main {
+        padding: 28px 0 max(48px, env(safe-area-inset-bottom));
+    }
+
+    main > .container {
+        width: calc(100% - 24px);
+    }
+
+    .checkout-top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+
+    .checkout-top-row .eyebrow {
+        min-width: 0;
+    }
+
+    .checkout-top-row .back {
+        flex: 0 0 auto;
+        min-height: auto;
+        padding: 0;
+        font-size: 12px;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    h1 {
+        max-width: none;
+        font-size: clamp(2rem, 10vw, 2.65rem);
+    }
+
+    .intro {
+        font-size: 15px;
+        line-height: 1.55;
+    }
+
+    .card {
+        border-radius: 14px;
+    }
+
+    .pad {
+        padding: 18px;
+    }
+
+    .fields {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .field.full {
+        grid-column: auto;
+    }
+
+    input,
+    select {
+        width: 100%;
+        min-height: 50px;
+        height: 50px;
+        font-size: 16px;
+    }
+
+    #payButton {
+        min-height: 52px;
+        width: 100%;
+        font-size: 14px;
+    }
+
+    /* Keep discount code and Apply button side-by-side on normal phones */
+    .discount-entry {
+        grid-template-columns: minmax(0, 1fr) 88px;
+        gap: 8px;
+    }
+
+    .discount-entry input,
+    .discount-entry button {
+        width: 100%;
+        min-height: 48px;
+        height: 48px;
+    }
+
+    .discount-entry button {
+        padding-inline: 10px;
+        font-size: 12px;
+    }
+
+    .summary .pad {
+        padding: 18px;
+    }
+
+    .price {
+        gap: 14px;
+    }
+
+    .price strong {
+        flex: 0 0 auto;
+    }
+
+    .discount-total-row {
+        gap: 12px;
+    }
+
+    .email-modal-card,
+    .address-validation-card {
+        width: 100%;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    main > .container {
+        width: calc(100% - 20px);
+    }
+
+    .checkout-top-row {
+        align-items: flex-start;
+    }
+
+    .checkout-top-row .back {
+        max-width: none;
+        font-size: 11px;
+    }
+
+    .pad {
+        padding: 16px;
+    }
+
+    .summary .pad {
+        padding: 16px;
+    }
+
+    /* On very narrow phones, stack discount input + button */
+    .discount-entry {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .discount-entry button {
+        width: 100%;
+        min-height: 48px;
+    }
+
+    .discount-box {
+        padding: 14px;
+    }
+
+    .email-modal-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Very narrow phones */
+@media (max-width: 360px) {
+    main > .container {
+        width: calc(100% - 16px);
+    }
+
+    .checkout-top-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .checkout-top-row .back {
+        text-align: left;
+    }
+
+    .pad,
+    .summary .pad {
+        padding: 14px;
+    }
+}
+
 </style>
 </head>
 <body><div class="topbar">
