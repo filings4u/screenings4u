@@ -1,0 +1,15 @@
+HTML pages: 52
+Indexed pages in sitemap: 41
+Noindex pages: 11
+Broken internal HTML links: 0 []
+Missing HTML image refs: 0 []
+Missing local JS refs: 2 [('audit-preparation.html', 'assets/js/faq.js'), ('accessibility.html', 'assets/js/faq.js')]
+HTML images missing alt: 0 []
+JS image refs missing: 0 []
+JS literal img tags missing alt: 0 []
+Pages with multiple H1s: 0 []
+NOTE: privacy.html and accessibility.html source content appears copied from unrelated consulting pages; both are noindex until the full legal/accessibility content is reviewed.
+Final missing local JS refs: 0 []
+Final broken internal links: 0
+Final missing images: 0
+Final HTML images missing alt: 0
