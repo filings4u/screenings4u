@@ -14,32 +14,38 @@
 <link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
   <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2"><style>
-header {
-    background: #fff;
-    border-bottom: 1px solid var(--line);
-}
-
-.header-inner {
-    min-height: 78px;
+.checkout-top-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 18px;
 }
 
-
-
-
-
-
+.checkout-top-row .eyebrow {
+    margin-bottom: 0;
+}
 
 .back {
+    display: inline-flex;
+    align-items: center;
     font-size: 13px;
     font-weight: 800;
     color: var(--blue);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.back:hover {
+    text-decoration: underline;
 }
 
 main {
     padding: 55px 0 90px;
+}
+
+main > .container {
+    max-width: 1440px;
 }
 
 
@@ -60,8 +66,8 @@ h1 {
 
 .grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 390px;
-    gap: 24px;
+    grid-template-columns: minmax(0, 1.65fr) minmax(340px, .65fr);
+    gap: 28px;
     align-items: start;
 }
 
@@ -169,6 +175,45 @@ select:focus {
 }
 
 
+
+#payButton {
+    width: 100%;
+    min-height: 52px;
+    margin-top: 18px;
+    padding: 0 22px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--orange);
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+    transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+#payButton:hover {
+    background: #e85f00;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(255, 107, 0, .20);
+}
+
+#payButton:active {
+    transform: translateY(0);
+}
+
+#payButton:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(36, 70, 127, .15), 0 8px 20px rgba(255, 107, 0, .20);
+}
+
+#payButton:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
 
 button:disabled {
     opacity: .55;
@@ -284,9 +329,44 @@ li:before {
     height: 44px;
     min-height: 44px;
     margin: 0;
-    padding: 0 12px;
+    padding: 0 16px;
+
+    border: 0;
+    border-radius: 8px;
+
     background: var(--blue);
+    color: #fff;
+
+    font-family: inherit;
     font-size: 12px;
+    font-weight: 800;
+    line-height: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition:
+        background .15s ease,
+        transform .15s ease,
+        box-shadow .15s ease;
+}
+
+.discount-entry button:hover {
+    background: var(--blue-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(36, 70, 127, .20);
+}
+
+.discount-entry button:active {
+    transform: translateY(0);
+}
+
+.discount-entry button:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 3px rgba(36, 70, 127, .15);
 }
 
 .discount-message {
@@ -729,11 +809,17 @@ li:before {
 }
 
 @media (max-width: 767px) {
-    
+    .checkout-top-row {
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 14px;
+    }
 
-    
-
-    
+    .checkout-top-row .back {
+        min-height: 44px;
+        padding: 0 8px;
+        text-align: right;
+    }
 
     /* Shared rule for marketing pages: suppress promotional/full-width banners on phones. */
     .full-banner, .announcement-bar, .promo-banner, [data-full-banner]{
@@ -980,18 +1066,11 @@ li:before {
   </div>
 </header>
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
-<header>
-<div class="container header-inner">
-<a class="brand" href="index.html">
-<img alt="screenings4u" decoding="async" height="233" src="images/logo.png" width="1255"/>
-</a>
-<a class="back" href="services.html" id="backLink">
-      ← Back to Services
-    </a>
-</div>
-</header>
 <main><div class="container">
+<div class="checkout-top-row">
 <div class="eyebrow">Secure Checkout</div>
+<a class="back" href="services.html" id="backLink">← Back to Services</a>
+</div>
 <h1>Complete Your Order.</h1>
 <p class="intro">Review the service you selected, confirm your information and continue to secure payment.</p>
 <div class="card pad" id="loading">Loading your selected service...</div>
