@@ -214,7 +214,7 @@ function createManualEntryWarning() {
       padding: 12px 20px;
       border: 0;
       border-radius: 9px;
-      background: #325aa3;
+      background: #24467f;
       color: #fff;
       font-size: 14px;
       font-weight: 800;
@@ -1805,7 +1805,7 @@ async function mountStripePayment(
         theme: "stripe",
 
         variables: {
-          colorPrimary: "#325aa3",
+          colorPrimary: "#24467f",
           colorText: "#1d2d45",
           borderRadius: "8px",
           fontFamily:
@@ -2385,7 +2385,7 @@ function createPaymentProcessingOverlay() {
       height: 52px;
       margin: 0 auto 22px;
       border: 4px solid #d9e3f0;
-      border-top-color: #325aa3;
+      border-top-color: #24467f;
       border-right-color: #ff6b00;
       border-radius: 50%;
       animation: screenings4uPaymentSpin .85s linear infinite;
@@ -2407,7 +2407,7 @@ function createPaymentProcessingOverlay() {
 
     .payment-processing-status {
       margin-top: 16px;
-      color: #325aa3;
+      color: #24467f;
       font-size: 12px;
       font-weight: 800;
     }

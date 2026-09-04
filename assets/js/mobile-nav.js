@@ -1,0 +1,25 @@
+(() => {
+  "use strict";
+  const markup = `
+    <div class="mobile-nav-item"><a class="mobile-nav-link" href="index.html">Home</a></div>
+    <div class="mobile-nav-item"><a class="mobile-nav-link" href="services.html">Services</a></div>
+    <div class="mobile-nav-item"><a class="mobile-nav-link" href="dot-services.html">DOT &amp; Transportation <span class="chevron" aria-hidden="true">▼</span></a><div class="mobile-dropdown"><a href="dot-services.html">DOT Services</a><a href="dot-urine-drug-tests.html">DOT Drug Testing</a><a href="dot-breathalyzer-services.html">DOT Alcohol Testing</a><a href="dot-physical-exam-services.html">DOT Physicals</a><a href="new-entrant-audit.html">New Entrant Audit</a></div></div>
+    <div class="mobile-nav-item"><a class="mobile-nav-link" href="business-services.html">Employers <span class="chevron" aria-hidden="true">▼</span></a><div class="mobile-dropdown"><a href="business-services.html">Business Services</a><a href="consulting-services.html">Consulting Services</a><a href="mobile-drug-and-alcohol-testing.html">Mobile Testing</a><a href="background-checks.html">Background Checks</a><a href="drug-alcohol-policy-creation.html">Drug &amp; Alcohol Policy</a><a href="new-entrant-audit.html">New Entrant Audit</a><a href="audit-preparation.html">Audit Preparation</a><a href="testing-workflow-review.html">Workflow Review</a></div></div>
+    <div class="mobile-nav-item"><a class="mobile-nav-link" href="personal-drug-and-alcohol-testing.html">Personal <span class="chevron" aria-hidden="true">▼</span></a><div class="mobile-dropdown"><a href="personal-drug-and-alcohol-testing.html">Personal Drug &amp; Alcohol Testing</a><a href="court-ordered-etg-drug-and-alcohol-testing.html">Court-Ordered Testing</a><a href="dna-tests-chicago-il.html">DNA Tests — Chicago, IL</a><a href="non-dot-breathalyzer-services.html">NON-DOT Breathalyzer</a><a href="nursing-school-drug-tests.html">Nursing School Drug Tests</a></div></div>
+    <div class="mobile-nav-item"><a class="mobile-nav-link" href="dot-specimen-collector-training.html">Training <span class="chevron" aria-hidden="true">▼</span></a><div class="mobile-dropdown"><a href="dot-specimen-collector-training.html">DOT Specimen Collector Training</a><a href="dot-specimen-collector-training-group-training.html">Group Training</a><a href="specimen_collector_training_supplies.html">Collector Training Supplies</a></div></div>
+    <div class="mobile-nav-item"><a class="mobile-nav-link" href="industries-served.html">Industries</a></div>
+    <div class="mobile-nav-item"><a class="mobile-nav-link" href="compliance-guidance.html">Resources <span class="chevron" aria-hidden="true">▼</span></a><div class="mobile-dropdown"><a href="join-our-collector-network.html">Collector Network</a><a href="contact.html">Contact Us</a><a href="about-us.html">About Us</a><a href="faqs.html">FAQs</a><a href="blog.html">Blog</a><a href="house-lab-account-setup.html">Lab Accounts</a><a href="become-a-clearinghouse-consortium-third-party-administrator.html">Become a C/TPA</a><a href="compliance-guidance.html">Compliance Guidance</a></div></div>
+    <div class="mobile-nav-actions"><a class="btn btn-orange" href="services.html">Order a Test</a><a class="btn btn-outline" href="https://portal.screenings4u.com/customer-login.html">Customer Login</a><a class="btn btn-outline" href="https://portal.screenings4u.com/employer-login.html">Employer Login</a></div>`;
+  function init(){
+    const nav=document.getElementById('mobileNav');
+    const toggle=document.getElementById('mobileToggle');
+    if(!nav||!toggle) return console.error('Screenings4U mobile navigation target missing',{mobileNav:!!nav,mobileToggle:!!toggle});
+    nav.innerHTML=markup;
+    const setOpen=open=>{nav.classList.toggle('is-open',open);nav.setAttribute('aria-hidden',String(!open));toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Close menu':'Open menu');toggle.textContent=open?'✕':'☰';document.body.classList.toggle('s4u-mobile-nav-open',open);if(!open) nav.querySelectorAll('.mobile-nav-item.open').forEach(i=>i.classList.remove('open'));};
+    toggle.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();setOpen(!nav.classList.contains('is-open'));});
+    nav.addEventListener('click',e=>{const link=e.target.closest('.mobile-nav-item>.mobile-nav-link');if(!link)return;const item=link.closest('.mobile-nav-item');const dd=item?.querySelector(':scope>.mobile-dropdown');if(!dd){setOpen(false);return;}e.preventDefault();const willOpen=!item.classList.contains('open');nav.querySelectorAll('.mobile-nav-item.open').forEach(i=>{if(i!==item)i.classList.remove('open')});item.classList.toggle('open',willOpen);});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('is-open')){setOpen(false);toggle.focus();}});
+    window.addEventListener('resize',()=>{if(window.innerWidth>1120)setOpen(false)},{passive:true});
+  }
+  document.readyState==='loading'?document.addEventListener('DOMContentLoaded',init,{once:true}):init();
+})();

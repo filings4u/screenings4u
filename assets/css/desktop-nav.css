@@ -1,0 +1,26 @@
+/* Screenings4U desktop navigation — desktop only */
+@media (min-width:1121px){
+  #desktopNav{display:flex;align-items:center;justify-content:center;gap:2px;min-width:0}
+  #desktopNav .nav-item{position:relative}
+  #desktopNav .nav-link{display:inline-flex;align-items:center;gap:6px;padding:13px 9px;color:#334d70;font-size:13px;font-weight:700;border-radius:8px;white-space:nowrap;text-decoration:none}
+  #desktopNav .nav-link:hover,#desktopNav .nav-item.open>.nav-link{color:var(--blue);background:var(--blue-pale)}
+  #desktopNav .chevron{font-size:9px;transition:transform .2s ease}
+  #desktopNav .nav-item:hover>.nav-link .chevron,#desktopNav .nav-item:focus-within>.nav-link .chevron,#desktopNav .nav-item.open>.nav-link .chevron{transform:rotate(180deg)}
+  #desktopNav .dropdown{position:absolute;top:calc(100% + 8px);left:0;min-width:255px;max-height:calc(100vh - 130px);overflow-y:auto;padding:10px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s ease;z-index:5200}
+  #desktopNav .nav-item:hover>.dropdown,#desktopNav .nav-item:focus-within>.dropdown,#desktopNav .nav-item.open>.dropdown{opacity:1;visibility:visible;transform:none}
+  #desktopNav .dropdown a{display:block;padding:11px 12px;border-radius:8px;color:#475467;font-size:13px;font-weight:600;text-decoration:none}
+  #desktopNav .dropdown a:hover{background:var(--blue-pale);color:var(--blue)}
+  .nav-account-menu{position:relative}
+  .nav-login{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 20px;border:1px solid var(--blue);border-radius:8px;background:var(--blue);color:#fff;font-size:14px;font-weight:800;white-space:nowrap;transition:.2s ease}
+  .nav-login:hover,.nav-account-menu.open .nav-login{background:#1d3b6d;border-color:#1d3b6d;transform:translateY(-1px)}
+  .nav-login-chevron{font-size:9px;transition:transform .2s ease}
+  .nav-account-menu.open .nav-login-chevron{transform:rotate(180deg)}
+  .nav-account-dropdown{position:absolute;top:calc(100% + 9px);right:0;min-width:205px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s ease;z-index:5200}
+  .nav-account-menu:hover .nav-account-dropdown,.nav-account-menu:focus-within .nav-account-dropdown,.nav-account-menu.open .nav-account-dropdown{opacity:1;visibility:visible;transform:none}
+  .nav-account-dropdown a{display:block;padding:11px 12px;border-radius:8px;color:#334d70;font-size:13px;font-weight:700;text-decoration:none}
+  .nav-account-dropdown a:hover{background:var(--blue-pale);color:var(--blue)}
+  #mobileToggle,#mobileNav{display:none!important}
+}
+@media (min-width:1440px){
+  #desktopNav{position:absolute;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 520px)}
+}
