@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", initS4UFooter);
 
 function initS4UFooter() {
   const target = document.getElementById("siteFooter");
+
   if (!target) return;
 
   const hasPageCTA = !!document.querySelector(
@@ -12,9 +13,12 @@ function initS4UFooter() {
     ? ""
     : `
       <div class="container footer-cta">
+
         <div class="footer-cta-copy">
           <span class="footer-cta-label">Nationwide Testing Support</span>
+
           <strong>Need help choosing the right service?</strong>
+
           <p>
             Our team can help with individual testing, employer programs,
             DOT compliance, and training.
@@ -22,6 +26,7 @@ function initS4UFooter() {
         </div>
 
         <div class="footer-cta-actions">
+
           <a
             class="footer-button footer-button-secondary"
             href="contact.html"
@@ -35,7 +40,9 @@ function initS4UFooter() {
           >
             Order a Test
           </a>
+
         </div>
+
       </div>
     `;
 
@@ -110,9 +117,7 @@ function initS4UFooter() {
 
             <a href="services.html">All Services</a>
             <a href="dot-urine-drug-tests.html">DOT Drug Testing</a>
-            <a href="dot-breathalyzer-services.html">
-              DOT Alcohol Testing
-            </a>
+            <a href="dot-breathalyzer-services.html">DOT Alcohol Testing</a>
             <a href="dot-physical-exam-services.html">DOT Physicals</a>
             <a href="workplace-drug-and-alcohol-testing.html">
               Workplace Testing
@@ -124,9 +129,7 @@ function initS4UFooter() {
             <h4>For Business</h4>
 
             <a href="business-services.html">Business Services</a>
-            <a href="mobile-drug-and-alcohol-testing.html">
-              Mobile Testing
-            </a>
+            <a href="mobile-drug-and-alcohol-testing.html">Mobile Testing</a>
             <a href="consulting-services.html">Consulting</a>
             <a href="background-checks.html">Background Checks</a>
             <a href="new-entrant-audit.html">New Entrant Audit</a>
@@ -166,7 +169,7 @@ function initS4UFooter() {
 
         <div class="footer-bottom-copy">
 
-          <span>
+          <span class="footer-copyright">
             © <span id="footerYear"></span>
             screenings4u. All rights reserved.
           </span>
@@ -177,7 +180,6 @@ function initS4UFooter() {
               href="https://www.roselandcompanies.com/"
               target="_blank"
               rel="noopener noreferrer"
-              style="color:#ff6b00 !important;"
             >
               Roseland Companies, LLC
             </a>
@@ -191,38 +193,22 @@ function initS4UFooter() {
           aria-label="Legal links"
         >
 
-          <a href="terms.html">
-            Terms of Use
-          </a>
-
-          <a href="privacy.html">
-            Privacy Policy
-          </a>
-
-          <a href="refund-policy.html">
-            Refund Policy
-          </a>
-
-          <a href="cookie-policy.html">
-            Cookie Policy
-          </a>
-
-          <a href="accessibility.html">
-            Accessibility
-          </a>
-
-          <a href="disclaimer.html">
-            Disclaimer
-          </a>
-
-          <a
-            href="https://portal.screenings4u.com/admin-login.html"
-            class="footer-admin-login"
-          >
-            Admin Login
-          </a>
+          <a href="terms.html">Terms of Use</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="refund-policy.html">Refund Policy</a>
+          <a href="cookie-policy.html">Cookie Policy</a>
+          <a href="accessibility.html">Accessibility</a>
+          <a href="disclaimer.html">Disclaimer</a>
 
         </nav>
+
+
+        <a
+          href="https://portal.screenings4u.com/admin-login.html"
+          class="footer-admin-login"
+        >
+          Admin Login
+        </a>
 
       </div>
     `;
