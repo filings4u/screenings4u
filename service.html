@@ -1,59 +1,433 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/><meta content="#24467f" name="theme-color"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Service | screenings4u</title>
-<link href="images/fav.png" rel="icon" type="image/png"/>
-<meta content="screenings4u service details and secure checkout." name="description">
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
-  <link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
-  <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2"><style>
-header{background:#fff;border-bottom:1px solid var(--line)}.header-inner{min-height:78px;display:flex;align-items:center;justify-content:space-between;gap:18px}.back{font-size:12px;font-weight:800;color:var(--blue)}main{padding:70px 0}.layout{display:grid;grid-template-columns:1.3fr .7fr;gap:22px}.card{min-width:0;background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px;box-shadow:0 14px 40px rgba(23,51,95,.07)}h1{font-size:clamp(38px,6vw,60px);line-height:1.02;letter-spacing:-.05em;color:var(--blue-dark);margin:10px 0 14px}.lead{font-size:15px;line-height:1.8;color:var(--muted)}.price{font-size:34px;font-weight:900;color:var(--blue-dark);margin:18px 0}.actions{display:flex;flex-wrap:wrap;gap:10px}.meta{display:grid;gap:14px}.meta-row{padding-bottom:14px;border-bottom:1px solid var(--line)}.label{font-size:10px;text-transform:uppercase;font-weight:900;color:#667085}.value{font-size:13px;font-weight:800;color:var(--blue-dark);margin-top:4px;overflow-wrap:anywhere}h2{font-size:20px;color:var(--blue-dark)}ul{padding-left:20px;color:var(--muted);line-height:1.8;font-size:13px}.error{background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px;color:#b42318}
-@media(max-width:800px){.header-inner{min-height:64px}.back{min-height:44px;display:flex;align-items:center;text-align:right}main{padding:34px 0 60px}.layout{grid-template-columns:minmax(0,1fr);gap:18px}.card{padding:24px;border-radius:14px}h1{font-size:clamp(2.1rem,10vw,2.8rem);line-height:1.08}.lead{font-size:1rem;line-height:1.65}.actions{display:grid;grid-template-columns:1fr}.actions .btn{width:100%;min-height:50px}.price{font-size:30px}}
-@media(max-width:380px){.card{padding:20px}}
-</style>
-</meta></head>
-<body><div class="topbar">
-<div class="container topbar-inner">
-<div class="topbar-left">
-<span>Nationwide Drug &amp; Alcohol Testing</span><span aria-hidden="true">•</span><span>Operating Nationwide</span>
-</div>
-<div class="topbar-right">
-<span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a>
-</div>
-</div>
-</div><header class="site-header">
-  <div class="container nav-inner" id="navInner">
-    <a href="index.html" class="brand" aria-label="screenings4u home">
-      <img src="images/logo.png" alt="screenings4u" class="site-logo">
-    </a>
-    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation"></nav>
-    <div class="nav-actions">
-      <a href="services.html" class="btn btn-outline">Order a Test</a>
-      <div class="nav-account-menu">
-        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron" aria-hidden="true">▼</span></button>
-        <div class="nav-account-dropdown">
-          <a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a>
-          <a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>
-        </div>
+  <meta charset="utf-8"/>
+  <meta name="theme-color" content="#24467f"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Service | screenings4u</title>
+
+  <link href="images/fav.png" rel="icon" type="image/png"/>
+  <meta name="description" content="screenings4u service details and secure checkout.">
+
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
+  <link href="assets/css/desktop-nav.css?v=20260904-1" rel="stylesheet">
+  <link href="assets/css/mobile-nav.css?v=20260904-2" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       SERVICE PAGE
+       ========================================================= */
+
+    main {
+      padding: 55px 0 90px;
+    }
+
+    main > .container {
+      width: min(100% - 32px, 1440px);
+      margin-inline: auto;
+    }
+
+    .service-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 18px;
+    }
+
+    .service-top-row .eyebrow {
+      margin-bottom: 0;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.2;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .back:hover {
+      text-decoration: underline;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(320px, .55fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .layout > * {
+      min-width: 0;
+    }
+
+    .card {
+      min-width: 0;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: 0 14px 40px rgba(23, 51, 95, .07);
+    }
+
+    h1 {
+      margin: 10px 0 14px;
+      color: var(--blue-dark);
+      font-size: clamp(38px, 6vw, 60px);
+      line-height: 1.02;
+      letter-spacing: -.05em;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .price {
+      margin: 18px 0;
+      color: var(--blue-dark);
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .actions .btn {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .meta {
+      display: grid;
+      gap: 14px;
+    }
+
+    .meta-row {
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .meta-row:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .label {
+      color: #667085;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .value {
+      margin-top: 4px;
+      color: var(--blue-dark);
+      font-size: 13px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    h2 {
+      color: var(--blue-dark);
+      font-size: 20px;
+    }
+
+    ul {
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .error {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 30px;
+      color: #b42318;
+    }
+
+    /* =========================================================
+       TABLET
+       ========================================================= */
+
+    @media (max-width: 1024px) {
+      main > .container {
+        width: min(100% - 28px, 960px);
+      }
+
+      .layout {
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 20px;
+      }
+
+      .card {
+        padding: 26px;
+      }
+    }
+
+    /* =========================================================
+       STACK PAGE BEFORE IT GETS CRAMPED
+       ========================================================= */
+
+    @media (max-width: 850px) {
+      main > .container {
+        width: min(100% - 24px, 760px);
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .layout > .card:last-child {
+        order: -1;
+      }
+    }
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+    @media (max-width: 767px) {
+      main {
+        padding: 28px 0 max(54px, env(safe-area-inset-bottom));
+      }
+
+      main > .container {
+        width: calc(100% - 24px);
+      }
+
+      .service-top-row {
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .service-top-row .back {
+        flex: 0 0 auto;
+        font-size: 12px;
+      }
+
+      .card {
+        padding: 20px;
+        border-radius: 14px;
+      }
+
+      h1 {
+        max-width: none;
+        margin-top: 8px;
+        font-size: clamp(2.15rem, 10vw, 2.9rem);
+        line-height: 1.06;
+        letter-spacing: -.045em;
+      }
+
+      .lead {
+        font-size: 16px;
+        line-height: 1.65;
+      }
+
+      .price {
+        font-size: 30px;
+      }
+
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .actions .btn {
+        width: 100%;
+        min-height: 52px;
+      }
+
+      .meta {
+        gap: 12px;
+      }
+
+      .value {
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      ul {
+        font-size: 14px;
+        line-height: 1.65;
+      }
+    }
+
+    /* =========================================================
+       SMALL PHONES
+       ========================================================= */
+
+    @media (max-width: 480px) {
+      main > .container {
+        width: calc(100% - 20px);
+      }
+
+      .service-top-row {
+        align-items: flex-start;
+      }
+
+      .service-top-row .back {
+        font-size: 11px;
+      }
+
+      .card {
+        padding: 17px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      main > .container {
+        width: calc(100% - 16px);
+      }
+
+      .service-top-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .card {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span>Nationwide Drug &amp; Alcohol Testing</span>
+        <span aria-hidden="true">•</span>
+        <span>Operating Nationwide</span>
       </div>
-      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mobileNav" aria-label="Open menu" aria-expanded="false">☰</button>
+
+      <div class="topbar-right">
+        <span>Mon–Fri, 8AM–8PM CST</span>
+        <a href="tel:7732457009">(773) 245-7009</a>
+      </div>
     </div>
   </div>
-</header>
-<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
-<header><div class="container header-inner"><a class="brand" href="index.html"><img alt="screenings4u" decoding="async" height="233" src="images/logo.png" width="1255"/></a><a class="back" href="services.html">← All Services</a></div></header>
-<main><div class="container"><div id="service"></div></div></main>
-<script src="assets/js/test-price-list.js"></script>
-<script src="assets/js/service.js"></script>
-<footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
+
+  <header class="site-header">
+    <div class="container nav-inner" id="navInner">
+
+      <a href="index.html" class="brand" aria-label="screenings4u home">
+        <img src="images/logo.png" alt="screenings4u" class="site-logo">
+      </a>
+
+      <nav
+        class="desktop-nav"
+        id="desktopNav"
+        aria-label="Main navigation"
+      ></nav>
+
+      <div class="nav-actions">
+
+        <a href="services.html" class="btn btn-outline">
+          Order a Test
+        </a>
+
+        <div class="nav-account-menu">
+          <button
+            type="button"
+            class="nav-login"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Account Login
+            <span class="nav-login-chevron" aria-hidden="true">▼</span>
+          </button>
+
+          <div class="nav-account-dropdown">
+            <a href="https://portal.screenings4u.com/customer-login.html">
+              Customer Login
+            </a>
+
+            <a href="https://portal.screenings4u.com/employer-login.html">
+              Employer Login
+            </a>
+          </div>
+        </div>
+
+        <button
+          class="mobile-toggle"
+          id="mobileToggle"
+          type="button"
+          aria-controls="mobileNav"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <nav
+    class="mobile-nav"
+    id="mobileNav"
+    aria-label="Mobile navigation"
+    aria-hidden="true"
+  ></nav>
+
+  <main>
+    <div class="container">
+
+      <div class="service-top-row">
+        <div class="eyebrow">Service Details</div>
+
+        <a class="back" href="services.html">
+          ← All Services
+        </a>
+      </div>
+
+      <div id="service"></div>
+
+    </div>
+  </main>
+
+  <script src="assets/js/test-price-list.js"></script>
+  <script src="assets/js/service.js"></script>
+
+  <footer
+    aria-label="Website footer"
+    class="site-footer"
+    id="siteFooter"
+  ></footer>
+
   <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
   <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
   <script src="assets/js/site-ui.js?v=20260904-1"></script>
-  <script src="assets/js/footer.js?v=20260904-1"></script></body>
+  <script src="assets/js/footer.js?v=20260904-1"></script>
+
+</body>
 </html>
