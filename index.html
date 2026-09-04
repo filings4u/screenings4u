@@ -1,1301 +1,18 @@
 <!DOCTYPE html>
-
-<html lang="en-US">
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Nationwide Drug &amp; Alcohol Testing | screenings4u</title>
-<meta content="#325aa3" name="theme-color"/>
-<link href="images/fav.png" rel="icon" type="image/png"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<style>
-    :root {
-  --orange: #ff6b00;
-  --blue: #325AA3;
-
-  /* Orange family */
-  --orange-dark: #d95800;
-  --orange-deep: #b84700;
-  --orange-soft: #fff0e6;
-  --orange-pale: #fff7f2;
-
-  /* Blue family */
-  --blue-dark: #24467F;
-  --blue-deep: #2B4F8A;
-  --blue-darker: #24467F;
-  --blue-soft: #e8eff9;
-  --blue-pale: #f4f7fc;
-
-  /* Blue-tinted neutrals */
-  --ink: #1d2d45;
-  --muted: #667892;
-  --surface: #f4f7fc;
-  --surface-2: #eef3f9;
-  --line: #d9e3f0;
-  --line-strong: #c4d3e5;
-  --white: #ffffff;
-
-  /* Brand-matched depth */
-  --shadow-sm: 0 5px 18px rgba(23, 51, 95, .08);
-  --shadow: 0 18px 45px rgba(23, 51, 95, .12);
-  --shadow-lg: 0 28px 70px rgba(23, 51, 95, .16);
-
-  --max: 1440px;
-  --radius: 18px;
-}
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: Inter, Arial, sans-serif;
-      color: var(--ink);
-      background: var(--white);
-      line-height: 1.55;
-      overflow-x: hidden;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    button, input, select, textarea { font: inherit; }
-    button { cursor: pointer; }
-
-    .container {
-      width: min(var(--max), calc(100% - 80px));
-      margin-inline: auto;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      color: var(--orange);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 28px;
-      height: 2px;
-      background: var(--orange);
-    }
-
-    .section-heading {
-      max-width: 780px;
-      margin-bottom: 48px;
-    }
-
-    .section-heading h2 {
-      color: var(--blue-dark);
-      font-size: clamp(34px, 4vw, 52px);
-      line-height: 1.08;
-      letter-spacing: -.035em;
-      margin-bottom: 16px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      font-size: 17px;
-      max-width: 690px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      min-height: 50px;
-      padding: 0 22px;
-      border-radius: 7px;
-      border: 1px solid transparent;
-      font-size: 14px;
-      font-weight: 800;
-      transition: .2s ease;
-    }
-
-    .btn-orange {
-      color: var(--white);
-      background: var(--orange);
-      box-shadow: 0 9px 25px rgba(255,107,0,.20);
-    }
-
-    .btn-orange:hover {
-      background: var(--blue-dark);
-      transform: translateY(-1px);
-    }
-
-    .btn-outline {
-      color: var(--blue);
-      border-color: var(--line-strong);
-      background: rgba(255,255,255,.78);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--blue);
-      color: var(--white);
-      background: var(--blue);
-      transform: translateY(-1px);
-    }
-
-    .btn-white {
-      color: var(--blue-dark);
-      background: var(--white);
-    }
-
-    .btn-white:hover { transform: translateY(-1px); }
-
-    /* TOP BAR */
-    .topbar {
-      background: var(--blue-dark);
-      color: #dfe9f5;
-      font-size: 12px;
-    }
-
-    .topbar-inner {
-      min-height: 38px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .topbar-left, .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .topbar a:hover { color: var(--white); }
-
-    /* NAVIGATION */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,.96);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(14px);
-    }
-
-    .nav-inner {
-      min-height: 82px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 26px;
-    }
-
- .brand {
-  display: flex;
-  align-items: center;
-  flex: 0 0 155px;
-  width: 155px;
-}
-
-.site-logo {
-  display: block;
-  width: 145px;
-  height: auto;
-  max-height: 48px;
-  object-fit: contain;
-  object-position: left center;
-}
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .nav-item {
-      position: relative;
-    }
-
-    .nav-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 13px 10px;
-      color: #334d70;
-      font-size: 13px;
-      font-weight: 700;
-      border-radius: 7px;
-    }
-
-    .nav-link:hover { color: var(--blue); background: var(--blue-pale); }
-
-    .nav-link .chevron {
-      font-size: 10px;
-      transition: transform .2s ease;
-    }
-
-    .dropdown {
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 0;
-      min-width: 255px;
-      padding: 10px;
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(6px);
-      transition: .18s ease;
-    }
-
-    .nav-item:hover .dropdown,
-    .nav-item:focus-within .dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .nav-item:hover .chevron { transform: rotate(180deg); }
-
-    .dropdown a {
-      display: block;
-      padding: 11px 12px;
-      border-radius: 8px;
-      font-size: 13px;
-      color: #475467;
-      font-weight: 600;
-    }
-
-    .dropdown a:hover {
-      background: var(--blue-pale);
-      color: var(--blue);
-    }
-
-    .nav-actions { display: flex; gap: 9px; align-items: center; }
-
-    .mobile-toggle {
-      display: none;
-      width: 44px;
-      height: 42px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--white);
-    }
-
-    /* HERO */
-    .hero {
-      position: relative;
-      min-height: 700px;
-      display: flex;
-      align-items: center;
-      background:
-        linear-gradient(90deg, rgba(16,40,75,.98) 0%, rgba(16,40,75,.93) 31%, rgba(16,40,75,.66) 53%, rgba(16,40,75,.12) 78%, rgba(16,40,75,0) 100%),
-        url("images/hero.png") center right / cover no-repeat;
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      right: -170px;
-      top: -220px;
-      width: 500px;
-      height: 500px;
-      background: var(--orange);
-      opacity: .96;
-      transform: rotate(35deg);
-      clip-path: polygon(42% 0,100% 0,100% 58%);
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 2;
-      padding: 92px 0 130px;
-    }
-
-    .hero-copy { max-width: 700px; color: var(--white); }
-
-    .hero-copy .eyebrow { color: #ffad73; }
-    .hero-copy .eyebrow::before { background: #ffad73; }
-
-    .hero h1 {
-      font-size: clamp(48px, 6vw, 78px);
-      line-height: .98;
-      letter-spacing: -.055em;
-      font-weight: 900;
-      margin-bottom: 24px;
-    }
-
-    .hero h1 span { color: var(--orange); }
-
-    .hero-lead {
-      max-width: 630px;
-      color: #d4e1f0;
-      font-size: 18px;
-      line-height: 1.7;
-      margin-bottom: 32px;
-    }
-
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 48px; }
-
-    .hero-actions .btn-outline {
-      color: var(--white);
-      border-color: rgba(255,255,255,.55);
-      background: transparent;
-    }
-
-    .hero-actions .btn-outline:hover {
-      color: var(--blue-dark);
-      background: var(--white);
-      border-color: var(--white);
-    }
-
-    .hero-features {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      max-width: 740px;
-      border-top: 1px solid rgba(255,255,255,.18);
-      padding-top: 22px;
-    }
-
-    .hero-feature {
-      padding: 0 17px;
-      border-right: 1px solid rgba(255,255,255,.18);
-    }
-
-    .hero-feature:first-child { padding-left: 0; }
-    .hero-feature:last-child { border-right: 0; }
-
-    .hero-feature strong {
-      display: block;
-      font-size: 12px;
-      line-height: 1.3;
-    }
-
-    .hero-feature small {
-      display: block;
-      color: #a8bad0;
-      font-size: 10px;
-      margin-top: 4px;
-    }
-
-    /* TRUST STRIP */
-    .trust-strip {
-      background: var(--blue-dark);
-      color: var(--white);
-      border-top: 1px solid rgba(255,255,255,.08);
-    }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 0;
-    }
-
-    .trust-item {
-      min-height: 112px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 18px;
-      border-right: 1px solid rgba(255,255,255,.1);
-    }
-
-    .trust-item:last-child { border-right: 0; }
-
-    .trust-item strong {
-      display: block;
-      font-size: 13px;
-      margin-bottom: 4px;
-    }
-
-    .trust-item span {
-      display: block;
-      color: #9eb0c6;
-      font-size: 11px;
-    }
-
-    /* VALUE / INTRO */
-    .intro {
-      padding: 110px 0 95px;
-    }
-
-    .intro-grid {
-      display: grid;
-      grid-template-columns: .95fr 1.05fr;
-      gap: 75px;
-      align-items: center;
-    }
-
-    .intro-card {
-      position: relative;
-      min-height: 440px;
-      border-radius: 22px;
-      overflow: hidden;
-      background:
-        url("images/second-hero.jpg") center / cover;
-      box-shadow: var(--shadow);
-    }
-
-    .intro-card::before {
-      content: "";
-      position: absolute;
-      left: 35px;
-      top: 32px;
-      color: rgba(255,255,255,.9);
-      font-size: 25px;
-      font-weight: 900;
-      letter-spacing: -.06em;
-    }
-
-    .intro-card-panel {
-      position: absolute;
-      left: 28px;
-      right: 28px;
-      bottom: 28px;
-      padding: 26px;
-      border-radius: 15px;
-      background: rgba(255,255,255,.96);
-    }
-
-    .intro-card-panel strong {
-      display: block;
-      color: var(--blue-dark);
-      font-size: 23px;
-      margin-bottom: 7px;
-    }
-
-    .intro-card-panel span {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .intro-copy h2 {
-      color: var(--blue-dark);
-      font-size: clamp(34px, 4vw, 51px);
-      line-height: 1.05;
-      letter-spacing: -.04em;
-      margin-bottom: 19px;
-    }
-
-    .intro-copy > p {
-      color: var(--muted);
-      font-size: 16px;
-      margin-bottom: 27px;
-    }
-
-    .check-list { display: grid; gap: 14px; margin-bottom: 30px; }
-
-    .check-list li {
-      list-style: none;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      color: #334d70;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .check-list li::before {
-      content: "✓";
-      flex: 0 0 23px;
-      width: 23px;
-      height: 23px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: var(--blue-soft);
-      color: var(--blue);
-      font-weight: 900;
-      font-size: 12px;
-    }
-
-    /* SERVICES */
-    .services {
-      padding: 105px 0;
-      background: var(--surface);
-      border-block: 1px solid var(--line);
-    }
-
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .service-card {
-      position: relative;
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 31px;
-      min-height: 265px;
-      transition: .2s ease;
-    }
-
-    .service-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--line-strong);
-      box-shadow: var(--shadow);
-    }
-
-    .service-number {
-      color: #8fa4c0;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .1em;
-      margin-bottom: 26px;
-    }
-
-    .service-icon {
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      color: var(--blue);
-      background: var(--blue-soft);
-      margin-bottom: 19px;
-      font-size: 20px;
-      font-weight: 900;
-    }
-
-    .service-card h3 {
-      color: var(--blue-dark);
-      font-size: 19px;
-      margin-bottom: 8px;
-    }
-
-    .service-card p {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.65;
-      margin-bottom: 17px;
-    }
-
-    .service-card a {
-      color: var(--orange);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    /* PROCESS */
-    .process { padding: 110px 0; }
-
-    .process-layout {
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      gap: 75px;
-      align-items: start;
-    }
-
-    .process-copy h2 {
-      color: var(--blue-dark);
-      font-size: clamp(34px, 4vw, 52px);
-      line-height: 1.05;
-      letter-spacing: -.04em;
-      margin-bottom: 17px;
-    }
-
-    .process-copy p { color: var(--muted); max-width: 480px; }
-
-    .steps { display: grid; gap: 0; }
-
-    .step {
-      display: grid;
-      grid-template-columns: 58px 1fr;
-      gap: 20px;
-      padding: 0 0 30px;
-      position: relative;
-    }
-
-    .step:not(:last-child)::after {
-      content: "";
-      position: absolute;
-      left: 28px;
-      top: 58px;
-      bottom: 0;
-      width: 1px;
-      background: var(--line);
-    }
-
-    .step-num {
-      position: relative;
-      z-index: 2;
-      width: 58px;
-      height: 58px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      color: var(--white);
-      background: var(--blue);
-      font-size: 14px;
-      font-weight: 900;
-      box-shadow: 0 0 0 7px var(--blue-soft);
-    }
-
-    .step h3 {
-      color: var(--blue-dark);
-      font-size: 19px;
-      margin: 4px 0 5px;
-    }
-
-    .step p { color: var(--muted); font-size: 13px; max-width: 580px; }
-
-    /* EMPLOYERS / PERSONAL */
-    .audiences {
-      padding: 105px 0;
-      background: var(--blue-dark);
-      color: var(--white);
-    }
-
-    .audience-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 22px;
-    }
-
-    .audience-card {
-      padding: 44px;
-      min-height: 330px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 20px;
-      background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
-    }
-
-    .audience-card .eyebrow { color: #ffad73; }
-    .audience-card .eyebrow::before { background: #ffad73; }
-
-    .audience-card h3 {
-      font-size: 30px;
-      line-height: 1.1;
-      margin-bottom: 13px;
-    }
-
-    .audience-card p {
-      color: #b7c7dc;
-      font-size: 14px;
-      max-width: 540px;
-      margin-bottom: 26px;
-    }
-
-    .audience-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .audience-links a {
-      padding: 9px 12px;
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 7px;
-      color: #e7eff9;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .audience-links a:hover { border-color: var(--orange); color: var(--white); }
-
-  /* CTA */
-.cta {
-  padding: 85px 0;
-  background: var(--surface-2);
-  color: var(--blue-dark);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-.cta-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-}
-
-.cta h2 {
-  font-size: clamp(30px, 4vw, 45px);
-  line-height: 1.05;
-  letter-spacing: -.035em;
-  color: var(--blue-dark);
-  margin-bottom: 8px;
-}
-
-.cta p {
-  color: var(--muted);
-  font-size: 15px;
-}
-
-.cta-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-/* Primary CTA button */
-.cta .btn-white {
-  color: var(--white);
-  background: var(--orange);
-  border-color: var(--orange-dark);
-}
-
-.cta .btn-white:hover {
-  color: var(--white);
-  background: var(--blue-dark);
-  border-color: var(--blue-dark);
-  transform: translateY(-1px);
-}
-
-/* Secondary CTA button */
-.cta .btn-outline {
-  color: var(--blue-dark);
-  background: transparent;
-  border: 1px solid var(--blue-dark);
-}
-
-.cta .btn-outline:hover {
-  color: var(--white);
-  background: var(--blue-dark);
-  border-color: var(--blue-dark);
-  transform: translateY(-1px);
-}
-
-    /* MOBILE */
-    @media (max-width: 1120px) {
-      .nav { display: none; }
-      .nav-actions .btn-outline { display: none; }
-      .mobile-toggle { display: block; }
-      .nav-inner.menu-open .nav {
-        display: flex;
-        position: absolute;
-        left: 20px;
-        right: 20px;
-        top: 76px;
-        padding: 12px;
-        background: var(--white);
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        box-shadow: var(--shadow);
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .nav-inner.menu-open .nav-item .nav-link { width: 100%; justify-content: space-between; }
-      .nav-inner.menu-open .dropdown {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        display: none;
-        box-shadow: none;
-        border: 0;
-        padding: 0 0 8px 10px;
-      }
-      .nav-inner.menu-open .nav-item.open .dropdown { display: block; }
-      .nav-inner.menu-open .nav-item:hover .dropdown { display: none; }
-      .nav-inner.menu-open .nav-item.open:hover .dropdown { display: block; }
-      .nav-inner.menu-open .nav-link .chevron { display: inline-block; }
-      .hero-features { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-      .hero-feature:nth-child(2) { border-right: 0; }
-      .service-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 800px) {
-      .container { width: min(var(--max), calc(100% - 38px)); }
-      .topbar-left span:nth-child(2) { display: none; }
-      .topbar-right span { display: none; }
-      .hero {
-        min-height: auto;
-        background:
-          linear-gradient(90deg, rgba(16,40,75,.96), rgba(16,40,75,.83)),
-          url("images/hero.png") center / cover no-repeat;
-      }
-      .hero-inner { padding: 75px 0 105px; }
-      .hero::after { width: 300px; height: 300px; right: -150px; top: -160px; }
-      .hero-features { max-width: 100%; }
-      .trust-grid { grid-template-columns: repeat(2, 1fr); }
-      .trust-item:nth-child(even) { border-right: 0; }
-      .trust-item:last-child { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.1); }
-      .intro-grid, .process-layout { grid-template-columns: 1fr; gap: 45px; }
-      .intro-card { min-height: 330px; }
-      .service-grid { grid-template-columns: 1fr; }
-      .audience-grid { grid-template-columns: 1fr; }
-      .cta-inner { flex-direction: column; align-items: flex-start; }
-    }
-
-    @media (max-width: 560px) {
-      .container { width: min(var(--max), calc(100% - 28px)); }
-      .topbar-inner { justify-content: center; }
-      .topbar-left { gap: 10px; }
-      .brand { flex-basis: 130px; width: 130px; }
-      .site-logo { width: 125px; max-height: 44px; }
-      .nav-actions .btn-orange { min-height: 43px; padding: 0 13px; font-size: 12px; }
-      .hero h1 { font-size: 49px; }
-      .hero-lead { font-size: 15px; }
-      .hero-actions { flex-direction: column; }
-      .hero-actions .btn { width: 100%; }
-      .hero-features { grid-template-columns: 1fr 1fr; }
-      .hero-feature { border-right: 0; padding: 0 7px; }
-      .trust-grid { grid-template-columns: 1fr; }
-      .trust-item, .trust-item:last-child { border-right: 0; border-top: 1px solid rgba(255,255,255,.1); }
-      .trust-item:first-child { border-top: 0; }
-      .audience-card { padding: 30px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-      .footer-bottom { flex-direction: column; }
-    }
-  </style>
-<style>
-    /* Page-specific responsive layout. Kept after the shared stylesheet so
-       this page remains predictable on tablets and phones. */
-    @media (max-width: 800px) {
-      html,
-      body {
-        max-width: 100%;
-        overflow-x: hidden;
-      }
-
-      img,
-      svg,
-      video,
-      iframe {
-        max-width: 100%;
-        height: auto;
-      }
-
-      .container {
-        width: min(100% - 32px, var(--max));
-      }
-
-      .site-header {
-        top: 0;
-      }
-
-      .nav-inner {
-        min-height: 70px;
-        gap: 10px;
-      }
-
-      .nav-inner.menu-open .nav {
-        position: absolute;
-        top: calc(100% + 1px);
-        left: 16px;
-        right: 16px;
-        max-height: calc(100vh - 105px);
-        overflow-y: auto;
-        overscroll-behavior: contain;
-      }
-
-      .nav-link,
-      .dropdown a {
-        min-height: 44px;
-      }
-
-      /* Image first, content second on mobile. */
-      .hero {
-        min-height: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        background: var(--blue-deep);
-        overflow: visible;
-      }
-
-      .hero::before {
-        content: "";
-        position: relative;
-        z-index: 1;
-        display: block;
-        width: 100%;
-        height: clamp(250px, 66vw, 440px);
-        flex: 0 0 auto;
-        background: url("images/hero.png") center center / cover no-repeat;
-      }
-
-      .hero::after {
-        display: none;
-      }
-
-      .hero-inner {
-        width: 100%;
-        padding: 48px 0 52px;
-        background: var(--blue-deep);
-      }
-
-      .hero-copy {
-        max-width: none;
-      }
-
-      .hero h1 {
-        max-width: 650px;
-        font-size: clamp(42px, 10vw, 62px);
-        line-height: 1.02;
-        overflow-wrap: anywhere;
-      }
-
-      .hero-lead {
-        max-width: 620px;
-      }
-
-      .hero-features {
-        width: 100%;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .hero-feature {
-        min-width: 0;
-      }
-
-      .intro,
-      .services,
-      .process,
-      .audiences,
-      .cta {
-        padding: 72px 0;
-      }
-
-      .section-heading {
-        margin-bottom: 32px;
-      }
-
-      .section-heading h2,
-      .intro-copy h2,
-      .process-copy h2 {
-        font-size: clamp(32px, 8vw, 44px);
-        overflow-wrap: anywhere;
-      }
-
-      .intro-grid,
-      .process-layout,
-      .service-grid,
-      .audience-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .intro-card {
-        width: 100%;
-        min-height: 430px;
-      }
-
-      .service-card,
-      .audience-card {
-        width: 100%;
-        min-width: 0;
-      }
-
-      .cta-inner,
-      .cta-actions {
-        width: 100%;
-      }
-
-      input,
-      select,
-      textarea,
-      button {
-        max-width: 100%;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .container {
-        width: min(100% - 28px, var(--max));
-      }
-
-      .topbar {
-        font-size: 11px;
-      }
-
-      .topbar-inner {
-        min-height: 34px;
-      }
-
-      .nav-inner {
-        min-height: 66px;
-      }
-
-      .brand {
-        width: 118px;
-        flex-basis: 118px;
-      }
-
-      .site-logo {
-        width: 116px;
-      }
-
-      .nav-actions {
-        gap: 6px;
-      }
-
-      .nav-actions .btn-orange {
-        min-height: 40px;
-        padding-inline: 11px;
-        white-space: nowrap;
-      }
-
-      .mobile-toggle {
-        width: 42px;
-        min-width: 42px;
-        height: 40px;
-      }
-
-      .hero::before {
-        height: clamp(230px, 72vw, 340px);
-        background-position: center center;
-      }
-
-      .hero-inner {
-        padding: 40px 0 44px;
-      }
-
-      .hero h1 {
-        font-size: clamp(38px, 12vw, 50px);
-        margin-bottom: 20px;
-      }
-
-      .hero-lead {
-        font-size: 15px;
-        line-height: 1.65;
-        margin-bottom: 26px;
-      }
-
-      .hero-actions {
-        margin-bottom: 36px;
-      }
-
-      .hero-actions .btn,
-      .cta-actions .btn,
-      .intro-copy > .btn {
-        width: 100%;
-      }
-
-      .hero-features {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 0;
-        padding-top: 10px;
-      }
-
-      .hero-feature,
-      .hero-feature:first-child {
-        padding: 14px 0;
-        border-right: 0;
-        border-bottom: 1px solid rgba(255,255,255,.16);
-      }
-
-      .hero-feature:last-child {
-        border-bottom: 0;
-      }
-
-      .trust-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .trust-item,
-      .trust-item:last-child {
-        min-height: 92px;
-        grid-column: auto;
-      }
-
-      .intro,
-      .services,
-      .process,
-      .audiences,
-      .cta {
-        padding: 56px 0;
-      }
-
-      .intro-grid,
-      .process-layout {
-        gap: 34px;
-      }
-
-      .intro-card {
-        min-height: 400px;
-        display: flex;
-        align-items: flex-end;
-        padding: 190px 16px 16px;
-        background-position: center top;
-      }
-
-      .intro-card-panel {
-        position: relative;
-        inset: auto;
-        width: 100%;
-        padding: 20px;
-      }
-
-      .intro-card-panel strong {
-        font-size: 20px;
-        line-height: 1.25;
-      }
-
-      .service-card,
-      .audience-card {
-        min-height: 0;
-        padding: 26px 22px;
-      }
-
-      .audience-card h3 {
-        font-size: 25px;
-      }
-
-      .audience-links {
-        flex-direction: column;
-      }
-
-      .audience-links a {
-        width: 100%;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-      }
-
-      .step {
-        grid-template-columns: 46px minmax(0, 1fr);
-        gap: 15px;
-      }
-
-      .step-num {
-        width: 46px;
-        height: 46px;
-        box-shadow: 0 0 0 5px var(--blue-soft);
-      }
-
-      .step:not(:last-child)::after {
-        left: 22px;
-        top: 46px;
-      }
-
-      .step h3 {
-        font-size: 17px;
-      }
-
-      .cta-inner {
-        gap: 24px;
-      }
-
-      .cta-actions {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    @media (max-width: 380px) {
-      .container {
-        width: min(100% - 22px, var(--max));
-      }
-
-      .nav-actions .btn-orange {
-        display: none;
-      }
-
-      .hero h1 {
-        font-size: 37px;
-      }
-    }
-  </style>
-<style>
-    .mobile-home-actions{display:none}
-    @media(max-width:767px){
-      :root{--mobile-gutter:20px}
-      html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-      body{min-width:320px;font-size:16px}
-      .container{width:100%;padding-inline:var(--mobile-gutter)}
-      .topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}
-      .nav-inner{min-height:64px;gap:12px}.brand{width:145px;flex-basis:145px}.site-logo{width:140px;max-height:42px}.nav-actions{margin-left:auto}.nav-actions>.btn,.nav-actions>.nav-account-menu{display:none!important}.mobile-toggle{display:grid;place-items:center;min-width:44px;width:44px;height:44px;font-size:23px}.nav-inner.menu-open .nav{left:0;right:0;top:64px;max-height:calc(100dvh - 64px);padding:10px var(--mobile-gutter) max(18px,env(safe-area-inset-bottom));border-radius:0 0 12px 12px}.nav-item{width:100%}.nav-link,.dropdown a{width:100%;min-height:44px;padding:12px 8px;font-size:16px}.nav-inner.menu-open .dropdown{padding-left:12px}.mobile-home-actions{display:grid;grid-template-columns:1fr;gap:10px;width:100%;padding-top:14px}.mobile-home-actions .btn{width:100%;min-height:48px}.mobile-home-actions .btn-outline{background:#fff}
-      .hero::before{height:290px}.hero-inner{padding:34px 0 40px}.hero h1{font-size:clamp(2.25rem,10vw,3rem);line-height:1.04}.hero-lead{font-size:16px;line-height:1.6}.hero-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:30px}.hero-actions .btn{width:100%;min-height:52px}.intro,.services,.process,.audiences,.cta{padding:54px 0}.section-heading h2,.intro-copy h2,.process-copy h2{font-size:clamp(1.8rem,8vw,2.3rem);line-height:1.1}.section-heading p,.intro-copy p,.process-copy p{font-size:16px;line-height:1.65}.service-card,.audience-card{padding:24px}.intro-card{min-height:360px}.cta-inner{display:grid;grid-template-columns:1fr;gap:24px}.cta-actions{grid-template-columns:1fr}.cta-actions .btn{min-height:52px}
-    }
-    @media(max-width:380px){:root{--mobile-gutter:16px}.brand{width:132px;flex-basis:132px}.site-logo{width:128px}.hero::before{height:250px}.service-card,.audience-card{padding:21px}}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-  </style>
-<style id="mobile-home-redesign">
-    @media(max-width:767px){
-      :root{--mobile-gutter:18px}
-      html{background:#fff}
-      body{min-width:320px;background:#fff;color:var(--ink);font-size:16px}
-      .container{width:100%;padding-inline:var(--mobile-gutter)}
-      .topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}
-
-      .site-header{position:sticky;top:0;background:rgba(255,255,255,.98);box-shadow:0 1px 0 var(--line)}
-      .nav-inner{min-height:64px;padding-block:8px}
-      .brand{width:136px;flex-basis:136px}.site-logo{width:132px;max-height:40px}
-      .nav-actions>.btn,.nav-actions>.nav-account-menu{display:none!important}
-      .mobile-toggle{display:grid;place-items:center;width:44px;min-width:44px;height:44px;border-radius:10px;font-size:22px}
-      .nav-inner.menu-open .nav{left:0;right:0;top:64px;padding:10px var(--mobile-gutter) 20px;border-width:1px 0 0;border-radius:0;box-shadow:0 18px 35px rgba(16,40,75,.16)}
-      .nav-link,.dropdown a{font-size:15px}
-
-      .hero{display:flex;flex-direction:column;min-height:0;padding:14px var(--mobile-gutter) 0;background:#fff;overflow:visible}
-      .hero::before{width:100%;height:clamp(220px,60vw,300px);border-radius:18px;background:url("images/hero.png") center 28%/cover no-repeat;box-shadow:0 12px 28px rgba(16,40,75,.12)}
-      .hero::after{display:none}
-      .hero-inner{padding:30px 0 26px;background:#fff}
-      .hero-copy{max-width:none;color:var(--ink)}
-      .hero-copy .eyebrow{margin-bottom:12px;color:var(--orange);font-size:10px;line-height:1.35;letter-spacing:.1em}
-      .hero-copy .eyebrow::before{width:20px;background:var(--orange)}
-      .hero h1{margin-bottom:16px;color:#325aa3;font-size:clamp(36px,10.5vw,46px);line-height:1.01;letter-spacing:-.045em;overflow-wrap:normal}
-      .hero h1 br{display:block}
-      .hero h1 span{display:block;margin-top:3px;color:var(--orange)}
-      .hero-lead{margin-bottom:22px;color:var(--muted);font-size:15px;line-height:1.6}
-      .hero-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:24px}
-      .hero-actions .btn{width:100%;min-height:50px;border-radius:10px;font-size:14px}
-      .hero-actions .btn-outline{color:var(--blue-dark);border-color:var(--line-strong);background:var(--blue-pale)}
-      .hero-features{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0;border:0}
-      .hero-feature,.hero-feature:first-child{min-height:104px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--blue-pale)}
-      .hero-feature:last-child{border:1px solid var(--line)}
-      .hero-feature strong{color:var(--blue-darker);font-size:12px;line-height:1.35}
-      .hero-feature small{color:var(--muted);font-size:10px;line-height:1.45}
-
-      .trust-strip{padding:22px 0 26px;border:0;background:var(--blue-darker)}
-      .trust-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;padding-inline:var(--mobile-gutter);overflow:hidden}
-      .trust-item,.trust-item:last-child{width:100%;min-width:0;min-height:112px;padding:14px 10px;border:1px solid rgba(255,255,255,.14);border-radius:14px;background:rgba(255,255,255,.06)}
-      .trust-item:last-child{grid-column:1/-1}
-      .trust-item strong{font-size:14px}.trust-item span{font-size:12px;line-height:1.45}
-
-      .intro,.services,.process,.audiences,.cta{padding:48px 0}
-      .intro-grid,.process-layout{gap:28px}
-      .section-heading{margin-bottom:26px}
-      .section-heading h2,.intro-copy h2,.process-copy h2{font-size:clamp(28px,8vw,36px);line-height:1.12;letter-spacing:-.03em}
-      .section-heading p,.intro-copy p,.process-copy p{font-size:15px;line-height:1.65}
-      .eyebrow{font-size:10px;letter-spacing:.1em}
-
-      .intro-card{min-height:0;padding:230px 14px 14px;border-radius:16px;background-position:center top;background-size:100% 230px;background-repeat:no-repeat;background-color:var(--blue-pale);box-shadow:var(--shadow-sm)}
-      .intro-card::before{display:none}
-      .intro-card-panel{position:relative;inset:auto;width:100%;padding:18px;border-radius:12px}
-      .intro-card-panel strong{font-size:19px}.intro-card-panel span{font-size:13px;line-height:1.55}
-      .intro-copy>.btn{width:100%;min-height:50px;border-radius:10px}
-
-      .service-grid,.audience-grid{grid-template-columns:1fr;gap:12px}
-      .service-card,.audience-card{width:100%;max-width:100%;min-width:0;min-height:0;padding:22px 18px;border-radius:14px;overflow:hidden}
-      .service-card h3{font-size:19px}.service-card p{font-size:14px;line-height:1.6}
-      .audience-card h3{font-size:24px}.audience-card p{font-size:14px;line-height:1.6}
-      .audience-links{display:grid;grid-template-columns:1fr;gap:8px}
-      .audience-links a{width:100%;min-height:46px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--blue-dark)!important;font-weight:700}
-      .audiences,.audience-grid{max-width:100%;overflow:hidden}
-
-      .steps{gap:22px}.step{grid-template-columns:42px minmax(0,1fr);gap:13px}
-      .step-num{width:42px;height:42px;font-size:13px;box-shadow:0 0 0 4px var(--blue-soft)}
-      .step:not(:last-child)::after{left:20px;top:42px}
-      .step h3{font-size:16px}.step p{font-size:14px;line-height:1.55}
-
-      .cta-inner{display:grid;grid-template-columns:1fr;gap:22px}
-      .cta-actions{display:grid;grid-template-columns:1fr;gap:10px;width:100%}
-      .cta-actions .btn{width:100%;min-height:50px;border-radius:10px}
-      .footer-grid{grid-template-columns:1fr;gap:28px}.footer-bottom{align-items:flex-start;flex-direction:column}
-    }
-    @media(max-width:390px){
-      :root{--mobile-gutter:14px}
-      .brand{width:126px;flex-basis:126px}.site-logo{width:122px}
-      .hero::before{height:215px}
-      .hero h1{font-size:35px}
-      .hero-features{grid-template-columns:1fr}
-      .hero-feature,.hero-feature:first-child{min-height:0}
-      .trust-grid{grid-template-columns:1fr}
-      .trust-item:last-child{grid-column:auto}
-    }
-  </style>
-<meta content="Nationwide drug and alcohol testing, DOT compliance services, personal testing, employer screening, mobile collections, physicals, and professional training from screenings4u." name="description"/><meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/><link href="https://screenings4u.com/" rel="canonical"/><link href="https://screenings4u.com/" hreflang="en-US" rel="alternate"/><meta content="website" property="og:type"/><meta content="screenings4u" property="og:site_name"/><meta content="Nationwide Drug &amp; Alcohol Testing | screenings4u" property="og:title"/><meta content="Nationwide drug and alcohol testing, DOT compliance services, personal testing, employer screening, mobile collections, physicals, and professional training from screenings4u." property="og:description"/><meta content="https://screenings4u.com/" property="og:url"/><meta content="https://screenings4u.com/images/home-hero.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Nationwide Drug &amp; Alcohol Testing | screenings4u" name="twitter:title"/><meta content="Nationwide drug and alcohol testing, DOT compliance services, personal testing, employer screening, mobile collections, physicals, and professional training from screenings4u." name="twitter:description"/><meta content="https://screenings4u.com/images/home-hero.png" name="twitter:image"/><meta content="US-IL" name="geo.region"/><meta content="Chicago" name="geo.placename"/><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@context": "https://schema.org", "@type": ["Organization", "ProfessionalService"], "@id": "https://screenings4u.com/#organization", "name": "screenings4u", "url": "https://screenings4u.com/", "logo": "https://screenings4u.com/images/logo.png", "image": "https://screenings4u.com/images/home-hero.png", "telephone": "+17732457009", "email": "support@screenings4u.com", "address": {"@type": "PostalAddress", "streetAddress": "8537 S Pulaski Rd", "addressLocality": "Chicago", "addressRegion": "IL", "postalCode": "60652", "addressCountry": "US"}, "areaServed": {"@type": "Country", "name": "United States"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "20:00"}]}]}</script>
-<!-- Screenings4U global brand normalization -->
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="screenings4u provides nationwide drug and alcohol testing, DOT compliance services, personal testing, employer solutions, and secure account access.">
+  <title>screenings4u | Nationwide Drug & Alcohol Testing</title>
+  <meta name="theme-color" content="#325aa3" />
+
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
     :root {
   --orange: #ff6b00;
   --blue: #325aa3;
@@ -2132,302 +849,746 @@
       .footer-bottom { flex-direction: column; }
     }
   </style>
-<style id="screenings4u-brand-normalization">
-  :root {
-    --blue: #325AA3 !important;
-    --blue-dark: #24467F !important;
-    --blue-deep: #2B4F8A !important;
-    --blue-darker: #24467F !important;
 
-    --brand-blue: #325AA3;
-    --brand-blue-dark: #24467F;
-    --brand-blue-deep: #2B4F8A;
-    --brand-blue-light: #5B7BB5;
-    --brand-surface: #F4F7FC;
-    --brand-border: #D9E3F0;
-    --brand-orange: #FF6B00;
-  }
+  <style>
+    /* Page-specific responsive layout. Kept after the shared stylesheet so
+       this page remains predictable on tablets and phones. */
+    @media (max-width: 800px) {
+      html,
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
 
-  /* Keep the browser/theme chrome aligned with the Screenings4U brand. */
-  html {
-    accent-color: var(--brand-blue);
-  }
+      img,
+      svg,
+      video,
+      iframe {
+        max-width: 100%;
+        height: auto;
+      }
 
-  /* Mobile logo: larger and consistent across pages. */
-  @media (max-width: 1120px) {
-    .site-logo {
-      width: 155px !important;
-      max-width: 42vw !important;
-      max-height: 54px !important;
-      height: auto !important;
-      object-fit: contain !important;
-      object-position: left center !important;
+      .container {
+        width: min(100% - 32px, var(--max));
+      }
+
+      .site-header {
+        top: 0;
+      }
+
+      .nav-inner {
+        min-height: 70px;
+        gap: 10px;
+      }
+
+      .nav-inner.menu-open .nav {
+        position: absolute;
+        top: calc(100% + 1px);
+        left: 16px;
+        right: 16px;
+        max-height: calc(100vh - 105px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+      }
+
+      .nav-link,
+      .dropdown a {
+        min-height: 44px;
+      }
+
+      /* Image first, content second on mobile. */
+      .hero {
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        background: var(--blue-deep);
+        overflow: visible;
+      }
+
+      .hero::before {
+        content: "";
+        position: relative;
+        z-index: 1;
+        display: block;
+        width: 100%;
+        height: clamp(250px, 66vw, 440px);
+        flex: 0 0 auto;
+        background: url("images/hero.png") center center / cover no-repeat;
+      }
+
+      .hero::after {
+        display: none;
+      }
+
+      .hero-inner {
+        width: 100%;
+        padding: 48px 0 52px;
+        background: var(--blue-deep);
+      }
+
+      .hero-copy {
+        max-width: none;
+      }
+
+      .hero h1 {
+        max-width: 650px;
+        font-size: clamp(42px, 10vw, 62px);
+        line-height: 1.02;
+        overflow-wrap: anywhere;
+      }
+
+      .hero-lead {
+        max-width: 620px;
+      }
+
+      .hero-features {
+        width: 100%;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-feature {
+        min-width: 0;
+      }
+
+      .intro,
+      .services,
+      .process,
+      .audiences,
+      .cta {
+        padding: 72px 0;
+      }
+
+      .section-heading {
+        margin-bottom: 32px;
+      }
+
+      .section-heading h2,
+      .intro-copy h2,
+      .process-copy h2 {
+        font-size: clamp(32px, 8vw, 44px);
+        overflow-wrap: anywhere;
+      }
+
+      .intro-grid,
+      .process-layout,
+      .service-grid,
+      .audience-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .intro-card {
+        width: 100%;
+        min-height: 430px;
+      }
+
+      .service-card,
+      .audience-card {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .cta-inner,
+      .cta-actions {
+        width: 100%;
+      }
+
+      input,
+      select,
+      textarea,
+      button {
+        max-width: 100%;
+      }
     }
-  }
 
-  @media (max-width: 620px) {
-    .site-logo {
-      width: 150px !important;
-      max-width: 45vw !important;
-      max-height: 52px !important;
-    }
-  }
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 28px, var(--max));
+      }
 
-  @media (max-width: 390px) {
-    .site-logo {
-      width: 142px !important;
-      max-width: 44vw !important;
-      max-height: 50px !important;
+      .topbar {
+        font-size: 11px;
+      }
+
+      .topbar-inner {
+        min-height: 34px;
+      }
+
+      .nav-inner {
+        min-height: 66px;
+      }
+
+      .brand {
+        width: 118px;
+        flex-basis: 118px;
+      }
+
+      .site-logo {
+        width: 116px;
+      }
+
+      .nav-actions {
+        gap: 6px;
+      }
+
+      .nav-actions .btn-orange {
+        min-height: 40px;
+        padding-inline: 11px;
+        white-space: nowrap;
+      }
+
+      .mobile-toggle {
+        width: 42px;
+        min-width: 42px;
+        height: 40px;
+      }
+
+      .hero::before {
+        height: clamp(230px, 72vw, 340px);
+        background-position: center center;
+      }
+
+      .hero-inner {
+        padding: 40px 0 44px;
+      }
+
+      .hero h1 {
+        font-size: clamp(38px, 12vw, 50px);
+        margin-bottom: 20px;
+      }
+
+      .hero-lead {
+        font-size: 15px;
+        line-height: 1.65;
+        margin-bottom: 26px;
+      }
+
+      .hero-actions {
+        margin-bottom: 36px;
+      }
+
+      .hero-actions .btn,
+      .cta-actions .btn,
+      .intro-copy > .btn {
+        width: 100%;
+      }
+
+      .hero-features {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+        padding-top: 10px;
+      }
+
+      .hero-feature,
+      .hero-feature:first-child {
+        padding: 14px 0;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255,255,255,.16);
+      }
+
+      .hero-feature:last-child {
+        border-bottom: 0;
+      }
+
+      .trust-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .trust-item,
+      .trust-item:last-child {
+        min-height: 92px;
+        grid-column: auto;
+      }
+
+      .intro,
+      .services,
+      .process,
+      .audiences,
+      .cta {
+        padding: 56px 0;
+      }
+
+      .intro-grid,
+      .process-layout {
+        gap: 34px;
+      }
+
+      .intro-card {
+        min-height: 400px;
+        display: flex;
+        align-items: flex-end;
+        padding: 190px 16px 16px;
+        background-position: center top;
+      }
+
+      .intro-card-panel {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        padding: 20px;
+      }
+
+      .intro-card-panel strong {
+        font-size: 20px;
+        line-height: 1.25;
+      }
+
+      .service-card,
+      .audience-card {
+        min-height: 0;
+        padding: 26px 22px;
+      }
+
+      .audience-card h3 {
+        font-size: 25px;
+      }
+
+      .audience-links {
+        flex-direction: column;
+      }
+
+      .audience-links a {
+        width: 100%;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+      }
+
+      .step {
+        grid-template-columns: 46px minmax(0, 1fr);
+        gap: 15px;
+      }
+
+      .step-num {
+        width: 46px;
+        height: 46px;
+        box-shadow: 0 0 0 5px var(--blue-soft);
+      }
+
+      .step:not(:last-child)::after {
+        left: 22px;
+        top: 46px;
+      }
+
+      .step h3 {
+        font-size: 17px;
+      }
+
+      .cta-inner {
+        gap: 24px;
+      }
+
+      .cta-actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
-  }
-</style></head>
+
+    @media (max-width: 380px) {
+      .container {
+        width: min(100% - 22px, var(--max));
+      }
+
+      .nav-actions .btn-orange {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 37px;
+      }
+    }
+  </style>
+  <style>
+    .mobile-home-actions{display:none}
+    @media(max-width:767px){
+      :root{--mobile-gutter:20px}
+      html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+      body{min-width:320px;font-size:16px}
+      .container{width:100%;padding-inline:var(--mobile-gutter)}
+      .topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}
+      .nav-inner{min-height:64px;gap:12px}.brand{width:145px;flex-basis:145px}.site-logo{width:140px;max-height:42px}.nav-actions{margin-left:auto}.nav-actions>.btn,.nav-actions>.nav-account-menu{display:none!important}.mobile-toggle{display:grid;place-items:center;min-width:44px;width:44px;height:44px;font-size:23px}.nav-inner.menu-open .nav{left:0;right:0;top:64px;max-height:calc(100dvh - 64px);padding:10px var(--mobile-gutter) max(18px,env(safe-area-inset-bottom));border-radius:0 0 12px 12px}.nav-item{width:100%}.nav-link,.dropdown a{width:100%;min-height:44px;padding:12px 8px;font-size:16px}.nav-inner.menu-open .dropdown{padding-left:12px}.mobile-home-actions{display:grid;grid-template-columns:1fr;gap:10px;width:100%;padding-top:14px}.mobile-home-actions .btn{width:100%;min-height:48px}.mobile-home-actions .btn-outline{background:#fff}
+      .hero::before{height:290px}.hero-inner{padding:34px 0 40px}.hero h1{font-size:clamp(2.25rem,10vw,3rem);line-height:1.04}.hero-lead{font-size:16px;line-height:1.6}.hero-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:30px}.hero-actions .btn{width:100%;min-height:52px}.intro,.services,.process,.audiences,.cta{padding:54px 0}.section-heading h2,.intro-copy h2,.process-copy h2{font-size:clamp(1.8rem,8vw,2.3rem);line-height:1.1}.section-heading p,.intro-copy p,.process-copy p{font-size:16px;line-height:1.65}.service-card,.audience-card{padding:24px}.intro-card{min-height:360px}.cta-inner{display:grid;grid-template-columns:1fr;gap:24px}.cta-actions{grid-template-columns:1fr}.cta-actions .btn{min-height:52px}
+    }
+    @media(max-width:380px){:root{--mobile-gutter:16px}.brand{width:132px;flex-basis:132px}.site-logo{width:128px}.hero::before{height:250px}.service-card,.audience-card{padding:21px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+  </style>
+  <style id="mobile-home-redesign">
+    @media(max-width:767px){
+      :root{--mobile-gutter:18px}
+      html{background:#fff}
+      body{min-width:320px;background:#fff;color:var(--ink);font-size:16px}
+      .container{width:100%;padding-inline:var(--mobile-gutter)}
+      .topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}
+
+      .site-header{position:sticky;top:0;background:rgba(255,255,255,.98);box-shadow:0 1px 0 var(--line)}
+      .nav-inner{min-height:64px;padding-block:8px}
+      .brand{width:136px;flex-basis:136px}.site-logo{width:132px;max-height:40px}
+      .nav-actions>.btn,.nav-actions>.nav-account-menu{display:none!important}
+      .mobile-toggle{display:grid;place-items:center;width:44px;min-width:44px;height:44px;border-radius:10px;font-size:22px}
+      .nav-inner.menu-open .nav{left:0;right:0;top:64px;padding:10px var(--mobile-gutter) 20px;border-width:1px 0 0;border-radius:0;box-shadow:0 18px 35px rgba(16,40,75,.16)}
+      .nav-link,.dropdown a{font-size:15px}
+
+      .hero{display:flex;flex-direction:column;min-height:0;padding:14px var(--mobile-gutter) 0;background:#fff;overflow:visible}
+      .hero::before{width:100%;height:clamp(220px,60vw,300px);border-radius:18px;background:url("images/hero.png") center 28%/cover no-repeat;box-shadow:0 12px 28px rgba(16,40,75,.12)}
+      .hero::after{display:none}
+      .hero-inner{padding:30px 0 26px;background:#fff}
+      .hero-copy{max-width:none;color:var(--ink)}
+      .hero-copy .eyebrow{margin-bottom:12px;color:var(--orange);font-size:10px;line-height:1.35;letter-spacing:.1em}
+      .hero-copy .eyebrow::before{width:20px;background:var(--orange)}
+      .hero h1{margin-bottom:16px;color:#325aa3;font-size:clamp(36px,10.5vw,46px);line-height:1.01;letter-spacing:-.045em;overflow-wrap:normal}
+      .hero h1 br{display:block}
+      .hero h1 span{display:block;margin-top:3px;color:var(--orange)}
+      .hero-lead{margin-bottom:22px;color:var(--muted);font-size:15px;line-height:1.6}
+      .hero-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:24px}
+      .hero-actions .btn{width:100%;min-height:50px;border-radius:10px;font-size:14px}
+      .hero-actions .btn-outline{color:var(--blue-dark);border-color:var(--line-strong);background:var(--blue-pale)}
+      .hero-features{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0;border:0}
+      .hero-feature,.hero-feature:first-child{min-height:104px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--blue-pale)}
+      .hero-feature:last-child{border:1px solid var(--line)}
+      .hero-feature strong{color:var(--blue-darker);font-size:12px;line-height:1.35}
+      .hero-feature small{color:var(--muted);font-size:10px;line-height:1.45}
+
+      .trust-strip{padding:22px 0 26px;border:0;background:var(--blue-darker)}
+      .trust-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;padding-inline:var(--mobile-gutter);overflow:hidden}
+      .trust-item,.trust-item:last-child{width:100%;min-width:0;min-height:112px;padding:14px 10px;border:1px solid rgba(255,255,255,.14);border-radius:14px;background:rgba(255,255,255,.06)}
+      .trust-item:last-child{grid-column:1/-1}
+      .trust-item strong{font-size:14px}.trust-item span{font-size:12px;line-height:1.45}
+
+      .intro,.services,.process,.audiences,.cta{padding:48px 0}
+      .intro-grid,.process-layout{gap:28px}
+      .section-heading{margin-bottom:26px}
+      .section-heading h2,.intro-copy h2,.process-copy h2{font-size:clamp(28px,8vw,36px);line-height:1.12;letter-spacing:-.03em}
+      .section-heading p,.intro-copy p,.process-copy p{font-size:15px;line-height:1.65}
+      .eyebrow{font-size:10px;letter-spacing:.1em}
+
+      .intro-card{min-height:0;padding:230px 14px 14px;border-radius:16px;background-position:center top;background-size:100% 230px;background-repeat:no-repeat;background-color:var(--blue-pale);box-shadow:var(--shadow-sm)}
+      .intro-card::before{display:none}
+      .intro-card-panel{position:relative;inset:auto;width:100%;padding:18px;border-radius:12px}
+      .intro-card-panel strong{font-size:19px}.intro-card-panel span{font-size:13px;line-height:1.55}
+      .intro-copy>.btn{width:100%;min-height:50px;border-radius:10px}
+
+      .service-grid,.audience-grid{grid-template-columns:1fr;gap:12px}
+      .service-card,.audience-card{width:100%;max-width:100%;min-width:0;min-height:0;padding:22px 18px;border-radius:14px;overflow:hidden}
+      .service-card h3{font-size:19px}.service-card p{font-size:14px;line-height:1.6}
+      .audience-card h3{font-size:24px}.audience-card p{font-size:14px;line-height:1.6}
+      .audience-links{display:grid;grid-template-columns:1fr;gap:8px}
+      .audience-links a{width:100%;min-height:46px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--blue-dark)!important;font-weight:700}
+      .audiences,.audience-grid{max-width:100%;overflow:hidden}
+
+      .steps{gap:22px}.step{grid-template-columns:42px minmax(0,1fr);gap:13px}
+      .step-num{width:42px;height:42px;font-size:13px;box-shadow:0 0 0 4px var(--blue-soft)}
+      .step:not(:last-child)::after{left:20px;top:42px}
+      .step h3{font-size:16px}.step p{font-size:14px;line-height:1.55}
+
+      .cta-inner{display:grid;grid-template-columns:1fr;gap:22px}
+      .cta-actions{display:grid;grid-template-columns:1fr;gap:10px;width:100%}
+      .cta-actions .btn{width:100%;min-height:50px;border-radius:10px}
+      .footer-grid{grid-template-columns:1fr;gap:28px}.footer-bottom{align-items:flex-start;flex-direction:column}
+    }
+    @media(max-width:390px){
+      :root{--mobile-gutter:14px}
+      .brand{width:126px;flex-basis:126px}.site-logo{width:122px}
+      .hero::before{height:215px}
+      .hero h1{font-size:35px}
+      .hero-features{grid-template-columns:1fr}
+      .hero-feature,.hero-feature:first-child{min-height:0}
+      .trust-grid{grid-template-columns:1fr}
+      .trust-item:last-child{grid-column:auto}
+    }
+  </style>
+</head>
+
 <body>
-<div class="topbar">
-<div class="container topbar-inner">
-<div class="topbar-left">
-<span>Nationwide Drug &amp; Alcohol Testing</span>
-<span>•</span>
-<span>Operating Nationwide</span>
-</div>
-<div class="topbar-right">
-<span>Mon–Fri, 8AM–8PM CST</span>
-<a href="tel:7732457009">(773) 245-7009</a>
-</div>
-</div>
-</div>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span>Nationwide Drug & Alcohol Testing</span>
+        <span>•</span>
+        <span>Operating Nationwide</span>
+      </div>
+      <div class="topbar-right">
+        <span>Mon–Fri, 8AM–8PM CST</span>
+        <a href="tel:7732457009">(773) 245-7009</a>
+      </div>
+    </div>
+  </div>
+
 <header class="site-header">
-<div class="container nav-inner" id="navInner">
-<a aria-label="screenings4u home" class="brand" href="index.html">
-<img alt="screenings4u" class="site-logo" src="images/logo.png"/>
-</a>
-<nav aria-label="Main navigation" class="nav" id="mainNav"></nav>
-<div class="nav-actions">
-<a class="btn btn-outline" href="services.html">
+  <div class="container nav-inner" id="navInner">
+
+    <a href="index.html" class="brand" aria-label="screenings4u home">
+      <img src="images/logo.png" alt="screenings4u" class="site-logo">
+    </a>
+
+<nav class="nav" id="mainNav" aria-label="Main navigation"></nav>
+
+    <div class="nav-actions">
+      <a href="services.html" class="btn btn-outline">
         Order a Test
       </a>
-<div class="nav-account-menu">
-<button aria-expanded="false" aria-haspopup="true" class="nav-login" type="button">
+
+      <div class="nav-account-menu">
+        <button
+          type="button"
+          class="nav-login"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
           Account Login
           <span class="nav-login-chevron">▼</span>
-</button>
-<div class="nav-account-dropdown">
-<a href="https://portal.screenings4u.com/customer-login.html">
+        </button>
+
+        <div class="nav-account-dropdown">
+          <a href="https://portal.screenings4u.com/customer-login.html">
             Customer Login
           </a>
-<a href="https://portal.screenings4u.com/employer-login.html">
+
+          <a href="https://portal.screenings4u.com/employer-login.html">
             Employer Login
           </a>
-</div>
-</div>
-<button aria-controls="mainNav" aria-expanded="false" aria-label="Open menu" class="mobile-toggle" id="mobileToggle">
+        </div>
+      </div>
+
+      <button
+        class="mobile-toggle"
+        id="mobileToggle"
+        aria-controls="mainNav"
+        aria-label="Open menu"
+        aria-expanded="false">
         ☰
       </button>
-</div>
-</div>
+    </div>
+
+  </div>
 </header>
-<main>
-<section class="hero">
-<div class="container hero-inner">
-<div class="hero-copy">
-<span class="eyebrow">Nationwide Drug &amp; Alcohol Testing</span>
-<h1>Workplace<br/>Screening<br/><span>Made Simple.</span></h1>
-<p class="hero-lead">
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow">Nationwide Drug & Alcohol Testing</span>
+          <h1>Workplace<br>Screening<br><span>Made Simple.</span></h1>
+          <p class="hero-lead">
             Drug testing, alcohol testing, DOT compliance, and workplace screening—simplified through one trusted partner.
           </p>
-<div class="hero-actions">
-<a class="btn btn-orange" href="services.html">Order a Test →</a>
-<a class="btn btn-outline" href="contact.html">Contact Us →</a>
-</div>
-<div class="hero-features">
-<div class="hero-feature">
-<strong>Nationwide Access</strong>
-<small>Thousands of collection locations</small>
-</div>
-<div class="hero-feature">
-<strong>Secure Account Access</strong>
-<small>Documents and updates in one place</small>
-</div>
-<div class="hero-feature">
-<strong>Secure Reporting</strong>
-<small>Streamlined result delivery</small>
-</div>
-<div class="hero-feature">
-<strong>Compliance Focused</strong>
-<small>DOT &amp; workplace solutions</small>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="trust-strip">
-<div class="container trust-grid">
-<div class="trust-item"><div><strong>Multiple Test Types</strong><span>Urine, hair, oral &amp; alcohol</span></div></div>
-<div class="trust-item"><div><strong>Nationwide Collection</strong><span>Professional collection network</span></div></div>
-<div class="trust-item"><div><strong>Secure &amp; Confidential</strong><span>Digital-first process</span></div></div>
-<div class="trust-item"><div><strong>Timely Results</strong><span>Automated reporting options</span></div></div>
-<div class="trust-item"><div><strong>Expert Support</strong><span>Help when you need it</span></div></div>
-</div>
-</section>
-<section class="intro">
-<div class="container intro-grid">
-<div class="intro-card">
-<div class="intro-card-panel">
-<strong>One platform. One trusted partner.</strong>
-<span>Testing, compliance, collection access and digital workflows designed around the way modern employers and individuals need to work.</span>
-</div>
-</div>
-<div class="intro-copy">
-<span class="eyebrow">The screenings4u Difference</span>
-<h2>Move from complicated screening to a simpler process.</h2>
-<p>
+
+          <div class="hero-actions">
+            <a href="services.html" class="btn btn-orange">Order a Test →</a>
+            <a href="contact.html" class="btn btn-outline">Contact Us →</a>
+          </div>
+
+          <div class="hero-features">
+            <div class="hero-feature">
+              <strong>Nationwide Access</strong>
+              <small>Thousands of collection locations</small>
+            </div>
+            <div class="hero-feature">
+              <strong>Secure Account Access</strong>
+              <small>Documents and updates in one place</small>
+            </div>
+            <div class="hero-feature">
+              <strong>Secure Reporting</strong>
+              <small>Streamlined result delivery</small>
+            </div>
+            <div class="hero-feature">
+              <strong>Compliance Focused</strong>
+              <small>DOT & workplace solutions</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-strip">
+      <div class="container trust-grid">
+        <div class="trust-item"><div><strong>Multiple Test Types</strong><span>Urine, hair, oral & alcohol</span></div></div>
+        <div class="trust-item"><div><strong>Nationwide Collection</strong><span>Professional collection network</span></div></div>
+        <div class="trust-item"><div><strong>Secure & Confidential</strong><span>Digital-first process</span></div></div>
+        <div class="trust-item"><div><strong>Timely Results</strong><span>Automated reporting options</span></div></div>
+        <div class="trust-item"><div><strong>Expert Support</strong><span>Help when you need it</span></div></div>
+      </div>
+    </section>
+
+    <section class="intro">
+      <div class="container intro-grid">
+        <div class="intro-card">
+          <div class="intro-card-panel">
+            <strong>One platform. One trusted partner.</strong>
+            <span>Testing, compliance, collection access and digital workflows designed around the way modern employers and individuals need to work.</span>
+          </div>
+        </div>
+
+        <div class="intro-copy">
+          <span class="eyebrow">The screenings4u Difference</span>
+          <h2>Move from complicated screening to a simpler process.</h2>
+          <p>
             screenings4u combines a nationwide collection network with secure account access and result workflows so employers and individuals can order the screening they need without unnecessary friction.
           </p>
-<ul class="check-list">
-<li>Nationwide access to professional collection locations</li>
-<li>Order documents and updates available through your account</li>
-<li>Workplace and DOT-focused compliance solutions</li>
-<li>Personal testing with privacy and convenience in mind</li>
-</ul>
-<a class="btn btn-outline" href="about-us.html">
+
+          <ul class="check-list">
+            <li>Nationwide access to professional collection locations</li>
+            <li>Order documents and updates available through your account</li>
+            <li>Workplace and DOT-focused compliance solutions</li>
+            <li>Personal testing with privacy and convenience in mind</li>
+          </ul>
+
+<a href="about-us.html" class="btn btn-outline">
   Learn About screenings4u →
-</a> </div>
-</div>
-</section>
-<section class="services" id="services">
-<div class="container">
-<div class="section-heading">
-<span class="eyebrow">Testing &amp; Compliance Services</span>
-<h2>Find the service that fits your needs.</h2>
-<p>From routine workplace screening to DOT compliance and personal testing, screenings4u brings the major pieces of the process together.</p>
-</div>
-<div class="service-grid">
-<article class="service-card">
-<div class="service-number">01</div>
-<div class="service-icon">U</div>
-<h3>Urine Drug Testing</h3>
-<p>Common drug screening options with multiple panel choices for workplace, personal and compliance needs.</p>
-<a href="services.html">Explore Urine Tests →</a>
-</article>
-<article class="service-card">
-<div class="service-number">02</div>
-<div class="service-icon">H</div>
-<h3>Hair Drug Testing</h3>
-<p>Longer-window screening options for employers, personal testing, court-related needs and more.</p>
-<a href="services.html">Explore Hair Tests →</a>
-</article>
-<article class="service-card">
-<div class="service-number">03</div>
-<div class="service-icon">O</div>
-<h3>Oral Fluid Testing</h3>
-<p>Non-invasive testing options designed for convenient collection and recent-use screening.</p>
-<a href="services.html">Explore Oral Tests →</a>
-</article>
-<article class="service-card">
-<div class="service-number">04</div>
-<div class="service-icon">A</div>
-<h3>Alcohol Testing</h3>
-<p>Breath and laboratory alcohol testing solutions for workplace and DOT-regulated environments.</p>
-<a href="dot-breathalyzer-services.html">Explore Alcohol Testing →</a>
-</article>
-<article class="service-card">
-<div class="service-number">05</div>
-<div class="service-icon">D</div>
-<h3>DOT Compliance</h3>
-<p>DOT drug tests, physicals, random programs, post-accident support, training and compliance services.</p>
-<a href="dot-services.html">Explore DOT Services →</a>
-</article>
-<article class="service-card">
-<div class="service-number">06</div>
-<div class="service-icon">P</div>
-<h3>Personal Testing</h3>
-<p>Private testing options with convenient ordering and access to professional collection locations.</p>
-<a href="personal-drug-and-alcohol-testing.html">Explore Personal Testing →</a>
-</article>
-</div>
-</div>
-</section>
-<section class="process">
-<div class="container process-layout">
-<div class="process-copy">
-<span class="eyebrow">How It Works</span>
-<h2>A better testing experience from order to results.</h2>
-<p>
+</a>        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Testing & Compliance Services</span>
+          <h2>Find the service that fits your needs.</h2>
+          <p>From routine workplace screening to DOT compliance and personal testing, screenings4u brings the major pieces of the process together.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <div class="service-number">01</div>
+            <div class="service-icon">U</div>
+            <h3>Urine Drug Testing</h3>
+            <p>Common drug screening options with multiple panel choices for workplace, personal and compliance needs.</p>
+            <a href="services.html">Explore Urine Tests →</a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number">02</div>
+            <div class="service-icon">H</div>
+            <h3>Hair Drug Testing</h3>
+            <p>Longer-window screening options for employers, personal testing, court-related needs and more.</p>
+            <a href="services.html">Explore Hair Tests →</a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number">03</div>
+            <div class="service-icon">O</div>
+            <h3>Oral Fluid Testing</h3>
+            <p>Non-invasive testing options designed for convenient collection and recent-use screening.</p>
+            <a href="services.html">Explore Oral Tests →</a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number">04</div>
+            <div class="service-icon">A</div>
+            <h3>Alcohol Testing</h3>
+            <p>Breath and laboratory alcohol testing solutions for workplace and DOT-regulated environments.</p>
+            <a href="dot-breathalyzer-services.html">Explore Alcohol Testing →</a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number">05</div>
+            <div class="service-icon">D</div>
+            <h3>DOT Compliance</h3>
+            <p>DOT drug tests, physicals, random programs, post-accident support, training and compliance services.</p>
+            <a href="dot-services.html">Explore DOT Services →</a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-number">06</div>
+            <div class="service-icon">P</div>
+            <h3>Personal Testing</h3>
+            <p>Private testing options with convenient ordering and access to professional collection locations.</p>
+            <a href="personal-drug-and-alcohol-testing.html">Explore Personal Testing →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="process">
+      <div class="container process-layout">
+        <div class="process-copy">
+          <span class="eyebrow">How It Works</span>
+          <h2>A better testing experience from order to results.</h2>
+          <p>
             The new screenings4u experience is built around a straightforward digital process that reduces unnecessary steps for the donor and the organization ordering the test.
           </p>
-</div>
-<div class="steps">
-<div class="step">
-<div class="step-num">01</div>
-<div><h3>Order Your Test</h3><p>Select the testing service you need and complete the secure checkout process.</p></div>
-</div>
-<div class="step">
-<div class="step-num">02</div>
-<div><h3>Receive Order Updates</h3><p>Your account is created and you receive confirmation and instructions from the screenings4u team.</p></div>
-</div>
-<div class="step">
-<div class="step-num">03</div>
-<div><h3>Receive Collection Instructions</h3><p>Our team provides the collection instructions needed for your testing appointment.</p></div>
-</div>
-<div class="step">
-<div class="step-num">04</div>
-<div><h3>Laboratory Analysis</h3><p>The specimen is processed through the appropriate laboratory testing workflow.</p></div>
-</div>
-<div class="step">
-<div class="step-num">05</div>
-<div><h3>Receive Your Results</h3><p>Results are delivered through the applicable secure reporting process.</p></div>
-</div>
-</div>
-</div>
-</section>
-<section class="audiences">
-<div class="container">
-<div class="section-heading">
-<span class="eyebrow">Built for Different Needs</span>
-<h2 style="color:#fff">Whether you're running a workforce or ordering for yourself.</h2>
-<p style="color:#b9c7d8">Choose the path that matches your situation and get to the right service faster.</p>
-</div>
-<div class="audience-grid">
-<article class="audience-card">
-<span class="eyebrow">For Employers</span>
-<h3>Build a safer, more organized screening program.</h3>
-<p>Workplace testing, DOT programs, random testing, mobile collection, consulting and compliance support for organizations of different sizes.</p>
-<div class="audience-links">
-<a href="business-services.html">Workplace Testing</a>
-<a href="consulting-services.html">Consulting</a>
-<a href="mobile-drug-and-alcohol-testing.html">Mobile Testing</a>
-<a href="business-services.html">Business Services</a>
-</div>
-</article>
-<article class="audience-card">
-<span class="eyebrow">For Individuals</span>
-<h3>Get the test you need without the employer in the middle.</h3>
-<p>Private personal testing with convenient ordering and nationwide collection access.</p>
-<div class="audience-links">
-<a href="personal-drug-and-alcohol-testing.html">Personal Testing</a>
-<a href="services.html">Urine Tests</a>
-<a href="services.html">Hair Tests</a>
-<a href="dot-services.html">DOT Tests</a>
-</div>
-</article>
-</div>
-</div>
-</section>
-<section class="cta">
-<div class="container cta-inner">
-<div>
-<h2>Ready to simplify your screening process?</h2>
-<p>Order a test or talk with a screenings4u specialist about the right solution.</p>
-</div>
-<div class="cta-actions">
-<a class="btn btn-orange" href="services.html">Order a Test →</a>
-<a class="btn btn-outline" href="contact.html">Contact Us →</a>
-</div>
-</div>
-</section>
-</main>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div><h3>Order Your Test</h3><p>Select the testing service you need and complete the secure checkout process.</p></div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div><h3>Receive Order Updates</h3><p>Your account is created and you receive confirmation and instructions from the screenings4u team.</p></div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div><h3>Receive Collection Instructions</h3><p>Our team provides the collection instructions needed for your testing appointment.</p></div>
+          </div>
+          <div class="step">
+            <div class="step-num">04</div>
+            <div><h3>Laboratory Analysis</h3><p>The specimen is processed through the appropriate laboratory testing workflow.</p></div>
+          </div>
+          <div class="step">
+            <div class="step-num">05</div>
+            <div><h3>Receive Your Results</h3><p>Results are delivered through the applicable secure reporting process.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="audiences">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Built for Different Needs</span>
+          <h2 style="color:#fff">Whether you're running a workforce or ordering for yourself.</h2>
+          <p style="color:#b9c7d8">Choose the path that matches your situation and get to the right service faster.</p>
+        </div>
+
+        <div class="audience-grid">
+          <article class="audience-card">
+            <span class="eyebrow">For Employers</span>
+            <h3>Build a safer, more organized screening program.</h3>
+            <p>Workplace testing, DOT programs, random testing, mobile collection, consulting and compliance support for organizations of different sizes.</p>
+            <div class="audience-links">
+              <a href="business-services.html">Workplace Testing</a>
+              <a href="consulting-services.html">Consulting</a>
+              <a href="mobile-drug-and-alcohol-testing.html">Mobile Testing</a>
+              <a href="business-services.html">Business Services</a>
+            </div>
+          </article>
+
+          <article class="audience-card">
+            <span class="eyebrow">For Individuals</span>
+            <h3>Get the test you need without the employer in the middle.</h3>
+            <p>Private personal testing with convenient ordering and nationwide collection access.</p>
+            <div class="audience-links">
+              <a href="personal-drug-and-alcohol-testing.html">Personal Testing</a>
+              <a href="services.html">Urine Tests</a>
+              <a href="services.html">Hair Tests</a>
+              <a href="dot-services.html">DOT Tests</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container cta-inner">
+        <div>
+          <h2>Ready to simplify your screening process?</h2>
+          <p>Order a test or talk with a screenings4u specialist about the right solution.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="services.html" class="btn btn-orange">Order a Test →</a>
+          <a href="contact.html" class="btn btn-outline">Contact Us →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
 <footer id="siteFooter"></footer>
-<script src="assets/js/navigation.js"></script>
-<script src="assets/js/footer.js"></script>
+
+ 
+
+  <script src="assets/js/navigation.js"></script>
+  <script src="assets/js/footer.js"></script>
 <script>document.addEventListener("DOMContentLoaded",function(){const nav=document.getElementById("mainNav");if(nav&&!nav.querySelector(".mobile-home-actions")){const actions=document.createElement("div");actions.className="mobile-home-actions";actions.innerHTML='<a class="btn btn-orange" href="services.html">Order a Test</a><a class="btn btn-outline" href="https://portal.screenings4u.com/customer-login.html">Customer Login</a><a class="btn btn-outline" href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>';nav.append(actions);}});</script>
 </body>
 </html>

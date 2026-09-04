@@ -1,208 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://screenings4u.com/</loc>
+  </url>
+  <url>
     <loc>https://screenings4u.com/about-us.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://screenings4u.com/accessibility.html</loc>
   </url>
   <url>
     <loc>https://screenings4u.com/audit-preparation.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/background-checks.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/become-a-clearinghouse-consortium-third-party-administrator.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/blog.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/business-services.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/compliance-guidance.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/consulting-services.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/contact.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/cookie-policy.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/court-ordered-etg-drug-and-alcohol-testing.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/disclaimer.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/dna-tests-chicago-il.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://screenings4u.com/donor-pass.html</loc>
   </url>
   <url>
     <loc>https://screenings4u.com/dot-breathalyzer-services.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/dot-physical-exam-services.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/dot-services.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/dot-specimen-collector-training-group-training.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/dot-specimen-collector-training.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/dot-urine-drug-tests.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/drug-alcohol-policy-creation.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/faqs.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/house-lab-account-setup.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://screenings4u.com/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/industries-served.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/join-our-collector-network.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/mobile-drug-and-alcohol-testing.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/new-entrant-audit.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/non-dot-breathalyzer-services.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/nursing-school-drug-tests.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/personal-drug-and-alcohol-testing.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/policy-review.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/post-accident-testing.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://screenings4u.com/privacy.html</loc>
   </url>
   <url>
     <loc>https://screenings4u.com/program-assessment.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/recordkeeping-review.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/refund-policy.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/services.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/specimen_collector_training_supplies.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/start-a-mobile-drug-testing-business.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/terms.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/testing-workflow-review.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://screenings4u.com/workplace-drug-and-alcohol-testing.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
 </urlset>

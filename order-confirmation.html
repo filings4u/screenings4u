@@ -1,254 +1,18 @@
 <!DOCTYPE html>
-
-<html lang="en-US">
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="#325aa3" name="theme-color"/>
-<title>Order Confirmation | screenings4u</title>
-<link href="images/fav.png" rel="icon" type="image/png"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<style>
-    :root {
-      --orange: #ff6b00;
-      --blue: #325AA3;
-      --blue-dark: #24467F;
-      --muted: #667892;
-      --surface: #f4f7fc;
-      --line: #d9e3f0;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#325aa3" />
 
-    * { box-sizing: border-box; }
+  <title>Order Confirmation | screenings4u</title>
+  <link rel="icon" type="image/png" href="images/fav.png">
 
-    body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: var(--surface);
-      color: #1d2d45;
-    }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    .container {
-      width: min(760px, calc(100% - 36px));
-      margin: 0 auto;
-    }
-
-    .card {
-      margin: 70px auto;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 44px;
-      box-shadow: 0 14px 40px rgba(23, 51, 95, .07);
-      text-align: center;
-    }
-
-    .check {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: #e9f2ff;
-      color: var(--blue);
-      font-size: 28px;
-      font-weight: 900;
-      margin: 0 auto 20px;
-    }
-
-    .eyebrow {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      font-weight: 900;
-      color: var(--orange);
-    }
-
-    h1 {
-      font-size: clamp(34px, 6vw, 52px);
-      color: var(--blue-dark);
-      letter-spacing: -.05em;
-      margin: 10px 0 14px;
-    }
-
-    p {
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 14px;
-      margin: 0 auto 14px;
-      max-width: 620px;
-    }
-
-    .tracking-card {
-      margin: 26px 0 18px;
-      padding: 20px;
-      background: #f7f9fc;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-    }
-
-    .tracking-label {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .tracking-number {
-      display: block;
-      margin-top: 7px;
-      color: var(--blue-dark);
-      font-size: clamp(18px, 4vw, 24px);
-      font-weight: 900;
-      letter-spacing: .02em;
-      word-break: break-word;
-    }
-
-    .email-notice,
-    .confirmation-status {
-      margin: 18px auto 24px;
-      padding: 17px 18px;
-      background: #fff8f2;
-      border: 1px solid #ffd7bb;
-      border-radius: 12px;
-      color: #5e493c;
-      font-size: 13px;
-      line-height: 1.65;
-    }
-
-    .email-notice strong {
-      color: var(--blue-dark);
-    }
-
-    .confirmation-status {
-      background: #fff4f2;
-      border-color: #efc7c2;
-      color: #8b2d25;
-    }
-
-    .donor-pass-card {
-      margin: 24px 0;
-      padding: 24px;
-      border: 1px solid #d7e3f4;
-      border-radius: 14px;
-      background: linear-gradient(180deg, #f9fbff 0%, #f3f7fd 100%);
-    }
-
-    .donor-pass-card h2 {
-      margin: 0 0 8px;
-      color: var(--blue-dark);
-      font-size: 20px;
-      letter-spacing: -.02em;
-    }
-
-    .donor-pass-card p {
-      font-size: 13px;
-      margin-bottom: 18px;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 24px;
-    }
-
-    .btn {
-      min-height: 46px;
-      padding: 0 18px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 900;
-      text-decoration: none;
-      border: 0;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    .orange {
-      background: var(--orange);
-      color: #fff;
-    }
-
-    .blue {
-      border: 1px solid var(--blue);
-      color: var(--blue);
-      background: #fff;
-    }
-
-    .donor-pass-btn {
-      min-height: 50px;
-      padding: 0 24px;
-      font-size: 13px;
-      box-shadow: 0 8px 22px rgba(50, 90, 163, .16);
-    }
-
-    .btn.is-disabled,
-    .btn[aria-disabled="true"] {
-      opacity: .55;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
-
-    .secondary-note {
-      margin-top: 18px;
-      font-size: 11px;
-      color: #8090a6;
-    }
-
-    @media (max-width: 640px) {
-      html {
-        -webkit-text-size-adjust: 100%;
-        text-size-adjust: 100%;
-      }
-
-      body { min-width: 320px; }
-
-      .container {
-        width: 100%;
-        padding-inline: 16px;
-      }
-
-      .card {
-        margin: 16px auto;
-        padding: 28px 18px;
-        border-radius: 14px;
-      }
-
-      h1 {
-        font-size: clamp(2rem, 10vw, 2.5rem);
-        line-height: 1.08;
-      }
-
-      .tracking-number { font-size: 18px; }
-
-      .tracking-card,
-      .donor-pass-card { padding: 18px 14px; }
-
-      .actions {
-        flex-direction: column;
-      }
-
-      .actions .btn,
-      .donor-pass-btn {
-        width: 100%;
-        min-height: 50px;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .container { padding-inline: 10px; }
-      .card { padding-inline: 14px; }
-    }
-  </style>
-<meta content="Secure screenings4u website page for drug and alcohol testing, DOT compliance, training, and related services." name="description"/><meta content="noindex,nofollow,noarchive" name="robots"/><link href="https://screenings4u.com/order-confirmation.html" rel="canonical"/><meta content="website" property="og:type"/><meta content="screenings4u" property="og:site_name"/><meta content="Order Confirmation | screenings4u" property="og:title"/><meta content="Secure screenings4u website page for drug and alcohol testing, DOT compliance, training, and related services." property="og:description"/><meta content="https://screenings4u.com/order-confirmation.html" property="og:url"/><meta content="https://screenings4u.com/images/home-hero.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Order Confirmation | screenings4u" name="twitter:title"/><meta content="Secure screenings4u website page for drug and alcohol testing, DOT compliance, training, and related services." name="twitter:description"/><meta content="https://screenings4u.com/images/home-hero.png" name="twitter:image"/><meta content="US-IL" name="geo.region"/><meta content="Chicago" name="geo.placename"/><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@context": "https://schema.org", "@type": ["Organization", "ProfessionalService"], "@id": "https://screenings4u.com/#organization", "name": "screenings4u", "url": "https://screenings4u.com/", "logo": "https://screenings4u.com/images/logo.png", "image": "https://screenings4u.com/images/home-hero.png", "telephone": "+17732457009", "email": "support@screenings4u.com", "address": {"@type": "PostalAddress", "streetAddress": "8537 S Pulaski Rd", "addressLocality": "Chicago", "addressRegion": "IL", "postalCode": "60652", "addressCountry": "US"}, "areaServed": {"@type": "Country", "name": "United States"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "20:00"}]}]}</script>
-<!-- Screenings4U global brand normalization -->
-<style>
+  <style>
     :root {
       --orange: #ff6b00;
       --blue: #325aa3;
@@ -484,101 +248,75 @@
       .card { padding-inline: 14px; }
     }
   </style>
-<style id="screenings4u-brand-normalization">
-  :root {
-    --blue: #325AA3 !important;
-    --blue-dark: #24467F !important;
-    --blue-deep: #2B4F8A !important;
-    --blue-darker: #24467F !important;
+</head>
 
-    --brand-blue: #325AA3;
-    --brand-blue-dark: #24467F;
-    --brand-blue-deep: #2B4F8A;
-    --brand-blue-light: #5B7BB5;
-    --brand-surface: #F4F7FC;
-    --brand-border: #D9E3F0;
-    --brand-orange: #FF6B00;
-  }
-
-  /* Keep the browser/theme chrome aligned with the Screenings4U brand. */
-  html {
-    accent-color: var(--brand-blue);
-  }
-
-  /* Mobile logo: larger and consistent across pages. */
-  @media (max-width: 1120px) {
-    .site-logo {
-      width: 155px !important;
-      max-width: 42vw !important;
-      max-height: 54px !important;
-      height: auto !important;
-      object-fit: contain !important;
-      object-position: left center !important;
-    }
-  }
-
-  @media (max-width: 620px) {
-    .site-logo {
-      width: 150px !important;
-      max-width: 45vw !important;
-      max-height: 52px !important;
-    }
-  }
-
-  @media (max-width: 390px) {
-    .site-logo {
-      width: 142px !important;
-      max-width: 44vw !important;
-      max-height: 50px !important;
-    }
-  }
-</style></head>
 <body>
-<main>
-<div class="container">
-<section class="card">
-<div aria-hidden="true" class="check">✓</div>
-<div class="eyebrow">Payment Submitted</div>
-<h1>Thank you for your order.</h1>
-<p>
+  <main>
+    <div class="container">
+      <section class="card">
+        <div class="check" aria-hidden="true">✓</div>
+        <div class="eyebrow">Payment Submitted</div>
+
+        <h1>Thank you for your order.</h1>
+
+        <p>
           Your payment has been submitted to Stripe.
           The screenings4u webhook will confirm the payment
           and finalize your order.
         </p>
-<div class="tracking-card">
-<span class="tracking-label">S4U Tracking Number</span>
-<strong class="tracking-number" id="trackingNumber">—</strong>
-</div>
-<div class="email-notice">
-<strong>Watch your email.</strong><br/>
+
+        <div class="tracking-card">
+          <span class="tracking-label">S4U Tracking Number</span>
+          <strong class="tracking-number" id="trackingNumber">—</strong>
+        </div>
+
+        <div class="email-notice">
+          <strong>Watch your email.</strong><br>
           Check your inbox and spam folder for your order receipt.
           If you are a new customer, you will also receive an email
           to set up your Customer Portal account.
         </div>
-<div class="confirmation-status" hidden="" id="confirmationStatus" role="alert"></div>
-<div class="donor-pass-card">
-<h2>Your testing location is next.</h2>
-<p>
+
+        <div
+          class="confirmation-status"
+          id="confirmationStatus"
+          role="alert"
+          hidden
+        ></div>
+
+        <div class="donor-pass-card">
+          <h2>Your testing location is next.</h2>
+
+          <p>
             Generate your donor pass by entering the exact location
             where you need testing. We will use that information to
             help identify an available testing location for your service.
           </p>
-<a aria-disabled="true" class="btn orange donor-pass-btn" href="#" id="donorPassButton">
+
+          <a
+            class="btn orange donor-pass-btn"
+            id="donorPassButton"
+            href="#"
+            aria-disabled="true"
+          >
             Generate Your Donor Pass
           </a>
-</div>
-<p class="secondary-note">
+        </div>
+
+        <p class="secondary-note">
           Keep your S4U Tracking Number for your records.
           If payment requires additional authentication, complete
           it in the Stripe window before leaving checkout.
         </p>
-<div class="actions">
-<a class="btn orange" href="services.html">Browse More Services</a>
-<a class="btn blue" href="index.html">Return Home</a>
-</div>
-</section>
-</div>
-</main>
-<script src="assets/js/order-confirmation.js?v=20260902-1"></script>
+
+        <div class="actions">
+          <a class="btn orange" href="services.html">Browse More Services</a>
+          <a class="btn blue" href="index.html">Return Home</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="assets/js/order-confirmation.js?v=20260902-1"></script>
 </body>
 </html>
