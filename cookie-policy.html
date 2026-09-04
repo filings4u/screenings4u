@@ -1,173 +1,114 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="How screenings4u uses cookies and similar technologies.">
-  <title>Cookie Policy | screenings4u</title>
-  <meta name="theme-color" content="#325aa3" />
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="How screenings4u uses cookies and similar technologies." name="description"/>
+<title>Cookie Policy | screenings4u</title>
+<meta content="#24467f" name="theme-color"/>
+<link href="images/fav.png" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
+  <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2"><style>
+.legal-hero{padding:78px 0 62px;background:linear-gradient(135deg,var(--blue-deep),var(--blue));color:#fff}.legal-hero .eyebrow{display:block;margin-bottom:12px;color:#ffd6b8;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.legal-hero h1{max-width:850px;font-size:clamp(38px,6vw,66px);line-height:1.04;letter-spacing:-.04em}.legal-hero p{max-width:790px;margin-top:18px;color:#e4edf9;font-size:17px}.legal-meta{margin-top:24px;font-size:13px;color:#c9d9ee}.legal-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:48px;padding:64px 0 84px}.legal-toc{position:sticky;top:112px;align-self:start;padding:22px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}.legal-toc strong{display:block;margin-bottom:12px;color:var(--blue-dark);font-size:13px;text-transform:uppercase;letter-spacing:.08em}.legal-toc a{display:block;padding:7px 0;color:var(--muted);font-size:13px}.legal-toc a:hover{color:var(--orange)}.legal-content{min-width:0}.legal-notice{margin-bottom:30px;padding:18px 20px;border-left:4px solid var(--orange);border-radius:8px;background:#fff7f2;color:#5c4435;font-size:14px}.legal-section{scroll-margin-top:115px;padding:0 0 32px;margin:0 0 32px;border-bottom:1px solid var(--line)}.legal-section:last-child{border-bottom:0}.legal-section h2{margin-bottom:13px;color:var(--blue-dark);font-size:25px;line-height:1.25}.legal-section h3{margin:22px 0 8px;color:var(--blue-deep);font-size:17px}.legal-section p,.legal-section li{color:#4e6079;font-size:15px}.legal-section p+p{margin-top:12px}.legal-section ul{padding-left:22px;margin-top:12px}.legal-section li+li{margin-top:8px}.legal-section a{color:var(--blue);text-decoration:underline}.legal-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.legal-links a{padding:9px 12px;border:1px solid var(--line);border-radius:7px;color:var(--blue);font-size:12px;font-weight:700;text-decoration:none}.legal-contact{padding:24px;border-radius:14px;background:var(--blue-deep);color:#fff}.legal-contact h2,.legal-contact p,.legal-contact a{color:#fff}
+@media(max-width:900px){.legal-layout{grid-template-columns:1fr}.legal-toc{position:static}}@media(max-width:620px){.legal-hero{padding:56px 0 46px}.legal-layout{padding:42px 0 64px}.legal-hero h1{font-size:40px}}
 
-  <link rel="icon" href="images/fav.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/legal.css">
-  <style>
-    .mobile-legal-actions{display:none}
-
-    @media(max-width:767px){
-      :root{--mobile-gutter:20px}
-      html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:78px}
-      body{min-width:320px;overflow-x:hidden;font-size:16px;line-height:1.65}
-      .container{width:100%!important;max-width:none!important;padding-inline:var(--mobile-gutter)!important}
-
-      /* Hide full-width promotional or informational banners on phones. */
-      .topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}
-
-      .site-header{position:sticky;top:0;z-index:1000}
-      .nav-inner{min-height:64px!important;gap:12px!important}
-      .brand{flex:0 0 145px!important;width:145px!important}
-      .site-logo{width:140px!important;max-height:42px!important}
-      .nav-actions{display:none!important}
-      .mobile-toggle{display:grid!important;place-items:center;min-width:44px;width:44px!important;height:44px!important;margin-left:auto;border-radius:8px;font-size:23px;touch-action:manipulation}
-      .nav-inner.menu-open .nav{top:64px!important;max-height:calc(100dvh - 64px);overflow-y:auto;display:flex;flex-direction:column;align-items:stretch;padding:10px var(--mobile-gutter) max(18px,env(safe-area-inset-bottom))!important}
-      .nav-item{width:100%}
-      .nav-link,.dropdown a{display:flex;width:100%;min-height:44px;align-items:center;padding:12px 8px!important;font-size:16px!important}
-      .nav-inner.menu-open .dropdown{position:static!important;display:none;min-width:0;opacity:1!important;visibility:visible!important;transform:none!important;box-shadow:none!important;border:0!important;padding:4px 0 8px 12px!important}
-      .nav-item.open .dropdown{display:block!important}
-      .mobile-legal-actions{display:grid;grid-template-columns:1fr;gap:10px;width:100%;padding-top:14px}
-      .mobile-legal-actions .btn{display:flex;width:100%;min-height:48px;align-items:center;justify-content:center}
-
-      .legal-hero{padding:44px 0 38px!important}
-      .legal-hero .eyebrow{font-size:11px!important}
-      .legal-hero h1{margin:10px 0 14px!important;font-size:clamp(2.25rem,11vw,3rem)!important;line-height:1.05!important;letter-spacing:-.045em!important}
-      .legal-hero p{max-width:none!important;margin:0!important;font-size:16px!important;line-height:1.65!important}
-      .legal-meta{margin-top:18px!important;font-size:13px!important;line-height:1.5}
-
-      .legal-layout{display:grid!important;grid-template-columns:1fr!important;gap:24px!important;padding-top:28px!important;padding-bottom:max(54px,env(safe-area-inset-bottom))!important}
-      .legal-toc{position:static!important;top:auto!important;display:grid!important;grid-template-columns:1fr!important;gap:0!important;width:100%!important;padding:18px!important;border-radius:14px!important}
-      .legal-toc strong{display:block;margin-bottom:8px;font-size:15px}
-      .legal-toc a{display:flex;min-height:44px;align-items:center;padding:10px 4px!important;border-top:1px solid rgba(50,90,163,.12);font-size:15px!important;line-height:1.35;text-decoration:none}
-
-      .legal-content{min-width:0;width:100%}
-      .legal-section{padding:28px 0!important;scroll-margin-top:78px}
-      .legal-section:first-child{padding-top:0!important}
-      .legal-section h2{margin:0 0 14px!important;font-size:clamp(1.55rem,7vw,2rem)!important;line-height:1.2!important;letter-spacing:-.025em!important}
-      .legal-section h3{margin:24px 0 8px!important;font-size:1.1rem!important;line-height:1.35!important}
-      .legal-section p,.legal-section li{font-size:16px!important;line-height:1.7!important;overflow-wrap:anywhere}
-      .legal-contact{padding:24px!important;border-radius:14px!important}
-      .legal-links{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;margin-top:20px!important}
-      .legal-links a{display:flex;min-height:48px;align-items:center;justify-content:center;padding:10px 14px;border-radius:8px;text-align:center}
-    }
-
-    @media(max-width:380px){
-      :root{--mobile-gutter:16px}
-      .brand{flex-basis:132px!important;width:132px!important}
-      .site-logo{width:128px!important}
-      .legal-hero{padding:38px 0 32px!important}
-      .legal-toc{padding:16px!important}
-      .legal-contact{padding:20px!important}
-    }
-
-    @media(prefers-reduced-motion:reduce){
-      *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-    }
-  </style>
+</style>
 </head>
 <body>
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <div class="topbar-left"><span>Nationwide Drug &amp; Alcohol Testing</span><span>•</span><span>Operating Nationwide</span></div>
-      <div class="topbar-right"><span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a></div>
+<div class="topbar">
+<div class="container topbar-inner">
+<div class="topbar-left">
+<span>Nationwide Drug &amp; Alcohol Testing</span><span aria-hidden="true">•</span><span>Operating Nationwide</span>
+</div>
+<div class="topbar-right">
+<span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a>
+</div>
+</div>
+</div><header class="site-header">
+  <div class="container nav-inner" id="navInner">
+    <a href="index.html" class="brand" aria-label="screenings4u home">
+      <img src="images/logo.png" alt="screenings4u" class="site-logo">
+    </a>
+    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation"></nav>
+    <div class="nav-actions">
+      <a href="services.html" class="btn btn-outline">Order a Test</a>
+      <div class="nav-account-menu">
+        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron" aria-hidden="true">▼</span></button>
+        <div class="nav-account-dropdown">
+          <a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a>
+          <a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>
+        </div>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mobileNav" aria-label="Open menu" aria-expanded="false">☰</button>
     </div>
   </div>
+</header>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
+<main>
+<section class="legal-hero">
+<div class="container">
+<span class="eyebrow">Privacy</span>
+<h1>Cookie Policy</h1>
+<p>This policy describes cookies and similar technologies used across screenings4u websites and portals.</p>
+<div class="legal-meta">Effective September 1, 2026</div>
+</div>
+</section>
+<div class="container legal-layout">
+<aside aria-label="Cookie policy sections" class="legal-toc">
+<strong>On this page</strong>
+<a href="#about">About cookies</a>
+<a href="#types">Types we use</a>
+<a href="#third-party">Third parties</a>
+<a href="#choices">Your choices</a>
+<a href="#changes">Changes</a>
+<a href="#contact">Contact</a>
+</aside>
+<article class="legal-content">
+<section class="legal-section" id="about">
+<h2>1. What cookies are</h2>
+<p>Cookies are small text files stored on a browser or device. Similar technologies include local storage, pixels, software development kits, and identifiers that help websites remember information or understand use.</p>
+</section>
+<section class="legal-section" id="types">
+<h2>2. Types of technologies we use</h2>
+<h3>Strictly necessary</h3>
+<p>Used for security, authentication, session continuity, fraud prevention, checkout, load balancing, and core site features. Disabling these may prevent services from working.</p>
+<h3>Preferences</h3>
+<p>Remember choices such as interface settings, cart contents, and communication preferences.</p>
+<h3>Analytics and performance</h3>
+<p>Help us understand traffic, errors, page performance, and how features are used. Information may be aggregated or pseudonymous.</p>
+<h3>Advertising or campaign measurement</h3>
+<p>If enabled, these technologies measure campaigns or support relevant outreach. They should be activated only as disclosed and with consent where required.</p>
+</section>
+<section class="legal-section" id="third-party">
+<h2>3. Third-party services</h2>
+<p>Payment, authentication, hosting, analytics, communications, embedded content, and support providers may place or access their own technologies. Their use is governed by their privacy notices. For example, payment providers may use device and fraud-prevention signals during checkout.</p>
+</section>
+<section class="legal-section" id="choices">
+<h2>4. Managing cookies</h2>
+<p>You can delete or block cookies through browser settings. Where a consent control is available, use it to change nonessential cookie preferences. Blocking necessary cookies can prevent login, checkout, saved preferences, or other functions.</p>
+<p>Browser “Do Not Track” signals are not interpreted consistently across the industry. We respond to legally recognized opt-out preference signals where required and technically supported.</p>
+</section>
+<section class="legal-section" id="changes">
+<h2>5. Retention and changes</h2>
+<p>Session cookies expire when a browsing session ends; persistent cookies remain for a defined period or until deleted. Retention depends on purpose and provider. We may update this policy when technologies or legal requirements change.</p>
+</section>
+<section class="legal-section legal-contact" id="contact">
+<h2>6. Contact</h2>
+<p>Questions may be sent to <a href="mailto:support@screenings4u.com">support@screenings4u.com</a>.</p>
+<div class="legal-links"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a></div>
+</section>
+</article>
+</div>
+</main>
 
-  <header class="site-header">
-    <div class="container nav-inner" id="navInner">
-      <a href="index.html" class="brand" aria-label="screenings4u home"><img src="images/logo.png" alt="screenings4u" class="site-logo"></a>
-      <nav class="nav" id="mainNav" aria-label="Main navigation"></nav>
-      <div class="nav-actions"><a href="services.html" class="btn">Order a Test</a></div>
-      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mainNav" aria-label="Open menu" aria-expanded="false">☰</button>
-    </div>
-  </header>
-
-  <main>
-    <section class="legal-hero">
-      <div class="container">
-        <span class="eyebrow">Privacy</span>
-        <h1>Cookie Policy</h1>
-        <p>This policy describes cookies and similar technologies used across screenings4u websites and portals.</p>
-        <div class="legal-meta">Effective September 1, 2026</div>
-      </div>
-    </section>
-
-    <div class="container legal-layout">
-      <aside class="legal-toc" aria-label="Cookie policy sections">
-        <strong>On this page</strong>
-        <a href="#about">About cookies</a>
-        <a href="#types">Types we use</a>
-        <a href="#third-party">Third parties</a>
-        <a href="#choices">Your choices</a>
-        <a href="#changes">Changes</a>
-        <a href="#contact">Contact</a>
-      </aside>
-
-      <article class="legal-content">
-        <section class="legal-section" id="about">
-          <h2>1. What cookies are</h2>
-          <p>Cookies are small text files stored on a browser or device. Similar technologies include local storage, pixels, software development kits, and identifiers that help websites remember information or understand use.</p>
-        </section>
-
-        <section class="legal-section" id="types">
-          <h2>2. Types of technologies we use</h2>
-          <h3>Strictly necessary</h3>
-          <p>Used for security, authentication, session continuity, fraud prevention, checkout, load balancing, and core site features. Disabling these may prevent services from working.</p>
-          <h3>Preferences</h3>
-          <p>Remember choices such as interface settings, cart contents, and communication preferences.</p>
-          <h3>Analytics and performance</h3>
-          <p>Help us understand traffic, errors, page performance, and how features are used. Information may be aggregated or pseudonymous.</p>
-          <h3>Advertising or campaign measurement</h3>
-          <p>If enabled, these technologies measure campaigns or support relevant outreach. They should be activated only as disclosed and with consent where required.</p>
-        </section>
-
-        <section class="legal-section" id="third-party">
-          <h2>3. Third-party services</h2>
-          <p>Payment, authentication, hosting, analytics, communications, embedded content, and support providers may place or access their own technologies. Their use is governed by their privacy notices. For example, payment providers may use device and fraud-prevention signals during checkout.</p>
-        </section>
-
-        <section class="legal-section" id="choices">
-          <h2>4. Managing cookies</h2>
-          <p>You can delete or block cookies through browser settings. Where a consent control is available, use it to change nonessential cookie preferences. Blocking necessary cookies can prevent login, checkout, saved preferences, or other functions.</p>
-          <p>Browser “Do Not Track” signals are not interpreted consistently across the industry. We respond to legally recognized opt-out preference signals where required and technically supported.</p>
-        </section>
-
-        <section class="legal-section" id="changes">
-          <h2>5. Retention and changes</h2>
-          <p>Session cookies expire when a browsing session ends; persistent cookies remain for a defined period or until deleted. Retention depends on purpose and provider. We may update this policy when technologies or legal requirements change.</p>
-        </section>
-
-        <section class="legal-section legal-contact" id="contact">
-          <h2>6. Contact</h2>
-          <p>Questions may be sent to <a href="mailto:support@screenings4u.com">support@screenings4u.com</a>.</p>
-          <div class="legal-links"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a></div>
-        </section>
-      </article>
-    </div>
-  </main>
-
-  <footer id="siteFooter"></footer>
-  <script src="assets/js/navigation.js"></script>
-  <script src="assets/js/footer.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded",function(){
-      const nav=document.getElementById("mainNav");
-      if(nav&&!nav.querySelector(".mobile-legal-actions")){
-        const actions=document.createElement("div");
-        actions.className="mobile-legal-actions";
-        actions.innerHTML='<a class="btn" href="services.html">Order a Test</a>';
-        nav.append(actions);
-      }
-    });
-  </script>
-</body>
+<footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
+  <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
+  <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
+  <script src="assets/js/site-ui.js?v=20260904-1"></script>
+  <script src="assets/js/footer.js?v=20260904-1"></script></body>
 </html>

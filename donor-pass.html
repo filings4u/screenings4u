@@ -1,53 +1,20 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#325aa3" />
-
-  <meta name="description" content="Enter your testing location to generate a screenings4u donor pass.">
-
-  <title>Generate Donor Pass | screenings4u</title>
-
-  <link rel="icon" type="image/png" href="images/fav.png">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  >
-
-  <style>
-    :root {
-      --orange: #ff6b00;
-      --blue: #325aa3;
-      --blue-dark: #24467f;
-      --muted: #667892;
-      --surface: #f4f7fc;
-      --line: #d9e3f0;
-      --soft-blue: #f7f9fc;
-      --success: #287a4b;
-      --danger: #b42318;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: var(--surface);
-      color: #1d2d45;
-    }
-
-    .container {
-      width: min(900px, calc(100% - 36px));
-      margin: 0 auto;
-    }
-
-    .page {
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#24467f" name="theme-color"/>
+<meta content="Enter your testing location to generate a screenings4u donor pass." name="description"/>
+<title>Generate Donor Pass | screenings4u</title>
+<link href="images/fav.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
+  <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2"><style>
+.page {
       padding: 58px 0 70px;
     }
 
@@ -63,13 +30,7 @@
       text-align: center;
     }
 
-    .eyebrow {
-      color: var(--orange);
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
+    
 
     h1 {
       margin: 9px 0 12px;
@@ -195,7 +156,7 @@
     input:focus,
     select:focus {
       border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(50, 90, 163, .10);
+      box-shadow: 0 0 0 3px rgba(36, 70, 127, .10);
     }
 
     input::placeholder {
@@ -228,23 +189,9 @@
       margin-top: 26px;
     }
 
-    .btn {
-      min-height: 47px;
-      padding: 0 20px;
-      border-radius: 8px;
-      border: 1px solid transparent;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      cursor: pointer;
-      font: 900 12px Inter, Arial, sans-serif;
-    }
+    
 
-    .btn-orange {
-      background: var(--orange);
-      color: #fff;
-    }
+    
 
     .btn-blue {
       background: #fff;
@@ -319,236 +266,171 @@
     }
 
     @media(max-width:767px){
-      :root{--mobile-gutter:18px}
-      html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-      body{min-width:320px;min-height:100dvh;font-size:16px;line-height:1.55;overflow-x:hidden}
-      .topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}
-      .container{width:100%;padding-inline:var(--mobile-gutter)}
+      
+      
+      
+      .full-banner, .announcement-bar, .promo-banner, [data-full-banner]{display:none!important}
+      
       .page{padding:18px 0 max(36px,env(safe-area-inset-bottom))}
       .card{width:100%;border-radius:15px}
-      .intro{padding:24px 20px;text-align:left}.eyebrow{font-size:11px}h1{margin:9px 0 12px;font-size:clamp(2rem,10vw,2.7rem);line-height:1.08;letter-spacing:-.04em}.intro p{font-size:16px;line-height:1.65}.tracking{margin-top:20px;padding:14px 16px}.tracking-label{font-size:12px}.tracking strong{font-size:15px;line-height:1.4}
+      .intro{padding:24px 20px;text-align:left}h1{margin:9px 0 12px;font-size:clamp(2rem,10vw,2.7rem);line-height:1.08;letter-spacing:-.04em}.intro p{font-size:16px;line-height:1.65}.tracking{margin-top:20px;padding:14px 16px}.tracking-label{font-size:12px}.tracking strong{font-size:15px;line-height:1.4}
       .form-section{padding:24px 20px}.section-title{font-size:21px;line-height:1.25}.section-copy{margin-bottom:22px;font-size:15px;line-height:1.6}.notice{font-size:14px;line-height:1.55}
       .location-grid{grid-template-columns:1fr;gap:16px}.field.full{grid-column:auto}label{font-size:13px;line-height:1.4}input,select{height:52px;min-height:52px;padding-inline:14px;font-size:16px}.help{font-size:12px;line-height:1.5}.location-note{margin-top:20px;padding:15px;font-size:13px;line-height:1.6}
-      .actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:24px}.btn{width:100%;min-height:52px;padding:12px 16px;font-size:14px;line-height:1.3;touch-action:manipulation}.btn-orange{order:-1}.status{padding:16px;text-align:left}.status-title{font-size:15px}.status-copy{font-size:14px;line-height:1.55}
+      .actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:24px}.status{padding:16px;text-align:left}.status-title{font-size:15px}.status-copy{font-size:14px;line-height:1.55}
     }
-    @media(max-width:380px){:root{--mobile-gutter:14px}.intro,.form-section{padding-left:17px;padding-right:17px}}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-  </style>
+    @media(max-width:380px){.intro,.form-section{padding-left:17px;padding-right:17px}}
+    @media(prefers-reduced-motion:reduce){*::before, *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
 </head>
-
-<body>
-
-  <main class="page">
-    <div class="container">
-
-      <section class="card">
-
-        <div class="intro">
-
-          <div class="eyebrow">Testing Location</div>
-
-          <h1>Generate Your Donor Pass.</h1>
-
-          <p>
+<body><div class="topbar">
+<div class="container topbar-inner">
+<div class="topbar-left">
+<span>Nationwide Drug &amp; Alcohol Testing</span><span aria-hidden="true">•</span><span>Operating Nationwide</span>
+</div>
+<div class="topbar-right">
+<span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a>
+</div>
+</div>
+</div><header class="site-header">
+  <div class="container nav-inner" id="navInner">
+    <a href="index.html" class="brand" aria-label="screenings4u home">
+      <img src="images/logo.png" alt="screenings4u" class="site-logo">
+    </a>
+    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation"></nav>
+    <div class="nav-actions">
+      <a href="services.html" class="btn btn-outline">Order a Test</a>
+      <div class="nav-account-menu">
+        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron" aria-hidden="true">▼</span></button>
+        <div class="nav-account-dropdown">
+          <a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a>
+          <a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>
+        </div>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mobileNav" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
+<main class="page">
+<div class="container">
+<section class="card">
+<div class="intro">
+<div class="eyebrow">Testing Location</div>
+<h1>Generate Your Donor Pass.</h1>
+<p>
             Tell us exactly where you need to complete your testing.
             Enter the location where you will be available, and we will
             use that information to determine the appropriate testing
             location for your service.
           </p>
-
-          <div class="tracking">
-            <span class="tracking-label">S4U Tracking Number</span>
-            <strong id="trackingNumber">—</strong>
-          </div>
-
-        </div>
-
-        <div class="form-section">
-
-          <h2 class="section-title">
+<div class="tracking">
+<span class="tracking-label">S4U Tracking Number</span>
+<strong id="trackingNumber">—</strong>
+</div>
+</div>
+<div class="form-section">
+<h2 class="section-title">
             Where do you need testing?
           </h2>
-
-          <p class="section-copy">
+<p class="section-copy">
             Please enter the exact city, state, and ZIP code where you
             want us to locate a testing facility. This does not need to
             be your billing address.
           </p>
-
-          <div
-            id="formMessage"
-            class="notice"
-            role="alert"
-            aria-live="polite"
-          ></div>
-
-          <form id="donorPassForm" novalidate>
-
-            <div class="location-grid">
-
-              <div class="field full">
-                <label for="address">
+<div aria-live="polite" class="notice" id="formMessage" role="alert"></div>
+<form id="donorPassForm" novalidate="">
+<div class="location-grid">
+<div class="field full">
+<label for="address">
                   Street Address <span class="required">*</span>
-                </label>
-
-                <input
-                  id="address"
-                  name="address"
-                  type="text"
-                  placeholder="123 Main Street"
-                  autocomplete="off"
-                  maxlength="120"
-                  required
-                >
-              </div>
-
-              <div class="field full">
-                <label for="address2">
+</label>
+<input autocomplete="off" id="address" maxlength="120" name="address" placeholder="123 Main Street" required="" type="text"/>
+</div>
+<div class="field full">
+<label for="address2">
                   Apt / Suite / Unit <span style="color:#8493a7;font-weight:600;">(Optional)</span>
-                </label>
-
-                <input
-                  id="address2"
-                  name="address2"
-                  type="text"
-                  placeholder="Apt 4B, Suite 200, Unit 12"
-                  autocomplete="off"
-                  maxlength="60"
-                >
-              </div>
-
-              <div class="field">
-                <label for="city">
+</label>
+<input autocomplete="off" id="address2" maxlength="60" name="address2" placeholder="Apt 4B, Suite 200, Unit 12" type="text"/>
+</div>
+<div class="field">
+<label for="city">
                   City <span class="required">*</span>
-                </label>
-
-                <input
-                  id="city"
-                  name="city"
-                  type="text"
-                  placeholder="Dallas"
-                  autocomplete="off"
-                  maxlength="60"
-                  required
-                >
-              </div>
-
-              <div class="field">
-                <label for="state">
+</label>
+<input autocomplete="off" id="city" maxlength="60" name="city" placeholder="Dallas" required="" type="text"/>
+</div>
+<div class="field">
+<label for="state">
                   State <span class="required">*</span>
-                </label>
-
-                <select
-                  id="state"
-                  name="state"
-                  autocomplete="off"
-                  required
-                >
-                  <option value="">Select</option>
-                  <option>AL</option><option>AK</option><option>AZ</option>
-                  <option>AR</option><option>CA</option><option>CO</option>
-                  <option>CT</option><option>DE</option><option>FL</option>
-                  <option>GA</option><option>HI</option><option>ID</option>
-                  <option>IL</option><option>IN</option><option>IA</option>
-                  <option>KS</option><option>KY</option><option>LA</option>
-                  <option>ME</option><option>MD</option><option>MA</option>
-                  <option>MI</option><option>MN</option><option>MS</option>
-                  <option>MO</option><option>MT</option><option>NE</option>
-                  <option>NV</option><option>NH</option><option>NJ</option>
-                  <option>NM</option><option>NY</option><option>NC</option>
-                  <option>ND</option><option>OH</option><option>OK</option>
-                  <option>OR</option><option>PA</option><option>RI</option>
-                  <option>SC</option><option>SD</option><option>TN</option>
-                  <option>TX</option><option>UT</option><option>VT</option>
-                  <option>VA</option><option>WA</option><option>WV</option>
-                  <option>WI</option><option>WY</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label for="zip">
+</label>
+<select autocomplete="off" id="state" name="state" required="">
+<option value="">Select</option>
+<option>AL</option><option>AK</option><option>AZ</option>
+<option>AR</option><option>CA</option><option>CO</option>
+<option>CT</option><option>DE</option><option>FL</option>
+<option>GA</option><option>HI</option><option>ID</option>
+<option>IL</option><option>IN</option><option>IA</option>
+<option>KS</option><option>KY</option><option>LA</option>
+<option>ME</option><option>MD</option><option>MA</option>
+<option>MI</option><option>MN</option><option>MS</option>
+<option>MO</option><option>MT</option><option>NE</option>
+<option>NV</option><option>NH</option><option>NJ</option>
+<option>NM</option><option>NY</option><option>NC</option>
+<option>ND</option><option>OH</option><option>OK</option>
+<option>OR</option><option>PA</option><option>RI</option>
+<option>SC</option><option>SD</option><option>TN</option>
+<option>TX</option><option>UT</option><option>VT</option>
+<option>VA</option><option>WA</option><option>WV</option>
+<option>WI</option><option>WY</option>
+</select>
+</div>
+<div class="field">
+<label for="zip">
                   ZIP Code <span class="required">*</span>
-                </label>
-
-                <input
-                  id="zip"
-                  name="zip"
-                  type="text"
-                  inputmode="numeric"
-                  placeholder="75001"
-                  autocomplete="off"
-                  maxlength="10"
-                  required
-                >
-
-                <div class="help">
+</label>
+<input autocomplete="off" id="zip" inputmode="numeric" maxlength="10" name="zip" placeholder="75001" required="" type="text"/>
+<div class="help">
                   Use the ZIP code closest to where you will test.
                 </div>
-              </div>
-
-            </div>
-
-            <div class="location-note">
-              <strong>Address verification:</strong>
+</div>
+</div>
+<div class="location-note">
+<strong>Address verification:</strong>
               Your testing location will be verified and standardized through
               USPS before it is saved to your S4U order. We will use this
               verified location to prepare the testing-location details for your order.
             </div>
-
-            <div class="actions">
-
-              <a
-                id="backButton"
-                class="btn btn-blue"
-                href="services.html"
-              >
+<div class="actions">
+<a class="btn btn-blue" href="services.html" id="backButton">
                 Back to Services
               </a>
-
-              <button
-                class="btn btn-orange"
-                id="generatePassButton"
-                type="submit"
-              >
+<button class="btn btn-orange" id="generatePassButton" type="submit">
                 Continue to Donor Pass
               </button>
-
-            </div>
-
-          </form>
-
-          <div
-            id="status"
-            class="status"
-            aria-live="polite"
-          >
-            <div class="status-title">
+</div>
+</form>
+<div aria-live="polite" class="status" id="status">
+<div class="status-title">
               Location received.
             </div>
-
-            <div class="status-copy">
+<div class="status-copy">
               Your donor pass workflow is ready for the next step.
               Continue with the testing-location assignment shown in your order.
             </div>
-          </div>
-
-        </div>
-
-      </section>
-
-    </div>
-  </main>
-
-  <!-- Supabase browser SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <!-- Public screenings4u configuration. Never put service-role credentials here. -->
-  <script src="assets/js/site-config.js"></script>
-
-  <!-- donor-pass.js creates the public Supabase client if the shared client is unavailable. -->
-
-  <!-- Donor pass location workflow -->
-  <script src="assets/js/donor-pass.js"></script>
-
-</body>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Supabase browser SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- Public screenings4u configuration. Never put service-role credentials here. -->
+<script src="assets/js/site-config.js"></script>
+<!-- donor-pass.js creates the public Supabase client if the shared client is unavailable. -->
+<!-- Donor pass location workflow -->
+<script src="assets/js/donor-pass.js"></script>
+<footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
+  <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
+  <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
+  <script src="assets/js/site-ui.js?v=20260904-1"></script>
+  <script src="assets/js/footer.js?v=20260904-1"></script></body>
 </html>

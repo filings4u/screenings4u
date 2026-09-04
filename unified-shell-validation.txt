@@ -1,0 +1,20 @@
+Screenings4U full-site shell validation
+========================================
+HTML pages processed: 52
+
+Canonical shell problems: 0
+Missing local scripts: 0
+Missing local stylesheets: 0
+Missing local images: 0
+Broken local HTML links detected: 0
+
+Brand system:
+Primary blue: #325AA3
+Dark blue: #24467F
+Deep blue: #2B4F8A
+Accent orange: #FF6B00
+
+Mobile logo:
+<=1120px: 180px
+<=620px: 170px
+<=390px: 158px

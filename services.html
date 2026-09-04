@@ -1,237 +1,74 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="theme-color" content="#325aa3" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="#24467f" name="theme-color"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Services | screenings4u</title>
-<link rel="icon" type="image/png" href="images/fav.png">
-
-<meta name="description" content="Browse screenings4u drug testing, alcohol testing, DOT services, physicals and professional training.">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --orange:#ff6b00;
-  --blue:#325aa3;
-  --orange-dark:#d95800;
-  --orange-deep:#b84700;
-  --orange-soft:#fff0e6;
-  --orange-pale:#fff7f2;
-  --blue-dark:#24467f;
-  --blue-deep:#17335f;
-  --blue-darker:#10284b;
-  --blue-soft:#e8eff9;
-  --blue-pale:#f4f7fc;
-  --ink:#1d2d45;
-  --muted:#667892;
-  --surface:#f4f7fc;
-  --surface-2:#eef3f9;
-  --line:#d9e3f0;
-  --line-strong:#c4d3e5;
-  --white:#ffffff;
-  --shadow-sm:0 5px 18px rgba(23,51,95,.08);
-  --shadow:0 18px 45px rgba(23,51,95,.12);
-  --shadow-lg:0 28px 70px rgba(23,51,95,.16);
-  --max:1440px;
-  --radius:18px;
-}
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  font-family:Inter,Arial,sans-serif;
-  color:var(--ink);
-  background:var(--surface);
-}
-
-a{
-  text-decoration:none;
-}
-
-button,
-input,
-select{
+<link href="images/fav.png" rel="icon" type="image/png"/>
+<meta content="Browse screenings4u drug testing, alcohol testing, DOT services, physicals and professional training." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
+  <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2"><style>
+input, select{
   font:inherit;
 }
 
-.container{
-  width:min(var(--max),calc(100% - 40px));
-  margin:auto;
-}
+
 
 /* =========================================================
    UNIVERSAL HEADER / NAVIGATION
    ========================================================= */
 
-.site-header{
-  background:var(--white);
-  border-bottom:1px solid var(--line);
-  position:sticky;
-  top:0;
-  z-index:1000;
-}
 
-.nav-inner{
-  min-height:82px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:22px;
-  position:relative;
-}
 
-.brand{
-  display:flex;
-  align-items:center;
-  flex:0 0 155px;
-  width:155px;
-}
 
-.brand img{
-  display:block;
-  width:145px;
-  height:auto;
-  max-height:48px;
-  object-fit:contain;
-  object-position:left center;
-}
 
-.nav{
-  display:flex;
-  align-items:center;
-  gap:4px;
-}
 
-.nav-item{
-  position:relative;
-}
 
-.nav-link{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:13px 10px;
-  color:var(--ink);
-  font-size:13px;
-  font-weight:700;
-  border-radius:7px;
-}
 
-.nav-link:hover{
-  color:var(--blue);
-  background:var(--blue-pale);
-}
 
-.chevron{
-  font-size:10px;
-  transition:transform .2s ease;
-}
 
-.nav-item:hover .chevron{
-  transform:rotate(180deg);
-}
 
-.dropdown{
-  position:absolute;
-  top:calc(100% + 8px);
-  left:0;
-  min-width:255px;
-  padding:10px;
-  background:var(--white);
-  border:1px solid var(--line);
-  border-radius:12px;
-  box-shadow:var(--shadow);
-  opacity:0;
-  visibility:hidden;
-  transform:translateY(6px);
-  transition:.18s ease;
-}
 
-.nav-item:hover .dropdown,
-.nav-item:focus-within .dropdown{
-  opacity:1;
-  visibility:visible;
-  transform:translateY(0);
-}
 
-.dropdown a{
-  display:block;
-  padding:11px 12px;
-  border-radius:8px;
-  font-size:13px;
-  color:var(--muted);
-  font-weight:600;
-}
 
-.dropdown a:hover{
-  background:var(--blue-pale);
-  color:var(--blue);
-}
 
-.nav-actions{
-  display:flex;
-  align-items:center;
-  gap:9px;
-}
 
-.nav-actions .btn{
-  min-height:42px;
-  padding:0 15px;
-}
 
-.mobile-toggle{
-  display:none;
-  width:44px;
-  height:42px;
-  border:1px solid var(--line);
-  border-radius:8px;
-  background:var(--white);
-  color:var(--blue-dark);
-  font-size:18px;
-  cursor:pointer;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* =========================================================
    BUTTONS
    ========================================================= */
 
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:42px;
-  padding:0 16px;
-  border-radius:8px;
-  font-size:12px;
-  font-weight:800;
-}
 
-.btn-outline{
-  border:1px solid var(--blue);
-  color:var(--blue);
-  background:var(--white);
-}
 
-.btn-orange{
-  background:var(--orange);
-  color:var(--white);
-}
 
-.btn-orange:hover{
-  background:var(--blue-dark);
-}
+
+
+
+
 
 /* =========================================================
    SERVICES PAGE
@@ -241,13 +78,7 @@ main{
   padding:70px 0 100px;
 }
 
-.eyebrow{
-  color:var(--orange);
-  font-size:11px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.12em;
-}
+
 
 h1{
   font-size:clamp(40px,6vw,64px);
@@ -392,60 +223,7 @@ h1{
    RESPONSIVE NAVIGATION
    ========================================================= */
 
-@media(max-width:1120px){
 
-  .nav{
-    display:none;
-  }
-
-  .nav-inner.menu-open .nav{
-    display:flex;
-    position:absolute;
-    left:0;
-    right:0;
-    top:82px;
-    flex-direction:column;
-    align-items:stretch;
-    padding:12px;
-    background:var(--white);
-    border:1px solid var(--line);
-    border-radius:0 0 12px 12px;
-    box-shadow:var(--shadow);
-  }
-
-  .nav-inner.menu-open .nav-item{
-    width:100%;
-  }
-
-  .nav-inner.menu-open .nav-link{
-    width:100%;
-    justify-content:space-between;
-  }
-
-  .nav-inner.menu-open .dropdown{
-    position:static;
-    display:none;
-    opacity:1;
-    visibility:visible;
-    transform:none;
-    min-width:0;
-    box-shadow:none;
-    border:0;
-    padding:4px 0 8px 15px;
-  }
-
-  .nav-item.open .dropdown{
-    display:block !important;
-  }
-
-  .mobile-toggle{
-    display:block;
-  }
-
-  .nav-actions .desktop-action{
-    display:none;
-  }
-}
 
 @media(max-width:900px){
   .grid{
@@ -455,9 +233,7 @@ h1{
 
 @media(max-width:600px){
 
-  .container{
-    width:min(100% - 28px,1200px);
-  }
+  
 
   main{
     padding:55px 0 75px;
@@ -472,49 +248,25 @@ h1{
     align-items:flex-start;
   }
 
-  .nav-inner{
-    min-height:74px;
-  }
+  
 
-  .nav-inner.menu-open .nav{
-    top:74px;
-  }
+  
 
-  .brand img{
-    width:135px;
-  }
+  
 }
 
 
 /* =========================================================
    SERVICES PAGE NAVIGATION + WIDTH FIX
    ========================================================= */
-.topbar{background:var(--blue-pale);border-bottom:1px solid var(--line);color:var(--muted);font-size:12px}
-.topbar-inner{min-height:38px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.topbar-left,.topbar-right{display:flex;align-items:center;gap:10px;min-width:0}.topbar a{color:var(--blue-dark);font-weight:800;white-space:nowrap}
-#mainNav.nav{display:flex;align-items:center;justify-content:center;gap:0;flex:1 1 auto;min-width:0}
-#mainNav .nav-item{position:relative;flex:0 0 auto}
-#mainNav .nav-link{padding:13px 8px;font-size:12px;white-space:nowrap}
-#mainNav .dropdown{z-index:1200}
-.nav-actions{flex:0 0 auto}.nav-login{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 15px;border:1px solid var(--blue);border-radius:8px;background:var(--blue);color:var(--white);font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
-.nav-account-menu{position:relative}.nav-account-dropdown{position:absolute;top:calc(100% + 9px);right:0;min-width:205px;padding:8px;background:var(--white);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s ease;z-index:1200}
-.nav-account-menu:hover .nav-account-dropdown,.nav-account-menu:focus-within .nav-account-dropdown,.nav-account-menu.open .nav-account-dropdown{opacity:1;visibility:visible;transform:translateY(0)}
-.nav-account-dropdown a{display:block;padding:11px 12px;border-radius:8px;color:var(--ink);font-size:13px;font-weight:700}.nav-account-dropdown a:hover{background:var(--blue-pale);color:var(--blue)}
-@media(max-width:1270px){#mainNav .nav-link{padding-left:6px;padding-right:6px;font-size:11px}.nav-actions .btn-outline{display:none}}
-@media(max-width:1120px){.site-header{position:relative}#mainNav.nav{display:none}.nav-inner.menu-open #mainNav.nav{display:flex;position:absolute;left:0;right:0;top:82px;flex-direction:column;align-items:stretch;justify-content:flex-start;padding:12px;background:var(--white);border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;box-shadow:var(--shadow);z-index:1100}.nav-inner.menu-open .nav-item{width:100%}.nav-inner.menu-open .nav-link{width:100%;justify-content:space-between;padding:13px 12px;font-size:13px}.nav-inner.menu-open .dropdown{position:static;display:none;opacity:1;visibility:visible;transform:none;width:100%;min-width:0;box-shadow:none;border:0;padding:4px 0 8px 15px}.nav-item.open .dropdown{display:block!important}.nav-item.open .chevron{transform:rotate(180deg)}.mobile-toggle{display:block}.nav-account-dropdown{position:static;display:none;width:100%;min-width:0;margin-top:8px;opacity:1;visibility:visible;transform:none;box-shadow:none}.nav-account-menu.open .nav-account-dropdown{display:block}}
-@media(max-width:700px){.topbar-inner{min-height:auto;padding:9px 0;flex-direction:column;align-items:flex-start;gap:5px}.topbar-left,.topbar-right{flex-wrap:wrap}}
-@media(max-width:600px){.topbar-inner{font-size:11px}.nav-inner.menu-open #mainNav.nav{top:74px}.nav-actions{gap:6px}.nav-login{min-height:40px;padding:0 11px;font-size:11px}}
-
 </style>
-  <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
 <style id="services-redesign-styles">
-  body.services-page{background:var(--white);overflow-x:hidden}
+body.services-page{background:var(--white);overflow-x:hidden}
   .services-page .container{width:min(1450px,calc(100% - 48px))}
-  .services-page .topbar{background:var(--blue-darker);border:0;color:var(--blue-soft)}
   .services-page .topbar a{color:var(--white);text-decoration:none}
   .services-page .site-header{background:rgba(255,255,255,.97);backdrop-filter:blur(14px)}
   .services-page main{padding:0}
-  .services-hero{position:relative;min-height:570px;display:flex;align-items:center;overflow:hidden;color:var(--white);background:linear-gradient(90deg,rgba(16,40,75,.99),rgba(23,51,95,.92) 46%,rgba(36,70,127,.48)),url("images/service-hero.png") center/cover no-repeat}
+  .services-hero{position:relative;min-height:570px;display:flex;align-items:center;overflow:hidden;color:var(--white);background:linear-gradient(90deg,rgba(16,40,75,.99),rgba(23,51,95,.92) 46%,rgba(36,70,127,.48)),url("images/service-hero.webp") center/cover no-repeat}
   .services-hero:after{content:"";position:absolute;right:-150px;top:-220px;width:490px;height:490px;background:var(--orange);opacity:.92;transform:rotate(35deg);clip-path:polygon(42% 0,100% 0,100% 58%)}
   .services-hero-inner{position:relative;z-index:2;max-width:850px;padding:90px 0 122px}
   .services-hero .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--orange);font-size:12px}
@@ -583,8 +335,8 @@ h1{
      Applied to every phone-sized layout in this page.
      ======================================================= */
   @media(max-width:767px){
-    html{font-size:16px}
-    body{font-size:16px;line-height:1.55}
+    
+    
     .services-page .topbar{display:none}
     .services-page .container{width:calc(100% - 32px)}
 
@@ -617,7 +369,7 @@ h1{
 
     .services-hero{display:block;background:var(--blue-darker)}
     .services-hero:after{display:none}
-    .services-hero-image{display:block;width:100%;height:clamp(230px,67vw,390px);background:url("images/service-hero.png") center/cover no-repeat}
+    .services-hero-image{display:block;width:100%;height:clamp(230px,67vw,390px);background:url("images/service-hero.webp") center/cover no-repeat}
     .services-hero-inner{max-width:none;padding:36px 0 72px}
     .services-hero .eyebrow{font-size:11px}
     .services-hero h1{margin:14px 0 18px;font-size:clamp(36px,11vw,48px);letter-spacing:-.04em}
@@ -676,75 +428,45 @@ h1{
   @media(min-width:768px){.services-hero-image{display:none}}
 </style>
 </head>
-
-<body class="services-page">
-
-<div class="topbar"><div class="container topbar-inner"><div class="topbar-left"><span>Nationwide Drug &amp; Alcohol Testing</span><span>•</span><span>Operating Nationwide</span></div><div class="topbar-right"><span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a></div></div></div>
-
-<header class="site-header">
+<body class="services-page"><div class="topbar">
+<div class="container topbar-inner">
+<div class="topbar-left">
+<span>Nationwide Drug &amp; Alcohol Testing</span><span aria-hidden="true">•</span><span>Operating Nationwide</span>
+</div>
+<div class="topbar-right">
+<span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a>
+</div>
+</div>
+</div><header class="site-header">
   <div class="container nav-inner" id="navInner">
-
     <a href="index.html" class="brand" aria-label="screenings4u home">
       <img src="images/logo.png" alt="screenings4u" class="site-logo">
     </a>
-
-<nav class="nav" id="mainNav" aria-label="Main navigation"></nav>
-
+    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation"></nav>
     <div class="nav-actions">
-      <a href="services.html" class="btn btn-outline">
-        Order a Test
-      </a>
-
+      <a href="services.html" class="btn btn-outline">Order a Test</a>
       <div class="nav-account-menu">
-        <button
-          type="button"
-          class="nav-login"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Account Login
-          <span class="nav-login-chevron">▼</span>
-        </button>
-
+        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron" aria-hidden="true">▼</span></button>
         <div class="nav-account-dropdown">
-          <a href="https://portal.screenings4u.com/customer-login.html">
-            Customer Login
-          </a>
-
-          <a href="https://portal.screenings4u.com/employer-login.html">
-            Employer Login
-          </a>
+          <a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a>
+          <a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>
         </div>
       </div>
-
-      <button
-        class="mobile-toggle"
-        id="mobileToggle"
-        aria-label="Open menu"
-        aria-expanded="false">
-        ☰
-      </button>
+      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mobileNav" aria-label="Open menu" aria-expanded="false">☰</button>
     </div>
-
   </div>
 </header>
-
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
 <main>
-  <section class="services-hero"><div class="services-hero-image" role="img" aria-label="Screenings4u testing and compliance services"></div><div class="container"><div class="services-hero-inner"><div class="eyebrow">Testing, compliance &amp; training</div><h1>Find the service.<br><span>We’ll help with the next step.</span></h1><p class="lead">Browse drug and alcohol testing, DOT services, physicals, training, and professional support from one trusted nationwide partner.</p><div class="services-hero-actions"><a class="btn btn-orange" href="#service-catalog">Browse Services →</a><a class="btn btn-outline" href="contact.html">Talk With Our Team</a></div><div class="hero-assurance"><div class="assurance"><strong>Nationwide Access</strong><span>Collection locations across the country</span></div><div class="assurance"><strong>Secure Checkout</strong><span>Protected online ordering and payment</span></div><div class="assurance"><strong>Expert Support</strong><span>Help choosing the appropriate service</span></div></div></div></div></section>
-
-  <section class="catalog-section" id="service-catalog"><div class="container"><div class="catalog-panel"><div class="catalog-heading"><div class="catalog-heading-copy"><div class="catalog-kicker">Screenings4u service catalog</div><h2>Choose a service category.</h2><p>Filter the catalog, compare available services, and select an option to review its details before ordering.</p></div><div class="catalog-note">Live services and current pricing</div></div><div id="filters" class="catalog-tools" aria-label="Service categories"></div><section class="section"><h2>Testing &amp; Training</h2><div id="catalog" class="grid"><div class="empty">Loading services…</div></div></section></div></div></section>
-
-  <section class="business-section"><div class="container business-grid"><div class="business-intro"><div class="eyebrow">Professional services</div><h2>Need more than a single test?</h2><p>Build a workplace program, prepare for an audit, review policies and records, or create a customized compliance solution with our team.</p><a class="btn btn-orange" href="business-services.html">Explore Business Services →</a></div><div class="business-options"><a class="business-option" href="consulting-services.html"><span>01 / CONSULTING</span><h3>Compliance Consulting</h3><p>Guidance for policies, workflows, records, and program requirements.</p></a><a class="business-option" href="new-entrant-audit.html"><span>02 / AUDITS</span><h3>Audit Preparation</h3><p>Support preparing documentation and processes for regulatory review.</p></a><a class="business-option" href="mobile-drug-and-alcohol-testing.html"><span>03 / MOBILE</span><h3>Mobile Testing</h3><p>On-site collection and testing support for workplace needs.</p></a><a class="business-option" href="dot-specimen-collector-training.html"><span>04 / TRAINING</span><h3>Professional Training</h3><p>Training resources for collectors, employers, and regulated programs.</p></a></div></div></section>
-
-  <section class="services-cta"><div class="container services-cta-inner"><div><h2>Not sure which service is right?</h2><p>Tell us what you need and our team will help identify the appropriate next step.</p></div><a class="btn btn-light" href="contact.html">Contact screenings4u →</a></div></section>
+<section class="services-hero"><div aria-label="Screenings4u testing and compliance services" class="services-hero-image" role="img"></div><div class="container"><div class="services-hero-inner"><div class="eyebrow">Testing, compliance &amp; training</div><h1>Find the service.<br/><span>We’ll help with the next step.</span></h1><p class="lead">Browse drug and alcohol testing, DOT services, physicals, training, and professional support from one trusted nationwide partner.</p><div class="services-hero-actions"><a class="btn btn-orange" href="#service-catalog">Browse Services →</a><a class="btn btn-outline" href="contact.html">Talk With Our Team</a></div><div class="hero-assurance"><div class="assurance"><strong>Nationwide Access</strong><span>Collection locations across the country</span></div><div class="assurance"><strong>Secure Checkout</strong><span>Protected online ordering and payment</span></div><div class="assurance"><strong>Expert Support</strong><span>Help choosing the appropriate service</span></div></div></div></div></section>
+<section class="catalog-section" id="service-catalog"><div class="container"><div class="catalog-panel"><div class="catalog-heading"><div class="catalog-heading-copy"><div class="catalog-kicker">Screenings4u service catalog</div><h2>Choose a service category.</h2><p>Filter the catalog, compare available services, and select an option to review its details before ordering.</p></div><div class="catalog-note">Live services and current pricing</div></div><div aria-label="Service categories" class="catalog-tools" id="filters"></div><section class="section"><h2>Testing &amp; Training</h2><div class="grid" id="catalog"><div class="empty">Loading services…</div></div></section></div></div></section>
+<section class="business-section"><div class="container business-grid"><div class="business-intro"><div class="eyebrow">Professional services</div><h2>Need more than a single test?</h2><p>Build a workplace program, prepare for an audit, review policies and records, or create a customized compliance solution with our team.</p><a class="btn btn-orange" href="business-services.html">Explore Business Services →</a></div><div class="business-options"><a class="business-option" href="consulting-services.html"><span>01 / CONSULTING</span><h3>Compliance Consulting</h3><p>Guidance for policies, workflows, records, and program requirements.</p></a><a class="business-option" href="new-entrant-audit.html"><span>02 / AUDITS</span><h3>Audit Preparation</h3><p>Support preparing documentation and processes for regulatory review.</p></a><a class="business-option" href="mobile-drug-and-alcohol-testing.html"><span>03 / MOBILE</span><h3>Mobile Testing</h3><p>On-site collection and testing support for workplace needs.</p></a><a class="business-option" href="dot-specimen-collector-training.html"><span>04 / TRAINING</span><h3>Professional Training</h3><p>Training resources for collectors, employers, and regulated programs.</p></a></div></div></section>
 </main>
-
-<footer id="siteFooter"></footer>
-
 <script src="assets/js/test-price-list.js"></script>
 <script src="assets/js/services.js"></script>
-<script src="assets/js/navigation.js"></script>
-<script src="assets/js/footer.js"></script>
-
-</body>
+<footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
+  <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
+  <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
+  <script src="assets/js/site-ui.js?v=20260904-1"></script>
+  <script src="assets/js/footer.js?v=20260904-1"></script></body>
 </html>

@@ -1,134 +1,32 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#325aa3" />
-
-  <meta
-    name="description"
-    content="Join the screenings4u Collector Network and receive opportunities for mobile drug and alcohol testing assignments in your area."
-  >
-
-  <title>Join Our Collector Network | screenings4u</title>
-
-  <link rel="icon" type="image/png" href="images/fav.png">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  >
-
-  <style>
-    :root {
-      --orange: #ff6b00;
-      --orange-dark: #d95800;
-      --orange-soft: #fff0e6;
-
-      --blue: #325aa3;
-      --blue-dark: #24467f;
-      --blue-deep: #17335f;
-
-      --ink: #1d2d45;
-      --muted: #667892;
-
-      --surface: #f4f7fc;
-      --surface-2: #eef3f9;
-
-      --line: #d9e3f0;
-      --line-strong: #c4d3e5;
-
-      --white: #ffffff;
-
-      --max: 1440px;
-
-      --shadow-sm: 0 5px 18px rgba(23, 51, 95, 0.08);
-      --shadow: 0 18px 45px rgba(23, 51, 95, 0.12);
-
-      --radius: 18px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Inter", Arial, sans-serif;
-      color: var(--ink);
-      background: var(--white);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button,
-    input,
-    select,
-    textarea {
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#24467f" name="theme-color"/>
+<meta content="Join the screenings4u Collector Network and receive opportunities for mobile drug and alcohol testing assignments in your area." name="description"/>
+<title>Join Our Collector Network | screenings4u</title>
+<link href="images/fav.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
+  <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2"><style>
+input, select, textarea{
       font: inherit;
     }
 
-    button {
-      cursor: pointer;
-    }
+    
 
-    .container {
-      width: min(var(--max), calc(100% - 80px));
-      margin-inline: auto;
-    }
+    
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
+    
 
-      color: var(--orange);
+    
 
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-
-      margin-bottom: 14px;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 28px;
-      height: 2px;
-      background: var(--orange);
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-
-      min-height: 52px;
-      padding: 0 24px;
-
-      border-radius: 7px;
-      border: 1px solid transparent;
-
-      font-size: 14px;
-      font-weight: 800;
-
-      transition: 0.2s ease;
-    }
+    
 
     .btn-primary {
       color: #ffffff;
@@ -142,17 +40,9 @@
       transform: translateY(-1px);
     }
 
-    .btn-outline {
-      color: var(--blue-dark);
-      border-color: #b9c8db;
-      background: #ffffff;
-    }
+    
 
-    .btn-outline:hover {
-      color: var(--blue);
-      border-color: var(--blue);
-      transform: translateY(-1px);
-    }
+    
 
     /* =========================================================
        HERO
@@ -177,7 +67,7 @@
           rgba(7, 26, 49, 0.20) 82%,
           rgba(7, 26, 49, 0) 100%
         ),
-        url("images/join-collector-network-hero.png")
+        url("images/join-collector-network-hero.webp")
         center / cover no-repeat;
 
       background-color: var(--blue-deep);
@@ -332,10 +222,7 @@
       align-items: center;
     }
 
-    .intro h2,
-    .section-heading h2,
-    .process-copy h2,
-    .form-heading h2 {
+    .intro h2, .process-copy h2, .form-heading h2{
       color: var(--blue-dark);
 
       font-size: clamp(34px, 4vw, 51px);
@@ -467,19 +354,9 @@
       border-block: 1px solid var(--line);
     }
 
-    .section-heading {
-      max-width: 780px;
+    
 
-      margin-bottom: 50px;
-    }
-
-    .section-heading p {
-      max-width: 700px;
-
-      color: var(--muted);
-
-      font-size: 17px;
-    }
+    
 
     .benefit-grid {
       display: grid;
@@ -823,7 +700,7 @@
     .field textarea:focus {
       border-color: var(--blue);
 
-      box-shadow: 0 0 0 3px rgba(50, 90, 163, 0.1);
+      box-shadow: 0 0 0 3px rgba(36, 70, 127, 0.1);
     }
 
     .checkbox-group {
@@ -1045,9 +922,7 @@
     }
 
     @media (max-width: 600px) {
-      .container {
-        width: min(var(--max), calc(100% - 32px));
-      }
+      
 
       .hero {
         min-height: 680px;
@@ -1106,139 +981,46 @@
     }
 
         /* TOP BAR */
-    .topbar {
-      background: var(--blue-dark);
-      color: #dfe9f5;
-      font-size: 12px;
-    }
+    
 
-    .topbar-inner {
-      min-height: 38px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-    }
+    
 
-    .topbar-left, .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
+    
 
-    .topbar a:hover { color: var(--white); }
+    
 
     /* NAVIGATION */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,.96);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(14px);
-    }
+    
 
-    .nav-inner {
-      min-height: 82px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 26px;
-    }
+    
 
- .brand {
-  display: flex;
-  align-items: center;
-  flex: 0 0 155px;
-  width: 155px;
-}
+ 
 
-.site-logo {
-  display: block;
-  width: 145px;
-  height: auto;
-  max-height: 48px;
-  object-fit: contain;
-  object-position: left center;
-}
 
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
 
-    .nav-item {
-      position: relative;
-    }
+    
 
-    .nav-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 13px 10px;
-      color: #334d70;
-      font-size: 13px;
-      font-weight: 700;
-      border-radius: 7px;
-    }
+    
 
-    .nav-link:hover { color: var(--blue); background: var(--blue-pale); }
+    
 
-    .nav-link .chevron {
-      font-size: 10px;
-      transition: transform .2s ease;
-    }
+    
 
-    .dropdown {
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 0;
-      min-width: 255px;
-      padding: 10px;
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(6px);
-      transition: .18s ease;
-    }
+    
 
-    .nav-item:hover .dropdown,
-    .nav-item:focus-within .dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
+    
 
-    .nav-item:hover .chevron { transform: rotate(180deg); }
+    
 
-    .dropdown a {
-      display: block;
-      padding: 11px 12px;
-      border-radius: 8px;
-      font-size: 13px;
-      color: #475467;
-      font-weight: 600;
-    }
+    
 
-    .dropdown a:hover {
-      background: var(--blue-pale);
-      color: var(--blue);
-    }
+    
 
-    .nav-actions { display: flex; gap: 9px; align-items: center; }
+    
 
-    .mobile-toggle {
-      display: none;
-      width: 44px;
-      height: 42px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--white);
-    }
+    
+
+    
 
     
 .faq-answer{display:none;padding:0 21px 20px;color:var(--muted);font-size:13px;line-height:1.7}.faq-item.active .faq-answer{display:block}.faq-plus{color:var(--orange);font-size:19px}
@@ -1258,68 +1040,29 @@
 .mobile-network-actions { display: none; }
 
 @media (max-width: 767px) {
-  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-  body { min-width: 320px; font-size: 16px; overflow-x: hidden; }
-  .container { width: 100%; padding-inline: 20px; }
+  
+  
+  
 
   /* The full desktop banner is intentionally hidden on phones. */
-  .topbar,
-  .full-banner,
-  .announcement-bar,
-  .promo-banner,
-  [data-full-banner] { display: none !important; }
+  .full-banner, .announcement-bar, .promo-banner, [data-full-banner]{ display: none !important; }
 
-  .site-header { top: 0; }
-  .nav-inner { min-height: 64px; position: relative; gap: 12px; }
-  .brand { width: auto; flex: 0 1 auto; }
-  .site-logo { width: 140px; max-width: 44vw; }
-  .nav-actions { margin-left: auto; }
-  .nav-actions > .btn,
-  .nav-account-menu { display: none !important; }
-  .mobile-toggle {
-    display: inline-grid !important;
-    place-items: center;
-    flex: 0 0 44px;
-    font-size: 23px;
-    cursor: pointer;
-  }
+  
+  
+  
+  
+  
+  
+  
 
   /* Keep the desktop menu fully closed until navigation.js opens it. */
-  .nav { display: none !important; }
-  .nav-inner.menu-open .nav {
-    display: flex !important;
-    position: absolute;
-    z-index: 1001;
-    top: 64px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 4px;
-    max-height: calc(100dvh - 64px);
-    overflow-y: auto;
-    padding: 14px 20px 22px;
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: 0 0 12px 12px;
-    box-shadow: var(--shadow);
-  }
-  .nav-item { width: 100%; }
-  .nav-link { width: 100%; min-height: 46px; justify-content: space-between; }
-  .nav-inner.menu-open .dropdown {
-    position: static;
-    display: none;
-    width: 100%;
-    min-width: 0;
-    padding: 4px 0 8px 14px;
-    border: 0;
-    box-shadow: none;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-  }
-  .nav-item.open .dropdown { display: block !important; }
-  .dropdown a { min-height: 44px; }
+  
+  
+  
+  
+  
+  
+  
   .mobile-network-actions {
     display: grid;
     gap: 10px;
@@ -1356,7 +1099,7 @@
     inset: 0 0 auto;
     z-index: 0;
     height: 280px;
-    background: url("images/join-collector-network-hero.png") center / cover no-repeat;
+    background: url("images/join-collector-network-hero.webp") center / cover no-repeat;
   }
   .hero::after { display: none; }
   .hero-inner {
@@ -1386,12 +1129,7 @@
   .application,
   .faq,
   .cta { padding-block: 54px; }
-  .intro h2,
-  .section-heading h2,
-  .network h2,
-  .process h2,
-  .form-copy h2,
-  .cta h2 { font-size: clamp(1.8rem, 8vw, 2.35rem); line-height: 1.1; }
+  .intro h2, .network h2, .process h2, .form-copy h2, .cta h2{ font-size: clamp(1.8rem, 8vw, 2.35rem); line-height: 1.1; }
   .intro-grid,
   .benefit-grid,
   .network-grid,
@@ -1422,7 +1160,7 @@
 }
 
 @media (max-width: 380px) {
-  .container { padding-inline: 16px; }
+  
   .hero { padding-top: 235px; }
   .hero::before { height: 235px; }
   .hero h1 { font-size: 2rem; }
@@ -1433,1329 +1171,773 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
+  
+  *::before, *::after{
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
 }
-
-  </style>
-
+</style>
 </head>
-
-<body>
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <div class="topbar-left">
-        <span>Nationwide Drug & Alcohol Testing</span>
-        <span>•</span>
-        <span>Operating Nationwide</span>
-      </div>
-      <div class="topbar-right">
-        <span>Mon–Fri, 8AM–8PM CST</span>
-        <a href="tel:7732457009">(773) 245-7009</a>
-      </div>
-    </div>
-  </div>
-
-<header class="site-header">
+<body><div class="topbar">
+<div class="container topbar-inner">
+<div class="topbar-left">
+<span>Nationwide Drug &amp; Alcohol Testing</span><span aria-hidden="true">•</span><span>Operating Nationwide</span>
+</div>
+<div class="topbar-right">
+<span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a>
+</div>
+</div>
+</div><header class="site-header">
   <div class="container nav-inner" id="navInner">
-
     <a href="index.html" class="brand" aria-label="screenings4u home">
       <img src="images/logo.png" alt="screenings4u" class="site-logo">
     </a>
-
-<nav class="nav" id="mainNav" aria-label="Main navigation"></nav>
-
+    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation"></nav>
     <div class="nav-actions">
-      <a href="services.html" class="btn btn-outline">
-        Order a Test
-      </a>
-
+      <a href="services.html" class="btn btn-outline">Order a Test</a>
       <div class="nav-account-menu">
-        <button
-          type="button"
-          class="nav-login"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Account Login
-          <span class="nav-login-chevron">▼</span>
-        </button>
-
+        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron" aria-hidden="true">▼</span></button>
         <div class="nav-account-dropdown">
-          <a href="https://portal.screenings4u.com/customer-login.html">
-            Customer Login
-          </a>
-
-          <a href="https://portal.screenings4u.com/employer-login.html">
-            Employer Login
-          </a>
+          <a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a>
+          <a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>
         </div>
       </div>
-
-      <button
-        class="mobile-toggle"
-        id="mobileToggle"
-        type="button"
-        aria-label="Open menu"
-        aria-controls="mainNav"
-        aria-expanded="false">
-        ☰
-      </button>
+      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mobileNav" aria-label="Open menu" aria-expanded="false">☰</button>
     </div>
-
   </div>
 </header>
-
-  <main>
-
-    <!-- =======================================================
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
+<main>
+<!-- =======================================================
          HERO
     ======================================================== -->
-
-    <section class="hero">
-
-      <div class="container hero-inner">
-
-        <div class="hero-copy">
-
-          <span class="eyebrow">
+<section class="hero">
+<div class="container hero-inner">
+<div class="hero-copy">
+<span class="eyebrow">
             Collector Opportunities
           </span>
-
-          <h1>
+<h1>
             Join the
             <span>screenings4u</span>
             Collector Network.
           </h1>
-
-          <p class="hero-lead">
+<p class="hero-lead">
             Expand your opportunities with a growing network of
             professional collectors supporting drug and alcohol
             testing assignments across the United States.
           </p>
-
-          <div class="hero-actions">
-
-            <a
-              href="#join-network"
-              class="btn btn-primary"
-            >
+<div class="hero-actions">
+<a class="btn btn-primary" href="#join-network">
               Join the Network →
             </a>
-
-            <a
-              href="#how-it-works"
-              class="btn btn-outline"
-            >
+<a class="btn btn-outline" href="#how-it-works">
               How It Works →
             </a>
-
-          </div>
-
-          <div class="hero-features">
-
-            <div class="hero-feature">
-              <strong>Nationwide Network</strong>
-              <small>
+</div>
+<div class="hero-features">
+<div class="hero-feature">
+<strong>Nationwide Network</strong>
+<small>
                 Opportunities across the United States
               </small>
-            </div>
-
-            <div class="hero-feature">
-              <strong>Flexible Assignments</strong>
-              <small>
+</div>
+<div class="hero-feature">
+<strong>Flexible Assignments</strong>
+<small>
                 Work opportunities based on your availability
               </small>
-            </div>
-
-            <div class="hero-feature">
-              <strong>Professional Network</strong>
-              <small>
+</div>
+<div class="hero-feature">
+<strong>Professional Network</strong>
+<small>
                 Built for qualified collection professionals
               </small>
-            </div>
-
-            <div class="hero-feature">
-              <strong>Growing Coverage</strong>
-              <small>
+</div>
+<div class="hero-feature">
+<strong>Growing Coverage</strong>
+<small>
                 Help us expand access where testing is needed
               </small>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- =======================================================
          INTRO
     ======================================================== -->
-
-    <section class="intro">
-
-      <div class="container intro-grid">
-
-        <div class="intro-copy">
-
-          <span class="eyebrow">
+<section class="intro">
+<div class="container intro-grid">
+<div class="intro-copy">
+<span class="eyebrow">
             Expand Your Opportunities
           </span>
-
-          <h2>
+<h2>
             Put your collection experience to work when opportunities arise.
           </h2>
-
-          <p>
+<p>
             screenings4u is building a nationwide network of qualified
             collection professionals who can help support workplace,
             DOT and other drug and alcohol testing needs.
           </p>
-
-          <p>
+<p>
             By joining the network, you can provide your professional
             information and service capabilities so our team can identify
             potential opportunities in your coverage area.
           </p>
-
-          <ul class="check-list">
-
-            <li>
+<ul class="check-list">
+<li>
               Receive notifications about potential assignments
               in your service area
             </li>
-
-            <li>
+<li>
               Share the collection services you are qualified
               to perform
             </li>
-
-            <li>
+<li>
               Identify mobile and fixed-location capabilities
             </li>
-
-            <li>
+<li>
               Provide coverage information for your local market
             </li>
-
-            <li>
+<li>
               Join a growing professional screening network
             </li>
-
-          </ul>
-
-        </div>
-
-
-        <aside class="intro-card">
-
-          <h3>
+</ul>
+</div>
+<aside class="intro-card">
+<h3>
             One network. More potential opportunities.
           </h3>
-
-          <p>
+<p>
             Your information helps screenings4u understand where
             qualified collectors are available and what services
             they can provide.
           </p>
-
-          <div class="stat-grid">
-
-            <div class="stat-box">
-              <strong>
+<div class="stat-grid">
+<div class="stat-box">
+<strong>
                 Mobile Collection
               </strong>
-
-              <span>
+<span>
                 Support employers and testing events at off-site locations.
               </span>
-            </div>
-
-            <div class="stat-box">
-              <strong>
+</div>
+<div class="stat-box">
+<strong>
                 Fixed Locations
               </strong>
-
-              <span>
+<span>
                 Tell us about collection sites where clients can be served.
               </span>
-            </div>
-
-            <div class="stat-box">
-              <strong>
+</div>
+<div class="stat-box">
+<strong>
                 Multiple Services
               </strong>
-
-              <span>
+<span>
                 Share the types of collection services you provide.
               </span>
-            </div>
-
-            <div class="stat-box">
-              <strong>
+</div>
+<div class="stat-box">
+<strong>
                 Local Coverage
               </strong>
-
-              <span>
+<span>
                 Help us identify the geographic areas you can support.
               </span>
-            </div>
-
-          </div>
-
-        </aside>
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
+</div>
+</div>
+</aside>
+</div>
+</section>
+<!-- =======================================================
          BENEFITS
     ======================================================== -->
-
-    <section class="benefits">
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <span class="eyebrow">
+<section class="benefits">
+<div class="container">
+<div class="section-heading">
+<span class="eyebrow">
             Why Join
           </span>
-
-          <h2>
+<h2>
             Build new opportunities around the services you already provide.
           </h2>
-
-          <p>
+<p>
             The screenings4u Collector Network is designed to connect
             qualified professionals with potential testing assignments
             when needs arise in their service areas.
           </p>
-
-        </div>
-
-
-        <div class="benefit-grid">
-
-          <article class="benefit-card">
-
-            <div class="benefit-number">
+</div>
+<div class="benefit-grid">
+<article class="benefit-card">
+<div class="benefit-number">
               01
             </div>
-
-            <h3>
+<h3>
               Assignment Opportunities
             </h3>
-
-            <p>
+<p>
               Receive information about potential testing assignments
               that match your service area and capabilities.
             </p>
-
-          </article>
-
-
-          <article class="benefit-card">
-
-            <div class="benefit-number">
+</article>
+<article class="benefit-card">
+<div class="benefit-number">
               02
             </div>
-
-            <h3>
+<h3>
               Flexible Opportunities
             </h3>
-
-            <p>
+<p>
               Network opportunities can complement your existing
               collection business and schedule.
             </p>
-
-          </article>
-
-
-          <article class="benefit-card">
-
-            <div class="benefit-number">
+</article>
+<article class="benefit-card">
+<div class="benefit-number">
               03
             </div>
-
-            <h3>
+<h3>
               Compliance Focus
             </h3>
-
-            <p>
+<p>
               Join a network built around professional workplace
               screening and collection support.
             </p>
-
-          </article>
-
-
-          <article class="benefit-card">
-
-            <div class="benefit-number">
+</article>
+<article class="benefit-card">
+<div class="benefit-number">
               04
             </div>
-
-            <h3>
+<h3>
               Extended Operations
             </h3>
-
-            <p>
+<p>
               Some collection needs can arise outside traditional
               business hours depending on client requirements.
             </p>
-
-          </article>
-
-
-          <article class="benefit-card">
-
-            <div class="benefit-number">
+</article>
+<article class="benefit-card">
+<div class="benefit-number">
               05
             </div>
-
-            <h3>
+<h3>
               Nationwide Growth
             </h3>
-
-            <p>
+<p>
               Be part of a growing network designed to expand
               professional testing coverage across the country.
             </p>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
+</article>
+</div>
+</div>
+</section>
+<!-- =======================================================
          WHO SHOULD JOIN
     ======================================================== -->
-
-    <section class="network">
-
-      <div class="container network-grid">
-
-        <div class="network-copy">
-
-          <span class="eyebrow">
+<section class="network">
+<div class="container network-grid">
+<div class="network-copy">
+<span class="eyebrow">
             Who Should Join
           </span>
-
-          <h2>
+<h2>
             Professional collectors and collection providers.
           </h2>
-
-          <p>
+<p>
             We are interested in learning about qualified professionals
             and organizations that provide drug and alcohol testing
             collection services.
           </p>
-
-          <p>
+<p>
             Your available qualifications, collection capabilities,
             location and coverage area help us understand how your
             services may fit future assignment needs.
           </p>
-
-        </div>
-
-
-        <div class="qualification-grid">
-
-          <article class="qualification-card">
-
-            <h3>
+</div>
+<div class="qualification-grid">
+<article class="qualification-card">
+<h3>
               Mobile Collectors
             </h3>
-
-            <p>
+<p>
               Professionals available to travel to employer locations,
               worksites or other approved testing locations.
             </p>
-
-          </article>
-
-
-          <article class="qualification-card">
-
-            <h3>
+</article>
+<article class="qualification-card">
+<h3>
               Collection Sites
             </h3>
-
-            <p>
+<p>
               Fixed locations with established hours and the ability
               to support scheduled testing collections.
             </p>
-
-          </article>
-
-
-          <article class="qualification-card">
-
-            <h3>
+</article>
+<article class="qualification-card">
+<h3>
               DOT Collection Professionals
             </h3>
-
-            <p>
+<p>
               Collectors with qualifications and experience supporting
               DOT-regulated testing programs.
             </p>
-
-          </article>
-
-
-          <article class="qualification-card">
-
-            <h3>
+</article>
+<article class="qualification-card">
+<h3>
               Specialized Collection Services
             </h3>
-
-            <p>
+<p>
               Providers offering services such as hair, oral fluid,
               alcohol or other authorized testing collections.
             </p>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
+</article>
+</div>
+</div>
+</section>
+<!-- =======================================================
          HOW IT WORKS
     ======================================================== -->
-
-    <section
-      class="process"
-      id="how-it-works"
-    >
-
-      <div class="container process-grid">
-
-        <div class="process-copy">
-
-          <span class="eyebrow">
+<section class="process" id="how-it-works">
+<div class="container process-grid">
+<div class="process-copy">
+<span class="eyebrow">
             How It Works
           </span>
-
-          <h2>
+<h2>
             A simple process to join the network.
           </h2>
-
-          <p>
+<p>
             Start by telling us about your collection services,
             qualifications and coverage area. Our team can use that
             information when evaluating future testing needs.
           </p>
-
-        </div>
-
-
-        <div class="steps">
-
-          <article class="step">
-
-            <div class="step-number">
+</div>
+<div class="steps">
+<article class="step">
+<div class="step-number">
               01
             </div>
-
-            <div>
-              <h3>
+<div>
+<h3>
                 Complete Your Profile
               </h3>
-
-              <p>
+<p>
                 Provide your contact information, business details
                 and the geographic areas you serve.
               </p>
-            </div>
-
-          </article>
-
-
-          <article class="step">
-
-            <div class="step-number">
+</div>
+</article>
+<article class="step">
+<div class="step-number">
               02
             </div>
-
-            <div>
-              <h3>
+<div>
+<h3>
                 Share Your Capabilities
               </h3>
-
-              <p>
+<p>
                 Let us know what types of collection services,
                 testing support and scheduling availability you provide.
               </p>
-            </div>
-
-          </article>
-
-
-          <article class="step">
-
-            <div class="step-number">
+</div>
+</article>
+<article class="step">
+<div class="step-number">
               03
             </div>
-
-            <div>
-              <h3>
+<div>
+<h3>
                 Join the Network
               </h3>
-
-              <p>
+<p>
                 Your information is added to the collector network
                 for consideration when opportunities arise in areas
                 you may be able to support.
               </p>
-            </div>
-
-          </article>
-
-
-          <article class="step">
-
-            <div class="step-number">
+</div>
+</article>
+<article class="step">
+<div class="step-number">
               04
             </div>
-
-            <div>
-              <h3>
+<div>
+<h3>
                 Receive Opportunity Notifications
               </h3>
-
-              <p>
+<p>
                 When appropriate assignments become available,
                 our team may contact qualified providers in the
                 relevant service area.
               </p>
-            </div>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- =======================================================
          APPLICATION
     ======================================================== -->
-
-    <section
-      class="application"
-      id="join-network"
-    >
-
-      <div class="container application-layout">
-
-        <div class="form-copy">
-
-          <span class="eyebrow">
+<section class="application" id="join-network">
+<div class="container application-layout">
+<div class="form-copy">
+<span class="eyebrow">
             Join the Network
           </span>
-
-          <h2>
+<h2>
             Tell us about your collection services.
           </h2>
-
-          <p>
+<p>
             Complete the information below so we can learn more
             about your business, qualifications and coverage area.
           </p>
-
-          <div class="form-note">
+<div class="form-note">
             Submitting this form expresses your interest in joining
             the screenings4u Collector Network. Submission does not
             guarantee assignments or establish an employment relationship.
           </div>
-
-        </div>
-
-
-        <form
-          class="application-form"
-          id="collectorNetworkForm"
-        >
-
-          <!-- PERSONAL INFORMATION -->
-
-          <div class="form-section">
-
-            <h3 class="form-section-title">
+</div>
+<form class="application-form" id="collectorNetworkForm">
+<!-- PERSONAL INFORMATION -->
+<div class="form-section">
+<h3 class="form-section-title">
               Your Information
             </h3>
-
-            <div class="form-grid">
-
-              <div class="field">
-                <label for="firstName">
+<div class="form-grid">
+<div class="field">
+<label for="firstName">
                   First Name *
                 </label>
-
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  required
-                >
-              </div>
-
-
-              <div class="field">
-                <label for="lastName">
+<input id="firstName" name="firstName" required="" type="text"/>
+</div>
+<div class="field">
+<label for="lastName">
                   Last Name *
                 </label>
-
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  required
-                >
-              </div>
-
-
-              <div class="field">
-                <label for="email">
+<input id="lastName" name="lastName" required="" type="text"/>
+</div>
+<div class="field">
+<label for="email">
                   Email Address *
                 </label>
-
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                >
-              </div>
-
-
-              <div class="field">
-                <label for="phone">
+<input id="email" name="email" required="" type="email"/>
+</div>
+<div class="field">
+<label for="phone">
                   Phone Number *
                 </label>
-
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  required
-                >
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- BUSINESS INFORMATION -->
-
-          <div class="form-section">
-
-            <h3 class="form-section-title">
+<input id="phone" name="phone" required="" type="tel"/>
+</div>
+</div>
+</div>
+<!-- BUSINESS INFORMATION -->
+<div class="form-section">
+<h3 class="form-section-title">
               Business Information
             </h3>
-
-            <div class="form-grid">
-
-              <div class="field full-width">
-
-                <label for="businessName">
+<div class="form-grid">
+<div class="field full-width">
+<label for="businessName">
                   Business Name
                 </label>
-
-                <input
-                  type="text"
-                  id="businessName"
-                  name="businessName"
-                >
-
-              </div>
-
-
-              <div class="field">
-
-                <label for="city">
+<input id="businessName" name="businessName" type="text"/>
+</div>
+<div class="field">
+<label for="city">
                   City *
                 </label>
-
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  required
-                >
-
-              </div>
-
-
-              <div class="field">
-
-                <label for="state">
+<input id="city" name="city" required="" type="text"/>
+</div>
+<div class="field">
+<label for="state">
                   State *
                 </label>
-
-                <select
-                  id="state"
-                  name="state"
-                  required
-                >
-                  <option value="">
+<select id="state" name="state" required="">
+<option value="">
                     Select State
                   </option>
-
-                  <option>Alabama</option>
-                  <option>Alaska</option>
-                  <option>Arizona</option>
-                  <option>Arkansas</option>
-                  <option>California</option>
-                  <option>Colorado</option>
-                  <option>Connecticut</option>
-                  <option>Delaware</option>
-                  <option>Florida</option>
-                  <option>Georgia</option>
-                  <option>Hawaii</option>
-                  <option>Idaho</option>
-                  <option>Illinois</option>
-                  <option>Indiana</option>
-                  <option>Iowa</option>
-                  <option>Kansas</option>
-                  <option>Kentucky</option>
-                  <option>Louisiana</option>
-                  <option>Maine</option>
-                  <option>Maryland</option>
-                  <option>Massachusetts</option>
-                  <option>Michigan</option>
-                  <option>Minnesota</option>
-                  <option>Mississippi</option>
-                  <option>Missouri</option>
-                  <option>Montana</option>
-                  <option>Nebraska</option>
-                  <option>Nevada</option>
-                  <option>New Hampshire</option>
-                  <option>New Jersey</option>
-                  <option>New Mexico</option>
-                  <option>New York</option>
-                  <option>North Carolina</option>
-                  <option>North Dakota</option>
-                  <option>Ohio</option>
-                  <option>Oklahoma</option>
-                  <option>Oregon</option>
-                  <option>Pennsylvania</option>
-                  <option>Rhode Island</option>
-                  <option>South Carolina</option>
-                  <option>South Dakota</option>
-                  <option>Tennessee</option>
-                  <option>Texas</option>
-                  <option>Utah</option>
-                  <option>Vermont</option>
-                  <option>Virginia</option>
-                  <option>Washington</option>
-                  <option>West Virginia</option>
-                  <option>Wisconsin</option>
-                  <option>Wyoming</option>
-
-                </select>
-
-              </div>
-
-
-              <div class="field">
-
-                <label for="zipCode">
+<option>Alabama</option>
+<option>Alaska</option>
+<option>Arizona</option>
+<option>Arkansas</option>
+<option>California</option>
+<option>Colorado</option>
+<option>Connecticut</option>
+<option>Delaware</option>
+<option>Florida</option>
+<option>Georgia</option>
+<option>Hawaii</option>
+<option>Idaho</option>
+<option>Illinois</option>
+<option>Indiana</option>
+<option>Iowa</option>
+<option>Kansas</option>
+<option>Kentucky</option>
+<option>Louisiana</option>
+<option>Maine</option>
+<option>Maryland</option>
+<option>Massachusetts</option>
+<option>Michigan</option>
+<option>Minnesota</option>
+<option>Mississippi</option>
+<option>Missouri</option>
+<option>Montana</option>
+<option>Nebraska</option>
+<option>Nevada</option>
+<option>New Hampshire</option>
+<option>New Jersey</option>
+<option>New Mexico</option>
+<option>New York</option>
+<option>North Carolina</option>
+<option>North Dakota</option>
+<option>Ohio</option>
+<option>Oklahoma</option>
+<option>Oregon</option>
+<option>Pennsylvania</option>
+<option>Rhode Island</option>
+<option>South Carolina</option>
+<option>South Dakota</option>
+<option>Tennessee</option>
+<option>Texas</option>
+<option>Utah</option>
+<option>Vermont</option>
+<option>Virginia</option>
+<option>Washington</option>
+<option>West Virginia</option>
+<option>Wisconsin</option>
+<option>Wyoming</option>
+</select>
+</div>
+<div class="field">
+<label for="zipCode">
                   ZIP Code
                 </label>
-
-                <input
-                  type="text"
-                  id="zipCode"
-                  name="zipCode"
-                >
-
-              </div>
-
-
-              <div class="field">
-
-                <label for="mobileAvailability">
+<input id="zipCode" name="zipCode" type="text"/>
+</div>
+<div class="field">
+<label for="mobileAvailability">
                   Do You Provide Mobile Collection?
                 </label>
-
-                <select
-                  id="mobileAvailability"
-                  name="mobileAvailability"
-                >
-                  <option value="">
+<select id="mobileAvailability" name="mobileAvailability">
+<option value="">
                     Select an Option
                   </option>
-
-                  <option value="yes">
+<option value="yes">
                     Yes
                   </option>
-
-                  <option value="no">
+<option value="no">
                     No
                   </option>
-
-                </select>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- SERVICES -->
-
-          <div class="form-section">
-
-            <h3 class="form-section-title">
+</select>
+</div>
+</div>
+</div>
+<!-- SERVICES -->
+<div class="form-section">
+<h3 class="form-section-title">
               Collection Services
             </h3>
-
-            <div class="form-grid">
-
-              <div class="field full-width">
-
-                <label for="services">
+<div class="form-grid">
+<div class="field full-width">
+<label for="services">
                   What Collection Services Do You Provide?
                 </label>
-
-                <textarea
-                  id="services"
-                  name="services"
-                  placeholder="Example: DOT urine collection, non-DOT collection, breath alcohol testing, oral fluid collection, hair collection..."
-                ></textarea>
-
-              </div>
-
-
-              <div class="field">
-
-                <label for="dotExperience">
+<textarea id="services" name="services" placeholder="Example: DOT urine collection, non-DOT collection, breath alcohol testing, oral fluid collection, hair collection..."></textarea>
+</div>
+<div class="field">
+<label for="dotExperience">
                   DOT Collection Experience
                 </label>
-
-                <select
-                  id="dotExperience"
-                  name="dotExperience"
-                >
-                  <option value="">
+<select id="dotExperience" name="dotExperience">
+<option value="">
                     Select an Option
                   </option>
-
-                  <option value="yes">
+<option value="yes">
                     Yes
                   </option>
-
-                  <option value="no">
+<option value="no">
                     No
                   </option>
-
-                </select>
-
-              </div>
-
-
-              <div class="field">
-
-                <label for="availability">
+</select>
+</div>
+<div class="field">
+<label for="availability">
                   General Availability
                 </label>
-
-                <select
-                  id="availability"
-                  name="availability"
-                >
-                  <option value="">
+<select id="availability" name="availability">
+<option value="">
                     Select an Option
                   </option>
-
-                  <option value="business-hours">
+<option value="business-hours">
                     Business Hours
                   </option>
-
-                  <option value="extended-hours">
+<option value="extended-hours">
                     Extended Hours
                   </option>
-
-                  <option value="24-7">
+<option value="24-7">
                     24/7 Availability
                   </option>
-
-                  <option value="varies">
+<option value="varies">
                     Varies
                   </option>
-
-                </select>
-
-              </div>
-
-
-              <div class="field full-width">
-
-                <label for="coverageArea">
+</select>
+</div>
+<div class="field full-width">
+<label for="coverageArea">
                   What Geographic Area Do You Cover?
                 </label>
-
-                <textarea
-                  id="coverageArea"
-                  name="coverageArea"
-                  placeholder="List cities, counties, ZIP codes or other areas you are able to serve."
-                ></textarea>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- ADDITIONAL INFORMATION -->
-
-          <div class="form-section">
-
-            <h3 class="form-section-title">
+<textarea id="coverageArea" name="coverageArea" placeholder="List cities, counties, ZIP codes or other areas you are able to serve."></textarea>
+</div>
+</div>
+</div>
+<!-- ADDITIONAL INFORMATION -->
+<div class="form-section">
+<h3 class="form-section-title">
               Additional Information
             </h3>
-
-            <div class="form-grid full">
-
-              <div class="field">
-
-                <label for="additionalNotes">
+<div class="form-grid full">
+<div class="field">
+<label for="additionalNotes">
                   Anything Else We Should Know?
                 </label>
-
-                <textarea
-                  id="additionalNotes"
-                  name="additionalNotes"
-                  placeholder="Tell us about additional qualifications, certifications, services or scheduling capabilities."
-                ></textarea>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <!-- CONSENT -->
-
-          <div class="checkbox-group">
-
-            <label class="checkbox-option">
-
-              <input
-                type="checkbox"
-                id="accuracyConfirmation"
-                required
-              >
-
-              <span>
+<textarea id="additionalNotes" name="additionalNotes" placeholder="Tell us about additional qualifications, certifications, services or scheduling capabilities."></textarea>
+</div>
+</div>
+</div>
+<!-- CONSENT -->
+<div class="checkbox-group">
+<label class="checkbox-option">
+<input id="accuracyConfirmation" required="" type="checkbox"/>
+<span>
                 I confirm that the information provided is accurate
                 to the best of my knowledge.
               </span>
-
-            </label>
-
-
-            <label class="checkbox-option">
-
-              <input
-                type="checkbox"
-                id="networkConsent"
-                required
-              >
-
-              <span>
+</label>
+<label class="checkbox-option">
+<input id="networkConsent" required="" type="checkbox"/>
+<span>
                 I understand that submitting this form does not
                 guarantee assignments or employment with screenings4u.
               </span>
-
-            </label>
-
-          </div>
-
-
-          <button
-            type="submit"
-            class="btn btn-primary form-submit"
-          >
+</label>
+</div>
+<button class="btn btn-primary form-submit" type="submit">
             Submit Collector Network Application →
           </button>
-
-
-          <div
-            class="form-success"
-            id="formSuccess"
-            role="status"
-          >
+<div class="form-success" id="formSuccess" role="status">
             Thank you for your interest in joining the screenings4u
             Collector Network. Your information has been received.
           </div>
-
-        </form>
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
+</form>
+</div>
+</section>
+<!-- =======================================================
          FAQ
     ======================================================== -->
-
-    <section class="faq">
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <span class="eyebrow">
+<section class="faq">
+<div class="container">
+<div class="section-heading">
+<span class="eyebrow">
             Frequently Asked Questions
           </span>
-
-          <h2>
+<h2>
             Questions about joining the network?
           </h2>
-
-        </div>
-
-
-        <div class="faq-list">
-
-          <div class="faq-item">
-
-            <button
-              class="faq-question"
-              type="button"
-              data-faq-toggle
-              aria-expanded="false"
-            >
+</div>
+<div class="faq-list">
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">
               Who can join the screenings4u Collector Network?
 
               <span class="faq-plus">
                 +
               </span>
-
-            </button>
-
-            <div class="faq-answer">
+</button>
+<div class="faq-answer">
               The network is intended for professional collectors,
               collection sites and qualified providers that offer
               drug and alcohol testing collection services.
             </div>
-
-          </div>
-
-
-          <div class="faq-item">
-
-            <button
-              class="faq-question"
-              type="button"
-              data-faq-toggle
-              aria-expanded="false"
-            >
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">
               Does joining the network guarantee assignments?
 
               <span class="faq-plus">
                 +
               </span>
-
-            </button>
-
-            <div class="faq-answer">
+</button>
+<div class="faq-answer">
               No. Joining the network allows screenings4u to learn
               about your services and coverage area. Assignment
               availability depends on client needs, location and
               service requirements.
             </div>
-
-          </div>
-
-
-          <div class="faq-item">
-
-            <button
-              class="faq-question"
-              type="button"
-              data-faq-toggle
-              aria-expanded="false"
-            >
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">
               Can mobile collectors join?
 
               <span class="faq-plus">
                 +
               </span>
-
-            </button>
-
-            <div class="faq-answer">
+</button>
+<div class="faq-answer">
               Yes. The application allows you to identify whether
               you provide mobile collection services and describe
               the geographic areas you can cover.
             </div>
-
-          </div>
-
-
-          <div class="faq-item">
-
-            <button
-              class="faq-question"
-              type="button"
-              data-faq-toggle
-              aria-expanded="false"
-            >
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">
               What information should I provide?
 
               <span class="faq-plus">
                 +
               </span>
-
-            </button>
-
-            <div class="faq-answer">
+</button>
+<div class="faq-answer">
               Provide accurate contact information, your business
               details, available collection services, qualifications
               and the areas where you are able to provide services.
             </div>
-
-          </div>
-
-
-          <div class="faq-item">
-
-            <button
-              class="faq-question"
-              type="button"
-              data-faq-toggle
-              aria-expanded="false"
-            >
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">
               What happens after I submit the form?
 
               <span class="faq-plus">
                 +
               </span>
-
-            </button>
-
-            <div class="faq-answer">
+</button>
+<div class="faq-answer">
               Your information can be reviewed and maintained as part
               of the collector network. Qualified providers may be
               contacted when appropriate opportunities arise in areas
               they are able to support.
             </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
+</div>
+</div>
+</div>
+</section>
+<!-- =======================================================
          CTA
     ======================================================== -->
-
-    <section class="cta">
-
-      <div class="container cta-inner">
-
-        <div>
-
-          <h2>
-            Ready to join the network?
-          </h2>
-
-          <p>
-            Tell us about your collection services and coverage area.
-          </p>
-
-        </div>
-
-
-        <div class="cta-actions">
-
-          <a
-            href="#join-network"
-            class="btn btn-primary"
-          >
-            Join the Network →
-          </a>
-
-
-          <a
-            href="contact.html"
-            class="btn btn-outline"
-          >
-            Contact Us →
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- =========================================================
+</main>
+<!-- =========================================================
        SHARED FOOTER
   ========================================================== -->
-
-  <footer id="siteFooter"></footer>
-
-
-  <!-- =========================================================
+<!-- =========================================================
        SCRIPTS
   ========================================================== -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/site-config.js"></script>
-
-<script src="assets/js/navigation.js"></script>
-<script src="assets/js/footer.js"></script>
 <script src="assets/js/collector-network.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-  const mainNav = document.getElementById("mainNav");
-
-  if (mainNav && !mainNav.querySelector(".mobile-network-actions")) {
-    const mobileActions = document.createElement("div");
-    mobileActions.className = "mobile-network-actions";
-    mobileActions.innerHTML = '<a href="services.html">Order a Test</a><a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a><a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>';
-    mainNav.appendChild(mobileActions);
-  }
-
+<script>document.addEventListener("DOMContentLoaded", function () {
   const faqButtons = document.querySelectorAll("[data-faq-toggle]");
 
   faqButtons.forEach(function (button) {
@@ -2797,6 +1979,9 @@
   });
 });
 </script>
-
-</body>
+<footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
+  <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
+  <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
+  <script src="assets/js/site-ui.js?v=20260904-1"></script>
+  <script src="assets/js/footer.js?v=20260904-1"></script></body>
 </html>

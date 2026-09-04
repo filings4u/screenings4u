@@ -1,291 +1,89 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="theme-color" content="#325aa3" />
+<meta charset="utf-8"/>
+<meta content="#24467f" name="theme-color"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Learn about screenings4u and our approach to personal testing, workplace services, DOT support, and professional training." name="description"/>
+<title>About screenings4u | Screening Made Clearer</title>
+<link href="images/fav.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
+  <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2"><style>
+input, select, textarea{ font: inherit; }
+    
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Learn about screenings4u and our approach to personal testing, workplace services, DOT support, and professional training.">
-  <title>About screenings4u | Screening Made Clearer</title>
-  <link rel="icon" type="image/png" href="images/fav.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
 
-  <style>
-    :root {
-  --orange: #ff6b00;
-  --blue: #325aa3;
+    
 
-  /* Orange family */
-  --orange-dark: #d95800;
-  --orange-deep: #b84700;
-  --orange-soft: #fff0e6;
-  --orange-pale: #fff7f2;
+    
 
-  /* Blue family */
-  --blue-dark: #24467f;
-  --blue-deep: #17335f;
-  --blue-darker: #10284b;
-  --blue-soft: #e8eff9;
-  --blue-pale: #f4f7fc;
+    
 
-  /* Blue-tinted neutrals */
-  --ink: #1d2d45;
-  --muted: #667892;
-  --surface: #f4f7fc;
-  --surface-2: #eef3f9;
-  --line: #d9e3f0;
-  --line-strong: #c4d3e5;
-  --white: #ffffff;
+    
 
-  /* Brand-matched depth */
-  --shadow-sm: 0 5px 18px rgba(23, 51, 95, .08);
-  --shadow: 0 18px 45px rgba(23, 51, 95, .12);
-  --shadow-lg: 0 28px 70px rgba(23, 51, 95, .16);
+    
 
-  --max: 1440px;
-  --radius: 18px;
-}
+    
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
 
-    html { scroll-behavior: smooth; }
+    
 
-    body {
-      font-family: Inter, Arial, sans-serif;
-      color: var(--ink);
-      background: var(--white);
-      line-height: 1.55;
-      overflow-x: hidden;
-    }
+    
 
-    a { color: inherit; text-decoration: none; }
-    button, input, select, textarea { font: inherit; }
-    button { cursor: pointer; }
+    
 
-    .container {
-      width: min(var(--max), calc(100% - 80px));
-      margin-inline: auto;
-    }
+    
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      color: var(--orange);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 28px;
-      height: 2px;
-      background: var(--orange);
-    }
-
-    .section-heading {
-      max-width: 780px;
-      margin-bottom: 48px;
-    }
-
-    .section-heading h2 {
-      color: var(--blue-dark);
-      font-size: clamp(34px, 4vw, 52px);
-      line-height: 1.08;
-      letter-spacing: -.035em;
-      margin-bottom: 16px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      font-size: 17px;
-      max-width: 690px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      min-height: 50px;
-      padding: 0 22px;
-      border-radius: 7px;
-      border: 1px solid transparent;
-      font-size: 14px;
-      font-weight: 800;
-      transition: .2s ease;
-    }
-
-    .btn-orange {
-      color: var(--white);
-      background: var(--orange);
-      box-shadow: 0 9px 25px rgba(255,107,0,.20);
-    }
-
-    .btn-orange:hover {
-      background: var(--blue-dark);
-      transform: translateY(-1px);
-    }
-
-    .btn-outline {
-      color: var(--blue);
-      border-color: var(--line-strong);
-      background: rgba(255,255,255,.78);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--blue);
-      color: var(--white);
-      background: var(--blue);
-      transform: translateY(-1px);
-    }
-
-    .btn-white {
-      color: var(--blue-dark);
-      background: var(--white);
-    }
-
-    .btn-white:hover { transform: translateY(-1px); }
+    
 
     /* TOP BAR */
-    .topbar {
-      background: var(--blue-dark);
-      color: #dfe9f5;
-      font-size: 12px;
-    }
+    
 
-    .topbar-inner {
-      min-height: 38px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-    }
+    
 
-    .topbar-left, .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
+    
 
-    .topbar a:hover { color: var(--white); }
+    
 
     /* NAVIGATION */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,.96);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(14px);
-    }
+    
 
-    .nav-inner {
-      min-height: 82px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 26px;
-    }
+    
 
- .brand {
-  display: flex;
-  align-items: center;
-  flex: 0 0 155px;
-  width: 155px;
-}
+ 
 
-.site-logo {
-  display: block;
-  width: 145px;
-  height: auto;
-  max-height: 48px;
-  object-fit: contain;
-  object-position: left center;
-}
 
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
 
-    .nav-item {
-      position: relative;
-    }
+    
 
-    .nav-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 13px 10px;
-      color: #334d70;
-      font-size: 13px;
-      font-weight: 700;
-      border-radius: 7px;
-    }
+    
 
-    .nav-link:hover { color: var(--blue); background: var(--blue-pale); }
+    
 
-    .nav-link .chevron {
-      font-size: 10px;
-      transition: transform .2s ease;
-    }
+    
 
-    .dropdown {
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 0;
-      min-width: 255px;
-      padding: 10px;
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(6px);
-      transition: .18s ease;
-    }
+    
 
-    .nav-item:hover .dropdown,
-    .nav-item:focus-within .dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
+    
 
-    .nav-item:hover .chevron { transform: rotate(180deg); }
+    
 
-    .dropdown a {
-      display: block;
-      padding: 11px 12px;
-      border-radius: 8px;
-      font-size: 13px;
-      color: #475467;
-      font-weight: 600;
-    }
+    
 
-    .dropdown a:hover {
-      background: var(--blue-pale);
-      color: var(--blue);
-    }
+    
 
-    .nav-actions { display: flex; gap: 9px; align-items: center; }
+    
 
-    .mobile-toggle {
-      display: none;
-      width: 44px;
-      height: 42px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--white);
-    }
+    
+
+    
 
     /* HERO */
     .hero {
@@ -295,7 +93,7 @@
       align-items: center;
       background:
         linear-gradient(90deg, rgba(16,40,75,.98) 0%, rgba(16,40,75,.93) 31%, rgba(16,40,75,.66) 53%, rgba(16,40,75,.12) 78%, rgba(16,40,75,0) 100%),
-        url("images/hero.png") center right / cover no-repeat;
+        url("images/hero.webp") center right / cover no-repeat;
       overflow: hidden;
     }
 
@@ -439,8 +237,8 @@
       border-radius: 22px;
       overflow: hidden;
       background:
-        linear-gradient(145deg, rgba(50,90,163,.95), rgba(10,34,64,.9)),
-        url("images/hero.png") center / cover;
+        linear-gradient(145deg, rgba(36,70,127,.95), rgba(10,34,64,.9)),
+        url("images/hero.webp") center / cover;
       box-shadow: var(--shadow);
     }
 
@@ -772,7 +570,7 @@
   color: var(--white);
   background: var(--blue);
   border-color: var(--blue);
-  box-shadow: 0 9px 25px rgba(50, 90, 163, .18);
+  box-shadow: 0 9px 25px rgba(36, 70, 127, .18);
 }
 
 .about-hero .hero-actions .btn-outline:hover,
@@ -789,53 +587,31 @@
 
     /* MOBILE */
     @media (max-width: 1120px) {
-      .nav { display: none; }
-      .nav-actions .btn-outline { display: none; }
-      .mobile-toggle { display: block; }
-      .nav-inner.menu-open .nav {
-        display: flex;
-        position: absolute;
-        left: 20px;
-        right: 20px;
-        top: 76px;
-        padding: 12px;
-        background: var(--white);
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        box-shadow: var(--shadow);
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .nav-inner.menu-open .nav-item .nav-link { width: 100%; justify-content: space-between; }
-      .nav-inner.menu-open .dropdown {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        display: none;
-        box-shadow: none;
-        border: 0;
-        padding: 0 0 8px 10px;
-      }
-      .nav-inner.menu-open .nav-item.open .dropdown { display: block; }
-      .nav-inner.menu-open .nav-item:hover .dropdown { display: none; }
-      .nav-inner.menu-open .nav-item.open:hover .dropdown { display: block; }
-      .nav-inner.menu-open .nav-link .chevron { display: inline-block; }
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       .hero-features { grid-template-columns: repeat(2, 1fr); gap: 20px; }
       .hero-feature:nth-child(2) { border-right: 0; }
       .service-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      
     }
 
     @media (max-width: 800px) {
-      .container { width: min(var(--max), calc(100% - 38px)); }
-      .topbar-left span:nth-child(2) { display: none; }
-      .topbar-right span { display: none; }
+      
+      
+      
       .hero {
         min-height: auto;
         background:
           linear-gradient(90deg, rgba(16,40,75,.96), rgba(16,40,75,.83)),
-          url("images/hero.png") center / cover no-repeat;
+          url("images/hero.webp") center / cover no-repeat;
       }
       .hero-inner { padding: 75px 0 105px; }
       .hero::after { width: 300px; height: 300px; right: -150px; top: -160px; }
@@ -851,12 +627,12 @@
     }
 
     @media (max-width: 560px) {
-      .container { width: min(var(--max), calc(100% - 28px)); }
-      .topbar-inner { justify-content: center; }
-      .topbar-left { gap: 10px; }
-      .brand { flex-basis: 130px; width: 130px; }
-      .site-logo { width: 125px; max-height: 44px; }
-      .nav-actions .btn-orange { min-height: 43px; padding: 0 13px; font-size: 12px; }
+      
+      
+      
+      
+      
+      
       .hero h1 { font-size: 49px; }
       .hero-lead { font-size: 15px; }
       .hero-actions { flex-direction: column; }
@@ -867,8 +643,8 @@
       .trust-item, .trust-item:last-child { border-right: 0; border-top: 1px solid rgba(255,255,255,.1); }
       .trust-item:first-child { border-top: 0; }
       .audience-card { padding: 30px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-      .footer-bottom { flex-direction: column; }
+      
+      
     }
   
 
@@ -928,33 +704,17 @@
     .about-cta { margin-top: 0; }
     @media (max-width: 1100px) { .about-hero-grid, .about-intro-grid, .about-principles-grid { grid-template-columns: 1fr; gap: 48px; } .about-audience-grid { grid-template-columns: repeat(2, 1fr); } .about-principles-copy { position: static; } .about-hero-visual { min-height: 420px; } }
     @media (max-width: 720px) { .about-hero { padding: 62px 0; } .about-hero-visual { min-height: 360px; border-radius: 22px; } .about-intro, .about-audiences, .about-principles { padding: 72px 0; } .about-audience-grid, .about-ecosystem-grid { grid-template-columns: 1fr; } .about-audience-card { min-height: 0; } .about-number { margin-bottom: 24px; } .about-visual-card { left: 18px; right: 18px; bottom: 18px; padding: 20px; } }
-
-  </style>
-  <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
-
-  <style>
-    /* About-page mobile layout */
+</style>
+<style>
+/* About-page mobile layout */
     @media (max-width: 800px) {
-      html,
-      body {
-        max-width: 100%;
-        overflow-x: hidden;
-      }
+      
 
-      .topbar,
-      .nav-account-menu {
-        display: none;
-      }
+      
 
-      body {
-        font-size: 16px;
-        line-height: 1.65;
-      }
+      
 
-      button,
-      input,
-      select,
-      textarea {
+      input, select, textarea{
         font-size: 16px;
       }
 
@@ -975,41 +735,17 @@
         height: auto;
       }
 
-      .container {
-        width: min(100% - 32px, var(--max));
-      }
+      
 
-      .nav-inner {
-        min-height: 70px;
-        gap: 10px;
-      }
+      
 
-      .nav-inner.menu-open .nav {
-        top: calc(100% + 1px);
-        left: 16px;
-        right: 16px;
-        max-height: calc(100vh - 86px);
-        max-height: calc(100dvh - 86px);
-        overflow-y: auto;
-        overscroll-behavior: contain;
-      }
+      
 
-      .nav-inner.menu-open .nav,
-      .nav-inner.menu-open .dropdown {
-        flex-direction: column;
-        align-items: stretch;
-      }
+      
 
-      .nav-inner.menu-open .dropdown a {
-        display: flex;
-        align-items: center;
-        width: 100%;
-      }
+      
 
-      .nav-link,
-      .dropdown a {
-        min-height: 44px;
-      }
+      
 
       .about-hero {
         padding: 0 0 58px;
@@ -1091,29 +827,17 @@
     }
 
     @media (max-width: 560px) {
-      .container,
-      .about-hero-copy {
+      .about-hero-copy{
         width: min(100% - 28px, var(--max));
       }
 
-      .nav-inner {
-        min-height: 66px;
-      }
+      
 
-      .brand {
-        width: 118px;
-        flex-basis: 118px;
-      }
+      
 
-      .site-logo {
-        width: 116px;
-      }
+      
 
-      .mobile-toggle {
-        width: 42px;
-        min-width: 42px;
-        height: 40px;
-      }
+      
 
       .about-hero {
         padding-bottom: 50px;
@@ -1182,12 +906,7 @@
         padding: 26px 22px;
       }
 
-      .btn {
-        width: 100%;
-        min-height: 48px;
-        padding-inline: 18px;
-        text-align: center;
-      }
+      
 
       .about-number {
         margin-bottom: 20px;
@@ -1209,8 +928,7 @@
     }
 
     @media (max-width: 380px) {
-      .container,
-      .about-hero-copy {
+      .about-hero-copy{
         width: min(100% - 22px, var(--max));
       }
 
@@ -1218,215 +936,158 @@
         font-size: 36px;
       }
     }
-  </style>
+</style>
 </head>
-
-<body>
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <div class="topbar-left">
-        <span>Nationwide Drug & Alcohol Testing</span>
-        <span>•</span>
-        <span>Operating Nationwide</span>
-      </div>
-      <div class="topbar-right">
-        <span>Mon–Fri, 8AM–8PM CST</span>
-        <a href="tel:7732457009">(773) 245-7009</a>
-      </div>
-    </div>
-  </div>
-
-<header class="site-header">
+<body><div class="topbar">
+<div class="container topbar-inner">
+<div class="topbar-left">
+<span>Nationwide Drug &amp; Alcohol Testing</span><span aria-hidden="true">•</span><span>Operating Nationwide</span>
+</div>
+<div class="topbar-right">
+<span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a>
+</div>
+</div>
+</div><header class="site-header">
   <div class="container nav-inner" id="navInner">
-
     <a href="index.html" class="brand" aria-label="screenings4u home">
       <img src="images/logo.png" alt="screenings4u" class="site-logo">
     </a>
-
-<nav class="nav" id="mainNav" aria-label="Main navigation"></nav>
-
+    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation"></nav>
     <div class="nav-actions">
-      <a href="services.html" class="btn btn-outline">
-        Order a Test
-      </a>
-
+      <a href="services.html" class="btn btn-outline">Order a Test</a>
       <div class="nav-account-menu">
-        <button
-          type="button"
-          class="nav-login"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Account Login
-          <span class="nav-login-chevron">▼</span>
-        </button>
-
+        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron" aria-hidden="true">▼</span></button>
         <div class="nav-account-dropdown">
-          <a href="https://portal.screenings4u.com/customer-login.html">
-            Customer Login
-          </a>
-
-          <a href="https://portal.screenings4u.com/employer-login.html">
-            Employer Login
-          </a>
+          <a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a>
+          <a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>
         </div>
       </div>
-
-      <button
-        type="button"
-        class="mobile-toggle"
-        id="mobileToggle"
-        aria-label="Open menu"
-        aria-expanded="false">
-        ☰
-      </button>
+      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mobileNav" aria-label="Open menu" aria-expanded="false">☰</button>
     </div>
-
   </div>
 </header>
-
-  <main>
-    <section class="about-hero">
-      <div class="container about-hero-grid">
-        <div class="about-hero-copy">
-          <span class="eyebrow">About screenings4u</span>
-          <h1>Built to make screening easier to navigate.</h1>
-          <p class="about-hero-lead">screenings4u brings testing, workplace support, DOT services, and professional training into a clearer experience for individuals and organizations.</p>
-          <div class="hero-actions">
-            <a href="services.html" class="btn btn-orange">Explore Services →</a>
-            <a href="contact.html" class="btn btn-outline">Talk With Our Team →</a>
-          </div>
-        </div>
-        <div class="about-hero-visual">
-          <img src="images/hero.png" alt="Professional screenings4u services">
-          <div class="about-visual-card">
-            <strong>One place to start.</strong>
-            <span>Clear next steps for testing, compliance, and training.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="about-intro">
-      <div class="container about-intro-grid">
-        <div>
-          <span class="eyebrow">Who We Are</span>
-          <h2>Practical support for the moments that require a reliable process.</h2>
-        </div>
-        <div class="about-intro-copy">
-          <p>From a person arranging a private test to an employer managing workplace requirements, screening needs can involve many moving parts. Our focus is to make the process easier to understand, easier to begin, and easier to manage.</p>
-          <p>We bring together service coordination, compliance-focused solutions, and access to training so customers can move forward with greater clarity and confidence.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="about-audiences">
-      <div class="container">
-        <div class="section-heading about-center-heading">
-          <span class="eyebrow">Who We Support</span>
-          <h2>Different needs. A more straightforward path forward.</h2>
-          <p>Our services are designed around the people and organizations that depend on timely, professional screening support.</p>
-        </div>
-        <div class="about-audience-grid">
-          <article class="about-audience-card">
-            <span class="about-number">01</span>
-            <h3>Individuals</h3>
-            <p>Access personal testing services when you need documentation, answers, or a professional collection process.</p>
-            <a href="personal-drug-and-alcohol-testing.html">Explore Personal Services →</a>
-          </article>
-          <article class="about-audience-card">
-            <span class="about-number">02</span>
-            <h3>Employers</h3>
-            <p>Coordinate workplace testing and support programs built around hiring, safety, and organizational requirements.</p>
-            <a href="business-services.html">Explore Business Services →</a>
-          </article>
-          <article class="about-audience-card">
-            <span class="about-number">03</span>
-            <h3>Transportation Teams</h3>
-            <p>Find DOT-focused services and compliance support for safety-sensitive operations and transportation programs.</p>
-            <a href="dot-services.html">Explore DOT Services →</a>
-          </article>
-          <article class="about-audience-card">
-            <span class="about-number">04</span>
-            <h3>Future Professionals</h3>
-            <p>Build knowledge and skills through professional training designed for the screening and collection environment.</p>
-            <a href="dot-specimen-collector-training.html">Explore Training →</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="about-principles">
-      <div class="container about-principles-grid">
-        <div class="about-principles-copy">
-          <span class="eyebrow">How We Work</span>
-          <h2>Clear processes matter.</h2>
-          <p>We believe screening services should not feel harder than they need to be. That is why we continue building a connected experience around straightforward information, professional coordination, and secure access to the resources that matter.</p>
-        </div>
-        <div class="principle-list">
-          <article class="principle-item">
-            <span>01</span>
-            <div><h3>Start with clarity</h3><p>Help customers understand their options and the next step before the process begins.</p></div>
-          </article>
-          <article class="principle-item">
-            <span>02</span>
-            <div><h3>Keep it practical</h3><p>Focus on solutions that support real workplace, transportation, and personal testing needs.</p></div>
-          </article>
-          <article class="principle-item">
-            <span>03</span>
-            <div><h3>Support access</h3><p>Create easier ways to connect services, account information, documents, and training.</p></div>
-          </article>
-          <article class="principle-item">
-            <span>04</span>
-            <div><h3>Continue improving</h3><p>Build better systems and experiences as our services and customer needs evolve.</p></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="about-ecosystem">
-      <div class="container about-ecosystem-grid">
-        <div class="ecosystem-card">
-          <span class="eyebrow">Services</span>
-          <h3>Find the support that fits the need.</h3>
-          <p>Explore testing and service options for personal, workplace, and transportation requirements.</p>
-          <a href="services.html" class="text-link">View All Services →</a>
-        </div>
-        <div class="ecosystem-card ecosystem-card-blue">
-          <span class="eyebrow">Account Access</span>
-          <h3>Keep important information within reach.</h3>
-          <p>Customers and employers can access their account through the screenings4u portal.</p>
-          <a href="https://portal.screenings4u.com/customer-login.html" class="text-link">Access Your Account →</a>
-        </div>
-        <div class="ecosystem-card">
-          <span class="eyebrow">Training</span>
-          <h3>Continue learning with dedicated training access.</h3>
-          <p>Professional learners can access courses and materials through the screenings4u training platform.</p>
-          <a href="https://training.screenings4u.com/training-login.html" class="text-link">Access Training →</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta about-cta">
-      <div class="container cta-inner">
-        <div>
-          <span class="eyebrow">Let’s Get Started</span>
-          <h2>Find the right place to begin.</h2>
-          <p>Whether you are ordering a test, supporting a workforce, or looking for training, we can help point you in the right direction.</p>
-        </div>
-        <div class="cta-actions">
-          <a href="services.html" class="btn btn-white">Explore Services →</a>
-          <a href="contact.html" class="btn btn-outline">Contact Us →</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-<footer id="siteFooter"></footer>
-
- 
-
-  <script src="assets/js/navigation.js"></script>
-  <script src="assets/js/footer.js"></script>
-</body>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
+<main>
+<section class="about-hero">
+<div class="container about-hero-grid">
+<div class="about-hero-copy">
+<span class="eyebrow">About screenings4u</span>
+<h1>Built to make screening easier to navigate.</h1>
+<p class="about-hero-lead">screenings4u brings testing, workplace support, DOT services, and professional training into a clearer experience for individuals and organizations.</p>
+<div class="hero-actions">
+<a class="btn btn-orange" href="services.html">Explore Services →</a>
+<a class="btn btn-outline" href="contact.html">Talk With Our Team →</a>
+</div>
+</div>
+<div class="about-hero-visual">
+<img alt="Professional screenings4u services" decoding="async" height="916" src="images/hero.webp" width="1717"/>
+<div class="about-visual-card">
+<strong>One place to start.</strong>
+<span>Clear next steps for testing, compliance, and training.</span>
+</div>
+</div>
+</div>
+</section>
+<section class="about-intro">
+<div class="container about-intro-grid">
+<div>
+<span class="eyebrow">Who We Are</span>
+<h2>Practical support for the moments that require a reliable process.</h2>
+</div>
+<div class="about-intro-copy">
+<p>From a person arranging a private test to an employer managing workplace requirements, screening needs can involve many moving parts. Our focus is to make the process easier to understand, easier to begin, and easier to manage.</p>
+<p>We bring together service coordination, compliance-focused solutions, and access to training so customers can move forward with greater clarity and confidence.</p>
+</div>
+</div>
+</section>
+<section class="about-audiences">
+<div class="container">
+<div class="section-heading about-center-heading">
+<span class="eyebrow">Who We Support</span>
+<h2>Different needs. A more straightforward path forward.</h2>
+<p>Our services are designed around the people and organizations that depend on timely, professional screening support.</p>
+</div>
+<div class="about-audience-grid">
+<article class="about-audience-card">
+<span class="about-number">01</span>
+<h3>Individuals</h3>
+<p>Access personal testing services when you need documentation, answers, or a professional collection process.</p>
+<a href="personal-drug-and-alcohol-testing.html">Explore Personal Services →</a>
+</article>
+<article class="about-audience-card">
+<span class="about-number">02</span>
+<h3>Employers</h3>
+<p>Coordinate workplace testing and support programs built around hiring, safety, and organizational requirements.</p>
+<a href="business-services.html">Explore Business Services →</a>
+</article>
+<article class="about-audience-card">
+<span class="about-number">03</span>
+<h3>Transportation Teams</h3>
+<p>Find DOT-focused services and compliance support for safety-sensitive operations and transportation programs.</p>
+<a href="dot-services.html">Explore DOT Services →</a>
+</article>
+<article class="about-audience-card">
+<span class="about-number">04</span>
+<h3>Future Professionals</h3>
+<p>Build knowledge and skills through professional training designed for the screening and collection environment.</p>
+<a href="dot-specimen-collector-training.html">Explore Training →</a>
+</article>
+</div>
+</div>
+</section>
+<section class="about-principles">
+<div class="container about-principles-grid">
+<div class="about-principles-copy">
+<span class="eyebrow">How We Work</span>
+<h2>Clear processes matter.</h2>
+<p>We believe screening services should not feel harder than they need to be. That is why we continue building a connected experience around straightforward information, professional coordination, and secure access to the resources that matter.</p>
+</div>
+<div class="principle-list">
+<article class="principle-item">
+<span>01</span>
+<div><h3>Start with clarity</h3><p>Help customers understand their options and the next step before the process begins.</p></div>
+</article>
+<article class="principle-item">
+<span>02</span>
+<div><h3>Keep it practical</h3><p>Focus on solutions that support real workplace, transportation, and personal testing needs.</p></div>
+</article>
+<article class="principle-item">
+<span>03</span>
+<div><h3>Support access</h3><p>Create easier ways to connect services, account information, documents, and training.</p></div>
+</article>
+<article class="principle-item">
+<span>04</span>
+<div><h3>Continue improving</h3><p>Build better systems and experiences as our services and customer needs evolve.</p></div>
+</article>
+</div>
+</div>
+</section>
+<section class="about-ecosystem">
+<div class="container about-ecosystem-grid">
+<div class="ecosystem-card">
+<span class="eyebrow">Services</span>
+<h3>Find the support that fits the need.</h3>
+<p>Explore testing and service options for personal, workplace, and transportation requirements.</p>
+<a class="text-link" href="services.html">View All Services →</a>
+</div>
+<div class="ecosystem-card ecosystem-card-blue">
+<span class="eyebrow">Account Access</span>
+<h3>Keep important information within reach.</h3>
+<p>Customers and employers can access their account through the screenings4u portal.</p>
+<a class="text-link" href="https://portal.screenings4u.com/customer-login.html">Access Your Account →</a>
+</div>
+<div class="ecosystem-card">
+<span class="eyebrow">Training</span>
+<h3>Continue learning with dedicated training access.</h3>
+<p>Professional learners can access courses and materials through the screenings4u training platform.</p>
+<a class="text-link" href="https://training.screenings4u.com/training-login.html">Access Training →</a>
+</div>
+</div>
+</section>
+</main>
+<footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
+  <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
+  <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
+  <script src="assets/js/site-ui.js?v=20260904-1"></script>
+  <script src="assets/js/footer.js?v=20260904-1"></script></body>
 </html>

@@ -1,67 +1,87 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="theme-color" content="#325aa3" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Purchase the specimen collector training supplies needed to complete five DOT mock collections.">
-  <title>Specimen Collector Training Supplies | screenings4u</title>
-  <link rel="icon" type="image/png" href="images/fav.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --orange:#ff6b00;--orange-dark:#d95800;--orange-soft:#fff0e6;--orange-pale:#fff7f2;
-      --blue:#325aa3;--blue-dark:#24467f;--blue-deep:#17335f;--blue-darker:#10284b;
-      --blue-soft:#e8eff9;--blue-pale:#f4f7fc;--ink:#1d2d45;--muted:#667892;
-      --surface:#f4f7fc;--surface-2:#eef3f9;--line:#d9e3f0;--line-strong:#c4d3e5;
-      --white:#fff;--shadow-sm:0 5px 18px rgba(23,51,95,.08);--shadow:0 18px 45px rgba(23,51,95,.12);
-      --shadow-lg:0 28px 70px rgba(23,51,95,.16);--max:1440px;--radius:18px;
-    }
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:var(--white)}a{color:inherit;text-decoration:none}img{max-width:100%;display:block}.container{width:min(var(--max),calc(100% - 40px));margin:auto}
-    .topbar{background:var(--blue-darker);color:var(--blue-soft);font-size:12px}.topbar-inner{min-height:34px;display:flex;align-items:center;justify-content:space-between;gap:20px}.topbar a{color:var(--white);font-weight:700}
-    .site-header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
-    .nav-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:22px;position:relative}
-    .brand{display:flex;align-items:center;width:155px;flex:0 0 155px}.brand img{width:145px;height:auto;max-height:48px;object-fit:contain;object-position:left center}
-    .nav{display:flex;align-items:center;justify-content:center;gap:4px;min-width:0}.nav-item{position:relative}.nav-link{display:inline-flex;align-items:center;gap:6px;padding:13px 10px;color:var(--ink);font-size:13px;font-weight:700;border-radius:7px;white-space:nowrap}.nav-link:hover,.nav-link.active{color:var(--blue);background:var(--blue-pale)}.chevron{font-size:10px;transition:transform .2s ease}.nav-item:hover .chevron,.nav-item:focus-within .chevron{transform:rotate(180deg)}
-    .dropdown{position:absolute;top:calc(100% + 8px);left:0;min-width:255px;padding:10px;background:var(--white);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s ease;z-index:1200}.nav-item:hover .dropdown,.nav-item:focus-within .dropdown{opacity:1;visibility:visible;transform:translateY(0)}.dropdown a{display:block;padding:11px 12px;border-radius:8px;color:var(--muted);font-size:13px;font-weight:600}.dropdown a:hover{background:var(--blue-pale);color:var(--blue)}
-    .nav-actions{display:flex;align-items:center;gap:9px;flex:0 0 auto}.nav-actions>.btn{min-height:42px;padding:0 15px;background:var(--orange);color:var(--white)}.nav-actions>.btn:hover{background:var(--orange-dark)}
-    .nav-account-menu{position:relative}.nav-login{min-height:42px;padding:0 14px;border:1px solid var(--line-strong);border-radius:8px;background:var(--white);color:var(--blue-dark);font:inherit;font-size:12px;font-weight:800;cursor:pointer}.nav-account-dropdown{position:absolute;top:calc(100% + 9px);right:0;min-width:205px;padding:8px;background:var(--white);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s ease;z-index:1200}.nav-account-menu:hover .nav-account-dropdown,.nav-account-menu:focus-within .nav-account-dropdown,.nav-account-menu.open .nav-account-dropdown{opacity:1;visibility:visible;transform:translateY(0)}.nav-account-dropdown a{display:block;padding:11px 12px;border-radius:8px;color:var(--ink);font-size:13px;font-weight:700}.nav-account-dropdown a:hover{background:var(--blue-pale);color:var(--blue)}
-    .mobile-toggle{display:none;width:44px;height:42px;border:1px solid var(--line);border-radius:8px;background:var(--white);color:var(--blue-dark);font-size:18px;cursor:pointer}
-    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 21px;border:1px solid transparent;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;transition:.2s ease}.btn-primary{background:var(--orange);color:var(--white);box-shadow:0 10px 24px rgba(255,107,0,.22)}.btn-primary:hover{background:var(--orange-dark);transform:translateY(-1px)}.btn-secondary{background:var(--white);border-color:var(--line-strong);color:var(--blue-dark)}
-    .product-hero{position:relative;overflow:hidden;background:linear-gradient(118deg,var(--blue-darker),var(--blue-deep) 56%,var(--blue-dark));color:var(--white)}.product-hero:after{content:"";position:absolute;width:520px;height:520px;right:-160px;top:-210px;border-radius:50%;background:rgba(255,107,0,.15)}.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);gap:72px;align-items:center;padding:86px 0 115px}.eyebrow{display:inline-flex;align-items:center;gap:9px;color:#ffd6b8;font-size:12px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.eyebrow:before{content:"";width:28px;height:3px;border-radius:4px;background:var(--orange)}h1{max-width:850px;margin:16px 0 20px;font-size:clamp(43px,5.5vw,76px);line-height:.98;letter-spacing:-.055em}.hero-copy{max-width:760px;color:var(--blue-soft);font-size:18px;line-height:1.75}.hero-note{display:flex;gap:12px;align-items:flex-start;margin-top:27px;padding:17px 19px;border:1px solid rgba(255,255,255,.18);border-radius:13px;background:rgba(255,255,255,.08);color:var(--white);font-size:14px;line-height:1.55}.hero-note strong{color:#ffd6b8}
+<meta charset="utf-8"/>
+<meta content="#24467f" name="theme-color"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Purchase the specimen collector training supplies needed to complete five DOT mock collections." name="description"/>
+<title>Specimen Collector Training Supplies | screenings4u</title>
+<link href="images/fav.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
+  <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2"><style>
+img{max-width:100%;display:block}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    .btn-primary{background:var(--orange);color:var(--white);box-shadow:0 10px 24px rgba(255,107,0,.22)}.btn-primary:hover{background:var(--orange-dark);transform:translateY(-1px)}.btn-secondary{background:var(--white);border-color:var(--line-strong);color:var(--blue-dark)}
+    .product-hero{position:relative;overflow:hidden;background:linear-gradient(118deg,var(--blue-darker),var(--blue-deep) 56%,var(--blue-dark));color:var(--white)}.product-hero:after{content:"";position:absolute;width:520px;height:520px;right:-160px;top:-210px;border-radius:50%;background:rgba(255,107,0,.15)}.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);gap:72px;align-items:center;padding:86px 0 115px}.eyebrow:before{content:"";width:28px;height:3px;border-radius:4px;background:var(--orange)}h1{max-width:850px;margin:16px 0 20px;font-size:clamp(43px,5.5vw,76px);line-height:.98;letter-spacing:-.055em}.hero-copy{max-width:760px;color:var(--blue-soft);font-size:18px;line-height:1.75}.hero-note{display:flex;gap:12px;align-items:flex-start;margin-top:27px;padding:17px 19px;border:1px solid rgba(255,255,255,.18);border-radius:13px;background:rgba(255,255,255,.08);color:var(--white);font-size:14px;line-height:1.55}.hero-note strong{color:#ffd6b8}
     .product-card{background:var(--white);color:var(--ink);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow-lg)}.product-badge{display:inline-flex;padding:7px 10px;border-radius:999px;background:var(--orange-soft);color:var(--orange-dark);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.product-card h2{margin:17px 0 6px;color:var(--blue-darker);font-size:23px}.price{display:flex;align-items:flex-end;gap:8px;margin:18px 0 5px;color:var(--blue-darker)}.price strong{font-size:48px;line-height:1;letter-spacing:-.05em}.price span{padding-bottom:5px;color:var(--muted);font-size:13px}.product-card>p{margin:11px 0 24px;color:var(--muted);font-size:14px;line-height:1.65}.product-card .btn{width:100%}.secure-copy{margin-top:13px;text-align:center;color:var(--muted);font-size:11px}
     .details{padding:86px 0;background:var(--surface)}.details-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:65px;align-items:start}.section-label{color:var(--orange-dark);font-size:11px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}.details h2{margin:10px 0 17px;color:var(--blue-darker);font-size:clamp(31px,4vw,48px);letter-spacing:-.04em}.details-intro{margin:0;color:var(--muted);font-size:16px;line-height:1.8}.steps{display:grid;gap:13px;margin-top:29px}.step{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;background:var(--white);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow-sm)}.step-number{display:grid;place-items:center;flex:0 0 31px;height:31px;border-radius:9px;background:var(--blue);color:var(--white);font-size:12px;font-weight:900}.step strong{display:block;color:var(--blue-darker);font-size:14px}.step span{display:block;margin-top:4px;color:var(--muted);font-size:12px;line-height:1.55}
     .included{padding:28px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.included h3{margin:0 0 20px;color:var(--blue-darker);font-size:22px}.included-list{display:grid;gap:12px;margin:0;padding:0;list-style:none}.included-list li{display:grid;grid-template-columns:25px 1fr;gap:11px;align-items:start;padding-bottom:12px;border-bottom:1px solid var(--line);font-size:13px;line-height:1.55}.included-list li:last-child{padding-bottom:0;border:0}.check{display:grid;place-items:center;width:23px;height:23px;border-radius:50%;background:var(--blue-soft);color:var(--blue-dark);font-size:12px;font-weight:900}
     .bottom-cta{background:var(--orange-pale);padding:68px 0}.bottom-cta-inner{display:flex;align-items:center;justify-content:space-between;gap:35px}.bottom-cta h2{margin:0 0 9px;color:var(--blue-darker);font-size:clamp(29px,4vw,44px);letter-spacing:-.04em}.bottom-cta p{margin:0;color:var(--muted);line-height:1.65}.bottom-cta .btn{flex:0 0 auto}
-    @media(max-width:1120px){.site-header{position:relative}#mainNav.nav{display:none}.nav-inner.menu-open #mainNav.nav{display:flex;position:absolute;left:0;right:0;top:82px;flex-direction:column;align-items:stretch;justify-content:flex-start;padding:12px;background:var(--white);border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px;box-shadow:var(--shadow);z-index:1100}.nav-inner.menu-open .nav-item{width:100%}.nav-inner.menu-open .nav-link{width:100%;justify-content:space-between;padding:13px 12px}.nav-inner.menu-open .dropdown{position:static;display:none;opacity:1;visibility:visible;transform:none;width:100%;min-width:0;padding:4px 0 8px 15px;border:0;box-shadow:none}.nav-item.open .dropdown{display:block!important}.nav-item.open .chevron{transform:rotate(180deg)}.mobile-toggle{display:block}.nav-account-dropdown{position:static;display:none;width:100%;min-width:0;margin-top:8px;opacity:1;visibility:visible;transform:none;box-shadow:none}.nav-account-menu.open .nav-account-dropdown{display:block}}
-    @media(max-width:980px){.hero-grid,.details-grid{grid-template-columns:1fr;gap:42px}.hero-grid{padding:70px 0 85px}.product-card{max-width:610px}.nav-actions>.btn{display:none}}
-    @media(max-width:700px){.container{width:min(100% - 28px,var(--max))}.topbar-left{display:none}.topbar-inner{justify-content:center}.nav-inner{min-height:72px;gap:10px}.brand,.brand img{width:132px}.brand{flex-basis:132px}.nav-inner.menu-open #mainNav.nav{top:72px}.nav-login{min-height:40px;padding:0 10px;font-size:11px}.mobile-toggle{width:40px;height:40px}.product-hero:after{opacity:.55}.hero-grid{padding:54px 0 69px}.hero-grid h1{font-size:43px}.hero-copy{font-size:15px}.product-card{padding:23px}.details{padding:65px 0}.details-grid{gap:32px}.included{padding:22px}.bottom-cta{padding:57px 0}.bottom-cta-inner{align-items:stretch;flex-direction:column}.bottom-cta .btn{width:100%}}
-  </style>
+    
+    @media(max-width:980px){.hero-grid,.details-grid{grid-template-columns:1fr;gap:42px}.hero-grid{padding:70px 0 85px}.product-card{max-width:610px}}
+    @media(max-width:700px){.product-hero:after{opacity:.55}.hero-grid{padding:54px 0 69px}.hero-grid h1{font-size:43px}.hero-copy{font-size:15px}.product-card{padding:23px}.details{padding:65px 0}.details-grid{gap:32px}.included{padding:22px}.bottom-cta{padding:57px 0}.bottom-cta-inner{align-items:stretch;flex-direction:column}.bottom-cta .btn{width:100%}}
+</style>
 </head>
-<body>
-  <div class="topbar"><div class="container topbar-inner"><div class="topbar-left">Nationwide Drug &amp; Alcohol Testing</div><div>Questions? <a href="tel:7732457009">(773) 245-7009</a></div></div></div>
-  <header class="site-header"><div class="container nav-inner" id="navInner"><a href="index.html" class="brand" aria-label="screenings4u home"><img src="images/logo.png" alt="screenings4u"></a><nav class="nav" id="mainNav" aria-label="Main navigation"></nav><div class="nav-actions"><a href="services.html" class="btn">Order a Test</a><div class="nav-account-menu"><button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login</button><div class="nav-account-dropdown"><a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a><a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a></div></div></div></div></header>
-  <main>
-    <section class="product-hero">
-      <div class="container hero-grid">
-        <div><span class="eyebrow">DOT Collector Training</span><h1>Specimen Collector Training Supplies</h1><p class="hero-copy">Everything a DOT Specimen Collector Training student needs to complete the five required mock collections, packaged in one convenient kit.</p><div class="hero-note"><span aria-hidden="true">✓</span><span><strong>Designed for training students.</strong> Use the included collection supplies and digital reference materials while completing your mock collections.</span></div></div>
-        <aside class="product-card" aria-label="Purchase training supplies"><span class="product-badge">Training Kit</span><h2>Collector Training Supplies</h2><div class="price"><strong>$75.00</strong><span>USD</span></div><p>Physical collection supplies plus digital training downloads for five mock collections.</p><a class="btn btn-primary" href="checkout.html?service=specimen_collector_training_supplies">Continue to Secure Checkout</a><div class="secure-copy">Checkout and payment are completed securely.</div></aside>
+<body><div class="topbar">
+<div class="container topbar-inner">
+<div class="topbar-left">
+<span>Nationwide Drug &amp; Alcohol Testing</span><span aria-hidden="true">•</span><span>Operating Nationwide</span>
+</div>
+<div class="topbar-right">
+<span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a>
+</div>
+</div>
+</div><header class="site-header">
+  <div class="container nav-inner" id="navInner">
+    <a href="index.html" class="brand" aria-label="screenings4u home">
+      <img src="images/logo.png" alt="screenings4u" class="site-logo">
+    </a>
+    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation"></nav>
+    <div class="nav-actions">
+      <a href="services.html" class="btn btn-outline">Order a Test</a>
+      <div class="nav-account-menu">
+        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron" aria-hidden="true">▼</span></button>
+        <div class="nav-account-dropdown">
+          <a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a>
+          <a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>
+        </div>
       </div>
-    </section>
-    <section class="details">
-      <div class="container details-grid">
-        <div><span class="section-label">Complete Your Training</span><h2>Built for your five mock collections</h2><p class="details-intro">DOT collector training requires hands-on practice. This kit brings the collection materials, forms, and supporting digital references together so students can prepare for and document each mock collection.</p><div class="steps"><div class="step"><span class="step-number">1</span><div><strong>Order your training kit</strong><span>Purchase the supplies before beginning the mock-collection portion of your course.</span></div></div><div class="step"><span class="step-number">2</span><div><strong>Review the included downloads</strong><span>Use the checklist, procedures, site-security guidance, and memorandum reference during practice.</span></div></div><div class="step"><span class="step-number">3</span><div><strong>Complete five mock collections</strong><span>Use the collection kits and CCFs to perform the required hands-on training exercises.</span></div></div></div></div>
-        <aside class="included"><h3>What’s included</h3><ul class="included-list"><li><span class="check">✓</span><span><strong>5</strong> DOT Collection Kits</span></li><li><span class="check">✓</span><span><strong>10</strong> Federal Custody and Control Forms (CCFs)</span></li><li><span class="check">✓</span><span>Mock Collection Checklist — Digital Download</span></li><li><span class="check">✓</span><span>Mock Procedures — Digital Download</span></li><li><span class="check">✓</span><span>Collection Site Security — Digital Download</span></li><li><span class="check">✓</span><span>Memorandum for Record — Digital Download</span></li><li><span class="check">✓</span><span><strong>1</strong> Ball Point Pen</span></li><li><span class="check">✓</span><span><strong>2 pairs</strong> of NON-Latex Gloves</span></li></ul></aside>
-      </div>
-    </section>
-    <section class="bottom-cta"><div class="container bottom-cta-inner"><div><h2>Ready for your mock collections?</h2><p>Get the collection materials and digital references required for the hands-on portion of your training.</p></div><a class="btn btn-primary" href="checkout.html?service=specimen_collector_training_supplies">Purchase for $75.00</a></div></section>
-  </main>
-  <footer id="siteFooter"></footer>
-  <script src="assets/js/test-price-list.js"></script>
-  <script src="assets/js/navigation.js"></script>
-  <script src="assets/js/footer.js"></script>
-</body>
+      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mobileNav" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
+<main>
+<section class="product-hero">
+<div class="container hero-grid">
+<div><span class="eyebrow">DOT Collector Training</span><h1>Specimen Collector Training Supplies</h1><p class="hero-copy">Everything a DOT Specimen Collector Training student needs to complete the five required mock collections, packaged in one convenient kit.</p><div class="hero-note"><span aria-hidden="true">✓</span><span><strong>Designed for training students.</strong> Use the included collection supplies and digital reference materials while completing your mock collections.</span></div></div>
+<aside aria-label="Purchase training supplies" class="product-card"><span class="product-badge">Training Kit</span><h2>Collector Training Supplies</h2><div class="price"><strong>$75.00</strong><span>USD</span></div><p>Physical collection supplies plus digital training downloads for five mock collections.</p><a class="btn btn-primary" href="checkout.html?service=specimen_collector_training_supplies">Continue to Secure Checkout</a><div class="secure-copy">Checkout and payment are completed securely.</div></aside>
+</div>
+</section>
+<section class="details">
+<div class="container details-grid">
+<div><span class="section-label">Complete Your Training</span><h2>Built for your five mock collections</h2><p class="details-intro">DOT collector training requires hands-on practice. This kit brings the collection materials, forms, and supporting digital references together so students can prepare for and document each mock collection.</p><div class="steps"><div class="step"><span class="step-number">1</span><div><strong>Order your training kit</strong><span>Purchase the supplies before beginning the mock-collection portion of your course.</span></div></div><div class="step"><span class="step-number">2</span><div><strong>Review the included downloads</strong><span>Use the checklist, procedures, site-security guidance, and memorandum reference during practice.</span></div></div><div class="step"><span class="step-number">3</span><div><strong>Complete five mock collections</strong><span>Use the collection kits and CCFs to perform the required hands-on training exercises.</span></div></div></div></div>
+<aside class="included"><h3>What’s included</h3><ul class="included-list"><li><span class="check">✓</span><span><strong>5</strong> DOT Collection Kits</span></li><li><span class="check">✓</span><span><strong>10</strong> Federal Custody and Control Forms (CCFs)</span></li><li><span class="check">✓</span><span>Mock Collection Checklist — Digital Download</span></li><li><span class="check">✓</span><span>Mock Procedures — Digital Download</span></li><li><span class="check">✓</span><span>Collection Site Security — Digital Download</span></li><li><span class="check">✓</span><span>Memorandum for Record — Digital Download</span></li><li><span class="check">✓</span><span><strong>1</strong> Ball Point Pen</span></li><li><span class="check">✓</span><span><strong>2 pairs</strong> of NON-Latex Gloves</span></li></ul></aside>
+</div>
+</section>
+</main>
+<script src="assets/js/test-price-list.js"></script>
+<footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
+  <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
+  <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
+  <script src="assets/js/site-ui.js?v=20260904-1"></script>
+  <script src="assets/js/footer.js?v=20260904-1"></script></body>
 </html>

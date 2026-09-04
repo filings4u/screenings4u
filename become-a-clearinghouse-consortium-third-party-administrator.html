@@ -1,225 +1,20 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="theme-color" content="#325aa3" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Become a Certified Clearinghouse C/TPA with screenings4u. Add FMCSA Clearinghouse management, driver query support, violation reporting workflows, and DOT consortium services to your business.">
-  <title>Become a Certified Clearinghouse C/TPA | screenings4u</title>
-
-  <link rel="icon" type="image/png" href="images/fav.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --orange:#ff6b00;
-      --orange-dark:#d85b00;
-      --blue:#325aa3;
-      --blue-dark:#24467f;
-      --navy:#10284b;
-      --ink:#1d2d45;
-      --muted:#667892;
-      --line:#d9e3f0;
-      --soft:#f4f7fc;
-      --white:#ffffff;
-      --shadow:0 18px 45px rgba(23,51,95,.12);
-      --max:1440px;
-    }
-
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:Inter,Arial,sans-serif;
-      color:var(--ink);
-      background:#fff;
-      line-height:1.55;
-      overflow-x:hidden;
-    }
-
-    a{text-decoration:none;color:inherit}
-    button{font:inherit}
-
-    .container{
-      width:min(var(--max),calc(100% - 80px));
-      margin-inline:auto;
-    }
-
-    .topbar{
-      background:var(--blue-dark);
-      color:#dfe9f5;
-      font-size:12px;
-    }
-
-    .topbar-inner{
-      min-height:38px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:20px;
-    }
-
-    .topbar-left,.topbar-right{
-      display:flex;
-      align-items:center;
-      gap:18px;
-    }
-
-    .topbar a:hover{color:#fff}
-
-    .site-header{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      background:rgba(255,255,255,.97);
-      border-bottom:1px solid var(--line);
-      backdrop-filter:blur(14px);
-    }
-
-    .nav-inner{
-      min-height:82px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:26px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      flex:0 0 155px;
-      width:155px;
-    }
-
-    .site-logo{
-      display:block;
-      width:145px;
-      height:auto;
-      max-height:48px;
-      object-fit:contain;
-      object-position:left center;
-    }
-
-    .nav{
-      display:flex;
-      align-items:center;
-      gap:4px;
-    }
-
-    .nav-item{position:relative}
-
-    .nav-link{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:13px 10px;
-      color:#334d70;
-      font-size:13px;
-      font-weight:700;
-      border-radius:7px;
-    }
-
-    .nav-link:hover{
-      color:var(--blue);
-      background:var(--soft);
-    }
-
-    .nav-link .chevron{font-size:10px}
-
-    .dropdown{
-      position:absolute;
-      top:calc(100% + 8px);
-      left:0;
-      min-width:255px;
-      padding:10px;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:12px;
-      box-shadow:var(--shadow);
-      opacity:0;
-      visibility:hidden;
-      transform:translateY(6px);
-      transition:.18s ease;
-      z-index:1100;
-    }
-
-    .nav-item:hover .dropdown,
-    .nav-item:focus-within .dropdown{
-      opacity:1;
-      visibility:visible;
-      transform:translateY(0);
-    }
-
-    .dropdown a{
-      display:block;
-      padding:11px 12px;
-      border-radius:8px;
-      font-size:13px;
-      color:#475467;
-      font-weight:600;
-    }
-
-    .dropdown a:hover{
-      background:var(--soft);
-      color:var(--blue);
-    }
-
-    .nav-actions{
-      display:flex;
-      gap:9px;
-      align-items:center;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:50px;
-      padding:0 22px;
-      border-radius:7px;
-      border:1px solid transparent;
-      font-size:14px;
-      font-weight:800;
-      transition:background .2s ease,border-color .2s ease,transform .2s ease;
-      white-space:nowrap;
-    }
-
-    .btn:hover{transform:translateY(-1px)}
-
-    .btn-orange{
-      color:#fff;
-      background:var(--orange);
-      box-shadow:0 9px 25px rgba(255,107,0,.20);
-    }
-
-    .btn-orange:hover{background:var(--orange-dark)}
-
-    .btn-outline{
-      color:var(--blue);
-      background:#fff;
-      border-color:var(--line);
-    }
-
-    .btn-outline:hover{
-      color:#fff;
-      background:var(--blue);
-      border-color:var(--blue);
-    }
-
-    .mobile-toggle{
-      display:none;
-      width:44px;
-      height:42px;
-      border:1px solid var(--line);
-      border-radius:8px;
-      background:#fff;
-      font-size:19px;
-      cursor:pointer;
-    }
-
-    /* HERO */
+<meta charset="utf-8"/>
+<meta content="#24467f" name="theme-color"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Become a Certified Clearinghouse C/TPA with screenings4u. Add FMCSA Clearinghouse management, driver query support, violation reporting workflows, and DOT consortium services to your business." name="description"/>
+<title>Become a Certified Clearinghouse C/TPA | screenings4u</title>
+<link href="images/fav.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
+  <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2"><style>
+/* HERO */
     .ctpa-hero{
       position:relative;
       overflow:hidden;
@@ -254,24 +49,9 @@
       padding:82px 0;
     }
 
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:9px;
-      color:#ffad73;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      margin-bottom:18px;
-    }
+    
 
-    .eyebrow::before{
-      content:"";
-      width:28px;
-      height:2px;
-      background:currentColor;
-    }
+    
 
     .ctpa-hero h1{
       max-width:760px;
@@ -390,8 +170,7 @@
       background:currentColor;
     }
 
-    .intro-copy h2,
-    .section-heading h2{
+    .intro-copy h2{
       color:var(--blue-dark);
       font-size:clamp(35px,4vw,54px);
       line-height:1.08;
@@ -453,7 +232,7 @@
       right:-115px;
       top:-115px;
       border-radius:50%;
-      background:rgba(50,90,163,.12);
+      background:rgba(36,70,127,.12);
     }
 
     .portal-card{
@@ -537,18 +316,9 @@
       border-block:1px solid var(--line);
     }
 
-    .section-heading{
-      max-width:820px;
-      margin:0 auto 48px;
-      text-align:center;
-    }
+    
 
-    .section-heading p{
-      max-width:700px;
-      margin:16px auto 0;
-      color:var(--muted);
-      font-size:16px;
-    }
+    
 
     .service-grid{
       display:grid;
@@ -890,42 +660,17 @@
     }
 
     @media(max-width:1120px){
-      .nav{display:none}
-      .nav-actions>.btn-outline{display:none}
-      .mobile-toggle{display:block}
+      
+      
+      
 
-      .nav-inner.menu-open .nav{
-        display:flex;
-        position:absolute;
-        left:20px;
-        right:20px;
-        top:76px;
-        padding:12px;
-        background:#fff;
-        border:1px solid var(--line);
-        border-radius:12px;
-        box-shadow:var(--shadow);
-        flex-direction:column;
-        align-items:stretch;
-      }
+      
 
-      .nav-inner.menu-open .nav-link{
-        width:100%;
-        justify-content:space-between;
-      }
+      
 
-      .nav-inner.menu-open .dropdown{
-        position:static;
-        opacity:1;
-        visibility:visible;
-        transform:none;
-        display:none;
-        box-shadow:none;
-        border:0;
-        padding:0 0 8px 10px;
-      }
+      
 
-      .nav-inner.menu-open .nav-item.open .dropdown{display:block}
+      
 
       .intro-grid{grid-template-columns:1fr;gap:48px}
       .workflow-grid{grid-template-columns:repeat(2,1fr)}
@@ -935,10 +680,9 @@
     }
 
     @media(max-width:800px){
-      .container{width:min(var(--max),calc(100% - 38px))}
-      .topbar-left span:nth-child(2),
-      .topbar-right span{display:none}
-      .topbar-inner{justify-content:space-between}
+      
+      
+      
       .section,.services-section,.workflow-section,.pricing-section,.faq-section{padding:78px 0}
       .ctpa-hero-grid{min-height:auto;padding:74px 0}
       .compliance-card{min-height:440px}
@@ -947,10 +691,10 @@
     }
 
     @media(max-width:560px){
-      .container{width:min(var(--max),calc(100% - 28px))}
-      .topbar-inner{justify-content:center}
-      .brand{flex-basis:130px;width:130px}
-      .site-logo{width:125px;max-height:44px}
+      
+      
+      
+      
       .ctpa-hero h1{font-size:46px}
       .ctpa-hero p{font-size:16px}
       .hero-actions{flex-direction:column}
@@ -966,16 +710,10 @@
       .faq-question{padding:20px;font-size:14px}
       .faq-answer{padding:0 20px 22px}
     }
-  </style>
-  <link rel="stylesheet" href="assets/css/mobile-ready.css?v=20260901-1">
-
-  <style id="mobile-page-layout">
-    /* Keep outline buttons visible on light backgrounds. */
-    .btn-outline{
-      color:var(--blue);
-      background:transparent;
-      border-color:var(--blue);
-    }
+</style>
+<style id="mobile-page-layout">
+/* Keep outline buttons visible on light backgrounds. */
+    
 
     .btn:focus-visible,
     .price-btn:focus-visible,
@@ -985,33 +723,18 @@
     }
 
     @media(max-width:800px){
-      html,body{max-width:100%;overflow-x:hidden}
-      .topbar,.nav-account-menu{display:none!important}
-      body{font-size:16px;line-height:1.65}
-      button,input,select,textarea{font:inherit;font-size:16px}
+      
+      
+      
+      input, select, textarea{font:inherit;font-size:16px}
       form,fieldset,input,select,textarea{width:100%;min-width:0}
       img,svg,video,iframe{max-width:100%;height:auto}
-      .container{width:min(100% - 32px,var(--max))}
+      
 
-      .nav-inner{min-height:70px;gap:10px}
-      .nav-inner.menu-open .nav{
-        top:calc(100% + 1px);
-        left:16px;
-        right:16px;
-        max-height:calc(100vh - 86px);
-        max-height:calc(100dvh - 86px);
-        overflow-y:auto;
-        overscroll-behavior:contain;
-      }
-      .nav-inner.menu-open .nav,
-      .nav-inner.menu-open .dropdown{flex-direction:column;align-items:stretch}
-      .nav-inner.menu-open .nav-link,
-      .nav-inner.menu-open .dropdown a{
-        display:flex;
-        align-items:center;
-        width:100%;
-        min-height:44px;
-      }
+      
+      
+      
+      
 
       .ctpa-hero-grid{
         min-height:auto;
@@ -1038,7 +761,7 @@
       .intro-grid,.service-grid,.workflow-grid,.pricing-grid{
         grid-template-columns:minmax(0,1fr);
       }
-      .intro-copy h2,.section-heading h2,.workflow-heading h2{
+      .intro-copy h2, .workflow-heading h2{
         font-size:clamp(32px,8vw,45px);
         overflow-wrap:anywhere;
       }
@@ -1055,11 +778,11 @@
     }
 
     @media(max-width:560px){
-      .container{width:min(100% - 28px,var(--max))}
-      .nav-inner{min-height:66px}
-      .brand{width:118px;flex-basis:118px}
-      .site-logo{width:116px;max-height:44px}
-      .mobile-toggle{width:42px;min-width:42px;height:40px}
+      
+      
+      
+      
+      
       .ctpa-hero-grid{padding:28px 0 48px}
       .hero-panel{padding:24px 20px}
       .hero-panel h2{font-size:24px}
@@ -1091,418 +814,311 @@
     }
 
     @media(max-width:380px){
-      .container{width:min(100% - 22px,var(--max))}
+      
       .ctpa-hero h1{font-size:34px}
     }
-  </style>
+</style>
 </head>
-
-<body>
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <div class="topbar-left">
-        <span>Nationwide Drug & Alcohol Testing</span>
-        <span>•</span>
-        <span>Operating Nationwide</span>
-      </div>
-      <div class="topbar-right">
-        <span>Mon–Fri, 8AM–8PM CST</span>
-        <a href="tel:7732457009">(773) 245-7009</a>
-      </div>
-    </div>
-  </div>
-
-<header class="site-header">
+<body><div class="topbar">
+<div class="container topbar-inner">
+<div class="topbar-left">
+<span>Nationwide Drug &amp; Alcohol Testing</span><span aria-hidden="true">•</span><span>Operating Nationwide</span>
+</div>
+<div class="topbar-right">
+<span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a>
+</div>
+</div>
+</div><header class="site-header">
   <div class="container nav-inner" id="navInner">
-
     <a href="index.html" class="brand" aria-label="screenings4u home">
       <img src="images/logo.png" alt="screenings4u" class="site-logo">
     </a>
-
-<nav class="nav" id="mainNav" aria-label="Main navigation"></nav>
-
+    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation"></nav>
     <div class="nav-actions">
-      <a href="services.html" class="btn btn-outline">
-        Order a Test
-      </a>
-
+      <a href="services.html" class="btn btn-outline">Order a Test</a>
       <div class="nav-account-menu">
-        <button
-          type="button"
-          class="nav-login"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Account Login
-          <span class="nav-login-chevron">▼</span>
-        </button>
-
+        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron" aria-hidden="true">▼</span></button>
         <div class="nav-account-dropdown">
-          <a href="https://portal.screenings4u.com/customer-login.html">
-            Customer Login
-          </a>
-
-          <a href="https://portal.screenings4u.com/employer-login.html">
-            Employer Login
-          </a>
+          <a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a>
+          <a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>
         </div>
       </div>
-
-      <button
-        type="button"
-        class="mobile-toggle"
-        id="mobileToggle"
-        aria-label="Open menu"
-        aria-expanded="false">
-        ☰
-      </button>
+      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mobileNav" aria-label="Open menu" aria-expanded="false">☰</button>
     </div>
-
   </div>
 </header>
-
-  <main>
-
-    <section class="ctpa-hero">
-      <div class="container ctpa-hero-grid">
-        <div class="ctpa-hero-copy">
-          <span class="eyebrow">FMCSA Compliance Solutions</span>
-          <h1>Become a Certified <span>Clearinghouse C/TPA.</span></h1>
-          <p>Expand your drug testing business by offering professional FMCSA Clearinghouse management services. Build a stronger compliance offering for trucking companies and owner-operators.</p>
-
-          <div class="hero-actions">
-            <a href="#pricing" class="btn btn-orange">Get Started →</a>
-            <a href="#services" class="btn hero-secondary">Learn More →</a>
-          </div>
-        </div>
-
-        <aside class="hero-panel">
-          <div class="hero-panel-label">Build your service offering</div>
-          <h2>Manage more of the compliance journey.</h2>
-          <ul class="hero-panel-list">
-            <li><strong>01</strong><span>Clearinghouse account setup and C/TPA status activation</span></li>
-            <li><strong>02</strong><span>Driver query and violation management workflows</span></li>
-            <li><strong>03</strong><span>DOT random consortium and multi-client support</span></li>
-          </ul>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container intro-grid">
-        <div class="intro-copy">
-          <span class="section-kicker">Why Become a C/TPA?</span>
-          <h2>Turn Testing Relationships Into Ongoing Compliance Services.</h2>
-          <p>As a Consortium/Third-Party Administrator, your business can support eligible employers with authorized Clearinghouse activities after the required registration and designation process is completed.</p>
-          <p>That creates an opportunity to offer a broader service experience around driver queries, violation reporting workflows, DOT consortium programs, and ongoing client management.</p>
-
-          <ul class="intro-checks">
-            <li>Build a recurring compliance service offering</li>
-            <li>Support trucking companies and owner-operators</li>
-            <li>Organize multiple clients through repeatable workflows</li>
-            <li>Add DOT random consortium services to your business</li>
-          </ul>
-        </div>
-
-        <div class="compliance-card" aria-label="C/TPA service workflow illustration">
-          <div class="portal-card">
-            <div class="portal-top">
-              <div class="portal-brand">C/TPA SERVICE HUB</div>
-              <div class="portal-status">COMPLIANCE</div>
-            </div>
-
-            <div class="portal-title">Your Client Services</div>
-            <div class="portal-sub">Organize your workflows around the services you provide.</div>
-
-            <div class="portal-grid">
-              <div class="portal-item">
-                <b>Driver Queries</b>
-                <span>Structured query support workflows</span>
-              </div>
-              <div class="portal-item">
-                <b>Violations</b>
-                <span>Authorized reporting workflows</span>
-              </div>
-              <div class="portal-item">
-                <b>Consortiums</b>
-                <span>DOT random testing programs</span>
-              </div>
-              <div class="portal-item">
-                <b>Client Management</b>
-                <span>Support multiple employer accounts</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="services-section" id="services">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-kicker">The Power of C/TPA Services</span>
-          <h2>Offer More Than a Single Drug Test.</h2>
-          <p>Build a professional compliance service around the needs of trucking companies, owner-operators, and DOT-regulated programs.</p>
-        </div>
-
-        <div class="service-grid">
-          <article class="service-card">
-            <div class="service-number">01</div>
-            <h3>Account Setup</h3>
-            <p>Get organized for the Clearinghouse registration process and the operational foundation of your C/TPA business.</p>
-          </article>
-
-          <article class="service-card">
-            <div class="service-number">02</div>
-            <h3>C/TPA Status</h3>
-            <p>Build the process needed for your company to establish and manage its C/TPA role.</p>
-          </article>
-
-          <article class="service-card">
-            <div class="service-number">03</div>
-            <h3>Driver Queries</h3>
-            <p>Create a repeatable workflow for authorized query services performed on behalf of designated clients.</p>
-          </article>
-
-          <article class="service-card">
-            <div class="service-number">04</div>
-            <h3>Violation Workflows</h3>
-            <p>Organize the procedures your business uses for authorized violation reporting activities.</p>
-          </article>
-
-          <article class="service-card">
-            <div class="service-number">05</div>
-            <h3>DOT Consortiums</h3>
-            <p>Add random testing consortium services for clients that need ongoing DOT program support.</p>
-          </article>
-
-          <article class="service-card">
-            <div class="service-number">06</div>
-            <h3>Client Management</h3>
-            <p>Build systems for managing multiple employer and owner-operator relationships efficiently.</p>
-          </article>
-
-          <article class="service-card">
-            <div class="service-number">07</div>
-            <h3>Certificates &amp; Agreements</h3>
-            <p>Create an organized workflow for consortium documentation and client-facing resources.</p>
-          </article>
-
-          <article class="service-card">
-            <div class="service-number">08</div>
-            <h3>Business Growth</h3>
-            <p>Create opportunities for recurring management and consulting services beyond individual collections.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="workflow-section">
-      <div class="container">
-        <div class="workflow-heading">
-          <span class="eyebrow">How It Works</span>
-          <h2>Build Your C/TPA Service Step by Step.</h2>
-          <p>Choose your setup option, complete onboarding, establish your workflow, and begin building your compliance client base.</p>
-        </div>
-
-        <div class="workflow-grid">
-          <article class="workflow-card">
-            <div class="workflow-step">01</div>
-            <h3>Choose Your Plan</h3>
-            <p>Select the setup level that best matches your current business and growth goals.</p>
-          </article>
-
-          <article class="workflow-card">
-            <div class="workflow-step">02</div>
-            <h3>Complete Onboarding</h3>
-            <p>Provide the information needed to begin organizing your C/TPA setup and service structure.</p>
-          </article>
-
-          <article class="workflow-card">
-            <div class="workflow-step">03</div>
-            <h3>Build Your Workflow</h3>
-            <p>Establish client management, consortium, query, reporting, and documentation processes.</p>
-          </article>
-
-          <article class="workflow-card">
-            <div class="workflow-step">04</div>
-            <h3>Start Growing</h3>
-            <p>Begin expanding your business with professional compliance services for eligible clients.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="pricing-section" id="pricing">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-kicker">Simple, Straightforward Pricing</span>
-          <h2>Choose the C/TPA Solution That Fits Your Growth Strategy.</h2>
-          <p>Start with professional setup or choose expanded management tools for a more complete compliance service operation.</p>
-        </div>
-
- <div class="pricing-grid">
-
-  <article class="price-card" data-service-id="ctpa_setup">
-    <h3>C/TPA Setup</h3>
-    <div class="price" data-service-price>$295</div>
-    <p class="price-note">Professional Clearinghouse C/TPA setup</p>
-
-    <div class="price-divider"></div>
-
-    <ul class="price-list">
-      <li>Clearinghouse account setup</li>
-      <li>C/TPA status activation</li>
-      <li>Direct registry listing support</li>
-      <li>Compliance guide</li>
-    </ul>
-
-    <a class="price-btn" data-service-link href="checkout.html?service=ctpa_setup">
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
+<main>
+<section class="ctpa-hero">
+<div class="container ctpa-hero-grid">
+<div class="ctpa-hero-copy">
+<span class="eyebrow">FMCSA Compliance Solutions</span>
+<h1>Become a Certified <span>Clearinghouse C/TPA.</span></h1>
+<p>Expand your drug testing business by offering professional FMCSA Clearinghouse management services. Build a stronger compliance offering for trucking companies and owner-operators.</p>
+<div class="hero-actions">
+<a class="btn btn-orange" href="#pricing">Get Started →</a>
+<a class="btn hero-secondary" href="#services">Learn More →</a>
+</div>
+</div>
+<aside class="hero-panel">
+<div class="hero-panel-label">Build your service offering</div>
+<h2>Manage more of the compliance journey.</h2>
+<ul class="hero-panel-list">
+<li><strong>01</strong><span>Clearinghouse account setup and C/TPA status activation</span></li>
+<li><strong>02</strong><span>Driver query and violation management workflows</span></li>
+<li><strong>03</strong><span>DOT random consortium and multi-client support</span></li>
+</ul>
+</aside>
+</div>
+</section>
+<section class="section">
+<div class="container intro-grid">
+<div class="intro-copy">
+<span class="section-kicker">Why Become a C/TPA?</span>
+<h2>Turn Testing Relationships Into Ongoing Compliance Services.</h2>
+<p>As a Consortium/Third-Party Administrator, your business can support eligible employers with authorized Clearinghouse activities after the required registration and designation process is completed.</p>
+<p>That creates an opportunity to offer a broader service experience around driver queries, violation reporting workflows, DOT consortium programs, and ongoing client management.</p>
+<ul class="intro-checks">
+<li>Build a recurring compliance service offering</li>
+<li>Support trucking companies and owner-operators</li>
+<li>Organize multiple clients through repeatable workflows</li>
+<li>Add DOT random consortium services to your business</li>
+</ul>
+</div>
+<div aria-label="C/TPA service workflow illustration" class="compliance-card">
+<div class="portal-card">
+<div class="portal-top">
+<div class="portal-brand">C/TPA SERVICE HUB</div>
+<div class="portal-status">COMPLIANCE</div>
+</div>
+<div class="portal-title">Your Client Services</div>
+<div class="portal-sub">Organize your workflows around the services you provide.</div>
+<div class="portal-grid">
+<div class="portal-item">
+<b>Driver Queries</b>
+<span>Structured query support workflows</span>
+</div>
+<div class="portal-item">
+<b>Violations</b>
+<span>Authorized reporting workflows</span>
+</div>
+<div class="portal-item">
+<b>Consortiums</b>
+<span>DOT random testing programs</span>
+</div>
+<div class="portal-item">
+<b>Client Management</b>
+<span>Support multiple employer accounts</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="services-section" id="services">
+<div class="container">
+<div class="section-heading">
+<span class="section-kicker">The Power of C/TPA Services</span>
+<h2>Offer More Than a Single Drug Test.</h2>
+<p>Build a professional compliance service around the needs of trucking companies, owner-operators, and DOT-regulated programs.</p>
+</div>
+<div class="service-grid">
+<article class="service-card">
+<div class="service-number">01</div>
+<h3>Account Setup</h3>
+<p>Get organized for the Clearinghouse registration process and the operational foundation of your C/TPA business.</p>
+</article>
+<article class="service-card">
+<div class="service-number">02</div>
+<h3>C/TPA Status</h3>
+<p>Build the process needed for your company to establish and manage its C/TPA role.</p>
+</article>
+<article class="service-card">
+<div class="service-number">03</div>
+<h3>Driver Queries</h3>
+<p>Create a repeatable workflow for authorized query services performed on behalf of designated clients.</p>
+</article>
+<article class="service-card">
+<div class="service-number">04</div>
+<h3>Violation Workflows</h3>
+<p>Organize the procedures your business uses for authorized violation reporting activities.</p>
+</article>
+<article class="service-card">
+<div class="service-number">05</div>
+<h3>DOT Consortiums</h3>
+<p>Add random testing consortium services for clients that need ongoing DOT program support.</p>
+</article>
+<article class="service-card">
+<div class="service-number">06</div>
+<h3>Client Management</h3>
+<p>Build systems for managing multiple employer and owner-operator relationships efficiently.</p>
+</article>
+<article class="service-card">
+<div class="service-number">07</div>
+<h3>Certificates &amp; Agreements</h3>
+<p>Create an organized workflow for consortium documentation and client-facing resources.</p>
+</article>
+<article class="service-card">
+<div class="service-number">08</div>
+<h3>Business Growth</h3>
+<p>Create opportunities for recurring management and consulting services beyond individual collections.</p>
+</article>
+</div>
+</div>
+</section>
+<section class="workflow-section">
+<div class="container">
+<div class="workflow-heading">
+<span class="eyebrow">How It Works</span>
+<h2>Build Your C/TPA Service Step by Step.</h2>
+<p>Choose your setup option, complete onboarding, establish your workflow, and begin building your compliance client base.</p>
+</div>
+<div class="workflow-grid">
+<article class="workflow-card">
+<div class="workflow-step">01</div>
+<h3>Choose Your Plan</h3>
+<p>Select the setup level that best matches your current business and growth goals.</p>
+</article>
+<article class="workflow-card">
+<div class="workflow-step">02</div>
+<h3>Complete Onboarding</h3>
+<p>Provide the information needed to begin organizing your C/TPA setup and service structure.</p>
+</article>
+<article class="workflow-card">
+<div class="workflow-step">03</div>
+<h3>Build Your Workflow</h3>
+<p>Establish client management, consortium, query, reporting, and documentation processes.</p>
+</article>
+<article class="workflow-card">
+<div class="workflow-step">04</div>
+<h3>Start Growing</h3>
+<p>Begin expanding your business with professional compliance services for eligible clients.</p>
+</article>
+</div>
+</div>
+</section>
+<section class="pricing-section" id="pricing">
+<div class="container">
+<div class="section-heading">
+<span class="section-kicker">Simple, Straightforward Pricing</span>
+<h2>Choose the C/TPA Solution That Fits Your Growth Strategy.</h2>
+<p>Start with professional setup or choose expanded management tools for a more complete compliance service operation.</p>
+</div>
+<div class="pricing-grid">
+<article class="price-card" data-service-id="ctpa_setup">
+<h3>C/TPA Setup</h3>
+<div class="price" data-service-price="">$295</div>
+<p class="price-note">Professional Clearinghouse C/TPA setup</p>
+<div class="price-divider"></div>
+<ul class="price-list">
+<li>Clearinghouse account setup</li>
+<li>C/TPA status activation</li>
+<li>Direct registry listing support</li>
+<li>Compliance guide</li>
+</ul>
+<a class="price-btn" data-service-link="" href="checkout.html?service=ctpa_setup">
       Get Started
     </a>
-  </article>
-
-
-  <article class="price-card featured" data-service-id="ctpa_pro_management">
-    <span class="popular">Most Popular</span>
-
-    <h3>C/TPA Pro Management</h3>
-    <div class="price" data-service-price>$595</div>
-    <p class="price-note">Setup plus expanded management support</p>
-
-    <div class="price-divider"></div>
-
-    <ul class="price-list">
-      <li>Clearinghouse account setup</li>
-      <li>C/TPA status activation</li>
-      <li>C/TPA registry listing support</li>
-      <li>Compliance guide</li>
-      <li>Random consortium software onboarding</li>
-      <li>Driver query handling workflows</li>
-      <li>Violation entry workflows</li>
-      <li>Management of multiple clients</li>
-      <li>Consortium certificate resources</li>
-      <li>Consortium agreement resources</li>
-    </ul>
-
-    <a class="price-btn" data-service-link href="checkout.html?service=ctpa_pro_management">
+</article>
+<article class="price-card featured" data-service-id="ctpa_pro_management">
+<span class="popular">Most Popular</span>
+<h3>C/TPA Pro Management</h3>
+<div class="price" data-service-price="">$595</div>
+<p class="price-note">Setup plus expanded management support</p>
+<div class="price-divider"></div>
+<ul class="price-list">
+<li>Clearinghouse account setup</li>
+<li>C/TPA status activation</li>
+<li>C/TPA registry listing support</li>
+<li>Compliance guide</li>
+<li>Random consortium software onboarding</li>
+<li>Driver query handling workflows</li>
+<li>Violation entry workflows</li>
+<li>Management of multiple clients</li>
+<li>Consortium certificate resources</li>
+<li>Consortium agreement resources</li>
+</ul>
+<a class="price-btn" data-service-link="" href="checkout.html?service=ctpa_pro_management">
       Get Started
     </a>
-  </article>
-
-
-  <article class="price-card" data-service-id="ctpa_custom_solutions">
-    <h3>C/TPA Custom Solutions</h3>
-    <div class="price custom" data-service-price>Custom</div>
-    <p class="price-note">For multi-office and high-volume operations</p>
-
-    <div class="price-divider"></div>
-
-    <ul class="price-list">
-      <li>Advanced Clearinghouse workflows</li>
-      <li>Random consortium software support</li>
-      <li>High-volume client management</li>
-      <li>Multi-office scaling</li>
-      <li>White-label support options</li>
-      <li>Audit-focused workflow planning</li>
-      <li>Dedicated account support</li>
-    </ul>
-
-    <a class="price-btn" data-service-link href="contact.html?subject=ctpa-custom-solutions">
+</article>
+<article class="price-card" data-service-id="ctpa_custom_solutions">
+<h3>C/TPA Custom Solutions</h3>
+<div class="price custom" data-service-price="">Custom</div>
+<p class="price-note">For multi-office and high-volume operations</p>
+<div class="price-divider"></div>
+<ul class="price-list">
+<li>Advanced Clearinghouse workflows</li>
+<li>Random consortium software support</li>
+<li>High-volume client management</li>
+<li>Multi-office scaling</li>
+<li>White-label support options</li>
+<li>Audit-focused workflow planning</li>
+<li>Dedicated account support</li>
+</ul>
+<a class="price-btn" data-service-link="" href="contact.html?subject=ctpa-custom-solutions">
       Request a Quote
     </a>
-  </article>
-
+</article>
 </div>
-
-
-        <p class="pricing-disclaimer">Employer clients remain responsible for meeting their applicable FMCSA and Clearinghouse compliance obligations. C/TPA access and activities are subject to applicable registration, designation, authorization, and consent requirements.</p>
-      </div>
-    </section>
-
-    <section class="faq-section">
-      <div class="container">
-        <div class="section-heading">
-          <span class="section-kicker">Frequently Asked Questions</span>
-          <h2>Clearinghouse C/TPA FAQs</h2>
-          <p>Answers to common questions about building a C/TPA service offering.</p>
-        </div>
-
-        <div class="faq-list">
-
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>What exactly does a C/TPA do?</span>
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">A Consortium/Third-Party Administrator may support employers with authorized Clearinghouse activities, including queries and violation reporting, when the required registration and employer designation requirements have been met.</div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>Who is this service designed for?</span>
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">This service is designed for drug testing business owners and professionals who want to expand their offerings with FMCSA compliance management services for trucking companies and owner-operators.</div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>What does screenings4u help set up?</span>
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">The service is structured to help organize your Clearinghouse account setup, C/TPA service foundation, compliance workflow, and client management process based on the option you select.</div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>How does a C/TPA increase my revenue opportunities?</span>
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">A C/TPA service can create opportunities for recurring client relationships through compliance administration, consortium services, query support, consulting, and other authorized service workflows.</div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>Who is responsible for Clearinghouse compliance?</span>
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">The employer remains responsible for meeting applicable Clearinghouse requirements, even when a C/TPA performs authorized activities on the employer's behalf.</div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false">
-              <span>How do I get started?</span>
-              <span class="faq-icon">+</span>
-            </button>
-            <div class="faq-answer">Choose the option that fits your business, complete the onboarding process, and begin building the service workflow needed to support your compliance clients.</div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <section class="final-cta">
-      <div class="container">
-        <div class="final-card">
-          <div>
-            <h2>Ready to Build Your Clearinghouse C/TPA Business?</h2>
-            <p>Expand your drug testing business with a stronger FMCSA compliance service offering.</p>
-          </div>
-          <a href="#pricing" class="btn btn-orange">Choose Your Option →</a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer id="siteFooter"></footer>
-
-<script src="assets/js/navigation.js"></script>
-<script src="assets/js/footer.js"></script>
-
-
-  <script>
+<p class="pricing-disclaimer">Employer clients remain responsible for meeting their applicable FMCSA and Clearinghouse compliance obligations. C/TPA access and activities are subject to applicable registration, designation, authorization, and consent requirements.</p>
+</div>
+</section>
+<section class="faq-section">
+<div class="container">
+<div class="section-heading">
+<span class="section-kicker">Frequently Asked Questions</span>
+<h2>Clearinghouse C/TPA FAQs</h2>
+<p>Answers to common questions about building a C/TPA service offering.</p>
+</div>
+<div class="faq-list">
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question" type="button">
+<span>What exactly does a C/TPA do?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">A Consortium/Third-Party Administrator may support employers with authorized Clearinghouse activities, including queries and violation reporting, when the required registration and employer designation requirements have been met.</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question" type="button">
+<span>Who is this service designed for?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">This service is designed for drug testing business owners and professionals who want to expand their offerings with FMCSA compliance management services for trucking companies and owner-operators.</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question" type="button">
+<span>What does screenings4u help set up?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">The service is structured to help organize your Clearinghouse account setup, C/TPA service foundation, compliance workflow, and client management process based on the option you select.</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question" type="button">
+<span>How does a C/TPA increase my revenue opportunities?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">A C/TPA service can create opportunities for recurring client relationships through compliance administration, consortium services, query support, consulting, and other authorized service workflows.</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question" type="button">
+<span>Who is responsible for Clearinghouse compliance?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">The employer remains responsible for meeting applicable Clearinghouse requirements, even when a C/TPA performs authorized activities on the employer's behalf.</div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-question" type="button">
+<span>How do I get started?</span>
+<span class="faq-icon">+</span>
+</button>
+<div class="faq-answer">Choose the option that fits your business, complete the onboarding process, and begin building the service workflow needed to support your compliance clients.</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<script>
     document.querySelectorAll(".faq-question").forEach(function(button){
       button.addEventListener("click", function(){
         const item = button.closest(".faq-item");
@@ -1521,5 +1137,9 @@
       });
     });
   </script>
-</body>
+<footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
+  <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
+  <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
+  <script src="assets/js/site-ui.js?v=20260904-1"></script>
+  <script src="assets/js/footer.js?v=20260904-1"></script></body>
 </html>

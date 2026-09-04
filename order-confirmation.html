@@ -1,42 +1,19 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#325aa3" />
-
-  <title>Order Confirmation | screenings4u</title>
-  <link rel="icon" type="image/png" href="images/fav.png">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --orange: #ff6b00;
-      --blue: #325aa3;
-      --blue-dark: #24467f;
-      --muted: #667892;
-      --surface: #f4f7fc;
-      --line: #d9e3f0;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: var(--surface);
-      color: #1d2d45;
-    }
-
-    .container {
-      width: min(760px, calc(100% - 36px));
-      margin: 0 auto;
-    }
-
-    .card {
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#24467f" name="theme-color"/>
+<title>Order Confirmation | screenings4u</title>
+<link href="images/fav.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
+  <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2"><style>
+.card {
       margin: 70px auto;
       background: #fff;
       border: 1px solid var(--line);
@@ -59,13 +36,7 @@
       margin: 0 auto 20px;
     }
 
-    .eyebrow {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      font-weight: 900;
-      color: var(--orange);
-    }
+    
 
     h1 {
       font-size: clamp(34px, 6vw, 52px);
@@ -157,20 +128,7 @@
       margin-top: 24px;
     }
 
-    .btn {
-      min-height: 46px;
-      padding: 0 18px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 900;
-      text-decoration: none;
-      border: 0;
-      cursor: pointer;
-      font-family: inherit;
-    }
+    
 
     .orange {
       background: var(--orange);
@@ -187,7 +145,7 @@
       min-height: 50px;
       padding: 0 24px;
       font-size: 13px;
-      box-shadow: 0 8px 22px rgba(50, 90, 163, .16);
+      box-shadow: 0 8px 22px rgba(36, 70, 127, .16);
     }
 
     .btn.is-disabled,
@@ -204,17 +162,11 @@
     }
 
     @media (max-width: 640px) {
-      html {
-        -webkit-text-size-adjust: 100%;
-        text-size-adjust: 100%;
-      }
+      
 
-      body { min-width: 320px; }
+      
 
-      .container {
-        width: 100%;
-        padding-inline: 16px;
-      }
+      
 
       .card {
         margin: 16px auto;
@@ -244,79 +196,89 @@
     }
 
     @media (max-width: 380px) {
-      .container { padding-inline: 10px; }
+      
       .card { padding-inline: 14px; }
     }
-  </style>
+</style>
 </head>
-
-<body>
-  <main>
-    <div class="container">
-      <section class="card">
-        <div class="check" aria-hidden="true">✓</div>
-        <div class="eyebrow">Payment Submitted</div>
-
-        <h1>Thank you for your order.</h1>
-
-        <p>
+<body><div class="topbar">
+<div class="container topbar-inner">
+<div class="topbar-left">
+<span>Nationwide Drug &amp; Alcohol Testing</span><span aria-hidden="true">•</span><span>Operating Nationwide</span>
+</div>
+<div class="topbar-right">
+<span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a>
+</div>
+</div>
+</div><header class="site-header">
+  <div class="container nav-inner" id="navInner">
+    <a href="index.html" class="brand" aria-label="screenings4u home">
+      <img src="images/logo.png" alt="screenings4u" class="site-logo">
+    </a>
+    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation"></nav>
+    <div class="nav-actions">
+      <a href="services.html" class="btn btn-outline">Order a Test</a>
+      <div class="nav-account-menu">
+        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron" aria-hidden="true">▼</span></button>
+        <div class="nav-account-dropdown">
+          <a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a>
+          <a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>
+        </div>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mobileNav" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
+<main>
+<div class="container">
+<section class="card">
+<div aria-hidden="true" class="check">✓</div>
+<div class="eyebrow">Payment Submitted</div>
+<h1>Thank you for your order.</h1>
+<p>
           Your payment has been submitted to Stripe.
           The screenings4u webhook will confirm the payment
           and finalize your order.
         </p>
-
-        <div class="tracking-card">
-          <span class="tracking-label">S4U Tracking Number</span>
-          <strong class="tracking-number" id="trackingNumber">—</strong>
-        </div>
-
-        <div class="email-notice">
-          <strong>Watch your email.</strong><br>
+<div class="tracking-card">
+<span class="tracking-label">S4U Tracking Number</span>
+<strong class="tracking-number" id="trackingNumber">—</strong>
+</div>
+<div class="email-notice">
+<strong>Watch your email.</strong><br/>
           Check your inbox and spam folder for your order receipt.
           If you are a new customer, you will also receive an email
           to set up your Customer Portal account.
         </div>
-
-        <div
-          class="confirmation-status"
-          id="confirmationStatus"
-          role="alert"
-          hidden
-        ></div>
-
-        <div class="donor-pass-card">
-          <h2>Your testing location is next.</h2>
-
-          <p>
+<div class="confirmation-status" hidden="" id="confirmationStatus" role="alert"></div>
+<div class="donor-pass-card">
+<h2>Your testing location is next.</h2>
+<p>
             Generate your donor pass by entering the exact location
             where you need testing. We will use that information to
             help identify an available testing location for your service.
           </p>
-
-          <a
-            class="btn orange donor-pass-btn"
-            id="donorPassButton"
-            href="#"
-            aria-disabled="true"
-          >
+<a aria-disabled="true" class="btn orange donor-pass-btn" href="#" id="donorPassButton">
             Generate Your Donor Pass
           </a>
-        </div>
-
-        <p class="secondary-note">
+</div>
+<p class="secondary-note">
           Keep your S4U Tracking Number for your records.
           If payment requires additional authentication, complete
           it in the Stripe window before leaving checkout.
         </p>
-
-        <div class="actions">
-          <a class="btn orange" href="services.html">Browse More Services</a>
-          <a class="btn blue" href="index.html">Return Home</a>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <script src="assets/js/order-confirmation.js?v=20260902-1"></script>
-</body>
+<div class="actions">
+<a class="btn orange" href="services.html">Browse More Services</a>
+<a class="btn blue" href="index.html">Return Home</a>
+</div>
+</section>
+</div>
+</main>
+<script src="assets/js/order-confirmation.js?v=20260902-1"></script>
+<footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
+  <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
+  <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
+  <script src="assets/js/site-ui.js?v=20260904-1"></script>
+  <script src="assets/js/footer.js?v=20260904-1"></script></body>
 </html>

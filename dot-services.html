@@ -1,283 +1,90 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#325aa3" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#24467f" name="theme-color"/>
+<meta content="DOT drug testing, alcohol testing, DOT physicals, consortium services, post-accident testing and DOT compliance services from screenings4u." name="description"/>
+<title>DOT &amp; Transportation | screenings4u</title>
+<link href="images/fav.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
+  <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2"><style>
+input, select, textarea{ font: inherit; }
+    
 
-<meta name="description" content="DOT drug testing, alcohol testing, DOT physicals, consortium services, post-accident testing and DOT compliance services from screenings4u.">
-<title>DOT & Transportation | screenings4u</title>
-  <link rel="icon" type="image/png" href="images/fav.png">
+    
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
+    
 
-     :root {
-  --orange: #ff6b00;
-  --blue: #325aa3;
-  --orange-dark: #d95800;
-  --orange-deep: #b84700;
-  --orange-soft: #fff0e6;
-  --orange-pale: #fff7f2;
-  --blue-dark: #24467f;
-  --blue-deep: #17335f;
-  --blue-darker: #10284b;
-  --blue-soft: #e9f0fb;
-  --blue-pale: #f4f7fc;
-  --ink: #1d2d45;
-  --muted: #667892;
-  --surface: #f4f7fc;
-  --surface-2: #eef3f9;
-  --line: #d9e3f0;
-  --line-strong: #c4d3e5;
-  --white: #ffffff;
-  --max: 1440px;
-  --shadow-sm: 0 5px 18px rgba(23,51,95,.08);
-  --shadow: 0 18px 45px rgba(23,51,95,.12);
-  --shadow-lg: 0 28px 70px rgba(23,51,95,.16);
-  --radius: 18px;
-}
+    
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
 
-    html { scroll-behavior: smooth; }
+    
 
-    body {
-      font-family: Inter, Arial, sans-serif;
-      color: var(--ink);
-      background: var(--white);
-      line-height: 1.55;
-      overflow-x: hidden;
-    }
+    
 
-    a { color: inherit; text-decoration: none; }
-    button, input, select, textarea { font: inherit; }
-    button { cursor: pointer; }
+    
 
-    .container {
-      width: min(var(--max), calc(100% - 80px));
-      margin-inline: auto;
-    }
+    
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      color: var(--orange);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
+    
 
-    .eyebrow::before {
-      content: "";
-      width: 28px;
-      height: 2px;
-      background: var(--orange);
-    }
+    
 
-    .section-heading {
-      max-width: 780px;
-      margin-bottom: 48px;
-    }
+    
 
-    .section-heading h2 {
-      color: var(--blue-dark);
-      font-size: clamp(34px, 4vw, 52px);
-      line-height: 1.08;
-      letter-spacing: -.035em;
-      margin-bottom: 16px;
-    }
+    
 
-    .section-heading p {
-      color: var(--muted);
-      font-size: 17px;
-      max-width: 690px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      min-height: 50px;
-      padding: 0 22px;
-      border-radius: 7px;
-      border: 1px solid transparent;
-      font-size: 14px;
-      font-weight: 800;
-      transition: .2s ease;
-    }
-
-    .btn-orange {
-      color: var(--white);
-      background: var(--orange);
-      box-shadow: 0 9px 25px rgba(255,107,0,.22);
-    }
-
-    .btn-orange:hover {
-      background: var(--blue-dark);
-      transform: translateY(-1px);
-    }
-
-    .btn-outline {
-      color: var(--blue-dark);
-      border-color: #b9c8db;
-      background: rgba(255,255,255,.78);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-      transform: translateY(-1px);
-    }
-
-    .btn-white {
-      color: var(--blue-dark);
-      background: var(--white);
-    }
-
-    .btn-white:hover { transform: translateY(-1px); }
+    
 
     /* TOP BAR */
-    .topbar {
-      background: var(--blue-dark);
-      color: #dfe9f5;
-      font-size: 12px;
-    }
+    
 
-    .topbar-inner {
-      min-height: 38px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-    }
+    
 
-    .topbar-left, .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
+    
 
-    .topbar a:hover { color: var(--white); }
+    
 
     /* NAVIGATION */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,.96);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(14px);
-    }
+    
 
-    .nav-inner {
-      min-height: 82px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 26px;
-    }
+    
 
- .brand {
-  display: flex;
-  align-items: center;
-  flex: 0 0 155px;
-  width: 155px;
-}
+ 
 
-.site-logo {
-  display: block;
-  width: 145px;
-  height: auto;
-  max-height: 48px;
-  object-fit: contain;
-  object-position: left center;
-}
-    .brand span { color: var(--orange); font-weight: 500; }
 
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
+    
 
-    .nav-item {
-      position: relative;
-    }
+    
 
-    .nav-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 13px 10px;
-      color: #344054;
-      font-size: 13px;
-      font-weight: 700;
-      border-radius: 7px;
-    }
+    
 
-    .nav-link:hover { color: var(--blue); background: #f5f8fc; }
+    
 
-    .nav-link .chevron {
-      font-size: 10px;
-      transition: transform .2s ease;
-    }
+    
 
-    .dropdown {
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 0;
-      min-width: 255px;
-      padding: 10px;
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      box-shadow: var(--shadow);
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(6px);
-      transition: .18s ease;
-    }
+    
 
-    .nav-item:hover .dropdown,
-    .nav-item:focus-within .dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
+    
 
-    .nav-item:hover .chevron { transform: rotate(180deg); }
+    
 
-    .dropdown a {
-      display: block;
-      padding: 11px 12px;
-      border-radius: 8px;
-      font-size: 13px;
-      color: #475467;
-      font-weight: 600;
-    }
+    
 
-    .dropdown a:hover {
-      background: #f3f7fc;
-      color: var(--blue);
-    }
+    
 
-    .nav-actions { display: flex; gap: 9px; align-items: center; }
+    
 
-    .mobile-toggle {
-      display: none;
-      width: 44px;
-      height: 42px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--white);
-    }
+    
+
+    
 
     /* HERO */
     .hero {
@@ -287,7 +94,7 @@
       align-items: center;
       background:
         linear-gradient(90deg, rgba(7,26,49,.98) 0%, rgba(7,26,49,.93) 31%, rgba(7,26,49,.66) 53%, rgba(7,26,49,.12) 78%, rgba(7,26,49,0) 100%),
-        url("images/dot-hero.png") 38% center / cover no-repeat;
+        url("images/dot-hero.webp") 38% center / cover no-repeat;
       overflow: hidden;
     }
 
@@ -431,8 +238,8 @@
       border-radius: 22px;
       overflow: hidden;
       background:
-        linear-gradient(145deg, rgba(50,90,163,.95), rgba(10,34,64,.9)),
-        url("images/hero.png") center / cover;
+        linear-gradient(145deg, rgba(36,70,127,.95), rgba(10,34,64,.9)),
+        url("images/hero.webp") center / cover;
       box-shadow: var(--shadow);
     }
 
@@ -760,53 +567,31 @@
 
     /* MOBILE */
     @media (max-width: 1120px) {
-      .nav { display: none; }
-      .nav-actions .btn-outline { display: none; }
-      .mobile-toggle { display: block; }
-      .nav-inner.menu-open .nav {
-        display: flex;
-        position: absolute;
-        left: 20px;
-        right: 20px;
-        top: 76px;
-        padding: 12px;
-        background: var(--white);
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        box-shadow: var(--shadow);
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .nav-inner.menu-open .nav-item .nav-link { width: 100%; justify-content: space-between; }
-      .nav-inner.menu-open .dropdown {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        display: none;
-        box-shadow: none;
-        border: 0;
-        padding: 0 0 8px 10px;
-      }
-      .nav-inner.menu-open .nav-item.open .dropdown { display: block; }
-      .nav-inner.menu-open .nav-item:hover .dropdown { display: none; }
-      .nav-inner.menu-open .nav-item.open:hover .dropdown { display: block; }
-      .nav-inner.menu-open .nav-link .chevron { display: inline-block; }
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       .hero-features { grid-template-columns: repeat(2, 1fr); gap: 20px; }
       .hero-feature:nth-child(2) { border-right: 0; }
       .service-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      
     }
 
     @media (max-width: 800px) {
-      .container { width: min(var(--max), calc(100% - 38px)); }
-      .topbar-left span:nth-child(2) { display: none; }
-      .topbar-right span { display: none; }
+      
+      
+      
       .hero {
         min-height: auto;
         background:
           linear-gradient(90deg, rgba(7,26,49,.96), rgba(7,26,49,.83)),
-          url("images/dot-hero.png") center / cover no-repeat;
+          url("images/dot-hero.webp") center / cover no-repeat;
       }
       .hero-inner { padding: 75px 0 105px; }
       .hero::after { width: 300px; height: 300px; right: -150px; top: -160px; }
@@ -822,11 +607,11 @@
     }
 
     @media (max-width: 560px) {
-      .container { width: min(var(--max), calc(100% - 28px)); }
-      .topbar-inner { justify-content: center; }
-      .topbar-left { gap: 10px; }
-      .brand { font-size: 25px; }
-      .nav-actions .btn-orange { min-height: 43px; padding: 0 13px; font-size: 12px; }
+      
+      
+      
+      
+      
       .hero h1 { font-size: 49px; }
       .hero-lead { font-size: 15px; }
       .hero-actions { flex-direction: column; }
@@ -837,11 +622,11 @@
       .trust-item, .trust-item:last-child { border-right: 0; border-top: 1px solid rgba(255,255,255,.1); }
       .trust-item:first-child { border-top: 0; }
       .audience-card { padding: 30px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-      .footer-bottom { flex-direction: column; }
+      
+      
     }
   
-.site-logo{display:block;width:145px;max-height:48px;height:auto;object-fit:contain}
+
 .dot-intro{padding:88px 0;background:var(--white)}
 .dot-intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .dot-intro h2,.dot-services h2,.dot-compliance h2,.dot-faq h2{color:var(--blue-dark);font-size:clamp(32px,4vw,50px);line-height:1.06;letter-spacing:-.04em}
@@ -1004,109 +789,71 @@
     padding:65px 0;
   }
 }
-
 </style>
 <style>
 .mobile-nav-actions{display:none}
-@media(max-width:1120px){.nav-actions>.nav-account-menu{display:none}.nav-inner.menu-open .nav{max-height:calc(100vh - 82px);overflow-y:auto}}
+
 @media(max-width:767px){
-:root{--mobile-gutter:20px}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{min-width:320px;font-size:16px;overflow-x:hidden}.container{width:100%;padding-inline:var(--mobile-gutter)}.topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}
-.nav-inner{min-height:64px;gap:12px}.brand{flex-basis:145px;width:145px}.site-logo{width:140px;max-height:42px}.mobile-toggle{display:grid;place-items:center;min-width:44px;height:44px;font-size:23px}.nav-actions{margin-left:auto}.nav-actions>.btn,.nav-actions>.nav-account-menu{display:none!important}.nav-inner.menu-open .nav{left:0;right:0;top:64px;max-height:calc(100dvh - 64px);padding:10px var(--mobile-gutter) max(18px,env(safe-area-inset-bottom));border-radius:0 0 12px 12px}.nav-link,.dropdown a{width:100%;min-height:44px;padding:12px 8px;font-size:16px}.nav-inner.menu-open .dropdown{padding-left:12px}.nav-item{width:100%}.mobile-nav-actions{display:grid;grid-template-columns:1fr;gap:10px;width:100%;padding-top:14px}.mobile-nav-actions .btn{width:100%;min-height:48px}.mobile-nav-actions .btn-outline{background:#fff}
-.hero{display:block;min-height:0;padding-top:290px;background:var(--blue-darker)}.hero::before{content:"";position:absolute;inset:0 0 auto;height:290px;background:url("images/dot-hero.png") center center/cover no-repeat}.hero::after{display:none}.hero-inner{padding:34px var(--mobile-gutter) 40px;background:var(--blue-darker)}.hero-copy{max-width:none}.hero h1{font-size:clamp(2.15rem,9.5vw,2.95rem);line-height:1.04;letter-spacing:-.045em;margin-bottom:16px}.hero-lead{font-size:16px;line-height:1.6;margin-bottom:24px}.hero-actions,.cta-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:0}.hero-actions .btn,.cta-actions .btn{width:100%;min-height:52px}.hero-features{grid-template-columns:1fr;margin-top:30px;padding-top:20px;gap:0}.hero-feature,.hero-feature:first-child{padding:10px 0;border:0;border-bottom:1px solid rgba(255,255,255,.12)}.hero-feature:last-child{border-bottom:0}.hero-feature strong{font-size:13px}.hero-feature small{font-size:12px;line-height:1.45}
-.dot-intro,.dot-services,.dot-compliance,.dot-faq{padding:54px 0}.dot-intro-grid,.dot-grid,.dot-compliance-grid,.dot-stats{grid-template-columns:1fr;gap:20px}.section-heading{margin-bottom:28px}.section-heading h2,.dot-intro h2,.dot-compliance h2{font-size:clamp(1.8rem,8vw,2.3rem);line-height:1.1}.section-heading p,.dot-intro p,.dot-compliance p{font-size:16px;line-height:1.65}.dot-card,.dot-panel{padding:24px}.dot-card h3,.dot-panel h3{font-size:1.45rem}.dot-card p,.dot-panel p,.dot-checks li{font-size:14px;line-height:1.6}.dot-stat{padding:16px}.dot-stat strong{font-size:14px}.dot-stat span{font-size:13px}.dot-num{font-size:13px}
+.full-banner, .announcement-bar, .promo-banner, [data-full-banner]{display:none!important}
+.mobile-nav-actions{display:grid;grid-template-columns:1fr;gap:10px;width:100%;padding-top:14px}.mobile-nav-actions .btn{width:100%;min-height:48px}.mobile-nav-actions .btn-outline{background:#fff}
+.hero{display:block;min-height:0;padding-top:290px;background:var(--blue-darker)}.hero::before{content:"";position:absolute;inset:0 0 auto;height:290px;background:url("images/dot-hero.webp") center center/cover no-repeat}.hero::after{display:none}.hero-inner{padding:34px var(--mobile-gutter) 40px;background:var(--blue-darker)}.hero-copy{max-width:none}.hero h1{font-size:clamp(2.15rem,9.5vw,2.95rem);line-height:1.04;letter-spacing:-.045em;margin-bottom:16px}.hero-lead{font-size:16px;line-height:1.6;margin-bottom:24px}.hero-actions,.cta-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:0}.hero-actions .btn,.cta-actions .btn{width:100%;min-height:52px}.hero-features{grid-template-columns:1fr;margin-top:30px;padding-top:20px;gap:0}.hero-feature,.hero-feature:first-child{padding:10px 0;border:0;border-bottom:1px solid rgba(255,255,255,.12)}.hero-feature:last-child{border-bottom:0}.hero-feature strong{font-size:13px}.hero-feature small{font-size:12px;line-height:1.45}
+.dot-intro,.dot-services,.dot-compliance,.dot-faq{padding:54px 0}.dot-intro-grid,.dot-grid,.dot-compliance-grid,.dot-stats{grid-template-columns:1fr;gap:20px}.dot-intro h2, .dot-compliance h2{font-size:clamp(1.8rem,8vw,2.3rem);line-height:1.1}.dot-intro p, .dot-compliance p{font-size:16px;line-height:1.65}.dot-card,.dot-panel{padding:24px}.dot-card h3,.dot-panel h3{font-size:1.45rem}.dot-card p,.dot-panel p,.dot-checks li{font-size:14px;line-height:1.6}.dot-stat{padding:16px}.dot-stat strong{font-size:14px}.dot-stat span{font-size:13px}.dot-num{font-size:13px}
 .dot-faq-question{min-height:56px;padding:16px;gap:14px;font-size:15px;line-height:1.4}.dot-faq-answer{padding:0 16px 18px;font-size:14px;line-height:1.65}.dot-faq-plus{flex:0 0 auto}.cta{padding:52px 0}.cta-inner{display:grid;grid-template-columns:1fr;gap:24px}.cta h2{font-size:clamp(1.85rem,8vw,2.35rem)}.cta p{font-size:16px;line-height:1.6}
 }
-@media(max-width:380px){:root{--mobile-gutter:16px}.brand{flex-basis:132px;width:132px}.site-logo{width:128px}.hero{padding-top:250px}.hero::before{height:250px}.dot-card,.dot-panel{padding:21px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+@media(max-width:380px){.hero{padding-top:250px}.hero::before{height:250px}.dot-card,.dot-panel{padding:21px}}
+@media(prefers-reduced-motion:reduce){*::before, *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
-<body>
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <div class="topbar-left">
-        <span>Nationwide Drug & Alcohol Testing</span>
-        <span>•</span>
-        <span>Operating Nationwide</span>
-      </div>
-      <div class="topbar-right">
-        <span>Mon–Fri, 8AM–8PM CST</span>
-        <a href="tel:7732457009">(773) 245-7009</a>
-      </div>
-    </div>
-  </div>
-
-<header class="site-header">
+<body><div class="topbar">
+<div class="container topbar-inner">
+<div class="topbar-left">
+<span>Nationwide Drug &amp; Alcohol Testing</span><span aria-hidden="true">•</span><span>Operating Nationwide</span>
+</div>
+<div class="topbar-right">
+<span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a>
+</div>
+</div>
+</div><header class="site-header">
   <div class="container nav-inner" id="navInner">
-
     <a href="index.html" class="brand" aria-label="screenings4u home">
       <img src="images/logo.png" alt="screenings4u" class="site-logo">
     </a>
-
-<nav class="nav" id="mainNav" aria-label="Main navigation"></nav>
-
+    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation"></nav>
     <div class="nav-actions">
-      <a href="services.html" class="btn btn-outline">
-        Order a Test
-      </a>
-
+      <a href="services.html" class="btn btn-outline">Order a Test</a>
       <div class="nav-account-menu">
-        <button
-          type="button"
-          class="nav-login"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Account Login
-          <span class="nav-login-chevron">▼</span>
-        </button>
-
+        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron" aria-hidden="true">▼</span></button>
         <div class="nav-account-dropdown">
-          <a href="https://portal.screenings4u.com/customer-login.html">
-            Customer Login
-          </a>
-
-          <a href="https://portal.screenings4u.com/employer-login.html">
-            Employer Login
-          </a>
+          <a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a>
+          <a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>
         </div>
       </div>
-
-      <button
-        class="mobile-toggle"
-        id="mobileToggle"
-        aria-controls="mainNav"
-        aria-label="Open menu"
-        aria-expanded="false">
-        ☰
-      </button>
+      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mobileNav" aria-label="Open menu" aria-expanded="false">☰</button>
     </div>
-
   </div>
 </header>
-
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
 <main>
 <section class="hero">
-  <div class="container hero-inner">
-    <div class="hero-copy">
-      <div class="eyebrow">DOT & Transportation</div>
-      <h1>DOT Compliance <span>Made Simple.</span></h1>
-      <p class="hero-lead">DOT drug testing, alcohol testing, physicals, random programs, post-accident testing and compliance services through one trusted nationwide partner.</p>
-      <div class="hero-actions">
-        <a href="#dot-services" class="btn btn-orange">Order a DOT Test →</a>
-        <a href="contact.html" class="btn btn-outline">Talk to a Specialist →</a>
-      </div>
-      <div class="hero-features">
-        <div class="hero-feature"><strong>Nationwide</strong><small>Collection access</small></div>
-        <div class="hero-feature"><strong>DOT Focused</strong><small>Compliance services</small></div>
-        <div class="hero-feature"><strong>Digital</strong><small>Donor passes</small></div>
-        <div class="hero-feature"><strong>Trusted</strong><small>Testing partner</small></div>
-      </div>
-    </div>
-  </div>
+<div class="container hero-inner">
+<div class="hero-copy">
+<div class="eyebrow">DOT &amp; Transportation</div>
+<h1>DOT Compliance <span>Made Simple.</span></h1>
+<p class="hero-lead">DOT drug testing, alcohol testing, physicals, random programs, post-accident testing and compliance services through one trusted nationwide partner.</p>
+<div class="hero-actions">
+<a class="btn btn-orange" href="#dot-services">Order a DOT Test →</a>
+<a class="btn btn-outline" href="contact.html">Talk to a Specialist →</a>
+</div>
+<div class="hero-features">
+<div class="hero-feature"><strong>Nationwide</strong><small>Collection access</small></div>
+<div class="hero-feature"><strong>DOT Focused</strong><small>Compliance services</small></div>
+<div class="hero-feature"><strong>Digital</strong><small>Donor passes</small></div>
+<div class="hero-feature"><strong>Trusted</strong><small>Testing partner</small></div>
+</div>
+</div>
+</div>
 </section>
-
-<section class="dot-intro"><div class="container dot-intro-grid"><div><div class="eyebrow">DOT Testing & Compliance</div><h2>Keep your drivers, records and testing program moving.</h2><p>screenings4u provides DOT-focused testing and compliance support for transportation employers, owner-operators and safety-sensitive employees. Order testing, connect with collection locations and manage your DOT requirements through one streamlined experience.</p></div><div class="dot-stats"><div class="dot-stat"><strong>Nationwide Collection</strong><span>Professional collection access across the country.</span></div><div class="dot-stat"><strong>Digital Donor Pass</strong><span>Testing authorization information delivered digitally.</span></div><div class="dot-stat"><strong>DOT Focused</strong><span>Services built around regulated transportation testing.</span></div><div class="dot-stat"><strong>Secure Workflow</strong><span>Testing and result information kept organized.</span></div></div></div></section>
-
+<section class="dot-intro"><div class="container dot-intro-grid"><div><div class="eyebrow">DOT Testing &amp; Compliance</div><h2>Keep your drivers, records and testing program moving.</h2><p>screenings4u provides DOT-focused testing and compliance support for transportation employers, owner-operators and safety-sensitive employees. Order testing, connect with collection locations and manage your DOT requirements through one streamlined experience.</p></div><div class="dot-stats"><div class="dot-stat"><strong>Nationwide Collection</strong><span>Professional collection access across the country.</span></div><div class="dot-stat"><strong>Digital Donor Pass</strong><span>Testing authorization information delivered digitally.</span></div><div class="dot-stat"><strong>DOT Focused</strong><span>Services built around regulated transportation testing.</span></div><div class="dot-stat"><strong>Secure Workflow</strong><span>Testing and result information kept organized.</span></div></div></div></section>
 <section class="dot-services" id="dot-services"><div class="container"><div class="section-heading"><div class="eyebrow">Our DOT Services</div><h2>One place for your DOT testing needs.</h2><p>Choose the service that fits your driver, employee or transportation compliance requirement.</p></div><div class="dot-grid">
 <article class="dot-card"><div class="dot-num">01</div><h3>DOT Drug Testing</h3><p>DOT drug testing with nationwide collection access and digital donor workflows.</p><a href="dot-urine-drug-tests.html">Learn More →</a></article>
 <article class="dot-card"><div class="dot-num">02</div><h3>DOT Breath Alcohol</h3><p>DOT-regulated breath alcohol testing through qualified collection professionals.</p><a href="dot-breathalyzer-services.html">Learn More →</a></article>
@@ -1121,36 +868,19 @@
 <article class="dot-card"><div class="dot-num">11</div><h3>Driver Qualification</h3><p>Transportation-related screening and qualification support for employers.</p><a href="new-entrant-audit.html">Learn More →</a></article>
 <article class="dot-card"><div class="dot-num">12</div><h3>DOT Compliance</h3><p>Program and compliance support for transportation employers and operators.</p><a href="consulting-services.html">Learn More →</a></article>
 </div></div></section>
-
-<section class="dot-compliance"><div class="container dot-compliance-grid"><article class="dot-panel"><div class="eyebrow">For Transportation Employers</div><h3>Centralize your DOT program.</h3><p>Build a more organized testing workflow around your workforce, drivers and compliance requirements.</p><ul class="dot-checks"><li>Random pool and selection support</li><li>DOT drug and alcohol testing</li><li>Post-accident response</li><li>Digital donor pass workflows</li><li>Compliance documentation support</li></ul></article><article class="dot-panel orange"><div class="eyebrow">For Drivers & Owner Operators</div><h3>Get the testing you need without the runaround.</h3><p>Order a DOT test, receive your donor information and move to the collection step without unnecessary delays.</p><ul class="dot-checks"><li>DOT drug testing</li><li>DOT physical services</li><li>Owner-operator compliance</li><li>Nationwide collection access</li><li>Secure result workflows</li></ul></article></div></section>
-
+<section class="dot-compliance"><div class="container dot-compliance-grid"><article class="dot-panel"><div class="eyebrow">For Transportation Employers</div><h3>Centralize your DOT program.</h3><p>Build a more organized testing workflow around your workforce, drivers and compliance requirements.</p><ul class="dot-checks"><li>Random pool and selection support</li><li>DOT drug and alcohol testing</li><li>Post-accident response</li><li>Digital donor pass workflows</li><li>Compliance documentation support</li></ul></article><article class="dot-panel orange"><div class="eyebrow">For Drivers &amp; Owner Operators</div><h3>Get the testing you need without the runaround.</h3><p>Order a DOT test, receive your donor information and move to the collection step without unnecessary delays.</p><ul class="dot-checks"><li>DOT drug testing</li><li>DOT physical services</li><li>Owner-operator compliance</li><li>Nationwide collection access</li><li>Secure result workflows</li></ul></article></div></section>
 <section class="dot-faq"><div class="container"><div class="section-heading"><div class="eyebrow">DOT Services FAQ</div><h2>Common questions about DOT testing.</h2><p>Quick answers to help you understand the testing process and services before you order.</p></div><div class="dot-faq-list">
-<div class="dot-faq-item"><button class="dot-faq-question" type="button" data-faq-toggle>Who is required to follow DOT testing rules?<span class="dot-faq-plus">+</span></button><div class="dot-faq-answer">Safety-sensitive employees regulated by a DOT agency may be subject to DOT drug and alcohol testing requirements.</div></div>
-<div class="dot-faq-item"><button class="dot-faq-question" type="button" data-faq-toggle>What is a DOT 5-panel drug test?<span class="dot-faq-plus">+</span></button><div class="dot-faq-answer">A DOT drug test follows a regulated testing process and chain of custody and includes the federally required drug panel.</div></div>
-<div class="dot-faq-item"><button class="dot-faq-question" type="button" data-faq-toggle>How does DOT random testing work?<span class="dot-faq-plus">+</span></button><div class="dot-faq-answer">Covered employees are placed into a random pool and selected without advance notice according to applicable DOT requirements.</div></div>
-<div class="dot-faq-item"><button class="dot-faq-question" type="button" data-faq-toggle>How does the digital donor pass work?<span class="dot-faq-plus">+</span></button><div class="dot-faq-answer">After ordering, the donor receives digital authorization information needed to complete the collection process.</div></div>
-<div class="dot-faq-item"><button class="dot-faq-question" type="button" data-faq-toggle>Can screenings4u help with DOT compliance?<span class="dot-faq-plus">+</span></button><div class="dot-faq-answer">screenings4u provides DOT-focused testing and related program support for transportation employers and operators.</div></div>
+<div class="dot-faq-item"><button class="dot-faq-question" data-faq-toggle="" type="button">Who is required to follow DOT testing rules?<span class="dot-faq-plus">+</span></button><div class="dot-faq-answer">Safety-sensitive employees regulated by a DOT agency may be subject to DOT drug and alcohol testing requirements.</div></div>
+<div class="dot-faq-item"><button class="dot-faq-question" data-faq-toggle="" type="button">What is a DOT 5-panel drug test?<span class="dot-faq-plus">+</span></button><div class="dot-faq-answer">A DOT drug test follows a regulated testing process and chain of custody and includes the federally required drug panel.</div></div>
+<div class="dot-faq-item"><button class="dot-faq-question" data-faq-toggle="" type="button">How does DOT random testing work?<span class="dot-faq-plus">+</span></button><div class="dot-faq-answer">Covered employees are placed into a random pool and selected without advance notice according to applicable DOT requirements.</div></div>
+<div class="dot-faq-item"><button class="dot-faq-question" data-faq-toggle="" type="button">How does the digital donor pass work?<span class="dot-faq-plus">+</span></button><div class="dot-faq-answer">After ordering, the donor receives digital authorization information needed to complete the collection process.</div></div>
+<div class="dot-faq-item"><button class="dot-faq-question" data-faq-toggle="" type="button">Can screenings4u help with DOT compliance?<span class="dot-faq-plus">+</span></button><div class="dot-faq-answer">screenings4u provides DOT-focused testing and related program support for transportation employers and operators.</div></div>
 </div></div></section>
-
-<section class="cta"><div class="container cta-inner"><div><h2>Ready to simplify your DOT testing process?</h2><p>Order a test or talk with a screenings4u specialist about the right solution.</p></div><div class="cta-actions"><a href="personal-drug-and-alcohol-testing.html" class="btn btn-orange">Order a Test →</a><a href="contact.html" class="btn btn-outline">Contact Us →</a></div></div></section>
 </main>
-
-<footer id="siteFooter"></footer>
-
-
-<script src="assets/js/dot-services.js" defer></script>
-  <script src="assets/js/navigation.js"></script>
-  <script src="assets/js/footer.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded",function(){
-  const nav=document.getElementById("mainNav");
-  if(nav&&!nav.querySelector(".mobile-nav-actions")){
-    const actions=document.createElement("div");
-    actions.className="mobile-nav-actions";
-    actions.innerHTML='<a class="btn btn-orange" href="services.html">Order a Test</a><a class="btn btn-outline" href="https://portal.screenings4u.com/customer-login.html">Customer Login</a><a class="btn btn-outline" href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>';
-    nav.append(actions);
-  }
-});
-</script>
-</body>
+<script defer="" src="assets/js/dot-services.js"></script>
+<footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
+  <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
+  <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
+  <script src="assets/js/site-ui.js?v=20260904-1"></script>
+  <script src="assets/js/footer.js?v=20260904-1"></script></body>
 </html>
