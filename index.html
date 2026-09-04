@@ -1015,6 +1015,112 @@ input, select, textarea{ font: inherit; }
       .trust-item:last-child{grid-column:auto}
     }
 </style>
+
+<style id="homepage-mobile-brand-refinement">
+@media (max-width:767px){
+  :root{--home-mobile-gutter:16px}
+  html,body{max-width:100%;overflow-x:hidden}
+
+  /* Mobile homepage hero: one branded visual unit */
+  .hero{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    min-height:0;
+    padding:14px var(--home-mobile-gutter) 20px;
+    background:var(--blue-pale,#f4f7fc);
+    overflow:visible;
+  }
+  .hero::before{
+    content:"";
+    display:block;
+    position:relative;
+    inset:auto;
+    width:100%;
+    height:clamp(238px,67vw,290px);
+    flex:0 0 auto;
+    border-radius:18px 18px 0 0;
+    background:url("images/hero.webp") center 27%/cover no-repeat;
+    box-shadow:none;
+  }
+  .hero::after{display:none}
+  .hero-inner{
+    width:100%;
+    margin:0;
+    padding:28px 18px 20px;
+    border-top:4px solid var(--orange,#ff6b00);
+    border-radius:0 0 18px 18px;
+    background:var(--blue-dark,#24467f);
+    box-shadow:0 16px 34px rgba(36,70,127,.18);
+  }
+  .hero-copy{width:100%;max-width:none;color:#fff}
+  .hero-copy .eyebrow{margin-bottom:12px;color:#ffb27c;font-size:10px;letter-spacing:.1em}
+  .hero-copy .eyebrow::before{width:20px;background:var(--orange,#ff6b00)}
+  .hero h1{
+    margin:0 0 16px;
+    color:#fff;
+    font-size:clamp(34px,10vw,43px);
+    line-height:1.02;
+    letter-spacing:-.045em;
+    overflow-wrap:normal;
+  }
+  .hero h1 span{display:block;margin-top:3px;color:var(--orange,#ff6b00)}
+  .hero-lead{margin:0 0 22px;color:#e7eef8;font-size:15px;line-height:1.62}
+  .hero-actions{display:grid;grid-template-columns:1fr;gap:10px;margin:0 0 22px}
+  .hero-actions .btn{width:100%;min-height:50px;border-radius:10px}
+  .hero-actions .btn-orange{background:var(--orange,#ff6b00);color:#fff}
+  .hero-actions .btn-outline{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.55);color:#fff}
+
+  .hero-features{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;padding:0;border:0}
+  .hero-feature,.hero-feature:first-child{
+    min-width:0;
+    min-height:98px;
+    padding:13px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:12px;
+    background:rgba(255,255,255,.07);
+  }
+  .hero-feature:last-child{border:1px solid rgba(255,255,255,.15)}
+  .hero-feature strong{color:#fff;font-size:12px;line-height:1.35}
+  .hero-feature small{color:#c8d6e8;font-size:10px;line-height:1.45}
+
+  /* Explicit gutters for every homepage section */
+  .trust-grid,
+  .intro>.container,
+  .services>.container,
+  .process>.container,
+  .audiences>.container,
+  .cta>.container{
+    width:100%;
+    max-width:none;
+    padding-left:var(--home-mobile-gutter);
+    padding-right:var(--home-mobile-gutter);
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .trust-grid{grid-template-columns:1fr 1fr;gap:10px;overflow:visible}
+  .trust-item,.trust-item:last-child{min-width:0;padding:14px 12px}
+  .intro-grid,.process-layout,.service-grid,.audience-grid{width:100%;min-width:0}
+  .intro-copy,.process-copy,.section-heading,.service-card,.audience-card,.step>div{min-width:0}
+  .service-card,.audience-card{width:100%;max-width:100%;overflow:hidden}
+  .section-heading h2,.intro-copy h2,.process-copy h2,.service-card h3,.audience-card h3,
+  .section-heading p,.intro-copy p,.process-copy p,.service-card p,.audience-card p{overflow-wrap:break-word}
+
+  /* Keep supporting imagery clean and contained */
+  .intro-card{width:100%;overflow:hidden;border-radius:16px;box-shadow:0 10px 26px rgba(36,70,127,.10)}
+}
+@media (max-width:420px){
+  :root{--home-mobile-gutter:14px}
+  .hero::before{height:245px;background-position:center 24%}
+  .hero-inner{padding:26px 16px 18px}
+  .hero-features{grid-template-columns:1fr}
+  .hero-feature,.hero-feature:first-child{min-height:0}
+  .trust-grid{grid-template-columns:1fr}
+  .trust-item:last-child{grid-column:auto}
+}
+</style>
+
 </head>
 <body><div class="topbar">
 <div class="container topbar-inner">
