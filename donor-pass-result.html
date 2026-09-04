@@ -7,7 +7,67 @@
 <meta content="#325aa3" name="theme-color"/>
 <title>Donor Pass Result | screenings4u</title><meta content="View, download, or print your screenings4u donor pass and testing-location details." name="description"/><meta content="noindex,nofollow,noarchive" name="robots"/><link href="https://screenings4u.com/donor-pass-result.html" rel="canonical"/><meta content="website" property="og:type"/><meta content="screenings4u" property="og:site_name"/><meta content="Donor Pass Result | screenings4u" property="og:title"/><meta content="View, download, or print your screenings4u donor pass and testing-location details." property="og:description"/><meta content="https://screenings4u.com/donor-pass-result.html" property="og:url"/><meta content="https://screenings4u.com/images/home-hero.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Donor Pass Result | screenings4u" name="twitter:title"/><meta content="View, download, or print your screenings4u donor pass and testing-location details." name="twitter:description"/><meta content="https://screenings4u.com/images/home-hero.png" name="twitter:image"/><meta content="US-IL" name="geo.region"/><meta content="Chicago" name="geo.placename"/><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@context": "https://schema.org", "@type": ["Organization", "ProfessionalService"], "@id": "https://screenings4u.com/#organization", "name": "screenings4u", "url": "https://screenings4u.com/", "logo": "https://screenings4u.com/images/logo.png", "image": "https://screenings4u.com/images/home-hero.png", "telephone": "+17732457009", "email": "support@screenings4u.com", "address": {"@type": "PostalAddress", "streetAddress": "8537 S Pulaski Rd", "addressLocality": "Chicago", "addressRegion": "IL", "postalCode": "60652", "addressCountry": "US"}, "areaServed": {"@type": "Country", "name": "United States"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "20:00"}]}]}</script>
 <!-- Screenings4U global brand normalization -->
-<style id="screenings4u-brand-normalization">
+<style>
+    :root{--orange:#ff6b00;--blue:#325aa3;--blue-dark:#24467f;--muted:#667892;--surface:#f4f7fc;--line:#d9e3f0}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--surface);color:#1d2d45}
+    .container{width:min(820px,calc(100% - 36px));margin:auto}
+    .card{margin:55px auto;background:#fff;border:1px solid var(--line);border-radius:20px;padding:40px;box-shadow:0 16px 48px rgba(23,51,95,.08)}
+    .pass{border-top:5px solid var(--orange)}
+    .brand{font-weight:900;color:var(--blue);font-size:15px;letter-spacing:-.02em}
+    .eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.12em;font-weight:900;color:var(--orange);margin-top:28px}
+    h1{font-size:clamp(32px,6vw,50px);color:var(--blue-dark);letter-spacing:-.05em;margin:8px 0}
+    .intro{color:var(--muted);font-size:13px;line-height:1.7}
+    .tracking{margin:25px 0;padding:18px;background:#f7f9fc;border:1px solid var(--line);border-radius:12px}
+    .tracking span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.1em;font-weight:900;color:var(--muted)}
+    .tracking strong{display:block;margin-top:6px;font-size:21px;letter-spacing:.03em;color:var(--blue-dark)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+    .panel{border:1px solid var(--line);border-radius:12px;padding:17px;background:#fff}
+    .panel.full{grid-column:1/-1}
+    .label{font-size:10px;text-transform:uppercase;letter-spacing:.09em;font-weight:900;color:var(--muted)}
+    .value{margin-top:6px;font-size:14px;font-weight:800;color:var(--blue-dark);line-height:1.55}
+    .instructions{margin-top:20px;padding:18px;background:#eef4ff;border:1px solid #cfddf3;border-radius:12px}
+    .instructions strong{color:var(--blue-dark);font-size:12px}
+    .instructions p{margin:7px 0 0;color:var(--muted);font-size:12px;line-height:1.65}
+    .actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:28px}
+    .btn{min-height:46px;padding:0 18px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;text-decoration:none;border:1px solid var(--blue);cursor:pointer}
+    .orange{background:var(--orange);border-color:var(--orange);color:#fff}
+    .blue{background:#fff;color:var(--blue)}
+    .notice{display:none;margin-top:18px;padding:13px 15px;border-radius:9px;background:#fff1f0;border:1px solid #f3c5c1;color:#b42318;font-size:12px}
+    @media(max-width:640px){.card{margin:25px auto;padding:27px 20px}.grid{grid-template-columns:1fr}.panel.full{grid-column:auto}}
+    @media print{
+      body{background:#fff}
+      .card{margin:0;box-shadow:none;border:1px solid #bbb}
+      .actions{display:none}
+    }
+
+    .brand img {
+  display: block;
+  width: 180px;
+  height: auto;
+}
+
+    @media(max-width:767px){
+      :root{--mobile-gutter:18px}
+      html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+      body{min-width:320px;min-height:100dvh;font-size:16px;line-height:1.55;overflow-x:hidden}
+      .topbar,.full-banner,.announcement-bar,.promo-banner,[data-full-banner]{display:none!important}
+      .container{width:100%;padding-inline:var(--mobile-gutter)}
+      .card{width:100%;margin:18px auto max(32px,env(safe-area-inset-bottom));padding:24px 20px;border-radius:15px}
+      .brand img{width:145px;max-width:55vw}
+      .eyebrow{margin-top:24px;font-size:11px}
+      h1{margin:8px 0 12px;font-size:clamp(2rem,10vw,2.7rem);line-height:1.08;letter-spacing:-.04em}
+      .intro{font-size:16px;line-height:1.65}
+      .tracking{margin:22px 0;padding:16px}.tracking strong{font-size:18px;line-height:1.4;overflow-wrap:anywhere}
+      .grid{grid-template-columns:1fr;gap:12px;margin-top:18px}.panel,.panel.full{grid-column:auto;padding:16px}.label{font-size:11px}.value{font-size:15px;overflow-wrap:anywhere}
+      .instructions{margin-top:18px;padding:16px}.instructions strong{font-size:13px}.instructions p{font-size:14px;line-height:1.6}
+      .actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:24px}.btn{width:100%;min-height:52px;padding:12px 16px;font-size:14px;line-height:1.3;touch-action:manipulation}.notice{font-size:14px;line-height:1.55}
+    }
+    @media(max-width:380px){:root{--mobile-gutter:14px}.card{padding:21px 17px}.brand img{width:132px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+  </style>
+<link href="images/fav.png" rel="icon" type="image/png"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/><style id="screenings4u-brand-normalization">
   :root {
     --blue: #325AA3 !important;
     --blue-dark: #24467F !important;
@@ -55,9 +115,7 @@
       max-height: 50px !important;
     }
   }
-</style>
-
-</head>
+</style></head>
 <body>
 <main>
 <div class="container">

@@ -7,7 +7,62 @@
 <meta content="#325aa3" name="theme-color"/>
 <title>Blog | screenings4u</title><meta content="Screenings4u articles about drug and alcohol testing, DOT compliance, workplace screening, and training." name="description"/><meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/><link href="https://screenings4u.com/blog.html" rel="canonical"/><link href="https://screenings4u.com/blog.html" hreflang="en-US" rel="alternate"/><meta content="website" property="og:type"/><meta content="screenings4u" property="og:site_name"/><meta content="Blog | screenings4u" property="og:title"/><meta content="Screenings4u articles about drug and alcohol testing, DOT compliance, workplace screening, and training." property="og:description"/><meta content="https://screenings4u.com/blog.html" property="og:url"/><meta content="https://screenings4u.com/images/home-hero.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Blog | screenings4u" name="twitter:title"/><meta content="Screenings4u articles about drug and alcohol testing, DOT compliance, workplace screening, and training." name="twitter:description"/><meta content="https://screenings4u.com/images/home-hero.png" name="twitter:image"/><meta content="US-IL" name="geo.region"/><meta content="Chicago" name="geo.placename"/><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@context": "https://schema.org", "@type": ["Organization", "ProfessionalService"], "@id": "https://screenings4u.com/#organization", "name": "screenings4u", "url": "https://screenings4u.com/", "logo": "https://screenings4u.com/images/logo.png", "image": "https://screenings4u.com/images/home-hero.png", "telephone": "+17732457009", "email": "support@screenings4u.com", "address": {"@type": "PostalAddress", "streetAddress": "8537 S Pulaski Rd", "addressLocality": "Chicago", "addressRegion": "IL", "postalCode": "60652", "addressCountry": "US"}, "areaServed": {"@type": "Country", "name": "United States"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "20:00"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://screenings4u.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://screenings4u.com/blog.html"}]}]}</script>
 <!-- Screenings4U global brand normalization -->
-<style id="screenings4u-brand-normalization">
+<style>
+    /* Page-specific mobile layer. Desktop styling remains in blog.css. */
+    :root { --mobile-gutter: 20px; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .mobile-toggle { display:none; }
+
+    @media (max-width: 767px) {
+      html { -webkit-text-size-adjust:100%; }
+      body { font-family:Inter,Arial,sans-serif; font-size:16px; line-height:1.55; overflow-x:hidden; }
+      .container { width:100%; max-width:none; padding-left:var(--mobile-gutter); padding-right:var(--mobile-gutter); }
+      .topbar { display:none !important; } /* Hide the full banner on mobile. */
+
+      .nav-inner { min-height:64px; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px; align-items:center; position:relative; }
+      .site-logo { display:block; width:auto; max-width:150px; max-height:42px; }
+      .nav-actions { display:flex; align-items:center; gap:8px; }
+      .nav-actions > .btn, .nav-account-menu { display:none; }
+      .mobile-toggle { display:inline-grid; place-items:center; width:44px; height:44px; padding:0; border:1px solid currentColor; border-radius:8px; background:#fff; font-size:24px; line-height:1; cursor:pointer; }
+      .nav { display:none; grid-column:1 / -1; width:100%; order:3; padding:8px 0 16px; }
+      .nav.is-open { display:flex; flex-direction:column; align-items:stretch; gap:2px; }
+      .nav a, .nav button { display:block; width:100%; padding:13px 4px; text-align:left; font-size:16px; border-bottom:1px solid rgba(16,40,75,.12); }
+      .nav .dropdown, .nav .submenu { position:static; display:block; box-shadow:none; }
+      .nav-mobile-actions { display:grid; gap:10px; padding-top:12px; }
+      .nav-mobile-actions .btn { width:100%; justify-content:center; text-align:center; }
+
+      /* Hero content sits below the hero image/background. */
+      .blog-hero { position:relative; min-height:420px; display:flex; align-items:flex-end; background-position:center top; background-size:100% auto; background-repeat:no-repeat; }
+      .blog-hero::before { content:""; position:absolute; inset:0; background:linear-gradient(to bottom, rgba(16,40,75,.05) 0 36%, rgba(16,40,75,.88) 72%, rgba(16,40,75,.96) 100%); pointer-events:none; }
+      .blog-hero-inner { position:relative; z-index:1; width:100%; padding-top:190px; padding-bottom:32px; }
+      .blog-hero h1 { font-size:clamp(2rem,9vw,2.7rem); line-height:1.08; letter-spacing:-.03em; }
+      .blog-hero p { font-size:1rem; line-height:1.6; }
+      .eyebrow { font-size:.75rem; letter-spacing:.09em; }
+
+      .blog-section { padding-top:38px; padding-bottom:48px; }
+      .blog-toolbar { display:flex; flex-direction:column; align-items:stretch; gap:20px; }
+      .blog-toolbar h2 { font-size:clamp(1.55rem,7vw,2.1rem); line-height:1.18; }
+      .blog-search { width:100%; }
+      .blog-search input { width:100%; min-height:48px; font-size:16px; }
+      .blog-categories { display:flex; flex-direction:column; align-items:stretch; gap:8px; overflow:visible; }
+      .blog-categories button, .blog-categories a { width:100%; min-height:44px; text-align:left; }
+      .blog-grid, .blog-featured, .article-layout { display:grid; grid-template-columns:1fr; gap:20px; }
+      .blog-card, .blog-featured > *, .article-aside { min-width:0; }
+      .blog-card img, .blog-featured img, .article-image-wrap img { width:100%; height:auto; max-height:none; object-fit:cover; }
+      .article-hero { padding-top:36px; padding-bottom:30px; }
+      .article-heading h1 { font-size:clamp(2rem,9vw,2.7rem); line-height:1.1; }
+      .article-excerpt { font-size:1.05rem; }
+      .article-layout { padding-top:28px; padding-bottom:48px; }
+      .article-content { min-width:0; overflow-wrap:anywhere; }
+      .article-content img, .article-content iframe, .article-content table { max-width:100%; }
+      .article-content iframe { width:100%; }
+      .article-content pre { overflow:auto; }
+      .article-aside { order:2; padding:20px; }
+      .article-aside .btn { width:100%; text-align:center; }
+      input, select, textarea, button { font:inherit; }
+    }
+  </style>
+<link href="images/fav.png" rel="icon"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/><link href="assets/css/blog.css" rel="stylesheet"/><link href="assets/css/mobile-ready.css?v=20260901-1" rel="stylesheet"/><style id="screenings4u-brand-normalization">
   :root {
     --blue: #325AA3 !important;
     --blue-dark: #24467F !important;
@@ -55,9 +110,7 @@
       max-height: 50px !important;
     }
   }
-</style>
-
-</head>
+</style></head>
 <body>
 <div class="topbar"><div class="container topbar-inner"><div class="topbar-left"><span>Nationwide Drug &amp; Alcohol Testing</span><span>•</span><span>Operating Nationwide</span></div><div class="topbar-right"><span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a></div></div></div>
 <header class="site-header">

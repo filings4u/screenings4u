@@ -1,0 +1,5 @@
+Screenings4U CSS restoration validation
+HTML pages repaired: 52
+Pages with no style blocks: 0
+Missing local script references: 0
+Missing local image references: 0
