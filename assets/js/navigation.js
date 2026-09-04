@@ -287,9 +287,39 @@ function injectNavigationStyles() {
       overflow-y: auto;
     }
 
+    @media (min-width: 1121px) {
+      #mainNav {
+        display: flex;
+      }
+    }
+
     @media (max-width: 1120px) {
       .topbar {
         display: none !important;
+      }
+
+      /*
+       * Universal mobile fallback.
+       * Individual page CSS may vary, so the shared navigation module
+       * provides the minimum rules required to show/hide the menu.
+       */
+      #mainNav {
+        display: none;
+        width: 100%;
+      }
+
+      #mainNav.menu-open,
+      .menu-open #mainNav {
+        display: block;
+      }
+
+      #mobileToggle,
+      .mobile-toggle,
+      .nav-toggle,
+      .menu-toggle,
+      .hamburger,
+      [data-mobile-toggle] {
+        cursor: pointer;
       }
 
       .nav-actions .nav-account-menu {
@@ -330,11 +360,44 @@ function injectNavigationStyles() {
 }
 
 function initializeNavigationBehavior() {
-  const navInner = document.getElementById("navInner");
-  const mobileToggle = document.getElementById("mobileToggle");
   const nav = document.getElementById("mainNav");
 
   if (!nav) return;
+
+  /*
+   * Some pages use slightly different header markup.
+   * Resolve the navigation wrapper and mobile toggle with fallbacks
+   * so the same shared navigation file works site-wide.
+   */
+  const navInner =
+    document.getElementById("navInner") ||
+    nav.closest(".nav-inner") ||
+    nav.closest(".navbar-inner") ||
+    nav.closest(".header-inner") ||
+    nav.parentElement;
+
+  let mobileToggle =
+    document.getElementById("mobileToggle") ||
+    document.querySelector(
+      ".mobile-toggle, .nav-toggle, .menu-toggle, .hamburger, [data-mobile-toggle], [aria-controls='mainNav']"
+    );
+
+  /*
+   * If a page omitted the mobile toggle entirely, create one.
+   * This prevents individual pages from silently losing mobile navigation.
+   */
+  if (!mobileToggle && navInner) {
+    mobileToggle = document.createElement("button");
+    mobileToggle.id = "mobileToggle";
+    mobileToggle.className = "mobile-toggle";
+    mobileToggle.type = "button";
+    mobileToggle.setAttribute("aria-controls", "mainNav");
+    mobileToggle.setAttribute("aria-expanded", "false");
+    mobileToggle.setAttribute("aria-label", "Open menu");
+    mobileToggle.textContent = "\u2630";
+
+    navInner.insertBefore(mobileToggle, navInner.firstChild);
+  }
 
   const navItems = nav.querySelectorAll(".nav-item");
 
@@ -382,38 +445,51 @@ function initializeNavigationBehavior() {
   }
 
   if (navInner && mobileToggle) {
-    mobileToggle.addEventListener("click", (event) => {
-      event.stopPropagation();
+    /*
+     * Avoid duplicate listeners if this module is refreshed/re-rendered.
+     */
+    if (mobileToggle.dataset.s4uNavBound !== "true") {
+      mobileToggle.dataset.s4uNavBound = "true";
 
-      const open =
-        navInner.classList.toggle("menu-open");
+      mobileToggle.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
 
-      mobileToggle.setAttribute(
-        "aria-expanded",
-        String(open)
-      );
+        const open = navInner.classList.toggle("menu-open");
 
-      mobileToggle.setAttribute(
-        "aria-label",
-        open ? "Close menu" : "Open menu"
-      );
+        /*
+         * Also toggle a class on mainNav for pages whose CSS is written
+         * against the nav element instead of the wrapper.
+         */
+        nav.classList.toggle("menu-open", open);
 
-      mobileToggle.textContent =
-        open ? "\u2715" : "\u2630";
-
-      if (!open) {
-        navItems.forEach((item) =>
-          item.classList.remove("open")
-        );
-
-        accountMenu?.classList.remove("open");
-
-        accountButton?.setAttribute(
+        mobileToggle.setAttribute(
           "aria-expanded",
-          "false"
+          String(open)
         );
-      }
-    });
+
+        mobileToggle.setAttribute(
+          "aria-label",
+          open ? "Close menu" : "Open menu"
+        );
+
+        mobileToggle.textContent =
+          open ? "\u2715" : "\u2630";
+
+        if (!open) {
+          navItems.forEach((item) =>
+            item.classList.remove("open")
+          );
+
+          accountMenu?.classList.remove("open");
+
+          accountButton?.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+        }
+      });
+    }
   }
 
   document.addEventListener("click", (event) => {
@@ -425,6 +501,7 @@ function initializeNavigationBehavior() {
     }
 
     navInner?.classList.remove("menu-open");
+    nav.classList.remove("menu-open");
 
     navItems.forEach((item) =>
       item.classList.remove("open")
@@ -455,6 +532,7 @@ function initializeNavigationBehavior() {
   window.addEventListener("resize", () => {
     if (window.innerWidth > 1120) {
       navInner?.classList.remove("menu-open");
+      nav.classList.remove("menu-open");
 
       navItems.forEach((item) =>
         item.classList.remove("open")

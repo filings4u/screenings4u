@@ -1,0 +1,4 @@
+Screenings4U brand normalization validation
+HTML pages processed: 52
+Validation problems: 0
+No validation problems found.

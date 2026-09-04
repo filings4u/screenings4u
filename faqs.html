@@ -12,7 +12,7 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <style>
-    :root{--orange:#ff6b00;--orange-dark:#d95800;--orange-soft:#fff0e6;--blue:#325aa3;--blue-dark:#24467f;--blue-deep:#17335f;--blue-darker:#10284b;--blue-soft:#e8eff9;--blue-pale:#f4f7fc;--ink:#1d2d45;--muted:#667892;--surface:#f4f7fc;--line:#d9e3f0;--line-strong:#c4d3e5;--white:#fff;--shadow:0 18px 45px rgba(23,51,95,.12);--max:1440px}
+    :root{--orange:#ff6b00;--orange-dark:#d95800;--orange-soft:#fff0e6;--blue: #325AA3;--blue-dark: #24467F;--blue-deep: #2B4F8A;--blue-darker: #24467F;--blue-soft:#e8eff9;--blue-pale:#f4f7fc;--ink:#1d2d45;--muted:#667892;--surface:#f4f7fc;--line:#d9e3f0;--line-strong:#c4d3e5;--white:#fff;--shadow:0 18px 45px rgba(23,51,95,.12);--max:1440px}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:var(--surface)}a{color:inherit;text-decoration:none}.container{width:min(var(--max),calc(100% - 40px));margin:auto}.topbar{background:var(--blue-darker);color:var(--blue-soft);font-size:12px}.topbar-inner{min-height:34px;display:flex;align-items:center;justify-content:space-between;gap:20px}.topbar a{color:var(--white);font-weight:700}
     .site-header{position:relative;z-index:1000;background:var(--white);border-bottom:1px solid var(--line)}.nav-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:22px;position:relative}.brand{display:flex;align-items:center;width:155px;flex:0 0 155px}.brand img{display:block;width:145px;max-height:48px;object-fit:contain}.nav{display:flex;align-items:center;justify-content:center;gap:4px}.nav-item{position:relative}.nav-link{display:inline-flex;align-items:center;gap:6px;padding:13px 10px;color:var(--ink);font-size:13px;font-weight:700;border-radius:7px;white-space:nowrap}.nav-link:hover,.nav-link.active{color:var(--blue);background:var(--blue-pale)}.chevron{font-size:10px}.dropdown,.nav-account-dropdown{position:absolute;top:calc(100% + 8px);min-width:235px;padding:9px;background:var(--white);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s;z-index:1200}.dropdown{left:0}.nav-account-dropdown{right:0}.nav-item:hover .dropdown,.nav-item:focus-within .dropdown,.nav-account-menu:hover .nav-account-dropdown,.nav-account-menu:focus-within .nav-account-dropdown,.nav-account-menu.open .nav-account-dropdown{opacity:1;visibility:visible;transform:none}.dropdown a,.nav-account-dropdown a{display:block;padding:10px 11px;border-radius:8px;color:var(--muted);font-size:12px;font-weight:700}.dropdown a:hover,.nav-account-dropdown a:hover{background:var(--blue-pale);color:var(--blue)}.nav-actions{display:flex;align-items:center;gap:9px}.nav-actions>.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 15px;border-radius:8px;background:var(--orange);color:var(--white);font-size:12px;font-weight:800}.nav-account-menu{position:relative}.nav-login,.mobile-toggle{min-height:42px;border:1px solid var(--line-strong);border-radius:8px;background:var(--white);color:var(--blue-dark);font:inherit;font-size:12px;font-weight:800;cursor:pointer}.nav-login{padding:0 14px}.mobile-toggle{display:none;width:44px;font-size:18px}
     .faqs-hero{position:relative;overflow:hidden;background:linear-gradient(120deg,var(--blue-darker),var(--blue-deep) 62%,var(--blue-dark));color:var(--white)}.faqs-hero:after{content:"?";position:absolute;right:4%;top:-95px;color:rgba(255,255,255,.045);font-size:410px;font-weight:900;line-height:1}.faqs-hero-inner{position:relative;z-index:1;padding:82px 0 105px;text-align:center}.eyebrow{color:#ffb47d;font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}.faqs-hero h1{margin:13px auto 17px;max-width:850px;font-size:clamp(44px,6vw,72px);line-height:1;letter-spacing:-.055em}.faqs-hero p{max-width:720px;margin:0 auto;color:var(--blue-soft);font-size:16px;line-height:1.75}.faqs-search-wrap{max-width:780px;margin:32px auto 0;position:relative}.faqs-search-wrap svg{position:absolute;left:18px;top:50%;width:20px;transform:translateY(-50%);fill:none;stroke:var(--muted);stroke-width:2}.faqs-search{width:100%;min-height:58px;padding:0 20px 0 52px;border:0;border-radius:14px;background:var(--white);box-shadow:var(--shadow);color:var(--ink);font:inherit;font-size:14px;outline:none}.faqs-search:focus{box-shadow:0 0 0 4px rgba(255,107,0,.22),var(--shadow)}
@@ -29,7 +29,59 @@
     @media(max-width:380px){:root{--mobile-gutter:16px}.brand{width:132px;flex-basis:132px}.brand img{width:128px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
   </style>
-<meta content="Answers to common questions about screenings4u drug and alcohol testing, DOT compliance, collection sites, results, employer services, and training." name="description"/><meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/><link href="https://screenings4u.com/faqs.html" rel="canonical"/><link href="https://screenings4u.com/faqs.html" hreflang="en-US" rel="alternate"/><meta content="website" property="og:type"/><meta content="screenings4u" property="og:site_name"/><meta content="Frequently Asked Questions | screenings4u" property="og:title"/><meta content="Answers to common questions about screenings4u drug and alcohol testing, DOT compliance, collection sites, results, employer services, and training." property="og:description"/><meta content="https://screenings4u.com/faqs.html" property="og:url"/><meta content="https://screenings4u.com/images/home-hero.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Frequently Asked Questions | screenings4u" name="twitter:title"/><meta content="Answers to common questions about screenings4u drug and alcohol testing, DOT compliance, collection sites, results, employer services, and training." name="twitter:description"/><meta content="https://screenings4u.com/images/home-hero.png" name="twitter:image"/><meta content="US-IL" name="geo.region"/><meta content="Chicago" name="geo.placename"/><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@context": "https://schema.org", "@type": ["Organization", "ProfessionalService"], "@id": "https://screenings4u.com/#organization", "name": "screenings4u", "url": "https://screenings4u.com/", "logo": "https://screenings4u.com/images/logo.png", "image": "https://screenings4u.com/images/home-hero.png", "telephone": "+17732457009", "email": "support@screenings4u.com", "address": {"@type": "PostalAddress", "streetAddress": "8537 S Pulaski Rd", "addressLocality": "Chicago", "addressRegion": "IL", "postalCode": "60652", "addressCountry": "US"}, "areaServed": {"@type": "Country", "name": "United States"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "20:00"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://screenings4u.com/"}, {"@type": "ListItem", "position": 2, "name": "Frequently Asked Questions", "item": "https://screenings4u.com/faqs.html"}]}]}</script></head>
+<meta content="Answers to common questions about screenings4u drug and alcohol testing, DOT compliance, collection sites, results, employer services, and training." name="description"/><meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/><link href="https://screenings4u.com/faqs.html" rel="canonical"/><link href="https://screenings4u.com/faqs.html" hreflang="en-US" rel="alternate"/><meta content="website" property="og:type"/><meta content="screenings4u" property="og:site_name"/><meta content="Frequently Asked Questions | screenings4u" property="og:title"/><meta content="Answers to common questions about screenings4u drug and alcohol testing, DOT compliance, collection sites, results, employer services, and training." property="og:description"/><meta content="https://screenings4u.com/faqs.html" property="og:url"/><meta content="https://screenings4u.com/images/home-hero.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Frequently Asked Questions | screenings4u" name="twitter:title"/><meta content="Answers to common questions about screenings4u drug and alcohol testing, DOT compliance, collection sites, results, employer services, and training." name="twitter:description"/><meta content="https://screenings4u.com/images/home-hero.png" name="twitter:image"/><meta content="US-IL" name="geo.region"/><meta content="Chicago" name="geo.placename"/><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@context": "https://schema.org", "@type": ["Organization", "ProfessionalService"], "@id": "https://screenings4u.com/#organization", "name": "screenings4u", "url": "https://screenings4u.com/", "logo": "https://screenings4u.com/images/logo.png", "image": "https://screenings4u.com/images/home-hero.png", "telephone": "+17732457009", "email": "support@screenings4u.com", "address": {"@type": "PostalAddress", "streetAddress": "8537 S Pulaski Rd", "addressLocality": "Chicago", "addressRegion": "IL", "postalCode": "60652", "addressCountry": "US"}, "areaServed": {"@type": "Country", "name": "United States"}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "20:00"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://screenings4u.com/"}, {"@type": "ListItem", "position": 2, "name": "Frequently Asked Questions", "item": "https://screenings4u.com/faqs.html"}]}]}</script>
+<!-- Screenings4U global brand normalization -->
+<style id="screenings4u-brand-normalization">
+  :root {
+    --blue: #325AA3 !important;
+    --blue-dark: #24467F !important;
+    --blue-deep: #2B4F8A !important;
+    --blue-darker: #24467F !important;
+
+    --brand-blue: #325AA3;
+    --brand-blue-dark: #24467F;
+    --brand-blue-deep: #2B4F8A;
+    --brand-blue-light: #5B7BB5;
+    --brand-surface: #F4F7FC;
+    --brand-border: #D9E3F0;
+    --brand-orange: #FF6B00;
+  }
+
+  /* Keep the browser/theme chrome aligned with the Screenings4U brand. */
+  html {
+    accent-color: var(--brand-blue);
+  }
+
+  /* Mobile logo: larger and consistent across pages. */
+  @media (max-width: 1120px) {
+    .site-logo {
+      width: 155px !important;
+      max-width: 42vw !important;
+      max-height: 54px !important;
+      height: auto !important;
+      object-fit: contain !important;
+      object-position: left center !important;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .site-logo {
+      width: 150px !important;
+      max-width: 45vw !important;
+      max-height: 52px !important;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .site-logo {
+      width: 142px !important;
+      max-width: 44vw !important;
+      max-height: 50px !important;
+    }
+  }
+</style>
+
+</head>
 <body>
 <div class="topbar"><div class="container topbar-inner"><div class="topbar-left">Nationwide Drug &amp; Alcohol Testing</div><div>Questions? <a href="tel:7732457009">(773) 245-7009</a></div></div></div>
 <header class="site-header"><div class="container nav-inner" id="navInner"><a aria-label="screenings4u home" class="brand" href="index.html"><img alt="screenings4u" src="images/logo.png"/></a><nav aria-label="Main navigation" class="nav" id="mainNav"></nav><div class="nav-actions"><a class="btn" href="services.html">Order a Test</a><div class="nav-account-menu"><button aria-expanded="false" aria-haspopup="true" class="nav-login" type="button">Account Login</button><div class="nav-account-dropdown"><a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a><a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a></div></div></div><button aria-controls="mainNav" aria-expanded="false" aria-label="Open menu" class="mobile-toggle" id="mobileToggle" type="button">☰</button></div></header>
