@@ -459,6 +459,28 @@ const TEST_SERVICES = {
     ]
   },
 
+  training_course_extension_30_days: {
+    id: "training_course_extension_30_days",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=training_course_extension_30_days",
+    name: "30-Day Course Access Extension",
+    shortName: "30-Day Course Extension",
+    category: "DOT Specimen Collector Training",
+    specimen: "N/A",
+    price: 10000,
+    currency: "usd",
+    stripePriceId: "",
+    results: "30-day access extension",
+    description: "Extend access to any eligible screenings4u training course for 30 additional days. Extensions may be purchased multiple times.",
+    features: [
+      "30 Additional Days of Course Access",
+      "$100 Per Extension",
+      "Available for Any Eligible Training Course",
+      "Purchase Multiple Extensions as Needed",
+      "Extension Applies After Successful Payment"
+    ]
+  },
+
   /* =========================================================
      DOT PHYSICAL EXAM SERVICES
      ========================================================= */
