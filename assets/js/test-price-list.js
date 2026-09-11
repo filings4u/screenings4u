@@ -1355,7 +1355,99 @@ const TEST_SERVICES = {
     ]
   },
 
-    /* =========================================================
+  
+  /* =========================================================
+     DOT RANDOM DRUG & ALCOHOL CONSORTIUM
+     ========================================================= */
+
+  dot_consortium_basic: {
+    id: "dot_consortium_basic",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=dot_consortium_basic",
+    name: "DOT Consortium - Basic Compliance",
+    shortName: "Basic Compliance",
+    category: "DOT Random Drug & Alcohol Consortium",
+    specimen: "N/A",
+    price: 5495,
+    currency: "usd",
+    stripePriceId: "",
+    results: "1-year enrollment",
+    description: "Annual DOT random drug and alcohol consortium enrollment for owner-operators and single-driver companies.",
+    features: [
+      "Random selection management",
+      "Enrollment Certificate",
+      "Annual MIS reporting support",
+      "Compliance Certificate",
+      "Random Drug Testing program administration",
+      "Random Alcohol Testing program administration",
+      "Secure online access to selection notices",
+      "Compliance reminders by email"
+    ]
+  },
+
+  dot_consortium_standard_fleet: {
+    id: "dot_consortium_standard_fleet",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=dot_consortium_standard_fleet",
+    name: "DOT Consortium - Standard Fleet",
+    shortName: "Standard Fleet",
+    category: "DOT Random Drug & Alcohol Consortium",
+    specimen: "N/A",
+    price: 10590,
+    currency: "usd",
+    stripePriceId: "",
+    results: "1-year enrollment",
+    description: "Annual DOT random program management plan for fleets with 2 to 25 drivers.",
+    features: [
+      "Everything in Basic Compliance",
+      "DOT Drug Test (All DOT Agencies)",
+      "DOT random program management for your entire team",
+      "Dedicated account support for your company",
+      "Centralized employer portal for all drivers",
+      "Assistance with pre-employment test coordination",
+      "Simple driver add/remove management",
+      "Annual compliance review summary"
+    ]
+  },
+
+  dot_consortium_plus_drug_test: {
+    id: "dot_consortium_plus_drug_test",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=dot_consortium_plus_drug_test",
+    name: "DOT Consortium + Drug Test",
+    shortName: "Consortium + Drug Test",
+    category: "DOT Random Drug & Alcohol Consortium",
+    specimen: "Urine",
+    price: 11595,
+    currency: "usd",
+    stripePriceId: "",
+    results: "1-year enrollment + drug test",
+    description: "Annual DOT random drug and alcohol consortium enrollment bundled with one DOT 5-panel urine drug test.",
+    features: [
+      "DOT Random Drug & Alcohol Consortium",
+      "Random selection management",
+      "Enrollment Certificate",
+      "Annual MIS reporting support",
+      "Compliance Certificate",
+      "Random Drug & Alcohol program administration",
+      "Secure online access to selection notices",
+      "Compliance reminders by email",
+      "DOT 5 Panel Urine Test",
+      "Digital Donor Pass",
+      "Results in 2 to 3 days",
+      "Nationwide Collection Sites",
+      "Secure Online Results"
+    ],
+    drugs: [
+      "Marijuana (THC)",
+      "Cocaine (COC)",
+      "Amphetamines (AMP)",
+      "Opioids (OPI)",
+      "Phencyclidine (PCP)"
+    ]
+  },
+
+  /* =========================================================
      CLEARINGHOUSE C/TPA SERVICES
      ========================================================= */
 
