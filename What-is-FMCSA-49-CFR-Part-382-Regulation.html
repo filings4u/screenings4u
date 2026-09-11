@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#24467f" name="theme-color"/>
+<meta content="Learn how FMCSA 49 CFR Part 382 applies to CDL drivers, owner-operators and motor carriers. screenings4u provides DOT random drug and alcohol consortium support, pool management, testing coordination and compliance records." name="description"/>
+<title>DOT Random Drug &amp; Alcohol Consortium | What is FMCSA 49 CFR Part 382? | screenings4u</title>
+<link href="images/fav.png" rel="icon" type="image/png">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
+<link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2">
+<style>
+.cons-hero{position:relative;overflow:hidden;color:#fff;background:
+  linear-gradient(90deg,rgba(8,29,56,.98) 0%,rgba(12,42,78,.95) 42%,rgba(15,51,93,.70) 67%,rgba(14,45,82,.20) 100%),
+  url("images/dot-hero.webp") center/cover no-repeat;}
+.cons-hero::after{content:"";position:absolute;right:-180px;top:-250px;width:540px;height:540px;background:var(--orange);opacity:.95;transform:rotate(33deg);clip-path:polygon(44% 0,100% 0,100% 62%)}
+.cons-hero-grid{position:relative;z-index:1;min-height:680px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(330px,.65fr);gap:64px;align-items:center;padding:82px 0 92px}
+.cons-hero-copy{max-width:790px}.cons-hero .eyebrow{color:#ffb985}.cons-hero .eyebrow::before{background:#ffb985}
+.cons-hero h1{margin:0;font-size:clamp(46px,5.8vw,76px);line-height:.98;letter-spacing:-.052em;font-weight:900}
+.cons-hero h1 span{color:var(--orange)}.cons-hero-lead{max-width:700px;margin:25px 0 0;color:#d9e5f2;font-size:18px;line-height:1.72}
+.cons-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}.cons-actions .btn-outline{color:#fff;border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.04)}
+.cons-actions .btn-outline:hover{background:#fff;color:var(--blue-dark);border-color:#fff}
+.hero-card{padding:30px;border:1px solid rgba(255,255,255,.18);border-radius:22px;background:rgba(8,29,56,.72);box-shadow:0 24px 70px rgba(0,0,0,.22);backdrop-filter:blur(8px)}
+.hero-card-label{color:#ffbd8c;font-size:11px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
+.hero-card h2{margin:10px 0 18px;font-size:28px;line-height:1.16}.hero-list{list-style:none;padding:0;margin:0;display:grid;gap:13px}
+.hero-list li{display:flex;gap:12px;align-items:flex-start;color:#e7eef7;font-size:13px;line-height:1.55}
+.hero-list b{display:grid;place-items:center;flex:0 0 26px;width:26px;height:26px;border-radius:50%;background:var(--orange);color:#fff;font-size:12px}
+
+.rate-strip{background:var(--blue-dark);color:#fff}.rate-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.rate-item{padding:24px 22px;border-right:1px solid rgba(255,255,255,.12)}.rate-item:last-child{border-right:0}
+.rate-item strong{display:block;font-size:17px}.rate-item span{display:block;margin-top:5px;color:#aebed2;font-size:11px;line-height:1.5}
+
+.section{padding:104px 0}.section.alt{background:var(--surface)}
+.intro-grid,.split-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:70px;align-items:center}
+.copy h2,.section-heading h2{margin-top:0}.copy h2{color:var(--blue-dark);font-size:clamp(36px,4vw,54px);line-height:1.08;letter-spacing:-.04em}
+.copy p{color:var(--muted);font-size:16px;line-height:1.78}.copy p+p{margin-top:16px}
+.reg-card{padding:34px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:var(--shadow)}
+.reg-card h3{margin:0;color:var(--blue-dark);font-size:23px}.reg-list{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:14px}
+.reg-list li{display:grid;grid-template-columns:30px 1fr;gap:11px;align-items:start;color:#405676;font-size:14px;line-height:1.55}
+.reg-list li::before{content:"✓";display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--blue-pale);color:var(--blue);font-size:12px;font-weight:900}
+
+.audience-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.audience-card{position:relative;overflow:hidden;padding:34px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:var(--shadow-sm)}
+.audience-card.orange{background:linear-gradient(145deg,#fff9f5,#fff);border-color:#ffd8bd}
+.audience-card .tag{display:inline-flex;padding:7px 10px;border-radius:999px;background:var(--blue-pale);color:var(--blue);font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.audience-card.orange .tag{background:#fff0e5;color:#c95300}.audience-card h3{margin:16px 0 10px;color:var(--blue-dark);font-size:28px}
+.audience-card p{color:var(--muted);font-size:14px;line-height:1.7}.audience-card ul{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:10px}
+.audience-card li{display:flex;gap:10px;color:#405676;font-size:13px;font-weight:700}.audience-card li::before{content:"•";color:var(--orange);font-size:20px;line-height:.7}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.feature-card{padding:28px;border:1px solid var(--line);border-radius:18px;background:#fff}
+.feature-num{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:var(--blue);color:#fff;font-size:12px;font-weight:900}
+.feature-card:nth-child(2n) .feature-num{background:var(--orange)}
+.feature-card h3{margin:18px 0 9px;color:var(--blue-dark);font-size:20px}.feature-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+
+.rate-panel{position:relative;overflow:hidden;padding:44px;border-radius:24px;background:linear-gradient(135deg,var(--blue-darker),#24467f);color:#fff;box-shadow:var(--shadow-lg)}
+.rate-panel::after{content:"";position:absolute;right:-100px;bottom:-130px;width:330px;height:330px;border:48px solid rgba(255,255,255,.05);border-radius:50%}
+.rate-panel-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto auto;gap:32px;align-items:center}
+.rate-panel h2{margin:0;font-size:clamp(29px,3vw,42px);line-height:1.08}.rate-panel p{max-width:650px;margin:14px 0 0;color:#c8d6e7;font-size:14px;line-height:1.7}
+.rate-number{text-align:center;min-width:135px}.rate-number strong{display:block;color:#fff;font-size:44px;line-height:1;font-weight:900}.rate-number span{display:block;margin-top:7px;color:#ffbd8c;font-size:10px;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff}
+.step{padding:30px;border-right:1px solid var(--line)}.step:last-child{border-right:0}.step b{color:var(--orange);font-size:12px;letter-spacing:.11em}.step h3{margin:9px 0;color:var(--blue-dark);font-size:18px}.step p{margin:0;color:var(--muted);font-size:12px;line-height:1.65}
+
+.cta-band{padding:86px 0;background:linear-gradient(110deg,#17335f,#24467f 64%,#315a9f);color:#fff}
+.cta-grid{display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}.cta-grid h2{margin:0;font-size:clamp(34px,4.2vw,54px);line-height:1.04;letter-spacing:-.04em}.cta-grid p{max-width:720px;margin:15px 0 0;color:#d5e1ef;line-height:1.7}
+
+.faq-list{display:grid;gap:12px}.faq-item{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+.faq-question{width:100%;display:flex;justify-content:space-between;gap:18px;align-items:center;padding:20px 22px;border:0;background:#fff;color:var(--blue-dark);text-align:left;font-weight:800}
+.faq-plus{font-size:20px;color:var(--orange);transition:.2s}.faq-answer{display:none;padding:0 22px 20px;color:var(--muted);font-size:14px;line-height:1.7}
+.faq-item.open .faq-answer{display:block}.faq-item.open .faq-plus{transform:rotate(45deg)}
+
+.source-note{margin-top:28px;padding:18px 20px;border-left:4px solid var(--orange);background:var(--orange-pale);color:#6b513e;font-size:12px;line-height:1.65}
+.source-note a{color:var(--blue);font-weight:800;text-decoration:underline;text-underline-offset:2px}
+
+@media(max-width:1100px){
+ .cons-hero-grid{grid-template-columns:1fr;gap:34px;min-height:0}.hero-card{max-width:650px}
+ .rate-grid{grid-template-columns:repeat(2,1fr)}.rate-item:nth-child(2){border-right:0}.rate-item:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.12)}
+ .feature-grid{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}.step:nth-child(2){border-right:0}.step:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+@media(max-width:800px){
+ .cons-hero{background:linear-gradient(rgba(8,29,56,.82),rgba(8,29,56,.94)),url("images/dot-hero.webp") 68% center/cover no-repeat}
+ .cons-hero-grid{padding:48px 0 58px}.cons-hero h1{font-size:clamp(39px,12vw,58px)}
+ .section{padding:72px 0}.intro-grid,.split-grid{grid-template-columns:1fr;gap:36px}.audience-grid,.feature-grid{grid-template-columns:1fr}
+ .rate-panel{padding:30px}.rate-panel-inner{grid-template-columns:1fr 1fr}.rate-panel-copy{grid-column:1/-1}.cta-grid{grid-template-columns:1fr}.cta-grid .cons-actions{margin-top:0}
+}
+@media(max-width:560px){
+ .rate-grid{grid-template-columns:1fr}.rate-item{border-right:0;border-bottom:1px solid rgba(255,255,255,.12)!important}.rate-item:last-child{border-bottom:0!important}
+ .steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:1px solid var(--line)!important}.step:last-child{border-bottom:0!important}
+ .rate-panel-inner{grid-template-columns:1fr}.rate-panel-copy{grid-column:auto}.rate-number{text-align:left}.cons-actions{display:grid;grid-template-columns:1fr}.cons-actions .btn{width:100%}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="topbar-left"><span>Nationwide Drug &amp; Alcohol Testing</span><span aria-hidden="true">•</span><span>Operating Nationwide</span></div>
+    <div class="topbar-right"><span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a></div>
+  </div>
+</div>
+<header class="site-header">
+  <div class="container nav-inner" id="navInner">
+    <a href="index.html" class="brand" aria-label="screenings4u home"><img src="images/logo.png" alt="screenings4u" class="site-logo"></a>
+    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation"></nav>
+    <div class="nav-actions">
+      <a href="services.html" class="btn btn-outline">Order a Test</a>
+      <div class="nav-account-menu">
+        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron" aria-hidden="true">▼</span></button>
+        <div class="nav-account-dropdown">
+          <a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a>
+          <a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>
+        </div>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mobileNav" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
+
+<main>
+<section class="cons-hero">
+  <div class="container cons-hero-grid">
+    <div class="cons-hero-copy">
+      <span class="eyebrow">DOT Random Drug &amp; Alcohol Consortium</span>
+      <h1>What is FMCSA <span>49 CFR Part 382?</span></h1>
+      <p class="cons-hero-lead">FMCSA Part 382 establishes drug and alcohol testing requirements for CDL drivers and motor carriers. screenings4u helps owner-operators and fleets manage random testing pools, selection notices, testing coordination and audit-ready program records.</p>
+      <div class="cons-actions">
+        <a class="btn btn-orange" href="contact.html?subject=dot-random-consortium">Enroll in a Consortium →</a>
+        <a class="btn btn-outline" href="#part-382">Learn About Part 382</a>
+      </div>
+    </div>
+    <aside class="hero-card">
+      <div class="hero-card-label">Consortium program support</div>
+      <h2>Stay enrolled. Stay ready. Stay organized.</h2>
+      <ul class="hero-list">
+        <li><b>01</b><span>Random pool enrollment and ongoing driver roster management</span></li>
+        <li><b>02</b><span>Unannounced random selection notifications and testing coordination</span></li>
+        <li><b>03</b><span>Secure compliance records and support for DOT/FMCSA reviews</span></li>
+        <li><b>04</b><span>Nationwide access to DOT drug and alcohol testing services</span></li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<section class="rate-strip" aria-label="DOT consortium highlights">
+  <div class="container rate-grid">
+    <div class="rate-item"><strong>49 CFR Part 382</strong><span>FMCSA controlled substances and alcohol testing requirements.</span></div>
+    <div class="rate-item"><strong>Owner-Operator Ready</strong><span>Single-driver companies must participate in a consortium random pool when applicable.</span></div>
+    <div class="rate-item"><strong>Nationwide Testing</strong><span>Coordinate DOT collections while drivers are on the road.</span></div>
+    <div class="rate-item"><strong>Audit-Ready Records</strong><span>Keep program documentation organized for compliance reviews.</span></div>
+  </div>
+</section>
+
+<section class="section" id="part-382">
+  <div class="container intro-grid">
+    <div class="copy">
+      <span class="eyebrow">Understanding the Regulation</span>
+      <h2>Part 382 is the FMCSA drug and alcohol testing rule for covered CDL drivers.</h2>
+      <p>FMCSA 49 CFR Part 382 applies to employers and drivers who are subject to the commercial driver's license requirements and perform safety-sensitive functions. It works together with 49 CFR Part 40, which establishes the procedures used for DOT drug and alcohol testing.</p>
+      <p>The rule covers more than random testing. A compliant program can include pre-employment controlled-substances testing, random testing, post-accident testing, reasonable-suspicion testing, return-to-duty testing, follow-up testing, recordkeeping and related program responsibilities.</p>
+    </div>
+    <aside class="reg-card">
+      <h3>Core Part 382 program responsibilities</h3>
+      <ul class="reg-list">
+        <li>Maintain a compliant DOT drug and alcohol testing program for covered drivers.</li>
+        <li>Keep eligible drivers in the appropriate random testing pool.</li>
+        <li>Ensure random selections are unannounced and reasonably spread throughout the year.</li>
+        <li>Coordinate required DOT testing using applicable Part 40 procedures.</li>
+        <li>Maintain required testing and program documentation.</li>
+        <li>Complete applicable FMCSA Clearinghouse responsibilities.</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Who Needs a Consortium?</span>
+      <h2>Built for owner-operators and transportation employers.</h2>
+      <p>FMCSA treats single-driver owner-operators differently from larger employers when it comes to managing the random testing pool.</p>
+    </div>
+    <div class="audience-grid">
+      <article class="audience-card orange">
+        <span class="tag">Owner-Operators</span>
+        <h3>Single-driver companies</h3>
+        <p>FMCSA guidance states that an owner-operator who is not leased to another motor carrier and has only one CDL driver must belong to a consortium for random testing purposes.</p>
+        <ul>
+          <li>Consortium random pool participation</li>
+          <li>Selection notification and coordination</li>
+          <li>Enrollment documentation</li>
+          <li>Testing and recordkeeping support</li>
+        </ul>
+      </article>
+      <article class="audience-card">
+        <span class="tag">Motor Carriers &amp; Fleets</span>
+        <h3>Multi-driver employers</h3>
+        <p>Employers with more than one covered CDL driver may manage their own random program or use a consortium/third-party administrator to reduce the administrative burden.</p>
+        <ul>
+          <li>Driver roster management</li>
+          <li>Random selection administration</li>
+          <li>Testing coordination for selected drivers</li>
+          <li>Centralized compliance records</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">screenings4u Consortium Services</span>
+      <h2>We manage the moving parts of your random testing program.</h2>
+      <p>Your company remains responsible for compliance, while screenings4u helps organize the program administration, testing coordination and documentation needed to keep your operation moving.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card"><div class="feature-num">01</div><h3>Random Pool Management</h3><p>Maintain eligible drivers in the appropriate pool and support scientifically valid random selections.</p></article>
+      <article class="feature-card"><div class="feature-num">02</div><h3>Selection Notices</h3><p>Coordinate confidential, unannounced selection notifications so required testing can move forward promptly.</p></article>
+      <article class="feature-card"><div class="feature-num">03</div><h3>Nationwide Testing</h3><p>Connect selected drivers with DOT drug and alcohol testing services through nationwide collection access.</p></article>
+      <article class="feature-card"><div class="feature-num">04</div><h3>Roster Management</h3><p>Add and remove covered drivers as your workforce changes and keep the random pool aligned with your active roster.</p></article>
+      <article class="feature-card"><div class="feature-num">05</div><h3>Compliance Records</h3><p>Keep random selection and testing documentation organized to support audits and program reviews.</p></article>
+      <article class="feature-card"><div class="feature-num">06</div><h3>Program Support</h3><p>Get help understanding the operational steps associated with random testing, records and related DOT program workflows.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="container">
+    <div class="rate-panel">
+      <div class="rate-panel-inner">
+        <div class="rate-panel-copy">
+          <span class="eyebrow" style="color:#ffbd8c">Current FMCSA Random Testing Rates</span>
+          <h2>Annual minimum testing rates for FMCSA-regulated drivers.</h2>
+          <p>FMCSA currently identifies a 50% annual minimum rate for controlled substances testing and a 10% annual minimum rate for alcohol testing. Random selections must be unannounced and reasonably spread throughout the calendar year. DOT agencies can change rates, so employers should confirm the current rate each year.</p>
+        </div>
+        <div class="rate-number"><strong>50%</strong><span>Controlled Substances</span></div>
+        <div class="rate-number"><strong>10%</strong><span>Alcohol</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">How Enrollment Works</span>
+      <h2>A straightforward path into the random program.</h2>
+      <p>We help move your business from enrollment through ongoing pool administration and testing coordination.</p>
+    </div>
+    <div class="steps">
+      <article class="step"><b>STEP 01</b><h3>Enroll</h3><p>Provide company and covered-driver information so your consortium account can be established.</p></article>
+      <article class="step"><b>STEP 02</b><h3>Build Your Roster</h3><p>Add active covered drivers and keep the roster current as drivers join or leave your operation.</p></article>
+      <article class="step"><b>STEP 03</b><h3>Random Selections</h3><p>Selections are administered without advance notice and spread across the testing period.</p></article>
+      <article class="step"><b>STEP 04</b><h3>Test &amp; Document</h3><p>Selected drivers complete the required test and program records are kept organized for future review.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container cta-grid">
+    <div>
+      <span class="eyebrow" style="color:#ffbd8c">Ready to Enroll?</span>
+      <h2>Put your DOT random testing program on a stronger compliance foundation.</h2>
+      <p>Whether you are a one-truck owner-operator or managing a growing fleet, screenings4u can help organize your consortium enrollment, random pool and testing workflow.</p>
+    </div>
+    <div class="cons-actions">
+      <a class="btn btn-orange" href="contact.html?subject=dot-random-consortium">Enroll Now →</a>
+      <a class="btn btn-outline" href="tel:7732457009">Call (773) 245-7009</a>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">DOT Consortium FAQ</span>
+      <h2>Common questions about FMCSA Part 382 and random testing.</h2>
+      <p>Quick answers for owner-operators, safety managers and motor carriers evaluating a random testing program.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false"><span>What is a DOT random drug and alcohol consortium?</span><span class="faq-plus">+</span></button>
+        <div class="faq-answer">A consortium combines covered drivers from participating employers into a managed random testing pool. A C/TPA may administer all or part of the employer's DOT drug and alcohol testing program, including random selection administration and related program support.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false"><span>Do owner-operators have to join a consortium?</span><span class="faq-plus">+</span></button>
+        <div class="faq-answer">FMCSA guidance says an owner-operator with only one covered CDL driver who is not leased to another motor carrier must belong to a consortium for random testing purposes.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false"><span>What are the current FMCSA random testing percentages?</span><span class="faq-plus">+</span></button>
+        <div class="faq-answer">FMCSA currently identifies annual minimum random testing rates of 50% for controlled substances and 10% for alcohol. Rates can change, so the current DOT agency rate should be confirmed each calendar year.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false"><span>Can the same driver be selected more than once?</span><span class="faq-plus">+</span></button>
+        <div class="faq-answer">Yes. A compliant random process gives each eligible driver an equal chance of selection each time selections are made, so a driver may be selected more than once during a year.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false"><span>Does joining a consortium replace pre-employment testing?</span><span class="faq-plus">+</span></button>
+        <div class="faq-answer">No. Consortium enrollment addresses random testing administration. Covered employers still have separate responsibilities for applicable pre-employment and other required testing under Parts 382 and 40.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false"><span>Does FMCSA approve or endorse consortium providers?</span><span class="faq-plus">+</span></button>
+        <div class="faq-answer">No. FMCSA states that it does not approve or endorse individual consortium/third-party administrators. Employers remain responsible for compliance with applicable DOT and FMCSA requirements.</div>
+      </div>
+    </div>
+    <div class="source-note">
+      <strong>Regulatory note:</strong> This page is general compliance information and is not legal advice. DOT and FMCSA requirements may change. Confirm current requirements with the applicable agency. Reference sources include
+      <a href="https://www.fmcsa.dot.gov/regulations/drug-alcohol-testing/random-testing" target="_blank" rel="noopener">FMCSA Random Testing guidance</a>,
+      <a href="https://www.fmcsa.dot.gov/regulations/drug-alcohol-testing/owner-operator" target="_blank" rel="noopener">FMCSA Owner-Operator guidance</a>, and
+      <a href="https://www.ecfr.gov/current/title-49/subtitle-B/chapter-III/subchapter-B/part-382" target="_blank" rel="noopener">49 CFR Part 382</a>.
+    </div>
+  </div>
+</section>
+</main>
+
+<footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
+<script src="assets/js/desktop-nav.js?v=20260911-1"></script>
+<script src="assets/js/mobile-nav.js?v=20260911-1"></script>
+<script src="assets/js/site-ui.js?v=20260904-1"></script>
+<script src="assets/js/footer.js?v=20260904-1"></script>
+<script>
+(() => {
+  "use strict";
+  document.querySelectorAll(".faq-question").forEach((button) => {
+    button.addEventListener("click", () => {
+      const item = button.closest(".faq-item");
+      const open = !item.classList.contains("open");
+      document.querySelectorAll(".faq-item.open").forEach((other) => {
+        if (other !== item) {
+          other.classList.remove("open");
+          other.querySelector(".faq-question")?.setAttribute("aria-expanded", "false");
+        }
+      });
+      item.classList.toggle("open", open);
+      button.setAttribute("aria-expanded", String(open));
+    });
+  });
+})();
+</script>
+</body>
+</html>
