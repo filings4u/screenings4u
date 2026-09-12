@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#24467f" name="theme-color"/>
+<meta name="description" content="screenings4u Client Compliance Portal helps employers manage employees, drug and alcohol testing, random programs, consortium activity, results, reports and compliance records in one secure browser-based platform."/>
+<title>Drug Testing Management Software | screenings4u Client Compliance Portal</title>
+<link href="images/fav.png" rel="icon" type="image/png">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
+<link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2">
+<style>
+.portal-hero{position:relative;overflow:hidden;background:
+  radial-gradient(circle at 82% 20%,rgba(238,116,35,.20),transparent 28%),
+  linear-gradient(120deg,#0c2342 0%,#173c70 60%,#24467f 100%);color:#fff}
+.portal-hero-grid{min-height:700px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(400px,.95fr);gap:64px;align-items:center;padding:76px 0 88px}
+.portal-hero h1{margin:0;font-size:clamp(48px,6vw,78px);line-height:.98;letter-spacing:-.055em;font-weight:900}
+.portal-hero h1 span{color:#ff8a3d}.portal-hero .lead{max-width:720px;margin:24px 0 0;color:#d9e6f3;font-size:18px;line-height:1.72}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.hero-actions .btn-outline{color:#fff;border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.04)}
+.hero-actions .btn-outline:hover{background:#fff;color:#17335f;border-color:#fff}
+.portal-preview{position:relative;padding:18px;border-radius:24px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);box-shadow:0 26px 80px rgba(0,0,0,.28);backdrop-filter:blur(8px)}
+.portal-window{overflow:hidden;border-radius:18px;background:#f7f9fc}
+.portal-top{height:48px;display:flex;align-items:center;gap:8px;padding:0 16px;background:#fff;border-bottom:1px solid #e5eaf1}
+.dot{width:8px;height:8px;border-radius:50%;background:#dce3ed}.portal-shell{display:grid;grid-template-columns:112px 1fr;min-height:365px}
+.portal-side{padding:18px 12px;background:#0f2b53}.portal-side div{height:12px;margin:10px 0;border-radius:999px;background:rgba(255,255,255,.16)}
+.portal-side div:first-child{width:70%;background:#ff8a3d}.portal-main{padding:22px}
+.preview-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.preview-head h3{margin:0;color:#16345f;font-size:18px}.preview-button{padding:8px 12px;border-radius:8px;background:#ff8a3d;color:#fff;font-size:10px;font-weight:800}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.preview-stat{padding:14px;border-radius:12px;background:#fff;border:1px solid #e7ebf2}.preview-stat b{display:block;color:#17335f;font-size:20px}.preview-stat span{color:#74849b;font-size:9px}
+.preview-table{margin-top:14px;padding:12px;border-radius:12px;background:#fff;border:1px solid #e7ebf2}
+.preview-row{display:grid;grid-template-columns:1.3fr .7fr .7fr;gap:10px;padding:10px 4px;border-bottom:1px solid #edf0f5;color:#65758d;font-size:9px}.preview-row:last-child{border-bottom:0}
+.preview-row strong{color:#294263}.status-pill{display:inline-flex;width:max-content;padding:4px 7px;border-radius:999px;background:#eaf7ef;color:#248351;font-weight:800}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;color:#ffbd93;font-size:11px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}.hero-tag::before{content:"";width:28px;height:2px;background:#ff8a3d}
+
+.trustbar{background:#fff;border-bottom:1px solid var(--line)}.trust-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.trust-item{padding:24px 18px;border-right:1px solid var(--line)}.trust-item:last-child{border-right:0}.trust-item b{display:block;color:var(--blue-dark);font-size:15px}.trust-item span{display:block;margin-top:5px;color:var(--muted);font-size:11px;line-height:1.5}
+
+.section{padding:102px 0}.section.alt{background:var(--surface)}
+.section-heading{max-width:790px}.section-heading h2{color:var(--blue-dark);font-size:clamp(36px,4vw,54px);line-height:1.07;letter-spacing:-.04em;margin-top:0}
+.section-heading p{color:var(--muted);font-size:16px;line-height:1.75}
+.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:38px}
+.feature-card{padding:28px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:var(--shadow-sm)}
+.feature-icon{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--blue-pale);color:var(--blue);font-weight:900;font-size:13px}.feature-card:nth-child(3n+2) .feature-icon{background:#fff0e7;color:#d66318}
+.feature-card h3{margin:18px 0 9px;color:var(--blue-dark);font-size:19px}.feature-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.68}
+
+.workflow-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}.workflow-copy h2{color:var(--blue-dark);font-size:clamp(34px,4vw,52px);line-height:1.08;letter-spacing:-.04em}.workflow-copy p{color:var(--muted);line-height:1.78}
+.workflow-list{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:13px}.workflow-list li{display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start;color:#405676;font-size:14px;line-height:1.55}.workflow-list li::before{content:"✓";display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#e8f5ed;color:#1b8750;font-size:11px;font-weight:900}
+.workflow-board{padding:26px;border-radius:24px;background:linear-gradient(145deg,#17335f,#24467f);box-shadow:var(--shadow-lg)}.board-card{padding:20px;border-radius:16px;background:#fff}.board-card+.board-card{margin-top:13px}.board-label{color:#8290a2;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em}.board-card h4{margin:6px 0 14px;color:#17335f;font-size:17px}.board-meter{height:8px;border-radius:999px;background:#eef2f7;overflow:hidden}.board-meter span{display:block;height:100%;border-radius:999px;background:#ff8a3d}.board-meta{display:flex;justify-content:space-between;margin-top:8px;color:#7d8ba0;font-size:9px}
+
+.role-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:36px}.role-card{padding:34px;border:1px solid var(--line);border-radius:22px;background:#fff}.role-card.dark{background:#17335f;border-color:#17335f;color:#fff}.role-card h3{margin:0 0 12px;color:var(--blue-dark);font-size:28px}.role-card.dark h3{color:#fff}.role-card p{color:var(--muted);font-size:14px;line-height:1.7}.role-card.dark p{color:#c8d6e7}.role-list{list-style:none;padding:0;margin:21px 0 0;display:grid;gap:10px}.role-list li{display:flex;gap:10px;font-size:13px;color:#405676}.role-card.dark .role-list li{color:#e7eef7}.role-list li::before{content:"•";color:#ff8a3d;font-size:20px;line-height:.7}
+
+.pricing-wrap{margin-top:38px}.pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch}
+.price-card{position:relative;display:flex;flex-direction:column;padding:34px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:var(--shadow-sm)}
+.price-card.featured{border:2px solid #ff8a3d;box-shadow:0 18px 50px rgba(23,51,95,.13);transform:translateY(-8px)}
+.price-badge{position:absolute;left:50%;top:-14px;transform:translateX(-50%);padding:7px 13px;border-radius:999px;background:#ff8a3d;color:#fff;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.price-kicker{color:var(--blue);font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.price-card h3{margin:10px 0 8px;color:var(--blue-dark);font-size:26px}
+.price{display:flex;gap:3px;align-items:flex-start;margin:15px 0 4px;color:var(--blue-dark)}.price .dollar{margin-top:6px;font-size:18px;font-weight:900}.price .amount{font-size:49px;font-weight:900;line-height:1;letter-spacing:-.045em}
+.price-term{color:var(--muted);font-size:12px}.price-desc{min-height:62px;margin:18px 0 20px;color:var(--muted);font-size:13px;line-height:1.65}
+.price-list{list-style:none;padding:0;margin:0 0 26px;display:grid;gap:11px;flex:1}.price-list li{display:grid;grid-template-columns:21px 1fr;gap:9px;color:#405676;font-size:13px;line-height:1.5}.price-list li::before{content:"✓";display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#eaf7ef;color:#1e8650;font-size:10px;font-weight:900}
+.price-card .btn{width:100%;justify-content:center}.price-note{margin-top:23px;text-align:center;color:var(--muted);font-size:12px;line-height:1.65}.price-note strong{color:var(--blue-dark)}
+.custom-note{margin-top:22px;padding:18px 20px;border-left:4px solid #ff8a3d;background:#fff4ec;color:#674d3a;font-size:12px;line-height:1.65}
+
+.security-strip{padding:74px 0;background:linear-gradient(110deg,#17335f,#24467f);color:#fff}.security-grid{display:grid;grid-template-columns:1.2fr repeat(3,.6fr);gap:28px;align-items:center}.security-copy h2{margin:0;font-size:clamp(30px,3.5vw,45px);line-height:1.06}.security-copy p{margin:14px 0 0;color:#cbd8e7;line-height:1.7;font-size:13px}.security-stat strong{display:block;color:#fff;font-size:28px}.security-stat span{display:block;margin-top:6px;color:#ffbd93;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+
+.faq-list{display:grid;gap:12px;margin-top:34px}.faq-item{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}.faq-question{width:100%;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:20px 22px;border:0;background:#fff;color:var(--blue-dark);text-align:left;font-weight:800}.faq-plus{font-size:20px;color:#ff8a3d;transition:.2s}.faq-answer{display:none;padding:0 22px 20px;color:var(--muted);font-size:14px;line-height:1.7}.faq-item.open .faq-answer{display:block}.faq-item.open .faq-plus{transform:rotate(45deg)}
+
+.cta-band{padding:88px 0;background:#fff}.cta-panel{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;padding:46px;border-radius:26px;background:linear-gradient(135deg,#0f2b53,#24467f);color:#fff;box-shadow:var(--shadow-lg)}.cta-panel h2{margin:0;font-size:clamp(34px,4vw,50px);line-height:1.05;letter-spacing:-.04em}.cta-panel p{max-width:700px;margin:14px 0 0;color:#cedaea;line-height:1.7}
+
+@media(max-width:1050px){
+ .portal-hero-grid{grid-template-columns:1fr;gap:36px;min-height:0}.portal-preview{max-width:720px}.trust-grid{grid-template-columns:repeat(2,1fr)}.trust-item:nth-child(2){border-right:0}.trust-item:nth-child(-n+2){border-bottom:1px solid var(--line)}
+ .feature-grid{grid-template-columns:repeat(2,1fr)}.pricing-grid{grid-template-columns:1fr}.price-card.featured{transform:none}.security-grid{grid-template-columns:1fr 1fr}.security-copy{grid-column:1/-1}
+}
+@media(max-width:780px){
+ .portal-hero-grid{padding:48px 0 58px}.portal-hero h1{font-size:clamp(40px,12vw,58px)}.section{padding:72px 0}.feature-grid,.workflow-grid,.role-grid{grid-template-columns:1fr}.cta-panel{grid-template-columns:1fr;padding:32px}
+ .portal-shell{grid-template-columns:74px 1fr}.stat-grid{grid-template-columns:1fr}.preview-stat:nth-child(n+2){display:none}
+}
+@media(max-width:520px){
+ .trust-grid{grid-template-columns:1fr}.trust-item{border-right:0;border-bottom:1px solid var(--line)!important}.trust-item:last-child{border-bottom:0!important}.security-grid{grid-template-columns:1fr}.hero-actions{display:grid;grid-template-columns:1fr}.hero-actions .btn{width:100%}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="topbar-left"><span>Nationwide Drug &amp; Alcohol Testing</span><span aria-hidden="true">•</span><span>Operating Nationwide</span></div>
+    <div class="topbar-right"><span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a></div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container nav-inner" id="navInner">
+    <a href="index.html" class="brand" aria-label="screenings4u home"><img src="images/logo.png" alt="screenings4u" class="site-logo"></a>
+    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation"></nav>
+    <div class="nav-actions">
+      <a href="services.html" class="btn btn-outline">Order a Test</a>
+      <div class="nav-account-menu">
+        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron" aria-hidden="true">▼</span></button>
+        <div class="nav-account-dropdown">
+          <a href="https://portal.screenings4u.com/customer-login.html">Customer Login</a>
+          <a href="https://portal.screenings4u.com/employer-login.html">Employer Login</a>
+        </div>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mobileNav" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
+
+<main>
+<section class="portal-hero">
+  <div class="container portal-hero-grid">
+    <div>
+      <div class="hero-tag">screenings4u Client Compliance Portal</div>
+      <h1>Drug testing management, <span>all in one place.</span></h1>
+      <p class="lead">Give your company one secure workspace to manage employees, order testing, track random programs, review results, download certificates and keep compliance records organized. Built for employers, fleets, consortium members and workplace testing programs.</p>
+      <div class="hero-actions">
+        <a class="btn btn-orange" href="#pricing">View Monthly Plans →</a>
+        <a class="btn btn-outline" href="contact.html?subject=client-compliance-portal-demo">Request a Demo</a>
+      </div>
+    </div>
+
+    <div class="portal-preview" aria-label="Illustration of the screenings4u software dashboard">
+      <div class="portal-window">
+        <div class="portal-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="portal-shell">
+          <aside class="portal-side"><div></div><div></div><div></div><div></div><div></div><div></div></aside>
+          <div class="portal-main">
+            <div class="preview-head"><h3>Compliance Dashboard</h3><span class="preview-button">Order Test</span></div>
+            <div class="stat-grid">
+              <div class="preview-stat"><b>128</b><span>Active Employees</span></div>
+              <div class="preview-stat"><b>12</b><span>Open Tests</span></div>
+              <div class="preview-stat"><b>96%</b><span>Compliance Ready</span></div>
+            </div>
+            <div class="preview-table">
+              <div class="preview-row"><strong>Employee</strong><strong>Test Type</strong><strong>Status</strong></div>
+              <div class="preview-row"><span>Driver 1042</span><span>DOT Random</span><span class="status-pill">Complete</span></div>
+              <div class="preview-row"><span>Driver 1188</span><span>Pre-Employment</span><span>Scheduled</span></div>
+              <div class="preview-row"><span>Employee 2021</span><span>Non-DOT</span><span>Pending</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trustbar">
+  <div class="container trust-grid">
+    <div class="trust-item"><b>Browser-Based Access</b><span>No desktop software to install.</span></div>
+    <div class="trust-item"><b>Role-Based Portal</b><span>Separate staff and customer access.</span></div>
+    <div class="trust-item"><b>Testing + Compliance</b><span>Manage orders, results and records together.</span></div>
+    <div class="trust-item"><b>Monthly Subscription</b><span>Software access billed by plan each month.</span></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Built for Workplace Testing Programs</span>
+      <h2>Replace scattered spreadsheets, emails and folders with one operating system.</h2>
+      <p>The screenings4u Client Compliance Portal is designed to bring day-to-day drug and alcohol testing administration into a single customer workspace while giving the screenings4u team the management tools needed to support every account.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card"><div class="feature-icon">01</div><h3>Employee Rosters</h3><p>Add, update and organize covered employees or drivers with program status, testing history and account-level records.</p></article>
+      <article class="feature-card"><div class="feature-icon">02</div><h3>Test Ordering</h3><p>Order approved drug, alcohol and background screening services from the customer portal and follow each order through completion.</p></article>
+      <article class="feature-card"><div class="feature-icon">03</div><h3>Random Programs</h3><p>Manage DOT and non-DOT random selection programs, consortium participants, selection events and completion tracking.</p></article>
+      <article class="feature-card"><div class="feature-icon">04</div><h3>Results &amp; Documents</h3><p>Centralize completed test results, certificates, program documents and compliance records for authorized users.</p></article>
+      <article class="feature-card"><div class="feature-icon">05</div><h3>Reports &amp; Audit Support</h3><p>Generate program summaries, testing activity reports and documentation designed to make audits easier to prepare for.</p></article>
+      <article class="feature-card"><div class="feature-icon">06</div><h3>Notifications</h3><p>Keep customers informed when tests require action, selections are issued, results arrive or compliance items need attention.</p></article>
+      <article class="feature-card"><div class="feature-icon">07</div><h3>Collection Coordination</h3><p>Connect orders with collection sites, donor passes, scheduling activity and service locations from the same workflow.</p></article>
+      <article class="feature-card"><div class="feature-icon">08</div><h3>Consortium Certificates</h3><p>Provide downloadable enrollment and consortium documentation for eligible customers and owner-operators.</p></article>
+      <article class="feature-card"><div class="feature-icon">09</div><h3>Background Screening</h3><p>Bring drug testing and supported background screening ordering into a unified customer experience.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="container workflow-grid">
+    <div class="workflow-copy">
+      <span class="eyebrow">Simple Daily Workflow</span>
+      <h2>Customers manage the program. screenings4u manages the platform.</h2>
+      <p>The customer side is focused on the tasks employers need every day. Behind it, the screenings4u management portal controls accounts, plans, permissions, testing services, random programs, results, documents and support.</p>
+      <ul class="workflow-list">
+        <li>Customers log in to their secure company account.</li>
+        <li>They manage employees and place testing orders.</li>
+        <li>Random selections and testing requirements appear as actionable items.</li>
+        <li>Results and documents are released to authorized users.</li>
+        <li>screenings4u staff can manage the entire lifecycle from the administrative portal.</li>
+      </ul>
+    </div>
+    <div class="workflow-board">
+      <div class="board-card"><div class="board-label">Testing Orders</div><h4>12 active orders</h4><div class="board-meter"><span style="width:72%"></span></div><div class="board-meta"><span>9 completed</span><span>3 open</span></div></div>
+      <div class="board-card"><div class="board-label">Random Program</div><h4>Q3 selection completion</h4><div class="board-meter"><span style="width:88%"></span></div><div class="board-meta"><span>Selection notices issued</span><span>88%</span></div></div>
+      <div class="board-card"><div class="board-label">Compliance Records</div><h4>Account documentation</h4><div class="board-meter"><span style="width:96%"></span></div><div class="board-meta"><span>Records organized</span><span>Ready</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Two Connected Portals</span>
+      <h2>One platform for customers. One control center for screenings4u.</h2>
+      <p>The software will be built around two role-specific experiences sharing the same underlying account, service and compliance data.</p>
+    </div>
+    <div class="role-grid">
+      <article class="role-card">
+        <h3>Customer Portal</h3>
+        <p>Employers, fleets and consortium customers get a focused workspace for the parts of the testing program they need to manage.</p>
+        <ul class="role-list">
+          <li>Company profile and authorized users</li>
+          <li>Employee / driver roster</li>
+          <li>Testing orders and donor passes</li>
+          <li>Random selections and consortium status</li>
+          <li>Results, certificates and documents</li>
+          <li>Invoices, subscription and account status</li>
+          <li>Notifications and support requests</li>
+        </ul>
+      </article>
+      <article class="role-card dark">
+        <h3>screenings4u Management Portal</h3>
+        <p>Your existing management portal becomes the operating center for the new software service.</p>
+        <ul class="role-list">
+          <li>Customer account administration</li>
+          <li>Subscription plan and access controls</li>
+          <li>Employee and testing oversight</li>
+          <li>Random pool and selection administration</li>
+          <li>Results and document release</li>
+          <li>Reporting and audit support</li>
+          <li>Notifications, billing and customer support</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="pricing">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Monthly Software Plans</span>
+      <h2>Choose the level of control your testing program needs.</h2>
+      <p>These launch prices are structured as monthly software subscriptions. Drug tests, alcohol tests, background checks and other transactional services are purchased separately unless a future plan specifically includes them.</p>
+    </div>
+
+    <div class="pricing-wrap">
+      <div class="pricing-grid">
+        <article class="price-card">
+          <span class="price-kicker">Small Employers</span>
+          <h3>Core</h3>
+          <div class="price"><span class="dollar">$</span><span class="amount">99</span></div>
+          <div class="price-term">per company / month</div>
+          <p class="price-desc">For small employers that need a clean place to manage employees, testing orders, results and records.</p>
+          <ul class="price-list">
+            <li>Up to 25 active employees</li>
+            <li>Employee roster management</li>
+            <li>Drug &amp; alcohol test ordering</li>
+            <li>Digital donor passes</li>
+            <li>Results &amp; document center</li>
+            <li>Basic compliance reports</li>
+            <li>Email notifications</li>
+            <li>2 customer users</li>
+          </ul>
+          <a class="btn btn-blue" href="contact.html?subject=client-portal-core">Start Core →</a>
+        </article>
+
+        <article class="price-card featured">
+          <span class="price-badge">Most Popular</span>
+          <span class="price-kicker">Growing Programs</span>
+          <h3>Professional</h3>
+          <div class="price"><span class="dollar">$</span><span class="amount">199</span></div>
+          <div class="price-term">per company / month</div>
+          <p class="price-desc">For active employer programs that need random testing, consortium tools and broader reporting.</p>
+          <ul class="price-list">
+            <li>Up to 150 active employees</li>
+            <li>Everything in Core</li>
+            <li>DOT &amp; non-DOT random programs</li>
+            <li>Random selection management</li>
+            <li>Consortium certificates</li>
+            <li>Advanced reports and exports</li>
+            <li>Background screening ordering</li>
+            <li>5 customer users</li>
+            <li>Priority support</li>
+          </ul>
+          <a class="btn btn-orange" href="contact.html?subject=client-portal-professional">Start Professional →</a>
+        </article>
+
+        <article class="price-card">
+          <span class="price-kicker">Larger Employers</span>
+          <h3>Enterprise</h3>
+          <div class="price"><span class="dollar">$</span><span class="amount">299</span></div>
+          <div class="price-term">starting per month</div>
+          <p class="price-desc">For larger or multi-location programs that need expanded access, storage, reporting and integration options.</p>
+          <ul class="price-list">
+            <li>250+ active employees</li>
+            <li>Everything in Professional</li>
+            <li>Multi-location account support</li>
+            <li>Expanded user permissions</li>
+            <li>Custom reporting</li>
+            <li>API / integration options</li>
+            <li>Long-term document storage</li>
+            <li>Dedicated account support</li>
+            <li>Custom workflow options</li>
+          </ul>
+          <a class="btn btn-blue" href="contact.html?subject=client-portal-enterprise">Contact Sales →</a>
+        </article>
+      </div>
+      <p class="price-note"><strong>Launch pricing can be adjusted before checkout is connected.</strong> The current page is structured so each plan can later be tied directly to Stripe subscription prices and automated portal access.</p>
+      <div class="custom-note"><strong>Planned billing model:</strong> customers purchase a recurring monthly software subscription. After successful payment, the account can be provisioned automatically and access controlled by subscription status. Individual testing services remain separate billable transactions unless included in a specific package.</div>
+    </div>
+  </div>
+</section>
+
+<section class="security-strip">
+  <div class="container security-grid">
+    <div class="security-copy">
+      <h2>Designed around secure, role-based access.</h2>
+      <p>The portal architecture is intended to keep each customer inside its own company workspace, separate customer users from screenings4u administrative users, and create auditable access to sensitive testing records.</p>
+    </div>
+    <div class="security-stat"><strong>24/7</strong><span>Browser Access</span></div>
+    <div class="security-stat"><strong>2</strong><span>Role-Based Portals</span></div>
+    <div class="security-stat"><strong>1</strong><span>Unified Platform</span></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Frequently Asked Questions</span>
+      <h2>What customers need to know before subscribing.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Is the monthly fee for software access or testing services?</span><span class="faq-plus">+</span></button><div class="faq-answer">The monthly fee is for access to the screenings4u Client Compliance Portal and the software features included in the selected plan. Drug tests, alcohol tests, background checks and other transactional services are billed separately unless a specific package states otherwise.</div></div>
+      <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Can we manage DOT and non-DOT employees?</span><span class="faq-plus">+</span></button><div class="faq-answer">Yes. The platform is being designed to support separate testing programs, employee groups and random pools so companies can organize DOT-regulated and non-DOT testing workflows appropriately.</div></div>
+      <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Can our company order tests directly from the portal?</span><span class="faq-plus">+</span></button><div class="faq-answer">Yes. Test ordering is a core part of the customer portal design. Authorized customer users will be able to choose supported screenings4u services, select or add an employee, and follow the order through its workflow.</div></div>
+      <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Will screenings4u manage random selections?</span><span class="faq-plus">+</span></button><div class="faq-answer">The Professional and Enterprise plans are designed to include random program administration features, including pool management, selection events, notifications, completion tracking and related documentation.</div></div>
+      <div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Can more than one person at our company have access?</span><span class="faq-plus">+</span></button><div class="faq-answer">Yes. Customer accounts can support multiple authorized users. The number of included users and the available permission options will depend on the subscription plan.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-panel">
+      <div>
+        <span class="eyebrow" style="color:#ffbd93">Coming to screenings4u</span>
+        <h2>Run your testing program from one secure workspace.</h2>
+        <p>Talk with screenings4u about early access, account setup and the subscription plan that fits your workforce.</p>
+      </div>
+      <div class="hero-actions" style="margin-top:0">
+        <a class="btn btn-orange" href="contact.html?subject=client-compliance-portal-demo">Request a Demo →</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
+<script src="assets/js/desktop-nav.js?v=20260911-1"></script>
+<script src="assets/js/mobile-nav.js?v=20260911-1"></script>
+<script src="assets/js/site-ui.js?v=20260904-1"></script>
+<script src="assets/js/footer.js?v=20260904-1"></script>
+<script>
+(() => {
+  "use strict";
+  document.querySelectorAll(".faq-question").forEach((button) => {
+    button.addEventListener("click", () => {
+      const item = button.closest(".faq-item");
+      const open = !item.classList.contains("open");
+      document.querySelectorAll(".faq-item.open").forEach((other) => {
+        if (other !== item) {
+          other.classList.remove("open");
+          other.querySelector(".faq-question")?.setAttribute("aria-expanded","false");
+        }
+      });
+      item.classList.toggle("open",open);
+      button.setAttribute("aria-expanded",String(open));
+    });
+  });
+})();
+</script>
+</body>
+</html>
