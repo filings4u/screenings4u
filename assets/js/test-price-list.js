@@ -1531,7 +1531,7 @@ const TEST_SERVICES = {
   specimen_collector_training_supplies: {
     id: "specimen_collector_training_supplies",
     orderType: "checkout",
-    orderUrl: "https://training.screenings4u.com/",
+    orderUrl: "https://training.screenings4u.com/collector-training-supplies.html",
     name: "Specimen Collector Training Supplies",
     shortName: "Collector Training Kit",
     category: "Training Supplies",
