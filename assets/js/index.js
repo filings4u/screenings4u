@@ -36,7 +36,7 @@ const infrastructureCatalog = [
     {
         title: "DOT Collector Certification",
         description: "Comprehensive multi-tier professional specimen collector training frameworks ranging from core compliance setups up to train-the-trainer credentials.",
-        destinationPage: "pages/dot-specimen-collector-training.html"
+        destinationPage: "https://training.screenings4u.com/"
     }
 ];
 

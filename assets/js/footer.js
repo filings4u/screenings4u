@@ -151,7 +151,7 @@ function initS4UFooter() {
               Access Training
             </a>
 
-            <a href="dot-specimen-collector-training.html">
+            <a href="https://training.screenings4u.com/">
               Training Courses
             </a>
 

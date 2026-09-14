@@ -363,7 +363,7 @@ const TEST_SERVICES = {
   dot_specimen_collector_training: {
     id: "dot_specimen_collector_training",
     orderType: "checkout",
-    orderUrl: "checkout.html?service=dot_specimen_collector_training",
+    orderUrl: "https://training.screenings4u.com/",
     name: "DOT Specimen Collector Training",
     shortName: "DOT Specimen Collector Training",
     category: "DOT Specimen Collector Training",
@@ -389,7 +389,7 @@ const TEST_SERVICES = {
   dot_specimen_collector_training_hair: {
     id: "dot_specimen_collector_training_hair",
     orderType: "checkout",
-    orderUrl: "checkout.html?service=dot_specimen_collector_training_hair",
+    orderUrl: "https://training.screenings4u.com/",
     name: "DOT Specimen Collector Training + Hair",
     shortName: "DOT Collector Training + Hair",
     category: "DOT Specimen Collector Training",
@@ -412,7 +412,7 @@ const TEST_SERVICES = {
   dot_specimen_collector_train_the_trainer: {
     id: "dot_specimen_collector_train_the_trainer",
     orderType: "checkout",
-    orderUrl: "checkout.html?service=dot_specimen_collector_train_the_trainer",
+    orderUrl: "https://training.screenings4u.com/",
     name: "DOT Specimen Collector Train the Trainer",
     shortName: "DOT Collector Train the Trainer",
     category: "DOT Specimen Collector Training",
@@ -436,7 +436,7 @@ const TEST_SERVICES = {
   dot_collector_train_the_trainer_hair: {
     id: "dot_collector_train_the_trainer_hair",
     orderType: "checkout",
-    orderUrl: "checkout.html?service=dot_collector_train_the_trainer_hair",
+    orderUrl: "https://training.screenings4u.com/",
     name: "DOT Collector Train the Trainer + Hair",
     shortName: "DOT Train the Trainer + Hair",
     category: "DOT Specimen Collector Training",
@@ -462,7 +462,7 @@ const TEST_SERVICES = {
   training_course_extension_30_days: {
     id: "training_course_extension_30_days",
     orderType: "checkout",
-    orderUrl: "checkout.html?service=training_course_extension_30_days",
+    orderUrl: "https://training.screenings4u.com/",
     name: "30-Day Course Access Extension",
     shortName: "30-Day Course Extension",
     category: "DOT Specimen Collector Training",
@@ -1531,7 +1531,7 @@ const TEST_SERVICES = {
   specimen_collector_training_supplies: {
     id: "specimen_collector_training_supplies",
     orderType: "checkout",
-    orderUrl: "checkout.html?service=specimen_collector_training_supplies",
+    orderUrl: "https://training.screenings4u.com/",
     name: "Specimen Collector Training Supplies",
     shortName: "Collector Training Kit",
     category: "Training Supplies",

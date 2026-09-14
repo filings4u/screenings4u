@@ -1221,6 +1221,19 @@ async function initCheckout() {
       return;
     }
 
+    const trainingServiceIds = new Set([
+      "dot_specimen_collector_training",
+      "dot_specimen_collector_training_hair",
+      "dot_specimen_collector_train_the_trainer",
+      "dot_collector_train_the_trainer_hair",
+      "training_course_extension_30_days"
+    ]);
+
+    if (trainingServiceIds.has(selectedService.id)) {
+      window.location.replace("https://training.screenings4u.com/");
+      return;
+    }
+
     /*
      * Only checkout services are allowed through this page.
      */
