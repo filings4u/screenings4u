@@ -1,3 +1,5 @@
+// Training products are sold only through the screenings4u Learning Center.
+(function(){const p=new URLSearchParams(location.search);const id=p.get('service')||'';const training=['dot_specimen_collector_training','dot_specimen_collector_training_hair','dot_specimen_collector_train_the_trainer','dot_collector_train_the_trainer_hair','training_course_extension_30_days','specimen_collector_training_supplies','live_dot_specimen_collector_training_1_dollar'];if(training.includes(id)){location.replace('https://training.screenings4u.com/');}})();
 
 
 /**
