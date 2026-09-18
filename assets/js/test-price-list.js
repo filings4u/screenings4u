@@ -1323,6 +1323,103 @@ const TEST_SERVICES = {
   },
 
   /* =========================================================
+     DRUG TESTING BUSINESS LAUNCH PACKAGES
+     ========================================================= */
+
+  "drug-testing-business-launch-foundation": {
+    id: "drug-testing-business-launch-foundation",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=drug-testing-business-launch-foundation",
+    sourcePage: "start-a-drug-testing-business.html",
+    name: "Drug Testing Business — Launch Foundation",
+    shortName: "Launch Foundation",
+    category: "Drug Testing Business Launch",
+    specimen: "N/A",
+    price: 249500,
+    currency: "usd",
+    stripePriceId: "",
+    results: "Business launch implementation",
+    description: "Core drug testing business launch package with collector training enrollment, business setup support, branding, website, lab account setup, starter supplies, and launch planning.",
+    features: [
+      "Launch strategy session and startup roadmap",
+      "DOT urine specimen collector training enrollment",
+      "Oral fluid collector training enrollment",
+      "Hair specimen collection training enrollment",
+      "Business entity filing coordination",
+      "EIN application assistance",
+      "Professional logo and starter brand kit",
+      "5-page professional website and domain configuration",
+      "Business email setup",
+      "House Lab Account setup",
+      "Starter CCF and collection supply package",
+      "screenings4u Collector Network onboarding",
+      "Starter service menu and pricing worksheet"
+    ]
+  },
+
+  "drug-testing-business-growth-operations": {
+    id: "drug-testing-business-growth-operations",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=drug-testing-business-growth-operations",
+    sourcePage: "start-a-drug-testing-business.html",
+    name: "Drug Testing Business — Growth & Operations",
+    shortName: "Growth & Operations",
+    category: "Drug Testing Business Launch",
+    specimen: "N/A",
+    price: 349500,
+    currency: "usd",
+    stripePriceId: "",
+    results: "Expanded business launch implementation",
+    description: "Expanded launch package with the Launch Foundation plus C/TPA setup, consortium software onboarding, results workflows, scheduling, CRM, local SEO, outreach tools, and coaching.",
+    features: [
+      "Everything in Launch Foundation",
+      "C/TPA setup and Clearinghouse registration support",
+      "Random consortium software onboarding",
+      "MRO and electronic results workflow configuration",
+      "DOT program administration starter templates",
+      "Booking and scheduling software setup",
+      "CRM setup for leads and employers",
+      "Google Business Profile setup",
+      "Local SEO configuration",
+      "Employer outreach and sales templates",
+      "Marketing materials starter package",
+      "Two one-on-one launch coaching sessions",
+      "Operational readiness review"
+    ]
+  },
+
+  "drug-testing-business-full-service-tpa": {
+    id: "drug-testing-business-full-service-tpa",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=drug-testing-business-full-service-tpa",
+    sourcePage: "start-a-drug-testing-business.html",
+    name: "Drug Testing Business — Full-Service TPA Launch",
+    shortName: "Full-Service TPA Launch",
+    category: "Drug Testing Business Launch",
+    specimen: "N/A",
+    price: 449500,
+    currency: "usd",
+    stripePriceId: "",
+    results: "Full-service business launch implementation",
+    description: "Full-service drug testing business launch package with TPA infrastructure, business and marketing plans, deeper implementation support, licensing assistance, software setup, and multi-site growth planning.",
+    features: [
+      "Everything in Growth & Operations",
+      "Three VIP implementation coaching sessions",
+      "Business plan development",
+      "Marketing plan development",
+      "Operating agreement document setup support",
+      "City business license filing assistance",
+      "CLIA waiver application support when applicable",
+      "SAM.gov / CAGE registration assistance",
+      "HR software setup",
+      "Payroll software setup",
+      "Multi-site and mobile growth strategy",
+      "90-day launch action plan",
+      "Priority implementation support"
+    ]
+  },
+
+  /* =========================================================
      HOUSE LAB ACCOUNT SETUP
      ========================================================= */
 
