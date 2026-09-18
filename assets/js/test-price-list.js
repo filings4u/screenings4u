@@ -1322,6 +1322,105 @@ const TEST_SERVICES = {
     ]
   },
 
+
+  /* =========================================================
+     MOBILE DRUG TESTING BUSINESS LAUNCH PACKAGES
+     ========================================================= */
+
+  "mobile-drug-testing-launch-starter": {
+    id: "mobile-drug-testing-launch-starter",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=mobile-drug-testing-launch-starter",
+    sourcePage: "start-a-mobile-drug-testing-business.html",
+    name: "Mobile Drug Testing Business — Starter Launch",
+    shortName: "Starter Package",
+    category: "Mobile Drug Testing Business Launch",
+    specimen: "N/A",
+    price: 249500,
+    currency: "usd",
+    stripePriceId: "",
+    results: "Mobile business launch implementation",
+    description: "Mobile drug testing business starter package with collector training, business setup, branding, website, lab account support, starter supplies, and launch planning.",
+    features: [
+      "Mobile launch strategy session and startup roadmap",
+      "DOT urine specimen collector training enrollment",
+      "Oral fluid collector training enrollment",
+      "Hair specimen collection training enrollment",
+      "Business entity filing coordination",
+      "EIN application assistance",
+      "Professional logo and starter brand kit",
+      "5-page professional website and domain configuration",
+      "Business email setup",
+      "House Lab Account setup",
+      "Starter CCF and collection supply package",
+      "Mobile service menu and pricing worksheet",
+      "screenings4u Collector Network onboarding"
+    ]
+  },
+
+  "mobile-drug-testing-growth": {
+    id: "mobile-drug-testing-growth",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=mobile-drug-testing-growth",
+    sourcePage: "start-a-mobile-drug-testing-business.html",
+    name: "Mobile Drug Testing Business — Growth Launch",
+    shortName: "Growth Package",
+    category: "Mobile Drug Testing Business Launch",
+    specimen: "N/A",
+    price: 349500,
+    currency: "usd",
+    stripePriceId: "",
+    results: "Expanded mobile business launch implementation",
+    description: "Expanded mobile launch package with C/TPA setup, consortium software, MRO/results workflows, scheduling, CRM, local SEO, employer outreach, and coaching.",
+    features: [
+      "Everything in Starter Package",
+      "Registered agent setup coordination",
+      "C/TPA setup and Clearinghouse registration support",
+      "Random consortium software onboarding",
+      "DOT compliance policy starter manual",
+      "MRO and electronic results workflow configuration",
+      "Booking and scheduling software setup",
+      "CRM setup for employers and leads",
+      "Google Business Profile setup",
+      "Local SEO configuration",
+      "Department of Revenue account setup assistance",
+      "Employer outreach and sales templates",
+      "Two one-on-one launch coaching sessions"
+    ]
+  },
+
+  "mobile-drug-testing-elite": {
+    id: "mobile-drug-testing-elite",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=mobile-drug-testing-elite",
+    sourcePage: "start-a-mobile-drug-testing-business.html",
+    name: "Mobile Drug Testing Business — Elite Launch",
+    shortName: "Elite Package",
+    category: "Mobile Drug Testing Business Launch",
+    specimen: "N/A",
+    price: 449500,
+    currency: "usd",
+    stripePriceId: "",
+    results: "Full mobile business launch implementation",
+    description: "Full mobile launch package with deeper implementation support, business and marketing plans, licensing assistance, TPA infrastructure, HR/payroll setup, and growth planning.",
+    features: [
+      "Everything in Growth Package",
+      "Three VIP implementation coaching sessions",
+      "Operating agreement document setup support",
+      "City business license filing assistance",
+      "CLIA waiver application support when applicable",
+      "Business plan development",
+      "Marketing plan development",
+      "SAM.gov / CAGE registration assistance",
+      "HR software setup",
+      "Payroll software setup",
+      "Mobile route and service-area strategy",
+      "Multi-site growth planning",
+      "90-day launch action plan",
+      "Priority implementation support"
+    ]
+  },
+
   /* =========================================================
      DRUG TESTING BUSINESS LAUNCH PACKAGES
      ========================================================= */

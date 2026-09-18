@@ -11,7 +11,10 @@
 
 <link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
-  <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2"><style>
+  <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2">
+<link href="assets/css/form-security.css?v=20260918-1" rel="stylesheet"/>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+<script src="assets/js/form-security.js?v=20260918-1" defer></script><style>
 img{display:block;max-width:100%}
     
     
@@ -76,6 +79,58 @@ img{display:block;max-width:100%}
     .support-card h3{margin:0 0 10px;color:var(--navy);font-size:20px}
     .support-card p{margin:0;color:var(--muted);font-size:14px}
 
+
+    /* PRICING */
+    .pricing{background:#0f2f5d;color:#fff;position:relative}
+    .pricing:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 5%,rgba(255,107,0,.16),transparent 35%);pointer-events:none}
+    .pricing .section-heading{position:relative;z-index:1}
+    .pricing .section-heading h2{color:#fff}
+    .pricing .section-heading p{color:#c8d7e8}
+    .pricing-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+    .price-card{display:flex;flex-direction:column;background:#fff;color:#183653;border-radius:18px;padding:30px;border:1px solid rgba(255,255,255,.2);box-shadow:0 20px 55px rgba(0,0,0,.16);position:relative}
+    .price-card.featured{transform:translateY(-8px);border:2px solid var(--orange)}
+    .popular{position:absolute;top:-14px;left:26px;background:var(--orange);color:#fff;font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;padding:7px 12px;border-radius:999px}
+    .plan-kicker{color:var(--orange);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+    .price-card h3{margin:10px 0 5px;color:var(--navy);font-size:26px;line-height:1.15}
+    .plan-subtitle{color:var(--muted);font-size:13px;min-height:42px;line-height:1.55}
+    .price{margin:20px 0 2px;color:var(--navy);font-size:44px;font-weight:900;letter-spacing:-1.7px}
+    .price-note{color:var(--muted);font-size:12px;margin-bottom:20px}
+    .plan-list{list-style:none;padding:0;margin:0 0 25px;display:grid;gap:11px;flex:1}
+    .plan-list li{position:relative;padding-left:24px;color:#43566d;font-size:13.5px;line-height:1.48}
+    .plan-list li:before{content:"✓";position:absolute;left:0;top:0;color:#14804a;font-weight:900}
+    .price-card .btn{width:100%;justify-content:center}
+    .pricing-note{position:relative;z-index:1;margin-top:25px;padding:17px 20px;border:1px solid rgba(255,255,255,.15);border-radius:12px;color:#cbd9e8;background:rgba(255,255,255,.04);font-size:12.5px;line-height:1.65}
+
+  .quote-section{background:#f5f8fc}
+  .quote-shell{display:grid;grid-template-columns:.78fr 1.22fr;gap:40px;align-items:start}
+  .quote-intro{position:sticky;top:110px}
+  .quote-intro h2{margin:12px 0 14px;color:#102a4c;font-size:clamp(34px,4vw,50px);line-height:1.08;letter-spacing:-1.3px}
+  .quote-intro p{color:#61738a;line-height:1.72;margin:0 0 18px}
+  .quote-points{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:11px}
+  .quote-points li{position:relative;padding-left:25px;color:#43566d;font-size:14px;line-height:1.55}
+  .quote-points li:before{content:"✓";position:absolute;left:0;color:#14804a;font-weight:900}
+  .quote-card{background:#fff;border:1px solid #dce5ef;border-radius:18px;padding:30px;box-shadow:0 16px 42px rgba(22,52,91,.07)}
+  .quote-card h3{margin:0 0 6px;color:#102a4c;font-size:23px}
+  .quote-card .quote-help{margin:0 0 22px;color:#61738a;font-size:13.5px;line-height:1.6}
+  .quote-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .quote-field{display:grid;gap:7px}
+  .quote-field.full{grid-column:1/-1}
+  .quote-field label,.quote-group-label{color:#183653;font-size:13px;font-weight:800}
+  .quote-field input,.quote-field select,.quote-field textarea{width:100%;border:1px solid #cfdbe8;border-radius:10px;background:#fff;color:#183653;padding:12px 13px;font:inherit;outline:none}
+  .quote-field input:focus,.quote-field select:focus,.quote-field textarea:focus{border-color:#24467f;box-shadow:0 0 0 3px rgba(36,70,127,.1)}
+  .quote-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:10px}
+  .quote-option{display:flex;align-items:flex-start;gap:9px;padding:11px 12px;border:1px solid #dce5ef;border-radius:10px;background:#fbfcfe;color:#43566d;font-size:13px;line-height:1.4;cursor:pointer}
+  .quote-option:hover{border-color:#9eb3cd;background:#f7faff}
+  .quote-option input{margin-top:2px;accent-color:#24467f;flex:0 0 auto}
+  .quote-count{margin-top:9px;color:#61738a;font-size:12.5px}
+  .quote-actions{margin-top:22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .quote-actions .btn{min-width:190px;justify-content:center}
+  .status{font-size:13px;line-height:1.5}
+  .status.success{color:#166534}
+  .status.error{color:#b42318;font-weight:700}
+  @media(max-width:900px){.quote-shell{grid-template-columns:1fr}.quote-intro{position:static}}
+  @media(max-width:620px){.quote-fields,.quote-options{grid-template-columns:1fr}.quote-card{padding:22px}}
+
     /* REALITY SECTION */
     .dark-band{background:var(--navy);color:#fff}
     .dark-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:start}
@@ -122,6 +177,7 @@ img{display:block;max-width:100%}
       .intro-grid,.dark-grid,.faq-grid{grid-template-columns:1fr}
       .path-grid{grid-template-columns:repeat(2,1fr)}
       .support-grid{grid-template-columns:repeat(2,1fr)}
+      .pricing-grid{grid-template-columns:1fr}.price-card.featured{transform:none}
     }
 
     @media(max-width:680px){
@@ -135,7 +191,7 @@ img{display:block;max-width:100%}
       .hero-actions{flex-direction:column}
       
       .image-panel{min-height:390px}
-      .path-grid, .support-grid{grid-template-columns:1fr}
+      .path-grid, .support-grid,.pricing-grid{grid-template-columns:1fr}
       .cta{padding:42px 25px}
     }
 </style>
@@ -144,7 +200,21 @@ img{display:block;max-width:100%}
 @media(max-width:380px){.hero{padding-top:235px}.hero:before{height:235px}.hero h1{font-size:2rem}}
 </style><style>
 @media(max-width:767px){.hero:before{background:url("https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&w=1200&q=85") center/cover no-repeat}}
-</style></meta></head>
+</style></meta>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Service",
+  "name":"Mobile Drug Testing Business Launch Services",
+  "provider":{"@type":"Organization","name":"screenings4u"},
+  "offers":[
+    {"@type":"Offer","name":"Starter Package","price":"2495.00","priceCurrency":"USD","url":"https://screenings4u.com/checkout.html?service=mobile-drug-testing-launch-starter"},
+    {"@type":"Offer","name":"Growth Package","price":"3495.00","priceCurrency":"USD","url":"https://screenings4u.com/checkout.html?service=mobile-drug-testing-growth"},
+    {"@type":"Offer","name":"Elite Package","price":"4495.00","priceCurrency":"USD","url":"https://screenings4u.com/checkout.html?service=mobile-drug-testing-elite"}
+  ]
+}
+</script>
+</head>
 <body><div class="topbar">
 <div class="container topbar-inner">
 <div class="topbar-left">
@@ -182,7 +252,7 @@ img{display:block;max-width:100%}
 <h1>Build Your <span>Mobile Drug Testing</span> Business.</h1>
 <p>Turn professional collection services into a business built around mobility, convenience, employer relationships, and reliable testing support.</p>
 <div class="hero-actions">
-<a class="btn btn-primary" href="start-a-drug-testing-business.html#pricing">View Launch Plans</a>
+<a class="btn btn-primary" href="#pricing">View Mobile Launch Plans</a>
 <a class="btn btn-outline" href="#your-path">Explore the Process</a>
 </div>
 <div class="hero-small">Designed for entrepreneurs exploring professional drug and alcohol testing services.</div>
@@ -196,12 +266,12 @@ img{display:block;max-width:100%}
 <h2>Take testing services where your clients need them.</h2>
 <p>A mobile drug testing business can serve employers, individuals, schools, staffing organizations, and other clients that need convenient access to professional collection services.</p>
 <p>The opportunity is not simply about purchasing supplies or completing one course. A successful operation needs a clear service model, appropriate training, dependable procedures, client outreach, and relationships that support the testing services you offer.</p>
-<a class="btn btn-primary" href="contact.html?subject=mobile-testing-business-consultation">Request a Consultation</a>
+<a class="btn btn-primary" href="#custom-quote">Request a Custom Quote</a>
 </div>
 <div class="image-panel">
 <div class="image-panel-card">
 <strong>Build around the services you want to provide.</strong>
-<span>Training, operations, client development, and industry resources all play a role in preparing for launch.</span>
+<span>Training, filings coordination, operations, client development, laboratory resources, and launch systems all play a role in preparing for a mobile operation.</span>
 </div>
 </div>
 </div>
@@ -272,6 +342,116 @@ img{display:block;max-width:100%}
 </div>
 </div>
 </section>
+
+<section class="pricing" id="pricing">
+<div class="container">
+<div class="section-heading">
+<span class="section-label" style="color:#ffb178">Mobile launch packages</span>
+<h2>Choose the level of mobile business setup you need.</h2>
+<p>The original screenings4u Starter, Growth, and Elite structure is now wired into the current checkout system. Package pricing covers screenings4u implementation services; vehicle costs, government fees, third-party subscriptions, laboratory charges, and recurring software costs are separate unless specifically stated.</p>
+</div>
+<div class="pricing-grid">
+<article class="price-card"><span class="plan-kicker">Starter</span><h3>Starter Package</h3><div class="plan-subtitle">For entrepreneurs who need the core training, business setup, brand, lab relationship, and mobile launch foundation.</div><div class="price">$2,495</div><div class="price-note">one-time screenings4u launch package</div><ul class="plan-list"><li>DOT specimen collector training enrollment</li><li>Oral fluid collector training enrollment</li><li>Hair specimen collection training enrollment</li><li>Business entity filing coordination and EIN assistance</li><li>Professional logo and starter brand kit</li><li>Professional website and domain configuration</li><li>Business email setup</li><li>Lab account setup for supported testing services</li><li>Starter CCF and collection supply package</li><li>Mobile service menu and pricing worksheet</li><li>screenings4u Collector Network onboarding</li></ul><a class="btn btn-primary" href="checkout.html?service=mobile-drug-testing-launch-starter">Choose Starter Package</a></article>
+<article class="price-card featured"><span class="popular">Most Popular</span><span class="plan-kicker">Growth</span><h3>Growth Package</h3><div class="plan-subtitle">For mobile operators who want the starter foundation plus C/TPA, compliance, scheduling, CRM, and local-growth systems.</div><div class="price">$3,495</div><div class="price-note">one-time screenings4u launch package</div><ul class="plan-list"><li>Everything in Starter Package</li><li>Registered-agent setup coordination</li><li>C/TPA setup and Clearinghouse registration support</li><li>Random consortium software onboarding</li><li>DOT compliance policy starter manual</li><li>MRO and electronic results workflow configuration</li><li>Booking and scheduling software setup</li><li>CRM setup for employers and leads</li><li>Google Business Profile and local SEO configuration</li><li>Department of Revenue account setup assistance</li><li>Employer outreach and sales templates</li><li>Two one-on-one launch coaching sessions</li></ul><a class="btn btn-primary" href="checkout.html?service=mobile-drug-testing-growth">Choose Growth Package</a></article>
+<article class="price-card"><span class="plan-kicker">Elite</span><h3>Elite Package</h3><div class="plan-subtitle">For entrepreneurs building a broader mobile operation with deeper planning, licensing support, systems, and growth infrastructure.</div><div class="price">$4,495</div><div class="price-note">one-time screenings4u launch package</div><ul class="plan-list"><li>Everything in Growth Package</li><li>Three VIP implementation coaching sessions</li><li>Operating agreement document setup support</li><li>City business license filing assistance</li><li>CLIA waiver application support when applicable</li><li>Business plan development</li><li>Marketing plan development</li><li>SAM.gov / CAGE registration assistance</li><li>HR and payroll software setup</li><li>Mobile route and service-area strategy</li><li>Multi-site growth planning</li><li>90-day launch action plan</li><li>Priority implementation support</li></ul><a class="btn btn-primary" href="checkout.html?service=mobile-drug-testing-elite">Choose Elite Package</a></article>
+</div>
+<div class="pricing-note"><strong>Important:</strong> Package prices do not include a vehicle, vehicle conversion, government filing fees, licensing fees, laboratory pass-through charges, registered-agent fees, or recurring third-party software subscriptions unless a written scope specifically says otherwise. screenings4u provides implementation and filing coordination services and does not provide legal or tax advice.</div>
+</div>
+</section>
+
+
+<section class="quote-section" id="custom-quote">
+  <div class="container quote-shell">
+    <div class="quote-intro">
+      <span class="section-label">Need a Custom Quote?</span>
+      <h2>Build a quote around your mobile launch.</h2>
+      <p>Not every entrepreneur needs every package component. Select the setup, training, systems, supplies, and business services you want us to price.</p>
+      <ul class="quote-points">
+        <li>Select only the services and setup items you want included.</li>
+        <li>Tell us how your business is structured and where you are in the launch process.</li>
+        <li>Our team will review the scope before preparing pricing.</li>
+      </ul>
+    </div>
+    <form id="customQuoteForm" class="quote-card" data-start-business-quote="true" data-s4u-protected="true" data-s4u-form-key="mobile_business_quote" data-s4u-public-submit="true">
+      <h3>Custom launch quote</h3>
+      <p class="quote-help">Select the items you want priced. Government filing fees, third-party subscriptions, laboratory charges, and licensing fees are separate unless specifically included in the quote.</p>
+      <div class="quote-fields">
+        <div class="quote-field">
+          <label for="quoteStructure">How is your business structured? *</label>
+          <select id="quoteStructure" name="business_structure" required>
+            <option value="">Select one</option><option value="Not formed yet">Not formed yet</option>
+            <option value="Sole proprietor">Sole proprietor</option><option value="LLC">LLC</option>
+            <option value="Corporation">Corporation</option><option value="Partnership / LLP">Partnership / LLP</option>
+            <option value="Existing testing business">Existing testing business</option><option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="quote-field">
+          <label for="quoteModel">Business model *</label>
+          <select id="quoteModel" name="business_model" required>
+            <option value="">Select one</option><option value="Mobile only">Mobile only</option><option value="Mobile + fixed site">Mobile + fixed site</option><option value="Existing mobile operation">Existing mobile operation</option>
+          </select>
+        </div>
+        <div class="quote-field">
+          <label for="quoteStage">Launch stage</label>
+          <select id="quoteStage" name="launch_stage">
+            <option value="">Select one</option><option value="Researching">Researching</option>
+            <option value="Ready to form business">Ready to form business</option>
+            <option value="Business already formed">Business already formed</option>
+            <option value="Already trained">Already trained</option><option value="Already operating">Already operating</option>
+          </select>
+        </div>
+        <div class="quote-field">
+          <label for="quoteState">Primary state / market</label>
+          <input id="quoteState" name="primary_market" type="text" maxlength="120" placeholder="Example: Illinois"/>
+        </div>
+        <div class="quote-field full">
+          <span class="quote-group-label">What would you like included in your quote? *</span>
+          <div class="quote-options" data-quote-options><label class="quote-option"><input type="checkbox" name="quote_items" value="Professional Website"/><span>Professional Website</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Professional Logo"/><span>Professional Logo</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Business Branding"/><span>Business Branding</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Social Media Manager"/><span>Social Media Manager</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Marketing Materials"/><span>Marketing Materials</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Business Email"/><span>Business Email</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Business Phone"/><span>Business Phone</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Operating Agreement"/><span>Operating Agreement</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Registered Agent"/><span>Registered Agent</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="CLIA Certificate / Waiver Support"/><span>CLIA Certificate / Waiver Support</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Department of Revenue Account Setup"/><span>Department of Revenue Account Setup</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="City Business License"/><span>City Business License</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Employer Identification Number (EIN)"/><span>Employer Identification Number (EIN)</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="SAM.gov / CAGE Registration"/><span>SAM.gov / CAGE Registration</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Business Entity Filing Coordination"/><span>Business Entity Filing Coordination</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Instant Drug Test Supplies"/><span>Instant Drug Test Supplies</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="NON-DOT CCFs"/><span>NON-DOT CCFs</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="DOT CCFs"/><span>DOT CCFs</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Collection Kits"/><span>Collection Kits</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Lab Account Setup"/><span>Lab Account Setup</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Random Consortium Software"/><span>Random Consortium Software</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Business Plan"/><span>Business Plan</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Marketing Plan"/><span>Marketing Plan</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Booking and Scheduling Software"/><span>Booking & Scheduling Software</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="CRM Setup"/><span>CRM Setup</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="One-on-One Coaching"/><span>One-on-One Coaching</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Become a C/TPA"/><span>Become a C/TPA</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Mobile Service Area Planning"/><span>Mobile Service Area Planning</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Mobile Collection Equipment Setup"/><span>Mobile Collection Equipment Setup</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Route / Travel Fee Pricing Strategy"/><span>Route / Travel Fee Pricing Strategy</span></label></div>
+          <div class="quote-count" data-quote-count></div>
+        </div>
+        <div class="quote-field"><label for="quoteFirstName">First name *</label><input id="quoteFirstName" name="firstName" type="text" maxlength="100" autocomplete="given-name" required/></div>
+        <div class="quote-field"><label for="quoteLastName">Last name *</label><input id="quoteLastName" name="lastName" type="text" maxlength="100" autocomplete="family-name" required/></div>
+        <div class="quote-field"><label for="quoteEmail">Email address *</label><input id="quoteEmail" name="email" type="email" maxlength="320" autocomplete="email" required/></div>
+        <div class="quote-field"><label for="quotePhone">Phone number *</label><input id="quotePhone" name="phone" type="tel" maxlength="40" autocomplete="tel" required/></div>
+        <div class="quote-field full"><label for="quoteNotes">Anything else we should know?</label><textarea id="quoteNotes" name="notes" rows="4" maxlength="2000" placeholder="Tell us about your target customers, launch timeline, existing training, or systems you already have."></textarea></div>
+      </div>
+      <div class="quote-actions">
+        <button class="btn btn-primary" type="submit">Request Custom Quote</button>
+        <div id="formStatus" class="status" role="status" aria-live="polite"></div>
+      </div>
+    </form>
+  </div>
+</section>
+
 <section class="dark-band">
 <div class="container dark-grid">
 <div>
@@ -330,7 +510,7 @@ img{display:block;max-width:100%}
 <h2>Let's talk about the mobile testing business you want to build.</h2>
 <p>Tell us where you are in the process and what services you are interested in. We can help point you toward the relevant training and business resources.</p>
 <div class="hero-actions">
-<a class="btn btn-primary" href="contact.html?subject=start-mobile-drug-testing-business">Contact Our Team</a>
+<a class="btn btn-primary" href="#pricing">Compare Mobile Plans</a>
 <a class="btn btn-outline" href="https://training.screenings4u.com/">View Training</a>
 </div>
 </div>
@@ -343,5 +523,8 @@ img{display:block;max-width:100%}
   <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
   <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
   <script src="assets/js/site-ui.js?v=20260904-1"></script>
-  <script src="assets/js/footer.js?v=20260904-1"></script></body>
+  <script src="assets/js/footer.js?v=20260904-1"></script>
+<script src="assets/js/site-config.js"></script>
+<script src="assets/js/public-forms.js?v=20260918-business-quotes-1"></script>
+<script src="assets/js/start-business-quote.js?v=20260918-1"></script></body>
 </html>

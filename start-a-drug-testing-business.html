@@ -10,6 +10,9 @@
 <link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
 <link href="assets/css/desktop-nav.css?v=20260904-1" rel="stylesheet"/>
 <link href="assets/css/mobile-nav.css?v=20260904-2" rel="stylesheet"/>
+<link href="assets/css/form-security.css?v=20260918-1" rel="stylesheet"/>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+<script src="assets/js/form-security.js?v=20260918-1" defer></script>
 <style>
   :root{--launch-navy:#173d78;--launch-blue:#24467f;--launch-orange:#ff6b00;--launch-soft:#f5f8fc;--launch-line:#dce5ef;--launch-ink:#102a4c;--launch-muted:#61738a}
   *{box-sizing:border-box}
@@ -112,6 +115,37 @@
   .cta .btn-outline{color:#fff;border-color:rgba(255,255,255,.6)}
   @media(max-width:1100px){.split,.faq{grid-template-columns:1fr}.path-grid{grid-template-columns:repeat(3,1fr)}.pricing-grid{grid-template-columns:1fr}.price-card.featured{transform:none}.steps-grid,.trust-grid{grid-template-columns:repeat(2,1fr)}.link-grid{grid-template-columns:1fr}.trust-item:nth-child(2){border-right:0}}
   @media(max-width:720px){.hero{min-height:0;padding-top:280px;background:#173d78;position:relative}.hero:before{content:"";position:absolute;left:0;right:0;top:0;height:280px;background:url("https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=85") center/cover no-repeat}.hero:after{display:none}.hero-content{padding:42px 0 55px}h1{font-size:clamp(2.3rem,11vw,3.25rem);letter-spacing:-1.9px}.hero p{font-size:16px}.hero-actions{flex-direction:column}.hero-actions .btn,.cta .btn{width:100%}section{padding:60px 0}.trust-grid,.steps-grid,.path-grid{grid-template-columns:1fr}.trust-item{border-right:0;border-bottom:1px solid var(--launch-line)}.trust-item:last-child{border-bottom:0}.price-card{padding:25px}.cta{padding:42px 24px}.faq{gap:25px}}
+
+  .quote-section{background:#f5f8fc}
+  .quote-shell{display:grid;grid-template-columns:.78fr 1.22fr;gap:40px;align-items:start}
+  .quote-intro{position:sticky;top:110px}
+  .quote-intro h2{margin:12px 0 14px;color:#102a4c;font-size:clamp(34px,4vw,50px);line-height:1.08;letter-spacing:-1.3px}
+  .quote-intro p{color:#61738a;line-height:1.72;margin:0 0 18px}
+  .quote-points{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:11px}
+  .quote-points li{position:relative;padding-left:25px;color:#43566d;font-size:14px;line-height:1.55}
+  .quote-points li:before{content:"✓";position:absolute;left:0;color:#14804a;font-weight:900}
+  .quote-card{background:#fff;border:1px solid #dce5ef;border-radius:18px;padding:30px;box-shadow:0 16px 42px rgba(22,52,91,.07)}
+  .quote-card h3{margin:0 0 6px;color:#102a4c;font-size:23px}
+  .quote-card .quote-help{margin:0 0 22px;color:#61738a;font-size:13.5px;line-height:1.6}
+  .quote-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .quote-field{display:grid;gap:7px}
+  .quote-field.full{grid-column:1/-1}
+  .quote-field label,.quote-group-label{color:#183653;font-size:13px;font-weight:800}
+  .quote-field input,.quote-field select,.quote-field textarea{width:100%;border:1px solid #cfdbe8;border-radius:10px;background:#fff;color:#183653;padding:12px 13px;font:inherit;outline:none}
+  .quote-field input:focus,.quote-field select:focus,.quote-field textarea:focus{border-color:#24467f;box-shadow:0 0 0 3px rgba(36,70,127,.1)}
+  .quote-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:10px}
+  .quote-option{display:flex;align-items:flex-start;gap:9px;padding:11px 12px;border:1px solid #dce5ef;border-radius:10px;background:#fbfcfe;color:#43566d;font-size:13px;line-height:1.4;cursor:pointer}
+  .quote-option:hover{border-color:#9eb3cd;background:#f7faff}
+  .quote-option input{margin-top:2px;accent-color:#24467f;flex:0 0 auto}
+  .quote-count{margin-top:9px;color:#61738a;font-size:12.5px}
+  .quote-actions{margin-top:22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .quote-actions .btn{min-width:190px;justify-content:center}
+  .status{font-size:13px;line-height:1.5}
+  .status.success{color:#166534}
+  .status.error{color:#b42318;font-weight:700}
+  @media(max-width:900px){.quote-shell{grid-template-columns:1fr}.quote-intro{position:static}}
+  @media(max-width:620px){.quote-fields,.quote-options{grid-template-columns:1fr}.quote-card{padding:22px}}
+
 </style>
 <script type="application/ld+json">
 {
@@ -138,12 +172,102 @@
 <div class="trust-strip"><div class="container trust-grid"><div class="trust-item"><div class="trust-icon">T</div><div><strong>Collector Training</strong><span>Build the technical foundation</span></div></div><div class="trust-item"><div class="trust-icon">L</div><div><strong>Lab &amp; Results Infrastructure</strong><span>Set up operational relationships</span></div></div><div class="trust-item"><div class="trust-icon">O</div><div><strong>Business Operations</strong><span>Workflows, systems, and documents</span></div></div><div class="trust-item"><div class="trust-icon">G</div><div><strong>Growth Systems</strong><span>Branding, scheduling, CRM, and outreach</span></div></div></div></div>
 <section><div class="container split"><div class="split-copy"><span class="section-label">Start with the whole operation</span><h2>A certification does not create a business by itself.</h2><p>A sustainable drug testing operation needs more than collection knowledge. You need a defined service menu, appropriate training, laboratory and MRO relationships, reliable procedures, business infrastructure, client-facing systems, and a plan for getting employer accounts.</p><p>Our launch plans organize those moving parts into one implementation path. Choose the level of support that matches the type of business you want to build.</p></div><div class="launch-panel"><h3>What a professional launch should address</h3><p>Build the systems around the service before you begin taking appointments.</p><ul class="launch-list"><li>Choose the testing and collection services you can support reliably.</li><li>Complete the training and qualifications appropriate for those services.</li><li>Establish laboratory, MRO, results, and supply workflows.</li><li>Create customer-facing pricing, scheduling, branding, and communication systems.</li><li>Document procedures for collections, records, client onboarding, and quality control.</li><li>Build a realistic employer and local-market outreach plan.</li></ul></div></div></section>
 <section class="soft"><div class="container"><div class="section-heading"><span class="section-label">A clearer launch sequence</span><h2>Build in the right order.</h2><p>The strongest startups connect qualification, infrastructure, operations, and customer acquisition instead of treating each one as a separate project.</p></div><div class="path-grid"><article class="path-card"><div class="path-number">01</div><h3>Define Your Model</h3><p>Decide whether you are launching mobile collections, a fixed collection site, employer testing administration, or a broader C/TPA operation.</p></article><article class="path-card"><div class="path-number">02</div><h3>Train &amp; Qualify</h3><p>Complete the training appropriate for the services you intend to offer and understand the procedures tied to those services.</p></article><article class="path-card"><div class="path-number">03</div><h3>Build Infrastructure</h3><p>Set up the business, laboratory relationships, supplies, results workflow, portal access, and core operating systems.</p></article><article class="path-card"><div class="path-number">04</div><h3>Prepare the Market</h3><p>Develop your brand, website, pricing, service materials, booking process, and client outreach tools.</p></article><article class="path-card"><div class="path-number">05</div><h3>Launch &amp; Improve</h3><p>Run a readiness review, begin client acquisition, measure your workflow, and expand only into services you can support consistently.</p></article></div></div></section>
-<section class="pricing" id="pricing"><div class="container"><div class="section-heading"><span class="section-label" style="color:#ff9b55">Launch packages</span><h2>Choose the level of buildout you need.</h2><p>Each package is designed around a different stage of operational maturity. The package price covers screenings4u implementation services; government fees, third-party subscriptions, and recurring software costs are separate unless specifically stated.</p></div><div class="pricing-grid">
+<section class="pricing" id="pricing"><div class="container"><div class="section-heading"><span class="section-label" style="color:#ff9b55">Launch packages</span><h2>Choose the level of buildout you need.</h2><p>Each package is designed around a different stage of operational maturity. Choose a package or build a custom quote below. Government fees, third-party subscriptions, and recurring software costs are separate unless specifically stated.</p></div><div class="pricing-grid">
 <article class="price-card"><span class="plan-kicker">Foundation</span><h3>Launch Foundation</h3><div class="plan-subtitle">For entrepreneurs who need the core training, business setup, brand, lab relationship, and launch systems.</div><div class="price">$2,495</div><div class="price-note">one-time screenings4u launch package</div><ul class="plan-list"><li>Launch strategy session and startup roadmap</li><li>DOT urine specimen collector training enrollment</li><li>Oral fluid collector training enrollment</li><li>Hair specimen collection training enrollment</li><li>Business entity filing coordination</li><li>EIN application assistance</li><li>Professional logo and starter brand kit</li><li>5-page professional website and domain configuration</li><li>Business email setup</li><li>House Lab Account setup for DOT and NON-DOT urine testing</li><li>Starter CCF and collection supply package</li><li>screenings4u Collector Network onboarding</li><li>Starter service menu and pricing worksheet</li></ul><a class="btn btn-primary" href="checkout.html?service=drug-testing-business-launch-foundation">Start Launch Foundation</a></article>
 <article class="price-card featured"><span class="popular">Most Popular</span><span class="plan-kicker">Operations</span><h3>Growth &amp; Operations</h3><div class="plan-subtitle">For businesses that want the launch foundation plus C/TPA, results, scheduling, CRM, and local-growth systems.</div><div class="price">$3,495</div><div class="price-note">one-time screenings4u launch package</div><ul class="plan-list"><li>Everything in Launch Foundation</li><li>C/TPA setup and Clearinghouse registration support</li><li>Random consortium software onboarding</li><li>MRO and electronic results workflow configuration</li><li>DOT program administration starter templates</li><li>Booking and scheduling software setup</li><li>CRM setup for leads, employers, and follow-up</li><li>Google Business Profile setup</li><li>Local SEO configuration</li><li>Starter employer outreach and sales templates</li><li>Marketing materials starter package</li><li>Two one-on-one launch coaching sessions</li><li>Operational readiness review before launch</li></ul><a class="btn btn-primary" href="checkout.html?service=drug-testing-business-growth-operations">Choose Growth &amp; Operations</a></article>
 <article class="price-card"><span class="plan-kicker">Full-Service</span><h3>Full-Service TPA Launch</h3><div class="plan-subtitle">For entrepreneurs building a broader testing company with employer administration, consortium services, growth planning, and deeper launch support.</div><div class="price">$4,495</div><div class="price-note">one-time screenings4u launch package</div><ul class="plan-list"><li>Everything in Growth &amp; Operations</li><li>Three VIP implementation coaching sessions</li><li>Business plan development</li><li>Marketing plan development</li><li>Operating agreement document setup support</li><li>City business license filing assistance</li><li>CLIA waiver application support when applicable</li><li>SAM.gov / CAGE registration assistance</li><li>HR software setup</li><li>Payroll software setup</li><li>Multi-site and mobile growth strategy</li><li>90-day launch action plan</li><li>Priority implementation support</li></ul><a class="btn btn-primary" href="checkout.html?service=drug-testing-business-full-service-tpa">Choose Full-Service TPA Launch</a></article>
 </div><div class="pricing-note"><strong>Important:</strong> Government filing fees, licensing fees, registered-agent fees, laboratory pass-through costs, software subscriptions, supplies beyond the included starter package, and other third-party charges are not included unless the plan specifically states otherwise. Training enrollment does not guarantee qualification; required coursework, demonstrations, mocks, or other applicable requirements must be successfully completed. screenings4u provides administrative and operational support and is not a law firm or accounting firm.</div></div></section>
 <section><div class="container"><div class="section-heading"><span class="section-label">Compare the buildout</span><h2>What changes as you move up.</h2><p>All three plans are built around the same launch foundation. Higher tiers add the systems needed to manage employer accounts, consortium activity, and a broader operating model.</p></div><div class="compare-wrap"><table class="compare"><thead><tr><th>Included capability</th><th>Launch Foundation</th><th>Growth &amp; Operations</th><th>Full-Service TPA</th></tr></thead><tbody><tr><td>Collector training stack</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr><tr><td>Business setup, EIN, brand, website</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr><tr><td>Lab account and starter supplies</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr><tr><td>C/TPA + Clearinghouse setup support</td><td class="muted-cell">—</td><td class="yes">✓</td><td class="yes">✓</td></tr><tr><td>Random consortium software onboarding</td><td class="muted-cell">—</td><td class="yes">✓</td><td class="yes">✓</td></tr><tr><td>Booking, CRM, Google profile, local SEO</td><td class="muted-cell">—</td><td class="yes">✓</td><td class="yes">✓</td></tr><tr><td>Business + marketing plans</td><td class="muted-cell">—</td><td class="muted-cell">—</td><td class="yes">✓</td></tr><tr><td>CLIA / city licensing / SAM-CAGE assistance</td><td class="muted-cell">—</td><td class="muted-cell">—</td><td class="yes">✓</td></tr><tr><td>Multi-site growth strategy</td><td class="muted-cell">—</td><td class="muted-cell">—</td><td class="yes">✓</td></tr></tbody></table></div></div></section>
+
+<section class="quote-section" id="custom-quote">
+  <div class="container quote-shell">
+    <div class="quote-intro">
+      <span class="section-label">Need a Custom Quote?</span>
+      <h2>Build a quote around the business you actually need.</h2>
+      <p>If the packaged plans include more—or less—than your launch requires, choose the specific implementation items you want us to review.</p>
+      <ul class="quote-points">
+        <li>Select only the services and setup items you want included.</li>
+        <li>Tell us how your business is structured and where you are in the launch process.</li>
+        <li>Our team will review the scope before preparing pricing.</li>
+      </ul>
+    </div>
+    <form id="customQuoteForm" class="quote-card" data-start-business-quote="true" data-s4u-protected="true" data-s4u-form-key="business_quote" data-s4u-public-submit="true">
+      <h3>Custom launch quote</h3>
+      <p class="quote-help">Select the items you want priced. Government filing fees, third-party subscriptions, laboratory charges, and licensing fees are separate unless specifically included in the quote.</p>
+      <div class="quote-fields">
+        <div class="quote-field">
+          <label for="quoteStructure">How is your business structured? *</label>
+          <select id="quoteStructure" name="business_structure" required>
+            <option value="">Select one</option><option value="Not formed yet">Not formed yet</option>
+            <option value="Sole proprietor">Sole proprietor</option><option value="LLC">LLC</option>
+            <option value="Corporation">Corporation</option><option value="Partnership / LLP">Partnership / LLP</option>
+            <option value="Existing testing business">Existing testing business</option><option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="quote-field">
+          <label for="quoteModel">Business model *</label>
+          <select id="quoteModel" name="business_model" required>
+            <option value="">Select one</option><option value="Mobile collections">Mobile collections</option><option value="Fixed collection site">Fixed collection site</option><option value="Mobile + fixed site">Mobile + fixed site</option><option value="C/TPA / employer administration">C/TPA / employer administration</option><option value="Existing testing business">Existing testing business</option>
+          </select>
+        </div>
+        <div class="quote-field">
+          <label for="quoteStage">Launch stage</label>
+          <select id="quoteStage" name="launch_stage">
+            <option value="">Select one</option><option value="Researching">Researching</option>
+            <option value="Ready to form business">Ready to form business</option>
+            <option value="Business already formed">Business already formed</option>
+            <option value="Already trained">Already trained</option><option value="Already operating">Already operating</option>
+          </select>
+        </div>
+        <div class="quote-field">
+          <label for="quoteState">Primary state / market</label>
+          <input id="quoteState" name="primary_market" type="text" maxlength="120" placeholder="Example: Illinois"/>
+        </div>
+        <div class="quote-field full">
+          <span class="quote-group-label">What would you like included in your quote? *</span>
+          <div class="quote-options" data-quote-options><label class="quote-option"><input type="checkbox" name="quote_items" value="Professional Website"/><span>Professional Website</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Professional Logo"/><span>Professional Logo</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Business Branding"/><span>Business Branding</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Social Media Manager"/><span>Social Media Manager</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Marketing Materials"/><span>Marketing Materials</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Business Email"/><span>Business Email</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Business Phone"/><span>Business Phone</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Operating Agreement"/><span>Operating Agreement</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Registered Agent"/><span>Registered Agent</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="CLIA Certificate / Waiver Support"/><span>CLIA Certificate / Waiver Support</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Department of Revenue Account Setup"/><span>Department of Revenue Account Setup</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="City Business License"/><span>City Business License</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Employer Identification Number (EIN)"/><span>Employer Identification Number (EIN)</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="SAM.gov / CAGE Registration"/><span>SAM.gov / CAGE Registration</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Business Entity Filing Coordination"/><span>Business Entity Filing Coordination</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Instant Drug Test Supplies"/><span>Instant Drug Test Supplies</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="NON-DOT CCFs"/><span>NON-DOT CCFs</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="DOT CCFs"/><span>DOT CCFs</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Collection Kits"/><span>Collection Kits</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Lab Account Setup"/><span>Lab Account Setup</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Random Consortium Software"/><span>Random Consortium Software</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Business Plan"/><span>Business Plan</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Marketing Plan"/><span>Marketing Plan</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Booking and Scheduling Software"/><span>Booking & Scheduling Software</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="CRM Setup"/><span>CRM Setup</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="One-on-One Coaching"/><span>One-on-One Coaching</span></label>
+<label class="quote-option"><input type="checkbox" name="quote_items" value="Become a C/TPA"/><span>Become a C/TPA</span></label></div>
+          <div class="quote-count" data-quote-count></div>
+        </div>
+        <div class="quote-field"><label for="quoteFirstName">First name *</label><input id="quoteFirstName" name="firstName" type="text" maxlength="100" autocomplete="given-name" required/></div>
+        <div class="quote-field"><label for="quoteLastName">Last name *</label><input id="quoteLastName" name="lastName" type="text" maxlength="100" autocomplete="family-name" required/></div>
+        <div class="quote-field"><label for="quoteEmail">Email address *</label><input id="quoteEmail" name="email" type="email" maxlength="320" autocomplete="email" required/></div>
+        <div class="quote-field"><label for="quotePhone">Phone number *</label><input id="quotePhone" name="phone" type="tel" maxlength="40" autocomplete="tel" required/></div>
+        <div class="quote-field full"><label for="quoteNotes">Anything else we should know?</label><textarea id="quoteNotes" name="notes" rows="4" maxlength="2000" placeholder="Tell us about your target customers, launch timeline, existing training, or systems you already have."></textarea></div>
+      </div>
+      <div class="quote-actions">
+        <button class="btn btn-primary" type="submit">Request Custom Quote</button>
+        <div id="formStatus" class="status" role="status" aria-live="polite"></div>
+      </div>
+    </form>
+  </div>
+</section>
+
 <section class="soft"><div class="container"><div class="section-heading"><span class="section-label">After checkout</span><h2>A package purchase starts an implementation process.</h2><p>You are not simply buying a list of documents. We organize the work around your business model and move through the setup in stages.</p></div><div class="steps-grid"><article class="step"><strong>1. Kickoff &amp; Scope</strong><p>We confirm your business model, service goals, operating state, target customers, and the specific components included in your selected package.</p></article><article class="step"><strong>2. Training &amp; Setup</strong><p>Training enrollments, business setup items, lab relationships, supplies, and account workflows are organized in the right sequence.</p></article><article class="step"><strong>3. Systems &amp; Brand</strong><p>Your client-facing website, brand assets, scheduling, CRM, pricing, and operational resources are configured according to the package.</p></article><article class="step"><strong>4. Launch Review</strong><p>We review the core workflow, identify open dependencies, and give you the next-step launch plan before you begin scaling your operation.</p></article></div></div></section>
 <section class="dark"><div class="container split"><div class="split-copy"><span class="section-label" style="color:#ff9b55">Build responsibly</span><h2>Drug testing businesses operate inside real procedural and regulatory requirements.</h2><p>The requirements that apply to your operation depend on your services, state and local rules, the clients you serve, and whether you perform DOT-regulated work. Your launch plan should match the services you are trained and equipped to provide.</p></div><div class="dark-note">screenings4u helps organize training, setup, operational resources, and business systems. Agency approvals, licenses, registrations, laboratory acceptance, CLIA status, and third-party account approvals remain subject to the applicable organization and its requirements.</div></div></section>
 <section><div class="container"><div class="section-heading"><span class="section-label">Build one component at a time</span><h2>Not ready for a full launch package?</h2><p>You can also start with individual services and add infrastructure as your business model becomes clearer.</p></div><div class="link-grid"><a class="link-card" href="house-lab-account-setup.html"><strong>House Lab Account</strong><span>Set up testing infrastructure, supplies, portal access, and available DOT/NON-DOT urine lab support.</span><b>Explore Lab Accounts →</b></a><a class="link-card" href="become-a-clearinghouse-consortium-third-party-administrator.html"><strong>Become a C/TPA</strong><span>Explore Clearinghouse, consortium, program administration, and C/TPA setup services.</span><b>Explore C/TPA Services →</b></a><a class="link-card" href="start-a-mobile-drug-testing-business.html"><strong>Mobile Drug Testing Model</strong><span>Review the operational decisions involved in building a mobile collection business.</span><b>Explore the Mobile Model →</b></a></div></div></section>
@@ -155,5 +279,8 @@
 <script src="assets/js/mobile-nav.js?v=20260918-start-business-1"></script>
 <script src="assets/js/site-ui.js?v=20260904-1"></script>
 <script src="assets/js/footer.js?v=20260904-1"></script>
+<script src="assets/js/site-config.js"></script>
+<script src="assets/js/public-forms.js?v=20260918-business-quotes-1"></script>
+<script src="assets/js/start-business-quote.js?v=20260918-1"></script>
 </body>
 </html>
