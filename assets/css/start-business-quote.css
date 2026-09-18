@@ -1,0 +1,47 @@
+/* screenings4u startup quote component — intentionally scoped */
+#custom-quote{background:#f5f8fc;padding:88px 0}
+#custom-quote .quote-shell{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:42px;align-items:start}
+#custom-quote .quote-intro{position:sticky;top:110px;min-width:0}
+#custom-quote .quote-intro h2{margin:12px 0 14px;color:#102a4c;font-size:clamp(34px,4vw,50px);line-height:1.08;letter-spacing:-1.25px}
+#custom-quote .quote-intro p{margin:0;color:#61738a;font-size:16px;line-height:1.72}
+#custom-quote .quote-points{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
+#custom-quote .quote-points li{position:relative;padding-left:26px;color:#43566d;font-size:14px;line-height:1.55}
+#custom-quote .quote-points li::before{content:"✓";position:absolute;left:0;top:0;color:#14804a;font-weight:900}
+#customQuoteForm{min-width:0;background:#fff;border:1px solid #dce5ef;border-radius:18px;padding:30px;box-shadow:0 16px 42px rgba(22,52,91,.07)}
+#customQuoteForm h3{margin:0 0 7px;color:#102a4c;font-size:24px;line-height:1.25}
+#customQuoteForm .quote-help{margin:0 0 24px;color:#61738a;font-size:13.5px;line-height:1.65}
+#customQuoteForm .quote-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#customQuoteForm .quote-field{display:grid;gap:7px;min-width:0}
+#customQuoteForm .quote-field.full{grid-column:1/-1}
+#customQuoteForm .quote-field>label,#customQuoteForm .quote-group-label{display:block;color:#183653;font-size:13px;font-weight:800;line-height:1.35}
+#customQuoteForm .quote-field>input:not([type="checkbox"]):not([type="radio"]),
+#customQuoteForm .quote-field>select,
+#customQuoteForm .quote-field>textarea{display:block;width:100%;min-width:0;border:1px solid #cfdbe8;border-radius:10px;background:#fff;color:#183653;padding:12px 13px;font:inherit;line-height:1.35;outline:none;box-sizing:border-box}
+#customQuoteForm .quote-field>textarea{resize:vertical;min-height:116px}
+#customQuoteForm .quote-field>input:not([type="checkbox"]):not([type="radio"]):focus,
+#customQuoteForm .quote-field>select:focus,
+#customQuoteForm .quote-field>textarea:focus{border-color:#24467f;box-shadow:0 0 0 3px rgba(36,70,127,.1)}
+#customQuoteForm .quote-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px;width:100%}
+#customQuoteForm .quote-option{display:grid;grid-template-columns:18px minmax(0,1fr);align-items:start;gap:10px;width:100%;min-width:0;margin:0;padding:12px 13px;border:1px solid #dce5ef;border-radius:10px;background:#fbfcfe;color:#43566d;font-size:13px;font-weight:600;line-height:1.4;cursor:pointer;box-sizing:border-box}
+#customQuoteForm .quote-option:hover{border-color:#9eb3cd;background:#f7faff}
+#customQuoteForm .quote-option:has(input:checked){border-color:#24467f;background:#f2f6fc;box-shadow:inset 0 0 0 1px rgba(36,70,127,.12)}
+#customQuoteForm .quote-option input[type="checkbox"]{appearance:auto!important;-webkit-appearance:checkbox!important;display:block!important;width:18px!important;height:18px!important;min-width:18px!important;max-width:18px!important;margin:1px 0 0!important;padding:0!important;border:0!important;border-radius:3px!important;box-shadow:none!important;accent-color:#24467f;flex:0 0 18px!important}
+#customQuoteForm .quote-option span{display:block;min-width:0;max-width:100%;overflow-wrap:anywhere;word-break:normal;color:#43566d;font-size:13px;font-weight:650;line-height:1.4}
+#customQuoteForm .quote-count{margin-top:10px;color:#61738a;font-size:12.5px;line-height:1.4}
+#customQuoteForm .quote-actions{margin-top:22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+#customQuoteForm .quote-actions .btn{min-width:190px;justify-content:center}
+#customQuoteForm .status{font-size:13px;line-height:1.5}
+#customQuoteForm .status.success{color:#166534}
+#customQuoteForm .status.error{color:#b42318;font-weight:700}
+#customQuoteForm .s4u-form-security{grid-column:1/-1;margin:22px 0 0}
+@media(max-width:900px){
+  #custom-quote .quote-shell{grid-template-columns:1fr;gap:28px}
+  #custom-quote .quote-intro{position:static}
+}
+@media(max-width:640px){
+  #custom-quote{padding:68px 0}
+  #customQuoteForm{padding:22px 18px}
+  #customQuoteForm .quote-fields,#customQuoteForm .quote-options{grid-template-columns:1fr}
+  #customQuoteForm .quote-actions{align-items:stretch}
+  #customQuoteForm .quote-actions .btn{width:100%;min-width:0}
+}
