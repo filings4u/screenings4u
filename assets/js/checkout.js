@@ -1290,8 +1290,8 @@ async function initCheckout() {
     if (backLink) {
 
       backLink.href =
-        "service.html?service=" +
-        encodeURIComponent(serviceId);
+        selectedService?.sourcePage ||
+        ("service.html?service=" + encodeURIComponent(serviceId));
     }
 
     const errorBackLink =
@@ -1355,7 +1355,7 @@ function renderService(service) {
     document.getElementById("category");
 
   const serviceElement =
-    document.getElementById("service");
+    document.getElementById("product");
 
   const price =
     document.getElementById("price");
@@ -1425,25 +1425,25 @@ function renderService(service) {
         ? service.drugs
         : [];
 
+    const drugsLabel = drugs.previousElementSibling;
+    const drugsDivider = drugsLabel?.previousElementSibling;
+
     if (!drugList.length) {
-
-      const li =
-        document.createElement("li");
-
-      li.textContent =
-        "See service details.";
-
-      drugs.appendChild(li);
-
+      drugs.style.display = "none";
+      if (drugsLabel) drugsLabel.style.display = "none";
+      if (drugsDivider && drugsDivider.tagName === "HR") {
+        drugsDivider.style.display = "none";
+      }
     } else {
+      drugs.style.display = "";
+      if (drugsLabel) drugsLabel.style.display = "";
+      if (drugsDivider && drugsDivider.tagName === "HR") {
+        drugsDivider.style.display = "";
+      }
 
       drugList.forEach(item => {
-
-        const li =
-          document.createElement("li");
-
+        const li = document.createElement("li");
         li.textContent = item;
-
         drugs.appendChild(li);
       });
     }
@@ -3433,6 +3433,9 @@ async function createPaymentIntent(form) {
   const data =
     new FormData(form);
 
+  const security =
+    window.Screenings4uFormSecurity?.payload(form) || {};
+
   const customer = {
 
     firstName:
@@ -3527,6 +3530,15 @@ async function createPaymentIntent(form) {
             discountCode:
               appliedDiscountCode || null,
 
+            turnstileToken:
+              security.turnstileToken || "",
+
+            formStartedAt:
+              security.formStartedAt || 0,
+
+            websiteTrap:
+              security.websiteTrap || "",
+
             customer
           })
       }
@@ -3552,6 +3564,8 @@ async function createPaymentIntent(form) {
   );
 
   if (!response.ok) {
+
+    window.Screenings4uFormSecurity?.reset(form);
 
     const serverErrorParts = [
       result?.error || result?.message,

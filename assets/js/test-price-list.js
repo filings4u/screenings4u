@@ -1323,6 +1323,96 @@ const TEST_SERVICES = {
   },
 
   /* =========================================================
+     HOUSE LAB ACCOUNT SETUP
+     ========================================================= */
+
+  "lab-account": {
+    id: "lab-account",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=lab-account",
+    sourcePage: "house-lab-account-setup.html",
+    name: "Lab Account",
+    shortName: "Lab Account",
+    category: "Testing Business Services - House Lab Accounts",
+    specimen: "N/A",
+    price: 28630,
+    currency: "usd",
+    stripePriceId: "",
+    results: "Account setup",
+    description: "Professional house lab account setup with supplies, Workforce Portal access, and DOT/NON-DOT urine lab account support.",
+    features: [
+      "Pack of NON-DOT CCFs (25)",
+      "Pack of DOT CCFs (25)",
+      "Shipping Supplies",
+      "Case of Collection Kits (25)",
+      "Workforce Portal",
+      "View and Download Results",
+      "NON-DOT Urine Lab Account",
+      "DOT Urine Lab Account"
+    ]
+  },
+
+  "lab-account-random-consortium": {
+    id: "lab-account-random-consortium",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=lab-account-random-consortium",
+    sourcePage: "house-lab-account-setup.html",
+    name: "Lab Account + Random Consortium",
+    shortName: "Lab Account + Random Consortium",
+    category: "Testing Business Services - House Lab Accounts",
+    specimen: "N/A",
+    price: 46130,
+    currency: "usd",
+    stripePriceId: "",
+    results: "Account setup",
+    description: "House lab account setup with supplies, Workforce Portal access, DOT/NON-DOT urine lab support, and random consortium management.",
+    features: [
+      "Pack of NON-DOT CCFs (25)",
+      "Pack of DOT CCFs (25)",
+      "Shipping Supplies",
+      "Case of Collection Kits (25)",
+      "Workforce Portal",
+      "View and Download Results",
+      "NON-DOT Urine Lab Account",
+      "DOT Urine Lab Account",
+      "Create Consortiums",
+      "Manage Consortiums"
+    ]
+  },
+
+  "lab-account-random-consortium-docs": {
+    id: "lab-account-random-consortium-docs",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=lab-account-random-consortium-docs",
+    sourcePage: "house-lab-account-setup.html",
+    name: "Lab Account + Random Consortium + Docs",
+    shortName: "Lab Account + Random Consortium + Docs",
+    category: "Testing Business Services - House Lab Accounts",
+    specimen: "N/A",
+    price: 51630,
+    currency: "usd",
+    stripePriceId: "",
+    results: "Account setup",
+    description: "Expanded house lab account setup with random consortium management, owner-operator compliance documents, and Clearinghouse account setup.",
+    features: [
+      "Pack of NON-DOT CCFs (25)",
+      "Pack of DOT CCFs (25)",
+      "Shipping Supplies",
+      "Case of Collection Kits (25)",
+      "Workforce Portal",
+      "View and Download Results",
+      "NON-DOT Urine Lab Account",
+      "DOT Urine Lab Account",
+      "Create Consortiums",
+      "Manage Consortiums",
+      "Certificate for owner-operator compliance",
+      "Owner-operator agreement",
+      "Clearinghouse Account Setup"
+    ]
+  },
+
+
+  /* =========================================================
      CLEARINGHOUSE C/TPA SERVICES
      ========================================================= */
 

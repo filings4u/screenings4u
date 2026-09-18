@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeSelectedService();
   initializeVehicleLogic();
   initializeConditionalFields();
-  initializeSubmission();
 });
 
 const STATE_OPTIONS = [

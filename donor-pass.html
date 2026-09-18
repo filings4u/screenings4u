@@ -281,6 +281,9 @@
     @media(max-width:380px){.intro,.form-section{padding-left:17px;padding-right:17px}}
     @media(prefers-reduced-motion:reduce){*::before, *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
+<link href="assets/css/form-security.css?v=20260918-1" rel="stylesheet"/>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+<script src="assets/js/form-security.js?v=20260918-1" defer></script>
 </head>
 <body><div class="topbar">
 <div class="container topbar-inner">
@@ -338,7 +341,7 @@
             be your billing address.
           </p>
 <div aria-live="polite" class="notice" id="formMessage" role="alert"></div>
-<form id="donorPassForm" novalidate="">
+<form id="donorPassForm" novalidate="" data-s4u-protected="true" data-s4u-form-key="donor_pass">
 <div class="location-grid">
 <div class="field full">
 <label for="address">

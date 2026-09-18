@@ -61,6 +61,9 @@
     @media(max-width:380px){.card{padding:21px 17px}.service{padding:14px}}
     @media(prefers-reduced-motion:reduce){*::before, *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
+<link href="assets/css/form-security.css?v=20260918-1" rel="stylesheet"/>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+<script src="assets/js/form-security.js?v=20260918-1" defer></script>
 </head>
 <body><div class="topbar">
 <div class="container topbar-inner">
@@ -103,7 +106,7 @@
 <span style="margin-top:12px">S4U Tracking Number</span>
 <strong id="trackingNumber">—</strong>
 </div>
-<form id="locationForm" novalidate="">
+<form id="locationForm" novalidate="" data-s4u-protected="true" data-s4u-form-key="donor_pass_location">
 <div class="grid">
 <div class="full">
 <label for="address">Street Address *</label>

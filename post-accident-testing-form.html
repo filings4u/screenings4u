@@ -70,6 +70,9 @@ textarea{min-height:120px;resize:vertical}
 @media(max-width:380px){.form-header,.form-body{padding-inline:15px}}
 @media(prefers-reduced-motion:reduce){*:before, *:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
+<link href="assets/css/form-security.css?v=20260918-1" rel="stylesheet"/>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+<script src="assets/js/form-security.js?v=20260918-1" defer></script>
 </head>
 <body><div class="topbar">
 <div class="container topbar-inner">
@@ -107,7 +110,7 @@ textarea{min-height:120px;resize:vertical}
 <p>Complete the information below so screenings4u can coordinate the appropriate post-accident testing service for your driver and company.</p>
 </div></section>
 <main class="form-wrap"><div class="container">
-<form class="form-card" enctype="multipart/form-data" id="postAccidentForm" novalidate="">
+<form class="form-card" enctype="multipart/form-data" id="postAccidentForm" novalidate="" data-s4u-protected="true" data-s4u-form-key="post_accident" data-s4u-public-submit="true">
 <div class="form-header"><h2>Post-Accident Testing Request Form</h2><p>Fields marked with <span class="required">*</span> are required. Your selected service is carried through from the service page.</p></div>
 <div class="form-body">
 <section class="section">
@@ -182,10 +185,13 @@ textarea{min-height:120px;resize:vertical}
 </div>
 </form>
 </div></main>
-<script src="assets/js/post-accident-testing-form.js"></script>
+<script src="assets/js/post-accident-testing-form.js?v=20260918-turnstile-1"></script>
 <footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
   <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
   <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
   <script src="assets/js/site-ui.js?v=20260904-1"></script>
-  <script src="assets/js/footer.js?v=20260904-1"></script></body>
+  <script src="assets/js/footer.js?v=20260904-1"></script>
+<script src="assets/js/site-config.js"></script>
+<script src="assets/js/public-forms.js?v=20260918-1"></script>
+</body>
 </html>

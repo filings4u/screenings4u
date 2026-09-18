@@ -61,6 +61,7 @@
 
       return window.supabaseClient;
     } catch (error) {
+      window.Screenings4uFormSecurity?.reset(form);
       console.error(
         "Unable to create Supabase client:",
         error
@@ -236,7 +237,7 @@
       ]
         .filter(Boolean)
         .join("\n\n"),
-      website_trap: ""
+      website_trap: getValue(form, "website_trap")
     };
   }
 
@@ -272,6 +273,16 @@
     clearMessage(messageElement);
 
     const payload = buildPayload(form);
+    const security =
+      window.Screenings4uFormSecurity?.payload(form) || {};
+
+    payload.turnstileToken =
+      security.turnstileToken || "";
+    payload.formStartedAt =
+      security.formStartedAt || 0;
+    payload.website_trap =
+      security.websiteTrap || payload.website_trap || "";
+
     const validationError =
       validatePayload(payload);
 
@@ -332,6 +343,7 @@
       }
 
       form.reset();
+      window.Screenings4uFormSecurity?.reset(form);
 
       showMessage(
         messageElement,

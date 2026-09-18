@@ -1179,6 +1179,9 @@ input, select, textarea{
   }
 }
 </style>
+<link href="assets/css/form-security.css?v=20260918-1" rel="stylesheet"/>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+<script src="assets/js/form-security.js?v=20260918-1" defer></script>
 </head>
 <body><div class="topbar">
 <div class="container topbar-inner">
@@ -1601,7 +1604,7 @@ input, select, textarea{
             guarantee assignments or establish an employment relationship.
           </div>
 </div>
-<form class="application-form" id="collectorNetworkForm">
+<form class="application-form" id="collectorNetworkForm" data-s4u-protected="true" data-s4u-form-key="collector_network">
 <!-- PERSONAL INFORMATION -->
 <div class="form-section">
 <h3 class="form-section-title">
@@ -1936,7 +1939,7 @@ input, select, textarea{
   ========================================================== -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/site-config.js"></script>
-<script src="assets/js/collector-network.js"></script>
+<script src="assets/js/collector-network.js?v=20260918-turnstile-1"></script>
 <script>document.addEventListener("DOMContentLoaded", function () {
   const faqButtons = document.querySelectorAll("[data-faq-toggle]");
 

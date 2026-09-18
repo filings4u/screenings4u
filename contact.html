@@ -54,6 +54,9 @@
   --soft:#F4F7FC;
 }
 </style>
+<link href="assets/css/form-security.css?v=20260918-1" rel="stylesheet"/>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+<script src="assets/js/form-security.js?v=20260918-1" defer></script>
 </head>
 <body><div class="topbar">
 <div class="container topbar-inner">
@@ -88,7 +91,7 @@
 <section class="hero"><div class="container"><div class="hero-content"><span class="eyebrow">Contact screenings4u</span><h1>Start with a question.<br/><span>Leave with a clear next step.</span></h1><p>Contact our team for personal testing, employer programs, DOT compliance, training, consulting, or support with an existing order or account.</p><div class="hero-actions"><a class="btn btn-orange" href="#contact-form">Send a Message →</a><a class="btn btn-outline" href="tel:7732457009">Call (773) 245-7009</a></div></div></div></section>
 <section class="contact-section" id="contact-form"><div class="container contact-layout">
 <aside class="contact-sidebar"><div><span class="eyebrow">Get in touch</span><h2>Talk with the right team.</h2><p>Include the service or program you are contacting us about so we can route your request correctly.</p></div><div class="contact-list"><div class="contact-item"><div class="contact-icon">☎</div><div><small>Phone</small><strong>Speak with our team</strong><a href="tel:7732457009">(773) 245-7009</a></div></div><div class="contact-item"><div class="contact-icon">@</div><div><small>Email</small><strong>General inquiries</strong><a href="mailto:support@screenings4u.com">support@screenings4u.com</a></div></div><div class="contact-item"><div class="contact-icon">⌖</div><div><small>Office</small><strong>Chicago location</strong><span>8537 S Pulaski Rd<br/>Chicago, IL 60652</span></div></div><div class="contact-item"><div class="contact-icon">↗</div><div><small>Existing customers</small><strong>Secure account access</strong><a href="https://portal.screenings4u.com/customer-login.html">Open Customer Portal →</a></div></div></div><div class="hours"><strong>Business hours</strong><br/>Monday–Friday, 8:00 AM–8:00 PM CST. For urgent questions, please call.</div></aside>
-<form class="form-card" id="contactForm"><div class="form-heading"><div><span class="eyebrow">Send a message</span><h2>How can we help?</h2><p>Share a few details below. Fields marked with an asterisk are required.</p></div><div class="response-badge">Secure inquiry form</div></div><div class="form-grid">
+<form class="form-card" id="contactForm" data-s4u-protected="true" data-s4u-form-key="contact" data-s4u-public-submit="true"><div class="form-heading"><div><span class="eyebrow">Send a message</span><h2>How can we help?</h2><p>Share a few details below. Fields marked with an asterisk are required.</p></div><div class="response-badge">Secure inquiry form</div></div><div class="form-grid">
 <div class="field"><label for="firstName">First Name <span class="required">*</span></label><input autocomplete="given-name" id="firstName" name="firstName" required=""/></div>
 <div class="field"><label for="lastName">Last Name <span class="required">*</span></label><input autocomplete="family-name" id="lastName" name="lastName" required=""/></div>
 <div class="field"><label for="email">Email Address <span class="required">*</span></label><input autocomplete="email" id="email" name="email" required="" type="email"/></div>
@@ -100,10 +103,13 @@
 <section class="pathways"><div class="container"><div class="section-heading"><span class="eyebrow">Find your starting point</span><h2>Go directly to the service you need.</h2><p>Explore the most common reasons customers and employers contact screenings4u.</p></div><div class="pathway-grid"><a class="pathway" href="personal-drug-and-alcohol-testing.html"><div class="pathway-num">01 / PERSONAL</div><h3>Personal Testing</h3><p>Individual testing options, requirements, scheduling, and service questions.</p></a><a class="pathway" href="business-services.html"><div class="pathway-num">02 / EMPLOYERS</div><h3>Employer Services</h3><p>Workplace testing, DOT programs, account support, and compliance needs.</p></a><a class="pathway" href="consulting-services.html"><div class="pathway-num">03 / CONSULTING</div><h3>Program Support</h3><p>Guidance for policies, workflows, records, audits, and program requirements.</p></a></div></div></section>
 </main>
 
-<script>document.getElementById("contactForm").addEventListener("submit",function(event){event.preventDefault();const status=document.getElementById("formStatus");status.className="status success";status.textContent="Thank you. Your message has been prepared for submission. Contact form delivery will be connected to the website email workflow."});</script>
+
 <footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
   <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
   <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
   <script src="assets/js/site-ui.js?v=20260904-1"></script>
-  <script src="assets/js/footer.js?v=20260904-1"></script></body>
+  <script src="assets/js/footer.js?v=20260904-1"></script>
+<script src="assets/js/site-config.js"></script>
+<script src="assets/js/public-forms.js?v=20260918-1"></script>
+</body>
 </html>
