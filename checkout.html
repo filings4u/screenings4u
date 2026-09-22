@@ -432,151 +432,6 @@ li:before {
 }
 
 /* =========================================================
-   EMAIL CONFIRMATION MODAL
-   ========================================================= */
-
-.email-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.email-modal.active {
-    display: flex;
-}
-
-.email-modal-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(18, 35, 61, .62);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}
-
-.email-modal-card {
-    position: relative;
-    z-index: 2;
-    width: min(500px, 100%);
-    background: #fff;
-    border-radius: 20px;
-    padding: 34px;
-    box-shadow: 0 30px 90px rgba(12, 32, 64, .28);
-    animation: emailModalIn .18s ease-out;
-}
-
-@keyframes emailModalIn {
-    from {
-        opacity: 0;
-        transform: translateY(12px) scale(.98);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-.email-modal-icon {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #eef4ff;
-    color: var(--blue);
-    font-size: 22px;
-    font-weight: 900;
-    margin-bottom: 18px;
-}
-
-.email-modal-eyebrow {
-    color: var(--orange);
-    font-size: 10px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: .12em;
-    margin-bottom: 7px;
-}
-
-.email-modal-card h2 {
-    margin: 0 0 10px;
-    color: var(--blue-dark);
-    font-size: 28px;
-    letter-spacing: -.035em;
-}
-
-.email-modal-copy {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.65;
-    margin: 0 0 18px;
-}
-
-.confirmed-email {
-    padding: 14px 16px;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    background: #f7faff;
-    color: var(--blue-dark);
-    font-size: 14px;
-    font-weight: 800;
-    word-break: break-word;
-}
-
-.email-modal-security {
-    display: grid;
-    gap: 4px;
-    margin-top: 16px;
-    padding: 14px;
-    border-radius: 10px;
-    background: #fff7ed;
-    color: #9a3412;
-    font-size: 11px;
-    line-height: 1.5;
-}
-
-.email-modal-security strong {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-}
-
-.email-modal-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 22px;
-}
-
-.email-modal-actions button {
-    margin-top: 0;
-}
-
-.modal-secondary {
-    background: #fff;
-    color: var(--blue-dark);
-    border: 1px solid #c8d4e3;
-}
-
-.modal-secondary:hover {
-    background: #f4f7fc;
-}
-
-.modal-primary {
-    background: var(--orange);
-    color: #fff;
-}
-
-.modal-primary:hover {
-    filter: brightness(.96);
-}
-
-/* =========================================================
    USPS ADDRESS VALIDATION MODAL
    ========================================================= */
 
@@ -1350,7 +1205,7 @@ button {
 <div class="fields">
 <div class="field"><label for="firstName">First Name</label><input autocomplete="given-name" id="firstName" name="firstName" required=""/></div>
 <div class="field"><label for="lastName">Last Name</label><input autocomplete="family-name" id="lastName" name="lastName" required=""/></div>
-<div class="field"><label for="email">Email Address</label><input autocomplete="email" id="email" name="email" required="" type="email"/></div>
+<div class="field"><label for="email">Email Address</label><input autocomplete="email" id="email" name="email" required="" type="text" inputmode="email"/></div>
 <div class="field"><label for="phone">Phone Number</label><input autocomplete="tel" id="phone" name="phone" required="" type="tel"/></div>
 <div class="field full">
 <label for="address">Billing Address</label>
@@ -1401,7 +1256,6 @@ button {
 <input autocomplete="postal-code" id="zip" inputmode="numeric" maxlength="10" name="zip" placeholder="75001" required="" type="text"/>
 </div>
 </div>
-<div aria-live="polite" id="addressValidationMessage" role="status" style="display:none;"></div>
 <!-- =====================================================
              Hidden until the customer:
              1. Completes all required customer information.
@@ -1471,47 +1325,7 @@ button {
 </div></main>
 <script src="assets/js/site-config.js"></script>
 <script src="assets/js/test-price-list.js?v=20260918-house-lab-1"></script>
-<script src="assets/js/checkout.js?v=20260918-turnstile-1"></script>
-<!-- =====================================================
-     EMAIL CONFIRMATION MODAL
-====================================================== -->
-<div aria-hidden="true" aria-labelledby="emailConfirmTitle" aria-modal="true" class="email-modal" id="emailConfirmModal" role="dialog">
-<div class="email-modal-backdrop"></div>
-<div class="email-modal-card">
-<div class="email-modal-icon">
-      ✓
-    </div>
-<div class="email-modal-eyebrow">
-      Account Email
-    </div>
-<h2 id="emailConfirmTitle">
-      Confirm Your Email
-    </h2>
-<p class="email-modal-copy">
-      Please confirm that this is the email address
-      you want to use for your screenings4u account.
-    </p>
-<div class="confirmed-email" id="confirmedEmailDisplay"></div>
-<div class="email-modal-security">
-<strong>
-        Important
-      </strong>
-<span>
-        This email will be used to access your account
-        and will become the primary email associated
-        with this account.
-      </span>
-</div>
-<div class="email-modal-actions">
-<button class="modal-secondary" id="changeEmailBtn" type="button">
-        Change Email
-      </button>
-<button class="modal-primary" id="confirmEmailBtn" type="button">
-        Confirm Email
-      </button>
-</div>
-</div>
-</div>
+<script src="assets/js/checkout.js?v=20260922-no-email-validation-2"></script>
 <footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
   <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
   <script src="assets/js/mobile-nav.js?v=20260904-2"></script>

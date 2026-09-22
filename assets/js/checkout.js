@@ -1318,7 +1318,6 @@ async function initCheckout() {
 
     setupCustomerFields();
     setupBillingAddressValidationState();
-    setupEmailModal();
     setupDiscountCode();
 
     const button =
@@ -1768,106 +1767,10 @@ async function handleSubmit(event) {
     }
 
     /*
-     * USPS has already validated and the customer has already accepted
-     * this exact address. A failed PaymentIntent setup must not force the
-     * customer through address validation again. Editing any address field
-     * clears this state through setupBillingAddressValidationState().
+     * Email confirmation/format validation is intentionally not performed
+     * by the website. Continue directly to Stripe payment setup.
      */
-    if (
-      billingAddressVerified &&
-      billingAddressVerificationKey ===
-        getBillingAddressVerificationKey()
-    ) {
-      const currentEmail =
-        getInputValue("email")
-          .trim()
-          .toLowerCase();
-
-      if (
-        emailConfirmed &&
-        confirmedEmailValue === currentEmail
-      ) {
-        await handleEmailConfirmation();
-        return;
-      }
-
-      openEmailConfirmation(
-        getInputValue("email")
-      );
-      return;
-    }
-
-    /*
-     * USPS BILLING ADDRESS VALIDATION
-     *
-     * Validate and standardize the billing address before we create
-     * the PaymentIntent. USPS credentials remain server-side inside
-     * the Supabase Edge Function.
-     */
-    try {
-      const uspsResult =
-        await validateBillingAddressWithUSPS(form);
-
-      if (!uspsResult.valid) {
-        showPaymentError(
-          uspsResult.message ||
-          "USPS could not validate this billing address. Please check the address and try again."
-        );
-        return;
-      }
-
-      /*
-       * USPS has validated the address, but we do NOT overwrite the
-       * customer's billing fields automatically.
-       *
-       * First show the USPS success state, then ask the customer whether
-       * they want to use USPS's standardized version.
-       */
-      const useUSPSAddress =
-        await confirmUSPSAddress(uspsResult.address);
-
-      if (!useUSPSAddress) {
-        const addressField =
-          document.getElementById("address");
-
-        if (addressField) {
-          addressField.focus();
-        }
-
-        return;
-      }
-
-      /*
-       * Only after the customer explicitly approves the USPS version do
-       * we place the standardized address into the checkout form.
-       */
-      applyUSPSAddressToForm(uspsResult.address);
-
-      billingAddressVerified = true;
-      billingAddressVerificationKey =
-        getBillingAddressVerificationKey();
-
-      /*
-       * Address is now verified and accepted. Move automatically to the
-       * existing email-confirmation step.
-       */
-      openEmailConfirmation(
-        getInputValue("email")
-      );
-
-    } catch (error) {
-      console.error(
-        "USPS billing address validation error:",
-        error
-      );
-
-      showPaymentError(
-        error?.message ||
-        "We could not verify your billing address right now. Please try again."
-      );
-      return;
-    }
-
+    await handleEmailConfirmation();
     return;
   }
 
@@ -1920,14 +1823,6 @@ const VALIDATION = {
 
   name:
     /^\p{L}[\p{L}' -]{1,49}$/u,
-
-  /*
-   * IMPORTANT:
-   * This is a JavaScript regex literal.
-   * The dot is escaped once, not twice.
-   */
-  email:
-    /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/,
 
   phone:
     /^(?:\+1[\s.-]?)?(?:\([2-9]\d{2}\)|[2-9]\d{2})[\s.-]?[2-9]\d{2}[\s.-]?\d{4}$/,
@@ -1994,15 +1889,6 @@ function validateCustomerForm(form) {
     };
   }
 
-  if (!VALIDATION.email.test(fields.email)) {
-
-    return {
-      valid: false,
-      field: "email",
-      message:
-        "Please enter a valid email address."
-    };
-  }
 
   if (!VALIDATION.phone.test(fields.phone)) {
 
@@ -3985,12 +3871,6 @@ function findPaymentSection(
 
 async function confirmPayment(form) {
 
-  if (!emailConfirmed) {
-
-    throw new Error(
-      "Please confirm your email address before continuing."
-    );
-  }
 
   if (
     !elements ||
