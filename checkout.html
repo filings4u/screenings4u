@@ -1152,9 +1152,6 @@ button {
 }
 
 </style>
-<link href="assets/css/form-security.css?v=20260918-1" rel="stylesheet"/>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
-<script src="assets/js/form-security.js?v=20260918-1" defer></script>
 </head>
 <body><div class="topbar">
 <div class="container topbar-inner">
@@ -1201,7 +1198,7 @@ button {
 <section class="card"><div class="pad">
 <h2>Customer Information</h2>
 <p class="sub">No account is required. This information is used to create your order and process your Stripe payment.</p>
-<form id="checkoutForm" data-s4u-protected="true" data-s4u-form-key="checkout">
+<form id="checkoutForm">
 <div class="fields">
 <div class="field"><label for="firstName">First Name</label><input autocomplete="given-name" id="firstName" name="firstName" required=""/></div>
 <div class="field"><label for="lastName">Last Name</label><input autocomplete="family-name" id="lastName" name="lastName" required=""/></div>
@@ -1325,7 +1322,7 @@ button {
 </div></main>
 <script src="assets/js/site-config.js"></script>
 <script src="assets/js/test-price-list.js?v=20260918-house-lab-1"></script>
-<script src="assets/js/checkout.js?v=20260922-no-email-validation-2"></script>
+<script src="assets/js/checkout.js?v=20260922-main-stripe-fix-1"></script>
 <footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
   <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
   <script src="assets/js/mobile-nav.js?v=20260904-2"></script>

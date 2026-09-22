@@ -1152,8 +1152,6 @@ async function initCheckout() {
 
   try {
 
-    createAddressValidationOverlay();
-    createUSPSAddressConfirmationModal();
 
     const params =
       new URLSearchParams(
@@ -3319,10 +3317,7 @@ async function createPaymentIntent(form) {
   const data =
     new FormData(form);
 
-  const security =
-    window.Screenings4uFormSecurity?.payload(form) || {};
-
-  const customer = {
+    const customer = {
 
     firstName:
       getFormValue(
@@ -3415,15 +3410,6 @@ async function createPaymentIntent(form) {
 
             discountCode:
               appliedDiscountCode || null,
-
-            turnstileToken:
-              security.turnstileToken || "",
-
-            formStartedAt:
-              security.formStartedAt || 0,
-
-            websiteTrap:
-              security.websiteTrap || "",
 
             customer
           })
