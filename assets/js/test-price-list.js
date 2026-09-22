@@ -12,6 +12,32 @@
 
 const TEST_SERVICES = {
   /* =========================================================
+     LIVE CHECKOUT TEST SERVICE
+     ========================================================= */
+
+  "stripe-test-screenings4u-1": {
+    id: "stripe-test-screenings4u-1",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=stripe-test-screenings4u-1",
+    name: "screenings4u.com Stripe Test — $1.00",
+    shortName: "$1 Checkout Test",
+    category: "Checkout Test Services",
+    specimen: "N/A",
+    price: 100,
+    currency: "usd",
+    stripePriceId: "",
+    results: "Immediate",
+    description: "Live $1.00 transaction used to verify the screenings4u checkout and payment workflow.",
+    features: [
+      "Live $1.00 transaction test",
+      "Uses the standard screenings4u checkout",
+      "Creates a normal screenings4u order record",
+      "Processes payment through Stripe"
+    ],
+    drugs: []
+  },
+
+  /* =========================================================
      DOT URINE DRUG TESTS
      ========================================================= */
 
