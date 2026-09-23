@@ -139,7 +139,7 @@ function initS4UFooter() {
           <div class="footer-col">
             <h4>Account &amp; Training</h4>
 
-            <a href="https://portal.screenings4u.com/customer-login.html">
+            <a href="https://customers.screenings4u.com/login.html">
               Customer Login
             </a>
 

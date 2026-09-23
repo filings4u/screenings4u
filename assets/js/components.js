@@ -40,7 +40,7 @@ function deployHeaderComponent() {
                         <a href="/pages/driver-qualification.html">Driver Qualification Files</a>
                     </div>
                 </div>
-                <a href="/https://training.screenings4u.com/" class="static-nav-link">Collector Training</a>
+                <a href="https://training.screenings4u.com/" class="static-nav-link">Collector Training</a>
             </nav>
             <div class="header-action-block">
                 <a href="https://screenings4u.com" class="btn-core structure-blue small-btn">Client Portal</a>

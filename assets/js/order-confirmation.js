@@ -13,7 +13,7 @@
 (() => {
   "use strict";
 
-  const DONOR_PASS_PAGE = "donor-pass.html";
+  const DONOR_PASS_PAGE = "https://customers.screenings4u.com/donor-passes.html";
   const UUID_PATTERN =
     /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
   const TRACKING_PATTERN = /^[A-Za-z0-9_-]{16}$/;
