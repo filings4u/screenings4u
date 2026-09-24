@@ -36,10 +36,9 @@
   <div class="hero">
     <div class="eyebrow">House Lab Account Setup</div>
     <h1>Complete Your Lab Account Intake</h1>
-    <p>This form gives screenings4u the business information needed to finish setting up your DOT and NON-DOT testing accounts and connect the correct Workforce DOT portal access.</p>
-    <div class="notice">This is a standalone screenings4u intake form. No account login or special link is required. Your submission is protected by Cloudflare security verification.</div>
+    <p>This form gives screenings4u the business information needed to finish setting up your DOT and NON-DOT testing accounts.</p>
   </div>
-<form class="card" id="form" data-form-key="lab_account_intake" data-turnstile-action="lab_account_intake">
+<form class="card" id="form" data-s4u-protected="true" data-s4u-form-key="lab_account_intake">
     <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden">
       <label for="websiteTrap">Website</label>
       <input id="websiteTrap" name="websiteTrap" type="text" tabindex="-1" autocomplete="off">
@@ -87,6 +86,7 @@ const API="https://rgsrubdtljyxmnihwlah.supabase.co/functions/v1/public-form-sub
 const form=document.getElementById("form");
 const msg=document.getElementById("msg");
 const submitBtn=document.getElementById("submitBtn");
+const formStartedAt=Date.now();
 
 function collectIntake(){
   const fd=new FormData(form), data={};
@@ -115,7 +115,13 @@ form.addEventListener("submit",async e=>{
   msg.className="msg";
 
   try{
-    const security=window.Screenings4uFormSecurity?.payload(form) || {};
+    let security={};
+    try{
+      security=window.Screenings4uFormSecurity?.payload(form) || {};
+    }catch(err){
+      console.warn("Form security is still initializing.",err);
+      security={};
+    }
     const intake=collectIntake();
 
     const response=await fetch(API,{
@@ -124,7 +130,7 @@ form.addEventListener("submit",async e=>{
       body:JSON.stringify({
         formKey:"lab_account_intake",
         turnstileToken:security.turnstileToken || "",
-        formStartedAt:security.formStartedAt || Date.now(),
+        formStartedAt:security.formStartedAt || formStartedAt,
         websiteTrap:security.websiteTrap || form.elements.websiteTrap?.value || "",
         sourceUrl:location.href,
         payload:intake
@@ -134,7 +140,11 @@ form.addEventListener("submit",async e=>{
     const result=await response.json().catch(()=>({}));
 
     if(!response.ok || result.error){
-      window.Screenings4uFormSecurity?.reset(form);
+      try{
+        window.Screenings4uFormSecurity?.reset(form);
+      }catch(err){
+        console.warn("Unable to reset Turnstile widget.",err);
+      }
       throw new Error(result.error || "Unable to submit the lab account intake.");
     }
 
