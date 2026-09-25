@@ -12,33 +12,33 @@
     .brand{display:inline-flex;align-items:center;margin-bottom:24px;text-decoration:none}.intake-logo{display:block;width:220px;max-width:70vw;height:auto}
     .hero{background:white;border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:0 14px 40px rgba(15,23,42,.07);margin-bottom:18px}
     .eyebrow{font-size:11px;letter-spacing:.08em;font-weight:900;color:var(--orange);text-transform:uppercase}h1{color:var(--blue);margin:7px 0 8px;font-size:32px}
-    p{color:var(--muted);line-height:1.6}.notice{padding:14px 16px;background:#fff7ef;border-left:4px solid var(--orange);border-radius:10px;font-size:13px;color:#6b471f}
+    p{color:var(--muted);line-height:1.6}.notice{padding:14px 16px;background:#fff7ef;border-left:4px solid var(--orange);border-radius:10px;font-size:13px;color:#6b471f;margin-top:14px}
     .card{background:white;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 12px 32px rgba(15,23,42,.06)}
-    .section{margin-top:18px}.section h2{font-size:19px;color:var(--blue);margin:0 0 5px}.section .sub{margin:0 0 17px;font-size:13px}
+    .section{margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}.section:first-of-type{margin-top:0;padding-top:0;border-top:0}.section h2{font-size:19px;color:var(--blue);margin:0 0 5px}.section .sub{margin:0 0 17px;font-size:13px}
     .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.full{grid-column:1/-1}.field{display:grid;gap:6px}
     label{font-size:12px;font-weight:800;color:#42526a}input,select,textarea{width:100%;border:1px solid #cbd5e1;border-radius:10px;padding:11px 12px;background:#fff;color:var(--ink);font:inherit}
-    textarea{min-height:110px;resize:vertical}.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.check{display:flex;align-items:flex-start;gap:9px;border:1px solid var(--line);border-radius:10px;padding:11px;background:#fbfcfe;font-size:13px}
-    .check input{width:auto;margin-top:2px}.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:22px}.btn{border:0;border-radius:10px;padding:12px 18px;font-weight:900;cursor:pointer}
+    textarea{min-height:110px;resize:vertical}.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.check{display:flex;align-items:flex-start;gap:9px;border:1px solid var(--line);border-radius:10px;padding:11px;background:#fbfcfe;font-size:13px}.check input{width:auto;margin-top:2px}
+    .same-row{display:flex;align-items:center;gap:8px;margin:0 0 14px;font-size:13px;font-weight:800;color:#42526a}.same-row input{width:auto}
+    .address-warning{font-size:12px;color:var(--danger);font-weight:800;margin-top:5px}.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:26px}.btn{border:0;border-radius:10px;padding:12px 18px;font-weight:900;cursor:pointer}
     .primary{background:var(--orange);color:#fff}.secondary{background:#fff;color:var(--blue);border:1px solid var(--line)}.msg{font-size:13px;font-weight:700}.error{color:var(--danger)}.success{color:var(--success)}
     .loading{text-align:center;padding:40px;color:var(--muted)}.hidden{display:none!important}
     @media(max-width:760px){.grid,.checks{grid-template-columns:1fr}.full{grid-column:auto}h1{font-size:27px}.hero,.card{padding:20px}.intake-logo{width:185px}}
   </style>
-
   <link href="assets/css/form-security.css?v=20260918-1" rel="stylesheet">
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
   <script src="assets/js/form-security.js?v=20260918-1" defer></script>
-
 </head>
 <body>
 <div class="wrap">
   <a class="brand" href="index.html" aria-label="screenings4u home"><img src="images/logo.png" alt="screenings4u" class="intake-logo"></a>
-
   <div class="hero">
     <div class="eyebrow">House Lab Account Setup</div>
     <h1>Complete Your Lab Account Intake</h1>
     <p>This form gives screenings4u the business information needed to finish setting up your DOT and NON-DOT testing accounts.</p>
+    <div class="notice"><strong>Physical street addresses are required.</strong> P.O. Boxes are not accepted for the business physical, billing, shipping, or mailing address.</div>
   </div>
-<form class="card" id="form" data-s4u-protected="true" data-s4u-form-key="lab_account_intake">
+
+  <form class="card" id="form" data-s4u-protected="true" data-s4u-form-key="lab_account_intake">
     <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden">
       <label for="websiteTrap">Website</label>
       <input id="websiteTrap" name="websiteTrap" type="text" tabindex="-1" autocomplete="off">
@@ -53,11 +53,57 @@
         <div class="field"><label>EIN</label><input name="ein"></div>
         <div class="field"><label>Business Phone *</label><input name="business_phone" required></div>
         <div class="field"><label>Website</label><input name="website"></div>
-        <div class="field full"><label>Street Address *</label><input name="address_line1" required></div>
-        <div class="field full"><label>Suite / Unit</label><input name="address_line2"></div>
-        <div class="field"><label>City *</label><input name="city" required></div>
-        <div class="field"><label>State *</label><input name="state" maxlength="2" required></div>
-        <div class="field"><label>ZIP Code *</label><input name="postal_code" required></div>
+      </div>
+    </div>
+
+    <div class="section" data-address-section="physical">
+      <h2>Business Physical Address</h2>
+      <p class="sub">Enter the physical street location of the business. P.O. Boxes are not allowed.</p>
+      <div class="grid">
+        <div class="field full"><label>Street Address *</label><input name="physical_address_line1" data-no-po-box required><div class="address-warning">No P.O. Boxes.</div></div>
+        <div class="field full"><label>Suite / Unit</label><input name="physical_address_line2"></div>
+        <div class="field"><label>City *</label><input name="physical_city" required></div>
+        <div class="field"><label>State *</label><input name="physical_state" maxlength="2" required></div>
+        <div class="field"><label>ZIP Code *</label><input name="physical_postal_code" required></div>
+      </div>
+    </div>
+
+    <div class="section" data-address-section="billing">
+      <h2>Billing Address</h2>
+      <p class="sub">Address used for invoices and billing correspondence. P.O. Boxes are not allowed.</p>
+      <label class="same-row"><input type="checkbox" name="billing_same_as_physical" data-copy-address="billing"> Same as business physical address</label>
+      <div class="grid">
+        <div class="field full"><label>Street Address *</label><input name="billing_address_line1" data-no-po-box required><div class="address-warning">No P.O. Boxes.</div></div>
+        <div class="field full"><label>Suite / Unit</label><input name="billing_address_line2"></div>
+        <div class="field"><label>City *</label><input name="billing_city" required></div>
+        <div class="field"><label>State *</label><input name="billing_state" maxlength="2" required></div>
+        <div class="field"><label>ZIP Code *</label><input name="billing_postal_code" required></div>
+      </div>
+    </div>
+
+    <div class="section" data-address-section="shipping">
+      <h2>Shipping Address</h2>
+      <p class="sub">Address used for testing materials, supplies, or other physical deliveries. P.O. Boxes are not allowed.</p>
+      <label class="same-row"><input type="checkbox" name="shipping_same_as_physical" data-copy-address="shipping"> Same as business physical address</label>
+      <div class="grid">
+        <div class="field full"><label>Street Address *</label><input name="shipping_address_line1" data-no-po-box required><div class="address-warning">No P.O. Boxes.</div></div>
+        <div class="field full"><label>Suite / Unit</label><input name="shipping_address_line2"></div>
+        <div class="field"><label>City *</label><input name="shipping_city" required></div>
+        <div class="field"><label>State *</label><input name="shipping_state" maxlength="2" required></div>
+        <div class="field"><label>ZIP Code *</label><input name="shipping_postal_code" required></div>
+      </div>
+    </div>
+
+    <div class="section" data-address-section="mailing">
+      <h2>Mailing Address</h2>
+      <p class="sub">Address used for mailed account correspondence. P.O. Boxes are not allowed.</p>
+      <label class="same-row"><input type="checkbox" name="mailing_same_as_physical" data-copy-address="mailing"> Same as business physical address</label>
+      <div class="grid">
+        <div class="field full"><label>Street Address *</label><input name="mailing_address_line1" data-no-po-box required><div class="address-warning">No P.O. Boxes.</div></div>
+        <div class="field full"><label>Suite / Unit</label><input name="mailing_address_line2"></div>
+        <div class="field"><label>City *</label><input name="mailing_city" required></div>
+        <div class="field"><label>State *</label><input name="mailing_state" maxlength="2" required></div>
+        <div class="field"><label>ZIP Code *</label><input name="mailing_postal_code" required></div>
       </div>
     </div>
 
@@ -82,93 +128,71 @@
 </div>
 
 <script>
-const API="https://rgsrubdtljyxmnihwlah.supabase.co/functions/v1/public-form-submit";
+const API="https://elpbnytpciqnbexiaebp.supabase.co/functions/v1/public-form-submit";
 const form=document.getElementById("form");
 const msg=document.getElementById("msg");
 const submitBtn=document.getElementById("submitBtn");
 const formStartedAt=Date.now();
+const PO_BOX_RE=/\bP(?:OST)?\.?\s*O(?:FFICE)?\.?\s*BOX\b|\bP\.?\s*O\.?\s*BOX\b|\bPOBOX\b/i;
+
+function copyPhysicalAddress(prefix,checked){
+  const map={address_line1:"physical_address_line1",address_line2:"physical_address_line2",city:"physical_city",state:"physical_state",postal_code:"physical_postal_code"};
+  for(const [suffix,source] of Object.entries(map)){
+    const target=form.elements[`${prefix}_${suffix}`];
+    if(!target) continue;
+    target.value=checked ? (form.elements[source]?.value || "") : target.value;
+    target.readOnly=checked;
+  }
+}
+
+document.querySelectorAll("[data-copy-address]").forEach(box=>{
+  box.addEventListener("change",()=>copyPhysicalAddress(box.dataset.copyAddress,box.checked));
+});
+
+form.querySelectorAll("[name^='physical_']").forEach(el=>{
+  el.addEventListener("input",()=>document.querySelectorAll("[data-copy-address]:checked").forEach(box=>copyPhysicalAddress(box.dataset.copyAddress,true)));
+});
 
 function collectIntake(){
-  const fd=new FormData(form), data={};
+  const fd=new FormData(form),data={};
   for(const [k,v] of fd.entries()){
     if(k==="websiteTrap") continue;
-    if(k==="specimen_types"){
-      (data[k]??=[]).push(v);
-    } else {
-      data[k]=v;
-    }
+    data[k]=v;
   }
-
-  for(const n of [
-  ]){
+  for(const n of ["billing_same_as_physical","shipping_same_as_physical","mailing_same_as_physical"]){
     data[n]=!!form.elements[n]?.checked;
   }
-
   return data;
 }
 
+function validateNoPoBoxes(){
+  for(const input of form.querySelectorAll("[data-no-po-box]")){
+    input.setCustomValidity(PO_BOX_RE.test(input.value) ? "P.O. Boxes are not allowed. Enter a physical street address." : "");
+    if(!input.checkValidity()){input.reportValidity();input.focus();return false;}
+  }
+  return true;
+}
+
+form.querySelectorAll("[data-no-po-box]").forEach(input=>input.addEventListener("input",()=>{
+  input.setCustomValidity(PO_BOX_RE.test(input.value) ? "P.O. Boxes are not allowed. Enter a physical street address." : "");
+}));
+
 form.addEventListener("submit",async e=>{
   e.preventDefault();
-
+  if(!validateNoPoBoxes()||!form.reportValidity()) return;
   submitBtn.disabled=true;
   msg.textContent="Submitting…";
   msg.className="msg";
-
   try{
     let security={};
-    try{
-      security=window.Screenings4uFormSecurity?.payload(form) || {};
-    }catch(err){
-      console.warn("Form security is still initializing.",err);
-      security={};
-    }
-    const intake=collectIntake();
-
-    const response=await fetch(API,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        formKey:"lab_account_intake",
-        turnstileToken:security.turnstileToken || "",
-        formStartedAt:security.formStartedAt || formStartedAt,
-        websiteTrap:security.websiteTrap || form.elements.websiteTrap?.value || "",
-        sourceUrl:location.href,
-        payload:intake
-      })
-    });
-
+    try{security=window.Screenings4uFormSecurity?.payload(form)||{};}catch(err){console.warn("Form security is still initializing.",err);}
+    const response=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({formKey:"lab_account_intake",turnstileToken:security.turnstileToken||"",formStartedAt:security.formStartedAt||formStartedAt,websiteTrap:security.websiteTrap||form.elements.websiteTrap?.value||"",sourceUrl:location.href,payload:collectIntake()})});
     const result=await response.json().catch(()=>({}));
-
-    if(!response.ok || result.error){
-      try{
-        window.Screenings4uFormSecurity?.reset(form);
-      }catch(err){
-        console.warn("Unable to reset Turnstile widget.",err);
-      }
-      throw new Error(result.error || "Unable to submit the lab account intake.");
-    }
-
-    msg.textContent="Your intake has been received. A confirmation email has been sent, and the submission has been linked to your screenings4u customer account when a matching account is available.";
+    if(!response.ok||result.error){try{window.Screenings4uFormSecurity?.reset(form);}catch{}throw new Error(result.error||"Unable to submit the lab account intake.");}
+    msg.textContent=`Your intake has been received. Submission ${result.submissionNumber||""}`.trim();
     msg.className="msg success";
-
-    if(result.portalUrl){
-      const existing=document.getElementById("portalLink");
-      if(existing) existing.remove();
-
-      const link=document.createElement("a");
-      link.id="portalLink";
-      link.className="btn secondary";
-      link.href=result.portalUrl;
-      link.textContent="Open Customer Portal";
-      link.style.textDecoration="none";
-      submitBtn.parentElement.appendChild(link);
-    }
-  }catch(e){
-    msg.textContent=e?.message || "Unable to submit the lab account intake.";
-    msg.className="msg error";
-  }finally{
-    submitBtn.disabled=false;
-  }
+    if(result.portalUrl){document.getElementById("portalLink")?.remove();const link=document.createElement("a");link.id="portalLink";link.className="btn secondary";link.href=result.portalUrl;link.textContent="Open Customer Portal";link.style.textDecoration="none";submitBtn.parentElement.appendChild(link);}
+  }catch(e){msg.textContent=e?.message||"Unable to submit the lab account intake.";msg.className="msg error";}finally{submitBtn.disabled=false;}
 });
 </script>
 </body>
