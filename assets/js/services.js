@@ -31,7 +31,9 @@ let activeCategory = "All";
    RENDER SERVICE CATALOG
 ========================================================= */
 
-function renderServiceCatalog() {
+async function renderServiceCatalog() {
+
+  if (typeof refreshTestingCatalog === "function") await refreshTestingCatalog();
 
   const services =
     typeof getAllTestServices === "function"

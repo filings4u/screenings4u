@@ -60,7 +60,7 @@
 
     const baseUrl =
       window.SCREENINGS4U_SUPABASE_URL ||
-      "https://rgsrubdtljyxmnihwlah.supabase.co";
+      "https://elpbnytpciqnbexiaebp.supabase.co";
 
     const formKey = form.dataset.s4uFormKey;
     const button = form.querySelector('[type="submit"]');

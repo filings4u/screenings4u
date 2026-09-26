@@ -1148,6 +1148,8 @@ async function ensureServiceCatalogLoaded() {
 
 async function initCheckout() {
 
+  if (typeof refreshTestingCatalog === "function") await refreshTestingCatalog();
+
   try {
 
 
@@ -2513,7 +2515,7 @@ async function validateBillingAddressWithUSPS(form) {
     }
 
     const response = await fetch(
-      "https://rgsrubdtljyxmnihwlah.supabase.co/functions/v1/validate-usps-address",
+      "https://elpbnytpciqnbexiaebp.supabase.co/functions/v1/validate-address",
       {
         method: "POST",
         headers: {

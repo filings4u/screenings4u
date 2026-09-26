@@ -20,8 +20,7 @@ function initS4UFooter() {
           <strong>Need help choosing the right service?</strong>
 
           <p>
-            Our team can help with individual testing, employer programs,
-            DOT compliance, and training.
+            Our team can help with personal, workplace, mobile, post-accident, DOT, and non-DOT drug and alcohol testing.
           </p>
         </div>
 
@@ -70,9 +69,7 @@ function initS4UFooter() {
           </a>
 
           <p class="footer-about">
-            Nationwide drug and alcohol testing, DOT compliance,
-            workplace screening, and professional training through
-            one trusted partner.
+            Nationwide drug and alcohol testing for individuals, employers, and workplace testing events through one trusted partner.
           </p>
 
           <div class="footer-contact">
@@ -118,7 +115,7 @@ function initS4UFooter() {
             <a href="services.html">All Services</a>
             <a href="dot-urine-drug-tests.html">DOT Drug Testing</a>
             <a href="dot-breathalyzer-services.html">DOT Alcohol Testing</a>
-            <a href="dot-physical-exam-services.html">DOT Physicals</a>
+            
             <a href="workplace-drug-and-alcohol-testing.html">
               Workplace Testing
             </a>
@@ -126,38 +123,19 @@ function initS4UFooter() {
 
 
           <div class="footer-col">
-            <h4>For Business</h4>
-
-            <a href="business-services.html">Business Services</a>
-            <a href="mobile-drug-and-alcohol-testing.html">Mobile Testing</a>
-            <a href="consulting-services.html">Consulting</a>
-            <a href="background-checks.html">Background Checks</a>
-            <a href="new-entrant-audit.html">New Entrant Audit</a>
+            <h4>Workplace Testing</h4>
+            <a href="workplace-drug-and-alcohol-testing.html">Workplace Testing</a>
+            <a href="mobile-drug-and-alcohol-testing.html">Mobile &amp; On-Site Testing</a>
+            <a href="post-accident-testing.html">Post-Accident Testing</a>
           </div>
 
 
           <div class="footer-col">
-            <h4>Account &amp; Training</h4>
-
-            <a href="https://customers.screenings4u.com/login.html">
-              Customer Login
-            </a>
-
-            <a href="https://portal.screenings4u.com/employer-login.html">
-              Employer Login
-            </a>
-
-            <a href="https://training.screenings4u.com">
-              Access Training
-            </a>
-
-            <a href="https://training.screenings4u.com/">
-              Training Courses
-            </a>
-
-            <a href="contact.html">
-              Support
-            </a>
+            <h4>Customer Access</h4>
+            <a href="https://customers.screenings4u.com/login.html">Customer Login</a>
+            <a href="services.html">Order a Test</a>
+            <a href="contact.html">Testing Support</a>
+            <a href="join-our-collector-network.html">Collector Network</a>
           </div>
 
         </nav>
@@ -204,7 +182,7 @@ function initS4UFooter() {
 
 
         <a
-          href="https://portal.screenings4u.com/admin-login.html"
+          href="https://portals.screenings4u.com/admin-login.html"
           class="footer-admin-login"
         >
           Admin Login

@@ -21,7 +21,9 @@ document.addEventListener(
    RENDER SERVICE
 ========================================================= */
 
-function renderService() {
+async function renderService() {
+
+  if (typeof refreshTestingCatalog === "function") await refreshTestingCatalog();
 
   const params =
     new URLSearchParams(

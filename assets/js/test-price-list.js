@@ -1695,6 +1695,23 @@ const TEST_SERVICES = {
 };
 
 
+
+const SCREENINGS4U_PUBLIC_TESTING_IDS = new Set(["dot_breathalyzer_pre_employment", "dot_breathalyzer_random", "dot_breathalyzer_post_accident", "dot_breathalyzer_reasonable_suspicion", "dot_follow_up", "dot_personal_test", "dot_post_accident", "dot_pre_employment", "dot_random_test", "dot_reasonable_suspicion", "dot_return_to_duty", "etg_alcohol_hair", "etg_plus_10_panel", "etg_plus_5_panel", "etg_urine_alcohol", "hair_12_panel", "hair_14_panel", "hair_17_panel", "hair_5_panel", "hair_5_panel_expanded_opiates", "hair_7_panel", "hair_9_panel", "oral_10_panel", "oral_5_panel", "oral_post_accident", "urine_10_panel_lab", "urine_10_panel_rapid", "urine_12_panel", "urine_14_panel", "urine_18_panel", "urine_4_panel", "urine_5_panel", "urine_5_panel_expanded_opiates"]);
+let SCREENINGS4U_LIVE_CATALOG_LOADED = false;
+async function refreshTestingCatalog(){
+  if(SCREENINGS4U_LIVE_CATALOG_LOADED) return getAllTestServices();
+  try{
+    const base=(window.SCREENINGS4U_SUPABASE_URL||"").replace(/\/+$/,"");
+    if(!base) return getAllTestServices();
+    const r=await fetch(base+"/functions/v1/public-testing-catalog",{headers:{apikey:window.SCREENINGS4U_SUPABASE_ANON_KEY||""}});
+    const d=await r.json();
+    if(!r.ok||!Array.isArray(d.services)) throw new Error(d.error||"Catalog unavailable");
+    for(const item of d.services){TEST_SERVICES[item.id]={...(TEST_SERVICES[item.id]||{}),...item};SCREENINGS4U_PUBLIC_TESTING_IDS.add(item.id);}
+    SCREENINGS4U_LIVE_CATALOG_LOADED=true;
+  }catch(e){console.warn("Using local Testing catalog fallback.",e)}
+  return getAllTestServices();
+}
+
 /* =========================================================
    service CATALOG HELPERS
    ========================================================= */
@@ -1707,14 +1724,14 @@ function getTestService(serviceId) {
     return null;
   }
 
-  return TEST_SERVICES[serviceId];
+  return SCREENINGS4U_PUBLIC_TESTING_IDS.has(serviceId) ? TEST_SERVICES[serviceId] : null;
 }
 
 /**
  * Return every service in the catalog.
  */
 function getAllTestServices() {
-  return Object.values(TEST_SERVICES);
+  return Object.values(TEST_SERVICES).filter(service => SCREENINGS4U_PUBLIC_TESTING_IDS.has(service.id));
 }
 
 /**
@@ -1824,5 +1841,8 @@ window.Screenings4UTestCatalog = {
   getTestServicesByCategory,
   formatTestPrice,
   getStripeAmount,
-  validateTestService
+  validateTestService,
+  refreshTestingCatalog
 };
+
+window.refreshTestingCatalog = refreshTestingCatalog;

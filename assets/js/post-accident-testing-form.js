@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeSelectedService();
   initializeVehicleLogic();
   initializeConditionalFields();
+  initializeSubmission();
 });
 
 const STATE_OPTIONS = [
@@ -193,39 +194,14 @@ function initializeConditionalFields() {
 function initializeSubmission() {
   const form = document.getElementById('postAccidentForm');
   const status = document.getElementById('formStatus');
-
   form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    status.className = 'status';
-    status.textContent = '';
-
-    if (!validateTestSelection()) {
-      showStatus('Please select at least one testing service.', 'error');
-      document.getElementById('testOptions').scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
-    }
-
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    const formData = new FormData(form);
-
-    /*
-      BACKEND HOOK:
-      Replace this section with your Supabase insert/storage logic.
-      The complete form data is available in formData.
-    */
-
-    console.log('Post-accident testing request:', Object.fromEntries(formData.entries()));
-
-    showStatus(
-      'Your post-accident testing request has been captured. A screenings4u specialist can review the information and coordinate the next step.',
-      'success'
-    );
-
-    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    event.preventDefault(); status.className='status'; status.textContent='';
+    if (!validateTestSelection()) { showStatus('Please select at least one testing service.', 'error'); return; }
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    const fd=new FormData(form), raw={}; for(const [k,v] of fd.entries()){if(v instanceof File)continue;if(k.endsWith('[]')){const key=k.slice(0,-2);(raw[key]||(raw[key]=[])).push(v)}else raw[k]=v}
+    const payload={request_type:'post_accident',source:'website',source_url:location.href,contact_name:[raw.requester_first_name,raw.requester_last_name].filter(Boolean).join(' '),contact_email:raw.requester_email,contact_phone:raw.requester_phone,company_name:raw.company_name,address_line_1:raw.company_address,city:raw.company_city,state:raw.company_state,postal_code:raw.company_zip,donor_count:1,dot_test:!!raw.dot_agency,dot_agency:raw.dot_agency||null,requested_services:raw.test_options||[],accident_details:{driver_first_name:raw.driver_first_name,driver_last_name:raw.driver_last_name,driver_phone:raw.driver_phone,driver_license_number:raw.driver_license_number,vehicle_type:raw.vehicle_type,description:raw.description,location_type:raw.location_type},notes:raw.collector_instruction_details||null,raw_form:raw};
+    try{showStatus('Submitting your post-accident testing request…','');const base=(window.SCREENINGS4U_SUPABASE_URL||'').replace(/\/+$/,'');const r=await fetch(base+'/functions/v1/testing-request-submit',{method:'POST',headers:{'Content-Type':'application/json','apikey':window.SCREENINGS4U_SUPABASE_ANON_KEY||''},body:JSON.stringify(payload)}),d=await r.json().catch(()=>({}));if(!r.ok||!d.success)throw new Error(d.error||'Unable to submit request.');showStatus(`Request ${d.requestNumber} received. A screenings4u testing specialist will contact you.`, 'success');}
+    catch(x){showStatus(x.message||'Unable to submit request.','error');}
   });
 }
 

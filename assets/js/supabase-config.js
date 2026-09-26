@@ -1,8 +1,8 @@
 /* SCREENINGS4U — SUPABASE CONFIG — SESSION STORAGE ONLY */
 (() => {
   "use strict";
-  const SUPABASE_URL = "https://rgsrubdtljyxmnihwlah.supabase.co";
-  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnc3J1YmR0bGp5eG1uaWh3bGFoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY2NjYxODgsImV4cCI6MjEwMjI0MjE4OH0.al5nEbeGjGncHZ9cJjh1oN76XjfS4EfYj5fXyeD2CE0";
+  const SUPABASE_URL = "https://elpbnytpciqnbexiaebp.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJIUzI1NiIsInJlZiI6ImVscGJueXRwY2lxbmJleGlhZWJwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAyOTYwMzQsImV4cCI6MjEwNTg3MjAzNH0.kWzPDxpdeorkJJpP6pvt4LCP-W9uGGVAgcQVVheVuE8";
   window.SCREENINGS4U_SUPABASE_URL=SUPABASE_URL;
   window.SCREENINGS4U_SUPABASE_ANON_KEY=SUPABASE_ANON_KEY;
   if(!window.screenings4uSupabase && window.supabase?.createClient){
