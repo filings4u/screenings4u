@@ -3426,11 +3426,18 @@ async function createPaymentIntent(form) {
 
     window.Screenings4uFormSecurity?.reset(form);
 
+    const normalizeServerError = (value) => {
+      if (!value) return "";
+      if (typeof value === "string") return value;
+      if (typeof value?.message === "string") return value.message;
+      try { return JSON.stringify(value); } catch { return String(value); }
+    };
+
     const serverErrorParts = [
-      result?.error || result?.message,
-      result?.stage ? "Stage: " + result.stage : "",
-      result?.code ? "Code: " + result.code : "",
-      result?.details ? "Details: " + result.details : ""
+      normalizeServerError(result?.error || result?.message),
+      result?.stage ? "Stage: " + normalizeServerError(result.stage) : "",
+      result?.code ? "Code: " + normalizeServerError(result.code) : "",
+      result?.details ? "Details: " + normalizeServerError(result.details) : ""
     ].filter(Boolean);
 
     const serverErrorMessage =
