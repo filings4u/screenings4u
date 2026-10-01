@@ -182,12 +182,7 @@ form.querySelectorAll("[data-no-po-box]").forEach(input=>input.addEventListener(
 }));
 
 form.addEventListener("submit",async e=>{
-  if(!intakeToken){
-    e.preventDefault();
-    msg.textContent="This intake link is incomplete. Please reopen the secure Lab Account Intake link from your screenings4u order or email.";
-    msg.className="msg error";
-    return;
-  }
+
   e.preventDefault();
   if(!validateNoPoBoxes()||!form.reportValidity()) return;
   submitBtn.disabled=true;
