@@ -3,268 +3,127 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="#24467f" name="theme-color"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="Personal drug and alcohol testing services for individuals who need convenient, professional testing through screenings4u." name="description"/>
 <title>Personal Drug &amp; Alcohol Testing | screenings4u</title>
-<link href="images/fav.png" rel="icon" type="image/png">
+<link href="images/fav.png" rel="icon" type="image/png"/>
+<meta content="#24467f" name="theme-color"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
-  <link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
-  <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2"><style>
-input, select, textarea{font:inherit}
-
-
-.eyebrow:before{content:"";width:28px;height:2px;background:var(--orange)}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.hero{position:relative;min-height:700px;display:flex;align-items:center;background:
-linear-gradient(90deg,rgba(7,26,49,.98) 0%,rgba(7,26,49,.93) 31%,rgba(7,26,49,.66) 53%,rgba(7,26,49,.12) 78%,rgba(7,26,49,0) 100%),
-url("images/personal-drug-and-alcohol-testing-hero.webp") 38% center/cover no-repeat;overflow:hidden}
-.hero:after{content:"";position:absolute;right:-170px;top:-220px;width:500px;height:500px;background:var(--orange);opacity:.96;transform:rotate(35deg);clip-path:polygon(42% 0,100% 0,100% 58%)}
-.hero-inner{position:relative;z-index:2;padding:92px 0 130px}.hero-copy{max-width:700px;color:#fff}
-.hero-copy .eyebrow{color:#ffad73}.hero-copy .eyebrow:before{background:#ffad73}
-.hero h1{font-size:clamp(48px,6vw,78px);line-height:.98;letter-spacing:-.055em;font-weight:900;margin-bottom:24px}
-.hero h1 span{color:var(--orange)}.hero-lead{max-width:650px;color:#d4e1f0;font-size:18px;line-height:1.7;margin-bottom:32px}
-.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:48px}.hero-actions .btn-outline{color:#fff;border-color:rgba(255,255,255,.55);background:transparent}
-.hero-actions .btn-outline:hover{color:var(--blue-dark);background:#fff;border-color:#fff}
-.hero-features{display:grid;grid-template-columns:repeat(4,1fr);max-width:760px;border-top:1px solid rgba(255,255,255,.18);padding-top:22px}
-.hero-feature{padding:0 17px;border-right:1px solid rgba(255,255,255,.18)}
-.hero-feature:first-child{padding-left:0}.hero-feature:last-child{border-right:0}
-.hero-feature strong{display:block;font-size:12px;line-height:1.3}.hero-feature small{display:block;color:#a8bad0;font-size:10px;margin-top:4px}
-
-.intro{padding:105px 0 95px}.intro-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
-.intro h2, .process-copy h2{color:var(--blue-dark);font-size:clamp(34px,4vw,51px);line-height:1.05;letter-spacing:-.04em;margin-bottom:18px}
-.intro-copy p{color:var(--muted);font-size:16px;margin-bottom:18px}.check-list{display:grid;gap:13px;margin-top:25px}
-.check-list li{list-style:none;display:flex;gap:12px;align-items:flex-start;color:#344054;font-size:14px;font-weight:600}
-.check-list li:before{content:"✓";flex:0 0 23px;width:23px;height:23px;display:grid;place-items:center;border-radius:50%;background:var(--blue-soft);color:var(--blue);font-weight:900;font-size:12px}
-.info-card{padding:38px;border-radius:20px;background:var(--blue-dark);color:#fff;box-shadow:var(--shadow)}
-.info-card h3{font-size:29px;line-height:1.08;margin-bottom:12px}.info-card p{color:#d4e1f0;font-size:14px;line-height:1.7;margin-bottom:25px}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.info-stat{padding:18px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.05)}
-.info-stat strong{display:block;font-size:13px;margin-bottom:4px}.info-stat span{display:block;color:#aebfd3;font-size:11px;line-height:1.45}
-
-.services{padding:105px 0;background:var(--surface-2);border-block:1px solid var(--line)}
-.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.service-card{padding:29px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);transition:.2s ease}
-.service-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line-strong)}
-.service-number{width:42px;height:42px;display:grid;place-items:center;margin-bottom:18px;border-radius:10px;background:var(--blue-soft);color:var(--blue);font-size:12px;font-weight:900}
-.service-card h3{color:var(--blue-dark);font-size:18px;margin-bottom:8px}.service-card p{color:var(--muted);font-size:12.5px;line-height:1.65}
-.service-link{display:inline-flex;margin-top:18px;color:var(--orange);font-size:12px;font-weight:900}
-
-.requirements{padding:105px 0}.requirements-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.requirement-panel{padding:38px;border-radius:var(--radius);background:var(--blue-dark);color:#fff}.requirement-panel.orange{background:var(--orange)}
-.requirement-panel h3{font-size:28px;line-height:1.1;margin-bottom:12px}.requirement-panel p{color:#d4e1f0;font-size:13px;line-height:1.7}
-.requirement-panel.orange p{color:#fff0e6}.requirement-panel ul{display:grid;gap:11px;margin-top:22px}
-.requirement-panel li{list-style:none;display:flex;gap:10px;color:#fff;font-size:12px}
-.requirement-panel li:before{content:"✓";width:21px;height:21px;flex:0 0 21px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.14);color:var(--orange);font-weight:900}
-
-.process{padding:105px 0;background:var(--blue-pale);border-top:1px solid var(--line)}.process-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:start}
-.process-copy p{color:var(--muted);font-size:15px}.steps{display:grid}.step{display:grid;grid-template-columns:58px 1fr;gap:20px;padding-bottom:30px;position:relative}
-.step:not(:last-child):after{content:"";position:absolute;left:28px;top:58px;bottom:0;width:1px;background:var(--line)}
-.step-num{position:relative;z-index:2;width:58px;height:58px;display:grid;place-items:center;border-radius:50%;color:#fff;background:var(--blue);font-size:14px;font-weight:900;box-shadow:0 0 0 7px #edf3fb}
-.step h3{color:var(--blue-dark);font-size:19px;margin:4px 0 5px}.step p{color:var(--muted);font-size:13px;max-width:580px}
-
-.cta{padding:85px 0;background:#eef3f9;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:30px}.cta h2{font-size:clamp(30px,4vw,45px);line-height:1.05;letter-spacing:-.035em;color:var(--blue-dark);margin-bottom:8px}
-.cta p{color:var(--muted);font-size:15px}.cta-actions{display:flex;flex-wrap:wrap;gap:10px}
-.faq{padding:105px 0}.faq-list{display:grid;gap:10px;max-width:900px}.faq-item{border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
-.faq-question{width:100%;padding:19px 21px;display:flex;justify-content:space-between;align-items:center;border:0;background:#fff;color:var(--blue-dark);text-align:left;font-size:14px;font-weight:800}
-.faq-answer{display:none;padding:0 21px 20px;color:var(--muted);font-size:13px;line-height:1.7}.faq-item.active .faq-answer{display:block}.faq-plus{color:var(--orange);font-size:19px}
-
-
-@media(max-width:900px){
-.hero{min-height:620px}.intro-grid,.requirements-grid,.process-grid{grid-template-columns:1fr}.service-grid{grid-template-columns:1fr 1fr}
-.hero-features{grid-template-columns:1fr 1fr;gap:18px}.hero-feature{border-right:0}.cta-inner{flex-direction:column;align-items:flex-start}
-}
-@media(max-width:600px){
-.hero{min-height:650px;background-position:60% center}
-.hero-inner{padding:70px 0 90px}.hero h1{font-size:48px}.hero-lead{font-size:15px}.hero-actions{flex-direction:column}
-.hero-actions .btn{width:100%}.hero-features{grid-template-columns:1fr 1fr}.service-grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr}
-}
-
-.mobile-page-actions{display:none}
-@media(max-width:767px){
-
-.full-banner, .announcement-bar, .promo-banner, [data-full-banner]{display:none!important}
-
-
-.mobile-page-actions{display:grid;gap:10px;margin-top:12px;padding-top:16px;border-top:1px solid var(--line)}.mobile-page-actions a{display:flex;align-items:center;justify-content:center;min-height:48px;padding:10px 16px;border-radius:8px;background:var(--blue);color:#fff;font-weight:800;text-align:center}.mobile-page-actions a:first-child{background:var(--orange)}
-.hero{display:block;min-height:0;padding-top:290px;background:var(--blue-deep)}.hero:before{content:"";position:absolute;inset:0 0 auto;height:290px;background:url("images/personal-drug-and-alcohol-testing-hero.webp") center/cover no-repeat}.hero:after{display:none}.hero-inner{min-height:0;padding-top:34px;padding-bottom:40px;background:var(--blue-deep)}.hero-copy{max-width:none}.hero h1{font-size:clamp(2.15rem,10vw,2.9rem);line-height:1.06}.hero-lead{font-size:1rem;line-height:1.65}.hero-actions,.cta-actions{display:grid;grid-template-columns:1fr;gap:12px}.hero-actions .btn,.cta-actions .btn{width:100%}.hero-features{grid-template-columns:1fr;gap:12px}.hero-feature{padding:0;border:0}
-.intro,.services,.requirements,.process,.faq,.cta{padding-block:54px}.intro h2, .process-copy h2, .cta h2{font-size:clamp(1.8rem,8vw,2.35rem)}
-.intro-grid,.service-grid,.requirements-grid,.process-grid,.info-grid{grid-template-columns:minmax(0,1fr);gap:20px}.info-card,.service-card,.requirement-panel{padding:24px}.cta-inner{align-items:stretch}.faq-question{min-height:56px;padding:17px 18px}.faq-answer{padding:0 18px 20px}
-}
-@media(max-width:380px){.hero{padding-top:245px}.hero:before{height:245px}.hero h1{font-size:2rem}.info-card,.service-card,.requirement-panel{padding:20px}}
-@media(prefers-reduced-motion:reduce){*:before, *:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-</style>
-</head>
-<body><div class="topbar">
-<div class="container topbar-inner">
-<div class="topbar-left">
-<span>Nationwide Drug &amp; Alcohol Testing</span><span aria-hidden="true">•</span><span>Operating Nationwide</span>
-</div>
-<div class="topbar-right">
-<span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a>
-</div>
-</div>
-</div><header class="site-header">
-  <div class="container nav-inner" id="navInner">
-    <a href="index.html" class="brand" aria-label="screenings4u home">
-      <img src="images/logo.png" alt="screenings4u" class="site-logo">
-    </a>
-    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation"></nav>
-    <div class="nav-actions">
-      <a href="services.html" class="btn btn-outline">Order a Test</a>
-      <div class="nav-account-menu">
-        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron" aria-hidden="true">▼</span></button>
-        <div class="nav-account-dropdown">
-          <a href="https://customers.screenings4u.com/login.html">Customer Login</a>
-        </div>
-      </div>
-      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mobileNav" aria-label="Open menu" aria-expanded="false">☰</button>
-    </div>
-  </div>
-</header>
-<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
+<link href="assets/css/global.css?v=20261002-shell1" rel="stylesheet"/>
+<link href="assets/css/navigation.css?v=20261002-shell1" rel="stylesheet"/>
+<link href="assets/css/footer.css?v=20261002-shell1" rel="stylesheet"/>
+<link href="assets/css/personal-drug-and-alcohol-testing.css?v=20261002-1" rel="stylesheet"/>
+<link href="https://screenings4u.com/personal-drug-and-alcohol-testing.html" rel="canonical"/><meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/><meta content="website" property="og:type"/><meta content="screenings4u" property="og:site_name"/><meta content="Personal Drug &amp; Alcohol Testing | screenings4u" property="og:title"/><meta content="Personal drug and alcohol testing services for individuals who need convenient, professional testing through screenings4u." property="og:description"/><meta content="https://screenings4u.com/personal-drug-and-alcohol-testing.html" property="og:url"/><meta content="https://screenings4u.com/images/logo.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Personal Drug &amp; Alcohol Testing | screenings4u" name="twitter:title"/><meta content="Personal drug and alcohol testing services for individuals who need convenient, professional testing through screenings4u." name="twitter:description"/><meta content="https://screenings4u.com/images/logo.png" name="twitter:image"/><script id="s4u-seo-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Personal Drug & Alcohol Testing | screenings4u","description":"Personal drug and alcohol testing services for individuals who need convenient, professional testing through screenings4u.","url":"https://screenings4u.com/personal-drug-and-alcohol-testing.html","isPartOf":{"@type":"WebSite","name":"screenings4u","url":"https://screenings4u.com/"}}</script><link href="assets/css/mobile-ready.css?v=20261002-sitewide2" rel="stylesheet"/></head>
+<body class="personal-testing-page">
+<div data-site-header="" id="siteHeader"></div>
 <main>
-<section class="hero">
-<div class="container hero-inner">
-<div class="hero-copy">
-<div class="eyebrow">Personal Testing</div>
-<h1>Drug &amp; Alcohol Testing <span>Made Simple.</span></h1>
-<p class="hero-lead">Need a drug or alcohol test for yourself? screenings4u makes personal testing straightforward with convenient testing options, clear instructions and access to participating collection locations.</p>
-<div class="hero-actions">
-<a class="btn btn-orange" href="#personal-services">View Testing Services →</a>
-<a class="btn btn-outline" href="contact.html">Talk to a Specialist →</a>
+<section class="pt-hero">
+<div class="container pt-hero-grid">
+<div class="pt-hero-copy">
+<div>
+<span class="pt-kicker">Personal Drug &amp; Alcohol Testing</span>
+<h1>Personal testing without the <span>guesswork.</span></h1>
+<p class="pt-lead">Order the testing you need, get clear instructions, and complete collection through a participating location with support from screenings4u.</p>
+<div class="pt-actions">
+<a class="btn btn-orange" href="services.html">View Testing Services →</a>
+<a class="btn btn-outline" href="contact.html">Talk With Our Team</a>
 </div>
-<div class="hero-features">
-<div class="hero-feature"><strong>Convenient</strong><small>Find a participating testing location</small></div>
-<div class="hero-feature"><strong>Professional</strong><small>Testing through established collection services</small></div>
-<div class="hero-feature"><strong>Clear Process</strong><small>Know what to expect before you arrive</small></div>
-<div class="hero-feature"><strong>Nationwide</strong><small>Access to participating locations</small></div>
 </div>
+<div class="pt-proof">
+<div><strong>Clear</strong><span>testing instructions</span></div>
+<div><strong>Convenient</strong><span>collection access</span></div>
+<div><strong>Professional</strong><span>testing support</span></div>
+</div>
+</div>
+<div class="pt-hero-media">
+<img alt="Personal drug and alcohol testing" decoding="async" fetchpriority="high" height="1024" loading="eager" src="images/personal-drug-and-alcohol-testing-hero.webp" width="1536"/>
+<span class="pt-badge">Personal testing support</span>
 </div>
 </div>
 </section>
-<section class="intro">
-<div class="container intro-grid">
-<div class="intro-copy">
-<span class="eyebrow">Personal Drug Testing</span>
-<h2>Get the testing you need without the confusion.</h2>
-<p>Whether testing is required for employment, a personal requirement, court-related documentation, school, professional licensing or another purpose, screenings4u helps make the process easier to understand and coordinate.</p>
-<ul class="check-list">
-<li>Personal drug testing options</li>
-<li>Personal alcohol testing options</li>
-<li>Employment and pre-employment testing support</li>
-<li>Access to participating collection locations</li>
-<li>Clear instructions for completing your test</li>
+<section aria-label="Personal testing options" class="pt-quick">
+<div class="container pt-quick-grid">
+<a href="#personal-services"><span>01</span><strong>Testing Options</strong><small>Review drug and alcohol testing services.</small></a>
+<a href="#before-you-test"><span>02</span><strong>Before You Test</strong><small>Know what to bring and expect.</small></a>
+<a href="#how-it-works"><span>03</span><strong>How It Works</strong><small>See the testing process from order to collection.</small></a>
+<a href="contact.html"><span>04</span><strong>Need Help?</strong><small>Ask our team which service fits your requirement.</small></a>
+</div>
+</section>
+<section class="pt-section pt-section-soft" id="personal-services">
+<div class="container">
+<div class="pt-section-head">
+<span class="eyebrow">Personal Testing Services</span>
+<h2>Choose the testing service that fits your requirement.</h2>
+<p>Whether you need testing for employment, documentation, school, court-related requirements, or another personal need, we help make the process easier to understand.</p>
+</div>
+<div class="pt-service-grid">
+<article class="pt-service-card"><span>01</span><h3>Personal Drug Testing</h3><p>Order a drug test for a personal, employment, school, licensing, or documentation requirement.</p><a href="checkout.html?service=urine_5_panel">Order test →</a></article>
+<article class="pt-service-card"><span>02</span><h3>Personal Alcohol Testing</h3><p>Arrange alcohol testing when documented testing is required for work or another qualifying need.</p><a href="checkout.html?service=etg_urine_alcohol">Order test →</a></article>
+<article class="pt-service-card"><span>03</span><h3>Drug + Alcohol Testing</h3><p>Coordinate both drug and alcohol testing when both services are required.</p><a href="checkout.html?service=etg_plus_5_panel">Order test →</a></article>
+<article class="pt-service-card"><span>04</span><h3>Pre-Employment Testing</h3><p>Complete testing requested by a prospective employer before starting a new position.</p><a href="checkout.html?service=urine_5_panel">Order test →</a></article>
+<article class="pt-service-card"><span>05</span><h3>Court-Ordered Testing</h3><p>Ask about testing services for court-related or documented monitoring requirements.</p><a href="court-ordered-etg-drug-and-alcohol-testing.html">Explore court testing →</a></article>
+<article class="pt-service-card"><span>06</span><h3>Special Testing Needs</h3><p>Not sure what to order? Tell us what documentation or testing requirement you were given.</p><a href="contact.html">Talk with our team →</a></article>
+</div>
+</div>
+</section>
+<section class="pt-section" id="before-you-test">
+<div class="container pt-info-grid">
+<div class="pt-info-panel">
+<span class="eyebrow">Before Your Visit</span>
+<h2>Know what to bring before collection.</h2>
+<p>Requirements can vary by testing service and collection location, so review your instructions before arriving.</p>
+<ul>
+<li>Bring required photo identification</li>
+<li>Bring your testing order or authorization</li>
+<li>Confirm the collection location and hours</li>
+<li>Follow any service-specific instructions</li>
+<li>Arrive within the required testing window</li>
 </ul>
 </div>
-<div class="info-card">
-<h3>Testing that works around your schedule.</h3>
-<p>Order the appropriate test, receive the information you need and complete collection at a participating location. Our goal is to make personal testing easier from start to finish.</p>
-<div class="info-grid">
-<div class="info-stat"><strong>Drug Testing</strong><span>Personal drug testing options based on your testing needs.</span></div>
-<div class="info-stat"><strong>Alcohol Testing</strong><span>Alcohol testing options when an alcohol test is required.</span></div>
-<div class="info-stat"><strong>Employment</strong><span>Support for individuals completing employer-requested testing.</span></div>
-<div class="info-stat"><strong>Convenience</strong><span>Connect with participating testing locations.</span></div>
-</div>
+<div class="pt-info-cards">
+<article><span>IDENTIFICATION</span><h3>Bring valid ID</h3><p>Collection sites generally require identification before testing can begin.</p></article>
+<article><span>AUTHORIZATION</span><h3>Have your order ready</h3><p>Bring the testing order, authorization, or instructions associated with your service.</p></article>
+<article><span>LOCATION</span><h3>Confirm before traveling</h3><p>Make sure you have the correct collection site, hours, and any appointment details.</p></article>
+<article><span>COLLECTION</span><h3>Follow site instructions</h3><p>The collector will guide you through the applicable testing and documentation process.</p></article>
 </div>
 </div>
 </section>
-<section class="services" id="personal-services">
-<div class="container">
-<div class="section-heading">
-<span class="eyebrow">Personal Testing Services</span>
-<h2>Choose the testing service that fits your needs.</h2>
-<p>Select the type of testing you need and get the process started with straightforward instructions and access to participating collection locations.</p>
-</div>
-<div class="service-grid">
-<article class="service-card"><div class="service-number">01</div><h3>Personal Drug Test</h3><p>Order a drug test for employment, personal documentation or another qualifying testing need.</p><a class="service-link" href="services.html">Get Started →</a></article>
-<article class="service-card"><div class="service-number">02</div><h3>Personal Alcohol Test</h3><p>Arrange alcohol testing when a documented alcohol test is required.</p><a class="service-link" href="services.html">Get Started →</a></article>
-<article class="service-card"><div class="service-number">03</div><h3>Drug &amp; Alcohol Package</h3><p>Coordinate both drug and alcohol testing through one convenient personal testing request.</p><a class="service-link" href="services.html">Get Started →</a></article>
-<article class="service-card"><div class="service-number">04</div><h3>Pre-Employment Testing</h3><p>Complete testing requested by a prospective employer before beginning a new position.</p><a class="service-link" href="services.html">Get Started →</a></article>
-<article class="service-card"><div class="service-number">05</div><h3>Random Testing</h3><p>Arrange a personal collection appointment when you have been selected for required testing.</p><a class="service-link" href="services.html">Get Started →</a></article>
-<article class="service-card"><div class="service-number">06</div><h3>Other Testing Needs</h3><p>Have a specific testing requirement? Contact our team to determine the appropriate service.</p><a class="service-link" href="contact.html">Talk to Us →</a></article>
-</div>
-</div>
-</section>
-<section class="requirements">
-<div class="container">
-<div class="section-heading">
-<span class="eyebrow">Before You Test</span>
-<h2>Know what to expect before your appointment.</h2>
-<p>A little preparation can make the collection process easier and help you arrive ready to complete your testing.</p>
-</div>
-<div class="requirements-grid">
-<div class="requirement-panel">
-<h3>Before Your Visit</h3>
-<p>Have the information and identification you need ready for collection.</p>
-<ul><li>Know which test you were instructed to complete</li><li>Bring required identification</li><li>Bring any testing authorization or order</li><li>Review the collection location instructions</li><li>Arrive during your scheduled testing window</li></ul>
-</div>
-<div class="requirement-panel orange">
-<h3>At Collection</h3>
-<p>Follow the collector's instructions and complete the applicable testing process.</p>
-<ul><li>Check in with the collection facility</li><li>Present required documentation</li><li>Follow collection instructions</li><li>Complete required paperwork</li><li>Confirm the collection is complete</li></ul>
-</div>
-</div>
-</div>
-</section>
-<section class="process">
-<div class="container process-grid">
-<div class="process-copy">
+<section class="pt-process" id="how-it-works">
+<div class="container pt-process-grid">
+<div class="pt-process-copy">
 <span class="eyebrow">How It Works</span>
 <h2>A simple path from order to collection.</h2>
-<p>Choose your test, receive the appropriate information and complete collection at a participating location.</p>
+<p>Choose the right service, receive your instructions, and complete testing through the appropriate collection process.</p>
 </div>
-<div class="steps">
-<div class="step"><div class="step-num">01</div><div><h3>Select Your Test</h3><p>Choose the drug, alcohol or combined testing service that matches your requirement.</p></div></div>
-<div class="step"><div class="step-num">02</div><div><h3>Complete Your Order</h3><p>Provide the information needed to coordinate your personal testing request.</p></div></div>
-<div class="step"><div class="step-num">03</div><div><h3>Visit the Collection Location</h3><p>Follow your testing instructions and arrive at the participating location prepared to test.</p></div></div>
-<div class="step"><div class="step-num">04</div><div><h3>Complete Your Testing</h3><p>Follow the collector's instructions and complete the applicable testing and documentation process.</p></div></div>
+<div class="pt-steps">
+<article><span>01</span><div><h3>Select your test</h3><p>Choose the drug, alcohol, or combined testing service that matches your requirement.</p></div></article>
+<article><span>02</span><div><h3>Complete your order</h3><p>Provide the information needed to set up your testing request and receive instructions.</p></div></article>
+<article><span>03</span><div><h3>Go to collection</h3><p>Visit the participating collection location with the required identification and documentation.</p></div></article>
+<article><span>04</span><div><h3>Complete testing</h3><p>Follow the collector's instructions and complete the applicable testing process.</p></div></article>
 </div>
 </div>
 </section>
-<section class="faq">
+<section class="pt-faq">
 <div class="container">
-<div class="section-heading">
+<div class="pt-section-head">
 <span class="eyebrow">Personal Testing FAQ</span>
-<h2>Questions about personal drug &amp; alcohol testing?</h2>
-<p>Review the basics before ordering your test.</p>
+<h2>Questions before you order?</h2>
 </div>
-<div class="faq-list">
-<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">What do I need to bring to my testing appointment?<span class="faq-plus">+</span></button><div class="faq-answer">Bring the identification and any testing authorization, order or instructions provided for your specific test. Requirements can vary by testing service and collection location.</div></div>
-<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">Can I order a drug test for employment?<span class="faq-plus">+</span></button><div class="faq-answer">Yes. Personal testing can be used when an employer or prospective employer requires an individual to complete a drug or alcohol test.</div></div>
-<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">Can I get both a drug and alcohol test?<span class="faq-plus">+</span></button><div class="faq-answer">Yes. A combined drug and alcohol testing option may be appropriate when both tests are required. Select the combined service or contact us if you are unsure which test you need.</div></div>
-<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">Where do I complete my test?<span class="faq-plus">+</span></button><div class="faq-answer">Testing is completed through a participating collection location. Availability depends on the service, location and scheduling.</div></div>
+<div class="pt-faq-list">
+<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">What should I bring to my testing appointment?<span class="faq-plus">+</span></button><div class="faq-answer">Bring required identification and any testing authorization, order, or instructions provided for your specific test. Requirements can vary by service and location.</div></div>
+<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">Can I order a test for employment?<span class="faq-plus">+</span></button><div class="faq-answer">Yes. Personal testing may be used when an employer or prospective employer requires you to complete drug or alcohol testing.</div></div>
+<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">Can I order both drug and alcohol testing?<span class="faq-plus">+</span></button><div class="faq-answer">Yes. A combined testing option may be appropriate when both are required. Contact us if you are unsure which service to select.</div></div>
+<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">Where is my test completed?<span class="faq-plus">+</span></button><div class="faq-answer">Testing is completed through a participating collection location. Availability depends on the service, location, and scheduling.</div></div>
 </div>
 </div>
 </section>
 </main>
-<script defer="" src="assets/js/personal-drug-and-alcohol-testing.js"></script>
-
-<footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
-  <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
-  <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
-  <script src="assets/js/site-ui.js?v=20260904-1"></script>
-  <script src="assets/js/footer.js?v=20260904-1"></script></body>
+<footer aria-label="Website footer" class="site-footer" data-site-footer="" id="siteFooter"></footer>
+<script src="assets/js/site-ui.js?v=20260904-1"></script>
+<script defer="" src="assets/js/personal-drug-and-alcohol-testing.js?v=20261002-2"></script>
+<script src="assets/js/navigation.js?v=20261002-shell1"></script>
+<script src="assets/js/footer.js?v=20261002-shell1"></script>
+</body>
 </html>

@@ -1,115 +1,22 @@
-/**
- * screenings4u
- * DOT Urine Drug Tests Page Controller
- * Location: assets/js/dot-urine-drug-tests.js
- */
-
-document.addEventListener("DOMContentLoaded", () => {
-  initMobileNavigation();
-  initFaqAccordion();
-});
-
-/**
- * Mobile navigation
- */
-function initMobileNavigation() {
-  const navInner = document.getElementById("navInner");
-  const mobileToggle = document.getElementById("mobileToggle");
-
-  if (!navInner || !mobileToggle) return;
-
-  mobileToggle.addEventListener("click", () => {
-    const isOpen = navInner.classList.toggle("menu-open");
-
-    mobileToggle.setAttribute("aria-expanded", String(isOpen));
-    mobileToggle.setAttribute(
-      "aria-label",
-      isOpen ? "Close menu" : "Open menu"
-    );
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('[data-faq-toggle]').forEach(button=>{
+    button.addEventListener('click',()=>{
+      const item=button.closest('.faq-item');
+      if(!item)return;
+      const open=item.classList.toggle('active');
+      button.setAttribute('aria-expanded',String(open));
+      const icon=button.querySelector('.faq-plus');
+      if(icon)icon.textContent=open?'−':'+';
+    });
   });
-
-  const dropdownParents = navInner.querySelectorAll(".nav-item");
-
-  dropdownParents.forEach((item) => {
-    const link = item.querySelector(".nav-link");
-    const dropdown = item.querySelector(".dropdown");
-
-    if (!link || !dropdown) return;
-
-    link.addEventListener("click", (event) => {
-      if (window.innerWidth > 1120) return;
-
+  document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+    anchor.addEventListener('click',event=>{
+      const id=anchor.getAttribute('href');
+      if(!id||id==='#')return;
+      const target=document.querySelector(id);
+      if(!target)return;
       event.preventDefault();
-
-      dropdownParents.forEach((otherItem) => {
-        if (otherItem !== item) {
-          otherItem.classList.remove("open");
-        }
-      });
-
-      item.classList.toggle("open");
+      target.scrollIntoView({behavior:'smooth',block:'start'});
     });
   });
-
-  document.addEventListener("click", (event) => {
-    if (!navInner.contains(event.target)) {
-      navInner.classList.remove("menu-open");
-
-      dropdownParents.forEach((item) => {
-        item.classList.remove("open");
-      });
-
-      mobileToggle.setAttribute("aria-expanded", "false");
-      mobileToggle.setAttribute("aria-label", "Open menu");
-    }
-  });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 1120) {
-      navInner.classList.remove("menu-open");
-
-      dropdownParents.forEach((item) => {
-        item.classList.remove("open");
-      });
-
-      mobileToggle.setAttribute("aria-expanded", "false");
-      mobileToggle.setAttribute("aria-label", "Open menu");
-    }
-  });
-}
-
-/**
- * FAQ accordion
- */
-function initFaqAccordion() {
-  const faqButtons = document.querySelectorAll("[data-faq-toggle]");
-
-  if (!faqButtons.length) return;
-
-  faqButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const faqItem = button.closest(".faq-item");
-
-      if (!faqItem) return;
-
-      const wasActive = faqItem.classList.contains("active");
-
-      document.querySelectorAll(".faq-item.active").forEach((item) => {
-        item.classList.remove("active");
-
-        const itemButton = item.querySelector("[data-faq-toggle]");
-
-        if (itemButton) {
-          itemButton.setAttribute("aria-expanded", "false");
-        }
-      });
-
-      if (!wasActive) {
-        faqItem.classList.add("active");
-        button.setAttribute("aria-expanded", "true");
-      }
-    });
-
-    button.setAttribute("aria-expanded", "false");
-  });
-}
+});

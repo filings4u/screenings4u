@@ -1618,53 +1618,7 @@ const TEST_SERVICES = {
      CLEARINGHOUSE C/TPA SERVICES
      ========================================================= */
 
-  ctpa_setup: {
-    id: "ctpa_setup",
-    orderType: "checkout",
-    orderUrl: "checkout.html?service=ctpa_setup",
-    name: "C/TPA Setup",
-    shortName: "C/TPA Setup",
-    category: "Clearinghouse C/TPA Services",
-    specimen: "N/A",
-    price: 29500,
-    currency: "usd",
-    stripePriceId: "",
-    results: "Setup Service",
-    description: "Professional Clearinghouse C/TPA setup and compliance support.",
-    features: [
-      "Clearinghouse account setup",
-      "C/TPA status activation",
-      "Direct registry listing support",
-      "Compliance guide"
-    ]
-  },
 
-  ctpa_pro_management: {
-    id: "ctpa_pro_management",
-    orderType: "checkout",
-    orderUrl: "checkout.html?service=ctpa_pro_management",
-    name: "C/TPA Pro Management",
-    shortName: "C/TPA Pro Management",
-    category: "Clearinghouse C/TPA Services",
-    specimen: "N/A",
-    price: 59500,
-    currency: "usd",
-    stripePriceId: "",
-    results: "Setup & Management",
-    description: "Professional C/TPA setup plus expanded Clearinghouse and client management support.",
-    features: [
-      "Clearinghouse account setup",
-      "C/TPA status activation",
-      "C/TPA registry listing support",
-      "Compliance guide",
-      "Random consortium software onboarding",
-      "Driver query handling workflows",
-      "Violation entry workflows",
-      "Management of multiple clients",
-      "Consortium certificate resources",
-      "Consortium agreement resources"
-    ]
-  },
 
   ctpa_custom_solutions: {
     id: "ctpa_custom_solutions",
@@ -1691,12 +1645,104 @@ const TEST_SERVICES = {
   },
 
 
+  non_dot_breathalyzer_test: {
+    id: "non_dot_breathalyzer_test",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=non_dot_breathalyzer_test",
+    name: "Breathalyzer Test",
+    shortName: "Breathalyzer Test",
+    category: "NON-DOT Breath Alcohol Testing",
+    specimen: "Breath",
+    price: 6995,
+    currency: "usd",
+    results: "Instant Results",
+    description: "NON-DOT breath alcohol testing service."
+  },
+  non_dot_breathalyzer_legal_court: {
+    id: "non_dot_breathalyzer_legal_court",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=non_dot_breathalyzer_legal_court",
+    name: "Legal & Court Support",
+    shortName: "Legal & Court Support",
+    category: "NON-DOT Breath Alcohol Testing",
+    specimen: "Breath",
+    price: 8995,
+    currency: "usd",
+    results: "Instant Results",
+    description: "NON-DOT breath alcohol testing with legal or court-support documentation."
+  },
+  non_dot_breathalyzer_workplace: {
+    id: "non_dot_breathalyzer_workplace",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=non_dot_breathalyzer_workplace",
+    name: "Workplace Package",
+    shortName: "Workplace Package",
+    category: "NON-DOT Breath Alcohol Testing",
+    specimen: "Breath",
+    price: 12995,
+    currency: "usd",
+    results: "Instant Results",
+    description: "NON-DOT workplace breath alcohol testing package."
+  },
+  drug_alcohol_policy_basic: {
+    id: "drug_alcohol_policy_basic",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=drug_alcohol_policy_basic",
+    name: "Basic Policy",
+    shortName: "Basic Policy",
+    category: "Drug & Alcohol Policy Creation",
+    specimen: "N/A",
+    price: 29595,
+    currency: "usd",
+    results: "Policy creation service",
+    description: "Basic drug and alcohol policy creation package."
+  },
+  drug_alcohol_policy_standard: {
+    id: "drug_alcohol_policy_standard",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=drug_alcohol_policy_standard",
+    name: "Standard Policy",
+    shortName: "Standard Policy",
+    category: "Drug & Alcohol Policy Creation",
+    specimen: "N/A",
+    price: 49595,
+    currency: "usd",
+    results: "Policy creation service",
+    description: "Standard drug and alcohol policy creation package."
+  },
+  drug_alcohol_policy_premium: {
+    id: "drug_alcohol_policy_premium",
+    orderType: "checkout",
+    orderUrl: "checkout.html?service=drug_alcohol_policy_premium",
+    name: "Premium Policy",
+    shortName: "Premium Policy",
+    category: "Drug & Alcohol Policy Creation",
+    specimen: "N/A",
+    price: 89595,
+    currency: "usd",
+    results: "Policy creation service",
+    description: "Premium drug and alcohol policy creation package."
+  },
+  dna_father_child_non_legal: { id:"dna_father_child_non_legal",orderType:"checkout",orderUrl:"checkout.html?service=dna_father_child_non_legal",name:"Father & Child — Non-Legal",shortName:"Father & Child — Non-Legal",category:"DNA Testing — Chicago",specimen:"DNA",price:32500,currency:"usd",results:"DNA testing service",description:"Non-legal father and child DNA relationship test." },
+  dna_father_child_legal: { id:"dna_father_child_legal",orderType:"checkout",orderUrl:"checkout.html?service=dna_father_child_legal",name:"Father & Child — Legal",shortName:"Father & Child — Legal",category:"DNA Testing — Chicago",specimen:"DNA",price:42500,currency:"usd",results:"DNA testing service",description:"Legal father and child DNA relationship test." },
+  dna_mother_child_non_legal: { id:"dna_mother_child_non_legal",orderType:"checkout",orderUrl:"checkout.html?service=dna_mother_child_non_legal",name:"Mother & Child — Non-Legal",shortName:"Mother & Child — Non-Legal",category:"DNA Testing — Chicago",specimen:"DNA",price:32500,currency:"usd",results:"DNA testing service",description:"Non-legal mother and child DNA relationship test." },
+  dna_mother_child_legal: { id:"dna_mother_child_legal",orderType:"checkout",orderUrl:"checkout.html?service=dna_mother_child_legal",name:"Mother & Child — Legal",shortName:"Mother & Child — Legal",category:"DNA Testing — Chicago",specimen:"DNA",price:42500,currency:"usd",results:"DNA testing service",description:"Legal mother and child DNA relationship test." },
+  dna_full_siblingship_with_parent: { id:"dna_full_siblingship_with_parent",orderType:"checkout",orderUrl:"checkout.html?service=dna_full_siblingship_with_parent",name:"Full Siblingship — With Parent",shortName:"Full Siblingship — With Parent",category:"DNA Testing — Chicago",specimen:"DNA",price:42500,currency:"usd",results:"DNA testing service",description:"Full siblingship DNA test with parent." },
+  dna_full_siblingship_with_parent_legal: { id:"dna_full_siblingship_with_parent_legal",orderType:"checkout",orderUrl:"checkout.html?service=dna_full_siblingship_with_parent_legal",name:"Full Siblingship — With Parent Legal",shortName:"Full Siblingship — With Parent Legal",category:"DNA Testing — Chicago",specimen:"DNA",price:52500,currency:"usd",results:"DNA testing service",description:"Legal full siblingship DNA test with parent." },
+  dna_full_siblingship_without_parent: { id:"dna_full_siblingship_without_parent",orderType:"checkout",orderUrl:"checkout.html?service=dna_full_siblingship_without_parent",name:"Full Siblingship — Without Parent",shortName:"Full Siblingship — Without Parent",category:"DNA Testing — Chicago",specimen:"DNA",price:42500,currency:"usd",results:"DNA testing service",description:"Full siblingship DNA test without parent." },
+  dna_full_siblingship_without_parent_legal: { id:"dna_full_siblingship_without_parent_legal",orderType:"checkout",orderUrl:"checkout.html?service=dna_full_siblingship_without_parent_legal",name:"Full Siblingship — Without Parent Legal",shortName:"Full Siblingship — Without Parent Legal",category:"DNA Testing — Chicago",specimen:"DNA",price:52500,currency:"usd",results:"DNA testing service",description:"Legal full siblingship DNA test without parent." },
+  dna_half_siblingship_with_parent: { id:"dna_half_siblingship_with_parent",orderType:"checkout",orderUrl:"checkout.html?service=dna_half_siblingship_with_parent",name:"Half Siblingship — With Parent",shortName:"Half Siblingship — With Parent",category:"DNA Testing — Chicago",specimen:"DNA",price:42500,currency:"usd",results:"DNA testing service",description:"Half siblingship DNA test with parent." },
+  dna_half_siblingship_with_parent_legal: { id:"dna_half_siblingship_with_parent_legal",orderType:"checkout",orderUrl:"checkout.html?service=dna_half_siblingship_with_parent_legal",name:"Half Siblingship — With Parent Legal",shortName:"Half Siblingship — With Parent Legal",category:"DNA Testing — Chicago",specimen:"DNA",price:52500,currency:"usd",results:"DNA testing service",description:"Legal half siblingship DNA test with parent." },
+  dna_half_siblingship_without_parent: { id:"dna_half_siblingship_without_parent",orderType:"checkout",orderUrl:"checkout.html?service=dna_half_siblingship_without_parent",name:"Half Siblingship — Without Parent",shortName:"Half Siblingship — Without Parent",category:"DNA Testing — Chicago",specimen:"DNA",price:42500,currency:"usd",results:"DNA testing service",description:"Half siblingship DNA test without parent." },
+  dna_half_siblingship_without_parent_legal: { id:"dna_half_siblingship_without_parent_legal",orderType:"checkout",orderUrl:"checkout.html?service=dna_half_siblingship_without_parent_legal",name:"Half Siblingship — Without Parent Legal",shortName:"Half Siblingship — Without Parent Legal",category:"DNA Testing — Chicago",specimen:"DNA",price:52500,currency:"usd",results:"DNA testing service",description:"Legal half siblingship DNA test without parent." },
+  dna_trio_paternity_non_legal: { id:"dna_trio_paternity_non_legal",orderType:"checkout",orderUrl:"checkout.html?service=dna_trio_paternity_non_legal",name:"Standard Trio Paternity — Non-Legal",shortName:"Standard Trio Paternity — Non-Legal",category:"DNA Testing — Chicago",specimen:"DNA",price:42500,currency:"usd",results:"DNA testing service",description:"Non-legal standard trio paternity DNA test." },
+  dna_trio_paternity_legal: { id:"dna_trio_paternity_legal",orderType:"checkout",orderUrl:"checkout.html?service=dna_trio_paternity_legal",name:"Standard Trio Paternity — Legal",shortName:"Standard Trio Paternity — Legal",category:"DNA Testing — Chicago",specimen:"DNA",price:52500,currency:"usd",results:"DNA testing service",description:"Legal standard trio paternity DNA test." },
 
 };
 
 
 
-const SCREENINGS4U_PUBLIC_TESTING_IDS = new Set(["dot_breathalyzer_pre_employment", "dot_breathalyzer_random", "dot_breathalyzer_post_accident", "dot_breathalyzer_reasonable_suspicion", "dot_follow_up", "dot_personal_test", "dot_post_accident", "dot_pre_employment", "dot_random_test", "dot_reasonable_suspicion", "dot_return_to_duty", "etg_alcohol_hair", "etg_plus_10_panel", "etg_plus_5_panel", "etg_urine_alcohol", "hair_12_panel", "hair_14_panel", "hair_17_panel", "hair_5_panel", "hair_5_panel_expanded_opiates", "hair_7_panel", "hair_9_panel", "oral_10_panel", "oral_5_panel", "oral_post_accident", "urine_10_panel_lab", "urine_10_panel_rapid", "urine_12_panel", "urine_14_panel", "urine_18_panel", "urine_4_panel", "urine_5_panel", "urine_5_panel_expanded_opiates"]);
+const SCREENINGS4U_PUBLIC_TESTING_IDS = new Set(["dna_father_child_legal", "dna_father_child_non_legal", "dna_full_siblingship_with_parent", "dna_full_siblingship_with_parent_legal", "dna_full_siblingship_without_parent", "dna_full_siblingship_without_parent_legal", "dna_half_siblingship_with_parent", "dna_half_siblingship_with_parent_legal", "dna_half_siblingship_without_parent", "dna_half_siblingship_without_parent_legal", "dna_mother_child_legal", "dna_mother_child_non_legal", "dna_trio_paternity_legal", "dna_trio_paternity_non_legal", "dot_breathalyzer_post_accident", "dot_breathalyzer_pre_employment", "dot_breathalyzer_random", "dot_breathalyzer_reasonable_suspicion", "dot_follow_up", "dot_personal_test", "dot_physical_complete", "dot_physical_compliance", "dot_physical_driver_plus", "dot_physical_essential", "dot_post_accident", "dot_pre_employment", "dot_random_test", "dot_reasonable_suspicion", "dot_return_to_duty", "drug-testing-business-full-service-tpa", "drug-testing-business-growth-operations", "drug-testing-business-launch-foundation", "drug_alcohol_policy_basic", "drug_alcohol_policy_premium", "drug_alcohol_policy_standard", "etg_alcohol_hair", "etg_plus_10_panel", "etg_plus_5_panel", "etg_urine_alcohol", "hair_12_panel", "hair_14_panel", "hair_17_panel", "hair_5_panel", "hair_5_panel_expanded_opiates", "hair_7_panel", "hair_9_panel", "lab-account", "lab-account-random-consortium", "lab-account-random-consortium-docs", "mobile-drug-testing-elite", "mobile-drug-testing-growth", "mobile-drug-testing-launch-starter", "non_dot_breathalyzer_legal_court", "non_dot_breathalyzer_test", "non_dot_breathalyzer_workplace", "oral_10_panel", "oral_5_panel", "oral_post_accident", "urine_10_panel_lab", "urine_10_panel_rapid", "urine_12_panel", "urine_14_panel", "urine_18_panel", "urine_4_panel", "urine_5_panel", "urine_5_panel_expanded_opiates"]);
 let SCREENINGS4U_LIVE_CATALOG_LOADED = false;
 async function refreshTestingCatalog(){
   if(SCREENINGS4U_LIVE_CATALOG_LOADED) return getAllTestServices();

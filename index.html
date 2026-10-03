@@ -3,1347 +3,176 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="screenings4u provides nationwide drug and alcohol testing, DOT compliance services, personal testing, employer solutions, and secure account access." name="description"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>screenings4u | Nationwide Drug &amp; Alcohol Testing</title>
+<meta content="screenings4u provides nationwide drug and alcohol testing, DOT compliance services, employer solutions, mobile testing, and personal testing through one trusted partner." name="description"/>
 <meta content="#24467f" name="theme-color"/>
-<link href="images/fav.png" rel="icon" type="image/png">
+<link href="images/fav.png" rel="icon" type="image/png"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
-  <link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
-  <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2"><style>
-input, select, textarea{ font: inherit; }
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    /* TOP BAR */
-    
-
-    
-
-    
-
-    
-
-    /* NAVIGATION */
-    
-
-    
-
- 
-
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    /* HERO */
-    .hero {
-      position: relative;
-      min-height: 700px;
-      display: flex;
-      align-items: center;
-      background:
-        linear-gradient(90deg, rgba(16,40,75,.98) 0%, rgba(16,40,75,.93) 31%, rgba(16,40,75,.66) 53%, rgba(16,40,75,.12) 78%, rgba(16,40,75,0) 100%),
-        url("images/hero.webp") center right / cover no-repeat;
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      right: -170px;
-      top: -220px;
-      width: 500px;
-      height: 500px;
-      background: var(--orange);
-      opacity: .96;
-      transform: rotate(35deg);
-      clip-path: polygon(42% 0,100% 0,100% 58%);
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 2;
-      padding: 92px 0 130px;
-    }
-
-    .hero-copy { max-width: 700px; color: var(--white); }
-
-    .hero-copy .eyebrow { color: #ffad73; }
-    .hero-copy .eyebrow::before { background: #ffad73; }
-
-    .hero h1 {
-      font-size: clamp(48px, 6vw, 78px);
-      line-height: .98;
-      letter-spacing: -.055em;
-      font-weight: 900;
-      margin-bottom: 24px;
-    }
-
-    .hero h1 span { color: var(--orange); }
-
-    .hero-lead {
-      max-width: 630px;
-      color: #d4e1f0;
-      font-size: 18px;
-      line-height: 1.7;
-      margin-bottom: 32px;
-    }
-
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 48px; }
-
-    .hero-actions .btn-outline {
-      color: var(--white);
-      border-color: rgba(255,255,255,.55);
-      background: transparent;
-    }
-
-    .hero-actions .btn-outline:hover {
-      color: var(--blue-dark);
-      background: var(--white);
-      border-color: var(--white);
-    }
-
-    .hero-features {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      max-width: 740px;
-      border-top: 1px solid rgba(255,255,255,.18);
-      padding-top: 22px;
-    }
-
-    .hero-feature {
-      padding: 0 17px;
-      border-right: 1px solid rgba(255,255,255,.18);
-    }
-
-    .hero-feature:first-child { padding-left: 0; }
-    .hero-feature:last-child { border-right: 0; }
-
-    .hero-feature strong {
-      display: block;
-      font-size: 12px;
-      line-height: 1.3;
-    }
-
-    .hero-feature small {
-      display: block;
-      color: #a8bad0;
-      font-size: 10px;
-      margin-top: 4px;
-    }
-
-    /* TRUST STRIP */
-    .trust-strip {
-      background: var(--blue-dark);
-      color: var(--white);
-      border-top: 1px solid rgba(255,255,255,.08);
-    }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 0;
-    }
-
-    .trust-item {
-      min-height: 112px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 18px;
-      border-right: 1px solid rgba(255,255,255,.1);
-    }
-
-    .trust-item:last-child { border-right: 0; }
-
-    .trust-item strong {
-      display: block;
-      font-size: 13px;
-      margin-bottom: 4px;
-    }
-
-    .trust-item span {
-      display: block;
-      color: #9eb0c6;
-      font-size: 11px;
-    }
-
-    /* VALUE / INTRO */
-    .intro {
-      padding: 110px 0 95px;
-    }
-
-    .intro-grid {
-      display: grid;
-      grid-template-columns: .95fr 1.05fr;
-      gap: 75px;
-      align-items: center;
-    }
-
-    .intro-card {
-      position: relative;
-      min-height: 440px;
-      border-radius: 22px;
-      overflow: hidden;
-      background:
-        url("images/second-hero.webp") center / cover;
-      box-shadow: var(--shadow);
-    }
-
-    .intro-card::before {
-      content: "";
-      position: absolute;
-      left: 35px;
-      top: 32px;
-      color: rgba(255,255,255,.9);
-      font-size: 25px;
-      font-weight: 900;
-      letter-spacing: -.06em;
-    }
-
-    .intro-card-panel {
-      position: absolute;
-      left: 28px;
-      right: 28px;
-      bottom: 28px;
-      padding: 26px;
-      border-radius: 15px;
-      background: rgba(255,255,255,.96);
-    }
-
-    .intro-card-panel strong {
-      display: block;
-      color: var(--blue-dark);
-      font-size: 23px;
-      margin-bottom: 7px;
-    }
-
-    .intro-card-panel span {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .intro-copy h2 {
-      color: var(--blue-dark);
-      font-size: clamp(34px, 4vw, 51px);
-      line-height: 1.05;
-      letter-spacing: -.04em;
-      margin-bottom: 19px;
-    }
-
-    .intro-copy > p {
-      color: var(--muted);
-      font-size: 16px;
-      margin-bottom: 27px;
-    }
-
-    .check-list { display: grid; gap: 14px; margin-bottom: 30px; }
-
-    .check-list li {
-      list-style: none;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      color: #334d70;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .check-list li::before {
-      content: "✓";
-      flex: 0 0 23px;
-      width: 23px;
-      height: 23px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: var(--blue-soft);
-      color: var(--blue);
-      font-weight: 900;
-      font-size: 12px;
-    }
-
-    /* SERVICES */
-    .services {
-      padding: 105px 0;
-      background: var(--surface);
-      border-block: 1px solid var(--line);
-    }
-
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .service-card {
-      position: relative;
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 31px;
-      min-height: 265px;
-      transition: .2s ease;
-    }
-
-    .service-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--line-strong);
-      box-shadow: var(--shadow);
-    }
-
-    .service-number {
-      color: #8fa4c0;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .1em;
-      margin-bottom: 26px;
-    }
-
-    .service-icon {
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      color: var(--blue);
-      background: var(--blue-soft);
-      margin-bottom: 19px;
-      font-size: 20px;
-      font-weight: 900;
-    }
-
-    .service-card h3 {
-      color: var(--blue-dark);
-      font-size: 19px;
-      margin-bottom: 8px;
-    }
-
-    .service-card p {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.65;
-      margin-bottom: 17px;
-    }
-
-    .service-card a {
-      color: var(--orange);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    /* PROCESS */
-    .process { padding: 110px 0; }
-
-    .process-layout {
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      gap: 75px;
-      align-items: start;
-    }
-
-    .process-copy h2 {
-      color: var(--blue-dark);
-      font-size: clamp(34px, 4vw, 52px);
-      line-height: 1.05;
-      letter-spacing: -.04em;
-      margin-bottom: 17px;
-    }
-
-    .process-copy p { color: var(--muted); max-width: 480px; }
-
-    .steps { display: grid; gap: 0; }
-
-    .step {
-      display: grid;
-      grid-template-columns: 58px 1fr;
-      gap: 20px;
-      padding: 0 0 30px;
-      position: relative;
-    }
-
-    .step:not(:last-child)::after {
-      content: "";
-      position: absolute;
-      left: 28px;
-      top: 58px;
-      bottom: 0;
-      width: 1px;
-      background: var(--line);
-    }
-
-    .step-num {
-      position: relative;
-      z-index: 2;
-      width: 58px;
-      height: 58px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      color: var(--white);
-      background: var(--blue);
-      font-size: 14px;
-      font-weight: 900;
-      box-shadow: 0 0 0 7px var(--blue-soft);
-    }
-
-    .step h3 {
-      color: var(--blue-dark);
-      font-size: 19px;
-      margin: 4px 0 5px;
-    }
-
-    .step p { color: var(--muted); font-size: 13px; max-width: 580px; }
-
-    /* EMPLOYERS / PERSONAL */
-    .audiences {
-      padding: 105px 0;
-      background: var(--blue-dark);
-      color: var(--white);
-    }
-
-    .audience-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 22px;
-    }
-
-    .audience-card {
-      padding: 44px;
-      min-height: 330px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 20px;
-      background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
-    }
-
-    .audience-card .eyebrow { color: #ffad73; }
-    .audience-card .eyebrow::before { background: #ffad73; }
-
-    .audience-card h3 {
-      font-size: 30px;
-      line-height: 1.1;
-      margin-bottom: 13px;
-    }
-
-    .audience-card p {
-      color: #b7c7dc;
-      font-size: 14px;
-      max-width: 540px;
-      margin-bottom: 26px;
-    }
-
-    .audience-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-    }
-
-    .audience-links a {
-      padding: 9px 12px;
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 7px;
-      color: #e7eff9;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .audience-links a:hover { border-color: var(--orange); color: var(--white); }
-
-  /* CTA */
-.cta {
-  padding: 85px 0;
-  background: var(--surface-2);
-  color: var(--blue-dark);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-.cta-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 30px;
-}
-
-.cta h2 {
-  font-size: clamp(30px, 4vw, 45px);
-  line-height: 1.05;
-  letter-spacing: -.035em;
-  color: var(--blue-dark);
-  margin-bottom: 8px;
-}
-
-.cta p {
-  color: var(--muted);
-  font-size: 15px;
-}
-
-.cta-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-/* Primary CTA button */
-.cta .btn-white {
-  color: var(--white);
-  background: var(--orange);
-  border-color: var(--orange-dark);
-}
-
-.cta .btn-white:hover {
-  color: var(--white);
-  background: var(--blue-dark);
-  border-color: var(--blue-dark);
-  transform: translateY(-1px);
-}
-
-/* Secondary CTA button */
-.cta .btn-outline {
-  color: var(--blue-dark);
-  background: transparent;
-  border: 1px solid var(--blue-dark);
-}
-
-.cta .btn-outline:hover {
-  color: var(--white);
-  background: var(--blue-dark);
-  border-color: var(--blue-dark);
-  transform: translateY(-1px);
-}
-
-    /* MOBILE */
-    @media (max-width: 1120px) {
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      .hero-features { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-      .hero-feature:nth-child(2) { border-right: 0; }
-      .service-grid { grid-template-columns: repeat(2, 1fr); }
-      
-    }
-
-    @media (max-width: 800px) {
-      
-      
-      
-      .hero {
-        min-height: auto;
-        background:
-          linear-gradient(90deg, rgba(16,40,75,.96), rgba(16,40,75,.83)),
-          url("images/hero.webp") center / cover no-repeat;
-      }
-      .hero-inner { padding: 75px 0 105px; }
-      .hero::after { width: 300px; height: 300px; right: -150px; top: -160px; }
-      .hero-features { max-width: 100%; }
-      .trust-grid { grid-template-columns: repeat(2, 1fr); }
-      .trust-item:nth-child(even) { border-right: 0; }
-      .trust-item:last-child { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.1); }
-      .intro-grid, .process-layout { grid-template-columns: 1fr; gap: 45px; }
-      .intro-card { min-height: 330px; }
-      .service-grid { grid-template-columns: 1fr; }
-      .audience-grid { grid-template-columns: 1fr; }
-      .cta-inner { flex-direction: column; align-items: flex-start; }
-    }
-
-    @media (max-width: 560px) {
-      
-      
-      
-      
-      
-      
-      .hero h1 { font-size: 49px; }
-      .hero-lead { font-size: 15px; }
-      .hero-actions { flex-direction: column; }
-      .hero-actions .btn { width: 100%; }
-      .hero-features { grid-template-columns: 1fr 1fr; }
-      .hero-feature { border-right: 0; padding: 0 7px; }
-      .trust-grid { grid-template-columns: 1fr; }
-      .trust-item, .trust-item:last-child { border-right: 0; border-top: 1px solid rgba(255,255,255,.1); }
-      .trust-item:first-child { border-top: 0; }
-      .audience-card { padding: 30px; }
-      
-      
-    }
-</style>
-<style>
-/* Page-specific responsive layout. Kept after the shared stylesheet so
-       this page remains predictable on tablets and phones. */
-    @media (max-width: 800px) {
-      
-
-      img,
-      svg,
-      video,
-      iframe {
-        max-width: 100%;
-        height: auto;
-      }
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      /* Image first, content second on mobile. */
-      .hero {
-        min-height: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        background: var(--blue-deep);
-        overflow: visible;
-      }
-
-      .hero::before {
-        content: "";
-        position: relative;
-        z-index: 1;
-        display: block;
-        width: 100%;
-        height: clamp(250px, 66vw, 440px);
-        flex: 0 0 auto;
-        background: url("images/hero.webp") center center / cover no-repeat;
-      }
-
-      .hero::after {
-        display: none;
-      }
-
-      .hero-inner {
-        width: 100%;
-        padding: 48px 0 52px;
-        background: var(--blue-deep);
-      }
-
-      .hero-copy {
-        max-width: none;
-      }
-
-      .hero h1 {
-        max-width: 650px;
-        font-size: clamp(42px, 10vw, 62px);
-        line-height: 1.02;
-        overflow-wrap: anywhere;
-      }
-
-      .hero-lead {
-        max-width: 620px;
-      }
-
-      .hero-features {
-        width: 100%;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .hero-feature {
-        min-width: 0;
-      }
-
-      .intro,
-      .services,
-      .process,
-      .audiences,
-      .cta {
-        padding: 72px 0;
-      }
-
-      
-
-      .intro-copy h2, .process-copy h2{
-        font-size: clamp(32px, 8vw, 44px);
-        overflow-wrap: anywhere;
-      }
-
-      .intro-grid,
-      .process-layout,
-      .service-grid,
-      .audience-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .intro-card {
-        width: 100%;
-        min-height: 430px;
-      }
-
-      .service-card,
-      .audience-card {
-        width: 100%;
-        min-width: 0;
-      }
-
-      .cta-inner,
-      .cta-actions {
-        width: 100%;
-      }
-
-      input, select, textarea{
-        max-width: 100%;
-      }
-    }
-
-    @media (max-width: 560px) {
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      
-
-      .hero::before {
-        height: clamp(230px, 72vw, 340px);
-        background-position: center center;
-      }
-
-      .hero-inner {
-        padding: 40px 0 44px;
-      }
-
-      .hero h1 {
-        font-size: clamp(38px, 12vw, 50px);
-        margin-bottom: 20px;
-      }
-
-      .hero-lead {
-        font-size: 15px;
-        line-height: 1.65;
-        margin-bottom: 26px;
-      }
-
-      .hero-actions {
-        margin-bottom: 36px;
-      }
-
-      .hero-actions .btn,
-      .cta-actions .btn,
-      .intro-copy > .btn {
-        width: 100%;
-      }
-
-      .hero-features {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 0;
-        padding-top: 10px;
-      }
-
-      .hero-feature,
-      .hero-feature:first-child {
-        padding: 14px 0;
-        border-right: 0;
-        border-bottom: 1px solid rgba(255,255,255,.16);
-      }
-
-      .hero-feature:last-child {
-        border-bottom: 0;
-      }
-
-      .trust-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .trust-item,
-      .trust-item:last-child {
-        min-height: 92px;
-        grid-column: auto;
-      }
-
-      .intro,
-      .services,
-      .process,
-      .audiences,
-      .cta {
-        padding: 56px 0;
-      }
-
-      .intro-grid,
-      .process-layout {
-        gap: 34px;
-      }
-
-      .intro-card {
-        min-height: 400px;
-        display: flex;
-        align-items: flex-end;
-        padding: 190px 16px 16px;
-        background-position: center top;
-      }
-
-      .intro-card-panel {
-        position: relative;
-        inset: auto;
-        width: 100%;
-        padding: 20px;
-      }
-
-      .intro-card-panel strong {
-        font-size: 20px;
-        line-height: 1.25;
-      }
-
-      .service-card,
-      .audience-card {
-        min-height: 0;
-        padding: 26px 22px;
-      }
-
-      .audience-card h3 {
-        font-size: 25px;
-      }
-
-      .audience-links {
-        flex-direction: column;
-      }
-
-      .audience-links a {
-        width: 100%;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-      }
-
-      .step {
-        grid-template-columns: 46px minmax(0, 1fr);
-        gap: 15px;
-      }
-
-      .step-num {
-        width: 46px;
-        height: 46px;
-        box-shadow: 0 0 0 5px var(--blue-soft);
-      }
-
-      .step:not(:last-child)::after {
-        left: 22px;
-        top: 46px;
-      }
-
-      .step h3 {
-        font-size: 17px;
-      }
-
-      .cta-inner {
-        gap: 24px;
-      }
-
-      .cta-actions {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    @media (max-width: 380px) {
-      
-
-      
-
-      .hero h1 {
-        font-size: 37px;
-      }
-    }
-</style>
-<style>
-.mobile-home-actions{display:none}
-    @media(max-width:767px){
-      
-      
-      
-      
-      .full-banner, .announcement-bar, .promo-banner, [data-full-banner]{display:none!important}
-      .mobile-home-actions{display:grid;grid-template-columns:1fr;gap:10px;width:100%;padding-top:14px}.mobile-home-actions .btn{width:100%;min-height:48px}.mobile-home-actions .btn-outline{background:#fff}
-      .hero::before{height:290px}.hero-inner{padding:34px 0 40px}.hero h1{font-size:clamp(2.25rem,10vw,3rem);line-height:1.04}.hero-lead{font-size:16px;line-height:1.6}.hero-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:30px}.hero-actions .btn{width:100%;min-height:52px}.intro,.services,.process,.audiences,.cta{padding:54px 0}.intro-copy h2, .process-copy h2{font-size:clamp(1.8rem,8vw,2.3rem);line-height:1.1}.intro-copy p, .process-copy p{font-size:16px;line-height:1.65}.service-card,.audience-card{padding:24px}.intro-card{min-height:360px}.cta-inner{display:grid;grid-template-columns:1fr;gap:24px}.cta-actions{grid-template-columns:1fr}.cta-actions .btn{min-height:52px}
-    }
-    @media(max-width:380px){.hero::before{height:250px}.service-card,.audience-card{padding:21px}}
-    @media(prefers-reduced-motion:reduce){*::before, *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-</style>
-<style id="mobile-home-redesign">
-@media(max-width:767px){
-      
-      
-      
-      
-      .full-banner, .announcement-bar, .promo-banner, [data-full-banner]{display:none!important}
-
-      
-      
-      
-      
-      
-      
-      
-
-      .hero{display:flex;flex-direction:column;min-height:0;padding:14px var(--mobile-gutter) 0;background:#fff;overflow:visible}
-      .hero::before{width:100%;height:clamp(220px,60vw,300px);border-radius:18px;background:url("images/hero.webp") center 28%/cover no-repeat;box-shadow:0 12px 28px rgba(16,40,75,.12)}
-      .hero::after{display:none}
-      .hero-inner{padding:30px 0 26px;background:#fff}
-      .hero-copy{max-width:none;color:var(--ink)}
-      .hero-copy .eyebrow{margin-bottom:12px;color:var(--orange);font-size:10px;line-height:1.35;letter-spacing:.1em}
-      .hero-copy .eyebrow::before{width:20px;background:var(--orange)}
-      .hero h1{margin-bottom:16px;color:#24467f;font-size:clamp(36px,10.5vw,46px);line-height:1.01;letter-spacing:-.045em;overflow-wrap:normal}
-      .hero h1 br{display:block}
-      .hero h1 span{display:block;margin-top:3px;color:var(--orange)}
-      .hero-lead{margin-bottom:22px;color:var(--muted);font-size:15px;line-height:1.6}
-      .hero-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:24px}
-      .hero-actions .btn{width:100%;min-height:50px;border-radius:10px;font-size:14px}
-      .hero-actions .btn-outline{color:var(--blue-dark);border-color:var(--line-strong);background:var(--blue-pale)}
-      .hero-features{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0;border:0}
-      .hero-feature,.hero-feature:first-child{min-height:104px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--blue-pale)}
-      .hero-feature:last-child{border:1px solid var(--line)}
-      .hero-feature strong{color:var(--blue-darker);font-size:12px;line-height:1.35}
-      .hero-feature small{color:var(--muted);font-size:10px;line-height:1.45}
-
-      .trust-strip{padding:22px 0 26px;border:0;background:var(--blue-darker)}
-      .trust-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;padding-inline:var(--mobile-gutter);overflow:hidden}
-      .trust-item,.trust-item:last-child{width:100%;min-width:0;min-height:112px;padding:14px 10px;border:1px solid rgba(255,255,255,.14);border-radius:14px;background:rgba(255,255,255,.06)}
-      .trust-item:last-child{grid-column:1/-1}
-      .trust-item strong{font-size:14px}.trust-item span{font-size:12px;line-height:1.45}
-
-      .intro,.services,.process,.audiences,.cta{padding:48px 0}
-      .intro-grid,.process-layout{gap:28px}
-      
-      .intro-copy h2, .process-copy h2{font-size:clamp(28px,8vw,36px);line-height:1.12;letter-spacing:-.03em}
-      .intro-copy p, .process-copy p{font-size:15px;line-height:1.65}
-      
-
-      .intro-card{min-height:0;padding:230px 14px 14px;border-radius:16px;background-position:center top;background-size:100% 230px;background-repeat:no-repeat;background-color:var(--blue-pale);box-shadow:var(--shadow-sm)}
-      .intro-card::before{display:none}
-      .intro-card-panel{position:relative;inset:auto;width:100%;padding:18px;border-radius:12px}
-      .intro-card-panel strong{font-size:19px}.intro-card-panel span{font-size:13px;line-height:1.55}
-      .intro-copy>.btn{width:100%;min-height:50px;border-radius:10px}
-
-      .service-grid,.audience-grid{grid-template-columns:1fr;gap:12px}
-      .service-card,.audience-card{width:100%;max-width:100%;min-width:0;min-height:0;padding:22px 18px;border-radius:14px;overflow:hidden}
-      .service-card h3{font-size:19px}.service-card p{font-size:14px;line-height:1.6}
-      .audience-card h3{font-size:24px}.audience-card p{font-size:14px;line-height:1.6}
-      .audience-links{display:grid;grid-template-columns:1fr;gap:8px}
-      .audience-links a{width:100%;min-height:46px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--blue-dark)!important;font-weight:700}
-      .audiences,.audience-grid{max-width:100%;overflow:hidden}
-
-      .steps{gap:22px}.step{grid-template-columns:42px minmax(0,1fr);gap:13px}
-      .step-num{width:42px;height:42px;font-size:13px;box-shadow:0 0 0 4px var(--blue-soft)}
-      .step:not(:last-child)::after{left:20px;top:42px}
-      .step h3{font-size:16px}.step p{font-size:14px;line-height:1.55}
-
-      .cta-inner{display:grid;grid-template-columns:1fr;gap:22px}
-      .cta-actions{display:grid;grid-template-columns:1fr;gap:10px;width:100%}
-      .cta-actions .btn{width:100%;min-height:50px;border-radius:10px}
-      
-    }
-    @media(max-width:390px){
-      
-      
-      .hero::before{height:215px}
-      .hero h1{font-size:35px}
-      .hero-features{grid-template-columns:1fr}
-      .hero-feature,.hero-feature:first-child{min-height:0}
-      .trust-grid{grid-template-columns:1fr}
-      .trust-item:last-child{grid-column:auto}
-    }
-</style>
-
-<style id="homepage-mobile-brand-refinement">
-@media (max-width:767px){
-  :root{--home-mobile-gutter:16px}
-  html,body{max-width:100%;overflow-x:hidden}
-
-  /* Mobile homepage hero: one branded visual unit */
-  .hero{
-    display:flex;
-    flex-direction:column;
-    width:100%;
-    min-height:0;
-    padding:14px var(--home-mobile-gutter) 20px;
-    background:var(--blue-pale,#f4f7fc);
-    overflow:visible;
-  }
-  .hero::before{
-    content:"";
-    display:block;
-    position:relative;
-    inset:auto;
-    width:100%;
-    height:clamp(238px,67vw,290px);
-    flex:0 0 auto;
-    border-radius:18px 18px 0 0;
-    background:url("images/hero.webp") center 27%/cover no-repeat;
-    box-shadow:none;
-  }
-  .hero::after{display:none}
-  .hero-inner{
-    width:100%;
-    margin:0;
-    padding:28px 18px 20px;
-    border-top:4px solid var(--orange,#ff6b00);
-    border-radius:0 0 18px 18px;
-    background:var(--blue-dark,#24467f);
-    box-shadow:0 16px 34px rgba(36,70,127,.18);
-  }
-  .hero-copy{width:100%;max-width:none;color:#fff}
-  .hero-copy .eyebrow{margin-bottom:12px;color:#ffb27c;font-size:10px;letter-spacing:.1em}
-  .hero-copy .eyebrow::before{width:20px;background:var(--orange,#ff6b00)}
-  .hero h1{
-    margin:0 0 16px;
-    color:#fff;
-    font-size:clamp(34px,10vw,43px);
-    line-height:1.02;
-    letter-spacing:-.045em;
-    overflow-wrap:normal;
-  }
-  .hero h1 span{display:block;margin-top:3px;color:var(--orange,#ff6b00)}
-  .hero-lead{margin:0 0 22px;color:#e7eef8;font-size:15px;line-height:1.62}
-  .hero-actions{display:grid;grid-template-columns:1fr;gap:10px;margin:0 0 22px}
-  .hero-actions .btn{width:100%;min-height:50px;border-radius:10px}
-  .hero-actions .btn-orange{background:var(--orange,#ff6b00);color:#fff}
-  .hero-actions .btn-outline{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.55);color:#fff}
-
-  .hero-features{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;padding:0;border:0}
-  .hero-feature,.hero-feature:first-child{
-    min-width:0;
-    min-height:98px;
-    padding:13px;
-    border:1px solid rgba(255,255,255,.15);
-    border-radius:12px;
-    background:rgba(255,255,255,.07);
-  }
-  .hero-feature:last-child{border:1px solid rgba(255,255,255,.15)}
-  .hero-feature strong{color:#fff;font-size:12px;line-height:1.35}
-  .hero-feature small{color:#c8d6e8;font-size:10px;line-height:1.45}
-
-  /* Explicit gutters for every homepage section */
-  .trust-grid,
-  .intro>.container,
-  .services>.container,
-  .process>.container,
-  .audiences>.container,
-  .cta>.container{
-    width:100%;
-    max-width:none;
-    padding-left:var(--home-mobile-gutter);
-    padding-right:var(--home-mobile-gutter);
-    margin-left:auto;
-    margin-right:auto;
-  }
-
-  .trust-grid{grid-template-columns:1fr 1fr;gap:10px;overflow:visible}
-  .trust-item,.trust-item:last-child{min-width:0;padding:14px 12px}
-  .intro-grid,.process-layout,.service-grid,.audience-grid{width:100%;min-width:0}
-  .intro-copy,.process-copy,.section-heading,.service-card,.audience-card,.step>div{min-width:0}
-  .service-card,.audience-card{width:100%;max-width:100%;overflow:hidden}
-  .section-heading h2,.intro-copy h2,.process-copy h2,.service-card h3,.audience-card h3,
-  .section-heading p,.intro-copy p,.process-copy p,.service-card p,.audience-card p{overflow-wrap:break-word}
-
-  /* Keep supporting imagery clean and contained */
-  .intro-card{width:100%;overflow:hidden;border-radius:16px;box-shadow:0 10px 26px rgba(36,70,127,.10)}
-}
-@media (max-width:420px){
-  :root{--home-mobile-gutter:14px}
-  .hero::before{height:245px;background-position:center 24%}
-  .hero-inner{padding:26px 16px 18px}
-  .hero-features{grid-template-columns:1fr}
-  .hero-feature,.hero-feature:first-child{min-height:0}
-  .trust-grid{grid-template-columns:1fr}
-  .trust-item:last-child{grid-column:auto}
-}
-</style>
-
-</head>
-<body><div class="topbar">
-<div class="container topbar-inner">
-<div class="topbar-left">
-<span>Nationwide Drug &amp; Alcohol Testing</span><span aria-hidden="true">•</span><span>Operating Nationwide</span>
-</div>
-<div class="topbar-right">
-<span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a>
-</div>
-</div>
-</div><header class="site-header">
-  <div class="container nav-inner" id="navInner">
-    <a href="index.html" class="brand" aria-label="screenings4u home">
-      <img src="images/logo.png" alt="screenings4u" class="site-logo">
-    </a>
-    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation"></nav>
-    <div class="nav-actions">
-      <a href="services.html" class="btn btn-outline">Order a Test</a>
-      <div class="nav-account-menu">
-        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron" aria-hidden="true">▼</span></button>
-        <div class="nav-account-dropdown">
-          <a href="https://customers.screenings4u.com/login.html">Customer Login</a>
-        </div>
-      </div>
-      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mobileNav" aria-label="Open menu" aria-expanded="false">☰</button>
-    </div>
-  </div>
-</header>
-<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
+<link href="assets/css/global.css?v=20261002-8" rel="stylesheet"/>
+<link href="assets/css/navigation.css?v=20261002-shell2" rel="stylesheet"/>
+<link href="assets/css/index.css?v=2-home1" rel="stylesheet"/>
+<link href="assets/css/footer.css?v=20261002-shell1" rel="stylesheet"/>
+<link href="https://screenings4u.com/" rel="canonical"/><meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/><meta content="website" property="og:type"/><meta content="screenings4u" property="og:site_name"/><meta content="screenings4u | Nationwide Drug &amp; Alcohol Testing" property="og:title"/><meta content="screenings4u provides nationwide drug and alcohol testing, DOT compliance services, employer solutions, mobile testing, and personal testing through one trusted partner." property="og:description"/><meta content="https://screenings4u.com/" property="og:url"/><meta content="https://screenings4u.com/images/logo.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="screenings4u | Nationwide Drug &amp; Alcohol Testing" name="twitter:title"/><meta content="screenings4u provides nationwide drug and alcohol testing, DOT compliance services, employer solutions, mobile testing, and personal testing through one trusted partner." name="twitter:description"/><meta content="https://screenings4u.com/images/logo.png" name="twitter:image"/><script id="s4u-seo-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"screenings4u | Nationwide Drug & Alcohol Testing","description":"screenings4u provides nationwide drug and alcohol testing, DOT compliance services, employer solutions, mobile testing, and personal testing through one trusted partner.","url":"https://screenings4u.com/","isPartOf":{"@type":"WebSite","name":"screenings4u","url":"https://screenings4u.com/"}}</script><link href="assets/css/mobile-ready.css?v=20261002-sitewide2" rel="stylesheet"/></head>
+<body data-page="home">
+<div data-site-header="" id="siteHeader"></div>
 <main>
-<section class="hero">
-<div class="container hero-inner">
-<div class="hero-copy">
-<span class="eyebrow">Nationwide Drug &amp; Alcohol Testing</span>
-<h1>Workplace<br/>Screening<br/><span>Made Simple.</span></h1>
-<p class="hero-lead">
-            Drug testing, alcohol testing, DOT compliance, and workplace screening—simplified through one trusted partner.
-          </p>
-<div class="hero-actions">
-<a class="btn btn-orange" href="services.html">Order a Test →</a>
-<a class="btn btn-outline" href="contact.html">Contact Us →</a>
+<section aria-labelledby="homeHeroTitle" class="home-hero">
+<div class="container home-hero-grid">
+<div aria-hidden="true" class="home-hero-media">
+<img alt="" decoding="async" fetchpriority="high" height="916" loading="eager" src="images/home-hero.webp" width="1717"/>
+<div class="home-hero-badge">
+<span class="home-status-dot"></span>
+            Nationwide service network
+          </div>
 </div>
-<div class="hero-features">
-<div class="hero-feature">
-<strong>Nationwide Access</strong>
-<small>Thousands of collection locations</small>
+<div class="home-hero-copy">
+<span class="home-kicker">Drug, alcohol &amp; workforce screening</span>
+<h1 id="homeHeroTitle">Testing and compliance support built around your workforce.</h1>
+<p class="home-hero-lead">Order testing, coordinate mobile collections, manage DOT requirements, and keep your screening program moving with one nationwide partner.</p>
+<div class="home-hero-actions">
+<a class="home-btn home-btn-primary" href="services.html">Order a Test <span aria-hidden="true">→</span></a>
+<a class="home-btn home-btn-secondary" href="business-services.html">Explore Business Services</a>
 </div>
-<div class="hero-feature">
-<strong>Secure Account Access</strong>
-<small>Documents and updates in one place</small>
-</div>
-<div class="hero-feature">
-<strong>Secure Reporting</strong>
-<small>Streamlined result delivery</small>
-</div>
-<div class="hero-feature">
-<strong>Compliance Focused</strong>
-<small>DOT &amp; workplace solutions</small>
-</div>
+<div aria-label="Key service benefits" class="home-proof-row">
+<div><strong>Nationwide</strong><span>testing access</span></div>
+<div><strong>DOT + Non-DOT</strong><span>program support</span></div>
+<div><strong>Mobile</strong><span>on-site collections</span></div>
 </div>
 </div>
 </div>
 </section>
-<section class="trust-strip">
-<div class="container trust-grid">
-<div class="trust-item"><div><strong>Multiple Test Types</strong><span>Urine, hair, oral &amp; alcohol</span></div></div>
-<div class="trust-item"><div><strong>Nationwide Collection</strong><span>Professional collection network</span></div></div>
-<div class="trust-item"><div><strong>Secure &amp; Confidential</strong><span>Digital-first process</span></div></div>
-<div class="trust-item"><div><strong>Timely Results</strong><span>Automated reporting options</span></div></div>
-<div class="trust-item"><div><strong>Expert Support</strong><span>Help when you need it</span></div></div>
+<section aria-label="Quick access" class="home-quick">
+<div class="container home-quick-grid">
+<a class="home-quick-card" href="personal-drug-and-alcohol-testing.html">
+<span class="home-card-number">01</span>
+<div><strong>Personal Testing</strong><span>Fast ordering for personal, court, school, and other individual testing needs.</span></div>
+<span aria-hidden="true" class="home-card-arrow">→</span>
+</a>
+<a class="home-quick-card" href="workplace-drug-and-alcohol-testing.html">
+<span class="home-card-number">02</span>
+<div><strong>Workplace Testing</strong><span>Pre-employment, random, post-accident, reasonable suspicion, and return-to-duty support.</span></div>
+<span aria-hidden="true" class="home-card-arrow">→</span>
+</a>
+<a class="home-quick-card" href="dot-services.html">
+<span class="home-card-number">03</span>
+<div><strong>DOT Compliance</strong><span>FMCSA and other DOT agency testing, programs, audits, physicals, and compliance support.</span></div>
+<span aria-hidden="true" class="home-card-arrow">→</span>
+</a>
 </div>
 </section>
-<section class="intro">
-<div class="container intro-grid">
-<div class="intro-card">
-<div class="intro-card-panel">
-<strong>One platform. One trusted partner.</strong>
-<span>Testing, compliance, collection access and digital workflows designed around the way modern employers and individuals need to work.</span>
+<section class="home-section home-services" id="services">
+<div class="container">
+<div class="home-section-head home-section-head-split">
+<div>
+<span class="home-kicker">Core services</span>
+<h2>Start with the service you need today.</h2>
+</div>
+<p>From a single test to an ongoing workforce program, screenings4u connects ordering, collection, compliance support, and account access without making customers navigate separate vendors.</p>
+</div>
+<div class="home-service-grid">
+<a class="home-service-card home-service-featured" href="services.html">
+<div class="home-service-top"><span>Testing</span><span aria-hidden="true">↗</span></div>
+<h3>Drug &amp; Alcohol Testing</h3>
+<p>Urine, alcohol, specialty, workplace, personal, and regulated testing options.</p>
+<strong>Browse testing services</strong>
+</a>
+<a class="home-service-card" href="mobile-drug-and-alcohol-testing.html">
+<div class="home-service-top"><span>On-site</span><span aria-hidden="true">↗</span></div>
+<h3>Mobile Testing</h3>
+<p>Bring collections to your workplace, event, job site, or other approved location.</p>
+<strong>Request mobile testing</strong>
+</a>
+<a class="home-service-card" href="background-checks.html">
+<div class="home-service-top"><span>Workforce</span><span aria-hidden="true">↗</span></div>
+<h3>Background Checks</h3>
+<p>Screen candidates and workers through a connected employment screening workflow.</p>
+<strong>Explore background checks</strong>
+</a>
+<a class="home-service-card" href="consulting-services.html">
+<div class="home-service-top"><span>Compliance</span><span aria-hidden="true">↗</span></div>
+<h3>Program Support</h3>
+<p>Policy, audit, recordkeeping, and testing workflow guidance for regulated programs.</p>
+<strong>View compliance support</strong>
+</a>
 </div>
 </div>
-<div class="intro-copy">
-<span class="eyebrow">The screenings4u Difference</span>
-<h2>Move from complicated screening to a simpler process.</h2>
-<p>
-            screenings4u combines a nationwide collection network with secure account access and result workflows so employers and individuals can order the screening they need without unnecessary friction.
-          </p>
-<ul class="check-list">
-<li>Nationwide access to professional collection locations</li>
-<li>Order documents and updates available through your account</li>
-<li>Workplace and DOT-focused compliance solutions</li>
-<li>Personal testing with privacy and convenience in mind</li>
+</section>
+<section class="home-section home-business">
+<div class="container home-business-grid">
+<div class="home-business-media">
+<img alt="Workplace screening team coordinating testing services" decoding="async" height="840" loading="lazy" src="images/second-hero.webp" width="1250"/>
+<div class="home-media-note"><strong>One partner.</strong><span>Testing, compliance, software, training, and support.</span></div>
+</div>
+<div class="home-business-copy">
+<span class="home-kicker">For employers &amp; organizations</span>
+<h2>Build a screening program your team can actually operate.</h2>
+<p>Centralize ordering, employee testing activity, documents, notifications, and service access while keeping the workflow practical for HR, safety, and operations teams.</p>
+<ul class="home-checklist">
+<li>Employer and workforce testing programs</li>
+<li>Mobile and post-accident response options</li>
+<li>DOT and non-DOT program support</li>
+<li>Account access, records, and ongoing service coordination</li>
 </ul>
-<a class="btn btn-outline" href="about-us.html">
-  Learn About screenings4u →
-</a> </div>
+<div class="home-inline-actions">
+<a class="home-text-link" href="business-services.html">Explore business services <span>→</span></a>
+<a class="home-text-link" href="industries-served.html">Industries we serve <span>→</span></a>
+</div>
+</div>
 </div>
 </section>
-<section class="services" id="services">
+<section class="home-section home-dot">
+<div class="container home-dot-shell">
+<div class="home-dot-copy">
+<span class="home-kicker home-kicker-light">DOT compliance</span>
+<h2>Regulated testing support without separating compliance from operations.</h2>
+<p>Workforce DOT by screenings4u supports employers, owner-operators, C/TPAs, and regulated programs with testing workflows, consortium support, audit preparation, physical exams, and software access.</p>
+<div class="home-dot-actions">
+<a class="home-btn home-btn-primary" href="dot-services.html">Explore DOT Services</a>
+<a class="home-btn home-btn-dark-outline" href="https://dot.screenings4u.com/">Workforce DOT Platform</a>
+</div>
+</div>
+<div class="home-dot-stats">
+<div><strong>FMCSA</strong><span>Employer and owner-operator support</span></div>
+<div><strong>49 CFR</strong><span>Program-focused compliance workflows</span></div>
+<div><strong>Nationwide</strong><span>Collection and testing coordination</span></div>
+<div><strong>Connected</strong><span>Testing, records, documents, and support</span></div>
+</div>
+</div>
+</section>
+<section class="home-section home-process">
 <div class="container">
-<div class="section-heading">
-<span class="eyebrow">Drug &amp; Alcohol Testing Services</span>
-<h2>Find the service that fits your needs.</h2>
-<p>From routine workplace screening to DOT and non-DOT drug and alcohol testing, screenings4u brings the testing process together.</p>
+<div class="home-section-head">
+<span class="home-kicker">How it works</span>
+<h2>From request to completed service.</h2>
+<p>Keep the next step clear whether you are ordering for yourself, an employee, or an entire program.</p>
 </div>
-<div class="service-grid">
-<article class="service-card">
-<div class="service-number">01</div>
-<div class="service-icon">U</div>
-<h3>Urine Drug Testing</h3>
-<p>Common drug screening options with multiple panel choices for workplace, personal and compliance needs.</p>
-<a href="services.html">Explore Urine Tests →</a>
-</article>
-<article class="service-card">
-<div class="service-number">02</div>
-<div class="service-icon">H</div>
-<h3>Hair Drug Testing</h3>
-<p>Longer-window screening options for employers, personal testing, court-related needs and more.</p>
-<a href="services.html">Explore Hair Tests →</a>
-</article>
-<article class="service-card">
-<div class="service-number">03</div>
-<div class="service-icon">O</div>
-<h3>Oral Fluid Testing</h3>
-<p>Non-invasive testing options designed for convenient collection and recent-use screening.</p>
-<a href="services.html">Explore Oral Tests →</a>
-</article>
-<article class="service-card">
-<div class="service-number">04</div>
-<div class="service-icon">A</div>
-<h3>Alcohol Testing</h3>
-<p>Breath and laboratory alcohol testing solutions for workplace and DOT-regulated environments.</p>
-<a href="dot-breathalyzer-services.html">Explore Alcohol Testing →</a>
-</article>
-<article class="service-card">
-<div class="service-number">05</div>
-<div class="service-icon">D</div>
-<h3>DOT Drug &amp; Alcohol Testing</h3>
-<p>DOT drug and alcohol testing for pre-employment, random, post-accident, reasonable suspicion, return-to-duty and follow-up testing events.</p>
-<a href="dot-urine-drug-tests.html">Explore DOT Testing →</a>
-</article>
-<article class="service-card">
-<div class="service-number">06</div>
-<div class="service-icon">P</div>
-<h3>Personal Testing</h3>
-<p>Private testing options with convenient ordering and access to professional collection locations.</p>
-<a href="personal-drug-and-alcohol-testing.html">Explore Personal Testing →</a>
-</article>
+<div class="home-process-grid">
+<div class="home-process-card"><span>1</span><h3>Choose a service</h3><p>Select the testing, compliance, or business service that fits the situation.</p></div>
+<div class="home-process-card"><span>2</span><h3>Provide the details</h3><p>Tell us who needs service, where it should happen, and any program requirements.</p></div>
+<div class="home-process-card"><span>3</span><h3>Complete the workflow</h3><p>Use the appropriate collection, appointment, mobile, or account workflow.</p></div>
+<div class="home-process-card"><span>4</span><h3>Track the outcome</h3><p>Access updates, documentation, support, and next steps through the appropriate account or service team.</p></div>
 </div>
 </div>
 </section>
-<section class="process">
-<div class="container process-layout">
-<div class="process-copy">
-<span class="eyebrow">How It Works</span>
-<h2>A better testing experience from order to results.</h2>
-<p>
-            The new screenings4u experience is built around a straightforward digital process that reduces unnecessary steps for the donor and the organization ordering the test.
-          </p>
+<section class="home-cta-section">
+<div class="container home-cta-shell">
+<div>
+<span class="home-kicker">Ready to move forward?</span>
+<h2>Order testing or talk with our team about your program.</h2>
+<p>Start with a service today, or contact screenings4u when you need help choosing the right workflow.</p>
 </div>
-<div class="steps">
-<div class="step">
-<div class="step-num">01</div>
-<div><h3>Order Your Test</h3><p>Select the testing service you need and complete the secure checkout process.</p></div>
-</div>
-<div class="step">
-<div class="step-num">02</div>
-<div><h3>Receive Order Updates</h3><p>Your account is created and you receive confirmation and instructions from the screenings4u team.</p></div>
-</div>
-<div class="step">
-<div class="step-num">03</div>
-<div><h3>Receive Collection Instructions</h3><p>Our team provides the collection instructions needed for your testing appointment.</p></div>
-</div>
-<div class="step">
-<div class="step-num">04</div>
-<div><h3>Laboratory Analysis</h3><p>The specimen is processed through the appropriate laboratory testing workflow.</p></div>
-</div>
-<div class="step">
-<div class="step-num">05</div>
-<div><h3>Receive Your Results</h3><p>Results are delivered through the applicable secure reporting process.</p></div>
-</div>
-</div>
-</div>
-</section>
-<section class="audiences">
-<div class="container">
-<div class="section-heading">
-<span class="eyebrow">Built for Different Needs</span>
-<h2 style="color:#fff">Whether you're running a workforce or ordering for yourself.</h2>
-<p style="color:#b9c7d8">Choose the path that matches your situation and get to the right service faster.</p>
-</div>
-<div class="audience-grid">
-<article class="audience-card">
-<span class="eyebrow">For Employers</span>
-<h3>Build a safer, more organized screening program.</h3>
-<p>Workplace testing, DOT programs, random testing, mobile collection, consulting and compliance support for organizations of different sizes.</p>
-<div class="audience-links">
-<a href="workplace-drug-and-alcohol-testing.html">Workplace Testing</a>
-<a href="https://workforce.screenings4u.com/">Consulting</a>
-<a href="mobile-drug-and-alcohol-testing.html">Mobile Testing</a>
-<a href="mobile-drug-and-alcohol-testing.html">Mobile &amp; On-Site Testing</a>
-</div>
-</article>
-<article class="audience-card">
-<span class="eyebrow">For Individuals</span>
-<h3>Get the test you need without the employer in the middle.</h3>
-<p>Private personal testing with convenient ordering and nationwide collection access.</p>
-<div class="audience-links">
-<a href="personal-drug-and-alcohol-testing.html">Personal Testing</a>
-<a href="services.html">Urine Tests</a>
-<a href="services.html">Hair Tests</a>
-<a href="https://dot.screenings4u.com/">DOT Tests</a>
-</div>
-</article>
+<div class="home-cta-actions">
+<a class="home-btn home-btn-primary" href="services.html">Order a Test</a>
+<a class="home-btn home-btn-secondary" href="contact.html">Contact Us</a>
 </div>
 </div>
 </section>
 </main>
-
-<footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
-  <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
-  <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
-  <script src="assets/js/site-ui.js?v=20260904-1"></script>
-  <script src="assets/js/footer.js?v=20260904-1"></script>
-
+<footer aria-label="Website footer" class="site-footer" data-site-footer="" id="siteFooter"></footer>
+<script src="assets/js/navigation.js?v=20261002-shell2"></script>
+<script src="assets/js/footer.js?v=20261002-shell1"></script>
 </body>
 </html>

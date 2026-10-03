@@ -1,12 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Lab Account Intake | screenings4u</title>
-  <link href="images/fav.png" rel="icon" type="image/png">
-  <meta name="description" content="Complete your screenings4u house lab account intake for DOT and NON-DOT testing setup.">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>Lab Account Intake | screenings4u</title>
+<link href="images/fav.png" rel="icon" type="image/png"/>
+<meta content="Complete your screenings4u house lab account intake for DOT and NON-DOT testing setup." name="description"/>
+<style>
     :root{--blue:#173d78;--blue2:#24467f;--orange:#ff6b00;--ink:#172033;--muted:#65758b;--line:#dbe3ec;--soft:#f5f7fa;--white:#fff;--danger:#b42318;--success:#137a4d}
     *{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--soft);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
     body{min-height:100vh}.wrap{max-width:1100px;margin:auto;padding:30px 18px 70px}
@@ -25,109 +26,100 @@
     .loading{text-align:center;padding:40px;color:var(--muted)}.hidden{display:none!important}
     @media(max-width:760px){.grid,.checks{grid-template-columns:1fr}.full{grid-column:auto}h1{font-size:27px}.hero,.card{padding:20px}.intake-logo{width:185px}}
   </style>
-  <link href="assets/css/form-security.css?v=20260918-1" rel="stylesheet">
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
-  <script src="assets/js/form-security.js?v=20260918-1" defer></script>
-</head>
-<body>
+<link href="assets/css/form-security.css?v=20260918-1" rel="stylesheet"/>
+<script defer="" src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
+<script defer="" src="assets/js/form-security.js?v=20260918-1"></script>
+<link href="assets/css/navigation.css?v=20261002-shell1" rel="stylesheet"/><link href="assets/css/footer.css?v=20261002-shell1" rel="stylesheet"/><link href="https://screenings4u.com/lab-account-intake.html" rel="canonical"/><meta content="noindex,follow" name="robots"/><link href="assets/css/mobile-ready.css?v=20261002-sitewide2" rel="stylesheet"/></head>
+<body><div data-site-header="" id="siteHeader"></div>
 <div class="wrap">
-  <a class="brand" href="index.html" aria-label="screenings4u home"><img src="images/logo.png" alt="screenings4u" class="intake-logo"></a>
-  <div class="hero">
-    <div class="eyebrow">House Lab Account Setup</div>
-    <h1>Complete Your Lab Account Intake</h1>
-    <p>This form gives screenings4u the business information needed to finish setting up your DOT and NON-DOT testing accounts.</p>
-    <div class="notice"><strong>Physical street addresses are required.</strong> P.O. Boxes are not accepted for the business physical, billing, shipping, or mailing address.</div>
-  </div>
-
-  <form class="card" id="form" data-s4u-protected="true" data-s4u-form-key="lab_account_intake">
-    <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden">
-      <label for="websiteTrap">Website</label>
-      <input id="websiteTrap" name="websiteTrap" type="text" tabindex="-1" autocomplete="off">
-    </div>
-
-    <div class="section">
-      <h2>Business Information</h2>
-      <p class="sub">Tell us how your testing account should be established.</p>
-      <div class="grid">
-        <div class="field full"><label>Legal Business Name *</label><input name="legal_business_name" required></div>
-        <div class="field"><label>DBA / Trade Name</label><input name="dba_name"></div>
-        <div class="field"><label>EIN</label><input name="ein"></div>
-        <div class="field"><label>Business Phone *</label><input name="business_phone" required></div>
-        <div class="field"><label>Website</label><input name="website"></div>
-      </div>
-    </div>
-
-    <div class="section" data-address-section="physical">
-      <h2>Business Physical Address</h2>
-      <p class="sub">Enter the physical street location of the business. P.O. Boxes are not allowed.</p>
-      <div class="grid">
-        <div class="field full"><label>Street Address *</label><input name="physical_address_line1" data-no-po-box required><div class="address-warning">No P.O. Boxes.</div></div>
-        <div class="field full"><label>Suite / Unit</label><input name="physical_address_line2"></div>
-        <div class="field"><label>City *</label><input name="physical_city" required></div>
-        <div class="field"><label>State *</label><input name="physical_state" maxlength="2" required></div>
-        <div class="field"><label>ZIP Code *</label><input name="physical_postal_code" required></div>
-      </div>
-    </div>
-
-    <div class="section" data-address-section="billing">
-      <h2>Billing Address</h2>
-      <p class="sub">Address used for invoices and billing correspondence. P.O. Boxes are not allowed.</p>
-      <label class="same-row"><input type="checkbox" name="billing_same_as_physical" data-copy-address="billing"> Same as business physical address</label>
-      <div class="grid">
-        <div class="field full"><label>Street Address *</label><input name="billing_address_line1" data-no-po-box required><div class="address-warning">No P.O. Boxes.</div></div>
-        <div class="field full"><label>Suite / Unit</label><input name="billing_address_line2"></div>
-        <div class="field"><label>City *</label><input name="billing_city" required></div>
-        <div class="field"><label>State *</label><input name="billing_state" maxlength="2" required></div>
-        <div class="field"><label>ZIP Code *</label><input name="billing_postal_code" required></div>
-      </div>
-    </div>
-
-    <div class="section" data-address-section="shipping">
-      <h2>Shipping Address</h2>
-      <p class="sub">Address used for testing materials, supplies, or other physical deliveries. P.O. Boxes are not allowed.</p>
-      <label class="same-row"><input type="checkbox" name="shipping_same_as_physical" data-copy-address="shipping"> Same as business physical address</label>
-      <div class="grid">
-        <div class="field full"><label>Street Address *</label><input name="shipping_address_line1" data-no-po-box required><div class="address-warning">No P.O. Boxes.</div></div>
-        <div class="field full"><label>Suite / Unit</label><input name="shipping_address_line2"></div>
-        <div class="field"><label>City *</label><input name="shipping_city" required></div>
-        <div class="field"><label>State *</label><input name="shipping_state" maxlength="2" required></div>
-        <div class="field"><label>ZIP Code *</label><input name="shipping_postal_code" required></div>
-      </div>
-    </div>
-
-    <div class="section" data-address-section="mailing">
-      <h2>Mailing Address</h2>
-      <p class="sub">Address used for mailed account correspondence. P.O. Boxes are not allowed.</p>
-      <label class="same-row"><input type="checkbox" name="mailing_same_as_physical" data-copy-address="mailing"> Same as business physical address</label>
-      <div class="grid">
-        <div class="field full"><label>Street Address *</label><input name="mailing_address_line1" data-no-po-box required><div class="address-warning">No P.O. Boxes.</div></div>
-        <div class="field full"><label>Suite / Unit</label><input name="mailing_address_line2"></div>
-        <div class="field"><label>City *</label><input name="mailing_city" required></div>
-        <div class="field"><label>State *</label><input name="mailing_state" maxlength="2" required></div>
-        <div class="field"><label>ZIP Code *</label><input name="mailing_postal_code" required></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2>Primary Contact</h2>
-      <p class="sub">This person will be the primary contact for account setup.</p>
-      <div class="grid">
-        <div class="field"><label>First Name *</label><input name="primary_contact_first_name" required></div>
-        <div class="field"><label>Last Name *</label><input name="primary_contact_last_name" required></div>
-        <div class="field"><label>Email *</label><input type="email" name="primary_contact_email" required></div>
-        <div class="field"><label>Phone</label><input name="primary_contact_phone"></div>
-        <div class="field"><label>Billing Contact Name</label><input name="billing_contact_name"></div>
-        <div class="field"><label>Billing Contact Email</label><input type="email" name="billing_contact_email"></div>
-      </div>
-    </div>
-
-    <div class="actions">
-      <button class="btn primary" type="submit" id="submitBtn">Submit Lab Account Intake</button>
-      <span class="msg" id="msg"></span>
-    </div>
-  </form>
+<a aria-label="screenings4u home" class="brand" href="index.html"><img alt="screenings4u" class="intake-logo" decoding="async" height="228" loading="eager" src="images/logo.png" width="1257"/></a>
+<div class="hero">
+<div class="eyebrow">House Lab Account Setup</div>
+<h1>Complete Your Lab Account Intake</h1>
+<p>This form gives screenings4u the business information needed to finish setting up your DOT and NON-DOT testing accounts.</p>
+<div class="notice"><strong>Physical street addresses are required.</strong> P.O. Boxes are not accepted for the business physical, billing, shipping, or mailing address.</div>
 </div>
-
+<form class="card" data-s4u-form-key="lab_account_intake" data-s4u-protected="true" id="form">
+<div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden">
+<label for="websiteTrap">Website</label>
+<input autocomplete="off" id="websiteTrap" name="websiteTrap" tabindex="-1" type="text"/>
+</div>
+<div class="section">
+<h2>Business Information</h2>
+<p class="sub">Tell us how your testing account should be established.</p>
+<div class="grid">
+<div class="field full"><label>Legal Business Name *</label><input name="legal_business_name" required=""/></div>
+<div class="field"><label>DBA / Trade Name</label><input name="dba_name"/></div>
+<div class="field"><label>EIN</label><input name="ein"/></div>
+<div class="field"><label>Business Phone *</label><input name="business_phone" required=""/></div>
+<div class="field"><label>Website</label><input name="website"/></div>
+</div>
+</div>
+<div class="section" data-address-section="physical">
+<h2>Business Physical Address</h2>
+<p class="sub">Enter the physical street location of the business. P.O. Boxes are not allowed.</p>
+<div class="grid">
+<div class="field full"><label>Street Address *</label><input data-no-po-box="" name="physical_address_line1" required=""/><div class="address-warning">No P.O. Boxes.</div></div>
+<div class="field full"><label>Suite / Unit</label><input name="physical_address_line2"/></div>
+<div class="field"><label>City *</label><input name="physical_city" required=""/></div>
+<div class="field"><label>State *</label><input maxlength="2" name="physical_state" required=""/></div>
+<div class="field"><label>ZIP Code *</label><input name="physical_postal_code" required=""/></div>
+</div>
+</div>
+<div class="section" data-address-section="billing">
+<h2>Billing Address</h2>
+<p class="sub">Address used for invoices and billing correspondence. P.O. Boxes are not allowed.</p>
+<label class="same-row"><input data-copy-address="billing" name="billing_same_as_physical" type="checkbox"/> Same as business physical address</label>
+<div class="grid">
+<div class="field full"><label>Street Address *</label><input data-no-po-box="" name="billing_address_line1" required=""/><div class="address-warning">No P.O. Boxes.</div></div>
+<div class="field full"><label>Suite / Unit</label><input name="billing_address_line2"/></div>
+<div class="field"><label>City *</label><input name="billing_city" required=""/></div>
+<div class="field"><label>State *</label><input maxlength="2" name="billing_state" required=""/></div>
+<div class="field"><label>ZIP Code *</label><input name="billing_postal_code" required=""/></div>
+</div>
+</div>
+<div class="section" data-address-section="shipping">
+<h2>Shipping Address</h2>
+<p class="sub">Address used for testing materials, supplies, or other physical deliveries. P.O. Boxes are not allowed.</p>
+<label class="same-row"><input data-copy-address="shipping" name="shipping_same_as_physical" type="checkbox"/> Same as business physical address</label>
+<div class="grid">
+<div class="field full"><label>Street Address *</label><input data-no-po-box="" name="shipping_address_line1" required=""/><div class="address-warning">No P.O. Boxes.</div></div>
+<div class="field full"><label>Suite / Unit</label><input name="shipping_address_line2"/></div>
+<div class="field"><label>City *</label><input name="shipping_city" required=""/></div>
+<div class="field"><label>State *</label><input maxlength="2" name="shipping_state" required=""/></div>
+<div class="field"><label>ZIP Code *</label><input name="shipping_postal_code" required=""/></div>
+</div>
+</div>
+<div class="section" data-address-section="mailing">
+<h2>Mailing Address</h2>
+<p class="sub">Address used for mailed account correspondence. P.O. Boxes are not allowed.</p>
+<label class="same-row"><input data-copy-address="mailing" name="mailing_same_as_physical" type="checkbox"/> Same as business physical address</label>
+<div class="grid">
+<div class="field full"><label>Street Address *</label><input data-no-po-box="" name="mailing_address_line1" required=""/><div class="address-warning">No P.O. Boxes.</div></div>
+<div class="field full"><label>Suite / Unit</label><input name="mailing_address_line2"/></div>
+<div class="field"><label>City *</label><input name="mailing_city" required=""/></div>
+<div class="field"><label>State *</label><input maxlength="2" name="mailing_state" required=""/></div>
+<div class="field"><label>ZIP Code *</label><input name="mailing_postal_code" required=""/></div>
+</div>
+</div>
+<div class="section">
+<h2>Primary Contact</h2>
+<p class="sub">This person will be the primary contact for account setup.</p>
+<div class="grid">
+<div class="field"><label>First Name *</label><input name="primary_contact_first_name" required=""/></div>
+<div class="field"><label>Last Name *</label><input name="primary_contact_last_name" required=""/></div>
+<div class="field"><label>Email *</label><input name="primary_contact_email" required="" type="email"/></div>
+<div class="field"><label>Phone</label><input name="primary_contact_phone"/></div>
+<div class="field"><label>Billing Contact Name</label><input name="billing_contact_name"/></div>
+<div class="field"><label>Billing Contact Email</label><input name="billing_contact_email" type="email"/></div>
+</div>
+</div>
+<div class="actions">
+<button class="btn primary" id="submitBtn" type="submit">Submit Lab Account Intake</button>
+<span class="msg" id="msg"></span>
+</div>
+</form>
+</div>
 <script>
 const API="https://elpbnytpciqnbexiaebp.supabase.co/functions/v1/public-form-submit";
 const form=document.getElementById("form");
@@ -196,5 +188,5 @@ form.addEventListener("submit",async e=>{
   }catch(e){msg.textContent=e?.message||"Unable to submit the lab account intake.";msg.className="msg error";}finally{submitBtn.disabled=false;}
 });
 </script>
-</body>
+<footer aria-label="Website footer" class="site-footer" data-site-footer="" id="siteFooter"></footer><script src="assets/js/navigation.js?v=20261002-shell1"></script><script src="assets/js/footer.js?v=20261002-shell1"></script></body>
 </html>

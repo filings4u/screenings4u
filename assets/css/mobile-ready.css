@@ -148,3 +148,191 @@ input,select,textarea{min-width:0}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+
+/* ============================================================
+   screenings4u.com sitewide responsive layer
+   User-specified mobile behavior:
+   - Hero image first, text below
+   - Footer links 2x2 stacked
+   - Legal area stacked and centered at bottom
+   ============================================================ */
+
+html,body{max-width:100%;overflow-x:hidden}
+img,svg,video,canvas{max-width:100%;height:auto}
+iframe{max-width:100%}
+a,p,li,td,th,label,strong,small,span,h1,h2,h3,h4,h5,h6{overflow-wrap:anywhere}
+[id]{scroll-margin-top:100px}
+
+@media(max-width:1024px){
+  .container{width:min(100% - 36px,var(--max,1440px))!important}
+
+  /* Collapse common desktop two-column layouts */
+  .home-hero-grid,.pt-hero-grid,.wt-hero-grid,.mobile-hero-grid,.pa-hero-grid,
+  .dna-hero-grid,.ns-hero-grid,.bc-hero-grid,.dot-hero-grid,.dot-urine-hero-grid,
+  .dot-physical-hero-grid,.dot-breathalyzer-hero-grid,.policy-hero-grid,
+  .consulting-hero-grid,.assessment-hero-grid,.workflow-hero-grid,
+  .recordkeeping-hero-grid,.industry-hero-grid,.lab-hero-grid,.business-hero-grid,
+  .start-hero-grid,.collector-hero-grid,.fmcsa-router-grid,.dm-grid,
+  .ctpa-solutions-grid,.par-hero-grid,.par-form-layout{
+    grid-template-columns:1fr!important;
+  }
+}
+
+@media(max-width:767px){
+  :root{--s4u-mobile-gutter:16px}
+  .container{width:calc(100% - 32px)!important;max-width:none!important}
+  main{overflow:hidden}
+
+  input,select,textarea{font-size:16px!important}
+
+  /* Hero media always on top, copy below */
+  .home-hero-grid,.pt-hero-grid,.wt-hero-grid,.mobile-hero-grid,.pa-hero-grid,
+  .dna-hero-grid,.ns-hero-grid,.bc-hero-grid,.dot-hero-grid,.dot-urine-hero-grid,
+  .dot-physical-hero-grid,.dot-breathalyzer-hero-grid,.policy-hero-grid,
+  .consulting-hero-grid,.assessment-hero-grid,.workflow-hero-grid,
+  .recordkeeping-hero-grid,.industry-hero-grid,.lab-hero-grid,.business-hero-grid,
+  .start-hero-grid,.collector-hero-grid,.fmcsa-router-grid,.par-hero-grid{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:26px!important;
+  }
+
+  .home-hero-media,.hero-media,[class*="-hero-media"],
+  .media-card,.image-card,.visual-card,.product-frame{
+    order:-1!important;
+    width:100%!important;
+    max-width:100%!important;
+  }
+
+  .home-hero-copy,.hero-copy,[class*="-hero-copy"],[class*="-hero-content"]{
+    order:0!important;
+    max-width:none!important;
+    width:100%!important;
+  }
+
+  .home-hero-media img,.hero-media img,[class*="-hero-media"] img,
+  .media-card img,.image-card img,.visual-card img,.product-frame img{
+    width:100%!important;
+    height:auto!important;
+    object-fit:cover!important;
+  }
+
+  h1,.hero h1,[class*="-hero"] h1{
+    font-size:clamp(2.05rem,10vw,3rem)!important;
+    line-height:1.03!important;
+    letter-spacing:-.04em!important;
+  }
+  h2{font-size:clamp(1.7rem,7.5vw,2.35rem)!important;line-height:1.08!important}
+
+  .hero-actions,.actions,.cta-actions,[class*="-actions"]{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+    width:100%!important;
+  }
+  .hero-actions>.btn,.actions>.btn,.cta-actions>.btn,
+  .hero-actions>a,.actions>a,.cta-actions>a{
+    width:100%!important;
+  }
+
+  /* Common cards/grids stack to one column on phones */
+  .pricing-grid,.plan-grid,.service-grid,.services-grid,.card-grid,.feature-grid,
+  .benefit-grid,.audience-grid,.fact-grid,.steps-grid,.process-grid,.faq-grid,
+  .resource-grid,.industry-grid,.dna-price-grid,.ns-price-grid,.package-grid,
+  .review-grid,.dm-platforms,.dm-link-grid,.ctpa-solutions-cards,
+  .fmcsa-router-links,.par-progress-grid,.par-sidebar,.grid,.grid-3,.form-grid,
+  .radio-grid,.check-grid,.checkbox-grid{
+    grid-template-columns:1fr!important;
+  }
+
+  table{display:block!important;width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch}
+
+  /* Footer: 2x2 stacked links on mobile */
+  .footer-shell{
+    grid-template-columns:1fr!important;
+    gap:28px!important;
+  }
+
+  .footer-links-grid{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:24px 18px!important;
+  }
+
+  .footer-col{
+    min-width:0!important;
+  }
+
+  .footer-col h4{
+    margin-bottom:10px!important;
+  }
+
+  .footer-col a{
+    display:block!important;
+    line-height:1.45!important;
+  }
+
+  /* Legal bottom stacked and centered */
+  .footer-legal-wrap{
+    text-align:center!important;
+    padding:22px 0 max(26px,env(safe-area-inset-bottom))!important;
+  }
+
+  .footer-legal-wrap>.container{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:14px!important;
+    text-align:center!important;
+  }
+
+  .footer-legal-name{
+    display:block!important;
+    width:100%!important;
+    max-width:460px!important;
+    margin-inline:auto!important;
+    text-align:center!important;
+    line-height:1.5!important;
+  }
+
+  .footer-legal-name>span{
+    display:block!important;
+  }
+
+  .footer-legal-name>span+span{
+    margin-top:3px!important;
+  }
+
+  .footer-legal-grid{
+    display:flex!important;
+    flex-wrap:wrap!important;
+    justify-content:center!important;
+    align-items:center!important;
+    gap:8px 16px!important;
+    margin:0!important;
+  }
+
+  .footer-login-row{
+    display:flex!important;
+    justify-content:center!important;
+    align-items:center!important;
+    flex-wrap:wrap!important;
+    gap:10px 18px!important;
+    margin:0!important;
+  }
+}
+
+@media(max-width:480px){
+  .container{width:calc(100% - 26px)!important}
+
+  /* Still 2x2, tighter on small screens */
+  .footer-links-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:20px 14px!important;
+  }
+
+  .footer-col h4{font-size:11px!important}
+  .footer-col a{font-size:12px!important}
+}

@@ -3,171 +3,61 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="#24467f" name="theme-color"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="Court-ordered drug and alcohol testing for probation, family court, parole, DUI and legal compliance through screenings4u." name="description"/>
 <title>Court-Ordered Drug &amp; Alcohol Testing | screenings4u</title>
-<link href="images/fav.png" rel="icon" type="image/png">
+<link href="images/fav.png" rel="icon" type="image/png"/>
+<meta content="#24467f" name="theme-color"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-<link href="assets/css/global.css?v=20260904-7" rel="stylesheet"/>
-  <link rel="stylesheet" href="assets/css/desktop-nav.css?v=20260904-1">
-  <link rel="stylesheet" href="assets/css/mobile-nav.css?v=20260904-2"><style>
-input, select, textarea{font:inherit}
-
-
-.eyebrow:before{content:"";width:28px;height:2px;background:var(--orange)}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.hero{position:relative;min-height:700px;display:flex;align-items:center;background:
-linear-gradient(90deg,rgba(7,26,49,.98) 0%,rgba(7,26,49,.93) 31%,rgba(7,26,49,.66) 53%,rgba(7,26,49,.12) 78%,rgba(7,26,49,0) 100%),
-url("images/court-ordered-testing-hero.webp") 38% center/cover no-repeat;overflow:hidden}
-.hero:after{content:"";position:absolute;right:-170px;top:-220px;width:500px;height:500px;background:var(--orange);opacity:.96;transform:rotate(35deg);clip-path:polygon(42% 0,100% 0,100% 58%)}
-.hero-inner{position:relative;z-index:2;padding:92px 0 130px}.hero-copy{max-width:700px;color:#fff}
-.hero-copy .eyebrow{color:#ffad73}.hero-copy .eyebrow:before{background:#ffad73}
-.hero h1{font-size:clamp(48px,6vw,78px);line-height:.98;letter-spacing:-.055em;font-weight:900;margin-bottom:24px}
-.hero h1 span{color:var(--orange)}.hero-lead{max-width:650px;color:#d4e1f0;font-size:18px;line-height:1.7;margin-bottom:32px}
-.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:48px}.hero-actions .btn-outline{color:#fff;border-color:rgba(255,255,255,.55);background:transparent}
-.hero-actions .btn-outline:hover{color:var(--blue-dark);background:#fff;border-color:#fff}
-.hero-features{display:grid;grid-template-columns:repeat(4,1fr);max-width:760px;border-top:1px solid rgba(255,255,255,.18);padding-top:22px}
-.hero-feature{padding:0 17px;border-right:1px solid rgba(255,255,255,.18)}
-.hero-feature:first-child{padding-left:0}.hero-feature:last-child{border-right:0}
-.hero-feature strong{display:block;font-size:12px;line-height:1.3}.hero-feature small{display:block;color:#a8bad0;font-size:10px;margin-top:4px}
-
-.intro{padding:105px 0 95px}.intro-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
-.intro h2, .process-copy h2{color:var(--blue-dark);font-size:clamp(34px,4vw,51px);line-height:1.05;letter-spacing:-.04em;margin-bottom:18px}
-.intro-copy p{color:var(--muted);font-size:16px;margin-bottom:18px}.check-list{display:grid;gap:13px;margin-top:25px}
-.check-list li{list-style:none;display:flex;gap:12px;align-items:flex-start;color:#344054;font-size:14px;font-weight:600}
-.check-list li:before{content:"✓";flex:0 0 23px;width:23px;height:23px;display:grid;place-items:center;border-radius:50%;background:var(--blue-soft);color:var(--blue);font-weight:900;font-size:12px}
-.info-card{padding:38px;border-radius:20px;background:var(--blue-dark);color:#fff;box-shadow:var(--shadow)}
-.info-card h3{font-size:29px;line-height:1.08;margin-bottom:12px}.info-card p{color:#d4e1f0;font-size:14px;line-height:1.7;margin-bottom:25px}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.info-stat{padding:18px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.05)}
-.info-stat strong{display:block;font-size:13px;margin-bottom:4px}.info-stat span{display:block;color:#aebfd3;font-size:11px;line-height:1.45}
-
-.services{padding:105px 0;background:var(--surface-2);border-block:1px solid var(--line)}
-.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.service-card{padding:29px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);transition:.2s ease}
-.service-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--line-strong)}
-.service-number{width:42px;height:42px;display:grid;place-items:center;margin-bottom:18px;border-radius:10px;background:var(--blue-soft);color:var(--blue);font-size:12px;font-weight:900}
-.service-card h3{color:var(--blue-dark);font-size:18px;margin-bottom:8px}.service-card p{color:var(--muted);font-size:12.5px;line-height:1.65}
-.service-link{display:inline-flex;margin-top:18px;color:var(--orange);font-size:12px;font-weight:900}
-
-.requirements{padding:105px 0}.requirements-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.requirement-panel{padding:38px;border-radius:var(--radius);background:var(--blue-dark);color:#fff}.requirement-panel.orange{background:var(--orange)}
-.requirement-panel h3{font-size:28px;line-height:1.1;margin-bottom:12px}.requirement-panel p{color:#d4e1f0;font-size:13px;line-height:1.7}
-.requirement-panel.orange p{color:#fff0e6}.requirement-panel ul{display:grid;gap:11px;margin-top:22px}
-.requirement-panel li{list-style:none;display:flex;gap:10px;color:#fff;font-size:12px}
-.requirement-panel li:before{content:"✓";width:21px;height:21px;flex:0 0 21px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.14);color:var(--orange);font-weight:900}
-
-.process{padding:105px 0;background:var(--blue-pale);border-top:1px solid var(--line)}.process-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:start}
-.process-copy p{color:var(--muted);font-size:15px}.steps{display:grid}.step{display:grid;grid-template-columns:58px 1fr;gap:20px;padding-bottom:30px;position:relative}
-.step:not(:last-child):after{content:"";position:absolute;left:28px;top:58px;bottom:0;width:1px;background:var(--line)}
-.step-num{position:relative;z-index:2;width:58px;height:58px;display:grid;place-items:center;border-radius:50%;color:#fff;background:var(--blue);font-size:14px;font-weight:900;box-shadow:0 0 0 7px #edf3fb}
-.step h3{color:var(--blue-dark);font-size:19px;margin:4px 0 5px}.step p{color:var(--muted);font-size:13px;max-width:580px}
-
-.cta{padding:85px 0;background:#eef3f9;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:30px}.cta h2{font-size:clamp(30px,4vw,45px);line-height:1.05;letter-spacing:-.035em;color:var(--blue-dark);margin-bottom:8px}
-.cta p{color:var(--muted);font-size:15px}.cta-actions{display:flex;flex-wrap:wrap;gap:10px}
-.faq{padding:105px 0}.faq-list{display:grid;gap:10px;max-width:900px}.faq-item{border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
-.faq-question{width:100%;padding:19px 21px;display:flex;justify-content:space-between;align-items:center;border:0;background:#fff;color:var(--blue-dark);text-align:left;font-size:14px;font-weight:800}
-.faq-answer{display:none;padding:0 21px 20px;color:var(--muted);font-size:13px;line-height:1.7}.faq-item.active .faq-answer{display:block}.faq-plus{color:var(--orange);font-size:19px}
-
-.mobile-nav-actions{display:none}
-
-
-@media(max-width:900px){.intro-grid,.requirements-grid,.process-grid{grid-template-columns:1fr}.service-grid{grid-template-columns:1fr 1fr}.hero-features{grid-template-columns:1fr 1fr;gap:18px}.hero-feature{border-right:0}.cta-inner{flex-direction:column;align-items:flex-start}}
-
-@media(max-width:767px){
-  
-  
-  
-  
-  .full-banner, .announcement-bar, .promo-banner, [data-full-banner]{display:none!important}
-  .mobile-nav-actions{display:grid;grid-template-columns:1fr;gap:10px;width:100%;padding-top:14px}.mobile-nav-actions .btn{width:100%;min-height:48px}.mobile-nav-actions .btn-outline{background:#fff}
-  .hero{display:block;min-height:0;padding-top:290px;background:var(--blue-darker)}.hero::before{content:"";position:absolute;inset:0 0 auto;height:290px;background:url("images/court-ordered-testing-hero.webp") center center/cover no-repeat}.hero::after{display:none}.hero-inner{padding:34px var(--mobile-gutter) 40px;background:var(--blue-darker)}.hero-copy{max-width:none}.hero h1{font-size:clamp(2.15rem,9.5vw,2.9rem);line-height:1.04;letter-spacing:-.045em;margin-bottom:16px}.hero-lead{font-size:16px;line-height:1.6;margin-bottom:24px}.hero-actions,.cta-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:0}.hero-actions .btn,.cta-actions .btn{width:100%;min-height:52px}.hero-features{grid-template-columns:1fr;margin-top:30px;padding-top:20px;gap:0}.hero-feature,.hero-feature:first-child{padding:10px 0;border:0;border-bottom:1px solid rgba(255,255,255,.12)}.hero-feature:last-child{border-bottom:0}.hero-feature strong{font-size:13px}.hero-feature small{font-size:12px;line-height:1.45}
-  .intro,.services,.requirements,.process,.faq{padding:54px 0}.intro-grid,.requirements-grid,.process-grid,.service-grid{grid-template-columns:1fr;gap:20px}.intro-grid{align-items:start}.intro h2, .process-copy h2{font-size:clamp(1.8rem,8vw,2.3rem);line-height:1.1}.intro-copy p, .process-copy p{font-size:16px;line-height:1.65}.check-list{gap:12px;margin-top:22px}.check-list li{font-size:14px;line-height:1.5}.info-card,.requirement-panel,.service-card{padding:24px}.info-card h3,.requirement-panel h3{font-size:1.65rem}.info-card p,.requirement-panel p,.requirement-panel li,.service-card p{font-size:14px}.info-grid{grid-template-columns:1fr;gap:10px}.info-stat{padding:16px}.info-stat strong{font-size:14px}.info-stat span{font-size:13px}.service-card h3{font-size:19px}.service-number{width:auto;min-width:76px;padding:0 11px;font-size:13px}.service-link{font-size:14px;min-height:44px;align-items:center}
-  .step{grid-template-columns:44px 1fr;gap:14px;padding-bottom:26px}.step-num{width:44px;height:44px;font-size:13px;box-shadow:0 0 0 5px #edf3fb}.step:not(:last-child)::after{left:21px;top:44px}.step h3{font-size:18px;margin-top:2px}.step p{font-size:14px;line-height:1.6}
-  .faq-list{gap:10px}.faq-question{min-height:56px;padding:16px;gap:14px;font-size:15px;line-height:1.4}.faq-answer{padding:0 16px 18px;font-size:14px;line-height:1.65}.faq-plus{flex:0 0 auto}.cta{padding:52px 0}.cta-inner{display:grid;grid-template-columns:1fr;gap:24px}.cta h2{font-size:clamp(1.85rem,8vw,2.35rem)}.cta p{font-size:16px;line-height:1.6}
-}
-
-@media(max-width:380px){.hero{padding-top:250px}.hero::before{height:250px}.hero-inner{padding-top:30px}.info-card,.requirement-panel,.service-card{padding:21px}}
-@media(prefers-reduced-motion:reduce){*::before, *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-</style>
-</head>
-<body><div class="topbar">
-<div class="container topbar-inner">
-<div class="topbar-left">
-<span>Nationwide Drug &amp; Alcohol Testing</span><span aria-hidden="true">•</span><span>Operating Nationwide</span>
-</div>
-<div class="topbar-right">
-<span>Mon–Fri, 8AM–8PM CST</span><a href="tel:7732457009">(773) 245-7009</a>
-</div>
-</div>
-</div><header class="site-header">
-  <div class="container nav-inner" id="navInner">
-    <a href="index.html" class="brand" aria-label="screenings4u home">
-      <img src="images/logo.png" alt="screenings4u" class="site-logo">
-    </a>
-    <nav class="desktop-nav" id="desktopNav" aria-label="Main navigation"></nav>
-    <div class="nav-actions">
-      <a href="services.html" class="btn btn-outline">Order a Test</a>
-      <div class="nav-account-menu">
-        <button type="button" class="nav-login" aria-haspopup="true" aria-expanded="false">Account Login <span class="nav-login-chevron" aria-hidden="true">▼</span></button>
-        <div class="nav-account-dropdown">
-          <a href="https://customers.screenings4u.com/login.html">Customer Login</a>
-        </div>
-      </div>
-      <button class="mobile-toggle" id="mobileToggle" type="button" aria-controls="mobileNav" aria-label="Open menu" aria-expanded="false">☰</button>
-    </div>
-  </div>
-</header>
-<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true"></nav>
+<link href="assets/css/global.css?v=20261002-shell1" rel="stylesheet"/>
+<link href="assets/css/navigation.css?v=20261002-shell1" rel="stylesheet"/>
+<link href="assets/css/footer.css?v=20261002-shell1" rel="stylesheet"/>
+<link href="assets/css/court-ordered-testing.css?v=20261002-1" rel="stylesheet"/>
+<link href="https://screenings4u.com/court-ordered-etg-drug-and-alcohol-testing.html" rel="canonical"/><meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/><meta content="website" property="og:type"/><meta content="screenings4u" property="og:site_name"/><meta content="Court-Ordered Drug &amp; Alcohol Testing | screenings4u" property="og:title"/><meta content="Court-ordered drug and alcohol testing for probation, family court, parole, DUI and legal compliance through screenings4u." property="og:description"/><meta content="https://screenings4u.com/court-ordered-etg-drug-and-alcohol-testing.html" property="og:url"/><meta content="https://screenings4u.com/images/logo.png" property="og:image"/><meta content="summary_large_image" name="twitter:card"/><meta content="Court-Ordered Drug &amp; Alcohol Testing | screenings4u" name="twitter:title"/><meta content="Court-ordered drug and alcohol testing for probation, family court, parole, DUI and legal compliance through screenings4u." name="twitter:description"/><meta content="https://screenings4u.com/images/logo.png" name="twitter:image"/><script id="s4u-seo-jsonld" type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Court-Ordered Drug & Alcohol Testing | screenings4u","description":"Court-ordered drug and alcohol testing for probation, family court, parole, DUI and legal compliance through screenings4u.","url":"https://screenings4u.com/court-ordered-etg-drug-and-alcohol-testing.html","isPartOf":{"@type":"WebSite","name":"screenings4u","url":"https://screenings4u.com/"}}</script><link href="assets/css/mobile-ready.css?v=20261002-sitewide2" rel="stylesheet"/></head>
+<body class="court-testing-page">
+<div data-site-header="" id="siteHeader"></div>
 <main>
-<section class="hero">
-<div class="container hero-inner">
-<div class="hero-copy">
-<div class="eyebrow">Court Ordered Testing</div>
-<h1>Court-Ordered Drug &amp; Alcohol Testing <span>Made Simple.</span></h1>
-<p class="hero-lead">Professional drug and alcohol testing designed around probation, family court, parole, DUI and other legal requirements, with secure reporting and flexible testing schedules.</p>
-<div class="hero-actions">
+<section class="co-hero">
+<div class="container co-hero-grid">
+<div class="co-hero-copy">
+<div>
+<span class="co-kicker">Court-Ordered Testing</span>
+<h1>Court-ordered testing made <span>easier to manage.</span></h1>
+<p class="co-lead">Professional drug and alcohol testing for probation, family court, parole, DUI, and other legal requirements, with secure reporting and flexible testing schedules.</p>
+<div class="co-actions">
 <a class="btn btn-orange" href="#testing-options">View Testing Options →</a>
-<a class="btn btn-outline" href="contact.html">Talk to a Specialist →</a>
+<a class="btn btn-outline" href="contact.html">Talk With a Specialist</a>
 </div>
-<div class="hero-features">
-<div class="hero-feature"><strong>Flexible</strong><small>Daily, weekly, monthly and quarterly schedules</small></div>
-<div class="hero-feature"><strong>Confidential</strong><small>Professional and discreet collection</small></div>
-<div class="hero-feature"><strong>Secure</strong><small>Verified reporting and chain of custody</small></div>
-<div class="hero-feature"><strong>Nationwide</strong><small>Thousands of collection sites</small></div>
 </div>
+<div class="co-proof">
+<div><strong>Flexible</strong><span>testing schedules</span></div>
+<div><strong>Secure</strong><span>results reporting</span></div>
+<div><strong>Nationwide</strong><span>collection access</span></div>
+</div>
+</div>
+<div class="co-hero-media">
+<img alt="Court-ordered drug and alcohol testing" decoding="async" fetchpriority="high" height="940" loading="eager" src="images/court-ordered-testing-hero.webp" width="1672"/>
+<span class="co-badge">Court &amp; legal testing support</span>
 </div>
 </div>
 </section>
-<section class="intro">
-<div class="container intro-grid">
-<div class="intro-copy">
+<section aria-label="Court testing navigation" class="co-quick">
+<div class="container co-quick-grid">
+<a href="#testing-options"><span>01</span><strong>Testing Options</strong><small>Choose the test required by your legal obligation.</small></a>
+<a href="#schedules"><span>02</span><strong>Testing Schedules</strong><small>Daily, weekly, monthly, or quarterly structures.</small></a>
+<a href="#how-it-works"><span>03</span><strong>How It Works</strong><small>Understand the testing and reporting workflow.</small></a>
+<a href="contact.html"><span>04</span><strong>Need Help?</strong><small>Ask our team which test fits your requirement.</small></a>
+</div>
+</section>
+<section class="co-section" id="schedules">
+<div class="container co-schedule-grid">
+<div class="co-schedule-copy">
 <span class="eyebrow">Trusted Compliance</span>
 <h2>Testing plans built around your legal requirements.</h2>
-<p>screenings4u supports clients navigating probation, family court and other legal obligations with customized testing plans and professional reporting.</p>
-<ul class="check-list">
+<p>screenings4u supports clients navigating probation, family court, and other legal obligations with customized testing plans and professional reporting.</p>
+<ul>
 <li>Customized testing schedules</li>
 <li>Urine drug testing</li>
 <li>EtG alcohol testing</li>
@@ -176,173 +66,182 @@ url("images/court-ordered-testing-hero.webp") 38% center/cover no-repeat;overflo
 <li>Authorized reporting to legal parties</li>
 </ul>
 </div>
-<div class="info-card">
-<h3>Choose a testing schedule that fits your mandate.</h3>
-<p>Testing can be structured around the frequency required by your probation, court or legal monitoring program.</p>
-<div class="info-grid">
-<div class="info-stat"><strong>Daily</strong><span>Continuous monitoring for intensive supervision programs.</span></div>
-<div class="info-stat"><strong>Weekly</strong><span>Consistent oversight for standard court mandates.</span></div>
-<div class="info-stat"><strong>Monthly</strong><span>Periodic accountability for long-term monitoring.</span></div>
-<div class="info-stat"><strong>Quarterly</strong><span>Scheduled compliance verification for extended requirements.</span></div>
-</div>
+<div class="co-schedule-cards">
+<article><span>DAILY</span><h3>Intensive monitoring</h3><p>Continuous testing schedules for programs that require frequent accountability.</p></article>
+<article><span>WEEKLY</span><h3>Standard oversight</h3><p>Consistent testing cadence for court or supervision requirements.</p></article>
+<article><span>MONTHLY</span><h3>Periodic compliance</h3><p>Scheduled verification for longer-term legal monitoring programs.</p></article>
+<article><span>QUARTERLY</span><h3>Extended requirements</h3><p>Structured testing for programs with less frequent mandated intervals.</p></article>
 </div>
 </div>
 </section>
-<section class="services" id="testing-options">
+<section class="co-section co-section-soft" id="testing-options">
 <div class="container">
-<div class="section-heading">
+<div class="co-section-head">
 <span class="eyebrow">Testing Options</span>
 <h2>Choose the test required by your legal obligation.</h2>
 <p>Select the testing service required for your court order or monitoring program.</p>
 </div>
-<div class="service-grid">
-<article class="service-card">
-<div class="service-number">$59.95</div>
+<div class="co-service-grid">
+<article class="co-service-card">
+<div class="co-service-price">$59.95</div>
 <h3>5 Panel Oral Fluid Test</h3>
 <p>Observed collection, laboratory analysis and secure reporting.</p>
-<a class="service-link" href="checkout.html?service=oral_5_panel">Get Started →</a>
+<a href="checkout.html?service=oral_5_panel">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$115.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$115.95</div>
 <h3>5 Panel Hair Follicle Test</h3>
 <p>Standardized 90-day drug screening with nationwide collection access.</p>
-<a class="service-link" href="checkout.html?service=hair_5_panel">Get Started →</a>
+<a href="checkout.html?service=hair_5_panel">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$135.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$135.95</div>
 <h3>5 Panel Hair Follicle (Exp Opi)</h3>
 <p>Expanded opiate screening for broader compliance monitoring.</p>
-<a class="service-link" href="checkout.html?service=hair_5_panel_expanded_opiates">Get Started →</a>
+<a href="checkout.html?service=hair_5_panel_expanded_opiates">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$155.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$155.95</div>
 <h3>7 Panel Hair Follicle Test</h3>
 <p>Seven-panel hair testing with secure online results.</p>
-<a class="service-link" href="checkout.html?service=hair_7_panel">Get Started →</a>
+<a href="checkout.html?service=hair_7_panel">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$225.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$225.95</div>
 <h3>9 Panel Hair Follicle Test</h3>
 <p>Comprehensive nine-panel detection for legal monitoring programs.</p>
-<a class="service-link" href="checkout.html?service=hair_9_panel">Get Started →</a>
+<a href="checkout.html?service=hair_9_panel">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$69.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$69.95</div>
 <h3>10 Panel Oral Fluid Test</h3>
 <p>Observed collection, laboratory analysis and secure reporting.</p>
-<a class="service-link" href="checkout.html?service=oral_10_panel">Get Started →</a>
+<a href="checkout.html?service=oral_10_panel">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$79.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$79.95</div>
 <h3>10 Panel Drug Test (Lab)</h3>
 <p>Detailed laboratory analysis with results typically in 2 to 3 days.</p>
-<a class="service-link" href="checkout.html?service=urine_10_panel_lab">Get Started →</a>
+<a href="checkout.html?service=urine_10_panel_lab">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$89.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$89.95</div>
 <h3>10 Panel Drug Test (Rapid)</h3>
 <p>Fast on-site results for broad 10-substance screening.</p>
-<a class="service-link" href="checkout.html?service=urine_10_panel_rapid">Get Started →</a>
+<a href="checkout.html?service=urine_10_panel_rapid">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$115.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$115.95</div>
 <h3>12 Panel Drug Test</h3>
 <p>Broad-spectrum screening across 12 substance groups.</p>
-<a class="service-link" href="checkout.html?service=urine_12_panel">Get Started →</a>
+<a href="checkout.html?service=urine_12_panel">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$475.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$475.95</div>
 <h3>12 Panel Hair Follicle Test</h3>
 <p>Detailed long-term detection covering a wide range of substances.</p>
-<a class="service-link" href="checkout.html?service=hair_12_panel">Get Started →</a>
+<a href="checkout.html?service=hair_12_panel">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$135.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$135.95</div>
 <h3>14 Panel Drug Test</h3>
 <p>Expanded screening for comprehensive legal compliance monitoring.</p>
-<a class="service-link" href="checkout.html?service=urine_14_panel">Get Started →</a>
+<a href="checkout.html?service=urine_14_panel">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$595.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$595.95</div>
 <h3>14 Panel Hair Follicle Test</h3>
 <p>Extended hair testing with nationwide collection and secure reporting.</p>
-<a class="service-link" href="checkout.html?service=hair_14_panel">Get Started →</a>
+<a href="checkout.html?service=hair_14_panel">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$159.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$159.95</div>
 <h3>18 Panel Drug Test</h3>
 <p>Maximum-range drug screening across 18 substance panels.</p>
-<a class="service-link" href="checkout.html?service=urine_18_panel">Get Started →</a>
+<a href="checkout.html?service=urine_18_panel">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$115.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$115.95</div>
 <h3>EtG Urine Alcohol Test</h3>
 <p>Urine-based EtG screening for recent alcohol consumption.</p>
-<a class="service-link" href="checkout.html?service=etg_urine_alcohol">Get Started →</a>
+<a href="checkout.html?service=etg_urine_alcohol">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$129.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$129.95</div>
 <h3>EtG + 5 Panel Drug Test</h3>
 <p>Combined EtG alcohol and five-panel drug screening.</p>
-<a class="service-link" href="checkout.html?service=etg_plus_5_panel">Get Started →</a>
+<a href="checkout.html?service=etg_plus_5_panel">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$144.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$144.95</div>
 <h3>EtG + 10 Panel Drug Test</h3>
 <p>Combined EtG alcohol and 10-panel drug screening.</p>
-<a class="service-link" href="checkout.html?service=etg_plus_10_panel">Get Started →</a>
+<a href="checkout.html?service=etg_plus_10_panel">Get Started →</a>
 </article>
-<article class="service-card">
-<div class="service-number">$395.95</div>
+<article class="co-service-card">
+<div class="co-service-price">$395.95</div>
 <h3>EtG Alcohol Hair Test</h3>
 <p>Long-term alcohol monitoring using hair-based testing.</p>
-<a class="service-link" href="checkout.html?service=etg_alcohol_hair">Get Started →</a>
+<a href="checkout.html?service=etg_alcohol_hair">Get Started →</a>
 </article>
 </div>
 </div>
 </section>
-<section class="requirements">
-<div class="container">
-<div class="section-heading">
-<span class="eyebrow">Professional Reporting</span>
-<h2>Results you can use to document compliance.</h2>
-<p>Verified results can be securely reported to authorized legal parties or downloaded for your records.</p>
+<section class="co-section">
+<div class="container co-requirements-grid">
+<div class="co-requirement-panel">
+<span class="eyebrow">Before You Order</span>
+<h2>Use the exact testing requirement you were given.</h2>
+<p>Court and legal testing requirements can vary. If your paperwork specifies a panel, testing method, frequency, or reporting requirement, use that information when choosing your service.</p>
+<ul>
+<li>Review the test type and panel</li>
+<li>Confirm the required testing frequency</li>
+<li>Bring required identification and paperwork</li>
+<li>Follow any reporting instructions from the ordering party</li>
+</ul>
 </div>
-<div class="requirements-grid">
-<div class="requirement-panel"><h3>Collection</h3><p>Bring your government-issued photo ID and digital donor pass to the selected collection site.</p><ul><li>Professional collectors</li><li>Secure chain-of-custody procedures</li><li>Nationwide collection locations</li><li>Discreet testing environment</li></ul></div>
-<div class="requirement-panel orange"><h3>Reporting</h3><p>Secure results reporting gives you documentation for your attorney, probation officer or court when authorized.</p><ul><li>Secure results</li><li>Authorized legal reporting</li><li>Downloadable reports</li><li>Private information handling</li></ul></div>
-</div>
-</div>
-</section>
-<section class="process">
-<div class="container process-grid">
-<div class="process-copy"><span class="eyebrow">How It Works</span><h2>A clear path from court requirement to completed test.</h2><p>screenings4u streamlines the process from intake and scheduling through collection and reporting.</p></div>
-<div class="steps">
-<div class="step"><div class="step-num">01</div><div><h3>Contact &amp; Intake</h3><p>Discuss your court requirements and build your testing profile.</p></div></div>
-<div class="step"><div class="step-num">02</div><div><h3>Schedule &amp; Receive Your Pass</h3><p>Select the testing frequency and location and receive your digital donor pass.</p></div></div>
-<div class="step"><div class="step-num">03</div><div><h3>Visit the Collection Site</h3><p>Present your digital pass and photo ID to a professional collector.</p></div></div>
-<div class="step"><div class="step-num">04</div><div><h3>Results &amp; Reporting</h3><p>Receive secure verified results and authorize reporting to legal parties as needed.</p></div></div>
+<div class="co-requirement-note">
+<span>IMPORTANT</span>
+<h3>Not sure which test was ordered?</h3>
+<p>Do not guess. Send us the testing requirement or tell us what your court, probation officer, attorney, or monitoring program requested and our team can help you identify the correct service.</p>
+<a class="btn btn-orange" href="contact.html">Ask Our Team →</a>
 </div>
 </div>
 </section>
-<section class="faq">
+<section class="co-process" id="how-it-works">
+<div class="container co-process-grid">
+<div class="co-process-copy">
+<span class="eyebrow">How It Works</span>
+<h2>A clear process from requirement to reporting.</h2>
+<p>Start with the testing requirement, complete collection, and follow the reporting instructions associated with your legal or monitoring program.</p>
+</div>
+<div class="co-steps">
+<article><span>01</span><div><h3>Review your requirement</h3><p>Confirm the test type, panel, schedule, and any reporting instructions.</p></div></article>
+<article><span>02</span><div><h3>Order the correct test</h3><p>Select the service that matches the court or monitoring requirement you received.</p></div></article>
+<article><span>03</span><div><h3>Complete collection</h3><p>Visit the assigned or participating collection location with required identification.</p></div></article>
+<article><span>04</span><div><h3>Results &amp; reporting</h3><p>Results are handled according to the service and any authorized reporting instructions.</p></div></article>
+</div>
+</div>
+</section>
+<section class="co-faq">
 <div class="container">
-<div class="section-heading"><span class="eyebrow">Court Testing FAQ</span><h2>Questions about court-ordered testing?</h2><p>Review the core details before selecting your test.</p></div>
-<div class="faq-list">
-<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">How do I get started with court-ordered testing?<span class="faq-plus">+</span></button><div class="faq-answer">Select the required test, complete the purchase and receive a digital donor pass by email. Take the pass to a partner collection site.</div></div>
-<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">What do I need to bring?<span class="faq-plus">+</span></button><div class="faq-answer">Bring a valid government-issued photo ID and the digital donor pass provided after purchase.</div></div>
-<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">Can I set up recurring testing?<span class="faq-plus">+</span></button><div class="faq-answer">Yes. The service offers customized daily, weekly and monthly testing schedules for long-term legal monitoring.</div></div>
-<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">Can results be sent to my attorney or probation officer?<span class="faq-plus">+</span></button><div class="faq-answer">Yes. You can authorize secure reporting to your attorney or probation officer, or download the official report yourself.</div></div>
-<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">Is my testing information private?<span class="faq-plus">+</span></button><div class="faq-answer">Strict privacy protocols and secure data handling are used, and information is disclosed only to authorized parties.</div></div>
+<div class="co-section-head">
+<span class="eyebrow">Court Testing FAQ</span>
+<h2>Questions before you order?</h2>
+</div>
+<div class="co-faq-list">
+<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">What if I do not know which test the court requires?<span class="faq-plus">+</span></button><div class="faq-answer">Review the written testing requirement or contact the ordering party. If you have the requirement but are unsure which screenings4u service matches it, contact our team before ordering.</div></div>
+<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">Can testing be scheduled weekly or monthly?<span class="faq-plus">+</span></button><div class="faq-answer">The source page supports daily, weekly, monthly, and quarterly testing structures. Your actual schedule should follow the requirement issued by the court or monitoring program.</div></div>
+<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">Do you offer EtG alcohol testing?<span class="faq-plus">+</span></button><div class="faq-answer">Yes. The available options on this page include an EtG urine alcohol test and a combined EtG plus 5-panel drug test.</div></div>
+<div class="faq-item"><button aria-expanded="false" class="faq-question" data-faq-toggle="" type="button">Can results be reported to an authorized legal party?<span class="faq-plus">+</span></button><div class="faq-answer">The existing service page states that authorized reporting to legal parties is supported. Reporting should follow the applicable authorization and program requirements.</div></div>
 </div>
 </div>
 </section>
 </main>
-<script defer="" src="assets/js/court-ordered-etg-drug-and-alcohol-testing.js"></script>
-
-<footer aria-label="Website footer" class="site-footer" id="siteFooter"></footer>
-  <script src="assets/js/desktop-nav.js?v=20260904-1"></script>
-  <script src="assets/js/mobile-nav.js?v=20260904-2"></script>
-  <script src="assets/js/site-ui.js?v=20260904-1"></script>
-  <script src="assets/js/footer.js?v=20260904-1"></script></body>
+<footer aria-label="Website footer" class="site-footer" data-site-footer="" id="siteFooter"></footer>
+<script src="assets/js/site-ui.js?v=20260904-1"></script>
+<script defer="" src="assets/js/court-ordered-testing.js?v=20261002-1"></script>
+<script src="assets/js/navigation.js?v=20261002-shell1"></script>
+<script src="assets/js/footer.js?v=20261002-shell1"></script>
+</body>
 </html>

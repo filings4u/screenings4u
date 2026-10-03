@@ -1,12 +1,11 @@
 User-agent: *
 Allow: /
-
 Disallow: /checkout.html
 Disallow: /order-confirmation.html
-Disallow: /status.html
-Disallow: /donor-pass-result.html
-Disallow: /donor-pass-location.html
+Disallow: /testing-request.html
+Disallow: /mobile-testing-request.html
+Disallow: /onsite-workplace-testing-request.html
+Disallow: /post-accident-testing-request.html
 Disallow: /post-accident-testing-form.html
-Disallow: /index%20copy.html
-
+Disallow: /lab-account-intake.html
 Sitemap: https://screenings4u.com/sitemap.xml

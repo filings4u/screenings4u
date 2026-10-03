@@ -1,98 +1,22 @@
-/**
- * screenings4u - NON DOT Breathalyzer Testing Services Page Controller
- * Location: assets/js/non-dot-breathalyzer-services.js
- */
-
-(function () {
-  'use strict';
-
-  function initializePage() {
-    initializeFaq();
-    initializeSmoothScroll();
-  }
-
-  function initializeFaq() {
-    document.addEventListener('click', function (event) {
-      var button = event.target.closest('[data-faq-toggle]');
-
-      if (!button) return;
-
-      var item = button.closest('.faq-item');
-
-      if (!item) return;
-
-      event.preventDefault();
-
-      var wasOpen = item.classList.contains('active');
-
-      document.querySelectorAll('.faq-item.active').forEach(function (openItem) {
-        openItem.classList.remove('active');
-
-        var openButton = openItem.querySelector('[data-faq-toggle]');
-
-        if (openButton) {
-          openButton.setAttribute('aria-expanded', 'false');
-
-          var openPlus = openButton.querySelector('.faq-plus');
-
-          if (openPlus) {
-            openPlus.textContent = '+';
-          }
-        }
-      });
-
-      if (!wasOpen) {
-        item.classList.add('active');
-        button.setAttribute('aria-expanded', 'true');
-
-        var plus = button.querySelector('.faq-plus');
-
-        if (plus) {
-          plus.textContent = '−';
-        }
-      }
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('[data-faq-toggle]').forEach(button=>{
+    button.addEventListener('click',()=>{
+      const item=button.closest('.faq-item');
+      if(!item)return;
+      const open=item.classList.toggle('active');
+      button.setAttribute('aria-expanded',String(open));
+      const icon=button.querySelector('.faq-plus');
+      if(icon)icon.textContent=open?'−':'+';
     });
-  }
-
-  function initializeSmoothScroll() {
-    document.addEventListener('click', function (event) {
-      var link = event.target.closest('a[href^="#"]');
-
-      if (!link) return;
-
-      var targetId = link.getAttribute('href');
-
-      if (!targetId || targetId === '#') return;
-
-      var target = document.querySelector(targetId);
-
-      if (!target) return;
-
+  });
+  document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+    anchor.addEventListener('click',event=>{
+      const id=anchor.getAttribute('href');
+      if(!id||id==='#')return;
+      const target=document.querySelector(id);
+      if(!target)return;
       event.preventDefault();
-
-      var header = document.querySelector('.site-header');
-      var headerHeight = header ? header.offsetHeight : 0;
-
-      var targetTop =
-        target.getBoundingClientRect().top +
-        window.pageYOffset -
-        headerHeight -
-        12;
-
-      window.scrollTo({
-        top: Math.max(0, targetTop),
-        behavior: 'smooth'
-      });
-
-      if (window.history && window.history.replaceState) {
-        window.history.replaceState(null, '', targetId);
-      }
+      target.scrollIntoView({behavior:'smooth',block:'start'});
     });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializePage);
-  } else {
-    initializePage();
-  }
-})();
+  });
+});

@@ -1,0 +1,34 @@
+
+.fmcsa-router-page{background:#fff}
+.fmcsa-router-page .container{width:min(var(--max),calc(100% - 80px))}
+.fmcsa-router-hero{padding:72px 0 90px;background:linear-gradient(180deg,#f7faff 0%,#fff 100%)}
+.fmcsa-router-grid{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:46px;align-items:start}
+.fmcsa-router-copy h1{margin:12px 0 18px;color:var(--blue-darker);font-size:clamp(42px,5vw,66px);line-height:1.02;letter-spacing:-.05em}
+.fmcsa-router-copy h1 span{color:var(--blue)}
+.fmcsa-router-copy>p{max-width:680px;margin:0;color:var(--muted);font-size:17px;line-height:1.72}
+.fmcsa-router-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:28px}
+.fmcsa-router-note{margin-top:30px;padding:22px;border:1px solid var(--line);border-radius:16px;background:#fff}
+.fmcsa-router-note strong{display:block;color:var(--blue-darker);font-size:17px}
+.fmcsa-router-note p{margin:7px 0 14px;color:var(--muted);font-size:13px;line-height:1.6}
+.fmcsa-router-note a{color:var(--orange);font-size:13px;font-weight:850}
+.fmcsa-router-card{display:flex;flex-direction:column;min-height:480px;padding:30px;border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:20px;background:#fff;box-shadow:var(--shadow-sm);text-decoration:none;transition:.18s ease}
+.fmcsa-router-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.fmcsa-router-label{color:var(--orange);font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.fmcsa-router-card h2{margin:12px 0 10px;color:var(--blue-darker);font-size:29px;line-height:1.1}
+.fmcsa-router-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.65}
+.fmcsa-router-card ul{display:grid;gap:9px;margin:24px 0 0;padding:0}
+.fmcsa-router-card li{list-style:none;display:flex;gap:8px;color:#50647d;font-size:12.5px;line-height:1.5}
+.fmcsa-router-card li:before{content:"✓";color:var(--orange);font-weight:900}
+.fmcsa-router-link{margin-top:auto;padding-top:28px;color:var(--orange);font-size:13px}
+.fmcsa-router-related{padding:80px 0;border-top:1px solid var(--line);background:var(--surface)}
+.fmcsa-router-head{max-width:820px;margin-bottom:30px}
+.fmcsa-router-head h2{margin:8px 0 10px;color:var(--blue-darker);font-size:clamp(32px,4vw,46px);line-height:1.06;letter-spacing:-.04em}
+.fmcsa-router-head p{margin:0;color:var(--muted);font-size:15px;line-height:1.7}
+.fmcsa-router-links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.fmcsa-router-links a{display:block;padding:22px;border:1px solid var(--line);border-radius:15px;background:#fff;text-decoration:none}
+.fmcsa-router-links strong{display:block;color:var(--blue-darker);font-size:15px}
+.fmcsa-router-links span{display:block;margin-top:7px;color:var(--muted);font-size:12px;line-height:1.6}
+.fmcsa-router-links a:hover strong{color:var(--orange)}
+@media(max-width:1050px){.fmcsa-router-grid{grid-template-columns:1fr}.fmcsa-router-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.fmcsa-router-page .container{width:calc(100% - 32px)}.fmcsa-router-hero{padding:48px 0 64px}.fmcsa-router-actions{display:grid}.fmcsa-router-actions .btn{width:100%}.fmcsa-router-card{min-height:0}.fmcsa-router-links{grid-template-columns:1fr}}
+@media(max-width:480px){.fmcsa-router-page .container{width:calc(100% - 24px)}}
