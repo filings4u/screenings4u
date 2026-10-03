@@ -325,6 +325,34 @@
 
     const toggle = document.getElementById("s4uShellToggle");
     const drawer = document.getElementById("s4uShellMobileNav");
+    const navCard = target.querySelector(".s4u-nav-card");
+    const primaryNav = target.querySelector(".s4u-primary-nav");
+    const navActions = target.querySelector(".s4u-nav-actions");
+
+    // Enforce the mobile/desktop header state in JS as well as CSS.
+    // This prevents legacy/global styles from pushing the hamburger out of view.
+    const applyShellLayout = () => {
+      const mobile = window.innerWidth <= BREAKPOINT;
+
+      if (mobile) {
+        primaryNav?.style.setProperty("display", "none", "important");
+        navActions?.style.setProperty("display", "none", "important");
+        toggle?.style.setProperty("display", "flex", "important");
+        toggle?.style.setProperty("position", "relative", "important");
+        toggle?.style.setProperty("inset", "auto", "important");
+        toggle?.style.setProperty("margin", "0", "important");
+        navCard?.style.setProperty("display", "grid", "important");
+        navCard?.style.setProperty("grid-template-columns", "minmax(0,1fr) 46px", "important");
+        navCard?.style.setProperty("align-items", "center", "important");
+      } else {
+        [primaryNav, navActions, toggle, navCard].forEach(el => {
+          if (!el) return;
+          ["display","position","inset","margin","grid-template-columns","align-items"].forEach(prop => el.style.removeProperty(prop));
+        });
+      }
+    };
+
+    applyShellLayout();
 
     const setMobileOpen = open => {
       drawer?.classList.toggle("is-open", open);
@@ -410,6 +438,7 @@
     });
 
     window.addEventListener("resize", () => {
+      applyShellLayout();
       if (window.innerWidth > BREAKPOINT) setMobileOpen(false);
       else closeDesktopGroups(null);
     });
