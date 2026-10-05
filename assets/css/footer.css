@@ -12,3 +12,37 @@
 @media(max-width:620px){#siteFooter .footer-shell,#siteFooter .footer-bottom,#siteFooter .footer-cta{width:calc(100% - 28px)}.footer-cta{flex-direction:column;padding:28px 0}.footer-cta-actions{width:100%;display:grid;grid-template-columns:1fr}.footer-cta-copy strong{font-size:22px}.footer-shell{padding:42px 0 36px}.footer-links-grid{grid-template-columns:repeat(2,1fr);gap:28px 18px}.footer-logo{width:205px}.footer-legal-links{grid-template-columns:repeat(3,1fr);width:100%;gap:9px 6px}.footer-legal-links a{font-size:10.5px;text-align:center}.footer-bottom{gap:18px}.footer-admin-login{margin-top:2px}}
 
 .footer-family a{overflow-wrap:anywhere;word-break:break-word}
+
+/* 2026-10-05: keep the desktop footer in one continuous row. */
+@media (min-width:1101px){
+  #siteFooter .footer-shell{
+    display:grid;
+    grid-template-columns:minmax(300px,1.35fr) minmax(0,4.65fr);
+    gap:46px;
+    align-items:start;
+  }
+  #siteFooter .footer-brand-area{
+    max-width:none;
+    min-width:0;
+  }
+  #siteFooter .footer-links-grid{
+    display:grid;
+    grid-template-columns:repeat(5,minmax(0,1fr));
+    gap:28px;
+    align-items:start;
+  }
+  #siteFooter .footer-col{
+    min-width:0;
+  }
+  #siteFooter .footer-family{
+    grid-column:auto;
+    grid-row:auto;
+  }
+  #siteFooter .footer-bottom{
+    grid-template-columns:minmax(320px,1fr) auto minmax(120px,1fr);
+    align-items:center;
+  }
+  #siteFooter .footer-admin-login{
+    justify-self:end;
+  }
+}
