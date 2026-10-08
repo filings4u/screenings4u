@@ -5,8 +5,8 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#24467f" name="theme-color"/>
-<meta content="Enter your testing location to generate a screenings4u donor pass." name="description"/>
-<title>Generate Donor Pass | screenings4u</title>
+<meta content="View your screenings4u Labcorp donor pass, registration status, collection details and testing instructions." name="description"/>
+<title>Donor Pass | screenings4u</title>
 <link href="images/fav.png" rel="icon" type="image/png"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
@@ -279,119 +279,36 @@
     }
     @media(max-width:380px){.intro,.form-section{padding-left:17px;padding-right:17px}}
     @media(prefers-reduced-motion:reduce){*::before, *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+.tracking-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(760px,100%);margin:24px auto 0}.tracking-grid .tracking{margin:0;width:auto}.donor-pass-actions{display:flex;justify-content:flex-end;gap:10px;margin-bottom:22px}.donor-pass-list{display:grid;gap:16px}.dp-item{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}.dp-head{padding:18px 20px;background:#f8fbff;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.dp-head h2{margin:0 0 5px;font-size:19px;color:var(--blue-dark)}.dp-head p{margin:0;color:var(--muted);font-size:12px}.dp-badge{display:inline-flex;align-items:center;padding:6px 9px;border-radius:999px;background:#eef4ff;color:var(--blue);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.05em}.dp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line)}.dp-cell{background:#fff;padding:15px 17px}.dp-cell span{display:block;margin-bottom:4px;color:var(--muted);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}.dp-cell strong{display:block;color:var(--blue-dark);font-size:13px;line-height:1.45;word-break:break-word}.dp-note{padding:16px 20px;background:#fff8f1;color:#7a4b17;font-size:12px;line-height:1.6;border-top:1px solid #f4dfc8}.dp-site{padding:18px 20px;background:#f4f8ff;border-top:1px solid var(--line)}.dp-site h3{margin:0 0 6px;color:var(--blue-dark);font-size:15px}.dp-site p{margin:0;color:#52677f;font-size:12px;line-height:1.6}@media(max-width:720px){.tracking-grid{grid-template-columns:1fr}.donor-pass-actions{display:grid;grid-template-columns:1fr}.donor-pass-actions .btn{width:100%}.dp-grid{grid-template-columns:1fr}.dp-head{display:block}.dp-badge{margin-top:10px}}@media print{#siteHeader,#siteFooter,.donor-pass-actions{display:none!important}.page{padding:0}.card{box-shadow:none;border:0}.dp-item{break-inside:avoid}}
 </style>
 <link href="assets/css/form-security.css?v=20260918-1" rel="stylesheet"/>
 <script defer="" src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
 <script defer="" src="assets/js/form-security.js?v=20260918-1"></script>
-</link><link href="assets/css/navigation.css?v=20261003-mobilefix2" rel="stylesheet"/><link href="assets/css/footer.css?v=20261005-row1" rel="stylesheet"/><link href="https://screenings4u.com/donor-pass.html" rel="canonical"/><meta content="noindex,follow" name="robots"/><link href="assets/css/mobile-ready.css?v=20261002-sitewide2" rel="stylesheet"/></head>
+<link href="assets/css/navigation.css?v=20261003-mobilefix2" rel="stylesheet"/><link href="assets/css/footer.css?v=20261005-row1" rel="stylesheet"/><link href="https://screenings4u.com/donor-pass.html" rel="canonical"/><meta content="noindex,follow" name="robots"/><link href="assets/css/mobile-ready.css?v=20261002-sitewide2" rel="stylesheet"/><link rel="stylesheet" href="assets/css/site-tighten.css?v=20261007-1"/></head>
 <body><div data-site-header="" id="siteHeader"></div>
 <main class="page">
 <div class="container">
-<section class="card">
-<div class="intro">
-<div class="eyebrow">Testing Location</div>
-<h1>Generate Your Donor Pass.</h1>
-<p>
-            Tell us exactly where you need to complete your testing.
-            Enter the location where you will be available, and we will
-            use that information to determine the appropriate testing
-            location for your service.
-          </p>
-<div class="tracking">
-<span class="tracking-label">S4U Tracking Number</span>
-<strong id="trackingNumber">—</strong>
-</div>
-</div>
-<div class="form-section">
-<h2 class="section-title">
-            Where do you need testing?
-          </h2>
-<p class="section-copy">
-            Please enter the exact city, state, and ZIP code where you
-            want us to locate a testing facility. This does not need to
-            be your billing address.
-          </p>
-<div aria-live="polite" class="notice" id="formMessage" role="alert"></div>
-<form data-s4u-form-key="donor_pass" data-s4u-protected="true" id="donorPassForm" novalidate="">
-<div class="location-grid">
-<div class="field full">
-<label for="address">
-                  Street Address <span class="required">*</span>
-</label>
-<input autocomplete="off" id="address" maxlength="120" name="address" placeholder="123 Main Street" required="" type="text"/>
-</div>
-<div class="field full">
-<label for="address2">
-                  Apt / Suite / Unit <span style="color:#8493a7;font-weight:600;">(Optional)</span>
-</label>
-<input autocomplete="off" id="address2" maxlength="60" name="address2" placeholder="Apt 4B, Suite 200, Unit 12" type="text"/>
-</div>
-<div class="field">
-<label for="city">
-                  City <span class="required">*</span>
-</label>
-<input autocomplete="off" id="city" maxlength="60" name="city" placeholder="Dallas" required="" type="text"/>
-</div>
-<div class="field">
-<label for="state">
-                  State <span class="required">*</span>
-</label>
-<select autocomplete="off" id="state" name="state" required="">
-<option value="">Select</option>
-<option>AL</option><option>AK</option><option>AZ</option>
-<option>AR</option><option>CA</option><option>CO</option>
-<option>CT</option><option>DE</option><option>FL</option>
-<option>GA</option><option>HI</option><option>ID</option>
-<option>IL</option><option>IN</option><option>IA</option>
-<option>KS</option><option>KY</option><option>LA</option>
-<option>ME</option><option>MD</option><option>MA</option>
-<option>MI</option><option>MN</option><option>MS</option>
-<option>MO</option><option>MT</option><option>NE</option>
-<option>NV</option><option>NH</option><option>NJ</option>
-<option>NM</option><option>NY</option><option>NC</option>
-<option>ND</option><option>OH</option><option>OK</option>
-<option>OR</option><option>PA</option><option>RI</option>
-<option>SC</option><option>SD</option><option>TN</option>
-<option>TX</option><option>UT</option><option>VT</option>
-<option>VA</option><option>WA</option><option>WV</option>
-<option>WI</option><option>WY</option>
-</select>
-</div>
-<div class="field">
-<label for="zip">
-                  ZIP Code <span class="required">*</span>
-</label>
-<input autocomplete="off" id="zip" inputmode="numeric" maxlength="10" name="zip" placeholder="75001" required="" type="text"/>
-<div class="help">
-                  Use the ZIP code closest to where you will test.
-                </div>
-</div>
-</div>
-<div class="location-note">
-<strong>Address verification:</strong>
-              Your testing location will be verified and standardized through
-              USPS before it is saved to your S4U order. We will use this
-              verified location to prepare the testing-location details for your order.
-            </div>
-<div class="actions">
-<a class="btn btn-blue" href="services.html" id="backButton">
-                Back to Services
-              </a>
-<button class="btn btn-orange" id="generatePassButton" type="submit">
-                Continue to Donor Pass
-              </button>
-</div>
-</form>
-<div aria-live="polite" class="status" id="status">
-<div class="status-title">
-              Location received.
-            </div>
-<div class="status-copy">
-              Your donor pass workflow is ready for the next step.
-              Continue with the testing-location assignment shown in your order.
-            </div>
-</div>
-</div>
+<section class="card donor-pass-card">
+  <div class="intro">
+    <div class="eyebrow">Labcorp Drug Testing</div>
+    <h1>Your Donor Pass.</h1>
+    <p>Use this page to follow your screenings4u lab-testing order from registration through collection. Labcorp registration and collection-site details appear here when they are available.</p>
+    <div class="tracking-grid">
+      <div class="tracking"><span class="tracking-label">S4U Tracking Number</span><strong id="trackingNumber">—</strong></div>
+      <div class="tracking"><span class="tracking-label">Order Number</span><strong id="orderNumber">—</strong></div>
+    </div>
+  </div>
+  <div class="form-section">
+    <div aria-live="polite" class="notice" id="pageMessage" role="status"></div>
+    <div class="donor-pass-actions">
+      <button class="btn btn-blue" id="printButton" type="button">Print Donor Pass</button>
+      <a class="btn btn-orange" href="https://customers.screenings4u.com" id="portalButton">Open Customer Portal</a>
+    </div>
+    <div id="donorPassList" class="donor-pass-list">
+      <div class="status active"><div class="status-title">Loading donor pass…</div><div class="status-copy">We are retrieving your paid order and Labcorp workflow.</div></div>
+    </div>
+  </div>
 </section>
 </div>
 </main>

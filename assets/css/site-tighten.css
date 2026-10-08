@@ -1,0 +1,139 @@
+
+/* screenings4u — sitewide layout tightening */
+html,body{max-width:100%;overflow-x:hidden}
+main img{max-width:100%}
+main .container{width:min(1450px,calc(100% - 48px));margin-inline:auto}
+
+/* Consistent public-page vertical rhythm */
+.home-section,.bc-section,.biz-section,.cx-section,.co-section,.dna-section,
+.dotx-section,.du-section,.db-section,.dp-section,.pc-section,.mt-section,
+.ndb-section,.ns-section,.pa-section,.pr-section,.rr-section,.twr-section,
+.ind-section,.launch-section,.smb-section,.pt-section,.hla-section,
+.cn-section,.section{
+  padding-top:64px!important;
+  padding-bottom:64px!important;
+}
+
+/* Tight, aligned marketing heroes */
+.home-hero,.about-hero,.bc-hero,.biz-hero,.cx-hero,.co-hero,.dna-hero,
+.dotx-hero,.du-hero,.db-hero,.dp-hero,.pc-hero,.mt-hero,.ndb-hero,
+.ns-hero,.pa-hero,.pr-hero,.rr-hero,.twr-hero,.ind-hero,.launch-hero,
+.smb-hero,.pt-hero,.hla-hero,.cn-hero,.services-hero,.ctpa-hero,
+.ctpa-solutions-hero,.dm-hero,.fmcsa-router-hero,.nea-hero,
+.blog-hero,.faqs-hero,section.hero{
+  padding-top:36px!important;
+  padding-bottom:36px!important;
+}
+
+.home-hero-grid,.about-hero-grid,.bc-hero-grid,.biz-hero-grid,.cx-hero-grid,
+.co-hero-grid,.dna-hero-grid,.dotx-hero-grid,.du-hero-grid,.db-hero-grid,
+.dp-hero-grid,.pc-hero-grid,.mt-hero-grid,.ndb-hero-grid,.ns-hero-grid,
+.pa-hero-grid,.pr-hero-grid,.rr-hero-grid,.twr-hero-grid,.ind-hero-grid,
+.launch-hero-grid,.smb-hero-grid,.pt-hero-grid,.hla-hero-grid,.cn-hero-grid,
+.services-hero-grid,.ctpa-grid,.ctpa-solutions-grid,.dm-grid,
+.fmcsa-router-grid,.nea-grid,.hero-inner,.hero-grid{
+  align-items:stretch!important;
+}
+
+/* Hero media always fills the same top/bottom line as the copy */
+.home-hero-media,.about-hero-media,.bc-hero-media,.biz-hero-media,.cx-hero-media,
+.co-hero-media,.dna-hero-media,.dotx-hero-media,.du-hero-media,.db-hero-media,
+.dp-hero-media,.pc-hero-media,.mt-hero-media,.ndb-hero-media,.ns-hero-media,
+.pa-hero-media,.pr-hero-media,.rr-hero-media,.twr-hero-media,.ind-hero-media,
+.launch-hero-media,.smb-hero-media,.pt-hero-media,.hla-hero-media,.cn-hero-media,
+.services-hero-media,.hero-media,.s4u-hero-photo{
+  align-self:stretch!important;
+  display:flex!important;
+  align-items:stretch!important;
+}
+.home-hero-media img,.about-hero-media img,.bc-hero-media img,.biz-hero-media img,
+.cx-hero-media img,.co-hero-media img,.dna-hero-media img,.dotx-hero-media img,
+.du-hero-media img,.db-hero-media img,.dp-hero-media img,.pc-hero-media img,
+.mt-hero-media img,.ndb-hero-media img,.ns-hero-media img,.pa-hero-media img,
+.pr-hero-media img,.rr-hero-media img,.twr-hero-media img,.ind-hero-media img,
+.launch-hero-media img,.smb-hero-media img,.pt-hero-media img,.hla-hero-media img,
+.cn-hero-media img,.services-hero-media img,.hero-media img,.s4u-hero-photo img{
+  width:100%!important;
+  height:100%!important;
+  min-height:0!important;
+  object-fit:cover!important;
+}
+
+/* Real-photo hero utility for pages that previously had text/cards only */
+.s4u-photo-hero>.container,
+.s4u-photo-hero .s4u-hero-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,.92fr) minmax(480px,1.08fr)!important;
+  gap:48px!important;
+  align-items:stretch!important;
+}
+.s4u-hero-photo{
+  min-height:390px;
+  overflow:hidden;
+  border-radius:18px;
+  border:1px solid #d7e2ef;
+  background:#eef3f8;
+  box-shadow:0 18px 44px rgba(23,51,95,.09);
+}
+.s4u-hero-photo img{object-position:center}
+
+/* Pages with cards already in the hero: add photo without breaking the cards */
+.s4u-inline-hero-photo{
+  width:100%;
+  height:190px;
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid #d7e2ef;
+  margin:0 0 16px;
+}
+
+/* Make card rows visually level */
+main [class*="-grid"]>article,
+main [class*="-grid"]>a[class*="card"],
+main [class*="-grid"]>div[class*="card"]{
+  height:100%;
+}
+
+/* Forms */
+main input,main select,main textarea,main button{font:inherit}
+main input,main select{min-height:46px}
+main textarea{min-height:120px}
+main input,main select,main textarea{max-width:100%}
+
+/* Checkout tables / long content should not force horizontal viewport overflow */
+.table-wrap,.comparison-table-shell,.responsive-table{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+@media(max-width:980px){
+  main .container{width:min(1450px,calc(100% - 32px))}
+  .home-section,.bc-section,.biz-section,.cx-section,.co-section,.dna-section,
+  .dotx-section,.du-section,.db-section,.dp-section,.pc-section,.mt-section,
+  .ndb-section,.ns-section,.pa-section,.pr-section,.rr-section,.twr-section,
+  .ind-section,.launch-section,.smb-section,.pt-section,.hla-section,
+  .cn-section,.section{padding-top:46px!important;padding-bottom:46px!important}
+  .home-hero,.about-hero,.bc-hero,.biz-hero,.cx-hero,.co-hero,.dna-hero,
+  .dotx-hero,.du-hero,.db-hero,.dp-hero,.pc-hero,.mt-hero,.ndb-hero,
+  .ns-hero,.pa-hero,.pr-hero,.rr-hero,.twr-hero,.ind-hero,.launch-hero,
+  .smb-hero,.pt-hero,.hla-hero,.cn-hero,.services-hero,.ctpa-hero,
+  .ctpa-solutions-hero,.dm-hero,.fmcsa-router-hero,.nea-hero,.blog-hero,
+  .faqs-hero,section.hero{padding-top:28px!important;padding-bottom:28px!important}
+  .s4u-photo-hero>.container,.s4u-photo-hero .s4u-hero-grid{
+    grid-template-columns:1fr!important;
+    gap:20px!important;
+  }
+  .s4u-hero-photo{min-height:280px}
+}
+@media(max-width:700px){
+  main .container{width:min(1450px,calc(100% - 24px))}
+  .home-section,.bc-section,.biz-section,.cx-section,.co-section,.dna-section,
+  .dotx-section,.du-section,.db-section,.dp-section,.pc-section,.mt-section,
+  .ndb-section,.ns-section,.pa-section,.pr-section,.rr-section,.twr-section,
+  .ind-section,.launch-section,.smb-section,.pt-section,.hla-section,
+  .cn-section,.section{padding-top:36px!important;padding-bottom:36px!important}
+  .home-hero,.about-hero,.bc-hero,.biz-hero,.cx-hero,.co-hero,.dna-hero,
+  .dotx-hero,.du-hero,.db-hero,.dp-hero,.pc-hero,.mt-hero,.ndb-hero,
+  .ns-hero,.pa-hero,.pr-hero,.rr-hero,.twr-hero,.ind-hero,.launch-hero,
+  .smb-hero,.pt-hero,.hla-hero,.cn-hero,.services-hero,.ctpa-hero,
+  .ctpa-solutions-hero,.dm-hero,.fmcsa-router-hero,.nea-hero,.blog-hero,
+  .faqs-hero,section.hero{padding-top:22px!important;padding-bottom:22px!important}
+  .s4u-hero-photo{min-height:220px;border-radius:14px}
+}

@@ -63,3 +63,68 @@ body.services-page{background:#fff}
   .catalog-section{padding:52px 0 62px}.catalog-shell{grid-template-columns:1fr;gap:20px}.catalog-sidebar{position:static;top:auto;padding:18px}.services-page .catalog-tools{grid-template-columns:repeat(2,minmax(0,1fr))}.services-page .filter{text-align:center}.catalog-main-head{align-items:flex-start;flex-direction:column}.services-page .grid{grid-template-columns:1fr}.services-page .card{min-height:0}.business-section{padding:60px 0}.business-options{grid-template-columns:1fr}.business-intro{padding:26px}.business-intro h2{font-size:31px}.services-cta{padding:54px 0}.services-cta-inner{align-items:stretch;flex-direction:column}.services-cta-actions{display:grid;grid-template-columns:1fr}.services-cta .btn{width:100%}
 }
 @media(max-width:480px){.services-page .container{width:calc(100% - 24px)}.services-page .catalog-tools{grid-template-columns:1fr}.catalog-sidebar{padding:16px}.services-hero-media{height:245px}.catalog-main-head h2{font-size:30px}}
+
+
+/* services.html — hero spacing/alignment only */
+body.services-page .services-hero{
+  padding:30px 0 34px!important;
+}
+body.services-page .services-hero-grid{
+  align-items:stretch!important;
+}
+body.services-page .services-hero-copy{
+  min-height:0!important;
+  padding:2px 0!important;
+  justify-content:space-between!important;
+}
+body.services-page .services-hero-actions{
+  margin-top:22px!important;
+}
+body.services-page .services-hero-proof{
+  margin-top:24px!important;
+  padding-top:20px!important;
+}
+body.services-page .services-hero-media{
+  min-height:0!important;
+  height:auto!important;
+  align-self:stretch!important;
+}
+body.services-page .services-hero-media img{
+  min-height:430px;
+  object-fit:cover;
+}
+
+/* Exact DOT-style sticky sidebar behavior:
+   the page scrolls; the entire sidebar remains visible. */
+@media(min-width:781px){
+  body.services-page .catalog-section{
+    overflow:visible!important;
+  }
+  body.services-page .catalog-shell{
+    align-items:start!important;
+    overflow:visible!important;
+  }
+  body.services-page .catalog-sidebar{
+    position:-webkit-sticky!important;
+    position:sticky!important;
+    top:112px!important;
+    align-self:start!important;
+    height:max-content!important;
+    max-height:none!important;
+    overflow:visible!important;
+    z-index:18!important;
+  }
+}
+
+@media(max-width:780px){
+  body.services-page .services-hero{
+    padding:22px 0 34px!important;
+  }
+  body.services-page .services-hero-media img{
+    min-height:0;
+  }
+  body.services-page .catalog-sidebar{
+    position:static!important;
+    top:auto!important;
+  }
+}

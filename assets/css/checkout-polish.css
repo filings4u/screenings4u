@@ -1,0 +1,133 @@
+
+/* screenings4u — checkout polish */
+body[data-page="checkout"],body.checkout-page{background:#f5f8fc}
+body[data-page="checkout"] main,body.checkout-page main{padding:34px 0 72px!important}
+body[data-page="checkout"] main>.container,body.checkout-page main>.container{max-width:1450px!important}
+
+.checkout-top-row{
+  margin:0 0 14px!important;
+  padding:18px 20px;
+  background:#fff;
+  border:1px solid #d7e2ef;
+  border-radius:16px;
+  box-shadow:0 12px 30px rgba(23,51,95,.06)
+}
+.checkout-top-row .eyebrow{font-size:11px;letter-spacing:.1em}
+body[data-page="checkout"] h1,body.checkout-page h1{
+  max-width:780px;
+  font-size:clamp(38px,4vw,54px)!important;
+  margin-top:24px!important
+}
+body[data-page="checkout"] .intro,body.checkout-page .intro{
+  max-width:760px;
+  font-size:15px!important;
+  line-height:1.65;
+  margin-bottom:26px!important
+}
+body[data-page="checkout"] .grid,body.checkout-page .grid{
+  grid-template-columns:minmax(0,1.55fr) minmax(330px,.68fr)!important;
+  gap:24px!important
+}
+body[data-page="checkout"] .card,body.checkout-page .card{
+  border-radius:18px!important;
+  border-color:#d7e2ef!important;
+  box-shadow:0 14px 34px rgba(23,51,95,.065)!important
+}
+body[data-page="checkout"] .pad,body.checkout-page .pad{padding:28px!important}
+body[data-page="checkout"] h2,body.checkout-page h2{
+  font-size:22px!important;
+  line-height:1.2
+}
+body[data-page="checkout"] .sub,body.checkout-page .sub{
+  font-size:13px!important;
+  line-height:1.6;
+  margin-bottom:20px!important
+}
+body[data-page="checkout"] .fields,body.checkout-page .fields{gap:12px 14px!important}
+body[data-page="checkout"] .field,body.checkout-page .field{margin-bottom:8px!important}
+body[data-page="checkout"] label,body.checkout-page label{font-size:12px!important}
+body[data-page="checkout"] input,
+body[data-page="checkout"] select,
+body.checkout-page input,
+body.checkout-page select{
+  min-height:48px!important;
+  height:48px!important;
+  border-radius:9px!important;
+  border-color:#cbd8e7!important
+}
+body[data-page="checkout"] .payment,body.checkout-page .payment{
+  border-radius:12px!important;
+  padding:18px!important
+}
+body[data-page="checkout"] #payButton,body.checkout-page #payButton{
+  min-height:52px!important;
+  border-radius:10px!important;
+  font-size:14px!important
+}
+body[data-page="checkout"] .summary,body.checkout-page .summary{
+  top:102px!important;
+  overflow:hidden
+}
+body[data-page="checkout"] .summary .category,body.checkout-page .summary .category{
+  color:#ff6b00!important;
+  letter-spacing:.1em!important
+}
+body[data-page="checkout"] .summary .service,body.checkout-page .summary .service{
+  font-size:23px!important;
+  line-height:1.15!important;
+  margin-top:8px!important
+}
+body[data-page="checkout"] .summary ul,body.checkout-page .summary ul{
+  padding-left:20px;
+  margin:10px 0 0;
+  color:#526984;
+  font-size:13px;
+  line-height:1.65
+}
+body[data-page="checkout"] .price,body.checkout-page .price{
+  display:flex!important;
+  align-items:end;
+  justify-content:space-between;
+  gap:16px
+}
+body[data-page="checkout"] .price strong,body.checkout-page .price strong{
+  color:#17335f;
+  font-size:28px!important;
+  white-space:nowrap
+}
+body[data-page="checkout"] .discount-box,body.checkout-page .discount-box{
+  margin-top:18px;
+  padding:16px;
+  border:1px solid #dce5f0;
+  border-radius:12px;
+  background:#f8fbff
+}
+body[data-page="checkout"] .discount-entry,body.checkout-page .discount-entry{
+  display:grid!important;
+  grid-template-columns:1fr auto!important;
+  gap:8px!important;
+  margin-top:9px
+}
+body[data-page="checkout"] #applyDiscountButton,body.checkout-page #applyDiscountButton{
+  min-height:46px;
+  padding:0 16px;
+  border:0;
+  border-radius:9px;
+  background:#24467f;
+  color:#fff;
+  font-weight:800
+}
+body[data-page="checkout"] #loading,body.checkout-page #loading{margin-bottom:20px}
+
+@media(max-width:960px){
+  body[data-page="checkout"] .grid,body.checkout-page .grid{grid-template-columns:1fr!important}
+  body[data-page="checkout"] .summary,body.checkout-page .summary{position:static!important}
+}
+@media(max-width:640px){
+  body[data-page="checkout"] main,body.checkout-page main{padding:20px 0 48px!important}
+  .checkout-top-row{padding:14px 15px!important}
+  body[data-page="checkout"] .fields,body.checkout-page .fields{grid-template-columns:1fr!important}
+  body[data-page="checkout"] .field.full,body.checkout-page .field.full{grid-column:auto!important}
+  body[data-page="checkout"] .pad,body.checkout-page .pad{padding:20px!important}
+  body[data-page="checkout"] h1,body.checkout-page h1{font-size:36px!important}
+}

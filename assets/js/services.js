@@ -188,14 +188,18 @@ function renderServiceCards(
           service.orderType !== "custom_form";
 
         /*
-         * Everything routes with ?service=...
-         * There is intentionally no ?product=...
+         * Route directly to the final order/request destination.
+         * Paid services go straight to universal checkout.
+         * Contact/custom-form services go straight to their configured form.
          */
         const destination =
-          "service.html?service=" +
-          encodeURIComponent(
-            service.id
-          );
+          typeof getTestOrderUrl === "function"
+            ? getTestOrderUrl(service.id)
+            : (
+                paid
+                  ? "checkout.html?service=" + encodeURIComponent(service.id)
+                  : "contact.html"
+              );
 
         return `
           <article class="card">
@@ -240,8 +244,8 @@ function renderServiceCards(
               >
                 ${
                   paid
-                    ? "View & Buy →"
-                    : "View Service →"
+                    ? "Buy Now →"
+                    : "Request Information →"
                 }
               </a>
 
@@ -322,3 +326,6 @@ function escapeHtml(value) {
       "&#039;"
     );
 }
+
+
+

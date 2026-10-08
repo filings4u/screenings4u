@@ -1146,6 +1146,33 @@ async function ensureServiceCatalogLoaded() {
   return serviceCatalogLoadPromise;
 }
 
+function isLabcorpEligibleService(service) {
+  if (!service) return false;
+  const category = String(service.category || "").toLowerCase();
+  const specimen = String(service.specimen || "").toLowerCase();
+  const results = String(service.results || "").toLowerCase();
+  return category.includes("drug testing") && ["urine","hair","oral fluid"].includes(specimen) && !results.includes("instant") && !results.includes("rapid");
+}
+
+function isDotLabcorpService(service) {
+  return isLabcorpEligibleService(service) && String(service.category || "").toLowerCase().startsWith("dot ");
+}
+
+function configureLabcorpDonorFields() {
+  const section=document.getElementById("labcorpDonorSection");
+  if(!section)return;
+  const eligible=isLabcorpEligibleService(selectedService);
+  section.style.display=eligible?"block":"none";
+  const showDot=isDotLabcorpService(selectedService);
+  ["testingAuthorityField","cdlStateField","cdlNumberField"].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display=showDot?"block":"none"});
+  if(!eligible)return;
+  const pairs=[["firstName","donorFirstName"],["lastName","donorLastName"],["email","donorEmail"],["phone","donorPhone"],["state","donorState"]];
+  pairs.forEach(([src,dst])=>{const a=document.getElementById(src),b=document.getElementById(dst);if(!a||!b)return;const sync=()=>{if(!b.dataset.edited)b.value=a.value};a.addEventListener("input",sync);a.addEventListener("change",sync);b.addEventListener("input",()=>{b.dataset.edited="1"});sync()});
+  const slug=String(selectedService?.id||"").toLowerCase();
+  const reason=document.getElementById("donorReason");
+  if(reason && !reason.value){if(slug.includes("pre_employment"))reason.value="PE";else if(slug.includes("random"))reason.value="RA";else if(slug.includes("post_accident"))reason.value="PA";else if(slug.includes("reasonable"))reason.value="RC";else if(slug.includes("return_to_duty"))reason.value="RD";else if(slug.includes("follow_up"))reason.value="FU";else reason.value="NI"}
+}
+
 async function initCheckout() {
 
   if (typeof refreshTestingCatalog === "function") await refreshTestingCatalog();
@@ -1237,6 +1264,7 @@ async function initCheckout() {
     }
 
     renderService(selectedService);
+    configureLabcorpDonorFields();
 
     if (
       typeof Stripe !==
@@ -1273,10 +1301,7 @@ async function initCheckout() {
       document.getElementById("backLink");
 
     if (backLink) {
-
-      backLink.href =
-        selectedService?.sourcePage ||
-        ("service.html?service=" + encodeURIComponent(serviceId));
+      backLink.href = "services.html";
     }
 
     const errorBackLink =
@@ -1923,6 +1948,19 @@ function validateCustomerForm(form) {
       message:
         "Please enter a valid ZIP code."
     };
+  }
+
+  if (isLabcorpEligibleService(selectedService)) {
+    const required = [
+      ["donorFirstName","Please enter the donor first name."],
+      ["donorLastName","Please enter the donor last name."],
+      ["donorEmail","Please enter the donor email address."],
+      ["donorDob","Please enter the donor date of birth."],
+      ["donorState","Please select the donor state of residence."],
+      ["donorReason","Please select the reason for test."]
+    ];
+    if (isDotLabcorpService(selectedService)) required.push(["testingAuthority","Please select the DOT testing authority."]);
+    for (const [id,message] of required) { if (!getInputValue(id)) return {valid:false,field:id,message}; }
   }
 
   return {
@@ -3361,6 +3399,22 @@ async function createPaymentIntent(form) {
       )
   };
 
+  const donor = isLabcorpEligibleService(selectedService) ? {
+    firstName: getFormValue(data,"donorFirstName"),
+    middleInitial: "",
+    lastName: getFormValue(data,"donorLastName"),
+    email: getFormValue(data,"donorEmail"),
+    phone: getFormValue(data,"donorPhone"),
+    dateOfBirth: getFormValue(data,"donorDob"),
+    stateOfResidence: getFormValue(data,"donorState").toUpperCase(),
+    reasonForTest: getFormValue(data,"donorReason").toUpperCase(),
+    testingAuthority: getFormValue(data,"testingAuthority").toUpperCase(),
+    cdlState: getFormValue(data,"cdlState").toUpperCase(),
+    cdlNumber: getFormValue(data,"cdlNumber"),
+    observedCollectionRequested: Boolean(document.getElementById("observedCollectionRequested")?.checked),
+    splitSpecimenRequested: Boolean(document.getElementById("splitSpecimenRequested")?.checked)
+  } : null;
+
   const functionUrl =
     baseUrl.replace(/\/+$/, "") +
     "/functions/v1/" +
@@ -3398,7 +3452,8 @@ async function createPaymentIntent(form) {
             discountCode:
               appliedDiscountCode || null,
 
-            customer
+            customer,
+            donor
           })
       }
     );
