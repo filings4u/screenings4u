@@ -23,3 +23,30 @@
    if(h&&p.hero&&p.hero.description){const container=h.closest('.hero-content,.page-hero,.hero,.portal-hero')||h.parentElement;const para=container?.querySelector('p');if(para)para.textContent=esc(p.hero.description)}
  }).catch(e=>console.warn('Managed page settings:',e.message));
 })();
+
+
+/* Navigation control is explicitly opt-in. Existing records without nav_managed=true retain their links. */
+(()=>{'use strict';
+const key=window.SCREENINGS4U_SUPABASE_ANON_KEY;
+if(!key)return;
+const url='https://elpbnytpciqnbexiaebp.supabase.co/rest/v1/testing_published_page_settings?select=route,nav_visible,nav_managed&site_code=eq.main&nav_managed=eq.true';
+const apply=(routes)=>{
+ document.querySelectorAll('header a[href],nav a[href],.s4u-primary-nav a[href],.s4u-mobile-nav a[href]').forEach(a=>{
+  let u;try{u=new URL(a.getAttribute('href'),location.href)}catch{return}
+  if(u.origin!==location.origin)return;
+  const route=u.pathname==='/index.html'?'/':u.pathname;
+  if(!routes.has(route))return;
+  const shouldHide=routes.get(route)===false;
+  if(a.hidden!==shouldHide)a.hidden=shouldHide;const display=shouldHide?'none':'';if(a.style.display!==display)a.style.display=display;
+ });
+};
+fetch(url,{headers:{apikey:key,Accept:'application/json'},cache:'no-store'})
+.then(r=>{if(!r.ok)throw Error('Navigation settings unavailable');return r.json()})
+.then(rows=>{const routes=new Map((rows||[]).filter(p=>p.nav_managed===true).map(p=>[p.route,p.nav_visible]));
+ if(!routes.size)return;
+ let scheduled=false;
+ const update=()=>{scheduled=false;apply(routes)};
+ const observer=new MutationObserver(()=>{if(!scheduled){scheduled=true;requestAnimationFrame(update)}});
+ observer.observe(document.documentElement,{subtree:true,childList:true});update();
+}).catch(err=>console.warn('Managed navigation:',err.message));
+})();
