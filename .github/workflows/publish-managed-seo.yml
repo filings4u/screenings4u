@@ -1,0 +1,33 @@
+name: Publish managed SEO to GitHub Pages
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
+permissions:
+  contents: write
+concurrency:
+  group: managed-static-seo
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply active managed SEO to static HTML
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          test -n "$SUPABASE_URL" && test -n "$SUPABASE_ANON_KEY" || { echo "Missing SUPABASE_URL or SUPABASE_ANON_KEY repository secrets"; exit 1; }
+          python3 scripts/publish-managed-seo.py
+      - name: Commit SEO metadata changes
+        run: |
+          if ! git diff --quiet -- '*.html'; then
+            git config user.name "screenings4u SEO Publisher"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -- '*.html'
+            git commit -m "Publish active SEO metadata from management portal"
+            git push
+          else
+            echo "SEO metadata already matches published settings."
+          fi
