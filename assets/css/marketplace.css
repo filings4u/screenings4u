@@ -169,3 +169,40 @@
 
 /* Full-cart checkout */
 .cart-quantity-label{display:flex;align-items:center;gap:8px;font-weight:650;color:#234767;font-size:13px}.cart-quantity-label input{width:70px;padding:9px;border:1px solid #cbd9e7;border-radius:7px}.cart-checkout-lines{display:grid;gap:14px;margin:15px 0}.cart-checkout-line{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:1px solid #e7ecf1;padding:0 0 12px}.cart-checkout-line:last-child{border-bottom:0}.cart-checkout-line strong{font-size:14px}.cart-checkout-line small{display:block;color:#64748b;margin-top:5px}.cart-checkout-line .cart-line-cost{text-align:right;white-space:nowrap}.checkout-deferred-notice{background:#eff6ff;border:1px solid #d4e5ff;color:#183b67;border-radius:10px;padding:15px;margin:15px 0;line-height:1.5;font-size:14px}.checkout-summary [hidden],.checkout-form-card [hidden]{display:none!important}
+
+/* Mobile visual hierarchy: hero image above copy, compact readable type. */
+@media(max-width:750px){
+ .hero-market{display:flex;flex-direction:column;min-height:0}
+ .hero-market>.hero-art{order:0;width:100%;height:225px;min-height:0;max-height:none}
+ .hero-market>.hero-art>img{width:100%;height:100%;object-fit:cover}
+ .hero-market>.hero-content{order:1;padding:24px 19px 28px}
+ .hero-market .floating-tag{left:12px;bottom:12px;padding:9px 12px}
+ .hero-market .floating-tag b,.hero-market .floating-tag span{font-size:10px}
+ .hero-content h1{font-size:clamp(26px,7.5vw,32px);line-height:1.16;margin:12px 0}
+ .hero-content p{font-size:13px;line-height:1.6}
+ .hero-overline,.eyebrow{font-size:10px;letter-spacing:.09em}
+ .hero-actions{margin-top:20px;gap:9px}
+ .hero-actions .primary,.hero-actions .secondary{font-size:12px;min-height:42px;padding:10px 13px}
+ .hero-mini{font-size:10px;margin-top:18px}
+ .section-top h2,.catalog-intro h1,.workflow-intro h2{font-size:clamp(23px,6.7vw,29px);line-height:1.18}
+ .section-top p,.catalog-intro p,.workflow-intro p{font-size:13px;line-height:1.55}
+ .cat-card strong{font-size:14px}
+ .product-info h3{font-size:13px;line-height:1.35}
+ .product-price{font-size:18px}
+ .product-buttons a,.product-buttons button{font-size:11px}
+ .cart-line h3{font-size:16px}
+ .cart-summary h2{font-size:22px}
+ .footer-cols strong{font-size:13px}
+ .footer-cols a,.footer-cols p{font-size:11px;line-height:1.7}
+ .workflow-card h3{font-size:17px}
+ .workflow-card p{font-size:12px}
+ .market-seo-content h2{font-size:23px}
+ .market-seo-content p{font-size:12px;line-height:1.6}
+ .market-seo-links a{font-size:12px}
+}
+@media(max-width:400px){
+ .hero-market>.hero-art{height:185px}
+ .hero-content h1{font-size:27px}
+ .hero-actions{flex-direction:column}
+ .hero-actions a{width:100%;text-align:center}
+}
