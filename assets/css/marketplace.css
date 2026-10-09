@@ -206,3 +206,14 @@
  .hero-actions{flex-direction:column}
  .hero-actions a{width:100%;text-align:center}
 }
+
+/* Center mobile footer legal information and compact the floating support chat. */
+.support-fab{display:inline-flex;align-items:center;justify-content:center;gap:9px}
+.chat-fab-icon{display:none;flex:none}
+@media(max-width:750px){
+ .market-footer .footbottom{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;padding:24px 0 85px}
+ .market-footer .footbottom>span{display:block;width:100%;max-width:340px;margin-inline:auto;text-align:center;line-height:1.65}
+ .support-fab{width:52px;height:52px;min-width:52px;min-height:52px;right:14px;bottom:14px;padding:0;border-radius:50%;display:flex;align-items:center;justify-content:center}
+ .support-fab .chat-fab-text{display:none}
+ .support-fab .chat-fab-icon{display:block;width:25px;height:25px}
+}
