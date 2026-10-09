@@ -172,3 +172,44 @@
 
 /* Mobile: remove the nationwide marketplace announcement strip. */
 @media (max-width:750px){.shipbar{display:none!important}}
+
+/* Clear shopping-cart icon on every screen. */
+.header-cart-svg{display:block;flex:none;color:#23466e;width:27px;height:27px}
+@media(max-width:750px){
+ /* Mobile hero: media first, copy below, even when desktop text precedes artwork in markup. */
+ .hero-market{display:flex;flex-direction:column;min-height:0}
+ .hero-market>.hero-art{order:0;width:100%;min-height:0;height:220px;max-height:240px}
+ .hero-market>.hero-art>img{width:100%;height:100%;object-fit:cover}
+ .hero-market>.hero-content{order:1;padding:25px 19px 28px}
+ .hero-market .floating-tag{left:12px;bottom:12px;padding:9px 12px;font-size:11px}
+ .hero-market .floating-tag span{font-size:11px}
+ /* Keep readable type at phone sizes without oversized headings or wasteful spacing. */
+ .hero-content h1{font-size:clamp(26px,7.5vw,32px);line-height:1.16;margin:12px 0}
+ .hero-content p{font-size:13px;line-height:1.6;margin:0}
+ .hero-overline,.eyebrow{font-size:10px;letter-spacing:.09em}
+ .hero-actions{margin-top:20px;gap:9px}
+ .hero-actions .primary,.hero-actions .secondary{font-size:12px;min-height:42px;padding:10px 13px}
+ .hero-mini{font-size:10px;margin-top:17px;gap:8px}
+ .section-top h2,.catalog-intro h1,.workflow-intro h2{font-size:clamp(23px,6.7vw,28px);line-height:1.18}
+ .section-top p,.catalog-intro p,.workflow-intro p{font-size:13px;line-height:1.55}
+ .cat-card strong{font-size:14px}.cat-card small{font-size:11px}
+ .product-info h3{font-size:13px;line-height:1.35}
+ .product-price{font-size:17px}
+ .product-buttons a,.product-buttons button{font-size:11px}
+ .cart-line h3{font-size:16px}
+ .cart-summary h2{font-size:23px}
+ .footer-cols strong{font-size:13px}
+ .footer-cols a,.footer-cols p{font-size:11px;line-height:1.7}
+ .workflow-card h3{font-size:17px}
+ .workflow-card p{font-size:12px}
+ .workflow-intro h2{font-size:26px}
+ .market-seo-content h2{font-size:23px}
+ .market-seo-content p{font-size:12px;line-height:1.6}
+ .market-seo-links a{font-size:12px}
+}
+@media(max-width:400px){
+ .hero-market>.hero-art{height:185px}
+ .hero-content h1{font-size:27px}
+ .hero-actions{flex-direction:column}
+ .hero-actions a{width:100%;text-align:center}
+}
