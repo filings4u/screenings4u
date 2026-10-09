@@ -3986,7 +3986,8 @@ async function confirmPayment(form) {
           "/order-confirmation.html?order=" +
           encodeURIComponent(
             orderId || ""
-          )
+          ) + "&tracking=" + encodeURIComponent(trackingNumber || "") +
+          "&payment_intent=" + encodeURIComponent(paymentIntentId || "")
       },
 
       redirect:
@@ -4015,7 +4016,8 @@ const confirmationUrl =
   "/order-confirmation.html?order=" +
   encodeURIComponent(orderId || "") +
   "&tracking=" +
-  encodeURIComponent(trackingNumber || "");
+  encodeURIComponent(trackingNumber || "") +
+  "&payment_intent=" + encodeURIComponent(paymentIntentId || "");
 
   window.setTimeout(() => {
 
