@@ -1,0 +1,26 @@
+/* Cart-specific responsive fixes; no changes to shared marketplace layouts. */
+@media (max-width:750px) {
+ body[data-market-page="cart"] .cart-layout { gap:28px; }
+ body[data-market-page="cart"] .cart-line { padding:16px; }
+ body[data-market-page="cart"] .cart-product { align-items:flex-start; gap:13px; }
+ body[data-market-page="cart"] .cart-product > div { min-width:0; }
+ body[data-market-page="cart"] .cart-product h3 { line-height:1.35; font-size:17px; }
+ body[data-market-page="cart"] .cart-line-actions { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:12px; justify-content:stretch; }
+ body[data-market-page="cart"] .cart-line-actions .cart-quantity-label { min-width:0; }
+ body[data-market-page="cart"] .cart-line-actions > strong { text-align:right; white-space:nowrap; font-size:19px; }
+ body[data-market-page="cart"] .cart-line-actions > a.primary { grid-column:1/-1; width:100%; min-height:47px; text-align:center; white-space:normal; }
+ body[data-market-page="cart"] .cart-line-actions > button { grid-column:1/-1; justify-self:start; }
+ body[data-market-page="cart"] .cart-summary { padding:22px 19px; }
+ body[data-market-page="cart"] .cart-summary #cartAction { min-height:48px; white-space:normal; text-align:center; line-height:1.4; }
+ body[data-market-page="cart"] .market-footer { padding-top:34px; }
+ body[data-market-page="cart"] .footer-cols { grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px 18px; }
+ body[data-market-page="cart"] .footer-cols > div { min-width:0; gap:10px; }
+ body[data-market-page="cart"] .footer-cols > div:first-child { grid-column:1/-1; padding-bottom:18px; border-bottom:1px solid rgba(255,255,255,.15); }
+ body[data-market-page="cart"] .footer-cols a,body[data-market-page="cart"] .footer-cols p { overflow-wrap:anywhere; }
+ body[data-market-page="cart"] .footer-cols > div:last-child { grid-column:1/-1; }
+ body[data-market-page="cart"] .footbottom { margin-top:29px; padding:22px 0 28px; line-height:1.65; }
+}
+@media (max-width:370px) {
+ body[data-market-page="cart"] .footer-cols { grid-template-columns:1fr; }
+ body[data-market-page="cart"] .footer-cols > div { grid-column:1/-1; }
+}
