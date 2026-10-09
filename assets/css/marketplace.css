@@ -169,3 +169,6 @@
 
 /* Full-cart checkout */
 .cart-quantity-label{display:flex;align-items:center;gap:8px;font-weight:650;color:#234767;font-size:13px}.cart-quantity-label input{width:70px;padding:9px;border:1px solid #cbd9e7;border-radius:7px}.cart-checkout-lines{display:grid;gap:14px;margin:15px 0}.cart-checkout-line{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:1px solid #e7ecf1;padding:0 0 12px}.cart-checkout-line:last-child{border-bottom:0}.cart-checkout-line strong{font-size:14px}.cart-checkout-line small{display:block;color:#64748b;margin-top:5px}.cart-checkout-line .cart-line-cost{text-align:right;white-space:nowrap}.checkout-deferred-notice{background:#eff6ff;border:1px solid #d4e5ff;color:#183b67;border-radius:10px;padding:15px;margin:15px 0;line-height:1.5;font-size:14px}.checkout-summary [hidden],.checkout-form-card [hidden]{display:none!important}
+
+/* Mobile: remove the nationwide marketplace announcement strip. */
+@media (max-width:750px){.shipbar{display:none!important}}
