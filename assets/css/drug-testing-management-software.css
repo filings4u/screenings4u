@@ -1,7 +1,7 @@
 
 .management-router-page{background:#fff}
 .management-router-page .container{width:min(var(--max),calc(100% - 80px))}
-.dm-hero{padding:72px 0 90px;background:linear-gradient(180deg,#f7faff 0%,#fff 100%)}
+.dm-hero{padding:72px 0 90px;background:linear-gradient(180deg,#f4f7fc 0%,#fff 100%)}
 .dm-grid{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:46px;align-items:start}
 .dm-copy h1{margin:12px 0 18px;color:var(--blue-darker);font-size:clamp(42px,5vw,66px);line-height:1.02;letter-spacing:-.05em}
 .dm-copy h1 span{color:var(--blue)}

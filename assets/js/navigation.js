@@ -307,7 +307,7 @@
       <header class="s4u-site-header">
         <div class="s4u-nav-card">
           <a class="s4u-brand" href="index.html" aria-label="screenings4u home">
-            <img src="images/logo.png" alt="screenings4u" width="1261" height="237">
+            <img src="images/logo.webp" alt="screenings4u" width="1261" height="237">
           </a>
           ${desktopMarkup}
           <div class="s4u-nav-actions">

@@ -9,7 +9,7 @@
     target.innerHTML=cta+`
       <div class="footer-shell">
         <div class="footer-brand-area">
-          <a class="footer-brand" href="index.html" aria-label="screenings4u home"><img src="images/logo2.png" alt="screenings4u" class="footer-logo" width="1261" height="237" loading="lazy" decoding="async"></a>
+          <a class="footer-brand" href="index.html" aria-label="screenings4u home"><img src="images/logo2.webp" alt="screenings4u" class="footer-logo" width="1261" height="237" loading="lazy" decoding="async"></a>
           <p class="footer-about">Nationwide drug and alcohol testing, workplace screening, DOT support, background checks, mobile testing and compliance services through one trusted partner.</p>
           <div class="footer-contact"><a href="tel:7732457009"><span class="footer-contact-icon">☎</span><span>(773) 245-7009</span></a><a href="mailto:support@screenings4u.com"><span class="footer-contact-icon">✉</span><span>support@screenings4u.com</span></a></div>
           <span class="footer-availability">Serving customers nationwide</span>

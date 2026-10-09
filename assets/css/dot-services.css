@@ -1,7 +1,7 @@
 
 :root{--dot-ink:#17365f;--dot-blue:#24467f;--dot-dark:#102f55;--dot-orange:#ff6b00;--dot-soft:#f3f7fb;--dot-line:#d7e3f0;--dot-muted:#6b7f9c;--dot-white:#fff}
 body[data-page="dot-services"]{background:#fff;color:var(--dot-ink)}
-.dotx-hero{padding:46px 0 54px;background:linear-gradient(180deg,#f7faff 0%,#fff 100%)}
+.dotx-hero{padding:46px 0 54px;background:linear-gradient(180deg,#f4f7fc 0%,#fff 100%)}
 .dotx-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(460px,.92fr);gap:52px;align-items:stretch}
 .dotx-hero-copy{display:flex;flex-direction:column;min-height:540px;padding:8px 0 6px}
 .dotx-kicker{display:inline-flex;align-items:center;gap:12px;color:var(--dot-orange);font-size:12px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}

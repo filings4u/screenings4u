@@ -1,6 +1,6 @@
 
 /* screenings4u — checkout polish */
-body[data-page="checkout"],body.checkout-page{background:#f5f8fc}
+body[data-page="checkout"],body.checkout-page{background:#f4f7fc}
 body[data-page="checkout"] main,body.checkout-page main{padding:34px 0 72px!important}
 body[data-page="checkout"] main>.container,body.checkout-page main>.container{max-width:1450px!important}
 
@@ -91,7 +91,7 @@ body[data-page="checkout"] .price,body.checkout-page .price{
   gap:16px
 }
 body[data-page="checkout"] .price strong,body.checkout-page .price strong{
-  color:#17335f;
+  color:#24467f;
   font-size:28px!important;
   white-space:nowrap
 }
@@ -100,7 +100,7 @@ body[data-page="checkout"] .discount-box,body.checkout-page .discount-box{
   padding:16px;
   border:1px solid #dce5f0;
   border-radius:12px;
-  background:#f8fbff
+  background:#f4f7fc
 }
 body[data-page="checkout"] .discount-entry,body.checkout-page .discount-entry{
   display:grid!important;

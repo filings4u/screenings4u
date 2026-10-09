@@ -1,7 +1,7 @@
 
 .post-accident-request-page{background:#fff}
 .post-accident-request-page .container{width:min(var(--max),calc(100% - 80px))}
-.par-hero{padding:54px 0 64px;background:linear-gradient(180deg,#f7faff 0%,#fff 100%)}
+.par-hero{padding:54px 0 64px;background:linear-gradient(180deg,#f4f7fc 0%,#fff 100%)}
 .par-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(380px,.72fr);gap:48px;align-items:center}
 .par-kicker{display:flex;align-items:center;gap:10px;color:var(--orange);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
 .par-kicker:after{content:"";width:34px;height:2px;background:var(--orange)}

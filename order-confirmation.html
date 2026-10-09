@@ -6,7 +6,7 @@
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#24467f" name="theme-color"/>
 <title>Order Confirmation | screenings4u</title>
-<link href="images/fav.png" rel="icon" type="image/png"/>
+<link href="images/fav.webp" rel="icon" type="image/png"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
@@ -247,5 +247,20 @@
 <script src="assets/js/order-confirmation.js?v=20260902-1"></script>
 <footer aria-label="Website footer" class="site-footer" data-site-footer="" id="siteFooter"></footer>
 <script src="assets/js/site-ui.js?v=20260904-1"></script>
-<script src="assets/js/navigation.js?v=20261003-mobilefix2"></script><script src="assets/js/footer.js?v=20261002-shell1"></script></body>
+<script src="assets/js/navigation.js?v=20261003-mobilefix2"></script><script src="assets/js/footer.js?v=20261002-shell1"></script><script src="assets/js/marketplace-widgets.js?v=13" defer></script><script>
+// Combined-cart purchases require donor assignment before a donor pass can be issued.
+if(new URLSearchParams(location.search).get('cart')==='1'){
+ document.addEventListener('DOMContentLoaded',()=>{
+  const card=document.querySelector('.donor-pass-card');
+  if(card){const heading=card.querySelector('h2'),message=card.querySelector('p'),link=card.querySelector('a');
+    if(heading)heading.textContent='Assign donors in your Customer Portal';
+    if(message)message.textContent='Your tests are purchased. Open My Orders in your customer account to review your tests. Donor information can be added when the donor-assignment page is available; donor passes and any Labcorp registrations are not ready yet.';
+    if(link){link.href='https://customers.screenings4u.com/orders.html';link.textContent='View My Orders';link.removeAttribute('aria-disabled');link.classList.remove('is-disabled');link.id='cartOrdersButton';}
+  }
+  const status=document.getElementById('confirmationStatus');if(status)status.hidden=true;
+  const tracking=document.getElementById('trackingNumber');if(tracking && tracking.textContent==='Submitted')tracking.textContent='See your order in My Orders';
+ });
+}
+</script>
+</body>
 </html>

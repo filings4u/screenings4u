@@ -1051,10 +1051,11 @@ function requireManualEntry() {
    INITIALIZATION
 ========================================================= */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  initCheckout
-);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCheckout, { once: true });
+} else {
+  initCheckout();
+}
 
 /*
  * SERVICE CATALOG SAFETY LOADER
@@ -2116,7 +2117,7 @@ function createEmailConfirmationModal() {
       padding: 13px 15px;
       border: 1px solid #d9e3f0;
       border-radius: 9px;
-      background: #f7faff;
+      background: #f4f7fc;
       color: #24467f;
       font-size: 14px;
       font-weight: 800;
@@ -2147,7 +2148,7 @@ function createEmailConfirmationModal() {
     }
 
     .email-confirm-change:hover {
-      background: #f5f8fc;
+      background: #f4f7fc;
       border-color: #b8c8dc;
     }
 
@@ -2810,7 +2811,7 @@ function createUSPSAddressConfirmationModal() {
       padding: 18px;
       border: 1px solid #d9e3f0;
       border-radius: 12px;
-      background: #f7faff;
+      background: #f4f7fc;
       text-align: left;
       color: #24467f;
       font-size: 14px;
@@ -2846,7 +2847,7 @@ function createUSPSAddressConfirmationModal() {
     }
 
     .usps-address-primary-button:hover {
-      background: #e85f00;
+      background: #ff6b00;
     }
 
     .usps-address-secondary-button {
@@ -3127,7 +3128,7 @@ function createAddressValidationOverlay() {
     }
 
     .address-validation-action:hover {
-      background: #e85f00;
+      background: #ff6b00;
     }
 
     .address-validation-spinner.success {

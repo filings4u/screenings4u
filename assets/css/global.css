@@ -6,7 +6,7 @@
 :root{
   --blue:#24467f;
   --blue-dark:#1d3b6d;
-  --blue-deep:#17335f;
+  --blue-deep:#24467f;
   --blue-darker:#10284b;
   --blue-soft:rgba(36,70,127,.10);
   --blue-pale:#f4f7fc;
@@ -25,7 +25,7 @@
   --shadow-sm:0 5px 18px rgba(36,70,127,.08);
   --shadow:0 18px 45px rgba(36,70,127,.12);
   --shadow-lg:0 28px 70px rgba(36,70,127,.16);
-  --max:1440px;
+  --max:1450px;
   --radius:18px;
 }
 *{box-sizing:border-box}

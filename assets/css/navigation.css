@@ -1,10 +1,10 @@
 :root{
-  --s4u-navy:#173761;
+  --s4u-navy:#24467f;
   --s4u-blue:#24467f;
   --s4u-orange:#ff6b00;
   --s4u-soft:#f4f7fc;
   --s4u-line:#d5e1ef;
-  --s4u-text:#173761;
+  --s4u-text:#24467f;
   --s4u-muted:#6e819d;
   --s4u-shell-max:1450px;
 }
@@ -33,7 +33,7 @@
 .s4u-mega-column>a strong{display:block;color:#274563;font-size:12.5px;line-height:1.3}
 .s4u-mega-column>a:hover strong,.s4u-mega-column>a.is-current strong{color:var(--s4u-orange)}
 .s4u-mega-column>a small{display:block;margin-top:3px;color:var(--s4u-muted);font-size:10.5px;font-weight:600;line-height:1.45}
-.s4u-mega-feature{display:flex;flex-direction:column;min-height:100%;padding:20px;border-radius:16px;background:linear-gradient(145deg,#173761,#24467f);color:#fff}
+.s4u-mega-feature{display:flex;flex-direction:column;min-height:100%;padding:20px;border-radius:16px;background:linear-gradient(145deg,#24467f,#24467f);color:#fff}
 .s4u-mega-feature .s4u-mega-label{color:#ffb47d}
 .s4u-mega-feature>strong{display:block;margin-top:12px;font-size:20px;line-height:1.18}
 .s4u-mega-feature>p{margin:10px 0 18px;color:#d6e2ef;font-size:11.5px;line-height:1.6}
@@ -64,7 +64,7 @@
   .s4u-mobile-trigger span{font-size:18px}.s4u-mobile-group.is-open>.s4u-mobile-trigger span{transform:rotate(45deg)}
   .s4u-mobile-submenu{display:none;padding:2px 0 8px 12px}.s4u-mobile-group.is-open>.s4u-mobile-submenu{display:grid}
   .s4u-mobile-submenu a{display:flex;align-items:center;min-height:42px;padding:0 12px;border-radius:9px;color:#4d6280;font-size:13px;font-weight:700;text-decoration:none}
-  .s4u-mobile-submenu a:hover,.s4u-mobile-submenu a.is-current{background:#f5f8fc;color:var(--s4u-orange)}
+  .s4u-mobile-submenu a:hover,.s4u-mobile-submenu a.is-current{background:#f4f7fc;color:var(--s4u-orange)}
   .s4u-mobile-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:8px;padding-top:12px;border-top:1px solid var(--s4u-line)}
   .s4u-btn{display:flex;min-height:46px;align-items:center;justify-content:center;border-radius:10px;font-size:13px;font-weight:850;text-decoration:none}.s4u-btn-secondary{border:1px solid #bcd0e7;color:var(--s4u-navy);background:#fff}.s4u-btn-primary{border:1px solid var(--s4u-orange);background:var(--s4u-orange);color:#fff}
   body.s4u-shell-menu-open{overflow:hidden}

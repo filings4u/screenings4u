@@ -1,5 +1,5 @@
 .post-accident-page{background:#fff}.post-accident-page .container{width:min(var(--max),calc(100% - 80px))}
-.pa-hero{padding:44px 0 70px;background:linear-gradient(180deg,#f7faff 0%,#fff 100%)}
+.pa-hero{padding:44px 0 70px;background:linear-gradient(180deg,#f4f7fc 0%,#fff 100%)}
 .pa-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(520px,.92fr);gap:54px;align-items:stretch}
 .pa-hero-copy{display:flex;flex-direction:column;justify-content:space-between;min-height:570px;padding:8px 0 2px}.pa-kicker{display:flex;align-items:center;gap:10px;color:var(--orange);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.pa-kicker:after{content:"";width:34px;height:2px;background:var(--orange)}
 .pa-hero h1{max-width:760px;margin:22px 0 18px;color:var(--blue-darker);font-size:clamp(48px,5.2vw,74px);line-height:.99;letter-spacing:-.055em}.pa-hero h1 span{color:var(--blue)}.pa-lead{max-width:700px;margin:0;color:var(--muted);font-size:18px;line-height:1.72}.pa-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:28px}

@@ -1,0 +1,25 @@
+/* Visual consistency for currently-disabled combined checkout preview */
+body.marketplace-combined {--blue:#24467f;--orange:#ff6b00;--border:#dbe6f0;color:#1c3a5b;background:#f4f7fc;font-family:Inter,Arial,sans-serif}
+body.marketplace-combined .market-header .wrap,body.marketplace-combined .market-footer .wrap{width:min(1450px,calc(100% - 64px))}
+body.marketplace-combined .market-header .market-top{min-height:96px}
+body.marketplace-combined .market-header .searchbox{height:48px}
+body.marketplace-combined .market-header .searchbox select,body.marketplace-combined .market-header .searchbox input{min-height:0;height:46px;border-radius:0;box-shadow:none}
+body.marketplace-combined .market-header .searchbox button{height:48px;border-radius:0;background:#ff6b00;color:#fff}
+body.marketplace-combined main.mc-wrap{width:min(1450px,calc(100% - 64px));max-width:1450px;margin:auto;padding:25px 0 75px}
+body.marketplace-combined .checkout-crumb{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-bottom:22px;font-size:12px;color:#7990a4}
+body.marketplace-combined .checkout-crumb a{color:#57758e}
+body.marketplace-combined .checkout-crumb strong{color:#24467f}
+body.marketplace-combined .mc-kicker{font-size:11px;letter-spacing:.14em;color:#ff6b00}
+body.marketplace-combined h1{font-size:clamp(32px,3.4vw,47px);color:#1c4269;margin:10px 0 16px;letter-spacing:-.04em;line-height:1.14}
+body.marketplace-combined main.mc-wrap>p{font-size:13px;line-height:1.7;color:#62788e}
+body.marketplace-combined .mc-status-note{background:#fff6ea;border:1px solid #f0d5b5;border-left:4px solid #ff6b00;border-radius:10px;padding:17px 20px;margin:0 0 18px;max-width:900px;color:#75522a;font-size:13px;line-height:1.7}
+body.marketplace-combined .mc-layout{grid-template-columns:minmax(0,1fr) minmax(310px,.5fr);gap:24px;margin-top:30px}
+body.marketplace-combined .mc-panel{border:1px solid #dfe7ef;box-shadow:0 9px 28px #12385a0b;border-radius:15px;padding:27px}
+body.marketplace-combined .mc-panel h2{font-size:21px;color:#1d4266}
+body.marketplace-combined .mc-panel label{font-size:12px;color:#294867}
+body.marketplace-combined .mc-panel input{min-height:49px;border-radius:9px}
+body.marketplace-combined .mc-summary{top:165px}
+body.marketplace-combined #mcPay{background:#ff6b00;color:#fff}
+body.marketplace-combined #mcPay:disabled{cursor:not-allowed;opacity:.55}
+@media(max-width:900px){body.marketplace-combined .mc-layout{grid-template-columns:1fr}body.marketplace-combined .mc-summary{position:static;grid-row:1}}
+@media(max-width:700px){body.marketplace-combined .market-header .wrap,body.marketplace-combined .market-footer .wrap,body.marketplace-combined main.mc-wrap{width:calc(100% - 32px)}body.marketplace-combined .mc-panel{padding:20px}}
