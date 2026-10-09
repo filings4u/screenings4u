@@ -12,7 +12,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Apply active managed SEO to static HTML
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
@@ -20,14 +20,31 @@ jobs:
         run: |
           test -n "$SUPABASE_URL" && test -n "$SUPABASE_ANON_KEY" || { echo "Missing SUPABASE_URL or SUPABASE_ANON_KEY repository secrets"; exit 1; }
           python3 scripts/publish-managed-seo.py
-      - name: Commit SEO metadata changes
+      - name: Publish SEO metadata safely (retry concurrent updates)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
-          if ! git diff --quiet -- '*.html'; then
-            git config user.name "screenings4u SEO Publisher"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "screenings4u SEO Publisher"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            echo "Publishing attempt $attempt of 5"
+            # Start from the current live branch, retaining any unrelated commits.
+            git fetch origin main
+            git reset --hard origin/main
+            python3 scripts/publish-managed-seo.py
+            if git diff --quiet -- '*.html'; then
+              echo "SEO metadata already matches published settings."
+              exit 0
+            fi
             git add -- '*.html'
             git commit -m "Publish active SEO metadata from management portal"
-            git push
-          else
-            echo "SEO metadata already matches published settings."
-          fi
+            if git push origin HEAD:main; then
+              echo "SEO metadata published successfully."
+              exit 0
+            fi
+            echo "The remote branch changed; retrying from its newest commit."
+            sleep 3
+          done
+          echo "::error::Could not publish after 5 attempts because of concurrent repository updates."
+          exit 1
