@@ -1752,7 +1752,13 @@ async function refreshTestingCatalog(){
     const r=await fetch(base+"/functions/v1/public-testing-catalog",{headers:{apikey:window.SCREENINGS4U_SUPABASE_ANON_KEY||""}});
     const d=await r.json();
     if(!r.ok||!Array.isArray(d.services)) throw new Error(d.error||"Catalog unavailable");
-    for(const item of d.services){TEST_SERVICES[item.id]={...(TEST_SERVICES[item.id]||{}),...item};SCREENINGS4U_PUBLIC_TESTING_IDS.add(item.id);}
+    // Live published services are authoritative when the request succeeds.
+    SCREENINGS4U_PUBLIC_TESTING_IDS.clear();
+    for(const item of d.services){
+      if(!item || typeof item.id!=='string' || !item.id) continue;
+      TEST_SERVICES[item.id]={...(TEST_SERVICES[item.id]||{}),...item};
+      SCREENINGS4U_PUBLIC_TESTING_IDS.add(item.id);
+    }
     SCREENINGS4U_LIVE_CATALOG_LOADED=true;
   }catch(e){console.warn("Using local Testing catalog fallback.",e)}
   return getAllTestServices();
